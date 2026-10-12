@@ -6,32 +6,46 @@
  */
 
 export const siteConfig = {
-  name: "Acme Inc.",
-  shortName: "Acme",
+  name: "Scryptic",
+  shortName: "Scryptic",
   // Used as the default meta description, og:description and the llms.txt
   // summary. Aim for one plain sentence of 120 to 160 characters that says what
   // the product is and who it is for: answer engines quote it verbatim.
   description:
-    "Acme Inc. is a placeholder product description. Replace it with one clear sentence that says what you do and who it is for.",
+    "Scryptic is a development studio that takes founders from idea to launched app. Start with a discovery call and audit, then ship a full build from $10k.",
+  // Short line used in the hero eyebrow and the footer.
+  tagline: "Development as a service",
   // Optional longer context for llms.txt. Leave empty to omit.
-  summary: "",
-  keywords: [] as string[],
+  summary:
+    "Scryptic offers two services: a discovery call and audit that turns an idea or an existing product into a scoped plan and written estimate, and a full app to market build, from $10k depending on complexity.",
+  keywords: [
+    "development as a service",
+    "app development studio",
+    "MVP development",
+    "SaaS development",
+    "technical audit",
+    "web app development",
+  ] as string[],
   locale: "en_US",
   language: "en",
   // Keep these in step with --background and --primary in globals.css.
   // Generated images cannot read CSS variables and do not understand oklch.
   colors: {
-    background: "#ffffff",
-    primary: "#171717",
-    primaryForeground: "#fafafa",
-    muted: "#f5f5f5",
-    mutedForeground: "#737373",
+    background: "#0a0a0f",
+    foreground: "#ededf3",
+    primary: "#7cffb2",
+    primaryForeground: "#06140c",
+    muted: "#111118",
+    mutedForeground: "#9a9aab",
   },
   organization: {
-    legalName: "Acme Inc.",
-    email: "",
+    legalName: "Scryptic",
+    email: "hello@scryptic.dev",
     foundingDate: "",
   },
+  // Where "Book a discovery call" goes. A scheduling link (Cal.com, Calendly)
+  // when there is one; otherwise the buttons open an email to the address above.
+  bookingUrl: "" as string,
   // Handle including the @, for twitter:site and twitter:creator.
   twitterHandle: "",
   // Every official profile (X, LinkedIn, GitHub, YouTube, Crunchbase,
@@ -70,6 +84,11 @@ export const isIndexable =
   (process.env.VERCEL_ENV
     ? process.env.VERCEL_ENV === "production"
     : process.env.NODE_ENV === "production")
+
+/** Target of every "Book a discovery call" button. */
+export const bookingHref =
+  siteConfig.bookingUrl ||
+  `mailto:${siteConfig.organization.email}?subject=${encodeURIComponent("Discovery call")}`
 
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString()
