@@ -27,6 +27,8 @@ import { cn } from "cn"
 export type FloatingNavItem = {
   name: string
   link: string
+  /** Leave out of the bar on phones, where the pill has room for about three links. */
+  hideOnMobile?: boolean
 }
 
 // Below this many pixels from the top the bar is always shown.
@@ -70,7 +72,7 @@ export function FloatingNav({
       <nav aria-label="Main" className="flex items-center">
         <ul className="flex items-center">
           {navItems.map((item) => (
-            <li key={item.link}>
+            <li key={item.link} className={cn(item.hideOnMobile && "hidden sm:block")}>
               <Link
                 href={item.link}
                 className="flex min-h-9 items-center rounded-full px-2 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground sm:px-3"

@@ -24,7 +24,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```
 src/
-  app/                  Routes: / , /login , /signup
+  app/                  Routes: / (single landing page, no accounts)
     globals.css         Theme tokens (light + .dark) and Tailwind setup
     robots.ts           robots.txt, sitemap.xml, manifest, llms.txt, icons and the
     sitemap.ts            Open Graph image are all generated from src/lib (see
@@ -39,7 +39,6 @@ src/
     site-footer.tsx
     brand-logo.tsx      The "S_" mark (also drawn into the favicon and share image)
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
-    login-form.tsx      Shared login / signup card
     em-dash-guard.tsx   Dev guard against em dashes in rendered text
   lib/
     site.ts             Brand facts, contact email and booking link, site URL, indexability
@@ -55,7 +54,7 @@ src/
 - **Feature code imports from `@/components/ui/*`**, never from `@base-ui/react` directly, so a widget can be restyled or swapped in one place.
 - **Style with theme tokens** (`bg-background`, `text-muted-foreground`, `border-border`, ...) from `globals.css` rather than raw colours, so light and dark mode keep working.
 - **One class helper:** `import { cn } from "cn"`.
-- **Composition uses `render`, not `asChild`:** `<Button nativeButton={false} render={<Link href="/login" />}>Login</Button>`.
+- **Composition uses `render`, not `asChild`:** `<Button nativeButton={false} render={<Link href="/#services" />}>Services</Button>`.
 
 ## Adding widgets
 

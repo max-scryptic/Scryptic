@@ -29,6 +29,25 @@ const steps = [
   },
 ]
 
+const principles = [
+  {
+    name: "Plan before code",
+    text: "Every build starts from an audit, so scope, risks and cost are clear before development begins.",
+  },
+  {
+    name: "One team, end to end",
+    text: "Design, engineering, deployment and launch stay with the same people, so nothing gets lost in a handoff.",
+  },
+  {
+    name: "Built to hand over",
+    text: "Clean, documented code on a mainstream stack, so you can grow the product with us or without us.",
+  },
+  {
+    name: "Straight answers",
+    text: "If a feature is not worth building yet, or an idea needs rethinking, you hear it on the first call.",
+  },
+]
+
 // Rendered in the FAQ section and emitted as FAQPage JSON-LD; keep them identical.
 const faqs = [
   {
@@ -291,6 +310,39 @@ export default function Home() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* About */}
+      <section
+        aria-labelledby="about-heading"
+        id="about"
+        className="scroll-mt-24 border-t border-border px-4 py-24 sm:px-6"
+      >
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]">
+          <div className="flex flex-col gap-6">
+            <SectionHeading eyebrow="About us" title="About Scryptic" id="about-heading">
+              {siteConfig.name} is a development studio for founders who need a working product,
+              not a team to manage.
+            </SectionHeading>
+            <p className="max-w-2xl text-pretty text-muted-foreground">
+              We act as your technical partner from the first conversation to launch day: working
+              out what is worth building, making the technical calls and shipping the app. Scope
+              and price are agreed before the build starts, so you always know what you are paying
+              for and what you will get.
+            </p>
+          </div>
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {principles.map((principle) => (
+              <li
+                key={principle.name}
+                className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-6"
+              >
+                <h3 className="font-semibold">{principle.name}</h3>
+                <p className="text-sm text-pretty text-muted-foreground">{principle.text}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

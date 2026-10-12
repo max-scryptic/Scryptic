@@ -40,7 +40,7 @@ export const siteConfig = {
   },
   organization: {
     legalName: "Scryptic",
-    email: "hello@scryptic.dev",
+    email: "maxwinterleinweber@gmail.com",
     foundingDate: "",
   },
   // Where "Book a discovery call" goes. A scheduling link (Cal.com, Calendly)
