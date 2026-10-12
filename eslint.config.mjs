@@ -74,6 +74,8 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    // Brand kit generator scripts, run by hand outside the app.
+    "brand/**",
     "next-env.d.ts",
   ]),
 ]);
