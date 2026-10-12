@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { EmDashGuard } from "@/components/em-dash-guard";
 import { JsonLd } from "@/components/json-ld";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import {
   baseOpenGraph,
   baseTwitter,
@@ -73,20 +75,24 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: siteConfig.colors.background,
-  colorScheme: "light",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={siteConfig.language}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      // The site is dark-only; .dark switches on the components' dark: styles.
+      className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
     >
       <body className="relative min-h-full">
         {/* Site-wide entities; each page's graph links back to these by @id. */}
         <JsonLd data={graph(organizationJsonLd(), websiteJsonLd())} />
         <EmDashGuard />
+        <SiteHeader />
         <div className="isolate flex min-h-dvh flex-col">{children}</div>
+        <SiteFooter />
       </body>
     </html>
   );

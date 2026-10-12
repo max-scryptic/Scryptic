@@ -1,6 +1,8 @@
-# base-repo-3
+# Scryptic
 
-Next.js 16 app starter with [Base UI](https://base-ui.com) as the only UI primitive layer, styled with Tailwind CSS v4.
+Marketing site for Scryptic, a development-as-a-service studio. Two services: a discovery call and audit, and a full app to market build (from $10k). Next.js 16 with [Base UI](https://base-ui.com) as the UI primitive layer, styled with Tailwind CSS v4.
+
+Brand: dark-only ink surfaces (`#0a0a0f`) with one mint signal colour (`#7cffb2`), Geist and Geist Mono, and an "S_" terminal-cursor mark. Tokens live in `src/app/globals.css`, mirrored in `siteConfig.colors` for the generated images.
 
 ## Getting started
 
@@ -22,7 +24,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```
 src/
-  app/                  Routes: / , /login , /signup
+  app/                  Routes: / (single landing page, no accounts)
     globals.css         Theme tokens (light + .dark) and Tailwind setup
     robots.ts           robots.txt, sitemap.xml, manifest, llms.txt, icons and the
     sitemap.ts            Open Graph image are all generated from src/lib (see
@@ -31,13 +33,16 @@ src/
     icon.tsx, apple-icon.tsx, opengraph-image.tsx
     not-found.tsx       Branded 404 (replaces Next's default and its "404: ..." title)
   components/
-    ui/                 Generic widgets built on @base-ui/react (Button, Card, Field, Input, Label, Separator)
-    brand-logo.tsx      Placeholder mark (also drawn into the favicon and share image)
+    ui/                 Generic widgets built on @base-ui/react (Button, Card, Field, Input, Label, Separator),
+                        plus floating-navbar.tsx, a port of Aceternity UI's Floating Navbar (uses motion)
+    site-header.tsx     Nav items and call to action for the floating navbar
+    site-footer.tsx
+    brand-logo.tsx      The "S_" mark (also drawn into the favicon and share image)
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
-    login-form.tsx      Shared login / signup card
     em-dash-guard.tsx   Dev guard against em dashes in rendered text
   lib/
-    site.ts             Brand facts, site URL, indexability
+    site.ts             Brand facts, contact email and booking link, site URL, indexability
+    services.ts         The two service offers: cards, prices and Service JSON-LD
     seo.ts              Page registry + createMetadata()
     structured-data.ts  schema.org builders (Organization, WebSite, WebPage, FAQ, Article, ...)
     em-dash.ts          Em dash helpers used by the guard and the check script
@@ -49,7 +54,7 @@ src/
 - **Feature code imports from `@/components/ui/*`**, never from `@base-ui/react` directly, so a widget can be restyled or swapped in one place.
 - **Style with theme tokens** (`bg-background`, `text-muted-foreground`, `border-border`, ...) from `globals.css` rather than raw colours, so light and dark mode keep working.
 - **One class helper:** `import { cn } from "cn"`.
-- **Composition uses `render`, not `asChild`:** `<Button nativeButton={false} render={<Link href="/login" />}>Login</Button>`.
+- **Composition uses `render`, not `asChild`:** `<Button nativeButton={false} render={<Link href="/#services" />}>Services</Button>`.
 
 ## Adding widgets
 

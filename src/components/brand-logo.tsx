@@ -1,18 +1,16 @@
 import { cn } from "cn"
 
 /*
- * Placeholder product mark, drawn inline rather than loaded as an image so it
- * takes its colours from the theme tokens and follows the app into dark mode
- * without a second asset. Swap the paths below (and the name in
- * src/lib/site.ts) for the real brand when there is one. The favicon, app
- * icons and Open Graph image are drawn from the same paths, so they follow.
+ * The Scryptic mark: a single-stroke "S" with a terminal cursor after it,
+ * ink on a mint tile. Drawn inline rather than loaded as an image so it
+ * takes its colours from the theme tokens. The favicon, app icons and Open Graph image are
+ * drawn from the same paths, so they follow any change here.
  */
 
 // 24x24 viewBox, stroked rather than filled.
 export const BRAND_MARK_PATHS = [
-  "M12 3 3 7.5l9 4.5 9-4.5L12 3Z",
-  "M3 16.5 12 21l9-4.5",
-  "M3 12l9 4.5 9-4.5",
+  "M15.5 4H9a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H5.5",
+  "M15 20h4.5",
 ]
 
 type BrandLogoProps = {
