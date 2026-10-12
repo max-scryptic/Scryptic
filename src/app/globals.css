@@ -5,43 +5,43 @@
 
 :root {
   /*
-   * Scryptic is dark-only: ink surfaces, one mint signal colour. The <html>
-   * element carries .dark so component dark: variants apply as well. Keep
-   * --background, --foreground, --primary and the muted pair in step with
-   * siteConfig.colors in src/lib/site.ts, which the generated images use.
+   * Scryptic is light by default: white surfaces, ink text and one green
+   * signal colour, with no gradients. Keep --background, --foreground,
+   * --primary and the muted pair in step with siteConfig.colors in
+   * src/lib/site.ts, which the generated images use.
    */
   --radius: 0.75rem;
-  --background: #0a0a0f;
-  --foreground: #ededf3;
-  --card: #111118;
-  --card-foreground: #ededf3;
-  --popover: #111118;
-  --popover-foreground: #ededf3;
-  --primary: #7cffb2;
-  --primary-foreground: #06140c;
-  --secondary: #1a1a24;
-  --secondary-foreground: #ededf3;
-  --muted: #111118;
-  --muted-foreground: #9a9aab;
-  --accent: #1a1a24;
-  --accent-foreground: #ededf3;
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: rgb(255 255 255 / 9%);
-  --input: rgb(255 255 255 / 14%);
-  --ring: #7cffb2;
-  --chart-1: #7cffb2;
-  --chart-2: #7cc4ff;
-  --chart-3: #c39cff;
-  --chart-4: #ffd27c;
-  --chart-5: #ff8f7c;
-  --sidebar: #111118;
-  --sidebar-foreground: #ededf3;
-  --sidebar-primary: #7cffb2;
-  --sidebar-primary-foreground: #06140c;
-  --sidebar-accent: #1a1a24;
-  --sidebar-accent-foreground: #ededf3;
-  --sidebar-border: rgb(255 255 255 / 9%);
-  --sidebar-ring: #7cffb2;
+  --background: #ffffff;
+  --foreground: #0a0a0f;
+  --card: #fafafb;
+  --card-foreground: #0a0a0f;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0f;
+  --primary: #047857;
+  --primary-foreground: #ffffff;
+  --secondary: #f0f0f3;
+  --secondary-foreground: #0a0a0f;
+  --muted: #f4f4f6;
+  --muted-foreground: #5c5c6b;
+  --accent: #f0f0f3;
+  --accent-foreground: #0a0a0f;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgb(10 10 15 / 10%);
+  --input: rgb(10 10 15 / 16%);
+  --ring: #047857;
+  --chart-1: #047857;
+  --chart-2: #1d6fd1;
+  --chart-3: #7c4dd8;
+  --chart-4: #b7791f;
+  --chart-5: #d1493b;
+  --sidebar: #fafafb;
+  --sidebar-foreground: #0a0a0f;
+  --sidebar-primary: #047857;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0f0f3;
+  --sidebar-accent-foreground: #0a0a0f;
+  --sidebar-border: rgb(10 10 15 / 10%);
+  --sidebar-ring: #047857;
 }
 
 @theme inline {
@@ -104,10 +104,3 @@
   }
 }
 
-@utility bg-grid {
-  /* Faint 48px grid behind hero and call-to-action panels. */
-  background-image:
-    linear-gradient(to right, rgb(255 255 255 / 5%) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 5%) 1px, transparent 1px);
-  background-size: 48px 48px;
-}

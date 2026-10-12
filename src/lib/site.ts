@@ -31,12 +31,12 @@ export const siteConfig = {
   // Keep these in step with --background and --primary in globals.css.
   // Generated images cannot read CSS variables and do not understand oklch.
   colors: {
-    background: "#0a0a0f",
-    foreground: "#ededf3",
-    primary: "#7cffb2",
-    primaryForeground: "#06140c",
-    muted: "#111118",
-    mutedForeground: "#9a9aab",
+    background: "#ffffff",
+    foreground: "#0a0a0f",
+    primary: "#047857",
+    primaryForeground: "#ffffff",
+    muted: "#f4f4f6",
+    mutedForeground: "#5c5c6b",
   },
   organization: {
     legalName: "Scryptic",
