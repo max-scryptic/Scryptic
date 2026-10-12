@@ -4,12 +4,14 @@ import type {
   FAQPage,
   Graph,
   Organization,
+  Service,
   Thing,
   WebPage,
   WebSite,
 } from "schema-dts"
 
 import { pages, type PageEntry } from "@/lib/seo"
+import { currency, type ServiceOffer } from "@/lib/services"
 import { absoluteUrl, siteConfig } from "@/lib/site"
 
 /*
@@ -157,6 +159,32 @@ export function articleJsonLd(
     publisher: { "@id": ids.organization },
     image: absoluteUrl(article.image ?? "/opengraph-image"),
     inLanguage: siteConfig.language,
+  }
+}
+
+/** A service the organization sells, shown as a card on `page`. */
+export function serviceJsonLd(page: PageEntry, service: ServiceOffer): Service {
+  const url = `${absoluteUrl(page.path)}#${service.id}`
+
+  return {
+    "@type": "Service",
+    "@id": url,
+    name: service.name,
+    description: service.summary,
+    url,
+    provider: { "@id": ids.organization },
+    offers: {
+      "@type": "Offer",
+      url,
+      priceCurrency: currency,
+      ...optional(service.minPrice, {
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          minPrice: service.minPrice,
+          priceCurrency: currency,
+        },
+      }),
+    },
   }
 }
 

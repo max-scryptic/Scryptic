@@ -8,39 +8,46 @@
 export const siteConfig = {
   name: "Scryptic",
   shortName: "Scryptic",
-  tagline: "Make the cryptic clear.",
   // Used as the default meta description, og:description and the llms.txt
   // summary. Aim for one plain sentence of 120 to 160 characters that says what
   // the product is and who it is for: answer engines quote it verbatim.
   description:
-    "Scryptic is an independent design agency that makes complex products easy to understand, with brand identities, websites and product interfaces for founders.",
+    "Scryptic is a development studio that takes founders from idea to launched app. Start with a discovery call and audit, then ship a full build from $10k.",
+  // Short line used in the hero eyebrow and the footer.
+  tagline: "Development as a service",
   // Optional longer context for llms.txt. Leave empty to omit.
   summary:
-    "Scryptic works with founders whose products are clever, complex and hard to explain. We find what the product really is, then make it obvious in a brand identity, a website and the product interface. Our line is: make the cryptic clear.",
+    "Scryptic offers two services: a discovery call and audit that turns an idea or an existing product into a scoped plan and written estimate, and a full app to market build, from $10k depending on complexity.",
   keywords: [
-    "design agency",
-    "brand identity",
-    "website design",
-    "product design",
-    "UI design",
-    "startup branding",
+    "development as a service",
+    "app development studio",
+    "MVP development",
+    "SaaS development",
+    "technical audit",
+    "web app development",
   ] as string[],
   locale: "en_US",
   language: "en",
-  // Keep these in step with --background and --primary in globals.css.
-  // Generated images cannot read CSS variables and do not understand oklch.
+  // Keep these in step with the .dark tokens in globals.css. Generated images
+  // (favicon, share image) cannot read CSS variables, so they use this dark
+  // set; backgroundLight is the light theme's ground, for the browser chrome.
   colors: {
-    background: "#eef1f5", // Mist
-    primary: "#14131b", // Obsidian
-    primaryForeground: "#eef1f5", // Mist
-    muted: "#e3e7ed",
-    mutedForeground: "#5b6072", // Slate
+    background: "#0e0d14", // Night
+    backgroundLight: "#eef1f5", // Mist
+    foreground: "#eef1f5", // Mist
+    primary: "#7d8bff", // Lapis, dark-theme tint
+    primaryForeground: "#14131b", // Obsidian
+    muted: "#18171f",
+    mutedForeground: "#a3a8b8", // Slate, dark-theme tint
   },
   organization: {
     legalName: "Scryptic",
-    email: "",
+    email: "maxwinterleinweber@gmail.com",
     foundingDate: "",
   },
+  // Where "Book a discovery call" goes. A scheduling link (Cal.com, Calendly)
+  // when there is one; otherwise the buttons open an email to the address above.
+  bookingUrl: "" as string,
   // Handle including the @, for twitter:site and twitter:creator.
   twitterHandle: "",
   // Every official profile (X, LinkedIn, GitHub, YouTube, Crunchbase,
@@ -79,6 +86,11 @@ export const isIndexable =
   (process.env.VERCEL_ENV
     ? process.env.VERCEL_ENV === "production"
     : process.env.NODE_ENV === "production")
+
+/** Target of every "Book a discovery call" button. */
+export const bookingHref =
+  siteConfig.bookingUrl ||
+  `mailto:${siteConfig.organization.email}?subject=${encodeURIComponent("Discovery call")}`
 
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString()

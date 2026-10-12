@@ -4,21 +4,22 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Scryptic palette. Obsidian and Mist do most of the work, Lapis marks what is
- * interactive and Glint (#f2a93b) is kept for one highlight per layout, so it
- * is not a theme token. Keep --background and --primary in step with
- * siteConfig.colors in src/lib/site.ts.
+ * Scryptic palette, in a light and a dark theme (the .dark class on <html>,
+ * set before paint by the script in layout.tsx). Obsidian and Mist do most of
+ * the work and Lapis marks what is interactive. Glint (#f2a93b) is kept for
+ * one highlight per layout. Keep the .dark values in step with
+ * siteConfig.colors in src/lib/site.ts, which the generated images use.
  */
 :root {
-  --radius: 0.375rem;
+  --radius: 0.75rem;
   --background: #eef1f5; /* Mist */
   --foreground: #14131b; /* Obsidian */
   --card: #ffffff;
   --card-foreground: #14131b;
   --popover: #ffffff;
   --popover-foreground: #14131b;
-  --primary: #14131b;
-  --primary-foreground: #eef1f5;
+  --primary: #2b3fd6; /* Lapis */
+  --primary-foreground: #ffffff;
   --secondary: #e3e7ed;
   --secondary-foreground: #14131b;
   --muted: #e3e7ed;
@@ -26,36 +27,36 @@
   --accent: #e3e7ed;
   --accent-foreground: #14131b;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #d5dae2;
-  --input: #d5dae2;
-  --ring: #2b3fd6; /* Lapis */
+  --border: rgb(20 19 27 / 12%);
+  --input: rgb(20 19 27 / 18%);
+  --ring: #2b3fd6;
   --chart-1: #2b3fd6;
-  --chart-2: #f2a93b;
+  --chart-2: #d98a1c; /* Glint, deepened to read on Mist */
   --chart-3: #5b6072;
   --chart-4: #7d8bff;
   --chart-5: #14131b;
   --sidebar: #e3e7ed;
   --sidebar-foreground: #14131b;
-  --sidebar-primary: #14131b;
-  --sidebar-primary-foreground: #eef1f5;
+  --sidebar-primary: #2b3fd6;
+  --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #d5dae2;
   --sidebar-accent-foreground: #14131b;
-  --sidebar-border: #d5dae2;
+  --sidebar-border: rgb(20 19 27 / 12%);
   --sidebar-ring: #2b3fd6;
 }
 
 .dark {
-  --background: #0e0d14;
+  --background: #0e0d14; /* Night */
   --foreground: #eef1f5;
   --card: #18171f;
   --card-foreground: #eef1f5;
   --popover: #18171f;
   --popover-foreground: #eef1f5;
-  --primary: #eef1f5;
+  --primary: #7d8bff;
   --primary-foreground: #14131b;
   --secondary: #23222c;
   --secondary-foreground: #eef1f5;
-  --muted: #23222c;
+  --muted: #18171f;
   --muted-foreground: #a3a8b8;
   --accent: #23222c;
   --accent-foreground: #eef1f5;
@@ -64,14 +65,14 @@
   --input: rgb(238 241 245 / 15%);
   --ring: #7d8bff;
   --chart-1: #7d8bff;
-  --chart-2: #f2a93b;
+  --chart-2: #f2a93b; /* Glint */
   --chart-3: #a3a8b8;
   --chart-4: #2b3fd6;
   --chart-5: #eef1f5;
   --sidebar: #18171f;
   --sidebar-foreground: #eef1f5;
   --sidebar-primary: #7d8bff;
-  --sidebar-primary-foreground: #0e0d14;
+  --sidebar-primary-foreground: #14131b;
   --sidebar-accent: #23222c;
   --sidebar-accent-foreground: #eef1f5;
   --sidebar-border: rgb(238 241 245 / 10%);
@@ -133,4 +134,21 @@
   h3 {
     @apply font-display tracking-tight;
   }
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@utility bg-grid {
+  /* Faint 48px grid behind hero and call-to-action panels. */
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
 }

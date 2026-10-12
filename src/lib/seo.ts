@@ -46,20 +46,6 @@ const home = {
 
 export const pages = {
   home,
-  signup: {
-    path: "/signup",
-    title: "Sign up",
-    description: `Create your ${siteConfig.name} account with Google to get started.`,
-    changeFrequency: "yearly",
-    priority: 0.5,
-  },
-  login: {
-    path: "/login",
-    title: "Login",
-    description: `Log in to your ${siteConfig.name} account with Google.`,
-    changeFrequency: "yearly",
-    priority: 0.3,
-  },
 } satisfies Record<string, PageEntry>
 
 export const publicPages: PageEntry[] = Object.values(pages).filter(

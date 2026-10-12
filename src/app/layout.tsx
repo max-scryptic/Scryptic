@@ -2,7 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Hanken_Grotesk, IBM_Plex_Mono, Syne } from "next/font/google";
 
 import { EmDashGuard } from "@/components/em-dash-guard";
+import { themeScript } from "@/components/theme-toggle";
 import { JsonLd } from "@/components/json-ld";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import {
   baseOpenGraph,
   baseTwitter,
@@ -80,8 +83,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: siteConfig.colors.background,
-  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: siteConfig.colors.backgroundLight },
+    { media: "(prefers-color-scheme: dark)", color: siteConfig.colors.background },
+  ],
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -89,12 +95,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang={siteConfig.language}
       className={`${syne.variable} ${hankenGrotesk.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
+      // The theme script adds .dark before React hydrates.
+      suppressHydrationWarning
     >
+      <head>
+        {/* Runs before first paint so a dark-theme visitor never sees a light flash. */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="relative min-h-full">
         {/* Site-wide entities; each page's graph links back to these by @id. */}
         <JsonLd data={graph(organizationJsonLd(), websiteJsonLd())} />
         <EmDashGuard />
+        <SiteHeader />
         <div className="isolate flex min-h-dvh flex-col">{children}</div>
+        <SiteFooter />
       </body>
     </html>
   );

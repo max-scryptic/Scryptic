@@ -11,7 +11,7 @@ import { siteConfig } from "@/lib/site"
 export function BrandMarkImage({
   size,
   background,
-  color = siteConfig.colors.primary,
+  color = siteConfig.colors.foreground,
 }: {
   size: number
   background?: string

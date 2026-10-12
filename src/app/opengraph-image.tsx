@@ -26,14 +26,17 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          background: colors.muted,
-          color: colors.primary,
+          background: colors.background,
+          color: colors.foreground,
         }}
       >
         <BrandMarkImage size={112} />
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ fontSize: 80, fontWeight: 600, letterSpacing: -2 }}>
             {siteConfig.name}
+          </div>
+          <div style={{ fontSize: 28, color: colors.primary }}>
+            {siteConfig.tagline}
           </div>
           <div
             style={{
