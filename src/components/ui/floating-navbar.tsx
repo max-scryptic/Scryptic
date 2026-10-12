@@ -64,7 +64,7 @@ export function FloatingNav({
       transition={{ duration: 0.2, ease: "easeOut" }}
       onFocusCapture={() => setVisible(true)}
       className={cn(
-        "fixed inset-x-0 top-4 z-50 mx-auto flex w-fit max-w-[calc(100%-2rem)] items-center gap-1 rounded-full border border-foreground/10 bg-background/70 py-1.5 pr-1.5 pl-2 shadow-[0_8px_32px_-12px_rgb(0_0_0/0.25)] dark:shadow-[0_8px_32px_-12px_rgb(0_0_0/0.6)] backdrop-blur-md sm:top-6 sm:gap-2 sm:pl-3",
+        "fixed inset-x-0 top-4 z-50 mx-auto flex w-fit max-w-[calc(100%-2rem)] items-center gap-1 rounded-full border border-border bg-background/80 py-1.5 pr-1.5 pl-2 shadow-[0_8px_32px_-12px_rgb(0_0_0/0.15)] backdrop-blur-md sm:top-6 sm:gap-2 sm:pl-3",
         className,
       )}
     >
@@ -89,8 +89,8 @@ export function FloatingNav({
 }
 
 /**
- * The pill button that sits at the end of the bar, with Aceternity's glowing
- * underline. Pass it as FloatingNav's `action`.
+ * The pill button that sits at the end of the bar. Pass it as FloatingNav's
+ * `action`.
  */
 export function FloatingNavAction({
   href,
@@ -102,13 +102,9 @@ export function FloatingNavAction({
   return (
     <a
       href={href}
-      className="relative flex min-h-9 items-center rounded-full border border-foreground/15 px-3 text-sm font-medium whitespace-nowrap text-foreground transition-colors hover:border-primary/40 hover:bg-primary/5 sm:px-4"
+      className="flex min-h-9 items-center rounded-full border border-input px-3 text-sm font-medium whitespace-nowrap text-foreground transition-colors hover:border-primary/40 hover:bg-primary/5 sm:px-4"
     >
       {children}
-      <span
-        aria-hidden="true"
-        className="absolute inset-x-0 -bottom-px mx-auto h-px w-1/2 bg-linear-to-r from-transparent via-primary to-transparent"
-      />
     </a>
   )
 }

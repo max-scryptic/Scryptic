@@ -144,11 +144,3 @@
     scroll-behavior: smooth;
   }
 }
-
-@utility bg-grid {
-  /* Faint 48px grid behind hero and call-to-action panels. */
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px);
-  background-size: 48px 48px;
-}

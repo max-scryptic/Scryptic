@@ -28,17 +28,17 @@ export const siteConfig = {
   ] as string[],
   locale: "en_US",
   language: "en",
-  // Keep these in step with the .dark tokens in globals.css. Generated images
-  // (favicon, share image) cannot read CSS variables, so they use this dark
-  // set; backgroundLight is the light theme's ground, for the browser chrome.
+  // Keep these in step with the theme tokens in globals.css. The site is
+  // light by default (:root) with an optional dark theme (.dark); generated
+  // files such as the web manifest cannot read CSS variables.
   colors: {
-    background: "#0e0d14", // Night
-    backgroundLight: "#eef1f5", // Mist
-    foreground: "#eef1f5", // Mist
-    primary: "#7d8bff", // Lapis, dark-theme tint
-    primaryForeground: "#14131b", // Obsidian
-    muted: "#18171f",
-    mutedForeground: "#a3a8b8", // Slate, dark-theme tint
+    background: "#eef1f5", // Mist
+    backgroundDark: "#0e0d14", // Night
+    foreground: "#14131b", // Obsidian
+    primary: "#2b3fd6", // Lapis
+    primaryForeground: "#ffffff",
+    muted: "#e3e7ed",
+    mutedForeground: "#5b6072", // Slate
   },
   organization: {
     legalName: "Scryptic",

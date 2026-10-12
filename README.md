@@ -2,7 +2,7 @@
 
 Marketing site for Scryptic, a development-as-a-service studio. Two services: a discovery call and audit, and a full app to market build (from $10k). Next.js 16 with [Base UI](https://base-ui.com) as the UI primitive layer, styled with Tailwind CSS v4.
 
-Brand: dark-only ink surfaces (`#0a0a0f`) with one mint signal colour (`#7cffb2`), Geist and Geist Mono, and an "S_" terminal-cursor mark. Tokens live in `src/app/globals.css`, mirrored in `siteConfig.colors` for the generated images.
+Brand: light surfaces (`#ffffff`) with ink text (`#0a0a0f`), one green signal colour (`#047857`) and no gradients, Geist and Geist Mono, and an "S_" terminal-cursor mark. Tokens live in `src/app/globals.css`, mirrored in `siteConfig.colors` for the generated images.
 
 ## Getting started
 
@@ -25,7 +25,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ```
 src/
   app/                  Routes: / (single landing page, no accounts)
-    globals.css         Theme tokens (light + .dark) and Tailwind setup
+    globals.css         Theme tokens (light) and Tailwind setup
     robots.ts           robots.txt, sitemap.xml, manifest, llms.txt, icons and the
     sitemap.ts            Open Graph image are all generated from src/lib (see
     manifest.ts           "SEO and AEO" below)
