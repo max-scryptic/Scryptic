@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Hanken_Grotesk, IBM_Plex_Mono, Syne } from "next/font/google";
 
 import { EmDashGuard } from "@/components/em-dash-guard";
+import { themeScript } from "@/components/theme-toggle";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -20,14 +21,22 @@ import {
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Brand type: Syne for headlines and the wordmark, Hanken Grotesk for text,
+// IBM Plex Mono for labels, numbers and code.
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const hankenGrotesk = Hanken_Grotesk({
+  variable: "--font-hanken-grotesk",
   subsets: ["latin"],
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-ibm-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 // Search console ownership tags, read at build time. Unset ones are skipped.
@@ -74,17 +83,26 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: siteConfig.colors.background,
-  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: siteConfig.colors.background },
+    { media: "(prefers-color-scheme: dark)", color: siteConfig.colors.backgroundDark },
+  ],
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={siteConfig.language}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${syne.variable} ${hankenGrotesk.variable} ${ibmPlexMono.variable} h-full antialiased`}
       data-scroll-behavior="smooth"
+      // The theme script adds .dark before React hydrates.
+      suppressHydrationWarning
     >
+      <head>
+        {/* Runs before first paint so a dark-theme visitor never sees a light flash. */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="relative min-h-full">
         {/* Site-wide entities; each page's graph links back to these by @id. */}
         <JsonLd data={graph(organizationJsonLd(), websiteJsonLd())} />

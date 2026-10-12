@@ -1,0 +1,15 @@
+{
+  "core": {
+    "obsidian": { "hex": "#14131B", "rgb": [20, 19, 27], "pantone": "Black 6 C", "use": "Text, the mark, dark surfaces" },
+    "mist": { "hex": "#EEF1F5", "rgb": [238, 241, 245], "pantone": "663 C", "use": "Light background, the mark on dark" },
+    "lapis": { "hex": "#2B3FD6", "rgb": [43, 63, 214], "pantone": "2728 C", "use": "Links, buttons, focus" },
+    "slate": { "hex": "#5B6072", "rgb": [91, 96, 114], "use": "Secondary text" },
+    "glint": { "hex": "#F2A93B", "rgb": [242, 169, 59], "pantone": "1365 C", "use": "One highlight per layout" }
+  },
+  "dark_theme": {
+    "night": { "hex": "#0E0D14", "use": "Dark background" },
+    "surface": { "hex": "#18171F", "use": "Cards on Night" },
+    "lapis": { "hex": "#7D8BFF", "use": "Links and buttons on Night" },
+    "slate": { "hex": "#A3A8B8", "use": "Secondary text on Night" }
+  }
+}

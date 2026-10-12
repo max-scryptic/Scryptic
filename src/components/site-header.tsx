@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { BrandLogo } from "@/components/brand-logo"
+import { ThemeToggle } from "@/components/theme-toggle"
 import {
   FloatingNav,
   FloatingNavAction,
@@ -23,14 +24,19 @@ export function SiteHeader() {
       brand={
         <Link
           href="/"
-          className="flex min-h-9 items-center gap-2 rounded-full pr-1 font-semibold tracking-tight sm:pr-2"
+          className="flex min-h-9 items-center gap-2 rounded-full pr-1 font-display font-extrabold tracking-tight lowercase sm:pr-2"
         >
-          <BrandLogo className="size-7 rounded-full" />
+          <BrandLogo className="size-6" />
           <span className="hidden sm:inline">{siteConfig.name}</span>
           <span className="sr-only sm:hidden">{siteConfig.name} home</span>
         </Link>
       }
-      action={<FloatingNavAction href={bookingHref}>Book a call</FloatingNavAction>}
+      action={
+        <>
+          <ThemeToggle />
+          <FloatingNavAction href={bookingHref}>Book a call</FloatingNavAction>
+        </>
+      }
     />
   )
 }

@@ -1,0 +1,15 @@
+/* Scryptic palette as CSS custom properties. The site's theme tokens live in
+   src/app/globals.css; this file is for decks, docs and other projects. */
+:root {
+  --scryptic-obsidian: #14131b;
+  --scryptic-mist: #eef1f5;
+  --scryptic-lapis: #2b3fd6;
+  --scryptic-slate: #5b6072;
+  --scryptic-glint: #f2a93b;
+
+  /* Dark theme */
+  --scryptic-night: #0e0d14;
+  --scryptic-surface: #18171f;
+  --scryptic-lapis-on-dark: #7d8bff;
+  --scryptic-slate-on-dark: #a3a8b8;
+}

@@ -3,50 +3,86 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Scryptic palette, in a light and a dark theme (the .dark class on <html>,
+ * set before paint by the script in layout.tsx). Obsidian and Mist do most of
+ * the work and Lapis marks what is interactive. Glint (#f2a93b) is kept for
+ * one highlight per layout. Keep the .dark values in step with
+ * siteConfig.colors in src/lib/site.ts, which the generated images use.
+ */
 :root {
-  /*
-   * Scryptic is light by default: white surfaces, ink text and one green
-   * signal colour, with no gradients. Keep --background, --foreground,
-   * --primary and the muted pair in step with siteConfig.colors in
-   * src/lib/site.ts, which the generated images use.
-   */
   --radius: 0.75rem;
-  --background: #ffffff;
-  --foreground: #0a0a0f;
-  --card: #fafafb;
-  --card-foreground: #0a0a0f;
+  --background: #eef1f5; /* Mist */
+  --foreground: #14131b; /* Obsidian */
+  --card: #ffffff;
+  --card-foreground: #14131b;
   --popover: #ffffff;
-  --popover-foreground: #0a0a0f;
-  --primary: #047857;
+  --popover-foreground: #14131b;
+  --primary: #2b3fd6; /* Lapis */
   --primary-foreground: #ffffff;
-  --secondary: #f0f0f3;
-  --secondary-foreground: #0a0a0f;
-  --muted: #f4f4f6;
-  --muted-foreground: #5c5c6b;
-  --accent: #f0f0f3;
-  --accent-foreground: #0a0a0f;
+  --secondary: #e3e7ed;
+  --secondary-foreground: #14131b;
+  --muted: #e3e7ed;
+  --muted-foreground: #5b6072; /* Slate */
+  --accent: #e3e7ed;
+  --accent-foreground: #14131b;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: rgb(10 10 15 / 10%);
-  --input: rgb(10 10 15 / 16%);
-  --ring: #047857;
-  --chart-1: #047857;
-  --chart-2: #1d6fd1;
-  --chart-3: #7c4dd8;
-  --chart-4: #b7791f;
-  --chart-5: #d1493b;
-  --sidebar: #fafafb;
-  --sidebar-foreground: #0a0a0f;
-  --sidebar-primary: #047857;
+  --border: rgb(20 19 27 / 12%);
+  --input: rgb(20 19 27 / 18%);
+  --ring: #2b3fd6;
+  --chart-1: #2b3fd6;
+  --chart-2: #d98a1c; /* Glint, deepened to read on Mist */
+  --chart-3: #5b6072;
+  --chart-4: #7d8bff;
+  --chart-5: #14131b;
+  --sidebar: #e3e7ed;
+  --sidebar-foreground: #14131b;
+  --sidebar-primary: #2b3fd6;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f0f0f3;
-  --sidebar-accent-foreground: #0a0a0f;
-  --sidebar-border: rgb(10 10 15 / 10%);
-  --sidebar-ring: #047857;
+  --sidebar-accent: #d5dae2;
+  --sidebar-accent-foreground: #14131b;
+  --sidebar-border: rgb(20 19 27 / 12%);
+  --sidebar-ring: #2b3fd6;
+}
+
+.dark {
+  --background: #0e0d14; /* Night */
+  --foreground: #eef1f5;
+  --card: #18171f;
+  --card-foreground: #eef1f5;
+  --popover: #18171f;
+  --popover-foreground: #eef1f5;
+  --primary: #7d8bff;
+  --primary-foreground: #14131b;
+  --secondary: #23222c;
+  --secondary-foreground: #eef1f5;
+  --muted: #18171f;
+  --muted-foreground: #a3a8b8;
+  --accent: #23222c;
+  --accent-foreground: #eef1f5;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: rgb(238 241 245 / 10%);
+  --input: rgb(238 241 245 / 15%);
+  --ring: #7d8bff;
+  --chart-1: #7d8bff;
+  --chart-2: #f2a93b; /* Glint */
+  --chart-3: #a3a8b8;
+  --chart-4: #2b3fd6;
+  --chart-5: #eef1f5;
+  --sidebar: #18171f;
+  --sidebar-foreground: #eef1f5;
+  --sidebar-primary: #7d8bff;
+  --sidebar-primary-foreground: #14131b;
+  --sidebar-accent: #23222c;
+  --sidebar-accent-foreground: #eef1f5;
+  --sidebar-border: rgb(238 241 245 / 10%);
+  --sidebar-ring: #7d8bff;
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-hanken-grotesk);
+  --font-display: var(--font-syne);
+  --font-mono: var(--font-ibm-plex-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -93,6 +129,11 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
   ::selection {
     @apply bg-primary text-primary-foreground;
   }
@@ -103,4 +144,3 @@
     scroll-behavior: smooth;
   }
 }
-

@@ -47,9 +47,9 @@ export function organizationJsonLd(): Organization {
     logo: {
       "@type": "ImageObject",
       "@id": ids.logo,
-      url: absoluteUrl("/icon"),
-      width: "192",
-      height: "192",
+      url: absoluteUrl("/icon-512.png"),
+      width: "512",
+      height: "512",
       caption: siteConfig.name,
     },
     ...optional(organization.legalName, { legalName: organization.legalName }),

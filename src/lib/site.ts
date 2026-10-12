@@ -28,15 +28,17 @@ export const siteConfig = {
   ] as string[],
   locale: "en_US",
   language: "en",
-  // Keep these in step with --background and --primary in globals.css.
-  // Generated images cannot read CSS variables and do not understand oklch.
+  // Keep these in step with the theme tokens in globals.css. The site is
+  // light by default (:root) with an optional dark theme (.dark); generated
+  // files such as the web manifest cannot read CSS variables.
   colors: {
-    background: "#ffffff",
-    foreground: "#0a0a0f",
-    primary: "#047857",
+    background: "#eef1f5", // Mist
+    backgroundDark: "#0e0d14", // Night
+    foreground: "#14131b", // Obsidian
+    primary: "#2b3fd6", // Lapis
     primaryForeground: "#ffffff",
-    muted: "#f4f4f6",
-    mutedForeground: "#5c5c6b",
+    muted: "#e3e7ed",
+    mutedForeground: "#5b6072", // Slate
   },
   organization: {
     legalName: "Scryptic",

@@ -30,14 +30,15 @@ src/
     sitemap.ts            Open Graph image are all generated from src/lib (see
     manifest.ts           "SEO and AEO" below)
     llms.txt/route.ts
-    icon.tsx, apple-icon.tsx, opengraph-image.tsx
+    icon.svg, apple-icon.png, opengraph-image.tsx   From the brand kit in brand/
     not-found.tsx       Branded 404 (replaces Next's default and its "404: ..." title)
   components/
     ui/                 Generic widgets built on @base-ui/react (Button, Card, Field, Input, Label, Separator),
                         plus floating-navbar.tsx, a port of Aceternity UI's Floating Navbar (uses motion)
     site-header.tsx     Nav items and call to action for the floating navbar
     site-footer.tsx
-    brand-logo.tsx      The "S_" mark (also drawn into the favicon and share image)
+    brand-logo.tsx      The split glass mark, inline so it follows the theme
+    theme-toggle.tsx    Light and dark mode: the navbar toggle and the pre-paint script
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
     em-dash-guard.tsx   Dev guard against em dashes in rendered text
   lib/
@@ -80,7 +81,7 @@ To try a different look for the built-in widgets, change `style` in `components.
 Search engine (SEO) and answer engine (AEO: ChatGPT, Claude, Perplexity, Google AI Overviews) requirements are built in. What you configure:
 
 1. **`src/lib/site.ts`**: name, one-sentence description, locale, brand colours, Twitter/X handle and every official profile URL (`sameAs`).
-2. **`src/components/brand-logo.tsx`**: the mark. The favicon, app icons and share image are drawn from it.
+2. **`src/components/brand-logo.tsx`** and **`brand/`**: the mark on the site, and the brand kit the favicon, app icons and share image come from (see `brand/README.md`).
 3. **Environment** (see `.env.example`): `NEXT_PUBLIC_SITE_URL` for non-Vercel hosts, and the search console verification tokens.
 4. **`pages` in `src/lib/seo.ts`**: one entry per public route.
 
@@ -95,7 +96,7 @@ What you get, all derived from those:
 | `sitemap.xml` | `src/app/sitemap.ts` | From the page registry. Only set `lastModified` when you know it. |
 | `llms.txt` | `src/app/llms.txt/route.ts` | [llmstxt.org](https://llmstxt.org) map of the site for AI agents, from the same registry. |
 | Structured data | `src/lib/structured-data.ts` | Organization + WebSite site-wide, WebPage + BreadcrumbList per page, linked by `@id`. FAQPage and Article builders ready to use. |
-| Favicon, app icons, manifest | `icon.tsx`, `apple-icon.tsx`, `manifest.ts` | 192px favicon (Google wants a multiple of 48px), `/favicon.ico` rewritten to it. |
+| Favicon, app icons, manifest | `icon.svg`, `apple-icon.png`, `public/favicon.ico`, `public/icon-*.png`, `manifest.ts` | SVG favicon that follows the browser theme, `favicon.ico` (16, 32, 48) for older browsers and crawlers, 192 and 512px manifest icons. All from `brand/`. |
 | Search console verification | `GOOGLE_`, `BING_`, `YANDEX_SITE_VERIFICATION` | Rendered as meta tags when set. |
 | Preview deployments | `isIndexable` | Anything but Vercel production (or a non-Vercel production build) sends `noindex` in meta, `X-Robots-Tag` and `robots.txt`. |
 
