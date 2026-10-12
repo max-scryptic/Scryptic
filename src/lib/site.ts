@@ -6,29 +6,38 @@
  */
 
 export const siteConfig = {
-  name: "Acme Inc.",
-  shortName: "Acme",
+  name: "Scryptic",
+  shortName: "Scryptic",
+  tagline: "Make the cryptic clear.",
   // Used as the default meta description, og:description and the llms.txt
   // summary. Aim for one plain sentence of 120 to 160 characters that says what
   // the product is and who it is for: answer engines quote it verbatim.
   description:
-    "Acme Inc. is a placeholder product description. Replace it with one clear sentence that says what you do and who it is for.",
+    "Scryptic is an independent design agency that makes complex products easy to understand, with brand identities, websites and product interfaces for founders.",
   // Optional longer context for llms.txt. Leave empty to omit.
-  summary: "",
-  keywords: [] as string[],
+  summary:
+    "Scryptic works with founders whose products are clever, complex and hard to explain. We find what the product really is, then make it obvious in a brand identity, a website and the product interface. Our line is: make the cryptic clear.",
+  keywords: [
+    "design agency",
+    "brand identity",
+    "website design",
+    "product design",
+    "UI design",
+    "startup branding",
+  ] as string[],
   locale: "en_US",
   language: "en",
   // Keep these in step with --background and --primary in globals.css.
   // Generated images cannot read CSS variables and do not understand oklch.
   colors: {
-    background: "#ffffff",
-    primary: "#171717",
-    primaryForeground: "#fafafa",
-    muted: "#f5f5f5",
-    mutedForeground: "#737373",
+    background: "#eef1f5", // Mist
+    primary: "#14131b", // Obsidian
+    primaryForeground: "#eef1f5", // Mist
+    muted: "#e3e7ed",
+    mutedForeground: "#5b6072", // Slate
   },
   organization: {
-    legalName: "Acme Inc.",
+    legalName: "Scryptic",
     email: "",
     foundingDate: "",
   },

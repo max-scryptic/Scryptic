@@ -29,11 +29,7 @@ export function BrandTile({
         width={size * 0.6}
         height={size * 0.6}
         viewBox="0 0 24 24"
-        fill="none"
-        stroke={siteConfig.colors.primaryForeground}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        fill={siteConfig.colors.primaryForeground}
       >
         {BRAND_MARK_PATHS.map((d) => (
           <path key={d} d={d} />

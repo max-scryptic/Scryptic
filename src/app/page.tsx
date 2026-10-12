@@ -14,7 +14,8 @@ export default function Home() {
       <PageJsonLd page={pages.home} />
       <div className="flex flex-col items-center gap-4">
         <BrandLogo className="size-14" />
-        <h1 className="text-3xl font-semibold tracking-tight">{siteConfig.name}</h1>
+        <h1 className="text-3xl font-extrabold">{siteConfig.name}</h1>
+        <p className="text-lg text-muted-foreground">{siteConfig.tagline}</p>
       </div>
       <div className="flex gap-3">
         {/* Base UI composes through `render`; `nativeButton` is off because the result is a link. */}
