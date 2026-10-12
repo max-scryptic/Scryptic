@@ -75,15 +75,14 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: siteConfig.colors.background,
-  colorScheme: "dark",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={siteConfig.language}
-      // The site is dark-only; .dark switches on the components' dark: styles.
-      className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       data-scroll-behavior="smooth"
     >
       <body className="relative min-h-full">

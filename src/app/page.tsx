@@ -137,26 +137,16 @@ export default function Home() {
       />
 
       {/* Hero */}
-      <section className="relative isolate overflow-hidden px-4 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-32">
-        <div
-          aria-hidden="true"
-          className="bg-grid absolute inset-0 -z-10 mask-[radial-gradient(ellipse_at_top,black_20%,transparent_70%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute top-0 left-1/2 -z-10 h-[420px] w-[720px] max-w-full -translate-x-1/2 -translate-y-1/3 rounded-full bg-primary/15 blur-[120px]"
-        />
+      <section className="px-4 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-32">
         <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
           <div className="flex flex-col items-start gap-7">
-            <p className="flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 font-mono text-xs text-muted-foreground">
+            <p className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
               <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
               {siteConfig.tagline}
             </p>
             <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
               From idea to{" "}
-              <span className="bg-linear-to-r from-primary to-chart-2 bg-clip-text text-transparent">
-                launched app
-              </span>
+              <span className="text-primary">launched app</span>
               , without hiring a dev team.
             </h1>
             <p className="max-w-xl text-lg text-pretty text-muted-foreground">
@@ -187,12 +177,12 @@ export default function Home() {
 
           <div
             aria-hidden="true"
-            className="w-full overflow-hidden rounded-2xl border border-border bg-card/80 shadow-2xl shadow-primary/5 backdrop-blur"
+            className="w-full overflow-hidden rounded-2xl border border-border bg-card shadow-xl shadow-black/5"
           >
             <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
-              <span className="size-2.5 rounded-full bg-white/15" />
-              <span className="size-2.5 rounded-full bg-white/15" />
-              <span className="size-2.5 rounded-full bg-white/15" />
+              <span className="size-2.5 rounded-full bg-foreground/15" />
+              <span className="size-2.5 rounded-full bg-foreground/15" />
+              <span className="size-2.5 rounded-full bg-foreground/15" />
             </div>
             <div className="flex flex-col gap-2 p-5 font-mono text-sm leading-relaxed">
               {terminalLines.map((line) => (
@@ -237,9 +227,7 @@ export default function Home() {
                   aria-labelledby={`${service.id}-name`}
                   className={cn(
                     "relative flex scroll-mt-24 flex-col gap-6 rounded-2xl border bg-card p-6 sm:p-8",
-                    featured
-                      ? "border-primary/40 shadow-[0_0_60px_-20px_rgb(124_255_178/0.35)]"
-                      : "border-border",
+                    featured ? "border-primary/50" : "border-border",
                   )}
                 >
                   <div className="flex items-start justify-between gap-4">
@@ -378,15 +366,7 @@ export default function Home() {
 
       {/* Call to action */}
       <section aria-labelledby="contact-heading" id="contact" className="scroll-mt-24 px-4 pb-24 sm:px-6">
-        <div className="relative isolate mx-auto flex max-w-6xl flex-col items-center gap-6 overflow-hidden rounded-3xl border border-border bg-card px-6 py-16 text-center sm:py-20">
-          <div
-            aria-hidden="true"
-            className="bg-grid absolute inset-0 -z-10 mask-[radial-gradient(ellipse_at_center,black_10%,transparent_70%)]"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute bottom-0 left-1/2 -z-10 h-64 w-[560px] max-w-full -translate-x-1/2 translate-y-1/2 rounded-full bg-primary/20 blur-[100px]"
-          />
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 rounded-3xl border border-border bg-card px-6 py-16 text-center sm:py-20">
           <h2 id="contact-heading" className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
             Start with a discovery call
           </h2>

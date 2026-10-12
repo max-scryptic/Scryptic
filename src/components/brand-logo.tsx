@@ -2,7 +2,7 @@ import { cn } from "cn"
 
 /*
  * The Scryptic mark: a single-stroke "S" with a terminal cursor after it,
- * ink on a mint tile. Drawn inline rather than loaded as an image so it
+ * white on a green tile. Drawn inline rather than loaded as an image so it
  * takes its colours from the theme tokens. The favicon, app icons and Open Graph image are
  * drawn from the same paths, so they follow any change here.
  */
