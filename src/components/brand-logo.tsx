@@ -23,25 +23,18 @@ type BrandLogoProps = {
 }
 
 export function BrandLogo({ className }: BrandLogoProps) {
+  // The bare mark on a transparent background, in the text colour, so it sits
+  // on any surface and flips with the theme.
   return (
-    <div
-      className={cn(
-        "flex aspect-square shrink-0 items-center justify-center rounded-[22%] bg-primary",
-        className
-      )}
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={cn("aspect-square shrink-0 text-foreground", className)}
+      aria-hidden="true"
     >
-      <svg
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        // Roughly 60% of the tile, so the clear space around the mark survives
-        // at the smallest size this is used at.
-        className="size-[60%] text-primary-foreground"
-        aria-hidden="true"
-      >
-        {BRAND_MARK_PATHS.map((d) => (
-          <path key={d} d={d} />
-        ))}
-      </svg>
-    </div>
+      {BRAND_MARK_PATHS.map((d) => (
+        <path key={d} d={d} />
+      ))}
+    </svg>
   )
 }

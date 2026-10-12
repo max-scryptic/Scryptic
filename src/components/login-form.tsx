@@ -39,7 +39,7 @@ export function LoginForm({
             href="/"
             className="mb-8 flex min-h-11 items-center gap-2 px-2 text-lg font-semibold tracking-tight"
           >
-            <BrandLogo className="size-11" />
+            <BrandLogo className="size-7" />
             {siteConfig.name}
           </Link>
           <CardTitle className="text-balance text-2xl">

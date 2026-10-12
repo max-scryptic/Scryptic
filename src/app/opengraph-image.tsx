@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og"
 
-import { BrandTile } from "@/lib/brand-image"
+import { BrandMarkImage } from "@/lib/brand-image"
 import { shareImage } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 
@@ -30,7 +30,7 @@ export default function OpengraphImage() {
           color: colors.primary,
         }}
       >
-        <BrandTile size={112} />
+        <BrandMarkImage size={112} />
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ fontSize: 80, fontWeight: 600, letterSpacing: -2 }}>
             {siteConfig.name}
