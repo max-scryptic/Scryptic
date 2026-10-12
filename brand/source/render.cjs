@@ -42,14 +42,13 @@ add("social/avatar-lapis-800.png", 800, 800, square(800, C.lapis, C.white, 0.52)
 add("social/avatar-mist-800.png", 800, 800, square(800, C.mist, C.obsidian, 0.52))
 // Banners.
 const banner = (w, h, opts) => `<div style="width:${w}px;height:${h}px;background:${C.night};color:${C.mist};position:relative;overflow:hidden;padding:${opts.pad}px;display:flex;flex-direction:column;justify-content:${opts.justify}">
-  <div style="position:absolute;inset:0;background-image:linear-gradient(to right,rgb(238 241 245/5%) 1px,transparent 1px),linear-gradient(to bottom,rgb(238 241 245/5%) 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:radial-gradient(ellipse at ${opts.glow},black 10%,transparent 70%)"></div>
   <div style="position:absolute;right:${opts.markRight}px;top:50%;transform:translateY(-50%);opacity:.06">${mark(C.mist, opts.bigMark + "px")}</div>
   <div style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:${opts.gap}px">${opts.body}</div></div>`
-add("social/og-image-1200x630.png", 1200, 630, banner(1200, 630, { pad: 80, justify: "space-between", glow: "top left", markRight: -120, bigMark: 620, gap: 28,
+add("social/og-image-1200x630.png", 1200, 630, banner(1200, 630, { pad: 80, justify: "space-between", markRight: -120, bigMark: 620, gap: 28,
   body: `${lockup("mist", "64px")}<div style="height:120px"></div><div style="font:800 76px/0.98 Syne;letter-spacing:-0.035em;max-width:900px">From idea to <span style="color:#7D8BFF">launched app</span>.</div><div style="font:400 24px Plex;color:${C.slate};letter-spacing:.08em;text-transform:uppercase">Development as a service</div>` }))
-add("social/linkedin-banner-1584x396.png", 1584, 396, banner(1584, 396, { pad: 0, justify: "center", glow: "right", markRight: -100, bigMark: 320, gap: 18,
+add("social/linkedin-banner-1584x396.png", 1584, 396, banner(1584, 396, { pad: 0, justify: "center", markRight: -100, bigMark: 320, gap: 18,
   body: `<div style="padding-left:520px;display:flex;flex-direction:column;gap:18px"><div style="font:800 40px/1 Syne;letter-spacing:-0.035em">From idea to <span style="color:#7D8BFF">launched app</span>.</div><div style="font:400 20px Plex;color:${C.slate};letter-spacing:.08em;text-transform:uppercase">Development as a service</div></div>` }))
-add("social/x-header-1500x500.png", 1500, 500, banner(1500, 500, { pad: 0, justify: "center", glow: "right", markRight: -20, bigMark: 360, gap: 18,
+add("social/x-header-1500x500.png", 1500, 500, banner(1500, 500, { pad: 0, justify: "center", markRight: -20, bigMark: 360, gap: 18,
   body: `<div style="padding-left:96px;display:flex;flex-direction:column;gap:20px"><div style="font:800 50px/1 Syne;letter-spacing:-0.035em">From idea to <span style="color:#7D8BFF">launched app</span>.</div><div style="font:400 20px Plex;color:${C.slate};letter-spacing:.08em;text-transform:uppercase">Development as a service</div></div>` }))
 
 ;(async () => {
