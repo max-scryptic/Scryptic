@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { BrandLogo } from "@/components/brand-logo"
+import { BrandLogo, BrandWordmark } from "@/components/brand-logo"
 import { navItems } from "@/components/site-header"
 import { siteConfig } from "@/lib/site"
 
@@ -37,6 +37,10 @@ export function SiteFooter() {
       </div>
       <div className="mx-auto max-w-6xl px-4 pb-10 font-mono text-xs text-muted-foreground sm:px-6">
         &copy; {new Date().getFullYear()} {siteConfig.organization.legalName}
+      </div>
+      {/* Sign-off: the wordmark run edge to edge, sitting on the bottom of the page. */}
+      <div className="overflow-hidden px-4 pb-4 sm:px-6 sm:pb-6">
+        <BrandWordmark className="block h-auto w-full" />
       </div>
     </footer>
   )
