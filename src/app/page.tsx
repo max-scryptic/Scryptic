@@ -562,18 +562,14 @@ export default function Home() {
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-16">
           <div className="flex flex-col gap-6">
-            <SectionHeading eyebrow="About us" title="About Scryptic" id="about-heading" wide>
+            <SectionHeading eyebrow="About us" title="About Scryptic" id="about-heading">
               {siteConfig.name} is a Brighton-based development studio for founders who need a
               working product, not a team to manage.
             </SectionHeading>
-            <p className="text-pretty text-muted-foreground">
-              The studio is built on more than five years of shipping software at pace, from
-              early-stage startups to enterprise applications. That experience now goes into your
-              product: we act as your technical partner from the first conversation to launch day,
-              working out what is worth building, making the technical calls and shipping the app.
-              Scope, price and timeline are agreed before the build starts, and a catch-up every
-              Friday keeps you across progress, so you always know what you are paying for, what you
-              will get and when.
+            <p className="max-w-2xl text-pretty text-muted-foreground">
+              Built on more than five years of shipping software, from early-stage startups to
+              enterprise applications. Scope, price and timeline are agreed before the build starts,
+              so you always know what you are paying for, what you will get and when.
             </p>
           </div>
 
