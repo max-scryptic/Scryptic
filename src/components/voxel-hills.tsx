@@ -1,13 +1,13 @@
 "use client"
 
-import { useEffect, useId, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { cn } from "cn"
 
 /*
  * The footer's sign-off landscape: a band of low, rolling hills built from
  * isometric cubes, sitting between the footer text and the wordmark. It has its
- * own band so it never runs behind text, and its front rows fade out into the
- * flat background above the wordmark.
+ * own band so it never runs behind text, and the band is cut flat along the
+ * front row so the hills stand on the line above the wordmark.
  *
  * The terrain comes from a fixed seed, so server and client draw the same
  * picture on every load. Each column is drawn as three faces (its full left
@@ -19,8 +19,6 @@ import { cn } from "cn"
 const CUBE = 44
 const ROWS = 9
 const SPAN = 2800
-// Share of the band's height, from the bottom, over which the terrain fades out.
-const FADE = 0.42
 
 const halfWidth = CUBE * 0.866
 const halfHeight = CUBE * 0.5
@@ -55,7 +53,6 @@ function buildTerrain() {
   let minX = Infinity
   let maxX = -Infinity
   let minY = Infinity
-  let maxY = -Infinity
 
   for (let row = 0; row < ROWS; row++) {
     let top = ""
@@ -66,7 +63,8 @@ function buildTerrain() {
       if ((col + row) & 1) continue
       const x = round(col * halfWidth)
       const base = row * halfHeight
-      const height = columnHeight(col * halfWidth, row, random)
+      // The front row is never empty, so the ground meets the line without gaps.
+      const height = Math.max(row === ROWS - 1 ? 1 : 0, columnHeight(col * halfWidth, row, random))
       const peak = round(base - height * CUBE)
       const w = round(halfWidth)
 
@@ -79,20 +77,21 @@ function buildTerrain() {
       minX = Math.min(minX, x - w)
       maxX = Math.max(maxX, x + w)
       minY = Math.min(minY, peak - halfHeight)
-      maxY = Math.max(maxY, base + halfHeight)
     }
     rows.push({ top, left, right })
   }
 
+  // Cut along the front row's base: everything behind it ends above this line,
+  // and the front columns are sliced flat, so the band has a straight bottom edge.
+  const maxY = (ROWS - 1) * halfHeight
   return { rows, box: [minX, minY, maxX - minX, maxY - minY].map(round) }
 }
 
 const terrain = buildTerrain()
 
 export function VoxelHills({ className }: { className?: string }) {
-  const id = useId()
   const ref = useRef<SVGSVGElement>(null)
-  const [x, y, width, height] = terrain.box
+  const [, , width, height] = terrain.box
 
   // Rows build in when the band scrolls into view. Until the observer reports
   // (and without JavaScript) the terrain simply shows.
@@ -128,31 +127,13 @@ export function VoxelHills({ className }: { className?: string }) {
       aria-hidden="true"
       className={cn("pointer-events-none block w-full select-none", className)}
     >
-      <defs>
-        <linearGradient
-          id={`${id}-fade`}
-          gradientUnits="userSpaceOnUse"
-          x1="0"
-          y1={y + height * (1 - FADE)}
-          x2="0"
-          y2={y + height}
-        >
-          <stop offset="0" stopColor="#fff" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
-        </linearGradient>
-        <mask id={`${id}-mask`} maskUnits="userSpaceOnUse" x={x} y={y} width={width} height={height}>
-          <rect x={x} y={y} width={width} height={height} fill={`url(#${id}-fade)`} />
-        </mask>
-      </defs>
-      <g mask={`url(#${id}-mask)`}>
-        {terrain.rows.map((row, index) => (
-          <g key={index} className="voxel-row" style={{ animationDelay: `${index * 90}ms` }}>
-            <path d={row.left} className="fill-voxel-left" />
-            <path d={row.right} className="fill-voxel-right" />
-            <path d={row.top} className="fill-voxel-top" />
-          </g>
-        ))}
-      </g>
+      {terrain.rows.map((row, index) => (
+        <g key={index} className="voxel-row" style={{ animationDelay: `${index * 90}ms` }}>
+          <path d={row.left} className="fill-voxel-left" />
+          <path d={row.right} className="fill-voxel-right" />
+          <path d={row.top} className="fill-voxel-top" />
+        </g>
+      ))}
     </svg>
   )
 }
