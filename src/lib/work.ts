@@ -467,7 +467,7 @@ const prettyMetrics: CaseStudy = {
   },
 }
 
-export const caseStudies: CaseStudy[] = [reelEstate, untilThen, viewlio, prettyMetrics]
+export const caseStudies: CaseStudy[] = [viewlio, prettyMetrics, reelEstate, untilThen]
 
 /** The case studies shown on the home page; /work lists them all. */
 export const featuredCaseStudies: CaseStudy[] = [viewlio, prettyMetrics]

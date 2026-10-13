@@ -14,15 +14,15 @@ import { siteConfig } from "@/lib/site"
 // Root-relative hashes so the links work from every route, not just home.
 export const navItems: FloatingNavItem[] = [
   { name: "Services", link: "/#services" },
-  { name: "Work", link: pages.work.path },
   { name: "Process", link: "/#process", hideBelow: "lg" },
   { name: "About", link: "/#about", hideBelow: "lg" },
   { name: "FAQ", link: "/#faq", hideBelow: "md" },
 ]
 
-// A page of its own rather than a section of home, so it sits next to the
+// Pages of their own rather than sections of home, so they sit next to the
 // theme toggle instead of in the section links.
 export const blogNavItem: FloatingNavItem = { name: "Blog", link: pages.blog.path }
+export const workNavItem: FloatingNavItem = { name: "Work", link: pages.work.path }
 
 export function SiteHeader() {
   return (
@@ -44,6 +44,7 @@ export function SiteHeader() {
           <FloatingNavLink href={blogNavItem.link} className="hidden min-[400px]:flex">
             {blogNavItem.name}
           </FloatingNavLink>
+          <FloatingNavLink href={workNavItem.link}>{workNavItem.name}</FloatingNavLink>
           <ThemeToggle />
           <FloatingNavAction href={pages.bookCall.path}>Book a call</FloatingNavAction>
         </>
