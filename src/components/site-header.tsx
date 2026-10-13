@@ -21,8 +21,8 @@ export const navItems: FloatingNavItem[] = [
 
 // Pages of their own rather than sections of home, so they sit next to the
 // theme toggle instead of in the section links.
-export const blogNavItem: FloatingNavItem = { name: "Blog", link: pages.blog.path }
 export const workNavItem: FloatingNavItem = { name: "Work", link: pages.work.path }
+export const blogNavItem: FloatingNavItem = { name: "Blog", link: pages.blog.path }
 
 export function SiteHeader() {
   return (
@@ -40,11 +40,11 @@ export function SiteHeader() {
       }
       action={
         <>
+          <FloatingNavLink href={workNavItem.link}>{workNavItem.name}</FloatingNavLink>
           {/* Below 400px the bar has no room for it next to Book a call; the footer still links it. */}
           <FloatingNavLink href={blogNavItem.link} className="hidden min-[400px]:flex">
             {blogNavItem.name}
           </FloatingNavLink>
-          <FloatingNavLink href={workNavItem.link}>{workNavItem.name}</FloatingNavLink>
           <ThemeToggle />
           <FloatingNavAction href={pages.bookCall.path}>Book a call</FloatingNavAction>
         </>
