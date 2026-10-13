@@ -10,7 +10,7 @@ import { service } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
-import { caseStudies } from "@/lib/work"
+import { featuredCaseStudies } from "@/lib/work"
 
 export const metadata = createMetadata(pages.home)
 
@@ -347,7 +347,7 @@ export default function Home() {
             </Button>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
-            {caseStudies.map((study) => (
+            {featuredCaseStudies.map((study) => (
               <CaseStudyCard key={study.slug} study={study} headingLevel="h3" />
             ))}
           </div>

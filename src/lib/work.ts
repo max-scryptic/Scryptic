@@ -469,6 +469,9 @@ const prettyMetrics: CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [reelEstate, untilThen, viewlio, prettyMetrics]
 
+/** The case studies shown on the home page; /work lists them all. */
+export const featuredCaseStudies: CaseStudy[] = [viewlio, prettyMetrics]
+
 export function getCaseStudy(slug: string) {
   return caseStudies.find((study) => study.slug === slug)
 }
