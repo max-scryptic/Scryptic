@@ -21,7 +21,7 @@ const agenda = [
   },
   {
     name: "A clear next step",
-    text: "If it makes sense to work together, that is usually the discovery audit, quoted as a fixed fee before anything starts.",
+    text: "If it makes sense to work together, you get a written estimate for the build before anything starts.",
   },
 ]
 

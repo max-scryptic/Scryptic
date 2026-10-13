@@ -1,6 +1,6 @@
 # Scryptic
 
-Marketing site for Scryptic, a development-as-a-service studio. Two services: a discovery call and audit, and a full app to market build (from £10k). Next.js 16 with [Base UI](https://base-ui.com) as the UI primitive layer, styled with Tailwind CSS v4.
+Marketing site for Scryptic, a development-as-a-service studio. One service: a full app to market build (from £10,000). Next.js 16 with [Base UI](https://base-ui.com) as the UI primitive layer, styled with Tailwind CSS v4.
 
 Brand: light surfaces (`#ffffff`) with ink text (`#0a0a0f`), one green signal colour (`#047857`) and no gradients, Geist and Geist Mono, and an "S_" terminal-cursor mark. Tokens live in `src/app/globals.css`, mirrored in `siteConfig.colors` for the generated images.
 
@@ -44,7 +44,7 @@ src/
     em-dash-guard.tsx   Dev guard against em dashes in rendered text
   lib/
     site.ts             Brand facts, contact email and booking link, site URL, indexability
-    services.ts         The two service offers: cards, prices (GBP) and Service JSON-LD
+    services.ts         The service offer: card, price and Service JSON-LD
     booking.ts          /book-a-call questions, and how answers reach the booking link or email
     team.ts             The founder profile used on / and /book-a-call
     seo.ts              Page registry + createMetadata()

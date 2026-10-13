@@ -24,7 +24,7 @@ export const bookingQuestions = [
     options: [
       "Building a new app",
       "Fixing or growing an existing app",
-      "An audit and estimate",
+      "Scoping and an estimate",
       "Not sure yet",
     ],
   },
