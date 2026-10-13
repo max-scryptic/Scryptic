@@ -5,7 +5,7 @@ import { cn } from "cn"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import { createMetadata, pages } from "@/lib/seo"
-import { services } from "@/lib/services"
+import { service } from "@/lib/services"
 import { bookingHref, siteConfig } from "@/lib/site"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
@@ -14,7 +14,7 @@ export const metadata = createMetadata(pages.home)
 const steps = [
   {
     name: "Discover",
-    text: "A call to understand the business, the users and what success looks like. If something already exists, we audit it.",
+    text: "A call to understand the business, the users and what success looks like. If something already exists, we review it.",
   },
   {
     name: "Plan",
@@ -33,7 +33,7 @@ const steps = [
 const principles = [
   {
     name: "Plan before code",
-    text: "Every build starts from an audit, so scope, risks and cost are clear before development begins.",
+    text: "Every build starts with a discovery call and a written estimate, so scope, risks and cost are clear before development begins.",
   },
   {
     name: "One team, end to end",
@@ -64,22 +64,17 @@ const faqs = [
   {
     question: "How much does it cost to build an app with Scryptic?",
     answer:
-      "A full app to market build starts at $10k. The final price depends on complexity: the number of screens and user roles, the integrations involved and how much already exists. The discovery call and audit turns that into a written estimate before any build starts.",
+      "A full app to market build starts from £10,000. The final price depends on complexity: the number of screens and user roles, the integrations involved and how much already exists. After the discovery call you get a written estimate, before any build starts.",
   },
   {
-    question: "Why start with a discovery call and audit?",
+    question: "What is included in a full app to market build?",
     answer:
-      "Because the most expensive mistake in software is building the wrong thing. The audit pins down scope, risks and the right stack first, so the build estimate is one you can plan around.",
-  },
-  {
-    question: "Do I have to book the full build after the audit?",
-    answer:
-      "No. The discovery call and audit is a standalone service. You keep the plan and the estimate, whether you build with Scryptic, another team or in house.",
+      "Everything from the first call to launch day: scoping and a written estimate, product design and a prototype, the full-stack build, authentication, payments and integrations, hosting, analytics and search, launch support and a clean handover.",
   },
   {
     question: "Can you work on an existing app or codebase?",
     answer:
-      "Yes. The audit covers existing code, infrastructure and prototypes. Often the best plan is to build on what you have rather than start again.",
+      "Yes. We review existing code, infrastructure and prototypes during discovery. Often the best plan is to build on what you have rather than start again.",
   },
   {
     question: "What kind of apps do you build?",
@@ -89,7 +84,7 @@ const faqs = [
 ]
 
 const terminalLines = [
-  { prompt: true, text: "scryptic discover --audit" },
+  { prompt: true, text: "scryptic discover" },
   { prompt: false, text: "goals, users and constraints mapped" },
   { prompt: false, text: "stack and architecture chosen" },
   { prompt: false, text: "first release scoped and estimated" },
@@ -142,7 +137,7 @@ export default function Home() {
       <PageJsonLd
         page={pages.home}
         nodes={[
-          ...services.map((service) => serviceJsonLd(pages.home, service)),
+          serviceJsonLd(pages.home, service),
           faqJsonLd(pages.home, faqs),
         ]}
       />
@@ -162,8 +157,8 @@ export default function Home() {
             </h1>
             <p className="max-w-xl text-lg text-pretty text-muted-foreground">
               {siteConfig.name} plans, designs and builds production web apps for founders and
-              small teams. Start with a discovery call and audit, then let us take the whole
-              thing to market.
+              small teams. Start with a discovery call, then let us take the whole thing to
+              market.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
@@ -181,7 +176,7 @@ export default function Home() {
                 render={<Link href="/#services" />}
                 className="h-11 rounded-full px-5 text-base"
               >
-                See services and pricing
+                See pricing
               </Button>
             </div>
           </div>
@@ -221,69 +216,47 @@ export default function Home() {
         className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Services" title="Two ways to work with Scryptic" id="services-heading">
-            Every engagement starts with a discovery call and audit. When you are ready to build,
-            we take the app all the way to market, with full builds from $10k depending on
-            complexity.
+          <SectionHeading eyebrow="Service" title="One service: your app, all the way to market" id="services-heading">
+            We plan, design, build, deploy and launch your app as one engagement, with full builds{" "}
+            {service.price.toLowerCase()} depending on complexity.
           </SectionHeading>
 
-          <div className="grid gap-6 lg:grid-cols-2">
-            {services.map((service, index) => {
-              const featured = index === services.length - 1
-
-              return (
-                <article
-                  key={service.id}
-                  id={service.id}
-                  aria-labelledby={`${service.id}-name`}
-                  className={cn(
-                    "relative flex scroll-mt-28 flex-col gap-6 rounded-2xl border bg-card p-6 sm:p-8",
-                    featured ? "border-primary/50" : "border-border",
-                  )}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex flex-col gap-2">
-                      <p className="font-mono text-xs text-muted-foreground">Step {service.step}</p>
-                      <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
-                        {service.name}
-                      </h3>
-                    </div>
-                    {featured && (
-                      <span className="rounded-full bg-primary/10 px-2.5 py-1 font-mono text-xs text-primary">
-                        Full build
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <p className="text-4xl font-semibold tracking-tight">{service.price}</p>
-                    <p className="text-sm text-muted-foreground">{service.priceNote}</p>
-                  </div>
-                  <p className="text-pretty text-muted-foreground">{service.summary}</p>
-                  <ul className="flex flex-col gap-3 text-sm">
-                    {service.includes.map((item) => (
-                      <li key={item} className="flex gap-3">
-                        <CheckIcon />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-auto border-t border-border pt-6 text-sm text-muted-foreground">
-                    <span className="font-medium text-foreground">Best for: </span>
-                    {service.bestFor}
-                  </p>
-                  <Button
-                    size="lg"
-                    variant={featured ? "default" : "outline"}
-                    nativeButton={false}
-                    render={<a href={bookingHref} />}
-                    className="h-11 rounded-full text-base"
-                  >
-                    {service.cta}
-                  </Button>
-                </article>
-              )
-            })}
-          </div>
+          <article
+            id={service.id}
+            aria-labelledby={`${service.id}-name`}
+            className="grid scroll-mt-28 gap-10 rounded-2xl border border-primary/50 bg-card p-6 sm:p-8 lg:grid-cols-[1fr_1.2fr] lg:gap-14 lg:p-10"
+          >
+            <div className="flex flex-col gap-6">
+              <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
+                {service.name}
+              </h3>
+              <div className="flex flex-col gap-1">
+                <p className="text-4xl font-semibold tracking-tight">{service.price}</p>
+                <p className="text-sm text-muted-foreground">{service.priceNote}</p>
+              </div>
+              <p className="text-pretty text-muted-foreground">{service.summary}</p>
+              <p className="text-sm text-muted-foreground">
+                <span className="font-medium text-foreground">Best for: </span>
+                {service.bestFor}
+              </p>
+              <Button
+                size="lg"
+                nativeButton={false}
+                render={<a href={bookingHref} />}
+                className="mt-auto h-11 w-full rounded-full text-base sm:w-fit sm:px-6"
+              >
+                {service.cta}
+              </Button>
+            </div>
+            <ul className="flex flex-col gap-4 text-sm lg:border-l lg:border-border lg:pl-14">
+              {service.includes.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <CheckIcon />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
         </div>
       </section>
 

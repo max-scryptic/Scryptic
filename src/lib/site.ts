@@ -12,21 +12,20 @@ export const siteConfig = {
   // summary. Aim for one plain sentence of 120 to 160 characters that says what
   // the product is and who it is for: answer engines quote it verbatim.
   description:
-    "Scryptic is a development studio that takes founders from idea to launched app. Start with a discovery call and audit, then ship a full build from $10k.",
+    "Scryptic is a development studio that takes founders from idea to launched app, with full app to market builds starting from £10,000.",
   // Short line used in the hero eyebrow and the footer.
   tagline: "Development as a service",
   // Optional longer context for llms.txt. Leave empty to omit.
   summary:
-    "Scryptic offers two services: a discovery call and audit that turns an idea or an existing product into a scoped plan and written estimate, and a full app to market build, from $10k depending on complexity.",
+    "Scryptic offers one service: a full app to market build, taking an idea or an existing product through discovery, design, development, deployment and launch, from £10,000 depending on complexity.",
   keywords: [
     "development as a service",
     "app development studio",
     "MVP development",
     "SaaS development",
-    "technical audit",
     "web app development",
   ] as string[],
-  locale: "en_US",
+  locale: "en_GB",
   language: "en",
   // Keep these in step with the theme tokens in globals.css. The site is
   // light by default (:root) with an optional dark theme (.dark); generated
