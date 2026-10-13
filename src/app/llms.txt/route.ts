@@ -1,4 +1,5 @@
-import { publicPages } from "@/lib/seo"
+import { migrationSeries } from "@/lib/blog"
+import { blogPostPages, publicPages, type PageEntry } from "@/lib/seo"
 import { absoluteUrl, siteConfig } from "@/lib/site"
 
 /*
@@ -10,7 +11,13 @@ import { absoluteUrl, siteConfig } from "@/lib/site"
 
 export const dynamic = "force-static"
 
+const link = (page: PageEntry) =>
+  `- [${page.title}](${absoluteUrl(page.path)}): ${page.description}`
+
 export function GET() {
+  const guides = blogPostPages.filter((page) => !page.noIndex)
+  const otherPages = publicPages.filter((page) => !guides.includes(page))
+
   const lines = [
     `# ${siteConfig.name}`,
     "",
@@ -19,9 +26,13 @@ export function GET() {
     ...(siteConfig.summary ? [siteConfig.summary, ""] : []),
     "## Pages",
     "",
-    ...publicPages.map(
-      (page) => `- [${page.title}](${absoluteUrl(page.path)}): ${page.description}`,
-    ),
+    ...otherPages.map(link),
+    "",
+    `## ${migrationSeries.name}`,
+    "",
+    migrationSeries.intro,
+    "",
+    ...guides.map(link),
     "",
   ]
 

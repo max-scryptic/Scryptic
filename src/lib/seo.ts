@@ -1,5 +1,6 @@
 import type { Metadata, MetadataRoute } from "next"
 
+import { posts, type BlogPost } from "@/lib/blog"
 import { isIndexable, siteConfig } from "@/lib/site"
 import { caseStudies, type CaseStudy } from "@/lib/work"
 
@@ -67,7 +68,7 @@ export const pages = {
     path: "/blog",
     title: "Blog",
     description:
-      "The Scryptic blog: practical notes for founders on scoping an MVP, choosing a stack, estimating build cost and taking an app from idea to launch.",
+      "Guides for founders on moving an app off Lovable, Bubble, Webflow and other low-code tools onto a production stack: what to export, fix and rebuild.",
     changeFrequency: "weekly",
     priority: 0.7,
   },
@@ -87,9 +88,27 @@ export function caseStudyPage(study: CaseStudy): PageEntry {
 
 export const caseStudyPages: PageEntry[] = caseStudies.map(caseStudyPage)
 
-export const publicPages: PageEntry[] = [...Object.values(pages), ...caseStudyPages].filter(
-  (page: PageEntry) => !page.noIndex,
-)
+/** The registry entry for a post's /blog/<slug> page, built from src/lib/blog. */
+export function blogPostPage(post: BlogPost): PageEntry {
+  return {
+    path: `/blog/${post.slug}`,
+    title: post.title,
+    description: post.description,
+    parents: [pages.blog],
+    lastModified: post.dateModified ?? post.datePublished,
+    changeFrequency: "yearly",
+    priority: 0.6,
+    type: "article",
+  }
+}
+
+export const blogPostPages: PageEntry[] = posts.map(blogPostPage)
+
+export const publicPages: PageEntry[] = [
+  ...Object.values(pages),
+  ...caseStudyPages,
+  ...blogPostPages,
+].filter((page: PageEntry) => !page.noIndex)
 
 /**
  * Robots directives for a page. The googlebot line lifts Google's default
