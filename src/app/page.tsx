@@ -137,10 +137,6 @@ export default function Home() {
       <section className="px-4 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-32">
         <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
           <div className="flex flex-col items-start gap-7">
-            <p className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
-              <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
-              {siteConfig.tagline}
-            </p>
             <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">
               From idea to{" "}
               <span className="text-primary">launched app</span>
