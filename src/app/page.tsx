@@ -97,13 +97,42 @@ const comparison: {
 const faqs = [
   {
     question: "How much does it cost to build an app with Scryptic?",
-    answer:
-      "A full app to market build starts from £10,000. The final price depends on complexity: the number of screens and user roles, the integrations involved and how much already exists. After the discovery call you get a written estimate and timeline, before any build starts.",
+    answer: `A full app to market build starts ${service.price.toLowerCase()}. The final price depends on complexity: the number of screens and user roles, the integrations involved and how much already exists. After the discovery call you get a written estimate and timeline, so the price is agreed before any build starts.`,
   },
   {
     question: "How long does it take to build an app?",
     answer:
-      "Most full app to market builds take one to two months from kickoff to launch. A focused first release sits at the shorter end; more user roles, integrations or an existing codebase to work around push it towards two months. Your timeline comes with the written estimate, so you know the launch window before the build starts.",
+      "Most full app to market builds take one to two months from kickoff to launch, and a typical build runs about eight weeks. A focused first release sits at the shorter end; more user roles, integrations or an existing codebase to work around push it towards two months. Your timeline comes with the written estimate, so you know the launch window before the build starts.",
+  },
+  {
+    question: "What is included in a full app to market build?",
+    answer:
+      "Everything from the first call to launch day, delivered by one team: scoping and a written estimate, product design and a clickable prototype, the full-stack build, authentication, payments and integrations, hosting, analytics and search, launch support and a clean handover.",
+  },
+  {
+    question: "What kind of apps do you build?",
+    answer:
+      "Production web apps and SaaS products, often with AI at their core. Recent launches include ReelEstate, which turns listing photos into property videos, Viewlio, AI analytics for YouTube creators, Until Then, which delivers messages years into the future, and Pretty Metrics, shareable revenue charts. Most are built with TypeScript, Next.js and Postgres, with Stripe for payments.",
+  },
+  {
+    question: "Can you take over an app built with Lovable, Bubble or another builder?",
+    answer:
+      "Yes. Apps from AI app builders such as Lovable, Bolt.new, v0 and Replit are real code, so the move is usually about owning and hardening what is there. No-code tools such as Bubble, Adalo and Glide keep the app on their platform, so the move is a planned rebuild that brings your data and users across. Our free migration guides cover sixteen tools step by step.",
+  },
+  {
+    question: "Can you work on an existing app or codebase?",
+    answer:
+      "Yes. We review existing code, infrastructure and prototypes during discovery. Often the best plan is to build on what you have rather than start again, and the estimate says which parts we would keep, fix or replace.",
+  },
+  {
+    question: "Who owns the code once the app is built?",
+    answer:
+      "You do. The code lives in your repository and the hosting, database, payments and other accounts are in your name, then handed over at launch. Nothing is locked to us, so any developer can pick it up later.",
+  },
+  {
+    question: "How is Scryptic different from an agency, a freelancer or an in-house hire?",
+    answer:
+      "You get agency-quality software at freelancer speed, with code you own outright. Hiring in-house means a recruitment round before any work starts, agencies tend to be slower and fix the plan up front, freelancers vary in quality, and AI-only tools rarely hold up with real users. With Scryptic you get a launched product in one to two months, a fixed estimate and priorities revisited every week.",
   },
   {
     question: "How do you keep me updated during the build?",
@@ -111,19 +140,13 @@ const faqs = [
       "With a catch-up every Friday. Each week we go through what shipped, agree priorities for the week ahead and look at what is coming up in the pipeline, so you can change direction early rather than at the end.",
   },
   {
-    question: "What is included in a full app to market build?",
-    answer:
-      "Everything from the first call to launch day: scoping and a written estimate, product design and a prototype, the full-stack build, authentication, payments and integrations, hosting, analytics and search, launch support and a clean handover.",
+    question: "Who will I be working with?",
+    answer: `With ${founder.name}, the founder, from the discovery call to launch day. ${siteConfig.name} is a small Brighton-based studio that takes on a few projects at a time, with one team throughout and no handoffs. ${founder.name} is a full-stack developer with five years of experience building software for enterprise clients and startups.`,
   },
   {
-    question: "Can you work on an existing app or codebase?",
+    question: "What happens on the discovery call?",
     answer:
-      "Yes. We review existing code, infrastructure and prototypes during discovery. Often the best plan is to build on what you have rather than start again.",
-  },
-  {
-    question: "What kind of apps do you build?",
-    answer:
-      "Web apps and SaaS products: customer-facing apps, dashboards, marketplaces, internal tools and AI-powered features, built on a modern TypeScript stack.",
+      "It is a free 30 minute call about your idea or product, who it is for and where it is stuck. You get straight advice on scope, stack, rough cost and timeline, including what is not worth building yet. If it makes sense to work together, a written estimate and timeline follow before anything starts.",
   },
 ]
 
