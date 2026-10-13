@@ -67,8 +67,7 @@ export const pages = {
   blog: {
     path: "/blog",
     title: "Blog",
-    description:
-      "Guides for founders on moving an app off Lovable, Bubble, Webflow and other low-code tools onto a production stack: what to export, fix and rebuild.",
+    description: `Practical guides from the ${siteConfig.name} studio on planning, building, launching and growing apps, written by the developers who build them for founders.`,
     changeFrequency: "weekly",
     priority: 0.7,
   },
