@@ -4,6 +4,7 @@ import { cn } from "cn"
 
 import { CaseStudyCard } from "@/components/case-study-card"
 import { PageJsonLd } from "@/components/json-ld"
+import { ScrollReveal } from "@/components/scroll-reveal"
 import { Button } from "@/components/ui/button"
 import { VoxelField } from "@/components/voxel-field"
 import { createMetadata, pages } from "@/lib/seo"
@@ -151,7 +152,7 @@ function SectionHeading({
   wide?: boolean
 }) {
   return (
-    <div className={`flex flex-col gap-4 ${wide ? "" : "max-w-2xl"}`}>
+    <div data-reveal="children" className={`flex flex-col gap-4 ${wide ? "" : "max-w-2xl"}`}>
       <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
       <h2 id={id} className="text-3xl tracking-tight text-balance sm:text-4xl">
         {title}
@@ -185,7 +186,7 @@ function ComparisonMark({ value, highlight = false }: { value: boolean; highligh
       {highlight ? (
         <span
           aria-hidden="true"
-          className="mx-auto flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground"
+          className="reveal-pop mx-auto flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground"
         >
           <svg
             viewBox="0 0 24 24"
@@ -227,15 +228,16 @@ export default function Home() {
           faqJsonLd(pages.home, faqs),
         ]}
       />
+      <ScrollReveal />
 
       {/* Hero: a full-width Lapis band, rounded at the bottom, the same Lapis in both themes. */}
       <section className="relative isolate overflow-hidden rounded-b-3xl bg-[#2b3fd6] px-4 pt-36 pb-24 text-white sm:rounded-b-[2.5rem] sm:px-6 sm:pt-44 sm:pb-32">
         <VoxelField
           faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
-          className="absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
+          className="hero-parallax absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
         />
-        <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
-          <div className="flex flex-col items-start gap-7">
+        <div className="hero-recede mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
+          <div className="hero-rise flex flex-col items-start gap-7">
             <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">
               From idea to{" "}
               <span className="text-[#c3caff]">launched app</span>
@@ -269,14 +271,14 @@ export default function Home() {
 
           <div
             aria-hidden="true"
-            className="w-full overflow-hidden rounded-2xl border border-border bg-card text-card-foreground shadow-2xl shadow-black/25"
+            className="hero-card w-full overflow-hidden rounded-2xl border border-border bg-card text-card-foreground shadow-2xl shadow-black/25"
           >
             <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
               <span className="size-2.5 rounded-full bg-foreground/15" />
               <span className="size-2.5 rounded-full bg-foreground/15" />
               <span className="size-2.5 rounded-full bg-foreground/15" />
             </div>
-            <div className="flex flex-col gap-2 p-5 font-mono text-sm leading-relaxed">
+            <div className="hero-terminal flex flex-col gap-2 p-5 font-mono text-sm leading-relaxed">
               {terminalLines.map((line) => (
                 <p
                   key={line.text}
@@ -314,7 +316,10 @@ export default function Home() {
             aria-labelledby={`${service.id}-name`}
             className="grid scroll-mt-28 items-center gap-12 lg:grid-cols-2 lg:gap-16"
           >
-            <div className="flex flex-col gap-6 rounded-2xl border border-primary/50 bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10">
+            <div
+              data-reveal
+              className="flex flex-col gap-6 rounded-2xl border border-primary/50 bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
+            >
               <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
                 {service.name}
               </h3>
@@ -341,13 +346,13 @@ export default function Home() {
               </Button>
             </div>
             <div className="flex flex-col gap-6">
-              <div className="flex flex-col gap-2">
+              <div data-reveal className="flex flex-col gap-2">
                 <h4 className="text-xl tracking-tight">What is included</h4>
                 <p className="text-pretty text-muted-foreground">
                   Everything from the first call to launch day, delivered by one team.
                 </p>
               </div>
-              <ul className="flex flex-col gap-4">
+              <ul data-reveal="children" className="flex flex-col gap-4">
                 {service.includes.map((item) => (
                   <li key={item} className="flex gap-3">
                     <CheckIcon />
@@ -386,7 +391,7 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-              <ol className="col-span-full grid grid-cols-subgrid">
+              <ol data-reveal="children" className="col-span-full grid grid-cols-subgrid">
                 {steps.map((step, index) => (
                   <li
                     key={step.name}
@@ -412,7 +417,7 @@ export default function Home() {
                       ))}
                       <p
                         className={cn(
-                          "relative mx-1 flex h-9 items-center gap-2 overflow-hidden rounded-lg px-3 font-mono text-xs whitespace-nowrap sm:mx-2",
+                          "reveal-wipe relative mx-1 flex h-9 items-center gap-2 overflow-hidden rounded-lg px-3 font-mono text-xs whitespace-nowrap sm:mx-2",
                           step.bar === "Live"
                             ? "bg-chart-2 text-[#14131b]"
                             : step.bar === "Build"
@@ -476,7 +481,7 @@ export default function Home() {
               See all case studies
             </Button>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
             {featuredCaseStudies.map((study) => (
               <CaseStudyCard key={study.slug} study={study} headingLevel="h3" />
             ))}
@@ -537,7 +542,7 @@ export default function Home() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border">
+              <tbody data-reveal="children" className="divide-y divide-border">
                 {comparison.map((row) => (
                   <tr key={row.name}>
                     <th
@@ -577,7 +582,7 @@ export default function Home() {
               {siteConfig.name} is a Brighton-based development studio for founders who need a
               working product, not a team to manage.
             </SectionHeading>
-            <p className="max-w-2xl text-pretty text-muted-foreground">
+            <p data-reveal className="max-w-2xl text-pretty text-muted-foreground">
               Keeping the studio small is deliberate: a few projects at a time, each with full
               attention and a catch-up every Friday. Scope, price and timeline are agreed before the
               build starts, so you always know what you are paying for, what you will get and when.
@@ -586,6 +591,7 @@ export default function Home() {
 
           <article
             aria-labelledby="founder-name"
+            data-reveal
             className="grid overflow-hidden rounded-2xl border border-border bg-card sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
           >
             <div className="relative aspect-square bg-portrait">
@@ -627,7 +633,7 @@ export default function Home() {
             Straight answers on pricing, timelines, process and what to expect. Anything else, ask on the
             discovery call.
           </SectionHeading>
-          <div className="flex flex-col divide-y divide-border border-y border-border">
+          <div data-reveal="children" className="flex flex-col divide-y divide-border border-y border-border">
             {faqs.map((faq) => (
               <details key={faq.question} className="group py-2">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-medium [&::-webkit-details-marker]:hidden">
@@ -648,7 +654,10 @@ export default function Home() {
 
       {/* Call to action */}
       <section aria-labelledby="contact-heading" id="contact" className="scroll-mt-28 px-4 pb-24 sm:px-6">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 rounded-3xl border border-border bg-card px-6 py-16 text-center sm:py-20">
+        <div
+          data-reveal="zoom"
+          className="mx-auto flex max-w-6xl flex-col items-center gap-6 rounded-3xl border border-border bg-card px-6 py-16 text-center sm:py-20"
+        >
           <h2 id="contact-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
             Start with a discovery call
           </h2>

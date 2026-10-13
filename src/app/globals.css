@@ -166,6 +166,128 @@
   [data-state="play"] .voxel-row {
     animation: voxel-drop 0.6s cubic-bezier(0.3, 1.3, 0.5, 1) both;
   }
+
+  /* Home hero (app/page.tsx), on load: the copy rises in line by line, the
+     terminal card follows and its lines print one after another. */
+  .hero-rise > * {
+    animation: rise 0.8s var(--ease-out) backwards;
+    animation-delay: calc(100ms + var(--i, 0) * 120ms);
+  }
+  .hero-card {
+    animation: rise 0.9s var(--ease-out) 350ms backwards;
+  }
+  .hero-terminal > p {
+    animation: type-in 0.4s var(--ease-out) backwards;
+    animation-delay: calc(800ms + var(--i, 0) * 180ms);
+  }
+
+  /* Scroll reveals (components/scroll-reveal.tsx). data-reveal fades the
+     element up; "children" staggers its direct children; "zoom" scales in.
+     Fill mode is backwards only, so no transform is left behind once played. */
+  [data-reveal-state="waiting"]:not([data-reveal="children"]),
+  [data-reveal-state="waiting"][data-reveal="children"] > * {
+    opacity: 0;
+  }
+  [data-reveal-state="play"]:not([data-reveal="children"]),
+  [data-reveal-state="play"][data-reveal="children"] > * {
+    animation: rise 0.8s var(--ease-out) backwards;
+    animation-delay: calc(var(--i, 0) * 80ms);
+  }
+  [data-reveal-state="play"][data-reveal="zoom"] {
+    animation-name: zoom-in;
+  }
+  /* Inside a played reveal: timetable bars wipe in from the left, after their row. */
+  [data-reveal-state="play"] .reveal-wipe {
+    animation: wipe 0.9s var(--ease-out) backwards;
+    animation-delay: calc(250ms + var(--i, 0) * 150ms);
+  }
+  /* Inside a played reveal: a mark pops in once its row has landed. */
+  [data-reveal-state="play"] .reveal-pop {
+    animation: pop 0.5s cubic-bezier(0.3, 1.5, 0.5, 1) backwards;
+    animation-delay: calc(250ms + var(--i, 0) * 80ms);
+  }
+
+  /* Scroll-linked hero parallax where the browser supports it: the cubes and
+     copy drift down slower than the page and the copy fades as it leaves. */
+  @supports (animation-timeline: scroll()) {
+    .hero-parallax,
+    .hero-recede {
+      animation: parallax linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+    .hero-recede {
+      animation-name: recede;
+      animation-range: 0 80vh;
+    }
+  }
+}
+
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Stagger index for animated children, capped so long lists don't drag. */
+:where([data-reveal="children"], .hero-rise, .hero-terminal) > * {
+  &:nth-child(2) { --i: 1; }
+  &:nth-child(3) { --i: 2; }
+  &:nth-child(4) { --i: 3; }
+  &:nth-child(5) { --i: 4; }
+  &:nth-child(6) { --i: 5; }
+  &:nth-child(7) { --i: 6; }
+  &:nth-child(8) { --i: 7; }
+  &:nth-child(9) { --i: 8; }
+  &:nth-child(n + 10) { --i: 9; }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+}
+
+@keyframes type-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+}
+
+@keyframes wipe {
+  from {
+    clip-path: inset(0 100% 0 0 round var(--radius-lg));
+  }
+  to {
+    clip-path: inset(0 0 0 0 round var(--radius-lg));
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+@keyframes parallax {
+  to {
+    transform: translateY(25%);
+  }
+}
+
+@keyframes recede {
+  to {
+    opacity: 0.3;
+    transform: translateY(80px);
+  }
 }
 
 @keyframes voxel-drop {
