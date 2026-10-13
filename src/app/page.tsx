@@ -446,7 +446,7 @@ export default function Home() {
                             ? "bg-chart-2 text-[#14131b]"
                             : step.bar === "Build"
                               ? "bg-primary text-primary-foreground"
-                              : "bg-primary/15 text-primary",
+                              : "bg-primary/15 text-primary dark:bg-primary/30 dark:text-foreground",
                         )}
                         style={{ gridColumn: `${step.start} / span ${step.weeks}` }}
                       >
