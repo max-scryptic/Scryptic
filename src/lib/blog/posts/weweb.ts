@@ -1,9 +1,11 @@
+import wewebLogo from "@/assets/blog/logos/weweb.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const weweb: BlogPost = {
   slug: "migrate-from-weweb",
   title: "Migrating from WeWeb to a production app",
   tool: "WeWeb",
+  logo: wewebLogo,
   category: "No-code app builders",
   description:
     "How to move a WeWeb app to production: what code export really gives you, how to keep your Supabase or Xano backend, and a step by step plan to launch.",

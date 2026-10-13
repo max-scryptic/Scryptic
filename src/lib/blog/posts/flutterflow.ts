@@ -1,9 +1,11 @@
+import flutterflowLogo from "@/assets/blog/logos/flutterflow.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const flutterflow: BlogPost = {
   slug: "migrate-from-flutterflow",
   title: "Migrating from FlutterFlow to a production app",
   tool: "FlutterFlow",
+  logo: flutterflowLogo,
   category: "No-code app builders",
   description:
     "How to take a FlutterFlow app to production: what the exported Flutter code gives you, when to keep it, when to rebuild the web side, and a step by step plan.",

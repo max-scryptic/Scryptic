@@ -1,9 +1,11 @@
+import softrLogo from "@/assets/blog/logos/softr.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const softr: BlogPost = {
   slug: "migrate-from-softr",
   title: "Migrating from Softr to a production app",
   tool: "Softr",
+  logo: softrLogo,
   category: "No-code app builders",
   description:
     "How to move a Softr app to production code: where your data lives, exporting users, rebuilding permissions and workflows, and a staged plan to launch safely.",
