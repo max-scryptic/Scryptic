@@ -33,25 +33,6 @@ const steps = [
   },
 ]
 
-const principles = [
-  {
-    name: "Plan before code",
-    text: "Every build starts with a discovery call, a written estimate and a timeline, so scope, risks, cost and launch date are clear before development begins.",
-  },
-  {
-    name: "One team, end to end",
-    text: "Design, engineering, deployment and launch stay with the same people, so nothing gets lost in a handoff.",
-  },
-  {
-    name: "Built to hand over",
-    text: "Clean, documented code on a mainstream stack, so you can grow the product with us or without us.",
-  },
-  {
-    name: "Straight answers, every week",
-    text: "A Friday catch-up covers what shipped, what is next and anything that needs your call. If a feature is not worth building yet, you hear it early.",
-  },
-]
-
 // The comparison table. `scryptic` is always true, so it is drawn from the
 // column rather than stored per row.
 const alternatives = ["In-house hire", "Agency", "Freelancer", "AI-only tools"] as const
@@ -137,14 +118,17 @@ function SectionHeading({
   title,
   children,
   id,
+  wide = false,
 }: {
   eyebrow: string
   title: string
   children: React.ReactNode
   id: string
+  /** Let the intro run the full width of the section instead of capping it. */
+  wide?: boolean
 }) {
   return (
-    <div className="flex max-w-2xl flex-col gap-4">
+    <div className={`flex flex-col gap-4 ${wide ? "" : "max-w-2xl"}`}>
       <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
       <h2 id={id} className="text-3xl tracking-tight text-balance sm:text-4xl">
         {title}
@@ -484,31 +468,20 @@ export default function Home() {
         className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-16">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-            <div className="flex flex-col gap-6">
-              <SectionHeading eyebrow="About us" title="About Scryptic" id="about-heading">
-                {siteConfig.name} is a development studio for founders who need a working product,
-                not a team to manage.
-              </SectionHeading>
-              <p className="max-w-2xl text-pretty text-muted-foreground">
-                We act as your technical partner from the first conversation to launch day: working
-                out what is worth building, making the technical calls and shipping the app. Scope,
-                price and timeline are agreed before the build starts, and a catch-up every Friday
-                keeps you across progress, so you always know what you are paying for, what you
-                will get and when.
-              </p>
-            </div>
-            <ul className="grid gap-4 sm:grid-cols-2">
-              {principles.map((principle) => (
-                <li
-                  key={principle.name}
-                  className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-6"
-                >
-                  <h3>{principle.name}</h3>
-                  <p className="text-sm text-pretty text-muted-foreground">{principle.text}</p>
-                </li>
-              ))}
-            </ul>
+          <div className="flex flex-col gap-6">
+            <SectionHeading eyebrow="About us" title="About Scryptic" id="about-heading" wide>
+              {siteConfig.name} is a Brighton-based development studio for founders who need a
+              working product, not a team to manage.
+            </SectionHeading>
+            <p className="text-pretty text-muted-foreground">
+              The studio is built on more than five years of shipping software at pace, from
+              early-stage startups to enterprise applications. That experience now goes into your
+              product: we act as your technical partner from the first conversation to launch day,
+              working out what is worth building, making the technical calls and shipping the app.
+              Scope, price and timeline are agreed before the build starts, and a catch-up every
+              Friday keeps you across progress, so you always know what you are paying for, what you
+              will get and when.
+            </p>
           </div>
 
           <article
