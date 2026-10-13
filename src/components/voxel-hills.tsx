@@ -9,7 +9,7 @@ import { seeded } from "@/lib/voxel"
  * The footer's sign-off landscape: a band of low, rolling hills built from
  * isometric cubes, sitting between the footer text and the wordmark. It has its
  * own band so it never runs behind text. The band is cut flat along the front
- * row, and the hills fade out as they come down to the wordmark.
+ * row, and the hills fade into the wordmark's colour as they come down to it.
  *
  * The terrain comes from a fixed seed, so server and client draw the same
  * picture on every load. Each column is drawn as three faces (its full left
@@ -21,8 +21,11 @@ import { seeded } from "@/lib/voxel"
 const CUBE = 44
 const ROWS = 9
 const SPAN = 2800
-// Share of the band's height, up from its bottom edge, over which the hills fade out.
+// Share of the band's height, up from its bottom edge, over which the hills fade
+// into the wordmark's colour.
 const FADE = 0.45
+// Back to front, so the tops paint over the sides they meet.
+const FACES = ["left", "right", "top"] as const
 
 const halfWidth = CUBE * 0.866
 const halfHeight = CUBE * 0.5
@@ -86,7 +89,7 @@ const terrain = buildTerrain()
 export function VoxelHills({ className }: { className?: string }) {
   const id = useId()
   const ref = useRef<SVGSVGElement>(null)
-  const [x, y, width, height] = terrain.box
+  const [, y, width, height] = terrain.box
 
   // Rows build in when the band scrolls into view. Until the observer reports
   // (and without JavaScript) the terrain simply shows.
@@ -123,30 +126,28 @@ export function VoxelHills({ className }: { className?: string }) {
       className={cn("pointer-events-none block w-full select-none", className)}
     >
       <defs>
-        <linearGradient
-          id={`${id}-fade`}
-          gradientUnits="userSpaceOnUse"
-          x1="0"
-          y1={y + height * (1 - FADE)}
-          x2="0"
-          y2={y + height}
-        >
-          <stop offset="0" stopColor="#fff" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
-        </linearGradient>
-        <mask id={`${id}-mask`} maskUnits="userSpaceOnUse" x={x} y={y} width={width} height={height}>
-          <rect x={x} y={y} width={width} height={height} fill={`url(#${id}-fade)`} />
-        </mask>
-      </defs>
-      <g mask={`url(#${id}-mask)`}>
-        {terrain.rows.map((row, index) => (
-          <g key={index} className="voxel-row" style={{ animationDelay: `${index * 90}ms` }}>
-            <path d={row.left} className="fill-voxel-left" />
-            <path d={row.right} className="fill-voxel-right" />
-            <path d={row.top} className="fill-voxel-top" />
-          </g>
+        {FACES.map((face) => (
+          <linearGradient
+            key={face}
+            id={`${id}-${face}`}
+            gradientUnits="userSpaceOnUse"
+            x1="0"
+            y1={y + height * (1 - FADE)}
+            x2="0"
+            y2={y + height}
+          >
+            <stop offset="0" style={{ stopColor: `var(--voxel-${face})` }} />
+            <stop offset="1" style={{ stopColor: `var(--voxel-${face}-fade)` }} />
+          </linearGradient>
         ))}
-      </g>
+      </defs>
+      {terrain.rows.map((row, index) => (
+        <g key={index} className="voxel-row" style={{ animationDelay: `${index * 90}ms` }}>
+          {FACES.map((face) => (
+            <path key={face} d={row[face]} fill={`url(#${id}-${face})`} />
+          ))}
+        </g>
+      ))}
     </svg>
   )
 }
