@@ -10,7 +10,6 @@ export type ServiceOffer = {
   name: string
   /** Shown large on the card. */
   price: string
-  priceNote: string
   /** Lowest price in `currency`, for structured data. Omit when unpublished. */
   minPrice?: number
   /** Typical time from kickoff to launch. */
@@ -27,7 +26,6 @@ export const service = {
   id: "app-to-market",
   name: "Full app to market",
   price: "From £10,000",
-  priceNote: "Scoped to complexity",
   minPrice: 10000,
   timeline: "1 to 2 months from kickoff to launch",
   summary:

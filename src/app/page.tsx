@@ -380,13 +380,10 @@ export default function Home() {
                 <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
                   {service.name}
                 </h3>
-                <div className="flex flex-col gap-1">
-                  <p className="flex items-baseline gap-2">
-                    {pricePrefix && <span className="text-lg text-muted-foreground">{pricePrefix}</span>}
-                    <span className="text-5xl font-semibold tracking-tight">{priceAmount}</span>
-                  </p>
-                  <p className="text-sm text-muted-foreground">{service.priceNote}</p>
-                </div>
+                <p className="flex items-baseline gap-2">
+                  {pricePrefix && <span className="text-lg text-muted-foreground">{pricePrefix}</span>}
+                  <span className="text-5xl font-semibold tracking-tight">{priceAmount}</span>
+                </p>
               </div>
               <p className="text-pretty text-muted-foreground">{service.summary}</p>
               <dl className="flex flex-col gap-4 border-t border-border pt-6">
