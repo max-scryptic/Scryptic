@@ -100,7 +100,7 @@ function SectionHeading({
   return (
     <div className="flex max-w-2xl flex-col gap-4">
       <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
-      <h2 id={id} className="text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
+      <h2 id={id} className="text-3xl tracking-tight text-balance sm:text-4xl">
         {title}
       </h2>
       <p className="text-lg text-pretty text-muted-foreground">{children}</p>
@@ -144,7 +144,7 @@ export default function Home() {
               <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
               {siteConfig.tagline}
             </p>
-            <h1 className="text-4xl font-extrabold tracking-tight text-balance sm:text-6xl">
+            <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">
               From idea to{" "}
               <span className="text-primary">launched app</span>
               , without hiring a dev team.
@@ -233,7 +233,7 @@ export default function Home() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex flex-col gap-2">
                       <p className="font-mono text-xs text-muted-foreground">Step {service.step}</p>
-                      <h3 id={`${service.id}-name`} className="text-2xl font-extrabold tracking-tight">
+                      <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
                         {service.name}
                       </h3>
                     </div>
@@ -293,7 +293,7 @@ export default function Home() {
                 <span className="font-mono text-sm text-primary">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="text-lg font-bold">{step.name}</h3>
+                <h3 className="text-lg">{step.name}</h3>
                 <p className="text-sm text-pretty text-muted-foreground">{step.text}</p>
               </li>
             ))}
@@ -326,7 +326,7 @@ export default function Home() {
                 key={principle.name}
                 className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-6"
               >
-                <h3 className="font-bold">{principle.name}</h3>
+                <h3>{principle.name}</h3>
                 <p className="text-sm text-pretty text-muted-foreground">{principle.text}</p>
               </li>
             ))}
@@ -367,7 +367,7 @@ export default function Home() {
       {/* Call to action */}
       <section aria-labelledby="contact-heading" id="contact" className="scroll-mt-24 px-4 pb-24 sm:px-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 rounded-3xl border border-border bg-card px-6 py-16 text-center sm:py-20">
-          <h2 id="contact-heading" className="text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
+          <h2 id="contact-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
             Start with a discovery call
           </h2>
           <p className="max-w-xl text-lg text-pretty text-muted-foreground">

@@ -81,7 +81,7 @@
 
 @theme inline {
   --font-sans: var(--font-hanken-grotesk);
-  --font-display: var(--font-syne);
+  --font-logo: var(--font-syne);
   --font-mono: var(--font-ibm-plex-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -129,10 +129,11 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
+  /* Headings share the body face at medium weight; Syne is kept for the logo. */
   h1,
   h2,
   h3 {
-    @apply font-display tracking-tight;
+    @apply font-medium tracking-tight;
   }
   ::selection {
     @apply bg-primary text-primary-foreground;

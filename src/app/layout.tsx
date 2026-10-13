@@ -21,8 +21,8 @@ import {
 
 import "./globals.css";
 
-// Brand type: Syne for headlines and the wordmark, Hanken Grotesk for text,
-// IBM Plex Mono for labels, numbers and code.
+// Brand type: Syne for the wordmark only, Hanken Grotesk for headings (at
+// medium weight) and text, IBM Plex Mono for labels, numbers and code.
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],

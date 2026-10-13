@@ -9,7 +9,7 @@ export function SiteFooter() {
     <footer className="border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12 sm:flex-row sm:items-start sm:justify-between sm:px-6">
         <div className="flex flex-col gap-3">
-          <Link href="/" className="flex items-center gap-2 font-display text-lg font-extrabold tracking-tight lowercase">
+          <Link href="/" className="flex items-center gap-2 font-logo text-lg font-extrabold tracking-tight lowercase">
             <BrandLogo className="size-6" />
             {siteConfig.name}
           </Link>
