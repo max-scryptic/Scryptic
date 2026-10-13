@@ -1,5 +1,9 @@
 import type { StaticImageData } from "next/image"
 
+import prettyMetricsDetail1 from "@/assets/work/prettymetrics/detail-1.webp"
+import prettyMetricsDetail2 from "@/assets/work/prettymetrics/detail-2.webp"
+import prettyMetricsHero from "@/assets/work/prettymetrics/hero.webp"
+import prettyMetricsMobile from "@/assets/work/prettymetrics/mobile.webp"
 import reelEstateDetail1 from "@/assets/work/reelestate/detail-1.webp"
 import reelEstateDetail2 from "@/assets/work/reelestate/detail-2.webp"
 import reelEstateHero from "@/assets/work/reelestate/hero.webp"
@@ -362,7 +366,108 @@ const viewlio: CaseStudy = {
   },
 }
 
-export const caseStudies: CaseStudy[] = [reelEstate, untilThen, viewlio]
+const prettyMetrics: CaseStudy = {
+  slug: "prettymetrics",
+  name: "Pretty Metrics",
+  url: "https://prettymetrics.cc",
+  category: "Shareable revenue charts",
+  summary:
+    "Pretty Metrics reads a founder's revenue from Stripe and six other payment providers and turns it into polished share cards and looping videos for X, LinkedIn and investor updates.",
+  description:
+    "How Scryptic built Pretty Metrics, which turns revenue from Stripe, Paddle and more into MRR charts and looping videos founders can share in a few clicks.",
+  audience: "Indie founders and subscription businesses who share their revenue and milestones in public.",
+  scope: "Product, brand, design, full-stack build and launch",
+  problem: [
+    "Founders love to share milestones like MRR, new customers and churn, but the usual options are a cropped dashboard screenshot or an evening spent designing a chart by hand.",
+    "The numbers already live in the payment provider. What was missing was a way to pull them out safely, chart them well and export something that looks good in a social feed, without spreadsheets or design work.",
+  ],
+  solution: [
+    "Pretty Metrics connects to a product's payment accounts with a read-only key and opens a studio with fifteen metrics, a choice of charts and card styles, and a library of still and animated backdrops. One click exports a PNG sized for the feed, or an MP4 on an animated backdrop.",
+    "Paste a product's website and it reads the name, logo and brand colours from the site, then generates backdrops in those colours. It is free to use, with a one-time Pro payment for logos, no footer and video export.",
+  ],
+  features: [
+    {
+      name: "Seven payment providers",
+      text: "Stripe, Paddle, Lemon Squeezy, Polar, RevenueCat, Square and Creem, with several providers combined into one total.",
+    },
+    {
+      name: "Fifteen metrics",
+      text: "MRR, ARR, revenue, subscribers, new customers, churn, lifetime value and breakdowns by plan, interval, country and cancellation reason.",
+    },
+    {
+      name: "Sized for every feed",
+      text: "Square, portrait, story and landscape exports at full social resolution, downloaded, copied or shared straight from the browser.",
+    },
+    {
+      name: "Still and live backdrops",
+      text: "Over a hundred backdrops, more than half of them animated, plus backdrops generated from each product's own brand colours and logo.",
+    },
+    {
+      name: "Looping video export",
+      text: "Animated cards export as seamless MP4 loops, encoded entirely in the user's browser.",
+    },
+    {
+      name: "Private by design",
+      text: "Keys are read-only and encrypted, revenue figures are never stored, and every image is drawn on the user's device.",
+    },
+  ],
+  engineering: [
+    {
+      name: "Video encoded in the browser",
+      text: "The card is captured once as a transparent image, then each frame paints the animated scene underneath it. Frames go to the browser's own video encoder, H.264 first with VP9 and AV1 as fallbacks, and every clip is exactly one loop long so it repeats without a seam.",
+    },
+    {
+      name: "Animated scenes in plain canvas",
+      text: "Around 9,000 lines of hand-written canvas scenes, each a function that paints one moment and loops exactly. Pixel-art scenes draw on a small fixed grid and scale up, so the preview and the exported file match at any size.",
+    },
+    {
+      name: "Brand colours read from a website",
+      text: "The server collects the colours a site declares, from its theme colour, manifest, CSS variables and SVG logo, groups near-identical shades and picks a primary and a clearly different secondary in a perceptual colour space. Every fetch is checked against private network addresses, so the URL box cannot probe the server.",
+    },
+    {
+      name: "One model for seven provider APIs",
+      text: "Each provider's data is mapped onto the same monthly grid. Stripe has no MRR history, so it is rebuilt from subscriptions. Mixed currencies are never summed, a product with one unreadable provider fails rather than showing a total that is too low, and derived metrics are calculated in the browser.",
+    },
+    {
+      name: "Keys that only work for their owner",
+      text: "Provider keys are encrypted with AES-256-GCM and bound to the owning account, so a copied ciphertext will not decrypt anywhere else. Stripe webhook signatures are verified directly, and production refuses test keys.",
+    },
+  ],
+  stack: [
+    "Next.js",
+    "Canvas",
+    "WebCodecs",
+    "Stripe",
+    "React",
+    "TypeScript",
+    "Neon Postgres",
+    "Neon Auth",
+    "Recharts",
+    "Resend",
+    "Tailwind CSS",
+    "Vercel",
+  ],
+  cover: {
+    src: prettyMetricsHero,
+    alt: "The Pretty Metrics home page: rows of revenue chart cards for MRR, new customers and total revenue on colourful still and animated backdrops",
+  },
+  gallery: [
+    {
+      src: prettyMetricsDetail1,
+      alt: "Pretty Metrics' about page: the headline Turn your MRR into charts worth sharing, above example share cards",
+    },
+    {
+      src: prettyMetricsDetail2,
+      alt: "The Pretty Metrics backdrop browser previewing an MRR card on the animated Coin Shower backdrop, beside a grid of live backdrops",
+    },
+  ],
+  mobile: {
+    src: prettyMetricsMobile,
+    alt: "The Pretty Metrics home page on a phone",
+  },
+}
+
+export const caseStudies: CaseStudy[] = [reelEstate, untilThen, viewlio, prettyMetrics]
 
 export function getCaseStudy(slug: string) {
   return caseStudies.find((study) => study.slug === slug)
