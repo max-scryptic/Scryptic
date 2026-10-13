@@ -163,7 +163,7 @@ function CheckIcon() {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="mt-0.5 size-4 shrink-0 text-primary"
+      className="mt-1 size-4 shrink-0 text-primary"
       aria-hidden="true"
     >
       <path d="M20 6 9 17l-5-5" />
@@ -297,12 +297,13 @@ export default function Home() {
             complexity.
           </SectionHeading>
 
+          {/* The card holds the offer; what it includes sits beside it on the section background. */}
           <article
             id={service.id}
             aria-labelledby={`${service.id}-name`}
-            className="grid scroll-mt-28 gap-10 rounded-2xl border border-primary/50 bg-card p-6 sm:p-8 lg:grid-cols-[1fr_1.2fr] lg:gap-14 lg:p-10"
+            className="grid scroll-mt-28 items-center gap-12 lg:grid-cols-2 lg:gap-16"
           >
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 rounded-2xl border border-primary/50 bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10">
               <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
                 {service.name}
               </h3>
@@ -323,19 +324,27 @@ export default function Home() {
                 size="lg"
                 nativeButton={false}
                 render={<Link href={pages.bookCall.path} />}
-                className="mt-auto h-11 w-full rounded-full text-base sm:w-fit sm:px-6"
+                className="h-11 w-full rounded-full text-base sm:w-fit sm:px-6"
               >
                 {service.cta}
               </Button>
             </div>
-            <ul className="flex flex-col gap-4 text-sm lg:border-l lg:border-border lg:pl-14">
-              {service.includes.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <CheckIcon />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
+                <h4 className="text-xl tracking-tight">What is included</h4>
+                <p className="text-pretty text-muted-foreground">
+                  Everything from the first call to launch day, delivered by one team.
+                </p>
+              </div>
+              <ul className="flex flex-col gap-4">
+                {service.includes.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <CheckIcon />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </article>
         </div>
       </section>
