@@ -207,7 +207,7 @@ export default function Home() {
       <section
         aria-labelledby="services-heading"
         id="services"
-        className="scroll-mt-24 border-t border-border px-4 py-24 sm:px-6"
+        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Services" title="Two ways to work with Scryptic" id="services-heading">
@@ -226,7 +226,7 @@ export default function Home() {
                   id={service.id}
                   aria-labelledby={`${service.id}-name`}
                   className={cn(
-                    "relative flex scroll-mt-24 flex-col gap-6 rounded-2xl border bg-card p-6 sm:p-8",
+                    "relative flex scroll-mt-28 flex-col gap-6 rounded-2xl border bg-card p-6 sm:p-8",
                     featured ? "border-primary/50" : "border-border",
                   )}
                 >
@@ -280,7 +280,7 @@ export default function Home() {
       <section
         aria-labelledby="process-heading"
         id="process"
-        className="scroll-mt-24 border-t border-border px-4 py-24 sm:px-6"
+        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Process" title="How a project runs" id="process-heading">
@@ -305,7 +305,7 @@ export default function Home() {
       <section
         aria-labelledby="about-heading"
         id="about"
-        className="scroll-mt-24 border-t border-border px-4 py-24 sm:px-6"
+        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]">
           <div className="flex flex-col gap-6">
@@ -338,7 +338,7 @@ export default function Home() {
       <section
         aria-labelledby="faq-heading"
         id="faq"
-        className="scroll-mt-24 border-t border-border px-4 py-24 sm:px-6"
+        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]">
           <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading">
@@ -365,7 +365,7 @@ export default function Home() {
       </section>
 
       {/* Call to action */}
-      <section aria-labelledby="contact-heading" id="contact" className="scroll-mt-24 px-4 pb-24 sm:px-6">
+      <section aria-labelledby="contact-heading" id="contact" className="scroll-mt-28 px-4 pb-24 sm:px-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 rounded-3xl border border-border bg-card px-6 py-16 text-center sm:py-20">
           <h2 id="contact-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
             Start with a discovery call
