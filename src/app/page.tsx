@@ -14,22 +14,38 @@ import { caseStudies } from "@/lib/work"
 
 export const metadata = createMetadata(pages.home)
 
+// The process timetable: a typical eight week build. `start` and `weeks` place
+// each step's bar on the week grid.
+const timetableWeeks = 8
+
 const steps = [
   {
     name: "Discover",
-    text: "A call to understand the business, the users and what success looks like. If something already exists, we review it.",
+    text: "A call on your goals, users and what exists.",
+    bar: "Call",
+    start: 1,
+    weeks: 1,
   },
   {
     name: "Plan",
-    text: "A scoped first release, a recommended stack, a written estimate and a timeline, so the build starts from a plan rather than a guess.",
+    text: "Scope, stack, a written estimate and a timeline.",
+    bar: "Estimate",
+    start: 2,
+    weeks: 1,
   },
   {
     name: "Build",
-    text: "Design and engineering run together. Every Friday we catch up on what shipped that week, agree priorities and look at what is next in the pipeline.",
+    text: "Design and code together, reviewed every Friday.",
+    bar: "Build",
+    start: 3,
+    weeks: 5,
   },
   {
     name: "Launch",
-    text: "Usually one to two months after kickoff. We deploy, set up analytics and search, launch with you and hand over everything you need to run it.",
+    text: "Deploy, set up analytics, launch and hand over.",
+    bar: "Live",
+    start: 8,
+    weeks: 1,
   },
 ]
 
@@ -137,14 +153,17 @@ function SectionHeading({
   title,
   children,
   id,
+  wide = false,
 }: {
   eyebrow: string
   title: string
   children: React.ReactNode
   id: string
+  /** Let the intro run the full width of the section. */
+  wide?: boolean
 }) {
   return (
-    <div className="flex max-w-2xl flex-col gap-4">
+    <div className={cn("flex flex-col gap-4", !wide && "max-w-2xl")}>
       <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
       <h2 id={id} className="text-3xl tracking-tight text-balance sm:text-4xl">
         {title}
@@ -377,22 +396,90 @@ export default function Home() {
         className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Process" title="How a project runs" id="process-heading">
+          <SectionHeading eyebrow="Process" title="How a project runs" id="process-heading" wide>
             Most projects go from first call to launch in one to two months, following the same
             four steps with one team throughout and a catch-up every Friday along the way. No
             handoffs between agencies, and no guessing what happens next.
           </SectionHeading>
-          <ol className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, index) => (
-              <li key={step.name} className="flex flex-col gap-3 bg-background p-6 sm:p-8">
-                <span className="font-mono text-sm text-primary">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-lg">{step.name}</h3>
-                <p className="text-sm text-pretty text-muted-foreground">{step.text}</p>
-              </li>
-            ))}
-          </ol>
+          {/* Phones stack each step's text above its bar; wider screens put it in a first column. */}
+          <div className="overflow-hidden rounded-2xl border border-border bg-card">
+            <div className="grid grid-cols-8 sm:grid-cols-[minmax(11rem,2.2fr)_repeat(8,minmax(0,1fr))]">
+              <div
+                aria-hidden="true"
+                className="col-span-full grid grid-cols-subgrid border-b border-border font-mono text-xs text-muted-foreground uppercase"
+              >
+                <span className="hidden px-6 py-4 sm:block">Step</span>
+                {Array.from({ length: timetableWeeks }, (_, week) => (
+                  <span key={week} className="py-4 text-center sm:border-l sm:border-border">
+                    W{week + 1}
+                  </span>
+                ))}
+              </div>
+              <ol className="col-span-full grid grid-cols-subgrid">
+                {steps.map((step, index) => (
+                  <li
+                    key={step.name}
+                    className="col-span-full grid grid-cols-subgrid border-b border-border last:border-b-0"
+                  >
+                    <div className="col-span-full flex flex-col gap-1 px-4 pt-5 sm:col-span-1 sm:px-6 sm:py-5">
+                      <h3 className="flex items-baseline gap-3 text-lg">
+                        <span className="font-mono text-sm text-primary">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        {step.name}
+                      </h3>
+                      <p className="text-sm text-pretty text-muted-foreground">{step.text}</p>
+                    </div>
+                    <div className="relative col-span-8 grid grid-cols-subgrid py-4 sm:py-5">
+                      {Array.from({ length: timetableWeeks }, (_, week) => (
+                        <span
+                          key={week}
+                          aria-hidden="true"
+                          className="absolute inset-y-0 hidden border-l border-border sm:block"
+                          style={{ left: `${(week / timetableWeeks) * 100}%` }}
+                        />
+                      ))}
+                      <p
+                        className={cn(
+                          "relative mx-1 flex h-9 items-center gap-2 overflow-hidden rounded-lg px-3 font-mono text-xs whitespace-nowrap sm:mx-2",
+                          step.bar === "Live"
+                            ? "bg-chart-2 text-[#14131b]"
+                            : step.bar === "Build"
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-primary/15 text-primary",
+                        )}
+                        style={{ gridColumn: `${step.start} / span ${step.weeks}` }}
+                      >
+                        <span className="sr-only">
+                          {step.weeks > 1
+                            ? `Weeks ${step.start} to ${step.start + step.weeks - 1}: `
+                            : `Week ${step.start}: `}
+                        </span>
+                        {/* A one week bar is too narrow for its label below lg; the step name sits beside it. */}
+                        <span className={cn("truncate", step.weeks === 1 && "max-lg:sr-only")}>
+                          {step.bar}
+                        </span>
+                        {step.bar === "Build" && (
+                          <span aria-hidden="true" className="ml-auto flex gap-[clamp(0.5rem,2vw,1.4rem)]">
+                            {Array.from({ length: step.weeks }, (_, week) => (
+                              <span key={week} className="size-1.5 rotate-45 bg-primary-foreground/80" />
+                            ))}
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <p className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border px-4 py-4 font-mono text-xs text-muted-foreground sm:px-6">
+              <span className="flex items-center gap-2">
+                <span aria-hidden="true" className="size-1.5 rotate-45 bg-primary" />
+                Friday catch-up
+              </span>
+              <span>A typical eight week build. Smaller first releases land sooner.</span>
+            </p>
+          </div>
         </div>
       </section>
 
