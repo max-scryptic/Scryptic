@@ -179,6 +179,34 @@ function CheckIcon() {
   )
 }
 
+/* The service card's detail icons: a clock for the timeline, people for who it suits. */
+function DetailIcon({ kind }: { kind: "clock" | "people" }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="size-4"
+      aria-hidden="true"
+    >
+      {kind === "clock" ? (
+        <>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </>
+      ) : (
+        <>
+          <circle cx="9" cy="8" r="3.5" />
+          <path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6" />
+        </>
+      )}
+    </svg>
+  )
+}
+
 function ComparisonMark({ value, highlight = false }: { value: boolean; highlight?: boolean }) {
   return (
     <>
@@ -319,67 +347,51 @@ export default function Home() {
             aria-labelledby={`${service.id}-name`}
             className="grid scroll-mt-28 items-center gap-12 lg:grid-cols-2 lg:gap-16"
           >
-            {/* A Lapis header carries the name and price, echoing the hero; the details sit below on the card. */}
+            {/* A thin Lapis rule tops the card; the price leads, then the details and the call. */}
             <div
               data-reveal
-              className="overflow-hidden rounded-2xl border border-border bg-card shadow-xl shadow-black/5"
+              className="relative flex flex-col gap-8 overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
             >
-              <div className="relative isolate overflow-hidden bg-[#2b3fd6] p-6 text-white sm:p-8 lg:px-10">
-                <div
-                  aria-hidden="true"
-                  className="absolute -top-24 -right-16 -z-10 size-64 rounded-full bg-white/10 blur-3xl"
-                />
-                <p className="font-mono text-xs tracking-widest text-white/70 uppercase">
-                  One engagement, one team
-                </p>
-                <h3 id={`${service.id}-name`} className="mt-3 text-2xl tracking-tight">
+              <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-primary" />
+              <div className="flex flex-col gap-5">
+                <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
                   {service.name}
                 </h3>
-                <p className="mt-8 flex items-baseline gap-2">
-                  {pricePrefix && <span className="text-lg text-white/70">{pricePrefix}</span>}
-                  <span className="text-5xl font-semibold tracking-tight sm:text-6xl">
-                    {priceAmount}
-                  </span>
-                </p>
-                <p className="mt-2 text-sm text-white/70">{service.priceNote}</p>
-              </div>
-
-              <div className="flex flex-col gap-8 p-6 sm:p-8 lg:px-10">
-                <p className="text-lg text-pretty">{service.summary}</p>
-                <dl className="flex flex-col divide-y divide-border border-y border-border">
-                  {[
-                    { label: "Timeline", value: service.timeline },
-                    { label: "Best for", value: service.bestFor },
-                  ].map((detail) => (
-                    <div key={detail.label} className="grid gap-1 py-4 sm:grid-cols-[6.5rem_1fr] sm:gap-4">
-                      <dt className="pt-0.5 font-mono text-xs tracking-widest text-primary uppercase">
-                        {detail.label}
-                      </dt>
-                      <dd className="text-sm text-pretty text-muted-foreground">{detail.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-5">
-                  <Button
-                    size="lg"
-                    nativeButton={false}
-                    render={<Link href={pages.bookCall.path} />}
-                    className="group/cta h-12 rounded-full px-6 text-base"
-                  >
-                    {service.cta}
-                    <span
-                      aria-hidden="true"
-                      className="transition-transform group-hover/cta:translate-x-0.5"
-                    >
-                      →
-                    </span>
-                  </Button>
-                  <p className="text-center text-xs text-muted-foreground sm:text-left">
-                    Written estimate before
-                    <br className="hidden sm:block" /> any build starts
+                <div className="flex flex-col gap-1">
+                  <p className="flex items-baseline gap-2">
+                    {pricePrefix && <span className="text-lg text-muted-foreground">{pricePrefix}</span>}
+                    <span className="text-5xl font-semibold tracking-tight">{priceAmount}</span>
                   </p>
+                  <p className="text-sm text-muted-foreground">{service.priceNote}</p>
                 </div>
               </div>
+              <p className="text-pretty text-muted-foreground">{service.summary}</p>
+              <dl className="flex flex-col gap-4 border-t border-border pt-6">
+                {(
+                  [
+                    { icon: "clock", label: "Timeline", value: service.timeline },
+                    { icon: "people", label: "Best for", value: service.bestFor },
+                  ] as const
+                ).map((detail) => (
+                  <div key={detail.label} className="flex gap-4">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <DetailIcon kind={detail.icon} />
+                    </span>
+                    <div className="flex flex-col gap-0.5 text-sm">
+                      <dt className="font-medium">{detail.label}</dt>
+                      <dd className="text-pretty text-muted-foreground">{detail.value}</dd>
+                    </div>
+                  </div>
+                ))}
+              </dl>
+              <Button
+                size="lg"
+                nativeButton={false}
+                render={<Link href={pages.bookCall.path} />}
+                className="h-12 w-full rounded-full text-base"
+              >
+                {service.cta}
+              </Button>
             </div>
             <div className="flex flex-col gap-6">
               <div data-reveal className="flex flex-col gap-2">
