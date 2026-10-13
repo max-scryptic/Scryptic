@@ -3,7 +3,7 @@ import Link from "next/link"
 import { PageJsonLd } from "@/components/json-ld"
 import { PostCard } from "@/components/post-card"
 import { Button } from "@/components/ui/button"
-import { migrationSeries, postCategories, posts, postsInCategory } from "@/lib/blog"
+import { migrationSeries, postCategories, postsInCategory } from "@/lib/blog"
 import { blogPostPages, createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
@@ -20,14 +20,11 @@ export default function BlogPage() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
         <div className="flex flex-col items-start gap-6">
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
-            From low-code prototype to <span className="text-primary">production app</span>
+            The {siteConfig.name} <span className="text-primary">blog</span>
           </h1>
-          <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
-            Built something that works in Lovable, Bubble, Webflow or another low-code tool, and
-            now need it to hold up with real customers? These {posts.length} guides from the{" "}
-            {siteConfig.name} studio cover each tool in turn: what you can take with you, what a
-            production version needs, and how to move without losing data, users or search
-            rankings.
+          <p className="max-w-xl text-lg text-pretty text-muted-foreground">
+            Practical guides on building, launching and growing apps, from the team that builds
+            them.
           </p>
           <nav aria-label="Guide categories">
             <ul className="flex flex-wrap gap-2 font-mono text-xs">
