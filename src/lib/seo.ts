@@ -54,6 +54,14 @@ export const pages = {
     changeFrequency: "monthly",
     priority: 0.8,
   },
+  blog: {
+    path: "/blog",
+    title: "Blog",
+    description:
+      "The Scryptic blog: practical notes for founders on scoping an MVP, choosing a stack, estimating build cost and taking an app from idea to launch.",
+    changeFrequency: "weekly",
+    priority: 0.7,
+  },
 } satisfies Record<string, PageEntry>
 
 export const publicPages: PageEntry[] = Object.values(pages).filter(
