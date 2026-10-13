@@ -1,9 +1,11 @@
+import wixLogo from "@/assets/blog/logos/wix.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const wix: BlogPost = {
   slug: "migrate-from-wix",
   title: "Migrating from Wix to a production app",
   tool: "Wix",
+  logo: wixLogo,
   category: "Website builders",
   description:
     "How to move from Wix, Wix Studio or Velo to a production app: what you can export, what has to be rebuilt, and how to protect your search rankings.",

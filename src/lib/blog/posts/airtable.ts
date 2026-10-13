@@ -1,9 +1,11 @@
+import airtableLogo from "@/assets/blog/logos/airtable.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const airtable: BlogPost = {
   slug: "migrate-from-airtable",
   title: "Migrating from Airtable to a production app",
   tool: "Airtable",
+  logo: airtableLogo,
   category: "Internal tool builders",
   description:
     "How to move a product or operation off Airtable: exporting data and files, turning linked records and automations into a real backend, and a step by step plan.",

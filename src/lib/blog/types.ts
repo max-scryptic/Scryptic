@@ -8,6 +8,8 @@
  * first: every section opens with the direct answer, then the detail.
  */
 
+import type { StaticImageData } from "next/image"
+
 /** A paragraph, a list or a highlighted note inside a section. */
 export type PostBlock =
   | { type: "paragraph"; text: string }
@@ -42,6 +44,11 @@ export type BlogPost = {
   title: string
   /** The tool the post is about, shown on the card. */
   tool: string
+  /**
+   * The tool's logo, an SVG from src/assets/blog/logos/ shown on the card and
+   * in the post header. Without one, both show the tool's initial instead.
+   */
+  logo?: StaticImageData
   category: PostCategory
   /** 120 to 160 characters, for the meta description and llms.txt. */
   description: string

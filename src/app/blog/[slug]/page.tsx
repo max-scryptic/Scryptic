@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 
 import { PageJsonLd } from "@/components/json-ld"
 import { PostCard } from "@/components/post-card"
+import { ToolLogo } from "@/components/tool-logo"
 import { Button } from "@/components/ui/button"
 import {
   formatPostDate,
@@ -126,9 +127,12 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
 
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-14">
             <div className="flex flex-col items-start gap-6">
-              <p className="font-mono text-xs tracking-widest text-primary uppercase">
-                Migration guide &middot; {post.category}
-              </p>
+              <div className="flex items-center gap-4">
+                <ToolLogo post={post} size="lg" />
+                <p className="font-mono text-xs tracking-widest text-primary uppercase">
+                  Migration guide &middot; {post.category}
+                </p>
+              </div>
               <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">{post.title}</h1>
               <p className="max-w-2xl text-lg text-pretty text-muted-foreground">{post.summary}</p>
               <p className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-muted-foreground">

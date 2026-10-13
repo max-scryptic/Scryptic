@@ -1,9 +1,11 @@
+import lovableLogo from "@/assets/blog/logos/lovable.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const lovable: BlogPost = {
   slug: "migrate-from-lovable",
   title: "Migrating from Lovable to a production app",
   tool: "Lovable",
+  logo: lovableLogo,
   category: "AI app builders",
   description:
     "How to take a Lovable prototype to production: what the exported code gives you, what it is missing, and a step by step plan to harden, test and launch it.",

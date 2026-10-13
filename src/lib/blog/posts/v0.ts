@@ -1,9 +1,11 @@
+import v0Logo from "@/assets/blog/logos/v0.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const v0: BlogPost = {
   slug: "migrate-from-v0",
   title: "Migrating from v0 to a production app",
   tool: "v0",
+  logo: v0Logo,
   category: "AI app builders",
   description:
     "How to turn a v0 project into a production app: what the Next.js code gives you, the backend and security work it usually lacks, and a plan to launch.",
