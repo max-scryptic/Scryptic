@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { cn } from "cn"
 
+import { CaseStudyCard } from "@/components/case-study-card"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import { createMetadata, pages } from "@/lib/seo"
@@ -9,6 +10,7 @@ import { service } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
+import { caseStudies } from "@/lib/work"
 
 export const metadata = createMetadata(pages.home)
 
@@ -319,6 +321,36 @@ export default function Home() {
               ))}
             </ul>
           </article>
+        </div>
+      </section>
+
+      {/* Work */}
+      <section
+        aria-labelledby="work-heading"
+        id="work"
+        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
+      >
+        <div className="mx-auto flex max-w-6xl flex-col gap-12">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHeading eyebrow="Our work" title="Products we have built and launched" id="work-heading">
+              Every app below went through the same process a client build does, from first sketch
+              to live domain. Each case study covers the problem, the product and the engineering.
+            </SectionHeading>
+            <Button
+              size="lg"
+              variant="outline"
+              nativeButton={false}
+              render={<Link href={pages.work.path} />}
+              className="h-11 shrink-0 rounded-full px-5 text-base"
+            >
+              See all case studies
+            </Button>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {caseStudies.map((study) => (
+              <CaseStudyCard key={study.slug} study={study} headingLevel="h3" />
+            ))}
+          </div>
         </div>
       </section>
 

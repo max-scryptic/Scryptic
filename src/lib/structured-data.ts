@@ -3,9 +3,11 @@ import type {
   BreadcrumbList,
   FAQPage,
   Graph,
+  ItemList,
   Organization,
   Service,
   Thing,
+  WebApplication,
   WebPage,
   WebSite,
 } from "schema-dts"
@@ -13,6 +15,7 @@ import type {
 import { pages, type PageEntry } from "@/lib/seo"
 import { currency, type ServiceOffer } from "@/lib/services"
 import { absoluteUrl, siteConfig } from "@/lib/site"
+import type { CaseStudy } from "@/lib/work"
 
 /*
  * schema.org builders. Search engines use JSON-LD for rich results; answer
@@ -185,6 +188,38 @@ export function serviceJsonLd(page: PageEntry, service: ServiceOffer): Service {
         },
       }),
     },
+  }
+}
+
+/** The pages listed on an index page, in the order shown. */
+export function itemListJsonLd(page: PageEntry, items: PageEntry[]): ItemList {
+  return {
+    "@type": "ItemList",
+    "@id": `${absoluteUrl(page.path)}#list`,
+    name: page.title,
+    numberOfItems: items.length,
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.title,
+      url: absoluteUrl(item.path),
+    })),
+  }
+}
+
+/** The live product a case study describes, made by the organization. */
+export function caseStudyJsonLd(page: PageEntry, study: CaseStudy): WebApplication {
+  return {
+    "@type": "WebApplication",
+    "@id": `${absoluteUrl(page.path)}#app`,
+    name: study.name,
+    url: study.url,
+    description: study.summary,
+    applicationCategory: study.category,
+    operatingSystem: "Web browser",
+    image: absoluteUrl(study.cover.src.src),
+    creator: { "@id": ids.organization },
+    subjectOf: { "@id": ids.webPage(page.path) },
   }
 }
 

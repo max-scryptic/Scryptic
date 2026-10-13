@@ -14,6 +14,7 @@ import { siteConfig } from "@/lib/site"
 // Root-relative hashes so the links work from every route, not just home.
 export const navItems: FloatingNavItem[] = [
   { name: "Services", link: "/#services" },
+  { name: "Work", link: pages.work.path },
   { name: "Process", link: "/#process", hideOnMobile: true },
   { name: "About", link: "/#about", hideOnMobile: true },
   { name: "FAQ", link: "/#faq" },
