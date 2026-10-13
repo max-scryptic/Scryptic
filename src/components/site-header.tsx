@@ -13,7 +13,7 @@ import { bookingHref, siteConfig } from "@/lib/site"
 export const navItems: FloatingNavItem[] = [
   { name: "Services", link: "/#services" },
   { name: "Process", link: "/#process", hideOnMobile: true },
-  { name: "About", link: "/#about" },
+  { name: "About", link: "/#about", hideOnMobile: true },
   { name: "FAQ", link: "/#faq" },
 ]
 
