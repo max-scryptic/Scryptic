@@ -13,7 +13,7 @@ export const siteConfig = {
   // the product is and who it is for: answer engines quote it verbatim.
   description:
     "Scryptic is a development studio that takes founders from idea to launched app, with full app to market builds starting from £10,000.",
-  // Short line used in the hero eyebrow and the footer.
+  // Short line used in the footer.
   tagline: "Development as a service",
   // Optional longer context for llms.txt. Leave empty to omit.
   summary:
