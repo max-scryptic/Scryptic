@@ -18,7 +18,7 @@ export default function NotFound() {
     <main className="flex min-h-svh flex-col items-center justify-center gap-8 bg-muted px-4 py-6 text-center">
       <div className="flex flex-col items-center gap-4">
         <BrandLogo className="size-14" />
-        <h1 className="text-3xl font-semibold tracking-tight">Page not found</h1>
+        <h1 className="text-3xl tracking-tight">Page not found</h1>
         <p className="max-w-sm text-balance text-muted-foreground">
           The page you are looking for does not exist or has moved.
         </p>
