@@ -16,10 +16,6 @@ export default function BlogPage() {
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-12">
         <div className="flex flex-col items-start gap-6">
-          <p className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
-            <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
-            Blog
-          </p>
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
             Notes on building and <span className="text-primary">launching apps</span>
           </h1>

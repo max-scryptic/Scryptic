@@ -17,18 +17,13 @@ export default function WorkPage() {
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
         <div className="flex flex-col items-start gap-6">
-          <p className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
-            <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
-            Our work
-          </p>
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
             Products we designed, built and <span className="text-primary">launched</span>
           </h1>
           <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
-            These are {caseStudies.length} web apps {siteConfig.name} took from idea to launch as
-            its own products, each live on its own domain with accounts and payments built in.
-            Every one ran through the same process a client build does: scope, design, build,
-            deploy and launch.
+            A few of the products {siteConfig.name} has taken from idea to launch, each live on
+            its own domain with accounts and payments built in. Each one ran through the same process a client build
+            does: scope, design, build, deploy and launch.
           </p>
         </div>
 
