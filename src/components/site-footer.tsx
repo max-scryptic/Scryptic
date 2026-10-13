@@ -1,15 +1,63 @@
 import Link from "next/link"
 
 import { BrandLogo, BrandWordmark } from "@/components/brand-logo"
-import { blogNavItem, navItems, workNavItem } from "@/components/site-header"
 import { VoxelHills } from "@/components/voxel-hills"
+import { pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
+import { caseStudies } from "@/lib/work"
+
+// The home page's sections, in the order they appear on it.
+const homeLinks = [
+  { name: "Services", href: "/#services" },
+  { name: "Process", href: "/#process" },
+  { name: "Our work", href: "/#work" },
+  { name: `Why ${siteConfig.name}`, href: "/#compare" },
+  { name: "About", href: "/#about" },
+  { name: "FAQ", href: "/#faq" },
+]
+
+const workLinks = [
+  ...caseStudies.map((study) => ({ name: study.name, href: `/work/${study.slug}` })),
+  { name: "All work", href: pages.work.path },
+]
+
+// No posts are published yet; list each one here ahead of "All posts" as they go live.
+const blogLinks = [{ name: "All posts", href: pages.blog.path }]
+
+function FooterColumn({
+  title,
+  links,
+  children,
+}: {
+  title: string
+  links: { name: string; href: string }[]
+  children?: React.ReactNode
+}) {
+  return (
+    <nav aria-label={title} className="flex flex-col gap-3">
+      <h2 className="font-mono text-xs tracking-widest text-foreground uppercase">{title}</h2>
+      <ul className="flex flex-col gap-2 text-sm">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link
+              href={link.href}
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {link.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      {children}
+    </nav>
+  )
+}
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12 sm:flex-row sm:items-start sm:justify-between sm:px-6">
-        <div className="flex flex-col gap-3">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-10 px-4 py-12 sm:grid-cols-3 sm:px-6 lg:grid-cols-[2fr_1fr_1fr_1fr]">
+        <div className="col-span-2 flex flex-col gap-3 sm:col-span-3 lg:col-span-1">
           <Link href="/" className="flex items-center gap-2 font-logo text-lg font-extrabold tracking-tight lowercase">
             <BrandLogo className="size-6" />
             {siteConfig.name}
@@ -17,24 +65,18 @@ export function SiteFooter() {
           <p className="max-w-xs text-sm text-muted-foreground">
             {siteConfig.tagline}. From first call to launched app.
           </p>
-        </div>
-        <nav aria-label="Footer" className="flex flex-col gap-2 text-sm sm:items-end">
-          {[...navItems, blogNavItem, workNavItem].map((item) => (
-            <Link
-              key={item.link}
-              href={item.link}
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {item.name}
-            </Link>
-          ))}
           <a
             href={`mailto:${siteConfig.organization.email}`}
-            className="text-primary hover:underline"
+            className="text-sm text-primary hover:underline"
           >
             {siteConfig.organization.email}
           </a>
-        </nav>
+        </div>
+        <FooterColumn title={siteConfig.name} links={homeLinks} />
+        <FooterColumn title="Work" links={workLinks} />
+        <FooterColumn title="Blog" links={blogLinks}>
+          <p className="text-sm text-muted-foreground/70">First posts coming soon.</p>
+        </FooterColumn>
       </div>
       <div className="mx-auto max-w-6xl px-4 pb-10 font-mono text-xs text-muted-foreground sm:px-6">
         &copy; {new Date().getFullYear()} {siteConfig.organization.legalName}
