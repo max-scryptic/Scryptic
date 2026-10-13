@@ -13,9 +13,13 @@ import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 import { featuredCaseStudies } from "@/lib/work"
 
-// The search title says what we do ("App development studio | Scryptic"); the
+// The search title leads with the brand, then says what we do. pageTitle()
+// drops the repeated app name it would append, so this renders as written. The
 // registry title stays "Scryptic" for breadcrumbs, JSON-LD and llms.txt.
-export const metadata = createMetadata({ ...pages.home, title: "App development studio" })
+export const metadata = createMetadata({
+  ...pages.home,
+  title: `${siteConfig.name} | App development studio`,
+})
 
 // The process timetable: a typical eight week build. `start` and `weeks` place
 // each step's bar on the week grid.
