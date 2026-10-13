@@ -8,8 +8,6 @@ import { founder } from "@/lib/team"
 
 export const metadata = createMetadata(pages.bookCall)
 
-const facts = ["30 minutes", "Free", "No obligation"]
-
 const agenda = [
   {
     name: "Your idea or product",
@@ -32,27 +30,9 @@ export default function BookCallPage() {
 
       <div className="mx-auto grid w-full max-w-6xl items-start gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
         <div className="flex flex-col gap-10 lg:sticky lg:top-32">
-          <div className="flex flex-col items-start gap-6">
-            <p className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
-              <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
-              Discovery call
-            </p>
-            <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
-              Book a free <span className="text-primary">30 minute</span> discovery call
-            </h1>
-            <p className="max-w-xl text-lg text-pretty text-muted-foreground">
-              Answer a few quick questions, one at a time, then pick a time that suits you. You speak directly
-              with {founder.name}, who plans and builds every {siteConfig.name} project, so no
-              pitch deck or preparation is needed.
-            </p>
-            <ul className="flex flex-wrap gap-2 font-mono text-xs">
-              {facts.map((fact) => (
-                <li key={fact} className="rounded-full bg-primary/10 px-3 py-1 text-primary">
-                  {fact}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
+            Book a free <span className="text-primary">30 minute</span> discovery call
+          </h1>
 
           <section aria-labelledby="agenda-heading" className="flex flex-col gap-5">
             <h2 id="agenda-heading" className="text-xl tracking-tight">

@@ -44,18 +44,39 @@ export function FloatingNav({
         <ul className="flex items-center md:gap-1">
           {navItems.map((item) => (
             <li key={item.link} className={cn(item.hideOnMobile && "hidden md:block")}>
-              <Link
-                href={item.link}
-                className="flex min-h-10 items-center rounded-lg px-1.5 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground focus-visible:text-foreground min-[360px]:px-2 md:px-3 md:text-base"
-              >
-                {item.name}
-              </Link>
+              <FloatingNavLink href={item.link}>{item.name}</FloatingNavLink>
             </li>
           ))}
         </ul>
       </nav>
       <div className="flex items-center gap-0.5 min-[360px]:gap-1 sm:gap-2">{action}</div>
     </header>
+  )
+}
+
+/**
+ * A plain text link styled like the nav items, for links that sit in the
+ * trailing `action` slot instead of the main list.
+ */
+export function FloatingNavLink({
+  href,
+  className,
+  children,
+}: {
+  href: string
+  className?: string
+  children: React.ReactNode
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "flex min-h-10 items-center rounded-lg px-1.5 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground focus-visible:text-foreground min-[360px]:px-2 md:px-3 md:text-base",
+        className,
+      )}
+    >
+      {children}
+    </Link>
   )
 }
 

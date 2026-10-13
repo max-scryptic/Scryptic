@@ -356,13 +356,6 @@ export function BookCallForm() {
                 <span aria-hidden="true">&rarr;</span>
               </Button>
             </div>
-            {current === lastSlide && (
-              <p className="text-xs text-muted-foreground">
-                {sendsEmail
-                  ? "Your answers go into an email to us, so you can check them before sending."
-                  : "Your answers are passed to the booking page and only used to prepare for your call."}
-              </p>
-            )}
           </div>
         </form>
       )}
