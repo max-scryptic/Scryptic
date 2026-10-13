@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { BrandLogo, BrandWordmark } from "@/components/brand-logo"
-import { navItems } from "@/components/site-header"
+import { blogNavItem, navItems } from "@/components/site-header"
 import { siteConfig } from "@/lib/site"
 
 export function SiteFooter() {
@@ -18,7 +18,7 @@ export function SiteFooter() {
           </p>
         </div>
         <nav aria-label="Footer" className="flex flex-col gap-2 text-sm sm:items-end">
-          {navItems.map((item) => (
+          {[...navItems, blogNavItem].map((item) => (
             <Link
               key={item.link}
               href={item.link}
