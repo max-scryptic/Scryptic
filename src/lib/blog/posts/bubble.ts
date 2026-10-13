@@ -14,7 +14,7 @@ export const bubble: BlogPost = {
     { label: "Code export", value: "No, the app file only opens in Bubble" },
     { label: "Data export", value: "CSV per data type, or the Data API" },
     { label: "Usual approach", value: "Planned rebuild, run in parallel" },
-    { label: "Typical timeline", value: "4 to 8 weeks to first release" },
+    { label: "Typical timeline", value: "4 to 8 weeks" },
   ],
   sections: [
     {

@@ -14,7 +14,7 @@ export const adalo: BlogPost = {
     { label: "Code export", value: "No, screens and logic are rebuilt" },
     { label: "Data export", value: "CSV per collection, or the Adalo API" },
     { label: "Usual approach", value: "Planned rebuild, run in parallel" },
-    { label: "Typical timeline", value: "5 to 8 weeks to first release" },
+    { label: "Typical timeline", value: "5 to 8 weeks" },
   ],
   sections: [
     {

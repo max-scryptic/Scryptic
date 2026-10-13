@@ -14,7 +14,7 @@ export const glide: BlogPost = {
     { label: "Code export", value: "No, the app is rebuilt" },
     { label: "Data export", value: "CSV, the Glide API, or your own sheets" },
     { label: "Usual approach", value: "Staged rebuild, then move the data" },
-    { label: "Typical timeline", value: "3 to 6 weeks to first release" },
+    { label: "Typical timeline", value: "3 to 6 weeks" },
   ],
   sections: [
     {

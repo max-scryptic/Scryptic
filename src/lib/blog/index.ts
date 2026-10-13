@@ -1,8 +1,15 @@
 import { adalo } from "@/lib/blog/posts/adalo"
+import { airtable } from "@/lib/blog/posts/airtable"
 import { bubble } from "@/lib/blog/posts/bubble"
+import { flutterflow } from "@/lib/blog/posts/flutterflow"
+import { framer } from "@/lib/blog/posts/framer"
 import { glide } from "@/lib/blog/posts/glide"
 import { lovable } from "@/lib/blog/posts/lovable"
+import { retool } from "@/lib/blog/posts/retool"
 import { softr } from "@/lib/blog/posts/softr"
+import { webflow } from "@/lib/blog/posts/webflow"
+import { weweb } from "@/lib/blog/posts/weweb"
+import { wix } from "@/lib/blog/posts/wix"
 import type { BlogPost, PostBlock, PostCategory } from "@/lib/blog/types"
 
 export type { BlogPost, PostBlock, PostCategory, PostSection } from "@/lib/blog/types"
@@ -12,7 +19,20 @@ export type { BlogPost, PostBlock, PostCategory, PostSection } from "@/lib/blog/
  * new post is a file in ./posts plus a line here; its page, card, metadata,
  * sitemap row, llms.txt line and JSON-LD all follow from that.
  */
-export const posts: BlogPost[] = [lovable, bubble, adalo, glide, softr]
+export const posts: BlogPost[] = [
+  lovable,
+  bubble,
+  flutterflow,
+  weweb,
+  adalo,
+  glide,
+  softr,
+  webflow,
+  framer,
+  wix,
+  retool,
+  airtable,
+]
 
 /** The migration guides series on /blog, one group per kind of tool. */
 export const migrationSeries = {
