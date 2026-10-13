@@ -567,9 +567,9 @@ export default function Home() {
               working product, not a team to manage.
             </SectionHeading>
             <p className="max-w-2xl text-pretty text-muted-foreground">
-              Built on more than five years of shipping software, from early-stage startups to
-              enterprise applications. Scope, price and timeline are agreed before the build starts,
-              so you always know what you are paying for, what you will get and when.
+              Keeping the studio small is deliberate: a few projects at a time, each with full
+              attention and a catch-up every Friday. Scope, price and timeline are agreed before the
+              build starts, so you always know what you are paying for, what you will get and when.
             </p>
           </div>
 
