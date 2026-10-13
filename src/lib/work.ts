@@ -1,5 +1,9 @@
 import type { StaticImageData } from "next/image"
 
+import reelEstateDetail1 from "@/assets/work/reelestate/detail-1.webp"
+import reelEstateDetail2 from "@/assets/work/reelestate/detail-2.webp"
+import reelEstateHero from "@/assets/work/reelestate/hero.webp"
+import reelEstateMobile from "@/assets/work/reelestate/mobile.webp"
 import untilThenDetail1 from "@/assets/work/until-then/detail-1.webp"
 import untilThenDetail2 from "@/assets/work/until-then/detail-2.webp"
 import untilThenHero from "@/assets/work/until-then/hero.webp"
@@ -50,6 +54,108 @@ export type CaseStudy = {
   cover: Screenshot
   gallery: Screenshot[]
   mobile?: Screenshot
+}
+
+const reelEstate: CaseStudy = {
+  slug: "reelestate",
+  name: "ReelEstate",
+  url: "https://reelestate.cc",
+  category: "AI video for estate agents",
+  summary:
+    "ReelEstate turns the listing photos estate agents already have into branded property videos, reels and carousels for every social platform. No filming, no editing.",
+  description:
+    "How Scryptic built ReelEstate, an AI app that turns estate agents' listing photos into branded property videos, reels and social carousels in minutes.",
+  audience: "Estate agents, property photographers and property marketing agencies, starting in the UK.",
+  scope: "Product, design, full-stack build, AI video pipeline and launch",
+  problem: [
+    "Video now does more for a listing on social media than photos do, but filming and editing every property is slow and expensive. Most agents post stills, or nothing.",
+    "They already have professional listing photos. The gap was a tool that turns those stills into video, edits them into something worth posting, and packages it at the right size for each platform with the agency's branding on it.",
+  ],
+  solution: [
+    "ReelEstate is a four-step workflow: add a property's photos, bring each one to life as a short clip with an AI camera move, arrange clips and photos into reels or carousels, then export them branded and sized for the platform.",
+    "Alongside video, AI photo edits fix the weather, switch to twilight, stage empty rooms or declutter busy ones, and anything that adds or removes objects is labelled as virtually staged, as listing rules require. Teams share a workspace and a credit balance, on monthly or yearly plans.",
+  ],
+  features: [
+    {
+      name: "Photo to video",
+      text: "Each photo becomes a short clip with a push in, pull out, orbit or drone move, aimed at a point the agent picks on the image.",
+    },
+    {
+      name: "AI photo edits",
+      text: "Twilight, golden hour and daylight skies, virtual staging in a chosen style, decluttering and empty rooms, from the photos already on file.",
+    },
+    {
+      name: "Reels in every shape",
+      text: "Arrange clips, photos and brand cards into 9:16, 16:9, 1:1 or 4:5 videos with cuts, crossfades, fades and slides.",
+    },
+    {
+      name: "Carousels for seven platforms",
+      text: "Instagram, TikTok, Facebook, LinkedIn, Threads, X and Pinterest, with each platform's slide limits and shapes checked before export.",
+    },
+    {
+      name: "Branded by default",
+      text: "Start cards, end cards and a logo watermark on everything exported, so every post is unmistakably the agency's.",
+    },
+    {
+      name: "Team workspaces",
+      text: "Roles, emailed invitations and one shared credit balance, with credits that roll over and refunds for failed clips.",
+    },
+  ],
+  engineering: [
+    {
+      name: "An AI video pipeline without a queue service",
+      text: "Each clip is a database row and a job on fal.ai. It completes through a webhook or through the page polling, whichever comes first, and a database lease makes sure only one path stores the result. The webhook body is never trusted: the app fetches the result again with its own key.",
+    },
+    {
+      name: "Catching bad AI output automatically",
+      text: "Video models sometimes cut to a room that does not exist. Every finished clip is decoded with ffmpeg and its frames compared against the clip's own typical change, so a sudden spike flags an invented cut. The clip is regenerated automatically, and only comes back with a Retry button if it happens twice.",
+    },
+    {
+      name: "A steady camera, measured",
+      text: "Moves are sent as twelve evenly timed keyframes with geometric spacing, so a zoom feels constant. Where a clip still rushes, the app measures the pace from its frames and trims to the steady part without cutting the file, so the agent can widen the trim again.",
+    },
+    {
+      name: "Video rendering on serverless",
+      text: "Reels render in background work split into segments, claimed by workers through database leases and stitched with ffmpeg. Transitions are layered with alpha masks using the same easing as the in-browser preview, and clips at different frame rates are retimed so no frame is dropped or doubled.",
+    },
+    {
+      name: "Credits that cannot be double-spent",
+      text: "A credit is taken in the same SQL statement that creates the clip, spending the soonest-to-expire credits first, and a failed clip refunds the balance it came from. Stripe webhooks re-read the subscription each time, so repeated or out-of-order events do no harm.",
+    },
+  ],
+  stack: [
+    "Next.js",
+    "fal.ai",
+    "ffmpeg",
+    "Neon Postgres",
+    "React",
+    "TypeScript",
+    "Neon Auth",
+    "Cloudflare R2",
+    "Stripe",
+    "Resend",
+    "Google Places",
+    "sharp",
+    "Vercel",
+  ],
+  cover: {
+    src: reelEstateHero,
+    alt: "The ReelEstate home page: the headline Turn listing photos into videos that sell homes faster, above a property video of a loft office",
+  },
+  gallery: [
+    {
+      src: reelEstateDetail1,
+      alt: "ReelEstate's How it works steps, from adding photos to publishing, above branded start cards, a logo watermark and end cards for a sample agency",
+    },
+    {
+      src: reelEstateDetail2,
+      alt: "ReelEstate's pricing page with Starter, Pro and Agent plans billed in credits",
+    },
+  ],
+  mobile: {
+    src: reelEstateMobile,
+    alt: "The ReelEstate home page on a phone, playing a property video",
+  },
 }
 
 const untilThen: CaseStudy = {
@@ -256,7 +362,7 @@ const viewlio: CaseStudy = {
   },
 }
 
-export const caseStudies: CaseStudy[] = [untilThen, viewlio]
+export const caseStudies: CaseStudy[] = [reelEstate, untilThen, viewlio]
 
 export function getCaseStudy(slug: string) {
   return caseStudies.find((study) => study.slug === slug)
