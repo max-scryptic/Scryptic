@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { cn } from "cn"
 
@@ -47,6 +48,16 @@ const principles = [
     text: "If a feature is not worth building yet, or an idea needs rethinking, you hear it on the first call.",
   },
 ]
+
+const founder = {
+  name: "Max",
+  role: "Founder",
+  image: "/team/max.png",
+  bio: [
+    "Scryptic is led by Max, who works on every project from the first call to launch day. You deal directly with the person planning and building your app, not an account manager passing notes along.",
+    "Keeping the studio small is deliberate. A few projects at a time means each one gets full attention, honest advice on what is worth building and code that is ready to hand over.",
+  ],
+}
 
 // Rendered in the FAQ section and emitted as FAQPage JSON-LD; keep them identical.
 const faqs = [
@@ -307,30 +318,62 @@ export default function Home() {
         id="about"
         className="scroll-mt-24 border-t border-border px-4 py-24 sm:px-6"
       >
-        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]">
-          <div className="flex flex-col gap-6">
-            <SectionHeading eyebrow="About us" title="About Scryptic" id="about-heading">
-              {siteConfig.name} is a development studio for founders who need a working product,
-              not a team to manage.
-            </SectionHeading>
-            <p className="max-w-2xl text-pretty text-muted-foreground">
-              We act as your technical partner from the first conversation to launch day: working
-              out what is worth building, making the technical calls and shipping the app. Scope
-              and price are agreed before the build starts, so you always know what you are paying
-              for and what you will get.
-            </p>
+        <div className="mx-auto flex max-w-6xl flex-col gap-16">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+            <div className="flex flex-col gap-6">
+              <SectionHeading eyebrow="About us" title="About Scryptic" id="about-heading">
+                {siteConfig.name} is a development studio for founders who need a working product,
+                not a team to manage.
+              </SectionHeading>
+              <p className="max-w-2xl text-pretty text-muted-foreground">
+                We act as your technical partner from the first conversation to launch day: working
+                out what is worth building, making the technical calls and shipping the app. Scope
+                and price are agreed before the build starts, so you always know what you are paying
+                for and what you will get.
+              </p>
+            </div>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              {principles.map((principle) => (
+                <li
+                  key={principle.name}
+                  className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-6"
+                >
+                  <h3>{principle.name}</h3>
+                  <p className="text-sm text-pretty text-muted-foreground">{principle.text}</p>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="grid gap-4 sm:grid-cols-2">
-            {principles.map((principle) => (
-              <li
-                key={principle.name}
-                className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-6"
-              >
-                <h3>{principle.name}</h3>
-                <p className="text-sm text-pretty text-muted-foreground">{principle.text}</p>
-              </li>
-            ))}
-          </ul>
+
+          <article
+            aria-labelledby="founder-name"
+            className="grid overflow-hidden rounded-2xl border border-border bg-card sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+          >
+            <div className="relative aspect-square bg-portrait">
+              <Image
+                src={founder.image}
+                alt={`Portrait of ${founder.name}, ${founder.role.toLowerCase()} of ${siteConfig.name}`}
+                fill
+                sizes="(min-width: 1152px) 460px, (min-width: 640px) 40vw, 100vw"
+                className="object-cover object-bottom"
+              />
+            </div>
+            <div className="flex flex-col justify-center gap-5 p-6 sm:p-10">
+              <div className="flex flex-col gap-1">
+                <p className="font-mono text-xs tracking-widest text-primary uppercase">
+                  {founder.role}
+                </p>
+                <h3 id="founder-name" className="text-2xl tracking-tight sm:text-3xl">
+                  {founder.name}
+                </h3>
+              </div>
+              {founder.bio.map((paragraph) => (
+                <p key={paragraph} className="max-w-xl text-pretty text-muted-foreground">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </article>
         </div>
       </section>
 
