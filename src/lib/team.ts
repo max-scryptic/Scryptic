@@ -4,7 +4,8 @@ export const founder = {
   role: "Founder",
   image: "/team/max.png",
   bio: [
-    "Scryptic is led by Max, who works on every project from the first call to launch day and leads every Friday catch-up. You deal directly with the person planning and building your app, not an account manager passing notes along.",
-    "Keeping the studio small is deliberate. A few projects at a time means each one gets full attention, honest advice on what is worth building and code that is ready to hand over.",
+    "Max is a full-stack developer with more than five years of industry experience. That time has been spent in small, tight-knit development teams, delivering numerous enterprise projects and taking several startups from an idea to a production app.",
+    "Enterprise work taught the standards: reliable, secure, maintainable code. Startup work taught the pace: shipping quickly, cutting what does not matter and getting real users in front of the product. Max brings both to every project, from the first call to launch day.",
+    "A forward thinker, Max is excited by where technology is heading and how to put it to work for clients. New tools are adopted when they make a product better, faster or more affordable to build, never for novelty, so every client gets the highest quality outcome.",
   ],
 }
