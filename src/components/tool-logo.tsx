@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 import type { BlogPost } from "@/lib/blog"
 
 type LogoProps = { post: Pick<BlogPost, "tool" | "logo"> }
@@ -30,15 +28,21 @@ export function ToolLogoWatermark({ post }: LogoProps) {
 
 /*
  * The logo of the tool a migration guide moves away from, in the post header,
- * on a white tile so the brand's own colours read the same in light and dark
- * mode. Renders nothing for a post without a logo.
+ * on a faint primary tile. Like the watermark, the logo is a mask over the
+ * primary colour, so every brand shows as the same purple silhouette in light
+ * and dark mode. Renders nothing for a post without a logo.
  */
 export function ToolLogo({ post }: LogoProps) {
   if (!post.logo) return null
 
   return (
-    <span className="flex size-16 shrink-0 items-center justify-center rounded-2xl border border-black/10 bg-white p-3 sm:size-20 sm:p-4">
-      <Image src={post.logo} alt={`${post.tool} logo`} className="size-full object-contain" />
+    <span className="flex size-16 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 p-3 sm:size-20 sm:p-4">
+      <span
+        role="img"
+        aria-label={`${post.tool} logo`}
+        className="size-full bg-primary mask-contain mask-center mask-no-repeat"
+        style={{ maskImage: `url(${post.logo.src})` }}
+      />
     </span>
   )
 }
