@@ -41,7 +41,7 @@ export default function BookCallPage() {
               Book a free <span className="text-primary">30 minute</span> discovery call
             </h1>
             <p className="max-w-xl text-lg text-pretty text-muted-foreground">
-              Answer four quick questions, then pick a time that suits you. You speak directly
+              Answer a few quick questions, one at a time, then pick a time that suits you. You speak directly
               with {founder.name}, who plans and builds every {siteConfig.name} project, so no
               pitch deck or preparation is needed.
             </p>
