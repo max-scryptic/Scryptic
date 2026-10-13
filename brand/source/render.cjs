@@ -31,12 +31,12 @@ for (const f of fs.readdirSync(SVG).filter(f => f.startsWith("scryptic-"))) {
   }
 }
 // Favicons and app icons.
-for (const s of [256]) add(`favicon/favicon-${s}.png`, s, s, square(s, "transparent", C.obsidian, 0.92), true)
-// No background, like the favicon. Only the maskable icon keeps a filled
+for (const s of [256]) add(`favicon/favicon-${s}.png`, s, s, square(s, "transparent", C.lapis, 0.92), true)
+// Lapis with no background, like the favicon. Only the maskable icon keeps a filled
 // square, because Android crops it to a shape and needs it full bleed.
-add("favicon/apple-touch-icon.png", 180, 180, square(180, "transparent", C.obsidian, 0.92), true)
-add("favicon/icon-192.png", 192, 192, square(192, "transparent", C.obsidian, 0.92), true)
-add("favicon/icon-512.png", 512, 512, square(512, "transparent", C.obsidian, 0.92), true)
+add("favicon/apple-touch-icon.png", 180, 180, square(180, "transparent", C.lapis, 0.92), true)
+add("favicon/icon-192.png", 192, 192, square(192, "transparent", C.lapis, 0.92), true)
+add("favicon/icon-512.png", 512, 512, square(512, "transparent", C.lapis, 0.92), true)
 add("favicon/icon-maskable-512.png", 512, 512, square(512, C.night, C.mist, 0.48))
 // Social avatars: circle-safe, mark at half the width.
 add("social/avatar-night-800.png", 800, 800, square(800, C.night, C.mist, 0.52))

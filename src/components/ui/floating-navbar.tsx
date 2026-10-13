@@ -17,9 +17,18 @@ import { cn } from "cn"
 export type FloatingNavItem = {
   name: string
   link: string
-  /** Leave out of the bar below the md breakpoint (phones and small tablets), where there is room for about two links. */
-  hideOnMobile?: boolean
+  /**
+   * Leave out of the bar below this breakpoint. Phones have room for about
+   * two links and tablets (md) for about three; everything fits from lg.
+   */
+  hideBelow?: "md" | "lg"
 }
+
+// Literal class names, so Tailwind can see them.
+const hideBelowClass = {
+  md: "hidden md:block",
+  lg: "hidden lg:block",
+} as const
 
 export function FloatingNav({
   navItems,
@@ -43,19 +52,40 @@ export function FloatingNav({
       <nav aria-label="Main" className="flex items-center">
         <ul className="flex items-center md:gap-1">
           {navItems.map((item) => (
-            <li key={item.link} className={cn(item.hideOnMobile && "hidden md:block")}>
-              <Link
-                href={item.link}
-                className="flex min-h-10 items-center rounded-lg px-1.5 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground focus-visible:text-foreground min-[360px]:px-2 md:px-3 md:text-base"
-              >
-                {item.name}
-              </Link>
+            <li key={item.link} className={cn(item.hideBelow && hideBelowClass[item.hideBelow])}>
+              <FloatingNavLink href={item.link}>{item.name}</FloatingNavLink>
             </li>
           ))}
         </ul>
       </nav>
       <div className="flex items-center gap-0.5 min-[360px]:gap-1 sm:gap-2">{action}</div>
     </header>
+  )
+}
+
+/**
+ * A plain text link styled like the nav items, for links that sit in the
+ * trailing `action` slot instead of the main list.
+ */
+export function FloatingNavLink({
+  href,
+  className,
+  children,
+}: {
+  href: string
+  className?: string
+  children: React.ReactNode
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "flex min-h-10 items-center rounded-lg px-1 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground focus-visible:text-foreground min-[360px]:px-2 md:px-3 md:text-base",
+        className,
+      )}
+    >
+      {children}
+    </Link>
   )
 }
 
@@ -71,11 +101,11 @@ export function FloatingNavAction({
   children: React.ReactNode
 }) {
   return (
-    <a
+    <Link
       href={href}
       className="flex min-h-10 items-center rounded-lg bg-primary px-2.5 text-sm font-medium whitespace-nowrap text-primary-foreground transition-colors hover:bg-primary/80 min-[360px]:px-3 sm:px-4 md:text-base"
     >
       {children}
-    </a>
+    </Link>
   )
 }

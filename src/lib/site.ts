@@ -12,21 +12,20 @@ export const siteConfig = {
   // summary. Aim for one plain sentence of 120 to 160 characters that says what
   // the product is and who it is for: answer engines quote it verbatim.
   description:
-    "Scryptic is a development studio that takes founders from idea to launched app. Start with a discovery call and audit, then ship a full build from $10k.",
-  // Short line used in the hero eyebrow and the footer.
+    "Scryptic is a development studio that takes founders from idea to launched app in one to two months, with full builds starting from £10,000.",
+  // Short line used in the footer.
   tagline: "Development as a service",
   // Optional longer context for llms.txt. Leave empty to omit.
   summary:
-    "Scryptic offers two services: a discovery call and audit that turns an idea or an existing product into a scoped plan and written estimate, and a full app to market build, from $10k depending on complexity.",
+    "Scryptic offers one service: a full app to market build, taking an idea or an existing product through discovery, design, development, deployment and launch, from £10,000 depending on complexity. Most builds go live in one to two months, with a catch-up every Friday to review progress and set priorities.",
   keywords: [
     "development as a service",
     "app development studio",
     "MVP development",
     "SaaS development",
-    "technical audit",
     "web app development",
   ] as string[],
-  locale: "en_US",
+  locale: "en_GB",
   language: "en",
   // Keep these in step with the theme tokens in globals.css. The site is
   // light by default (:root) with an optional dark theme (.dark); generated
@@ -45,9 +44,11 @@ export const siteConfig = {
     email: "maxwinterleinweber@gmail.com",
     foundingDate: "",
   },
-  // Where "Book a discovery call" goes. A scheduling link (Cal.com, Calendly)
-  // when there is one; otherwise the buttons open an email to the address above.
-  bookingUrl: "" as string,
+  // Where /book-a-call sends people once they have answered its questions. A
+  // scheduling link (Cal.com, Calendly) when there is one, and their answers
+  // are attached as the booking note (see src/lib/booking.ts); otherwise the
+  // form opens an email to the address above with the answers filled in.
+  bookingUrl: "https://calendly.com/maxwinterleinweber/30min" as string,
   // Handle including the @, for twitter:site and twitter:creator.
   twitterHandle: "",
   // Every official profile (X, LinkedIn, GitHub, YouTube, Crunchbase,
@@ -87,7 +88,7 @@ export const isIndexable =
     ? process.env.VERCEL_ENV === "production"
     : process.env.NODE_ENV === "production")
 
-/** Target of every "Book a discovery call" button. */
+/** The scheduling link, or the fallback email. Every "Book a call" button goes to /book-a-call first. */
 export const bookingHref =
   siteConfig.bookingUrl ||
   `mailto:${siteConfig.organization.email}?subject=${encodeURIComponent("Discovery call")}`

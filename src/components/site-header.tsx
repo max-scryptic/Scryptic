@@ -5,17 +5,24 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import {
   FloatingNav,
   FloatingNavAction,
+  FloatingNavLink,
   type FloatingNavItem,
 } from "@/components/ui/floating-navbar"
-import { bookingHref, siteConfig } from "@/lib/site"
+import { pages } from "@/lib/seo"
+import { siteConfig } from "@/lib/site"
 
 // Root-relative hashes so the links work from every route, not just home.
 export const navItems: FloatingNavItem[] = [
   { name: "Services", link: "/#services" },
-  { name: "Process", link: "/#process", hideOnMobile: true },
-  { name: "About", link: "/#about", hideOnMobile: true },
-  { name: "FAQ", link: "/#faq" },
+  { name: "Work", link: pages.work.path },
+  { name: "Process", link: "/#process", hideBelow: "lg" },
+  { name: "About", link: "/#about", hideBelow: "lg" },
+  { name: "FAQ", link: "/#faq", hideBelow: "md" },
 ]
+
+// A page of its own rather than a section of home, so it sits next to the
+// theme toggle instead of in the section links.
+export const blogNavItem: FloatingNavItem = { name: "Blog", link: pages.blog.path }
 
 export function SiteHeader() {
   return (
@@ -33,8 +40,12 @@ export function SiteHeader() {
       }
       action={
         <>
+          {/* Below 400px the bar has no room for it next to Book a call; the footer still links it. */}
+          <FloatingNavLink href={blogNavItem.link} className="hidden min-[400px]:flex">
+            {blogNavItem.name}
+          </FloatingNavLink>
           <ThemeToggle />
-          <FloatingNavAction href={bookingHref}>Book a call</FloatingNavAction>
+          <FloatingNavAction href={pages.bookCall.path}>Book a call</FloatingNavAction>
         </>
       }
     />

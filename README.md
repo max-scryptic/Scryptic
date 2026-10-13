@@ -1,6 +1,6 @@
 # Scryptic
 
-Marketing site for Scryptic, a development-as-a-service studio. Two services: a discovery call and audit, and a full app to market build (from $10k). Next.js 16 with [Base UI](https://base-ui.com) as the UI primitive layer, styled with Tailwind CSS v4.
+Marketing site for Scryptic, a development-as-a-service studio. One service: a full app to market build (from £10,000). Next.js 16 with [Base UI](https://base-ui.com) as the UI primitive layer, styled with Tailwind CSS v4.
 
 Brand: light surfaces (`#ffffff`) with ink text (`#0a0a0f`), one green signal colour (`#047857`) and no gradients, Geist and Geist Mono, and an "S_" terminal-cursor mark. Tokens live in `src/app/globals.css`, mirrored in `siteConfig.colors` for the generated images.
 
@@ -24,7 +24,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```
 src/
-  app/                  Routes: / (single landing page, no accounts)
+  app/                  Routes: / (landing page) and /book-a-call (qualifying questions, then the booking link)
     globals.css         Theme tokens (light) and Tailwind setup
     robots.ts           robots.txt, sitemap.xml, manifest, llms.txt, icons and the
     sitemap.ts            Open Graph image are all generated from src/lib (see
@@ -37,13 +37,16 @@ src/
                         plus floating-navbar.tsx, a port of Aceternity UI's Floating Navbar (uses motion)
     site-header.tsx     Nav items and call to action for the floating navbar
     site-footer.tsx
+    book-call-form.tsx  The qualifying form on /book-a-call
     brand-logo.tsx      The split glass mark, inline so it follows the theme
     theme-toggle.tsx    Light and dark mode: the navbar toggle and the pre-paint script
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
     em-dash-guard.tsx   Dev guard against em dashes in rendered text
   lib/
     site.ts             Brand facts, contact email and booking link, site URL, indexability
-    services.ts         The two service offers: cards, prices and Service JSON-LD
+    services.ts         The service offer: card, price and Service JSON-LD
+    booking.ts          /book-a-call questions, and how answers reach the booking link or email
+    team.ts             The founder profile used on / and /book-a-call
     seo.ts              Page registry + createMetadata()
     structured-data.ts  schema.org builders (Organization, WebSite, WebPage, FAQ, Article, ...)
     em-dash.ts          Em dash helpers used by the guard and the check script
