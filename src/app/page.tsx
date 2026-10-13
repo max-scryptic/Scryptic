@@ -222,9 +222,8 @@ export default function Home() {
         ]}
       />
 
-      {/* Hero: a Lapis panel inset from the page edges, the same Lapis in both themes. */}
-      <section className="px-3 pt-3 sm:px-5 sm:pt-5">
-        <div className="relative isolate overflow-hidden rounded-3xl bg-[#2b3fd6] px-4 pt-32 pb-20 text-white sm:px-6 sm:pt-40 sm:pb-28">
+      {/* Hero: a full-width Lapis band, rounded at the bottom, the same Lapis in both themes. */}
+      <section className="relative isolate overflow-hidden rounded-b-3xl bg-[#2b3fd6] px-4 pt-36 pb-24 text-white sm:rounded-b-[2.5rem] sm:px-6 sm:pt-44 sm:pb-32">
         <VoxelField
           faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
           className="absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
@@ -287,7 +286,6 @@ export default function Home() {
               <span className="mt-1 h-4 w-2 animate-pulse bg-primary motion-reduce:animate-none" />
             </div>
           </div>
-        </div>
         </div>
       </section>
 
