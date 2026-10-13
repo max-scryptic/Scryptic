@@ -26,9 +26,9 @@ export default function WorkPage() {
           </h1>
           <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
             These are {caseStudies.length} web apps {siteConfig.name} took from idea to launch as
-            its own products, each live on its own domain with real sign-ups and payments. Every
-            one ran through the same process a client build does: scope, design, build, deploy and
-            launch.
+            its own products, each live on its own domain with accounts and payments built in.
+            Every one ran through the same process a client build does: scope, design, build,
+            deploy and launch.
           </p>
         </div>
 

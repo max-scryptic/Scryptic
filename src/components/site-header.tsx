@@ -15,9 +15,9 @@ import { siteConfig } from "@/lib/site"
 export const navItems: FloatingNavItem[] = [
   { name: "Services", link: "/#services" },
   { name: "Work", link: pages.work.path },
-  { name: "Process", link: "/#process", hideOnMobile: true },
-  { name: "About", link: "/#about", hideOnMobile: true },
-  { name: "FAQ", link: "/#faq" },
+  { name: "Process", link: "/#process", hideBelow: "lg" },
+  { name: "About", link: "/#about", hideBelow: "lg" },
+  { name: "FAQ", link: "/#faq", hideBelow: "md" },
 ]
 
 // A page of its own rather than a section of home, so it sits next to the
