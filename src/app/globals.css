@@ -51,9 +51,9 @@
   --voxel-right: color-mix(in oklab, var(--portrait) 62%, var(--background));
   /* What the hills' faces fade into down by the wordmark: its colour, with a trace of
      each face left so the cubes still read. Resolves per theme, as .dark sits on :root. */
-  --voxel-top-fade: color-mix(in oklab, var(--foreground) 85%, var(--voxel-top));
-  --voxel-left-fade: color-mix(in oklab, var(--foreground) 85%, var(--voxel-left));
-  --voxel-right-fade: color-mix(in oklab, var(--foreground) 85%, var(--voxel-right));
+  --voxel-top-fade: color-mix(in oklab, var(--portrait) 85%, var(--voxel-top));
+  --voxel-left-fade: color-mix(in oklab, var(--portrait) 85%, var(--voxel-left));
+  --voxel-right-fade: color-mix(in oklab, var(--portrait) 85%, var(--voxel-right));
 }
 
 .dark {

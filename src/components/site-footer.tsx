@@ -84,9 +84,10 @@ export function SiteFooter() {
       {/* Its own band between the text and the wordmark, so it never sits behind either. */}
       <VoxelHills className="min-h-36 sm:min-h-48" />
       {/* Sign-off: the wordmark run edge to edge, sitting on the bottom of the page.
-          The hills fade out just above it, and it is padded equally above and below. */}
+          It shares the hills' periwinkle, which they fade into just above it, and it is
+          padded equally above and below. */}
       <div className="overflow-hidden p-4 sm:p-6">
-        <BrandWordmark className="block h-auto w-full" />
+        <BrandWordmark className="block h-auto w-full text-portrait" />
       </div>
     </footer>
   )
