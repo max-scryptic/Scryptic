@@ -70,9 +70,10 @@ for name, fill in COLOURS.items():
 for k, v in specs.items():
     (out / f"{k}.svg").write_text(v)
 
-# Favicon that follows the browser theme.
+# Favicon in Lapis, the primary colour, switching to its lighter dark-theme
+# shade when the browser is dark, as the site's primary token does.
 fav = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="1 1 22 22">'
-       '<style>path{fill:#14131B}@media (prefers-color-scheme:dark){path{fill:#EEF1F5}}</style>'
+       '<style>path{fill:#2B3FD6}@media (prefers-color-scheme:dark){path{fill:#7D8BFF}}</style>'
        + "".join(f'<path d="{d}"/>' for d in MARK) + "</svg>\n")
 (out / "favicon.svg").write_text(fav)
 json.dump({"wordmark_path": WD, "word_box": [wx0, wy0, wx1, wy1], "x_height": XH}, open(out / "_wordmark.json", "w"))  # read by render.cjs

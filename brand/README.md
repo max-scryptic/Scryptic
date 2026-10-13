@@ -10,7 +10,7 @@ in the brand book: https://claude.ai/artifact/G1UhUvXw5Zr4pDU54Li9G2
 | --- | --- |
 | `logo/svg` | Mark, wordmark, horizontal lockup and stacked lockup, each in Obsidian, Mist and white. Vector, with the wordmark outlined, so no font is needed. Use these wherever SVG is accepted. |
 | `logo/png` | The same files as transparent PNGs. Marks at 512px and 2048px wide, wordmarks and lockups at 1200px and 3000px wide. |
-| `favicon` | `favicon.svg` (switches between Obsidian and Mist with the browser theme), `favicon.ico` (16, 32, 48), PNG favicons, `apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` and `icon-maskable-512.png` for web app manifests. |
+| `favicon` | `favicon.svg` (Lapis, switching to `#7D8BFF` when the browser is dark), `favicon.ico` (16, 32, 48), PNG favicons, `apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` and `icon-maskable-512.png` for web app manifests. |
 | `social` | Profile avatars (800px, on Night, Lapis or Mist), the link preview card (1200x630), a LinkedIn banner (1584x396) and an X header (1500x500). |
 | `colour` | The palette as `palette.css` and `palette.json`, with hex, RGB and Pantone values. |
 | `source` | The scripts that generate every file above. |
@@ -24,8 +24,9 @@ The website already uses these: `public/favicon.ico`, `src/app/icon.svg`, the
   or white on dark ones. The mark is always one colour, never Glint and never
   two colours.
 - **No container.** The mark sits straight on the surface, favicons and app
-  icons included. The only exceptions are the maskable app icon and avatars,
-  where the platform needs a filled square.
+  icons included. Favicons and app icons are Lapis, the primary colour. The
+  only exceptions are the maskable app icon and avatars, where the platform
+  needs a filled square.
 - **Clear space:** half the mark's height on every side.
 - **Minimum size:** 16px on screen, 6mm in print.
 - **Never** rotate, mirror, recolour the halves separately or line the halves
