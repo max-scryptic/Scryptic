@@ -3,6 +3,8 @@
 import { useEffect, useId, useRef, useState } from "react"
 import { cn } from "cn"
 
+import { seeded } from "@/lib/voxel"
+
 /*
  * The footer's sign-off landscape: a band of low, rolling hills built from
  * isometric cubes, sitting between the footer text and the wordmark. It has its
@@ -24,16 +26,6 @@ const FADE = 0.45
 
 const halfWidth = CUBE * 0.866
 const halfHeight = CUBE * 0.5
-
-// mulberry32: a tiny seeded PRNG.
-function seeded(seed: number) {
-  return () => {
-    seed = (seed + 0x6d2b79f5) | 0
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed)
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
-  }
-}
 
 // Two overlapping waves make the hills; the random term roughens the tops.
 function columnHeight(x: number, row: number, random: () => number) {
