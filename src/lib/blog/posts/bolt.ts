@@ -1,9 +1,11 @@
+import boltLogo from "@/assets/blog/logos/bolt.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const bolt: BlogPost = {
   slug: "migrate-from-bolt",
   title: "Migrating from Bolt.new to a production app",
   tool: "Bolt.new",
+  logo: boltLogo,
   category: "AI app builders",
   description:
     "Moving a Bolt.new app to production: how to get the code and Bolt Database out, what the app needs before real users arrive, and a step by step migration plan.",

@@ -1,9 +1,11 @@
+import base44Logo from "@/assets/blog/logos/base44.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const base44: BlogPost = {
   slug: "migrate-from-base44",
   title: "Migrating from Base44 to a production app",
   tool: "Base44",
+  logo: base44Logo,
   category: "AI app builders",
   description:
     "Moving a Base44 app to production: why the exported code still relies on Base44, how to get your data out, and a step by step plan to rebuild the backend.",

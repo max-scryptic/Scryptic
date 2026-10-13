@@ -1,9 +1,11 @@
+import bubbleLogo from "@/assets/blog/logos/bubble.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const bubble: BlogPost = {
   slug: "migrate-from-bubble",
   title: "Migrating from Bubble to a production app",
   tool: "Bubble",
+  logo: bubbleLogo,
   category: "No-code app builders",
   description:
     "How to move a Bubble app to production code: what you can export, what you have to rebuild, and a step by step plan for data, users, workflows and cutover.",

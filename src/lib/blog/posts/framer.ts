@@ -1,9 +1,11 @@
+import framerLogo from "@/assets/blog/logos/framer.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const framer: BlogPost = {
   slug: "migrate-from-framer",
   title: "Migrating from Framer to a production app",
   tool: "Framer",
+  logo: framerLogo,
   category: "Website builders",
   description:
     "How to go from a Framer site to a production app: what you can take with you, why keeping the site in Framer often makes sense, and an SEO-safe plan.",

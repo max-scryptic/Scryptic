@@ -1,9 +1,11 @@
+import retoolLogo from "@/assets/blog/logos/retool.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const retool: BlogPost = {
   slug: "migrate-from-retool",
   title: "Migrating from Retool to a production app",
   tool: "Retool",
+  logo: retoolLogo,
   category: "Internal tool builders",
   description:
     "When a Retool tool becomes your product: what you can take with you, why the interface needs rebuilding, and a step by step plan to launch a customer app.",

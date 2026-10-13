@@ -1,9 +1,11 @@
+import glideLogo from "@/assets/blog/logos/glide.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const glide: BlogPost = {
   slug: "migrate-from-glide",
   title: "Migrating from Glide to a production app",
   tool: "Glide",
+  logo: glideLogo,
   category: "No-code app builders",
   description:
     "How to move a Glide app to production code: getting data out of Sheets, Airtable or Glide Tables, moving users, rebuilding logic and a staged plan to launch.",

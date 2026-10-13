@@ -1,9 +1,11 @@
+import replitLogo from "@/assets/blog/logos/replit.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const replit: BlogPost = {
   slug: "migrate-from-replit",
   title: "Migrating from Replit to a production app",
   tool: "Replit",
+  logo: replitLogo,
   category: "AI app builders",
   description:
     "Taking a Replit Agent app to production: what you can export, the Replit specific parts to replace, and a step by step plan to secure, test and launch it.",

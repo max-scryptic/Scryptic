@@ -42,6 +42,7 @@ src/
     brand-logo.tsx      The split glass mark, inline so it follows the theme
     theme-toggle.tsx    Light and dark mode: the navbar toggle and the pre-paint script
     post-card.tsx       A blog post card, used on /blog and under each post
+    tool-logo.tsx       The migrated-from tool's logo: a watermark on post cards, a tile in post headers
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
     em-dash-guard.tsx   Dev guard against em dashes in rendered text
   lib/
@@ -50,7 +51,8 @@ src/
     booking.ts          /book-a-call questions, and how answers reach the booking link or email
     team.ts             The founder profile used on /, /book-a-call and as blog author
     blog/               Blog posts as data: types.ts (the shape), posts/<tool>.ts (one per post),
-                        index.ts (the list, categories and helpers). A post is a file plus a line in index.ts
+                        index.ts (the list, categories and helpers). A post is a file plus a line in index.ts;
+                        its optional tool logo is an SVG in src/assets/blog/logos/ imported as the post's `logo`
     seo.ts              Page registry + createMetadata()
     structured-data.ts  schema.org builders (Organization, WebSite, WebPage, FAQ, Article, ...)
     em-dash.ts          Em dash helpers used by the guard and the check script

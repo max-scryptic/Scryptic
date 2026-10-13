@@ -1,9 +1,11 @@
+import webflowLogo from "@/assets/blog/logos/webflow.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const webflow: BlogPost = {
   slug: "migrate-from-webflow",
   title: "Migrating from Webflow to a production app",
   tool: "Webflow",
+  logo: webflowLogo,
   category: "Website builders",
   description:
     "How to move from Webflow to a production app: what you can export, why the split of site and app often works best, and how to keep your SEO intact.",

@@ -1,9 +1,11 @@
+import adaloLogo from "@/assets/blog/logos/adalo.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const adalo: BlogPost = {
   slug: "migrate-from-adalo",
   title: "Migrating from Adalo to a production app",
   tool: "Adalo",
+  logo: adaloLogo,
   category: "No-code app builders",
   description:
     "How to move an Adalo app to production code: exporting collections, moving users, keeping your App Store listing, and a step by step plan for a safe cutover.",
