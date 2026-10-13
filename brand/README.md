@@ -23,8 +23,9 @@ The website already uses these: `public/favicon.ico`, `src/app/icon.svg`, the
 - **Pick the colour for the background.** Obsidian on light backgrounds, Mist
   or white on dark ones. The mark is always one colour, never Glint and never
   two colours.
-- **No container.** The mark sits straight on the surface. The only exceptions
-  are app icons and avatars, where the platform needs a filled square.
+- **No container.** The mark sits straight on the surface, favicons and app
+  icons included. The only exceptions are the maskable app icon and avatars,
+  where the platform needs a filled square.
 - **Clear space:** half the mark's height on every side.
 - **Minimum size:** 16px on screen, 6mm in print.
 - **Never** rotate, mirror, recolour the halves separately or line the halves
