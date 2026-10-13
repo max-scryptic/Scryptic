@@ -46,6 +46,14 @@ const home = {
 
 export const pages = {
   home,
+  bookCall: {
+    path: "/book-a-call",
+    title: "Book a call",
+    description:
+      "Book a free 30 minute discovery call with Scryptic. Answer four quick questions about your app, then pick a time to talk scope, stack and cost.",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
 } satisfies Record<string, PageEntry>
 
 export const publicPages: PageEntry[] = Object.values(pages).filter(

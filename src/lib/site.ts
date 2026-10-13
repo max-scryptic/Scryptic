@@ -44,9 +44,11 @@ export const siteConfig = {
     email: "maxwinterleinweber@gmail.com",
     foundingDate: "",
   },
-  // Where "Book a discovery call" goes. A scheduling link (Cal.com, Calendly)
-  // when there is one; otherwise the buttons open an email to the address above.
-  bookingUrl: "" as string,
+  // Where /book-a-call sends people once they have answered its questions. A
+  // scheduling link (Cal.com, Calendly) when there is one, and their answers
+  // are attached as the booking note (see src/lib/booking.ts); otherwise the
+  // form opens an email to the address above with the answers filled in.
+  bookingUrl: "https://calendly.com/maxwinterleinweber/30min" as string,
   // Handle including the @, for twitter:site and twitter:creator.
   twitterHandle: "",
   // Every official profile (X, LinkedIn, GitHub, YouTube, Crunchbase,
@@ -86,7 +88,7 @@ export const isIndexable =
     ? process.env.VERCEL_ENV === "production"
     : process.env.NODE_ENV === "production")
 
-/** Target of every "Book a discovery call" button. */
+/** The scheduling link, or the fallback email. Every "Book a call" button goes to /book-a-call first. */
 export const bookingHref =
   siteConfig.bookingUrl ||
   `mailto:${siteConfig.organization.email}?subject=${encodeURIComponent("Discovery call")}`

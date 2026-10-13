@@ -24,7 +24,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```
 src/
-  app/                  Routes: / (single landing page, no accounts)
+  app/                  Routes: / (landing page) and /book-a-call (qualifying questions, then the booking link)
     globals.css         Theme tokens (light) and Tailwind setup
     robots.ts           robots.txt, sitemap.xml, manifest, llms.txt, icons and the
     sitemap.ts            Open Graph image are all generated from src/lib (see
@@ -37,6 +37,7 @@ src/
                         plus floating-navbar.tsx, a port of Aceternity UI's Floating Navbar (uses motion)
     site-header.tsx     Nav items and call to action for the floating navbar
     site-footer.tsx
+    book-call-form.tsx  The qualifying form on /book-a-call
     brand-logo.tsx      The split glass mark, inline so it follows the theme
     theme-toggle.tsx    Light and dark mode: the navbar toggle and the pre-paint script
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
@@ -44,6 +45,8 @@ src/
   lib/
     site.ts             Brand facts, contact email and booking link, site URL, indexability
     services.ts         The service offer: card, price and Service JSON-LD
+    booking.ts          /book-a-call questions, and how answers reach the booking link or email
+    team.ts             The founder profile used on / and /book-a-call
     seo.ts              Page registry + createMetadata()
     structured-data.ts  schema.org builders (Organization, WebSite, WebPage, FAQ, Article, ...)
     em-dash.ts          Em dash helpers used by the guard and the check script
