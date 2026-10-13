@@ -49,7 +49,7 @@ export const siteConfig = {
   // scheduling link (Cal.com, Calendly) when there is one, and their answers
   // are attached as the booking note (see src/lib/booking.ts); otherwise the
   // form opens an email to the address above with the answers filled in.
-  bookingUrl: "" as string,
+  bookingUrl: "https://calendly.com/maxwinterleinweber/30min" as string,
   // Handle including the @, for twitter:site and twitter:creator.
   twitterHandle: "",
   // Every official profile (X, LinkedIn, GitHub, YouTube, Crunchbase,

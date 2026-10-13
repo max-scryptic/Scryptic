@@ -8,7 +8,7 @@ import { founder } from "@/lib/team"
 
 export const metadata = createMetadata(pages.bookCall)
 
-const facts = ["20 minutes", "Free", "No obligation"]
+const facts = ["30 minutes", "Free", "No obligation"]
 
 const agenda = [
   {
@@ -38,7 +38,7 @@ export default function BookCallPage() {
               Discovery call
             </p>
             <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
-              Book a free <span className="text-primary">20 minute</span> discovery call
+              Book a free <span className="text-primary">30 minute</span> discovery call
             </h1>
             <p className="max-w-xl text-lg text-pretty text-muted-foreground">
               Answer four quick questions, then pick a time that suits you. You speak directly
