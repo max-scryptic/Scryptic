@@ -12,12 +12,12 @@ export const siteConfig = {
   // summary. Aim for one plain sentence of 120 to 160 characters that says what
   // the product is and who it is for: answer engines quote it verbatim.
   description:
-    "Scryptic is a development studio that takes founders from idea to launched app, with full app to market builds starting from £10,000.",
+    "Scryptic is a development studio that takes founders from idea to launched app in one to two months, with full builds starting from £10,000.",
   // Short line used in the footer.
   tagline: "Development as a service",
   // Optional longer context for llms.txt. Leave empty to omit.
   summary:
-    "Scryptic offers one service: a full app to market build, taking an idea or an existing product through discovery, design, development, deployment and launch, from £10,000 depending on complexity.",
+    "Scryptic offers one service: a full app to market build, taking an idea or an existing product through discovery, design, development, deployment and launch, from £10,000 depending on complexity. Most builds go live in one to two months, with a catch-up every Friday to review progress and set priorities.",
   keywords: [
     "development as a service",
     "app development studio",
