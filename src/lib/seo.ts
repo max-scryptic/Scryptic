@@ -1,6 +1,7 @@
 import type { Metadata, MetadataRoute } from "next"
 
 import { isIndexable, siteConfig } from "@/lib/site"
+import { caseStudies, type CaseStudy } from "@/lib/work"
 
 /*
  * Every public route is registered here once. The entry drives the page's
@@ -50,7 +51,15 @@ export const pages = {
     path: "/book-a-call",
     title: "Book a call",
     description:
-      "Book a free 30 minute discovery call with Scryptic. Answer four quick questions about your app, then pick a time to talk scope, stack and cost.",
+      "Book a free 30 minute discovery call with Scryptic. Answer four quick questions about your app, then pick a time to talk scope, cost and timeline.",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  work: {
+    path: "/work",
+    title: "Our work",
+    description:
+      "Case studies of web apps Scryptic has designed, built and launched: AI video, scheduled messages, analytics and shareable metric graphics, all live.",
     changeFrequency: "monthly",
     priority: 0.8,
   },
@@ -64,7 +73,21 @@ export const pages = {
   },
 } satisfies Record<string, PageEntry>
 
-export const publicPages: PageEntry[] = Object.values(pages).filter(
+/** The registry entry for a case study's /work/<slug> page, built from src/lib/work.ts. */
+export function caseStudyPage(study: CaseStudy): PageEntry {
+  return {
+    path: `/work/${study.slug}`,
+    title: study.name,
+    description: study.description,
+    parents: [pages.work],
+    changeFrequency: "yearly",
+    priority: 0.6,
+  }
+}
+
+export const caseStudyPages: PageEntry[] = caseStudies.map(caseStudyPage)
+
+export const publicPages: PageEntry[] = [...Object.values(pages), ...caseStudyPages].filter(
   (page: PageEntry) => !page.noIndex,
 )
 
@@ -160,7 +183,9 @@ export const baseTwitter = {
  * og:site_name, og:locale and twitter:card on every page.
  */
 export function createMetadata(page: PageEntry): Metadata {
-  const fullTitle = pageTitle(page.title)
+  // Parents follow the page, nearest first: "Invoice 42 | Billing | Acme Inc.".
+  const parentTitles = (page.parents ?? []).map((parent) => parent.title).reverse()
+  const fullTitle = pageTitle(page.title, ...parentTitles)
   const images = page.image
     ? [{ ...shareImage, url: page.image, alt: fullTitle }]
     : [shareImage]

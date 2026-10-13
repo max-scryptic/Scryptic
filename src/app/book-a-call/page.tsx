@@ -15,11 +15,11 @@ const agenda = [
   },
   {
     name: "Straight advice",
-    text: "An honest view on scope, stack and rough cost, including what is not worth building yet. Useful even if we are not the right fit.",
+    text: "An honest view on scope, stack, rough cost and how long it will take, including what is not worth building yet. Useful even if we are not the right fit.",
   },
   {
     name: "A clear next step",
-    text: "If it makes sense to work together, you get a written estimate for the build before anything starts.",
+    text: "If it makes sense to work together, you get a written estimate and timeline for the build before anything starts. Most builds launch within one to two months.",
   },
 ]
 

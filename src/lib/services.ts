@@ -13,6 +13,8 @@ export type ServiceOffer = {
   priceNote: string
   /** Lowest price in `currency`, for structured data. Omit when unpublished. */
   minPrice?: number
+  /** Typical time from kickoff to launch. */
+  timeline: string
   summary: string
   includes: string[]
   bestFor: string
@@ -27,14 +29,16 @@ export const service = {
   price: "From £10,000",
   priceNote: "Scoped to complexity",
   minPrice: 10000,
+  timeline: "1 to 2 months from kickoff to launch",
   summary:
-    "A production app planned, designed, built, deployed and launched by one team, with you in the loop the whole way.",
+    "A production app planned, designed, built, deployed and launched by one team in one to two months, with a catch-up every Friday so you are in the loop the whole way.",
   includes: [
     "Discovery call to map your goals, users and constraints",
-    "Prioritised scope, recommended stack and a written estimate",
+    "Prioritised scope, recommended stack, a written estimate and a timeline",
     "Product design and a clickable prototype",
     "Full-stack build: web app, API and database",
     "Authentication, payments and third-party integrations",
+    "A catch-up every Friday on progress, priorities and what is next",
     "Hosting, analytics and search set up for launch",
     "Launch support and a clean handover",
   ],

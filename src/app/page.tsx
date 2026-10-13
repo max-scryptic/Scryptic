@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { cn } from "cn"
 
+import { CaseStudyCard } from "@/components/case-study-card"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import { createMetadata, pages } from "@/lib/seo"
@@ -9,6 +10,7 @@ import { service } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
+import { caseStudies } from "@/lib/work"
 
 export const metadata = createMetadata(pages.home)
 
@@ -19,22 +21,22 @@ const steps = [
   },
   {
     name: "Plan",
-    text: "A scoped first release, a recommended stack and a written estimate, so the build starts from a plan rather than a guess.",
+    text: "A scoped first release, a recommended stack, a written estimate and a timeline, so the build starts from a plan rather than a guess.",
   },
   {
     name: "Build",
-    text: "Design and engineering run together. You see working software early and often, not only at the end.",
+    text: "Design and engineering run together. Every Friday we catch up on what shipped that week, agree priorities and look at what is next in the pipeline.",
   },
   {
     name: "Launch",
-    text: "We deploy, set up analytics and search, launch with you and hand over everything you need to run it.",
+    text: "Usually one to two months after kickoff. We deploy, set up analytics and search, launch with you and hand over everything you need to run it.",
   },
 ]
 
 const principles = [
   {
     name: "Plan before code",
-    text: "Every build starts with a discovery call and a written estimate, so scope, risks and cost are clear before development begins.",
+    text: "Every build starts with a discovery call, a written estimate and a timeline, so scope, risks, cost and launch date are clear before development begins.",
   },
   {
     name: "One team, end to end",
@@ -45,8 +47,8 @@ const principles = [
     text: "Clean, documented code on a mainstream stack, so you can grow the product with us or without us.",
   },
   {
-    name: "Straight answers",
-    text: "If a feature is not worth building yet, or an idea needs rethinking, you hear it on the first call.",
+    name: "Straight answers, every week",
+    text: "A Friday catch-up covers what shipped, what is next and anything that needs your call. If a feature is not worth building yet, you hear it early.",
   },
 ]
 
@@ -61,7 +63,7 @@ const comparison: {
 }[] = [
   {
     name: "Speed",
-    text: "Live in weeks, not after a hiring round",
+    text: "Live in 1 to 2 months, not after a hiring round",
     values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
   },
   {
@@ -71,7 +73,7 @@ const comparison: {
   },
   {
     name: "Flexibility",
-    text: "Scope that changes as you learn",
+    text: "Priorities revisited every week as you learn",
     values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": false },
   },
   {
@@ -91,7 +93,17 @@ const faqs = [
   {
     question: "How much does it cost to build an app with Scryptic?",
     answer:
-      "A full app to market build starts from £10,000. The final price depends on complexity: the number of screens and user roles, the integrations involved and how much already exists. After the discovery call you get a written estimate, before any build starts.",
+      "A full app to market build starts from £10,000. The final price depends on complexity: the number of screens and user roles, the integrations involved and how much already exists. After the discovery call you get a written estimate and timeline, before any build starts.",
+  },
+  {
+    question: "How long does it take to build an app?",
+    answer:
+      "Most full app to market builds take one to two months from kickoff to launch. A focused first release sits at the shorter end; more user roles, integrations or an existing codebase to work around push it towards two months. Your timeline comes with the written estimate, so you know the launch window before the build starts.",
+  },
+  {
+    question: "How do you keep me updated during the build?",
+    answer:
+      "With a catch-up every Friday. Each week we go through what shipped, agree priorities for the week ahead and look at what is coming up in the pipeline, so you can change direction early rather than at the end.",
   },
   {
     question: "What is included in a full app to market build?",
@@ -116,7 +128,8 @@ const terminalLines = [
   { prompt: false, text: "stack and architecture chosen" },
   { prompt: false, text: "first release scoped and estimated" },
   { prompt: true, text: "scryptic ship --to market" },
-  { prompt: false, text: "designed, built, deployed, launched" },
+  { prompt: false, text: "progress reviewed every Friday" },
+  { prompt: false, text: "launched in 1 to 2 months" },
 ]
 
 function SectionHeading({
@@ -219,8 +232,8 @@ export default function Home() {
             </h1>
             <p className="max-w-xl text-lg text-pretty text-muted-foreground">
               {siteConfig.name} plans, designs and builds production web apps for founders and
-              small teams. Start with a discovery call, then let us take the whole thing to
-              market.
+              small teams, usually from first call to launch in one to two months. Start with a
+              discovery call, then let us take the whole thing to market.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
@@ -279,8 +292,9 @@ export default function Home() {
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Service" title="One service: your app, all the way to market" id="services-heading">
-            We plan, design, build, deploy and launch your app as one engagement, with full builds{" "}
-            {service.price.toLowerCase()} depending on complexity.
+            We plan, design, build, deploy and launch your app as one engagement. Full builds go
+            live in one to two months and start {service.price.toLowerCase()}, depending on
+            complexity.
           </SectionHeading>
 
           <article
@@ -297,6 +311,10 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground">{service.priceNote}</p>
               </div>
               <p className="text-pretty text-muted-foreground">{service.summary}</p>
+              <p className="text-sm text-muted-foreground">
+                <span className="font-medium text-foreground">Timeline: </span>
+                {service.timeline}
+              </p>
               <p className="text-sm text-muted-foreground">
                 <span className="font-medium text-foreground">Best for: </span>
                 {service.bestFor}
@@ -322,6 +340,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Work */}
+      <section
+        aria-labelledby="work-heading"
+        id="work"
+        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
+      >
+        <div className="mx-auto flex max-w-6xl flex-col gap-12">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHeading eyebrow="Our work" title="Products we have built and launched" id="work-heading">
+              Every app below went through the same process a client build does, from first sketch
+              to live domain. Each case study covers the problem, the product and the engineering.
+            </SectionHeading>
+            <Button
+              size="lg"
+              variant="outline"
+              nativeButton={false}
+              render={<Link href={pages.work.path} />}
+              className="h-11 shrink-0 rounded-full px-5 text-base"
+            >
+              See all case studies
+            </Button>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {caseStudies.map((study) => (
+              <CaseStudyCard key={study.slug} study={study} headingLevel="h3" />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Process */}
       <section
         aria-labelledby="process-heading"
@@ -330,8 +378,9 @@ export default function Home() {
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Process" title="How a project runs" id="process-heading">
-            Every project follows the same four steps, run by one team from the first call to
-            launch day. No handoffs between agencies, and no guessing what happens next.
+            Most projects go from first call to launch in one to two months, following the same
+            four steps with one team throughout and a catch-up every Friday along the way. No
+            handoffs between agencies, and no guessing what happens next.
           </SectionHeading>
           <ol className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, index) => (
@@ -443,9 +492,10 @@ export default function Home() {
               </SectionHeading>
               <p className="max-w-2xl text-pretty text-muted-foreground">
                 We act as your technical partner from the first conversation to launch day: working
-                out what is worth building, making the technical calls and shipping the app. Scope
-                and price are agreed before the build starts, so you always know what you are paying
-                for and what you will get.
+                out what is worth building, making the technical calls and shipping the app. Scope,
+                price and timeline are agreed before the build starts, and a catch-up every Friday
+                keeps you across progress, so you always know what you are paying for, what you
+                will get and when.
               </p>
             </div>
             <ul className="grid gap-4 sm:grid-cols-2">
@@ -501,7 +551,7 @@ export default function Home() {
       >
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]">
           <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading">
-            Straight answers on pricing, process and what to expect. Anything else, ask on the
+            Straight answers on pricing, timelines, process and what to expect. Anything else, ask on the
             discovery call.
           </SectionHeading>
           <div className="flex flex-col divide-y divide-border border-y border-border">
