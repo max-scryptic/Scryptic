@@ -73,7 +73,7 @@ export function FloatingNavAction({
   return (
     <a
       href={href}
-      className="flex min-h-10 items-center rounded-lg border border-input px-2.5 text-sm font-medium whitespace-nowrap text-foreground transition-colors hover:border-primary/40 hover:bg-primary/5 min-[360px]:px-3 sm:px-4 md:text-base"
+      className="flex min-h-10 items-center rounded-lg bg-primary px-2.5 text-sm font-medium whitespace-nowrap text-primary-foreground transition-colors hover:bg-primary/80 min-[360px]:px-3 sm:px-4 md:text-base"
     >
       {children}
     </a>
