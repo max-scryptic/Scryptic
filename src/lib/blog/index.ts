@@ -1,12 +1,16 @@
 import { adalo } from "@/lib/blog/posts/adalo"
 import { airtable } from "@/lib/blog/posts/airtable"
+import { base44 } from "@/lib/blog/posts/base44"
+import { bolt } from "@/lib/blog/posts/bolt"
 import { bubble } from "@/lib/blog/posts/bubble"
 import { flutterflow } from "@/lib/blog/posts/flutterflow"
 import { framer } from "@/lib/blog/posts/framer"
 import { glide } from "@/lib/blog/posts/glide"
 import { lovable } from "@/lib/blog/posts/lovable"
+import { replit } from "@/lib/blog/posts/replit"
 import { retool } from "@/lib/blog/posts/retool"
 import { softr } from "@/lib/blog/posts/softr"
+import { v0 } from "@/lib/blog/posts/v0"
 import { webflow } from "@/lib/blog/posts/webflow"
 import { weweb } from "@/lib/blog/posts/weweb"
 import { wix } from "@/lib/blog/posts/wix"
@@ -21,6 +25,10 @@ export type { BlogPost, PostBlock, PostCategory, PostSection } from "@/lib/blog/
  */
 export const posts: BlogPost[] = [
   lovable,
+  bolt,
+  v0,
+  replit,
+  base44,
   bubble,
   flutterflow,
   weweb,
