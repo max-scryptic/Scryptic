@@ -5,6 +5,7 @@ import { cn } from "cn"
 import { CaseStudyCard } from "@/components/case-study-card"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
+import { VoxelField } from "@/components/voxel-field"
 import { createMetadata, pages } from "@/lib/seo"
 import { service } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
@@ -221,16 +222,21 @@ export default function Home() {
         ]}
       />
 
-      {/* Hero */}
-      <section className="px-4 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-32">
+      {/* Hero: a Lapis panel inset from the page edges, the same Lapis in both themes. */}
+      <section className="px-3 pt-3 sm:px-5 sm:pt-5">
+        <div className="relative isolate overflow-hidden rounded-3xl bg-[#2b3fd6] px-4 pt-32 pb-20 text-white sm:px-6 sm:pt-40 sm:pb-28">
+        <VoxelField
+          faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
+          className="absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
+        />
         <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
           <div className="flex flex-col items-start gap-7">
             <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">
               From idea to{" "}
-              <span className="text-primary">launched app</span>
+              <span className="text-[#c3caff]">launched app</span>
               , without hiring a dev team.
             </h1>
-            <p className="max-w-xl text-lg text-pretty text-muted-foreground">
+            <p className="max-w-xl text-lg text-pretty text-white/80">
               {siteConfig.name} plans, designs and builds production web apps for founders and
               small teams, usually from first call to launch in one to two months. Start with a
               discovery call, then let us take the whole thing to market.
@@ -240,7 +246,7 @@ export default function Home() {
                 size="lg"
                 nativeButton={false}
                 render={<Link href={pages.bookCall.path} />}
-                className="h-11 rounded-full px-5 text-base"
+                className="h-11 rounded-full bg-white px-5 text-base text-[#2b3fd6] hover:bg-white/90"
               >
                 Book a discovery call
               </Button>
@@ -249,7 +255,7 @@ export default function Home() {
                 variant="outline"
                 nativeButton={false}
                 render={<Link href="/#services" />}
-                className="h-11 rounded-full px-5 text-base"
+                className="h-11 rounded-full border-white/40 bg-transparent px-5 text-base text-white hover:bg-white/10 hover:text-white dark:border-white/40 dark:bg-transparent dark:hover:bg-white/10"
               >
                 See pricing
               </Button>
@@ -258,7 +264,7 @@ export default function Home() {
 
           <div
             aria-hidden="true"
-            className="w-full overflow-hidden rounded-2xl border border-border bg-card shadow-xl shadow-black/5"
+            className="w-full overflow-hidden rounded-2xl border border-border bg-card text-card-foreground shadow-2xl shadow-black/25"
           >
             <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
               <span className="size-2.5 rounded-full bg-foreground/15" />
@@ -282,13 +288,14 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* Services */}
       <section
         aria-labelledby="services-heading"
         id="services"
-        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
+        className="scroll-mt-28 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Service" title="One service: your app, all the way to market" id="services-heading">
