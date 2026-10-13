@@ -128,7 +128,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-14">
             <div className="flex flex-col items-start gap-6">
               <div className="flex items-center gap-4">
-                <ToolLogo post={post} size="lg" />
+                <ToolLogo post={post} />
                 <p className="font-mono text-xs tracking-widest text-primary uppercase">
                   Migration guide &middot; {post.category}
                 </p>

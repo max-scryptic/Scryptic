@@ -1,12 +1,12 @@
 import Link from "next/link"
 
-import { ToolLogo } from "@/components/tool-logo"
+import { ToolLogoWatermark } from "@/components/tool-logo"
 import { readingMinutes, type BlogPost } from "@/lib/blog"
 
 /**
- * A blog post in a grid: the tool's logo and name, title, summary and reading
- * time. The whole card is one link, named after the post so the link text says
- * where it goes.
+ * A blog post in a grid: the tool, title, summary and reading time, with the
+ * tool's logo as a watermark behind them. The whole card is one link, named
+ * after the post so the link text says where it goes.
  */
 export function PostCard({
   post,
@@ -17,11 +17,9 @@ export function PostCard({
   headingLevel?: "h3" | "h4"
 }) {
   return (
-    <article className="group relative flex flex-col gap-3 rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/50">
-      <div className="flex items-center gap-3">
-        <ToolLogo post={post} decorative />
-        <p className="font-mono text-xs tracking-widest text-primary uppercase">{post.tool}</p>
-      </div>
+    <article className="group relative isolate flex flex-col gap-3 rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/50">
+      <ToolLogoWatermark post={post} />
+      <p className="font-mono text-xs tracking-widest text-primary uppercase">{post.tool}</p>
       <Heading className="text-xl tracking-tight text-balance">
         <Link
           href={`/blog/${post.slug}`}

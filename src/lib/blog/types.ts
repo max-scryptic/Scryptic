@@ -45,8 +45,8 @@ export type BlogPost = {
   /** The tool the post is about, shown on the card. */
   tool: string
   /**
-   * The tool's logo, an SVG from src/assets/blog/logos/ shown on the card and
-   * in the post header. Without one, both show the tool's initial instead.
+   * The tool's logo, an SVG from src/assets/blog/logos/: a watermark on the
+   * card and a tile in the post header. Leave it out to show neither.
    */
   logo?: StaticImageData
   category: PostCategory
