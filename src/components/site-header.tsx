@@ -7,7 +7,8 @@ import {
   FloatingNavAction,
   type FloatingNavItem,
 } from "@/components/ui/floating-navbar"
-import { bookingHref, siteConfig } from "@/lib/site"
+import { pages } from "@/lib/seo"
+import { siteConfig } from "@/lib/site"
 
 // Root-relative hashes so the links work from every route, not just home.
 export const navItems: FloatingNavItem[] = [
@@ -34,7 +35,7 @@ export function SiteHeader() {
       action={
         <>
           <ThemeToggle />
-          <FloatingNavAction href={bookingHref}>Book a call</FloatingNavAction>
+          <FloatingNavAction href={pages.bookCall.path}>Book a call</FloatingNavAction>
         </>
       }
     />

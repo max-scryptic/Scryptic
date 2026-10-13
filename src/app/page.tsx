@@ -6,7 +6,8 @@ import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import { createMetadata, pages } from "@/lib/seo"
 import { services } from "@/lib/services"
-import { bookingHref, siteConfig } from "@/lib/site"
+import { siteConfig } from "@/lib/site"
+import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
 export const metadata = createMetadata(pages.home)
@@ -49,22 +50,12 @@ const principles = [
   },
 ]
 
-const founder = {
-  name: "Max",
-  role: "Founder",
-  image: "/team/max.png",
-  bio: [
-    "Scryptic is led by Max, who works on every project from the first call to launch day. You deal directly with the person planning and building your app, not an account manager passing notes along.",
-    "Keeping the studio small is deliberate. A few projects at a time means each one gets full attention, honest advice on what is worth building and code that is ready to hand over.",
-  ],
-}
-
 // Rendered in the FAQ section and emitted as FAQPage JSON-LD; keep them identical.
 const faqs = [
   {
     question: "How much does it cost to build an app with Scryptic?",
     answer:
-      "A full app to market build starts at $10k. The final price depends on complexity: the number of screens and user roles, the integrations involved and how much already exists. The discovery call and audit turns that into a written estimate before any build starts.",
+      "A full app to market build starts at £10k. The final price depends on complexity: the number of screens and user roles, the integrations involved and how much already exists. The discovery call and audit turns that into a written estimate before any build starts.",
   },
   {
     question: "Why start with a discovery call and audit?",
@@ -169,7 +160,7 @@ export default function Home() {
               <Button
                 size="lg"
                 nativeButton={false}
-                render={<a href={bookingHref} />}
+                render={<Link href={pages.bookCall.path} />}
                 className="h-11 rounded-full px-5 text-base"
               >
                 Book a discovery call
@@ -223,7 +214,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Services" title="Two ways to work with Scryptic" id="services-heading">
             Every engagement starts with a discovery call and audit. When you are ready to build,
-            we take the app all the way to market, with full builds from $10k depending on
+            we take the app all the way to market, with full builds from £10k depending on
             complexity.
           </SectionHeading>
 
@@ -275,7 +266,7 @@ export default function Home() {
                     size="lg"
                     variant={featured ? "default" : "outline"}
                     nativeButton={false}
-                    render={<a href={bookingHref} />}
+                    render={<Link href={pages.bookCall.path} />}
                     className="h-11 rounded-full text-base"
                   >
                     {service.cta}
@@ -420,7 +411,7 @@ export default function Home() {
           <Button
             size="lg"
             nativeButton={false}
-            render={<a href={bookingHref} />}
+            render={<Link href={pages.bookCall.path} />}
             className="h-11 rounded-full px-6 text-base"
           >
             Book a discovery call

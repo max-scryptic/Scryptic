@@ -20,7 +20,7 @@ export type ServiceOffer = {
   cta: string
 }
 
-export const currency = "USD"
+export const currency = "GBP"
 
 export const services = [
   {
@@ -30,7 +30,7 @@ export const services = [
     price: "Fixed fee",
     priceNote: "Quoted before we start",
     summary:
-      "Know exactly what to build, what it will cost and what could sink it, before you spend a dollar on development.",
+      "Know exactly what to build, what it will cost and what could sink it, before you spend a penny on development.",
     includes: [
       "Discovery call to map your goals, users and constraints",
       "Audit of any existing product, codebase or prototype",
@@ -46,7 +46,7 @@ export const services = [
     id: "app-to-market",
     step: "02",
     name: "Full app to market",
-    price: "From $10k",
+    price: "From £10k",
     priceNote: "Scoped to complexity",
     minPrice: 10000,
     summary:
