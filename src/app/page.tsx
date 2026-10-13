@@ -50,6 +50,42 @@ const principles = [
   },
 ]
 
+// The comparison table. `scryptic` is always true, so it is drawn from the
+// column rather than stored per row.
+const alternatives = ["In-house hire", "Agency", "Freelancer", "AI-only tools"] as const
+
+const comparison: {
+  name: string
+  text: string
+  values: Record<(typeof alternatives)[number], boolean>
+}[] = [
+  {
+    name: "Speed",
+    text: "Live in weeks, not after a hiring round",
+    values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
+  },
+  {
+    name: "Quality",
+    text: "Production code that holds up with real users",
+    values: { "In-house hire": true, Agency: true, Freelancer: false, "AI-only tools": false },
+  },
+  {
+    name: "Flexibility",
+    text: "Scope that changes as you learn",
+    values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": false },
+  },
+  {
+    name: "Yours to own",
+    text: "Code and accounts handed over to you",
+    values: { "In-house hire": true, Agency: false, Freelancer: true, "AI-only tools": true },
+  },
+  {
+    name: "Cost vs value",
+    text: "A fixed estimate for a launched product",
+    values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
+  },
+]
+
 // Rendered in the FAQ section and emitted as FAQPage JSON-LD; keep them identical.
 const faqs = [
   {
@@ -119,6 +155,45 @@ function CheckIcon() {
     >
       <path d="M20 6 9 17l-5-5" />
     </svg>
+  )
+}
+
+function ComparisonMark({ value, highlight = false }: { value: boolean; highlight?: boolean }) {
+  return (
+    <>
+      <span className="sr-only">{value ? "Yes" : "No"}</span>
+      {highlight ? (
+        <span
+          aria-hidden="true"
+          className="mx-auto flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="size-4"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </span>
+      ) : (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={value ? 2.5 : 2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className={cn("mx-auto size-5", value ? "text-foreground" : "text-muted-foreground/60")}
+        >
+          {value ? <path d="M20 6 9 17l-5-5" /> : <path d="M18 6 6 18M6 6l12 12" />}
+        </svg>
+      )}
+    </>
   )
 }
 
@@ -244,6 +319,87 @@ export default function Home() {
               ))}
             </ul>
           </article>
+        </div>
+      </section>
+
+      {/* Comparison */}
+      <section
+        aria-labelledby="compare-heading"
+        id="compare"
+        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
+      >
+        <div className="mx-auto flex max-w-6xl flex-col gap-12">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHeading
+              eyebrow="Why Scryptic"
+              title="Hire in-house. Brief an agency. Chance a freelancer. Or skip the trade-offs."
+              id="compare-heading"
+            >
+              {siteConfig.name} gives you agency-quality software at freelancer speed, with code you
+              own outright. Here is how it compares with the usual ways to get an app built.
+            </SectionHeading>
+            <Button
+              size="lg"
+              nativeButton={false}
+              render={<Link href={pages.bookCall.path} />}
+              className="h-11 w-fit shrink-0 rounded-full px-6 text-base"
+            >
+              Book a discovery call
+            </Button>
+          </div>
+
+          {/* Relative so the visually hidden labels stay inside the scroll area on phones. */}
+          <div className="relative overflow-x-auto rounded-2xl border border-border bg-card">
+            <table className="w-full min-w-[600px] border-collapse text-left sm:min-w-[720px]">
+              <caption className="sr-only">
+                How {siteConfig.name} compares with an in-house hire, an agency, a freelancer and
+                AI-only tools
+              </caption>
+              <thead>
+                <tr className="border-b border-border">
+                  <td className="sticky left-0 z-10 w-[24%] bg-card" />
+                  <th
+                    scope="col"
+                    className="w-[16%] bg-primary/10 px-4 py-6 text-center font-logo text-xl font-extrabold tracking-tight lowercase"
+                  >
+                    {siteConfig.name}
+                  </th>
+                  {alternatives.map((alternative) => (
+                    <th
+                      key={alternative}
+                      scope="col"
+                      className="w-[15%] px-4 py-6 text-center text-sm font-medium"
+                    >
+                      {alternative}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {comparison.map((row) => (
+                  <tr key={row.name}>
+                    <th
+                      scope="row"
+                      className="sticky left-0 z-10 bg-card px-4 py-5 font-normal sm:px-8"
+                    >
+                      <span className="block font-medium">{row.name}</span>
+                      <span className="hidden text-sm text-pretty text-muted-foreground sm:block">
+                        {row.text}
+                      </span>
+                    </th>
+                    <td className="bg-primary/10 px-4 py-5">
+                      <ComparisonMark value highlight />
+                    </td>
+                    {alternatives.map((alternative) => (
+                      <td key={alternative} className="px-4 py-5">
+                        <ComparisonMark value={row.values[alternative]} />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
