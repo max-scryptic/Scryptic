@@ -59,7 +59,7 @@ export const pages = {
     path: "/work",
     title: "Our work",
     description:
-      "Case studies of web apps Scryptic has designed, built and launched: AI video, scheduled messages, analytics and shareable metric graphics, all live.",
+      "Case studies of four web apps Scryptic designed, built and launched: AI property video, scheduled messages, YouTube analytics and shareable revenue charts.",
     changeFrequency: "monthly",
     priority: 0.8,
   },

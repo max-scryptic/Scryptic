@@ -17,9 +17,18 @@ import { cn } from "cn"
 export type FloatingNavItem = {
   name: string
   link: string
-  /** Leave out of the bar below the md breakpoint (phones and small tablets), where there is room for about two links. */
-  hideOnMobile?: boolean
+  /**
+   * Leave out of the bar below this breakpoint. Phones have room for about
+   * two links and tablets (md) for about three; everything fits from lg.
+   */
+  hideBelow?: "md" | "lg"
 }
+
+// Literal class names, so Tailwind can see them.
+const hideBelowClass = {
+  md: "hidden md:block",
+  lg: "hidden lg:block",
+} as const
 
 export function FloatingNav({
   navItems,
@@ -43,7 +52,7 @@ export function FloatingNav({
       <nav aria-label="Main" className="flex items-center">
         <ul className="flex items-center md:gap-1">
           {navItems.map((item) => (
-            <li key={item.link} className={cn(item.hideOnMobile && "hidden md:block")}>
+            <li key={item.link} className={cn(item.hideBelow && hideBelowClass[item.hideBelow])}>
               <FloatingNavLink href={item.link}>{item.name}</FloatingNavLink>
             </li>
           ))}
@@ -71,7 +80,7 @@ export function FloatingNavLink({
     <Link
       href={href}
       className={cn(
-        "flex min-h-10 items-center rounded-lg px-1.5 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground focus-visible:text-foreground min-[360px]:px-2 md:px-3 md:text-base",
+        "flex min-h-10 items-center rounded-lg px-1 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground focus-visible:text-foreground min-[360px]:px-2 md:px-3 md:text-base",
         className,
       )}
     >
