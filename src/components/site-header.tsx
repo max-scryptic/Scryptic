@@ -13,7 +13,7 @@ import { bookingHref, siteConfig } from "@/lib/site"
 export const navItems: FloatingNavItem[] = [
   { name: "Services", link: "/#services" },
   { name: "Process", link: "/#process", hideOnMobile: true },
-  { name: "About", link: "/#about" },
+  { name: "About", link: "/#about", hideOnMobile: true },
   { name: "FAQ", link: "/#faq" },
 ]
 
@@ -24,9 +24,9 @@ export function SiteHeader() {
       brand={
         <Link
           href="/"
-          className="flex min-h-9 items-center gap-2 rounded-full pr-1 font-logo font-extrabold tracking-tight lowercase sm:pr-2"
+          className="flex min-h-10 items-center gap-2 rounded-lg px-1 font-logo text-lg font-extrabold tracking-tight lowercase sm:pr-2"
         >
-          <BrandLogo className="size-6" />
+          <BrandLogo className="size-7" />
           <span className="hidden sm:inline">{siteConfig.name}</span>
           <span className="sr-only sm:hidden">{siteConfig.name} home</span>
         </Link>

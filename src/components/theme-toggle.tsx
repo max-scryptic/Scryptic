@@ -72,7 +72,7 @@ export function ThemeToggle() {
       size="icon-lg"
       onClick={toggle}
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      className="rounded-full text-muted-foreground hover:text-foreground"
+      className="size-10 rounded-lg text-muted-foreground hover:text-foreground"
     >
       {/* Sun in dark mode, moon in light mode: the icon shows where you will go. */}
       <svg
