@@ -322,6 +322,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Process */}
+      <section
+        aria-labelledby="process-heading"
+        id="process"
+        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
+      >
+        <div className="mx-auto flex max-w-6xl flex-col gap-12">
+          <SectionHeading eyebrow="Process" title="How a project runs" id="process-heading">
+            Every project follows the same four steps, run by one team from the first call to
+            launch day. No handoffs between agencies, and no guessing what happens next.
+          </SectionHeading>
+          <ol className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, index) => (
+              <li key={step.name} className="flex flex-col gap-3 bg-background p-6 sm:p-8">
+                <span className="font-mono text-sm text-primary">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-lg">{step.name}</h3>
+                <p className="text-sm text-pretty text-muted-foreground">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       {/* Comparison */}
       <section
         aria-labelledby="compare-heading"
@@ -400,31 +425,6 @@ export default function Home() {
               </tbody>
             </table>
           </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section
-        aria-labelledby="process-heading"
-        id="process"
-        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
-      >
-        <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Process" title="How a project runs" id="process-heading">
-            Every project follows the same four steps, run by one team from the first call to
-            launch day. No handoffs between agencies, and no guessing what happens next.
-          </SectionHeading>
-          <ol className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, index) => (
-              <li key={step.name} className="flex flex-col gap-3 bg-background p-6 sm:p-8">
-                <span className="font-mono text-sm text-primary">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-lg">{step.name}</h3>
-                <p className="text-sm text-pretty text-muted-foreground">{step.text}</p>
-              </li>
-            ))}
-          </ol>
         </div>
       </section>
 
