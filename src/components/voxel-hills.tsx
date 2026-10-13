@@ -7,8 +7,7 @@ import { cn } from "cn"
  * The footer's sign-off landscape: a band of low, rolling hills built from
  * isometric cubes, sitting between the footer text and the wordmark. It has its
  * own band so it never runs behind text. The band is cut flat along the front
- * row and sits on the line above the wordmark, and the hills fade out as they
- * come down to that line.
+ * row, and the hills fade out as they come down to the wordmark.
  *
  * The terrain comes from a fixed seed, so server and client draw the same
  * picture on every load. Each column is drawn as three faces (its full left
@@ -20,7 +19,7 @@ import { cn } from "cn"
 const CUBE = 44
 const ROWS = 9
 const SPAN = 2800
-// Share of the band's height, up from the line, over which the hills fade out.
+// Share of the band's height, up from its bottom edge, over which the hills fade out.
 const FADE = 0.45
 
 const halfWidth = CUBE * 0.866
