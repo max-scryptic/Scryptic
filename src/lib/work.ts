@@ -149,11 +149,11 @@ const reelEstate: CaseStudy = {
   gallery: [
     {
       src: reelEstateDetail1,
-      alt: "ReelEstate's How it works steps, from adding photos to publishing, above branded start cards, a logo watermark and end cards for a sample agency",
+      alt: "A property in the ReelEstate app: a living room photo in the viewer, a strip of listing photos to tick, and buttons to create a carousel or video, edit or animate photos",
     },
     {
       src: reelEstateDetail2,
-      alt: "ReelEstate's pricing page with Starter, Pro and Agent plans billed in credits",
+      alt: "ReelEstate's video editor: reel, widescreen, portrait and square shapes, a transition and logo watermark picker, above numbered clips with their durations",
     },
   ],
   mobile: {
