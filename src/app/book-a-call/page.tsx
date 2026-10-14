@@ -66,14 +66,7 @@ export default function BookCallPage() {
             <div className="flex flex-col gap-0.5 text-sm">
               <p className="font-medium">You will speak with {founder.name}</p>
               <p className="text-muted-foreground">
-                {founder.role}, {siteConfig.name}. Prefer email? Write to{" "}
-                <a
-                  href={`mailto:${siteConfig.organization.email}`}
-                  className="text-primary hover:underline"
-                >
-                  {siteConfig.organization.email}
-                </a>
-                .
+                {founder.role}, {siteConfig.name}
               </p>
             </div>
           </div>

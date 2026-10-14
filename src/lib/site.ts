@@ -43,14 +43,13 @@ export const siteConfig = {
   },
   organization: {
     legalName: "Scryptic",
-    email: "maxwinterleinweber@gmail.com",
     foundingDate: "",
   },
-  // Where /book-a-call sends people once they have answered its questions. A
-  // scheduling link (Cal.com, Calendly) when there is one, and their answers
-  // are attached as the booking note (see src/lib/booking.ts); otherwise the
-  // form opens an email to the address above with the answers filled in.
-  bookingUrl: "https://calendly.com/maxwinterleinweber/30min" as string,
+  // Where /book-a-call sends people once they have answered its questions: a
+  // scheduling link (Cal.com, Calendly), with their answers attached as the
+  // booking note (see src/lib/booking.ts). It is the site's only contact
+  // route; no email address is published.
+  bookingUrl: "https://calendly.com/maxwinterleinweber/30min",
   // Handle including the @, for twitter:site and twitter:creator.
   twitterHandle: "",
   // Every official profile (X, LinkedIn, GitHub, YouTube, Crunchbase,
@@ -89,11 +88,6 @@ export const isIndexable =
   (process.env.VERCEL_ENV
     ? process.env.VERCEL_ENV === "production"
     : process.env.NODE_ENV === "production")
-
-/** The scheduling link, or the fallback email. Every "Book a call" button goes to /book-a-call first. */
-export const bookingHref =
-  siteConfig.bookingUrl ||
-  `mailto:${siteConfig.organization.email}?subject=${encodeURIComponent("Discovery call")}`
 
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString()

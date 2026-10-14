@@ -46,9 +46,9 @@ src/
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
     em-dash-guard.tsx   Dev guard against em dashes in rendered text
   lib/
-    site.ts             Brand facts, contact email and booking link, site URL, indexability
+    site.ts             Brand facts, booking link, site URL, indexability
     services.ts         The service offer: card, price and Service JSON-LD
-    booking.ts          /book-a-call questions, and how answers reach the booking link or email
+    booking.ts          /book-a-call questions, and how answers reach the booking link
     team.ts             The founder profile used on /, /book-a-call and as blog author
     blog/               Blog posts as data: types.ts (the shape), posts/<tool>.ts (one per post),
                         index.ts (the list, categories and helpers). A post is a file plus a line in index.ts;

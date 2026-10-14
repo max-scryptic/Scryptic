@@ -1,10 +1,9 @@
-import { bookingHref, siteConfig } from "@/lib/site"
+import { siteConfig } from "@/lib/site"
 
 /*
  * The qualifying questions on /book-a-call, and where the answers go once
  * they are in. There is no backend: the answers ride along to the booking
- * page (as the booking note on Cal.com or Calendly) or, while there is no
- * scheduling link, fill in the body of the fallback email.
+ * page as the booking note on Cal.com or Calendly.
  */
 
 export type BookingQuestion = {
@@ -81,12 +80,6 @@ function prefillFor(host: string) {
 /** Where the form sends someone once they have answered: the booking link with their answers attached. */
 export function bookingDestination(answers: BookingAnswers) {
   const summary = summarizeAnswers(answers)
-
-  if (!siteConfig.bookingUrl) {
-    const body = `Hi, I'd like to book a discovery call.\n\nName: ${answers.name}\nEmail: ${answers.email}\n\n${summary}\n`
-    return `${bookingHref}&body=${encodeURIComponent(body)}`
-  }
-
   const url = new URL(siteConfig.bookingUrl)
   const params = prefillFor(url.hostname)
   if (params) {

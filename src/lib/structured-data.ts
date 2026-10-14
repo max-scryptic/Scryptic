@@ -56,7 +56,6 @@ export function organizationJsonLd(): Organization {
       caption: siteConfig.name,
     },
     ...optional(organization.legalName, { legalName: organization.legalName }),
-    ...optional(organization.email, { email: organization.email }),
     ...optional(organization.foundingDate, {
       foundingDate: organization.foundingDate,
     }),
