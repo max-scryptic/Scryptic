@@ -10,7 +10,10 @@
 
 import type { StaticImageData } from "next/image"
 
-/** A paragraph, a list or a highlighted note inside a section. */
+/**
+ * A paragraph, a list, a highlighted note, a table, a checklist or a
+ * subheading inside a section.
+ */
 export type PostBlock =
   | { type: "paragraph"; text: string }
   | {
@@ -21,6 +24,18 @@ export type PostBlock =
       items: (string | { term: string; text: string })[]
     }
   | { type: "callout"; title: string; text: string }
+  | {
+      type: "table"
+      /** Says what the table compares; read out by screen readers. */
+      caption: string
+      columns: string[]
+      /** One array per row, the same length as `columns`. The first cell is the row's label. */
+      rows: string[][]
+    }
+  /** Things to tick off, shown with boxes rather than bullets. */
+  | { type: "checklist"; items: string[] }
+  /** An <h3> that splits a long section. */
+  | { type: "subheading"; text: string }
 
 export type PostSection = {
   /** Anchor id for the table of contents, e.g. "when-to-move". */
@@ -67,9 +82,17 @@ export type BlogPost = {
   /** ISO dates (YYYY-MM-DD). Only real ones. */
   datePublished: string
   dateModified?: string
-  /** Three to five quick facts shown beside the summary, e.g. "Code export". */
-  facts: { label: string; value: string }[]
+  /**
+   * Quick facts shown beside the summary, e.g. "Code export". Leave it out
+   * when a post has no useful at-a-glance facts; the summary then runs full width.
+   */
+  facts?: { label: string; value: string }[]
   sections: PostSection[]
-  /** Shown as a visible FAQ and emitted as FAQPage JSON-LD; keep them identical. */
+  /**
+   * Shown as a visible FAQ and emitted as FAQPage JSON-LD; keep them identical.
+   * Leave it empty to show no FAQ.
+   */
   faqs: { question: string; answer: string }[]
+  /** The FAQ's heading, when "Frequently asked questions" does not suit the post. */
+  faqHeading?: string
 }

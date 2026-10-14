@@ -189,6 +189,9 @@ export function relatedPosts(post: BlogPost, count = 3) {
 function blockText(block: PostBlock) {
   if (block.type === "paragraph") return block.text
   if (block.type === "callout") return `${block.title} ${block.text}`
+  if (block.type === "subheading") return block.text
+  if (block.type === "checklist") return block.items.join(" ")
+  if (block.type === "table") return [...block.columns, ...block.rows.flat()].join(" ")
   return block.items
     .map((item) => (typeof item === "string" ? item : `${item.term} ${item.text}`))
     .join(" ")
