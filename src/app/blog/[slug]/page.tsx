@@ -346,7 +346,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             <p className="text-2xl tracking-tight text-balance">
               {series.cta.heading(post)}
             </p>
-            <p className="max-w-xl text-pretty text-muted-foreground">{series.cta.text}</p>
+            <p className="text-pretty text-muted-foreground">{series.cta.text}</p>
             <Button
               size="lg"
               nativeButton={false}

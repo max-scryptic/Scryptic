@@ -112,7 +112,7 @@ export default function BlogPage() {
           <h2 id="blog-cta-heading" className="text-2xl tracking-tight text-balance">
             Planning an app, or stuck with one?
           </h2>
-          <p className="max-w-xl text-pretty text-muted-foreground">
+          <p className="text-pretty text-muted-foreground">
             Book a free discovery call and tell us what you are building or show us what you have.
             You get straight advice on scope, stack, cost and timeline, then a written estimate
             before any work starts.
