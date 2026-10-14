@@ -256,7 +256,7 @@ export const bubble: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Say you have a Bubble marketplace with 3,000 users, 20,000 listings and 50,000 messages. The script, run against a copy of live data, will probably need three or four rehearsals before nothing is orphaned. Each one costs an afternoon, which is far cheaper than finding missing messages after launch.",
+          text: "Run the script against a copy of live data and expect it to take several rehearsals before nothing is orphaned. Each rehearsal is far cheaper than finding missing records after launch.",
         },
       ],
     },

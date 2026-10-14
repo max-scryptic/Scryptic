@@ -67,7 +67,7 @@ export const appCostUk: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "The same label can hide very different projects. A booking app for one physio clinic and a booking platform for hundreds of clinics, each with their own staff and settings, share a name and almost nothing else on the invoice.",
+          text: "The same label can hide very different projects. An app built for one business and a platform that many businesses sign up to, each with their own users and settings, can share a name and almost nothing else on the invoice.",
         },
       ],
     },
@@ -136,7 +136,7 @@ export const appCostUk: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "To make that concrete, take a hypothetical £20,000 web app. Maintenance at 15 to 20% is £3,000 to £4,000 a year, or about £250 to £330 a month. Add hosting and services of, say, £50 to £150 a month while traffic is modest, and you're looking at roughly £300 to £500 a month all in. A native mobile app sits higher, because the operating system changes under it every year.",
+          text: "To work out your own figure, take 15 to 20% of the build cost, divide it by twelve, and add your hosting and service bills. A native mobile app sits higher than a web app, because the operating system changes under it every year.",
         },
       ],
     },

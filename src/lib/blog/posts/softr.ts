@@ -21,7 +21,7 @@ export const softr: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Say your Softr client portal has grown to a few hundred customers, each seeing their own projects, invoices and files, and you're now hitting user limits and building workarounds for features the blocks can't express. That's the point where a rebuild pays off. Start by writing down what the Softr app really does, because none of it exports.",
+          text: "A rebuild pays off once you are hitting user limits and building workarounds for features the blocks cannot express. Start by writing down what the Softr app really does, because none of it exports.",
         },
         {
           type: "checklist",

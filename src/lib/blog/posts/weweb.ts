@@ -65,7 +65,7 @@ export const weweb: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Say you run a client portal where each agency sees its own projects. In WeWeb, the projects list is filtered by the signed-in user's agency. If the projects table has no policy enforcing the same rule, one agency can read every other agency's projects by changing a single value in the request. Fix that in the database first; it protects the WeWeb app today and the new app tomorrow.",
+          text: "If a list in WeWeb is filtered to the signed-in user's records but the table behind it has no policy enforcing the same rule, any user can read everyone else's records by changing a single value in the request. Fix that in the database first; it protects the WeWeb app today and the new app tomorrow.",
         },
       ],
     },

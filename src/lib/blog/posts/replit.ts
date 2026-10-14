@@ -3,34 +3,29 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const replit: BlogPost = {
   slug: "migrate-from-replit",
-  title: "Taking a Replit Agent app to production, week by week",
+  title: "Getting a Replit Agent app ready for production, week by week",
   series: "migration",
   topic: "Replit",
   logo: replitLogo,
   category: "AI app builders",
   description:
-    "A week by week walkthrough of taking a Replit Agent app to production: owning the code, fixing access checks, replacing Replit Auth and cutting over safely.",
+    "A week by week plan for taking your Replit Agent app to production: owning the code, fixing access checks, deciding on Replit Auth and cutting over safely.",
   summary:
-    "A Replit Agent app is ordinary code on a Postgres database, so you can usually keep it and harden it rather than rebuild it. This walkthrough follows a hypothetical booking tool from the first git push to launch day over about six weeks, and shows where the Replit specific decisions come up.",
+    "A Replit Agent app is ordinary code on a Postgres database, so you can usually keep it and harden it rather than rebuild it. This plan sets out what to do in each of roughly six weeks, from the first git push to launch day, and where the Replit specific decisions come up along the way.",
   datePublished: "2026-10-13",
   dateModified: "2026-10-14",
   sections: [
     {
-      id: "the-example",
-      heading: "The app we'll follow",
+      id: "starting-point",
+      heading: "What Replit Agent has handed you",
       blocks: [
         {
           type: "paragraph",
-          text: "Say you built a booking tool on Replit with Replit Agent. Independent fitness instructors use it to publish classes, their clients book and pay, and everyone gets a reminder email the evening before. Agent gave you a React frontend, a Node.js server, Replit's built-in Postgres database and Replit Auth for sign-in. Class photos are uploaded to Replit's object storage. You've got around 40 instructors and a few hundred of their clients, and people are starting to pay.",
+          text: "Replit Agent usually leaves you with a standard web app, which is good news: the work ahead is hardening, not rewriting. The typical shape is a React frontend, a Node.js server, Replit's built-in Postgres database and, if you asked for accounts, Replit Auth for sign-in. Uploaded files tend to live in Replit's object storage, and recurring jobs such as reminder emails or nightly reports run as scheduled deployments.",
         },
         {
           type: "paragraph",
-          text: "It works. The question is whether it's ready for the instructor who emails to ask how their clients' details are protected, or for the developer you're about to bring in who wants to see what changed last Tuesday. That's the gap between a working app and a production app, and closing it took our imaginary founder about six weeks.",
-        },
-        {
-          type: "callout",
-          title: "This is an illustrative example",
-          text: "The booking tool, its numbers and its timeline are made up to show the order things usually happen in. It isn't a client story. Your own app will have different parts, but the Replit specific decisions in each week are real ones.",
+          text: "What's missing is everything around the code. Changes go live when someone presses publish, nobody reviews the history, and nobody has checked whether one user can read another user's data. The weeks below close that gap in the order that tends to work: ownership, portability, security, the sign-in and hosting decisions, then cutover. Treat them as stages rather than deadlines; the order matters more than the calendar.",
         },
       ],
     },
@@ -40,30 +35,30 @@ export const replit: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "The first job is ownership: the code goes into a GitHub repository that belongs to your business, and from then on every change is reviewed before it's published. Nothing about the app changes yet.",
+          text: "The first job is ownership: your code goes into a GitHub repository that belongs to your business, and from then on every change is reviewed before it's published. Nothing about the app itself changes yet.",
         },
         {
           type: "paragraph",
-          text: "Our founder connects GitHub from the Git pane and pushes the project to a new repository in the company's GitHub organisation, not a personal account. A ZIP download would also work, but it gives you a snapshot rather than a history you can keep adding to. The push doesn't include secrets, so the next hour goes on copying every value out of the Secrets pane into a password manager: the Stripe keys, the email provider's API key, the database connection strings.",
+          text: "Connect GitHub from the Git pane and push the project to a new repository in your company's GitHub organisation, not a personal account. A ZIP download gives you a snapshot, not a history. Secrets aren't pushed, so copy every value out of the Secrets pane into a password manager: payment keys, email API keys, database connection strings and anything else Agent asked you to paste in.",
         },
         {
           type: "paragraph",
-          text: "Then comes an inventory of everything the app leans on that only exists inside Replit. For the booking tool it looks like this:",
+          text: "Then write down everything your app leans on that only exists inside Replit. Most Agent projects have some or all of these:",
         },
         {
           type: "list",
           items: [
             "Replit Auth, which signs every user in with a Replit account.",
-            "Two Postgres databases, one for development and one for the published app.",
-            "Object storage holding the class photos.",
-            "A scheduled deployment that sends the reminder emails each evening.",
-            "Environment variables Replit sets automatically, such as the app's domain, which the auth code reads.",
+            "Replit's Postgres, often as separate development and production databases.",
+            "Object storage holding uploaded images or documents.",
+            "Scheduled deployments that run recurring jobs.",
+            "Environment variables Replit sets automatically, such as the app's domain, which the auth code often reads.",
             "The .replit and replit.nix files, which configure the workspace and won't be needed anywhere else.",
           ],
         },
         {
           type: "paragraph",
-          text: "Last, a house rule. Agent is still allowed to help, but only on a branch, and its changes reach production through a pull request like anyone else's. Letting Agent edit the live copy while a developer works in the repository is how two versions of the same app quietly drift apart.",
+          text: "Last, set a house rule. Agent can still help, but only on a branch, and its changes reach production through a pull request like anyone else's. Letting Agent edit the live copy while a developer works in the repository is how two versions of the same app quietly drift apart.",
         },
       ],
     },
@@ -73,37 +68,48 @@ export const replit: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "If the app only runs inside the workspace, you don't really own it yet. Week two is about cloning the repository onto a laptop and getting it running against a copy of the real data.",
+          text: "If your app only runs inside the workspace, you don't really own it yet. Week two gets it running on a laptop against a copy of the real data.",
         },
         {
           type: "paragraph",
-          text: "Most of the friction is small. The server listens on whatever port Replit expected. The auth code reads Replit's own environment variables and falls over without them. A package was installed in the workspace but never written into package.json. Each fix is a few minutes; finding them is the work.",
+          text: "Most of the friction is small. The server listens on whatever port Replit expected. The auth code reads Replit's own environment variables and falls over without them. A package was installed in the workspace but never written into package.json. Each fix takes a few minutes; finding them is the work.",
         },
         {
           type: "paragraph",
-          text: "For data, the founder takes a pg_dump of the production database, not the development one. They're both standard Postgres and easy to mix up, and a staging copy full of test bookings tells you nothing. The dump is restored into a local database and a hosted staging database, and from now on staging is where every change gets checked first.",
+          text: "For data, take a pg_dump of the production database, not the development one. They're easy to mix up, and test records tell you nothing about real use. Restore it into a local database and a hosted staging database, and from now on check every change on staging first.",
         },
       ],
     },
     {
       id: "week-3",
-      heading: "Week 3. Find out who can see whose bookings",
+      heading: "Week 3. Find out who can see whose data",
       blocks: [
         {
           type: "paragraph",
-          text: "This is the most important week, because the bugs it finds are the ones that end up in an apology email. Generated servers usually check that someone is signed in. They often don't check that the record being asked for belongs to them.",
+          text: "This is the most important week, because the bugs it finds are the ones that end up in an apology email. Generated servers usually check that someone is signed in. They often don't check that the record being asked for belongs to that person.",
         },
         {
           type: "paragraph",
-          text: "In our example, the route that returns a booking by its ID only checks for a session. Any signed-in client who changes the number in the URL can read another client's booking, including their name and phone number. The fix is one line per route, a check that the booking belongs to the user or to the instructor running the class, but it has to be done on every route, and the only way to be sure is to go through them one by one.",
+          text: "Start with every route that fetches, updates or deletes a record by its ID. If the route only checks for a session, any signed-in user who changes the number in the URL can read or change someone else's record. The fix is usually a line or two per route, checking that the record belongs to the current user, but it has to be done everywhere, and the only way to be sure is to read every route.",
+        },
+        {
+          type: "checklist",
+          items: [
+            "Every route that takes an ID checks ownership, not just sign-in.",
+            "Admin and staff routes check the user's role on the server, not just in the interface.",
+            "Request bodies are validated on the server with a schema library such as Zod.",
+            "Queries use parameters or the ORM, never strings stitched together from user input.",
+            "API responses return only the fields the screen needs, not whole database rows.",
+            "File uploads are checked for type and size, and stored files can't be fetched by guessing a URL.",
+          ],
         },
         {
           type: "paragraph",
-          text: "The same pass covers the other basics. Request bodies get validated on the server with a schema library, so a booking can't be created for a class that's already full by sending a hand-written request. Queries are checked to make sure they use parameters or the ORM rather than strings stitched together from user input. Agent often sets projects up with Drizzle, which helps here.",
+          text: "The interface isn't a security boundary: anyone can send a hand-written request, so the server has to refuse anything the screens would never allow. Agent often sets projects up with Drizzle, which makes parameterised queries the default.",
         },
         {
           type: "paragraph",
-          text: "Database changes get the same treatment as code. Instead of pushing schema changes straight to the database when the app is published, they become migration files in the repository that someone reads before they run.",
+          text: "Database changes get the same treatment as code. Instead of pushing schema changes straight to the database when the app is published, turn them into migration files in the repository that someone reads before they run. If your project uses Drizzle, that means generating migrations with Drizzle Kit rather than relying on a push command.",
         },
       ],
     },
@@ -113,60 +119,64 @@ export const replit: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Replit Auth is fine if your users are developers who already have Replit accounts. Fitness clients aren't, so in our example it goes. If your users don't mind the Replit sign-in, keeping it is a perfectly reasonable choice and saves a week.",
+          text: "Keep Replit Auth if your users are developers who already have Replit accounts; replace it if they aren't. Asking ordinary customers to create a Replit account adds friction and ties your user list to another platform.",
         },
         {
           type: "paragraph",
-          text: "The founder picks a hosted auth provider with email magic links, so nobody has to invent a password. Clerk is a common choice for Replit apps and Replit has published guidance on moving to it; Supabase Auth or Auth.js would also work. What matters more than the provider is how existing users arrive on the other side.",
+          text: "If you're replacing it, a hosted auth provider with email magic links or social sign-in saves you building password handling yourself. Clerk is a common choice for Replit apps and Replit has published guidance on moving to it; Supabase Auth or Auth.js would also work. What matters more than the provider is how your existing users arrive on the other side without losing their data.",
         },
         {
           type: "list",
           ordered: true,
           items: [
-            "Export the user table, keyed on email address, which both systems share.",
+            "Export your user table, keyed on email address, which both systems share.",
             "Create matching accounts in the new provider and store the new ID next to the old one.",
-            "Change every foreign key that pointed at the Replit user ID, so bookings and classes follow their owners.",
+            "Update every foreign key that pointed at the Replit user ID, so each user's records follow them.",
             "Write the email that tells users the sign-in screen is changing and why, and schedule it for the day before cutover.",
           ],
         },
         {
           type: "paragraph",
-          text: "Users who sign in with a screen they don't recognise assume something is wrong. A short heads-up email costs nothing and saves a week of support replies.",
+          text: "Users who meet a sign-in screen they don't recognise assume something is wrong. A short heads-up email costs nothing and saves a week of support replies. If you keep Replit Auth, spend this week on whatever week three turned up.",
         },
       ],
     },
     {
       id: "week-5",
-      heading: "Week 5. Tests, staging and the hosting question",
+      heading: "Week 5. Tests, monitoring and the hosting question",
       blocks: [
         {
           type: "paragraph",
-          text: "By now the code is owned, runs anywhere and is safe to share. Week five adds the safety net: tests on the flows that cost money if they break, and a decision about where the app lives.",
+          text: "Week five adds the safety net: tests on the flows that cost money or trust if they break, and a decision about where the app lives.",
         },
         {
           type: "paragraph",
-          text: "The tests aren't exhaustive. They cover signing in, booking a class, paying, cancelling inside and outside the refund window, and the reminder job picking the right people. Those run on every pull request, and staging gets a deploy on every merge so the founder can click through before anything reaches instructors. Error tracking and uptime alerts go in at the same time, along with a backup that someone actually restores to prove it works.",
+          text: "The tests don't need to be exhaustive. Cover signing in, the main thing your users come to do, taking payment, cancellations and refunds, and any scheduled job that decides who gets an email or a charge. Run them on every pull request, and deploy to staging on every merge so you can click through before anything reaches real users. Add error tracking and uptime alerts at the same time, along with a backup that someone actually restores to prove it works.",
         },
         {
           type: "paragraph",
-          text: "Then hosting. Leaving Replit is optional. Replit Deployments can run a production app on Autoscale or a Reserved VM, and scheduled deployments handle jobs like the reminder emails. Plenty of teams keep all of that and only change how code reaches it. Our founder weighs it up:",
+          text: "Then hosting. Leaving Replit is optional. Replit Deployments can run a production app on Autoscale or a Reserved VM, and scheduled deployments handle recurring jobs. Plenty of teams keep all of that and only change how code reaches it.",
         },
         {
-          type: "list",
-          items: [
-            {
-              term: "Stay on Replit",
-              text: "Least change, and the separate development and production databases already exist. The cost is keeping deployment tied to the workspace rather than to the repository.",
-            },
-            {
-              term: "Move to a platform such as Render, Railway or Fly.io",
-              text: "Deploys straight from GitHub, with a managed Postgres and a worker for the reminders. More setup, more control over regions and scaling.",
-            },
+          type: "table",
+          caption: "Staying on Replit hosting compared with moving to another platform",
+          columns: ["Option", "What you get", "What it costs you"],
+          rows: [
+            [
+              "Stay on Replit Deployments",
+              "Least change; your databases, storage and scheduled jobs stay where they are.",
+              "Deployment stays tied to the workspace rather than the repository.",
+            ],
+            [
+              "Move to Render, Railway or Fly.io",
+              "Deploys straight from GitHub, managed Postgres, workers for jobs, more choice of region.",
+              "More setup now, and storage and jobs have to be moved too.",
+            ],
           ],
         },
         {
           type: "paragraph",
-          text: "In the example, the founder moves, mainly because a UK hosting region matters to two of the larger instructors. Photos go from Replit's object storage to an S3 compatible bucket, copied with a short script that also rewrites the stored URLs.",
+          text: "The usual reasons to move are hosting region, for UK or EU data residency, cost at higher traffic, or wanting every deploy to come from the repository. If you move, files in Replit's object storage go to an S3 compatible bucket, copied with a short script that also rewrites any URLs stored in the database.",
         },
       ],
     },
@@ -176,29 +186,40 @@ export const replit: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Cutover is a rehearsed routine, not a leap. The founder runs the whole move on staging twice before doing it for real.",
+          text: "Cutover should be a rehearsed routine, not a leap. Run the whole move on staging at least twice before doing it for real.",
         },
         {
           type: "paragraph",
-          text: "Each rehearsal takes a fresh dump of the Replit production database, restores it to the new database, runs the user mapping from week four and compares row counts for users, classes, bookings and payments. The second rehearsal is timed, which turns into the length of the maintenance window: about forty minutes on a Sunday evening, announced to instructors a week ahead.",
+          text: "Each rehearsal takes a fresh dump of the Replit production database, restores it to the new one, runs the user mapping from week four and compares row counts for every important table. Time the second rehearsal: that sets your maintenance window, which you announce to users a week ahead and schedule for your quietest hour.",
+        },
+        {
+          type: "list",
+          ordered: true,
+          items: [
+            "Put the Replit app into read-only mode or show a maintenance page.",
+            "Take the final dump, restore it and check the row counts against the last rehearsal.",
+            "Point your domain at the new deployment.",
+            "Update webhook endpoints with Stripe and any other provider, so no confirmation lands on the old server.",
+            "Sign in as a real user, run the main flow end to end and watch error tracking for the first hour.",
+          ],
         },
         {
           type: "paragraph",
-          text: "On the night, the Replit app goes into read-only mode, the final dump is taken and restored, the counts are checked, and the domain is pointed at the new deployment. Stripe's webhook endpoint is updated in the same window, so no payment confirmation lands on the old server. The Replit deployment is then paused, not deleted. It stays that way for a month, in case anything needs comparing or the switch needs reversing.",
+          text: "Afterwards, pause the Replit deployment rather than deleting it, and leave it paused for a month. If anything needs comparing, or the switch needs reversing, it's still there.",
         },
       ],
     },
     {
       id: "your-timeline",
-      heading: "How your own timeline might differ",
+      heading: "How your own timeline may differ",
       blocks: [
         {
           type: "paragraph",
-          text: "Six weeks is the middle of the range. Most Replit apps we'd expect to take three to eight weeks to get to this point, and the decisions in weeks four and five move the number most.",
+          text: "Most Replit Agent apps take three to eight weeks to reach this point, and the decisions in weeks four and five move the number most.",
         },
         {
           type: "paragraph",
-          text: "If you keep Replit Auth and Replit hosting, weeks four and five largely disappear and three weeks is realistic. If the app has several user roles, money moving between parties, or code that Agent rewrote in several different directions, the security review and tidying in week three can easily double. And if the original design no longer fits what the product has become, a rebuild on the same database can beat hardening, though that's rarer than people expect with Agent's fairly standard output.",
+          text: "Keep Replit Auth and Replit hosting and weeks four and five largely disappear, so three weeks is realistic. If your app has several user roles, money moving between parties, or code that Agent rewrote in several different directions, the security review and tidying in week three can easily double. And if the original design no longer fits what your product has become, a rebuild on the same database can beat hardening, though that's rarer than people expect with Agent's fairly standard output.",
         },
       ],
     },

@@ -12,20 +12,20 @@ export const googleSheetsDatabase: BlogPost = {
   datePublished: "2026-10-14",
   sections: [
     {
-      id: "a-business-on-a-sheet",
-      heading: "Picture a business that runs on one spreadsheet",
+      id: "what-sheets-does-well",
+      heading: "What does Google Sheets do well as a database, and when does it stop?",
       blocks: [
         {
           type: "paragraph",
-          text: "A spreadsheet is a fine database for a small business, right up until the day it quietly isn't. Picture an imaginary cleaning company with a handful of staff. Bookings arrive through a Google Form and land as rows in a sheet. The owner and one coordinator assign cleaners by typing a name into a column, and a short Apps Script emails the cleaner the address.",
+          text: "Google Sheets works as a database while a few people edit simple, flat data and nothing outside the sheet depends on its layout. It stops working when your data needs rules, reliable links between tables, sturdy automations or per-person access, because a spreadsheet enforces none of those.",
         },
         {
           type: "paragraph",
-          text: "At that size, the sheet is the right call. It costs nothing extra on Google Workspace, everyone knows how to use it, and the structure changes in ten seconds without a developer.",
+          text: "If your business runs on a sheet, that was probably the right call when you started. It costs nothing beyond your Google Workspace plan, your team already knows it, and you can add a column without waiting for a developer.",
         },
         {
           type: "paragraph",
-          text: "Now let it grow for two years: more staff, regular clients, invoices, a promised client portal. The sheet doesn't fail all at once. It fails in a fairly predictable sequence, and knowing where you are in it tells you how long you've got.",
+          text: "A sheet rarely fails in one go. As you grow, more people edit it, more tabs refer to each other and more tools read from it. The problems arrive in a fairly predictable order, and knowing where you are in it tells you how long you have before something breaks in front of a customer.",
         },
       ],
     },
@@ -40,22 +40,22 @@ export const googleSheetsDatabase: BlogPost = {
         { type: "subheading", text: "1. A row of red cells saying do not touch" },
         {
           type: "paragraph",
-          text: "More people start editing. Someone sorts one column on its own and scrambles a week of bookings, so a coloured row appears listing columns nobody may change. Meanwhile the sheet accepts a mistyped date, a duplicate email or a blank required field without complaint.",
+          text: "More people start editing. Someone sorts one column on its own and scrambles a week of entries, so a coloured row appears listing the columns nobody may change. Meanwhile the sheet accepts a mistyped date, a duplicate email or a blank required field without complaint.",
         },
         { type: "subheading", text: "2. More lookups than data" },
         {
           type: "paragraph",
-          text: "Regular clients get their own tab with an ID, and bookings pull details across with XLOOKUP. Nothing enforces the link: delete a client and their bookings point at nothing, change an ID and every lookup quietly returns blank. This is the sheet trying to be a relational database.",
+          text: "Your customers get their own tab with an ID, and other tabs pull their details across with XLOOKUP. Nothing enforces the link: delete a customer and the rows that referred to them point at nothing, change an ID and every lookup quietly returns blank. This is the sheet trying to be a relational database.",
         },
         { type: "subheading", text: "3. An automation breaks because a column moved" },
         {
           type: "paragraph",
-          text: "Someone inserts a Phone column between Email and Address, and the script that reads column D starts sending texts to email addresses. The error only shows in an execution log nobody checks. Once Zapier or a website also read the sheet, every column rename is a small outage.",
+          text: "Someone inserts a column mid-sheet, and any script that reads column D by position now reads the wrong field. The error only shows in an execution log nobody checks. Once Zapier, Make or your website also read the sheet, every column rename is a small outage.",
         },
         { type: "subheading", text: "4. Clean-up becomes a weekly job" },
         {
           type: "paragraph",
-          text: "The same client spelled three ways, dates in four formats, phone numbers that lost their leading zero. Someone spends Friday afternoon fixing it, every Friday.",
+          text: "The same customer spelled three ways, dates in four formats, phone numbers that lost their leading zero. Someone spends an afternoon a week fixing it.",
         },
         { type: "subheading", text: "5. The file gets slow" },
         {
@@ -65,17 +65,17 @@ export const googleSheetsDatabase: BlogPost = {
         { type: "subheading", text: "6. Quota errors and timeouts" },
         {
           type: "paragraph",
-          text: "The Sheets API limits requests per minute: at the time of writing, 300 reads and 300 writes per project, and 60 of each per user. Go over and you get 429 errors until the minute resets. An Apps Script run is capped at six minutes, so the nightly invoicing script needs chunking. Adding delays and retries means you're working around the tool.",
+          text: "The Sheets API limits requests per minute: at the time of writing, 300 reads and 300 writes per project, and 60 of each per user. Go over and you get 429 errors until the minute resets. An Apps Script run is capped at six minutes, so long jobs need chunking. Adding delays and retries means you're working around the tool.",
         },
-        { type: "subheading", text: "7. A client wants to see only their own records" },
+        { type: "subheading", text: "7. A customer wants to see only their own records" },
         {
           type: "paragraph",
-          text: "This is usually the hard stop. Sharing is per file, so anyone who can open the spreadsheet sees every tab and row; protected ranges stop edits, not reading. Separating clients means a file per client, synced by hand.",
+          text: "This is usually the hard stop. Sharing is per file, so anyone who can open the spreadsheet sees every tab and row; protected ranges stop edits, not reading. Separating customers means a file per customer, kept in sync by hand.",
         },
         { type: "subheading", text: "8. Nobody can say who has access" },
         {
           type: "paragraph",
-          text: "The sheet holds names, addresses and door codes, it's shared with former staff and a contractor's personal Gmail, and version history only rolls back the whole file. There's no independent backup. With personal data, that's more than an inconvenience.",
+          text: "The sheet holds names, addresses and phone numbers, it's still shared with people who left and with personal Gmail accounts, and restoring an earlier version brings back the whole file rather than one overwritten row. There's no independent backup. With personal data, that's more than an inconvenience.",
         },
         {
           type: "callout",
@@ -90,7 +90,7 @@ export const googleSheetsDatabase: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "For most businesses here, the answer is Postgres behind a small app. It enforces links with foreign keys, rejects bad values with constraints, joins tables in one query instead of ten thousand formulas, and shows each person only their rows.",
+          text: "For most businesses at this point, the answer is Postgres behind a small app. It enforces links with foreign keys, rejects bad values with constraints, joins tables in one query instead of thousands of formulas, and shows each person only their rows.",
         },
         {
           type: "list",
@@ -101,7 +101,7 @@ export const googleSheetsDatabase: BlogPost = {
             },
             {
               term: "A CRM",
-              text: "If the sheet is really a client list with notes and follow-ups, an off-the-shelf CRM may solve it without a build.",
+              text: "If your sheet is really a customer list with notes and follow-ups, an off-the-shelf CRM may solve it without a build.",
             },
             {
               term: "Airtable",
@@ -111,7 +111,7 @@ export const googleSheetsDatabase: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "An outgrown spreadsheet also makes a surprisingly good spec: it shows exactly how the business already works.",
+          text: "An outgrown spreadsheet also makes a surprisingly good spec: it shows exactly how your business already works.",
         },
       ],
     },
@@ -121,7 +121,7 @@ export const googleSheetsDatabase: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Don't switch everything in one weekend. Put the database underneath, keep the team looking at a sheet they recognise, and move the inputs across one at a time, so each tab only ever has one place where it's edited.",
+          text: "Don't switch everything in one weekend. Put the database underneath, keep your team looking at a sheet they recognise, and move the inputs across one at a time, so each tab only ever has one place where it's edited.",
         },
         {
           type: "list",
@@ -133,7 +133,7 @@ export const googleSheetsDatabase: BlogPost = {
             },
             {
               term: "Design and clean",
-              text: "One table per kind of thing, with real types and constraints for every rule the sheet only hoped people would follow. Then clean: duplicates, dates, phone numbers kept as text, and cells like 'red, blue, green' split into rows. This step takes longest, because someone who knows the business has to decide each case.",
+              text: "One table per kind of thing, with real types and constraints for every rule the sheet only hoped people would follow. Then clean: duplicates, dates, phone numbers kept as text, and cells holding several values split into rows. This step takes longest, because someone who knows the business has to decide each case.",
             },
             {
               term: "Import on repeat",
@@ -141,7 +141,7 @@ export const googleSheetsDatabase: BlogPost = {
             },
             {
               term: "Flip one input at a time",
-              text: "Replace the Google Form with a form in the app, so new bookings land in the database. From then on, a scheduled job writes that data back to its tab, so the team still sees it in the sheet. Repeat for each input, and move Apps Script logic into server jobs you can monitor and retry.",
+              text: "Replace a Google Form or manual entry with a form in the app, so new entries land in the database. From then on, a scheduled job writes that data back to its tab, so your team still sees it in the sheet. Repeat for each input, and move Apps Script logic into server jobs you can monitor and retry.",
             },
             {
               term: "Lock the sheet",
@@ -151,7 +151,7 @@ export const googleSheetsDatabase: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "For the sync, we'd use a scheduled job in the app that runs a query hourly or overnight and overwrites a tab through the Sheets API, batching requests so it barely touches the quota. Apps Script's JDBC service can connect Sheets to Postgres directly, but your database then has to accept connections from Google's address ranges, which we wouldn't do for customer data. Either way, use a read-only database user and send only the columns the report needs.",
+          text: "For the sync, we'd use a scheduled job that runs a query hourly or overnight and overwrites a tab through the Sheets API, batching requests to spare the quota. Apps Script's JDBC service can connect Sheets to Postgres directly, but your database then has to accept connections from Google's address ranges, which we wouldn't do for customer data. Either way, use a read-only database user and send only the columns the report needs.",
         },
       ],
     },

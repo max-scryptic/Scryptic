@@ -43,8 +43,8 @@ export const n8nVsZapierVsMake: BlogPost = {
         },
         {
           type: "callout",
-          title: "The same workflow, priced three ways",
-          text: "Take a workflow with a trigger and five actions that runs 1,000 times a month. That's about 5,000 Zapier tasks, about 6,000 Make credits and 1,000 n8n executions. Loop over order lines and the Zapier and Make numbers multiply while n8n's stays put. Plans and allowances change often, so compare the units, then check current prices with each vendor.",
+          title: "How each one counts usage",
+          text: "Zapier counts a task for each action that runs, Make counts credits for each module that runs, trigger included, and n8n counts one execution per workflow run however many steps it has. Loop over a list and the Zapier and Make counts multiply while n8n's stays put. Plans and allowances change often, so compare the units, then check current prices with each vendor.",
         },
       ],
     },

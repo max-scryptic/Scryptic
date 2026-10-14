@@ -58,7 +58,7 @@ export const buildAnMvp: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "The first week produces a single sentence and a short list, and both matter more than any code. The sentence is the core job, for example: this lets a dog groomer take bookings without a phone call. Every feature either serves that sentence or waits.",
+          text: "The first week produces a single sentence and a short list, and both matter more than any code. The sentence is the core job: who the app is for and the one thing it lets them do. Every feature either serves that sentence or waits.",
         },
         {
           type: "subheading",

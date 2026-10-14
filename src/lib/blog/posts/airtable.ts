@@ -27,7 +27,7 @@ export const airtable: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Say your base has four tables: Clients, Projects, Invoices and Files. Exported as CSV, it looks like four spreadsheets. Read through the Airtable metadata API, it's a list of field types and options, and that list tells you exactly how much work the move to Postgres will be.",
+          text: "Exported as CSV, a base looks like a set of spreadsheets. Read through the Airtable metadata API, it's a list of field types and options, and that list tells you exactly how much work the move to Postgres will be.",
         },
         {
           type: "paragraph",
