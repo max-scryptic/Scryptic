@@ -3,193 +3,201 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const replit: BlogPost = {
   slug: "migrate-from-replit",
-  title: "Migrating from Replit to a production app",
+  title: "Taking a Replit Agent app to production, week by week",
   series: "migration",
   topic: "Replit",
   logo: replitLogo,
   category: "AI app builders",
   description:
-    "Taking a Replit Agent app to production: what you can export, the Replit specific parts to replace, and a step by step plan to secure, test and launch it.",
+    "A week by week walkthrough of taking a Replit Agent app to production: owning the code, fixing access checks, replacing Replit Auth and cutting over safely.",
   summary:
-    "An app built with Replit Agent is real code running on a standard stack, usually with a PostgreSQL database, so it can be kept and improved rather than rebuilt. Going to production means getting the code into your own repository, deciding whether to stay on Replit hosting, replacing Replit specific pieces such as Replit Auth where they no longer fit, and adding tests, environments and monitoring.",
+    "A Replit Agent app is ordinary code on a Postgres database, so you can usually keep it and harden it rather than rebuild it. This walkthrough follows a hypothetical booking tool from the first git push to launch day over about six weeks, and shows where the Replit specific decisions come up.",
   datePublished: "2026-10-13",
-  facts: [
-    { label: "Code export", value: "Yes, GitHub through the Git pane or ZIP" },
-    { label: "Data export", value: "Standard Postgres, dump and restore" },
-    { label: "Usual approach", value: "Harden in place, then decide on hosting" },
-    { label: "Typical timeline", value: "3 to 8 weeks" },
-  ],
   sections: [
     {
-      id: "when-to-move",
-      heading: "When is it time to move a Replit app to production?",
+      id: "the-example",
+      heading: "The app we'll follow",
       blocks: [
         {
           type: "paragraph",
-          text: "It is time when the app has paying users, sensitive data or a team of people working on it. Replit Agent is good at building and publishing a working full stack app quickly. Production asks for more than a working app: control over changes, tested releases and an answer when someone asks how the data is protected.",
+          text: "Say you built a booking tool on Replit with Replit Agent. Independent fitness instructors use it to publish classes, their clients book and pay, and everyone gets a reminder email the evening before. Agent gave you a React frontend, a Node.js server, Replit's built-in Postgres database and Replit Auth for sign-in. Class photos are uploaded to Replit's object storage. You've got around 40 instructors and a few hundred of their clients, and people are starting to pay.",
         },
-        { type: "paragraph", text: "Look out for these signs:" },
-        {
-          type: "list",
-          items: [
-            "Agent changes often touch more files than you expected, and you are not confident what each checkpoint changed.",
-            "Your usage bill is becoming hard to predict as the app and the number of Agent sessions grow.",
-            "Users outside the Replit community find the Replit branded sign-in confusing, or you need your own login with your own branding.",
-            "A developer wants to work locally with their own tools, code review and automated tests.",
-            "You need background workers, queues or infrastructure in a particular region that do not fit how the app is hosted today.",
-          ],
-        },
-      ],
-    },
-    {
-      id: "what-you-can-export",
-      heading: "What can you take out of Replit?",
-      blocks: [
         {
           type: "paragraph",
-          text: "You can take out the code and the database. Replit Agent writes ordinary source files, commonly a React frontend with a Node.js or Python server, and stores data in Replit's built-in PostgreSQL database, which is standard Postgres.",
-        },
-        {
-          type: "list",
-          items: [
-            {
-              term: "Source code",
-              text: "Connect GitHub from the Git pane to push the project to a repository, or download the files as a ZIP. Secrets set in Replit are not included, so record them separately.",
-            },
-            {
-              term: "Database",
-              text: "Replit gives a published app separate development and production databases. Both are Postgres, so standard tools such as pg_dump can copy the schema and data once you have a connection string. Export from production, not development, or you will leave your real records behind.",
-            },
-            {
-              term: "Users and files",
-              text: "Accounts created through Replit Auth are tied to Replit's login system, and uploaded files may sit in Replit's object storage. Both need a plan of their own.",
-            },
-            {
-              term: "What stays behind",
-              text: "Agent's chat history, checkpoints, the workspace and Replit Deployments. Files such as .replit and replit.nix only configure the Replit workspace and are not needed elsewhere.",
-            },
-          ],
+          text: "It works. The question is whether it's ready for the instructor who emails to ask how their clients' details are protected, or for the developer you're about to bring in who wants to see what changed last Tuesday. That's the gap between a working app and a production app, and closing it took our imaginary founder about six weeks.",
         },
         {
           type: "callout",
-          title: "Leaving Replit is optional",
-          text: "Replit Deployments can host production apps, with Autoscale and Reserved VM options. Plenty of teams harden the code and keep the hosting. Moving the code into your own repository and testing process is the important part; moving the servers is a separate decision.",
+          title: "This is an illustrative example",
+          text: "The booking tool, its numbers and its timeline are made up to show the order things usually happen in. It isn't a client story. Your own app will have different parts, but the Replit specific decisions in each week are real ones.",
         },
       ],
     },
     {
-      id: "what-is-missing",
-      heading: "What does a Replit app usually need before launch?",
+      id: "week-1",
+      heading: "Week 1. Get the code out of the workspace",
       blocks: [
         {
           type: "paragraph",
-          text: "Most Replit apps need their security reviewed, their structure tidied and a release process added. The app works, but it was shaped one prompt at a time, with the AI optimising for the next request rather than the next year.",
+          text: "The first job is ownership: the code goes into a GitHub repository that belongs to your business, and from then on every change is reviewed before it's published. Nothing about the app changes yet.",
+        },
+        {
+          type: "paragraph",
+          text: "Our founder connects GitHub from the Git pane and pushes the project to a new repository in the company's GitHub organisation, not a personal account. A ZIP download would also work, but it gives you a snapshot rather than a history you can keep adding to. The push doesn't include secrets, so the next hour goes on copying every value out of the Secrets pane into a password manager: the Stripe keys, the email provider's API key, the database connection strings.",
+        },
+        {
+          type: "paragraph",
+          text: "Then comes an inventory of everything the app leans on that only exists inside Replit. For the booking tool it looks like this:",
         },
         {
           type: "list",
           items: [
-            {
-              term: "Authorisation on every route",
-              text: "Check that every API route confirms who the user is and that they own the record they are asking for. Generated servers often check that a user is signed in but not what they may access.",
-            },
-            {
-              term: "Input validation",
-              text: "Validate request bodies on the server with a schema, and make sure database queries use parameters rather than strings built from user input.",
-            },
-            {
-              term: "Login that fits your users",
-              text: "Replit Auth signs people in with a Replit account. For a consumer or business product you may want your own provider, and Replit documents a route for moving from Replit Auth to Clerk.",
-            },
-            {
-              term: "Schema migrations",
-              text: "Keep database changes as migration files in the repository, reviewed like code, rather than applied automatically at publish time without anyone reading them.",
-            },
-            {
-              term: "Tests and staging",
-              text: "Automated tests for sign-up, payments and the core workflow, plus a staging copy of the app with its own database for checking releases.",
-            },
-            {
-              term: "Monitoring and backups",
-              text: "Error tracking, uptime alerts, structured logs and a backup you have actually restored at least once.",
-            },
+            "Replit Auth, which signs every user in with a Replit account.",
+            "Two Postgres databases, one for development and one for the published app.",
+            "Object storage holding the class photos.",
+            "A scheduled deployment that sends the reminder emails each evening.",
+            "Environment variables Replit sets automatically, such as the app's domain, which the auth code reads.",
+            "The .replit and replit.nix files, which configure the workspace and won't be needed anywhere else.",
           ],
+        },
+        {
+          type: "paragraph",
+          text: "Last, a house rule. Agent is still allowed to help, but only on a branch, and its changes reach production through a pull request like anyone else's. Letting Agent edit the live copy while a developer works in the repository is how two versions of the same app quietly drift apart.",
         },
       ],
     },
     {
-      id: "migration-plan",
-      heading: "How do you migrate a Replit app, step by step?",
+      id: "week-2",
+      heading: "Week 2. Make it run somewhere other than Replit",
       blocks: [
         {
           type: "paragraph",
-          text: "Get the code under version control you own, make the app safe, then choose where it runs. Keep the existing deployment live until the new setup has been proven.",
+          text: "If the app only runs inside the workspace, you don't really own it yet. Week two is about cloning the repository onto a laptop and getting it running against a copy of the real data.",
+        },
+        {
+          type: "paragraph",
+          text: "Most of the friction is small. The server listens on whatever port Replit expected. The auth code reads Replit's own environment variables and falls over without them. A package was installed in the workspace but never written into package.json. Each fix is a few minutes; finding them is the work.",
+        },
+        {
+          type: "paragraph",
+          text: "For data, the founder takes a pg_dump of the production database, not the development one. They're both standard Postgres and easy to mix up, and a staging copy full of test bookings tells you nothing. The dump is restored into a local database and a hosted staging database, and from now on staging is where every change gets checked first.",
+        },
+      ],
+    },
+    {
+      id: "week-3",
+      heading: "Week 3. Find out who can see whose bookings",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "This is the most important week, because the bugs it finds are the ones that end up in an apology email. Generated servers usually check that someone is signed in. They often don't check that the record being asked for belongs to them.",
+        },
+        {
+          type: "paragraph",
+          text: "In our example, the route that returns a booking by its ID only checks for a session. Any signed-in client who changes the number in the URL can read another client's booking, including their name and phone number. The fix is one line per route, a check that the booking belongs to the user or to the instructor running the class, but it has to be done on every route, and the only way to be sure is to go through them one by one.",
+        },
+        {
+          type: "paragraph",
+          text: "The same pass covers the other basics. Request bodies get validated on the server with a schema library, so a booking can't be created for a class that's already full by sending a hand-written request. Queries are checked to make sure they use parameters or the ORM rather than strings stitched together from user input. Agent often sets projects up with Drizzle, which helps here.",
+        },
+        {
+          type: "paragraph",
+          text: "Database changes get the same treatment as code. Instead of pushing schema changes straight to the database when the app is published, they become migration files in the repository that someone reads before they run.",
+        },
+      ],
+    },
+    {
+      id: "week-4",
+      heading: "Week 4. Decide what to do about Replit Auth",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Replit Auth is fine if your users are developers who already have Replit accounts. Fitness clients aren't, so in our example it goes. If your users don't mind the Replit sign-in, keeping it is a perfectly reasonable choice and saves a week.",
+        },
+        {
+          type: "paragraph",
+          text: "The founder picks a hosted auth provider with email magic links, so nobody has to invent a password. Clerk is a common choice for Replit apps and Replit has published guidance on moving to it; Supabase Auth or Auth.js would also work. What matters more than the provider is how existing users arrive on the other side.",
         },
         {
           type: "list",
           ordered: true,
           items: [
-            {
-              term: "Push to your own repository",
-              text: "Connect GitHub from the Git pane and push to a repository owned by your organisation. From this point, review every change before it reaches production.",
-            },
-            {
-              term: "Inventory the Replit dependencies",
-              text: "List the secrets, Replit Auth usage, object storage buckets, scheduled jobs and any Replit specific environment variables the code reads.",
-            },
-            {
-              term: "Run it outside Replit",
-              text: "Clone the repository, set the environment variables and run the app locally against a copy of the database. Fix anything that only worked inside the workspace.",
-            },
-            {
-              term: "Secure and tidy",
-              text: "Add authorisation checks and server validation, remove dead code from abandoned attempts and split the largest files.",
-            },
-            {
-              term: "Decide on login",
-              text: "Keep Replit Auth if your users are comfortable with it, or move to a provider such as Clerk or Supabase Auth, with a plan for how existing users sign in afterwards.",
-            },
-            {
-              term: "Choose hosting",
-              text: "Either stay on Replit Deployments with the new review process, or move to a platform such as Render, Fly.io or a major cloud with a managed Postgres database.",
-            },
-            {
-              term: "Test, then copy the data",
-              text: "Rehearse the database move on staging, check row counts and key records, then repeat it for production during a short, announced maintenance window.",
-            },
-            {
-              term: "Cut over",
-              text: "Point the domain at the new deployment, watch errors closely for the first days, and keep the Replit app paused rather than deleted until you are sure.",
-            },
+            "Export the user table, keyed on email address, which both systems share.",
+            "Create matching accounts in the new provider and store the new ID next to the old one.",
+            "Change every foreign key that pointed at the Replit user ID, so bookings and classes follow their owners.",
+            "Write the email that tells users the sign-in screen is changing and why, and schedule it for the day before cutover.",
           ],
+        },
+        {
+          type: "paragraph",
+          text: "Users who sign in with a screen they don't recognise assume something is wrong. A short heads-up email costs nothing and saves a week of support replies.",
         },
       ],
     },
     {
-      id: "pitfalls",
-      heading: "What goes wrong in Replit migrations?",
+      id: "week-5",
+      heading: "Week 5. Tests, staging and the hosting question",
       blocks: [
         {
           type: "paragraph",
-          text: "The usual problems are exporting the wrong database, missing secrets, and users who cannot sign in after the move.",
+          text: "By now the code is owned, runs anywhere and is safe to share. Week five adds the safety net: tests on the flows that cost money if they break, and a decision about where the app lives.",
+        },
+        {
+          type: "paragraph",
+          text: "The tests aren't exhaustive. They cover signing in, booking a class, paying, cancelling inside and outside the refund window, and the reminder job picking the right people. Those run on every pull request, and staging gets a deploy on every merge so the founder can click through before anything reaches instructors. Error tracking and uptime alerts go in at the same time, along with a backup that someone actually restores to prove it works.",
+        },
+        {
+          type: "paragraph",
+          text: "Then hosting. Leaving Replit is optional. Replit Deployments can run a production app on Autoscale or a Reserved VM, and scheduled deployments handle jobs like the reminder emails. Plenty of teams keep all of that and only change how code reaches it. Our founder weighs it up:",
         },
         {
           type: "list",
           items: [
-            "Dumping the development database instead of production, and launching the new app with test data.",
-            "Forgetting that secrets are not in the repository, then spending launch day hunting for API keys.",
-            "Switching away from Replit Auth without telling users, so they arrive at a login screen they do not recognise.",
-            "Letting Agent keep editing the Replit copy after developers start in the repository, so the two versions drift apart.",
+            {
+              term: "Stay on Replit",
+              text: "Least change, and the separate development and production databases already exist. The cost is keeping deployment tied to the workspace rather than to the repository.",
+            },
+            {
+              term: "Move to a platform such as Render, Railway or Fly.io",
+              text: "Deploys straight from GitHub, with a managed Postgres and a worker for the reminders. More setup, more control over regions and scaling.",
+            },
           ],
+        },
+        {
+          type: "paragraph",
+          text: "In the example, the founder moves, mainly because a UK hosting region matters to two of the larger instructors. Photos go from Replit's object storage to an S3 compatible bucket, copied with a short script that also rewrites the stored URLs.",
         },
       ],
     },
     {
-      id: "when-to-stay",
-      heading: "Should you stay on Replit instead?",
+      id: "week-6",
+      heading: "Week 6. Rehearse, then cut over",
       blocks: [
         {
           type: "paragraph",
-          text: "Stay if the app is still changing shape every week, or if Replit's hosting already meets your needs. Replit is a capable place to build and run an early product, and its separate development and production databases help. Move the code into a reviewed, tested workflow once mistakes would hurt customers, and only move the hosting if cost, control or specific infrastructure needs make it worthwhile.",
+          text: "Cutover is a rehearsed routine, not a leap. The founder runs the whole move on staging twice before doing it for real.",
+        },
+        {
+          type: "paragraph",
+          text: "Each rehearsal takes a fresh dump of the Replit production database, restores it to the new database, runs the user mapping from week four and compares row counts for users, classes, bookings and payments. The second rehearsal is timed, which turns into the length of the maintenance window: about forty minutes on a Sunday evening, announced to instructors a week ahead.",
+        },
+        {
+          type: "paragraph",
+          text: "On the night, the Replit app goes into read-only mode, the final dump is taken and restored, the counts are checked, and the domain is pointed at the new deployment. Stripe's webhook endpoint is updated in the same window, so no payment confirmation lands on the old server. The Replit deployment is then paused, not deleted. It stays that way for a month, in case anything needs comparing or the switch needs reversing.",
+        },
+      ],
+    },
+    {
+      id: "your-timeline",
+      heading: "How your own timeline might differ",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Six weeks is the middle of the range. Most Replit apps we'd expect to take three to eight weeks to get to this point, and the decisions in weeks four and five move the number most.",
+        },
+        {
+          type: "paragraph",
+          text: "If you keep Replit Auth and Replit hosting, weeks four and five largely disappear and three weeks is realistic. If the app has several user roles, money moving between parties, or code that Agent rewrote in several different directions, the security review and tidying in week three can easily double. And if the original design no longer fits what the product has become, a rebuild on the same database can beat hardening, though that's rarer than people expect with Agent's fairly standard output.",
         },
       ],
     },
@@ -198,22 +206,17 @@ export const replit: BlogPost = {
     {
       question: "Can I export my code from Replit?",
       answer:
-        "Yes. You can push the project to GitHub from the Git pane or download it as a ZIP file. Secrets are not included, so copy them from Replit's Secrets settings into your new environment separately.",
+        "Yes. You can push the project to a GitHub repository from the Git pane or download it as a ZIP file. Secrets are not included in either, so copy them from Replit's Secrets pane into your new environment separately.",
     },
     {
-      question: "Do I need to rebuild my Replit Agent app from scratch?",
+      question: "Do I have to leave Replit hosting to go to production?",
       answer:
-        "Usually not. Replit Agent writes standard code on common frameworks with a Postgres database, so most apps can be secured, tidied and tested rather than rewritten. A rebuild only makes sense if the original design no longer fits the product.",
+        "No. Replit Deployments can host production apps, including Autoscale and Reserved VM options and scheduled jobs. What matters is owning the code in your own repository, reviewing and testing every change, and having monitoring and backups. Moving hosting is a separate decision driven by cost, control or region.",
     },
     {
-      question: "Can I keep hosting my app on Replit after it goes to production?",
+      question: "Do I need to rebuild a Replit Agent app from scratch?",
       answer:
-        "Yes, if it suits you. Replit Deployments can host production apps. The important changes are owning the code in your own repository, reviewing and testing every release, and having monitoring and backups in place.",
-    },
-    {
-      question: "How long does it take to move a Replit app to production?",
-      answer:
-        "Typically three to eight weeks, depending on the size of the app, whether you change login provider, and whether you move the hosting and database or keep them on Replit.",
+        "Usually not. Replit Agent writes standard code on common frameworks with a Postgres database, so most apps can be secured, tidied and tested in three to eight weeks rather than rewritten. A rebuild only makes sense when the original design no longer fits the product.",
     },
   ],
 }

@@ -3,193 +3,140 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const v0: BlogPost = {
   slug: "migrate-from-v0",
-  title: "Migrating from v0 to a production app",
+  title: "What v0 actually builds, explained for founders",
   series: "migration",
   topic: "v0",
   logo: v0Logo,
   category: "AI app builders",
   description:
-    "How to turn a v0 project into a production app: what the Next.js code gives you, the backend and security work it usually lacks, and a plan to launch.",
+    "A plain-English guide to what v0 produces, what the Next.js and shadcn/ui code means for you, and the backend work still needed before real customers use it.",
   summary:
-    "v0 produces clean Next.js, React and Tailwind code that you own, so the interface you designed is rarely thrown away. Moving to production is mostly about what sits behind the screens: real data, authentication, server side checks, tests and a Vercel and GitHub setup owned by your business.",
+    "v0 builds the part of an app you can see: polished screens in Next.js, React and shadcn/ui, as real code you own. What it often doesn't build is the part you can't see, such as a proper database, secure sign-in and the checks that keep one customer's data away from another's. That's the work between a v0 project and a launch.",
   datePublished: "2026-10-13",
   facts: [
     { label: "Code export", value: "Yes, GitHub branches or a ZIP download" },
-    { label: "Data export", value: "Yours, in the provider you connected" },
+    { label: "What it builds", value: "Mostly the frontend" },
     { label: "Usual approach", value: "Keep the interface, finish the backend" },
     { label: "Typical timeline", value: "4 to 8 weeks" },
   ],
   sections: [
     {
-      id: "when-to-move",
-      heading: "When is it time to move a v0 app to production?",
+      id: "what-v0-gives-you",
+      heading: "What does v0 actually give you?",
       blocks: [
         {
           type: "paragraph",
-          text: "It is time when the app has to do real work for real people, not just look right. v0 is one of the best tools for producing polished interfaces quickly. The gap usually appears behind the interface, where data, permissions and integrations have to hold up under real use.",
+          text: "v0 is a tool from Vercel that turns a written description into working screens, and the result is genuine code rather than a mock-up. You describe a dashboard or a sign-up page, and v0 writes the code that draws it, which you can preview, tweak by chatting and publish to a live web address.",
         },
-        { type: "paragraph", text: "You will probably recognise some of these:" },
+        {
+          type: "paragraph",
+          text: "That code is a Next.js project. It's the same kind of project a professional team would start with, which is good news: nothing about it ties you to v0, and any web developer can open it, run it and carry on. You can connect it to GitHub, where v0 works on its own branch and proposes changes for review, or download it as a ZIP file.",
+        },
+        {
+          type: "paragraph",
+          text: "The catch is about depth. v0 is excellent at what users see and much lighter on what happens behind the screen. Many v0 projects look finished while still showing sample data, and buttons that appear to save things sometimes don't save anything anywhere. v0 can connect a database through Vercel's integrations, such as Neon or Supabase, but connecting one isn't the same as designing one.",
+        },
+      ],
+    },
+    {
+      id: "glossary",
+      heading: "The words you'll hear, in plain English",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "When a developer looks at your v0 project, these are the terms that will come up. You don't need to learn them deeply, just enough to follow the conversation.",
+        },
         {
           type: "list",
           items: [
-            "Screens look finished, but some still show placeholder or hard-coded data.",
-            "Each chat produced its own version of a component, and they no longer match.",
-            "You need sign-in, user roles or payments, and getting them right by prompting is taking several attempts.",
-            "A developer is joining and needs a normal workflow: local development, branches, code review and tests.",
-            "The app runs on a personal Vercel account, and customers or investors are about to depend on it.",
+            {
+              term: "Frontend",
+              text: "Everything that runs in the user's browser: the screens, buttons and forms. This is v0's strength.",
+            },
+            {
+              term: "Backend",
+              text: "The part that runs on a server: saving data, checking who's allowed to do what, taking payments, sending emails. Often thin or missing in a v0 project.",
+            },
+            {
+              term: "Next.js",
+              text: "A popular framework for building web apps. It can do frontend and backend work in one project, which is why a v0 app has room to grow.",
+            },
+            {
+              term: "React",
+              text: "The library Next.js uses to build screens out of reusable pieces called components.",
+            },
+            {
+              term: "shadcn/ui",
+              text: "A set of ready-made, good-looking components, such as buttons, menus and tables, that v0 uses to give apps their clean look. The code sits inside your project, so it can be changed freely.",
+            },
+            {
+              term: "Tailwind CSS",
+              text: "The styling system that controls colours, spacing and layout in v0's code.",
+            },
+            {
+              term: "Mock data",
+              text: "Made-up sample content typed into the code so a screen looks real. It never changes and isn't stored anywhere.",
+            },
+            {
+              term: "Database",
+              text: "Where real information lives, such as customers, orders and messages, so it's still there tomorrow.",
+            },
+            {
+              term: "Authentication",
+              text: "Signing users in and proving they are who they say they are.",
+            },
+            {
+              term: "Repository",
+              text: "The folder of code, usually on GitHub, with a full history of every change. Whoever owns it owns the app.",
+            },
           ],
         },
       ],
     },
     {
-      id: "what-you-can-export",
-      heading: "What can you take out of v0?",
+      id: "whats-missing",
+      heading: "What's usually missing before launch",
       blocks: [
         {
           type: "paragraph",
-          text: "You can take out all of the code. v0 generates a Next.js project using React, TypeScript, Tailwind CSS and shadcn/ui components, and it can work directly in a GitHub repository, creating a branch for its changes and opening pull requests rather than writing to your main branch.",
+          text: "In short, the backend and the safety checks. The screens are often close to done; what's missing is the machinery that makes them trustworthy with real customers and real money.",
         },
         {
           type: "list",
           items: [
-            {
-              term: "Source code",
-              text: "Connect GitHub to keep the project in a repository, or download it as a ZIP file. Once it is in your repository it is an ordinary Next.js app that any developer can run.",
-            },
-            {
-              term: "Data",
-              text: "v0 does not keep your data itself. Databases and storage connected through Vercel's integrations, such as Neon, Supabase, Upstash or Vercel Blob, live with that provider and are linked to your Vercel account.",
-            },
-            {
-              term: "Hosting and settings",
-              text: "Deployments, domains and environment variables live in a Vercel project. Make sure that project sits in a Vercel team your business owns.",
-            },
-            {
-              term: "What stays behind",
-              text: "Your chats, design iterations and the v0 preview sandbox. None of them are needed to run or deploy the app.",
-            },
+            "A designed database, so information is stored properly and stays fast as you grow.",
+            "Secure sign-in, built on a proven service rather than written from scratch in a chat.",
+            "Permission checks on the server, so a customer can't see another customer's data by guessing a web address. Hiding a button isn't a permission check.",
+            "Secret keys kept off the user's browser. In Next.js, any setting whose name starts with NEXT_PUBLIC_ is visible to anyone, so payment and AI keys must never be named that way.",
+            "Sensible behaviour when things go wrong: a slow connection, a failed payment, an empty list.",
+            "One tidy set of components, because each chat tends to produce its own slightly different version of the same button.",
+            "Tests on the important journeys, plus backups and error alerts.",
           ],
         },
         {
           type: "callout",
-          title: "Moving on does not mean leaving v0",
-          text: "Because v0 works through branches and pull requests, many teams keep using it for new screens after launch. The difference is that its changes go through review, tests and a preview deployment before they reach customers.",
+          title: "A five-minute test you can do yourself",
+          text: "Open your v0 app, add or change something, then refresh the page in a different browser. If your change has vanished, that screen is running on mock data. Do this on every screen and you'll have a fair picture of how much backend work is left.",
         },
       ],
     },
     {
-      id: "what-is-missing",
-      heading: "What does a v0 app usually need before launch?",
+      id: "what-to-do-next",
+      heading: "What to do next",
       blocks: [
         {
           type: "paragraph",
-          text: "A v0 app usually needs its backend finishing and its security checked. The interface is often close to done, while data access, authentication and error handling were built just far enough to make the preview work.",
-        },
-        {
-          type: "list",
-          items: [
-            {
-              term: "Real data and a schema",
-              text: "Replace mock data with a designed database schema, managed through migrations, with indexes for the queries the app actually runs.",
-            },
-            {
-              term: "Authentication and authorisation",
-              text: "Sign-in needs to be a proven library or provider, and every server action and API route must check who the user is and what they are allowed to do. Hiding a button is not a permission check.",
-            },
-            {
-              term: "Secrets kept on the server",
-              text: "In Next.js, any environment variable starting with NEXT_PUBLIC_ is sent to the browser. Keep payment, email and AI keys without that prefix and use them only in server code.",
-            },
-            {
-              term: "Validation and error states",
-              text: "Validate every form on the server, and design what users see when a request fails, takes a long time or returns nothing.",
-            },
-            {
-              term: "One set of components",
-              text: "Merge duplicated components from different chats into a single shared set, so a change to a button or form field happens once.",
-            },
-            {
-              term: "Tests, environments and monitoring",
-              text: "Automated tests on the important flows, a staging environment with its own database, error tracking and backups.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "migration-plan",
-      heading: "How do you migrate a v0 app, step by step?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Secure ownership, then design the data, then wire the interface to it, then harden and launch. The interface can stay visible to testers throughout because preview deployments show every change.",
+          text: "Get ownership sorted first, then let a developer finish the backend behind the interface you already have. You rarely need to start again.",
         },
         {
           type: "list",
           ordered: true,
           items: [
-            {
-              term: "Move everything into business accounts",
-              text: "Put the repository in your GitHub organisation and the Vercel project, domain and database stores in a Vercel team your business owns.",
-            },
-            {
-              term: "Map what is real and what is mock",
-              text: "Go screen by screen and record which data is live, which is placeholder and which actions do nothing yet. This list becomes the backlog.",
-            },
-            {
-              term: "Design the data model",
-              text: "Choose the database, write the schema and migrations, and decide who can read and change each kind of record.",
-            },
-            {
-              term: "Add authentication",
-              text: "Pick an auth provider or library, protect routes and server actions, and test as an ordinary user and as a signed-out visitor.",
-            },
-            {
-              term: "Wire the interface to real data",
-              text: "Replace mock data with server side queries, add loading and error states, and validate all input on the server.",
-            },
-            {
-              term: "Consolidate components",
-              text: "Merge near-duplicate components, remove unused ones and keep shadcn/ui components in one shared folder.",
-            },
-            {
-              term: "Set up environments and checks",
-              text: "Separate development, preview and production environment variables and databases, and run tests on every pull request.",
-            },
-            {
-              term: "Launch",
-              text: "Add monitoring and backups, point the production domain at the new deployment and keep v0 changes flowing through pull requests only.",
-            },
+            "Move the GitHub repository, the Vercel project, the domain and any connected database into accounts your business owns, not a personal login.",
+            "Ask a developer to list which screens use real data, which use mock data and which buttons do nothing yet. That list is the real scope of work.",
+            "Budget for the backend, sign-in and security work. A typical project takes four to eight weeks to reach a production first release.",
+            "Keep using v0 for new screens if you like it, with its changes going through review before customers see them.",
           ],
-        },
-      ],
-    },
-    {
-      id: "pitfalls",
-      heading: "What goes wrong in v0 migrations?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "The common mistake is treating a finished looking interface as a finished app, and launching before the backend has caught up.",
-        },
-        {
-          type: "list",
-          items: [
-            "Shipping with buttons and pages that still run on placeholder data, then finding out from customers.",
-            "Checking permissions only in the interface, so anyone who calls the server action or API route directly can bypass them.",
-            "Leaving the project, domain and database in a personal Vercel account, which is hard to untangle when the company grows or the founder changes.",
-            "Merging v0 pull requests without review, so generated changes undo fixes that developers made by hand.",
-          ],
-        },
-      ],
-    },
-    {
-      id: "when-to-stay",
-      heading: "Should you stay on v0 instead?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "For design and early prototyping, yes. If you are still testing the idea with a clickable product, v0 is a quick and inexpensive way to learn what users want. Move to a proper production setup once people rely on the app for real work, and keep v0 as a design tool that feeds pull requests into the codebase rather than the place the product is built.",
         },
       ],
     },
@@ -198,22 +145,12 @@ export const v0: BlogPost = {
     {
       question: "Can I export my code from v0?",
       answer:
-        "Yes. You can connect a GitHub repository, where v0 works on branches and opens pull requests, or download the project as a ZIP file. The code is a standard Next.js app with React, Tailwind CSS and shadcn/ui.",
+        "Yes. You can connect a GitHub repository, where v0 works on branches and proposes changes for review, or download the project as a ZIP file. The code is a standard Next.js app using React, Tailwind CSS and shadcn/ui, which any web developer can work on.",
     },
     {
       question: "Do I need to rebuild my v0 app from scratch?",
       answer:
-        "Rarely. The interface v0 generates is usually worth keeping. Most of the work is building out the backend: the database, authentication, permission checks and server side validation, plus tests and monitoring.",
-    },
-    {
-      question: "Do I have to host a v0 app on Vercel?",
-      answer:
-        "No. v0 deploys to Vercel by default and it is a good fit for Next.js, but the exported code is a standard Next.js app that can run on other hosts that support it. Many teams stay on Vercel and move the project into a business owned team.",
-    },
-    {
-      question: "How long does it take to move a v0 app to production?",
-      answer:
-        "Typically four to eight weeks. The interface is often close to done, so the time depends mostly on how much backend, authentication and integration work the app needs.",
+        "Rarely. The interface v0 generates is usually worth keeping. Most of the work is building what sits behind it: a designed database, secure sign-in, permission checks on the server, validation, tests and monitoring.",
     },
   ],
 }

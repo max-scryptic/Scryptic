@@ -2,215 +2,168 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const chooseAppDevelopmentCompany: BlogPost = {
   slug: "how-to-choose-an-app-development-company-uk",
-  title: "How to choose an app development company in the UK",
+  title: "A buyer's checklist for choosing an app development company in the UK",
   series: "launch",
   topic: "Hiring",
   description:
-    "How to choose an app development company in the UK: freelancer, studio, agency or in-house, what to check, red flags, who owns the code and questions to ask.",
+    "Choosing an app development company in the UK: the questions to ask, what good answers sound like, the red flags, and freelancer vs studio vs agency.",
   summary:
-    "To choose an app development company in the UK, first pick the right kind of supplier for your project, then check that they have live products you can use, that you know who will write your code, and that the contract assigns the code and every account to you. A low quote matters much less than those checks.",
+    "Choose an app development company by what you can check, not by the size of the quote: live apps you can use, a named person writing your code, and a contract that assigns the code and every account to you. Ask the questions below, listen for the answers, and walk away if several red flags turn up together.",
   datePublished: "2026-10-14",
-  facts: [
-    { label: "Main options", value: "Freelancer, studio, agency, in-house" },
-    { label: "Check first", value: "Live products you can use" },
-    { label: "Must be in writing", value: "IP assignment to you" },
-    { label: "Accounts", value: "In your name from day one" },
-    { label: "Pricing models", value: "Fixed price or time and materials" },
-  ],
   sections: [
     {
-      id: "your-options",
-      heading: "What are your options for building an app in the UK?",
+      id: "before-you-start",
+      heading: "Most bad app projects are decided before any code is written",
       blocks: [
         {
           type: "paragraph",
-          text: "There are four realistic routes: a freelance app developer, a small studio, a larger app development agency, or hiring your own developers. The same four apply if you're looking for a mobile app development company in the UK rather than a web build. Which one fits depends on how big the job is, how much of it you can manage yourself, and how long you'll need developers for: a few months, or years.",
+          text: "Here's the uncomfortable part: by the time an app project goes wrong, the cause is usually months old. It was the supplier picked on price, the portfolio of screenshots nobody downloaded, the contract that licensed the code instead of assigning it. None of it was hidden. It just wasn't checked.",
+        },
+        {
+          type: "paragraph",
+          text: "So this is a checklist for the checking. Decide what kind of supplier you need, ask the questions with answers you can verify, watch for the red flags, and get ownership in writing. A low quote matters much less than any of those.",
+        },
+      ],
+    },
+    {
+      id: "supplier-types",
+      heading: "Freelancer, studio, agency or in-house",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Pick the kind of supplier before you pick the supplier. The choice comes down to how big the job is, how much of the non-coding work you'll do yourself, and whether you need developers for months or for years. The same four routes apply to a mobile app as to a web app.",
         },
         {
           type: "list",
           items: [
             {
               term: "Freelancer",
-              text: "Cheapest, and you talk directly to the person writing the code. Quality varies enormously, and one person rarely does design, development, testing and project management equally well. If they get ill or land a bigger contract, your project stops.",
+              text: "Cheapest, and you talk to the person writing the code. Great value if you'll write the scope, manage the work and handle testing yourself. If they fall ill or take a bigger contract, your project stops.",
             },
             {
               term: "Small studio",
-              text: "A few people covering design, build and launch, often with the founders writing code. More continuity than a freelancer, less overhead than an agency. The catch is capacity: a studio only takes on a few projects at once, so you may have to wait for a slot.",
+              text: "A few people covering design, build and launch, often with the founders writing code. More continuity than a freelancer, less overhead than an agency, but limited capacity, so you may wait for a slot.",
             },
             {
               term: "Agency",
-              text: "Project managers, designers, QA testers and a defined process. Worth it for large or regulated builds, or when your organisation needs procurement paperwork and a supplier with a big bench. More layers mean higher cost and slower decisions, and the developers may be people you never meet.",
+              text: "Project managers, designers, testers and a set process. Worth it for large or regulated builds, or when procurement needs a big supplier. Higher cost, slower decisions, and developers you may never meet.",
             },
             {
               term: "In-house hire",
-              text: "The most control, and knowledge that stays in the business. Also the slowest start, since a good hire can take months, and one developer won't have every skill an app needs. We'd only go this way once the product is proven and needs work every week.",
+              text: "Most control, and the knowledge stays with you. Slowest to start, and one hire won't cover every skill an app needs. We'd only go this way once the product is proven and needs work every week.",
             },
           ],
         },
-      ],
-    },
-    {
-      id: "developer-vs-agency",
-      heading: "Should you hire an app developer or an agency?",
-      blocks: [
         {
           type: "paragraph",
-          text: "Hire an app developer directly if the scope is small and you're happy to run the project yourself. If you'd rather have one team own design, build and launch, and be accountable for all of it, go to a studio or agency.",
-        },
-        {
-          type: "paragraph",
-          text: "The quickest way to decide is to list the jobs that aren't coding: writing the scope, designing screens, testing on real phones, setting up hosting and environments, submitting to the app stores. If you're going to do those yourself anyway, a good freelancer is excellent value. If you'd rather spend that time talking to customers, pay a team to cover it.",
-        },
-        {
-          type: "callout",
-          title: "About lists of the best app development companies",
-          text: "Ranking sites are fine for finding names. Placements are often paid, or driven by how many reviews a firm has collected rather than how good the work is, so treat them as a long list and do your own checks.",
+          text: "A quick test: list the jobs that aren't coding, such as writing the scope, designing screens, testing on real phones, setting up hosting and submitting to the app stores. If you're happy to do those, a good freelancer is excellent value. If you'd rather spend that time with customers, pay a team that covers them.",
         },
       ],
     },
     {
-      id: "what-to-check",
-      heading: "What should you check before hiring an app development company?",
+      id: "questions-and-answers",
+      heading: "Questions to ask, and what a good answer sounds like",
       blocks: [
         {
           type: "paragraph",
-          text: "Check things you can verify. The first thing we'd look at is whether their portfolio contains apps that are live today. Download them, sign up, click around. Screenshots and Dribbble shots prove someone can design; a live product with real users proves someone can ship. Then ask what that company built and what was done by others, because portfolios often include work where the agency did the branding and someone else wrote the code.",
+          text: "Ask questions with answers you can check, and listen for specifics. A good supplier answers all of these in one call without needing to get back to you.",
+        },
+        {
+          type: "table",
+          caption: "Questions to ask an app development company, with a good answer and a worrying one for each",
+          columns: ["Question", "A good answer sounds like", "Worry if you hear"],
+          rows: [
+            ["Can I use apps you've built that are live today?", "Here are two in the stores, and one web app you can sign up to.", "Mostly mock-ups, or apps that have since been taken down."],
+            ["Which parts of those did you build?", "We did design and build; the client's team ran marketing.", "We were part of a wider team, and no detail."],
+            ["Who will write my code?", "Names, and those people are on this call.", "Our developers, with no names, or a team you never meet."],
+            ["Is any of the work subcontracted?", "A clear yes or no, and where.", "A pause, then a change of subject."],
+            ["Whose name are the accounts in?", "Yours from day one; we're invited as users.", "We set it all up and hand it over at the end."],
+            ["Does the contract assign the IP to me?", "Yes, on payment of each stage, with any reused code licensed to you.", "You get a licence to use it."],
+            ["How do scope changes get priced?", "A written change request with a price before any work starts.", "We'll work it out as we go."],
+            ["How often will I see working software?", "Every week, as a version you can click through.", "At the end of each phase, or at launch."],
+            ["What happens after launch?", "A bug fixing period, then a support option with a stated price.", "We'll discuss that later."],
+            ["If we part ways, what do I get?", "Full source, database access and enough notes to hand over.", "The app, running on our hosting."],
+            ["Why this technology for my app?", "A reason tied to your product, users or budget.", "It's what we always use, and nothing more."],
+          ],
         },
         {
           type: "paragraph",
-          text: "Next, find out who'll actually write your code. Are the people on the sales call the people who build? Is any work subcontracted, in the UK or abroad? Neither is automatically a problem, but you should know before you sign, not discover it from the commit history.",
-        },
-        {
-          type: "paragraph",
-          text: "Then the practical bits. Your GitHub organisation, hosting, database, domain, Apple and Google developer accounts and Stripe account should all be registered to your business, with the supplier invited as a user. Progress should be visible every week, ideally as a working version you can click through, not a reveal at the end. And there should be a written answer to what happens after launch: a bug fixing period, a support retainer, or a clean handover to another developer. Ask for a reference from a past client with a similar project while you're at it.",
-        },
-      ],
-    },
-    {
-      id: "who-owns-the-code",
-      heading: "Who owns the code when someone else builds your app?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Under UK copyright law, whoever writes the code owns it unless a written agreement assigns it to you. Paying the invoice doesn't transfer ownership on its own. Employees are the exception, since work they do as part of their job belongs to the employer, but freelancers, studios and agencies aren't your employees.",
-        },
-        {
-          type: "paragraph",
-          text: "So the contract needs to assign all intellectual property in the work to your company, usually once each stage is paid. If the supplier reuses their own starter code or internal tools, the contract should list them and give you a permanent licence to use them in your app. Open source libraries keep their own licences, which is normal; just ask that nothing with unusual licence terms goes in without your say. And you should get the full source, database access and enough documentation for another developer to run it. A working build on its own isn't enough.",
-        },
-        {
-          type: "callout",
-          title: "Not legal advice",
-          text: "That's the general position. On a contract of any size, it's worth paying a solicitor to read the IP and termination clauses before you sign.",
-        },
-      ],
-    },
-    {
-      id: "fixed-price-or-time-and-materials",
-      heading: "Fixed price or time and materials?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "For a first release, we'd push for a fixed price. Fixed price software development gives you a number you can plan around, and it forces both sides to agree the scope properly up front. Suppliers add a margin for risk, and changes go through a change request, so ask how those are priced before you sign.",
-        },
-        {
-          type: "paragraph",
-          text: "Time and materials, where you pay a day or hourly rate for time spent, fits better once the product is live and the work is a stream of smaller changes. It only works if you get detailed timesheets and agree a monthly cap. The hybrid that suits most founders is a fixed price for version one, then a retainer or day rate afterwards.",
+          text: "Then do the one check that beats every question: download their live apps, sign up, and use them for ten minutes. Screenshots prove someone can design. A live product with real users proves someone can ship. Ask for a reference from a past client with a similar project too.",
         },
       ],
     },
     {
       id: "red-flags",
-      heading: "What are the red flags when choosing an app developer?",
+      heading: "Red flags worth walking away over",
       blocks: [
         {
           type: "paragraph",
-          text: "The big ones are vagueness about who owns the code, who does the work and what's included. One of these is worth a direct question. Several together and we'd walk away.",
+          text: "One of these deserves a direct question. Three or more together and we'd walk away, however good the price looks.",
         },
         {
-          type: "list",
+          type: "checklist",
           items: [
             "A price within minutes of hearing the idea, with no questions about users, roles or integrations.",
             "Pushback on putting the repository, hosting or app store accounts in your name.",
-            "A contract that licenses the code to you instead of assigning it, or keeps ownership until a long retainer ends.",
-            "A portfolio of mock-ups with nothing live you can try.",
+            "A contract that licenses the code to you, or keeps ownership until a long retainer ends.",
+            "A portfolio of designs with nothing live you can try.",
             "No straight answer about who writes the code, or a different team turning up after you sign.",
             "The whole fee upfront, rather than staged payments tied to things you can see working.",
+            "No working software until the end of the project.",
             "Yes to every feature, every deadline and every budget.",
+            "A top placement on a ranking site as the main evidence of quality. Those placements are often paid or driven by review counts.",
           ],
         },
       ],
     },
     {
-      id: "questions-to-ask",
-      heading: "What questions should you ask before signing?",
+      id: "ownership",
+      heading: "Get the code assigned to you in writing",
       blocks: [
         {
           type: "paragraph",
-          text: "Ask questions with answers you can check. A good supplier will answer all of these in one call without hesitating.",
+          text: "Under UK copyright law, whoever writes the code owns it unless a written agreement assigns it to you. Paying the invoice doesn't transfer ownership. Employees are the exception, but freelancers, studios and agencies aren't your employees.",
         },
         {
-          type: "list",
-          ordered: true,
-          items: [
-            "Can I use a couple of apps you've built that are live today?",
-            "Who will write the code, and could that change mid-project?",
-            "Will the code, hosting, database, domain and store accounts be in my name from the start?",
-            "Does the contract assign all intellectual property to my company?",
-            "Is the price fixed, and how are scope changes priced?",
-            "What's included: design, testing, store submission, launch support?",
-            "How often will I see working software?",
-            "What happens after launch, and what does support cost?",
-            "If we part ways, what do I get to hand the app to someone else?",
-            "Which technologies will you use, and why those for this app?",
-          ],
+          type: "paragraph",
+          text: "The contract should assign all intellectual property in the work to your company, usually as each stage is paid. If the supplier reuses their own starter code or tools, the contract should list them and give you a permanent licence. Open source libraries keep their own licences, which is normal. And the GitHub organisation, hosting, database, domain, Apple and Google developer accounts and Stripe account should be registered to your business from the start. This is the general position, not legal advice; on a contract of any size, a solicitor reading the IP and termination clauses is money well spent.",
         },
       ],
     },
     {
-      id: "typical-costs",
-      heading: "How much do UK app development companies charge?",
+      id: "pricing",
+      heading: "Fixed price, day rates and what UK suppliers charge",
       blocks: [
         {
           type: "paragraph",
-          text: "For a focused first version, typical UK prices are around £5,000 to £25,000 with a freelancer, £10,000 to £60,000 with a small studio and £40,000 to £150,000 or more with an agency. They're ranges, not price lists, and scope moves them more than the type of supplier does.",
+          text: "For a first release, push for a fixed price. It forces both sides to agree the scope properly and gives you a number to plan around. Time and materials, paid by the day or hour, suits ongoing work after launch, as long as you get detailed timesheets and a monthly cap.",
         },
         {
           type: "paragraph",
-          text: "Freelance developers typically charge around £300 to £700 a day. Agency day rates are usually higher because they carry project managers and other specialists. An in-house developer typically costs £50,000 to £90,000 a year in salary at mid-level to senior, more in London, before employer National Insurance, pension, equipment and recruitment fees.",
+          text: "For a focused first version, typical UK prices are roughly £5,000 to £25,000 with a freelancer, £10,000 to £60,000 with a small studio and £40,000 to £150,000 or more with an agency. Freelance day rates usually sit around £300 to £700. A mid-level to senior in-house developer typically costs £50,000 to £90,000 a year in salary, more in London, before National Insurance, pension and recruitment fees. Scope moves these numbers more than the type of supplier does; our guide to the cost of building an app in the UK goes into what pushes them up or down.",
         },
         {
           type: "paragraph",
-          text: "Small studios sit between freelancers and agencies on price. Scryptic is one example: a founder-led studio in Brighton where full app to market builds start from £10,000, the client owns the code and every account, and there's a catch-up every Friday. For what pushes a price up or down, see our guide How much does it cost to build an app in the UK?",
+          text: "For reference, Scryptic is a founder-led studio in Brighton. Full app to market builds start from £10,000, the client owns the code and every account, and there's a catch-up every Friday.",
         },
       ],
     },
   ],
   faqs: [
     {
-      question: "Is it better to hire a freelance app developer or an agency?",
-      answer:
-        "A freelancer is cheaper and works well for small, clearly scoped projects you're happy to manage. A studio or agency costs more but takes design, build, testing and launch off your plate as one accountable job. Decide based on how much of the non-coding work you want to do yourself.",
-    },
-    {
       question: "Who owns the code if an agency builds my app?",
       answer:
-        "In the UK, whoever writes the code owns the copyright unless a written contract assigns it to you. Make sure yours includes a full IP assignment to your company, and that the repository and accounts are in your name from the start.",
-    },
-    {
-      question: "Should I choose a fixed price or time and materials contract?",
-      answer:
-        "For a first release, fixed price is usually the better choice because it forces a clear scope and gives you a number to plan around. Time and materials suits ongoing work after launch, as long as you get detailed timesheets and a monthly cap.",
+        "In the UK, whoever writes the code owns the copyright unless a written contract assigns it to you, and paying the invoice is not enough on its own. Make sure your contract includes a full IP assignment to your company, and that the repository and accounts are in your name from the start.",
     },
     {
       question: "Does my app development company need to be in the UK?",
       answer:
-        "No. A UK supplier makes contracts, time zones and meetings simpler, but plenty of founders work happily with developers in other cities or countries over video calls. Clear communication, ownership terms and live products matter far more than location.",
+        "No. A UK supplier makes contracts, time zones and meetings simpler, but plenty of founders work well with developers elsewhere over video calls. Clear communication, ownership terms and live products you can try matter far more than location.",
     },
     {
       question: "How many quotes should I get for an app?",
       answer:
-        "Two or three is plenty, as long as every supplier gets the same written brief. Compare what's included as well as the total, because the cheapest quote often leaves out design, testing or launch support.",
+        "Two or three is plenty, as long as every supplier gets the same written brief. Compare what each quote includes as well as the total, because the cheapest one often leaves out design, testing or launch support.",
     },
   ],
 }

@@ -6,7 +6,7 @@ export const appCostUk: BlogPost = {
   series: "launch",
   topic: "App cost",
   description:
-    "What it costs to build an app in the UK: typical prices for DIY tools, freelancers, studios and agencies, how long it takes, running costs and ways to save.",
+    "UK app development costs broken down: prices by route and by type of app, what moves a quote, monthly running costs and the hidden costs founders miss.",
   summary:
     "Building an app in the UK typically costs a few hundred pounds if you do it yourself with no-code or AI tools, roughly £5,000 to £25,000 with a freelancer, £10,000 to £60,000 with a small studio and £40,000 to £150,000 or more with an agency. Scope moves the price far more than who builds it. Once it's live, budget around 15 to 20% of the build cost a year to keep it running and up to date.",
   datePublished: "2026-10-14",
@@ -20,31 +20,21 @@ export const appCostUk: BlogPost = {
   sections: [
     {
       id: "cost-by-route",
-      heading: "How much does it cost to build an app in the UK?",
+      heading: "The price depends on who builds it",
       blocks: [
         {
           type: "paragraph",
-          text: "For a focused first version, expect to pay somewhere between £5,000 and £60,000 if you hire someone, and well past £150,000 for a large, polished product from an agency. These are the ranges UK founders are typically quoted, not survey figures, and they overlap a lot. A simple app from an agency can easily cost less than a complicated one from a freelancer.",
+          text: "£10,000 to £60,000 is the range most UK founders are quoted for a focused first version built by a small studio. Do it yourself and the cash cost drops to a few hundred pounds; hire a full-service agency and it can pass £150,000. These are the ranges we see quoted, not survey figures, and they overlap a lot: a simple app from an agency can cost less than a complicated one from a freelancer.",
         },
         {
-          type: "list",
-          items: [
-            {
-              term: "Do it yourself: a few hundred pounds",
-              text: "No-code and AI app builders charge a monthly subscription, so the cash outlay for a first version is often under £1,000. You pay in time instead, and in the walls you hit once real users, payments and personal data turn up.",
-            },
-            {
-              term: "Freelancer: roughly £5,000 to £25,000",
-              text: "UK freelance developers typically charge around £300 to £700 a day. A good one can ship a small MVP on their own, but you'll usually be the designer, tester and project manager.",
-            },
-            {
-              term: "Small studio: roughly £10,000 to £60,000",
-              text: "A small team handles design, build and launch, and you normally get a written estimate before anything starts. Less process than an agency, and someone other than you is accountable when things slip.",
-            },
-            {
-              term: "Agency: roughly £40,000 to £150,000 and up",
-              text: "You're paying for account managers, dedicated designers, QA testers and a formal discovery phase. That's money well spent on a complex or regulated product. For a first MVP it's usually more machinery than you need.",
-            },
+          type: "table",
+          caption: "Typical UK cost of a first app version by who builds it",
+          columns: ["Route", "Typical cost", "What you get", "What you still do yourself"],
+          rows: [
+            ["Do it yourself", "A few hundred pounds", "A no-code or AI builder on a monthly subscription", "Everything, plus hitting the walls when payments and personal data arrive"],
+            ["Freelancer", "£5,000 to £25,000", "One developer at roughly £300 to £700 a day", "Usually design, testing and project management"],
+            ["Small studio", "£10,000 to £60,000", "Design, build and launch from a small team, with a written estimate first", "Decisions, content and feedback"],
+            ["Agency", "£40,000 to £150,000+", "Account managers, designers, QA and a formal discovery phase", "Very little, but you pay for the machinery"],
           ],
         },
         {
@@ -55,33 +45,62 @@ export const appCostUk: BlogPost = {
       ],
     },
     {
-      id: "what-drives-cost",
-      heading: "What drives app development cost?",
+      id: "cost-by-app-type",
+      heading: "Cost by type of app",
       blocks: [
         {
           type: "paragraph",
-          text: "Scope. How many screens there are, how many different kinds of user, and how many other systems the app has to talk to. Day rates matter less than people expect, because a cheaper developer on a bigger scope still sends a bigger invoice.",
+          text: "What the app does matters more than who builds it. The table below gives rough ranges for a focused first version from a small studio. They're our own planning estimates for typical scopes, not quotes, and your app can land outside them in either direction.",
+        },
+        {
+          type: "table",
+          caption: "Rough studio cost and timeline for a first version, by type of app",
+          columns: ["Type of app", "A typical first version", "Rough cost", "Rough timeline"],
+          rows: [
+            ["Internal tool or dashboard", "Sign-in, a few data screens, an export, two roles", "£10,000 to £20,000", "4 to 8 weeks"],
+            ["Booking or appointments app", "Availability, booking, payment, reminders, staff view", "£12,000 to £30,000", "6 to 10 weeks"],
+            ["SaaS web app", "Accounts, teams, one core workflow, subscriptions, admin", "£15,000 to £40,000", "6 to 12 weeks"],
+            ["AI-powered product", "One core AI feature, usage limits, billing, logging", "£15,000 to £45,000", "6 to 12 weeks"],
+            ["Two-sided marketplace", "Two user types, listings, search, payouts, moderation", "£25,000 to £60,000", "8 to 16 weeks"],
+            ["Native iOS and Android app", "Shared codebase, backend, store submission", "£25,000 to £60,000+", "10 to 16 weeks"],
+          ],
         },
         {
           type: "paragraph",
-          text: "These are the things that move a quote most, in rough order of how often they surprise people:",
+          text: "The same label can hide very different projects. A booking app for one physio clinic and a booking platform for hundreds of clinics, each with their own staff and settings, share a name and almost nothing else on the invoice.",
+        },
+      ],
+    },
+    {
+      id: "what-drives-cost",
+      heading: "What moves a quote up or down",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Scope moves it most: how many screens, how many kinds of user and how many other systems the app talks to. Day rates matter less than people expect, because a cheaper developer on a bigger scope still sends a bigger invoice.",
         },
         {
-          type: "list",
-          items: [
-            "Admin tools. Somebody has to refund a customer, ban a spammer and fix a typo in a listing. A proper back office is easy to forget at the idea stage and can be a surprisingly large slice of the build.",
-            "User roles. Customer, staff and admin isn't three times the work, but every role adds screens and permission rules, and each rule needs testing signed in as that user, because testing as an admin hides permission bugs.",
-            "Payments. A one-off Stripe Checkout is quick. Subscriptions with trials, proration, failed card retries and VAT invoices take much longer, and a webhook that fires twice and books the same class twice is the kind of bug you only avoid by designing for it.",
-            "Integrations. A well documented API like Stripe or Xero is predictable. An old booking system with a SOAP API and a test environment that's down half the time is not, so price the fussy ones generously.",
-            "Platforms. Web, iOS and Android are three targets. React Native or Flutter share most of the code between the two phone platforms, but each still needs its own testing, store listing and review.",
-            "Design. A clean interface built on a component library costs a fraction of a fully bespoke brand system with custom illustration and animation.",
+          type: "table",
+          caption: "The features that move an app quote most, from the cheaper end to the expensive end",
+          columns: ["Cost driver", "Cheaper end", "Expensive end"],
+          rows: [
+            ["Admin tools", "Editing data in the database dashboard", "A full back office with refunds, moderation and reports"],
+            ["User roles", "One kind of user", "Customer, staff and admin, each tested separately"],
+            ["Payments", "A one-off Stripe Checkout", "Subscriptions with trials, proration, retries and VAT invoices"],
+            ["Integrations", "A well documented API such as Stripe or Xero", "An old system with a SOAP API and an unreliable test environment"],
+            ["Platforms", "One responsive web app", "Web, iOS and Android, each with its own testing and review"],
+            ["Design", "A clean interface on a component library", "A bespoke brand system with custom illustration and animation"],
           ],
+        },
+        {
+          type: "paragraph",
+          text: "Admin tools are the one founders forget most often. Somebody has to refund a customer, ban a spammer and fix a typo in a listing, and a proper back office can be a surprisingly large slice of the build. Payments come second: a Stripe webhook that fires twice and books the same class twice is the kind of bug you only avoid by designing for it from the start.",
         },
       ],
     },
     {
       id: "how-long",
-      heading: "How long does it take to build an app?",
+      heading: "How long it takes, and why waiting costs more than coding",
       blocks: [
         {
           type: "paragraph",
@@ -89,63 +108,52 @@ export const appCostUk: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "In practice the code is rarely what holds a launch up. Waiting is. Waiting on copy and decisions from the founder, on a payment provider's account checks, on API keys from a partner, and on App Store review, which is often quick but can stretch to a couple of weeks if the first submission gets rejected. Build those waits into your plan and you'll hit your date far more often.",
+          text: "The code is rarely what holds a launch up. Waiting is: on copy and decisions from the founder, on a payment provider's account checks, on API keys from a partner, and on App Store review, which is often quick but can stretch to a couple of weeks if the first submission is rejected. Build those waits into the plan and you'll hit your date far more often.",
         },
       ],
     },
     {
       id: "running-costs",
-      heading: "How much does it cost to keep an app running?",
+      heading: "Running costs per month",
       blocks: [
         {
           type: "paragraph",
-          text: "Plan on roughly 15 to 20% of the build cost each year for maintenance, plus hosting and service fees. That percentage is a rule of thumb, not a law. A quiet internal tool can cost far less, and a product you're actively growing will cost more because you'll keep adding to it.",
+          text: "An early-stage web app typically costs tens of pounds a month to host, plus maintenance of roughly 15 to 20% of the build cost a year. Maintenance is the bigger number by far, and the one most budgets leave out. The percentage is a rule of thumb: a quiet internal tool can cost much less, and a product you're actively growing will cost more.",
         },
         {
-          type: "list",
-          items: [
-            {
-              term: "Hosting and database",
-              text: "Often tens of pounds a month for an early product on platforms like Vercel, Render or a managed Postgres provider. It climbs with traffic, storage and background jobs.",
-            },
-            {
-              term: "Apple Developer Program",
-              text: "You need it to publish on the App Store. At the time of writing it's US$99 a year, charged in local currency.",
-            },
-            {
-              term: "Google Play",
-              text: "A one-off registration fee, US$25 at the time of writing.",
-            },
-            {
-              term: "Store commission",
-              text: "Apple and Google take a cut of digital goods and subscriptions sold inside a mobile app, typically 15% to 30% depending on the programme and your revenue. On the web, Stripe's card processing fee is a small fraction of that.",
-            },
-            {
-              term: "Third-party services",
-              text: "Transactional email, error tracking, analytics, maps, SMS and AI APIs. Most start cheap and bill by usage, so watch the AI and SMS lines in particular as you grow.",
-            },
-            {
-              term: "Maintenance",
-              text: "Dependency and security updates, bug fixes, and keeping up with each new iOS and Android release. Mobile apps need noticeably more of this than web apps, because the operating system changes under them every year.",
-            },
+          type: "table",
+          caption: "Typical running costs for an early-stage app",
+          columns: ["Item", "Typical cost", "Notes"],
+          rows: [
+            ["Hosting and database", "Tens of pounds a month at first", "Vercel, Render or a managed Postgres provider; climbs with traffic, storage and jobs"],
+            ["Email, error tracking and analytics", "Free tiers, then tens of pounds a month", "Billed by usage once you outgrow the free allowance"],
+            ["AI, SMS and maps APIs", "Pennies per call, by usage", "The lines to watch as you grow; set limits per user"],
+            ["Apple Developer Program", "US$99 a year", "Needed to publish on the App Store; charged in local currency"],
+            ["Google Play", "US$25 once", "One-off registration fee at the time of writing"],
+            ["Store commission", "15% to 30% of in-app digital sales", "Depends on the programme and your revenue; Stripe on the web costs far less"],
+            ["Maintenance", "15 to 20% of the build a year", "Updates, security patches, bug fixes and new iOS and Android releases"],
           ],
+        },
+        {
+          type: "paragraph",
+          text: "To make that concrete, take a hypothetical £20,000 web app. Maintenance at 15 to 20% is £3,000 to £4,000 a year, or about £250 to £330 a month. Add hosting and services of, say, £50 to £150 a month while traffic is modest, and you're looking at roughly £300 to £500 a month all in. A native mobile app sits higher, because the operating system changes under it every year.",
         },
       ],
     },
     {
       id: "hidden-costs",
-      heading: "What hidden costs should you budget for?",
+      heading: "The costs that sit outside the quote",
       blocks: [
         {
           type: "paragraph",
-          text: "The ones that catch founders out sit outside the quote: work the supplier assumed you'd do, and things nobody thought about until launch week. Ask each supplier directly which of these they've included.",
+          text: "The ones that catch founders out are work the supplier assumed you'd do, and things nobody thought about until launch week. Ask each supplier directly which of these they've included.",
         },
         {
           type: "list",
           items: [
             "Content. Onboarding copy, empty states, emails, help pages and app store screenshots don't write themselves.",
             "Legal. A privacy policy and terms of service, and a proper look at UK GDPR if you're storing personal data.",
-            "Changing your mind mid-build. It's the single most common reason projects run over. Park new ideas for version two unless they're blocking launch.",
+            "Changing your mind mid-build. It's the most common reason projects run over. Park new ideas for version two unless they block launch.",
             "The first month after launch. Real users find things testing didn't, so keep some budget back for it.",
             "Paying twice. A cheap prototype that can't carry real users gets rebuilt, and the second build is the expensive one.",
           ],
@@ -154,7 +162,7 @@ export const appCostUk: BlogPost = {
     },
     {
       id: "cut-the-cost",
-      heading: "How can you cut the cost without cutting corners?",
+      heading: "How to spend less without regretting it",
       blocks: [
         {
           type: "paragraph",
@@ -162,11 +170,7 @@ export const appCostUk: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "For most first versions we'd also start on the web. A responsive web app works on every phone and laptop, ships without app store review and avoids store commission. Go native first only if the product genuinely needs it, for example offline use in the field or background location tracking. Our guides How to build an MVP and Web app or mobile app first? go into both decisions in more detail.",
-        },
-        {
-          type: "paragraph",
-          text: "Buy the boring parts. Authentication, payments, email and search are solved problems, and building your own is rarely worth it at this stage. If you already have a prototype from Lovable, Bolt or a no-code tool, bring it: it's a working specification, and sometimes a codebase worth keeping, as our guide From vibe coding to a production app explains.",
+          text: "Start on the web unless the product genuinely needs a native app. A responsive web app works on every phone and laptop, ships without app store review and avoids store commission; offline use in the field or background location tracking are the usual reasons to go native first. Buy the boring parts too. Authentication, payments, email and search are solved problems. And if you already have a prototype from Lovable, Bolt or a no-code tool, bring it: it's a working specification, and sometimes a codebase worth keeping.",
         },
         {
           type: "callout",
@@ -177,7 +181,7 @@ export const appCostUk: BlogPost = {
     },
     {
       id: "accurate-quote",
-      heading: "How do you get an accurate quote for your app?",
+      heading: "Getting a quote you can rely on",
       blocks: [
         {
           type: "paragraph",
@@ -197,7 +201,7 @@ export const appCostUk: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "At Scryptic, full app to market builds start from £10,000 depending on complexity, usually take 1 to 2 months from kickoff to launch, and the written estimate comes before any work starts. Whoever you go with, our guide How to choose an app development company in the UK covers what else to check before you sign.",
+          text: "At Scryptic, full app to market builds start from £10,000 depending on complexity, usually take 1 to 2 months from kickoff to launch, and the written estimate comes before any work starts. Whoever you go with, our guide on choosing an app development company in the UK covers what else to check before you sign.",
         },
       ],
     },
@@ -212,6 +216,11 @@ export const appCostUk: BlogPost = {
       question: "Can I build an app for under £5,000?",
       answer:
         "Yes, if you build it yourself with no-code or AI tools, or the scope is very small. At that budget a professional build is usually a prototype rather than a production app. That's a perfectly good first step if you want to test demand before spending more.",
+    },
+    {
+      question: "How much do app developers charge per day in the UK?",
+      answer:
+        "UK freelance app developers typically charge around £300 to £700 a day, depending on experience and the technology. Studios and agencies often quote a fixed price for a defined scope instead, which builds in design, testing and project management.",
     },
     {
       question: "Is a web app cheaper to build than a mobile app?",
