@@ -1,3 +1,4 @@
+import outsystemsLogo from "@/assets/blog/logos/outsystems.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const outsystems: BlogPost = {
@@ -5,6 +6,7 @@ export const outsystems: BlogPost = {
   title: "Migrating from OutSystems to an agentic stack",
   series: "migration",
   topic: "OutSystems",
+  logo: outsystemsLogo,
   category: "Enterprise low-code",
   description:
     "How to migrate from OutSystems to code you own: O11 detach versus ODC, getting your data out, what to rebuild, and how AI coding agents change the sums.",
