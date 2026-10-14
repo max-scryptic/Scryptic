@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { BrowserFrame, PhoneFrame } from "@/components/browser-frame"
+import { BrowserFrame } from "@/components/browser-frame"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import { caseStudyPage, createMetadata, pages } from "@/lib/seo"
@@ -166,7 +166,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           </ul>
         </Section>
 
-        {study.gallery.length > 0 || study.mobile ? (
+        {study.gallery.length > 0 ? (
           <section aria-labelledby="screens-heading" className="flex flex-col gap-8 border-t border-border pt-12">
             <div className="flex flex-col gap-3">
               <p className="font-mono text-xs tracking-widest text-primary uppercase">Screens</p>
@@ -174,26 +174,16 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 A closer look
               </h2>
             </div>
-            <div className="grid items-start gap-6 lg:grid-cols-[1fr_16rem]">
-              <div className="flex flex-col gap-6">
-                {study.gallery.map((shot) => (
-                  <BrowserFrame
-                    key={shot.alt}
-                    src={shot.src}
-                    alt={shot.alt}
-                    domain={domain}
-                    sizes="(min-width: 1152px) 864px, 100vw"
-                  />
-                ))}
-              </div>
-              {study.mobile ? (
-                <PhoneFrame
-                  src={study.mobile.src}
-                  alt={study.mobile.alt}
-                  sizes="(min-width: 1024px) 256px, 70vw"
-                  className="mx-auto w-full max-w-64 lg:sticky lg:top-32"
+            <div className="flex flex-col gap-6">
+              {study.gallery.map((shot) => (
+                <BrowserFrame
+                  key={shot.alt}
+                  src={shot.src}
+                  alt={shot.alt}
+                  domain={domain}
+                  sizes="(min-width: 1152px) 1152px, 100vw"
                 />
-              ) : null}
+              ))}
             </div>
           </section>
         ) : null}

@@ -54,27 +54,3 @@ export function BrowserFrame({
     </figure>
   )
 }
-
-/** A phone-sized screenshot with rounded corners, for the mobile view. */
-export function PhoneFrame({
-  src,
-  alt,
-  sizes,
-  className,
-}: {
-  src: StaticImageData
-  alt: string
-  sizes: string
-  className?: string
-}) {
-  return (
-    <figure
-      className={cn(
-        "overflow-hidden rounded-[2rem] border-[6px] border-foreground/90 bg-card shadow-xl shadow-black/10",
-        className,
-      )}
-    >
-      <Image src={src} alt={alt} sizes={sizes} placeholder="blur" className="block h-auto w-full" />
-    </figure>
-  )
-}
