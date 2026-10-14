@@ -19,7 +19,7 @@ import { featuredCaseStudies } from "@/lib/work"
 // registry title stays "Scryptic" for breadcrumbs, JSON-LD and llms.txt.
 export const metadata = createMetadata({
   ...pages.home,
-  title: `${siteConfig.name} | MVP and app development studio in Brighton`,
+  title: `${siteConfig.name} | MVP and app development studio`,
 })
 
 // The process timetable: a typical eight week build. `start` and `weeks` place
