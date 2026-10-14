@@ -20,6 +20,9 @@ export const founder = {
     "I'm a full-stack developer. For the past five years I've worked in small, close-knit teams, building software for enterprise clients and helping startups get from a rough idea to a live product.",
     "Enterprise work taught me to write code that's secure and easy to maintain. Startups taught me to move fast and cut what doesn't matter. I bring both to every project, and I'll only use a new tool if it makes your product better, faster or cheaper to build, not just because it's new.",
   ],
+  /** The shorter, third-person bio in the "About the author" box on every blog post. */
+  authorBio:
+    "Max is the founder of Scryptic and a full-stack developer with five years of experience building software for enterprise clients and startups. He builds MVPs for UK founders and takes apps made with no-code and AI builders through to production.",
   /** Also emitted as the author's schema.org sameAs on every post. */
   socials: [
     {

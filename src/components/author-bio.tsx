@@ -32,11 +32,7 @@ export function AuthorBio() {
             {founder.role}, {siteConfig.name}
           </p>
         </div>
-        {founder.bio.map((paragraph) => (
-          <p key={paragraph} className="max-w-2xl text-pretty text-muted-foreground">
-            {paragraph}
-          </p>
-        ))}
+        <p className="max-w-2xl text-pretty text-muted-foreground">{founder.authorBio}</p>
         <SocialLinks name={founder.fullName} profiles={founder.socials} />
       </div>
     </section>
