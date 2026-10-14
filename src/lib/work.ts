@@ -436,12 +436,12 @@ const prettyMetrics: CaseStudy = {
   },
   gallery: [
     {
-      src: prettyMetricsDetail1,
-      alt: "Pretty Metrics' about page: the headline Turn your MRR into charts worth sharing, above example share cards",
-    },
-    {
       src: prettyMetricsDetail2,
       alt: "The Pretty Metrics backdrop browser previewing an MRR card on the animated Coin Shower backdrop, beside a grid of live backdrops",
+    },
+    {
+      src: prettyMetricsDetail1,
+      alt: "Pretty Metrics' about page: the headline Turn your MRR into charts worth sharing, above example share cards",
     },
   ],
 }
