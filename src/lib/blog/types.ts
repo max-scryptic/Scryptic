@@ -39,6 +39,7 @@ export type PostCategory =
   | "No-code app builders"
   | "Website builders"
   | "Internal tool builders"
+  | "Enterprise low-code"
 
 export type BlogPost = {
   /** URL segment: /blog/<slug>. */

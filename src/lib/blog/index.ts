@@ -124,6 +124,10 @@ export const postCategories: { name: PostCategory; text: string }[] = [
     name: "Internal tool builders",
     text: "When an internal tool or a spreadsheet base turns into the product customers use.",
   },
+  {
+    name: "Enterprise low-code",
+    text: "Platforms that run core business systems, where the move is about licence cost, lock-in and keeping the business running while you rebuild.",
+  },
 ]
 
 export function getPost(slug: string) {
