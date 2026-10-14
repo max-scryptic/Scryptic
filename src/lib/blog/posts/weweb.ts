@@ -13,6 +13,7 @@ export const weweb: BlogPost = {
   summary:
     "Leaving WeWeb is usually smaller than founders fear and different from what they expect. The exported Vue build isn't source code you can maintain, but your Supabase or Xano backend and its data can stay put while the frontend is rebuilt against it, typically in four to eight weeks.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   sections: [
     {
       id: "export-means-ownership",

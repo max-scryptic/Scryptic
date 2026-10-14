@@ -2,177 +2,126 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const googleSheetsDatabase: BlogPost = {
   slug: "google-sheets-as-a-database",
-  title: "Using Google Sheets as a database, and when to move off it",
+  title: "Google Sheets as a database and the signs you've outgrown it",
   series: "automation",
   topic: "Google Sheets",
   description:
-    "When using Google Sheets as a database works, the limits you will hit, the signs it is time to move, and how to switch to Postgres and keep Sheets for reports.",
+    "Using Google Sheets as a database works until it doesn't. The warning signs in the order they appear, what to move to, and how to switch over gradually.",
   summary:
-    "Using Google Sheets as a database is fine for a small team with low volume, simple data and a few trusted people editing it. It stops being fine when you need linked records, per-user permissions or automations that can't afford to break. The usual next step is Postgres, with Sheets kept as a read-only reporting view on top.",
+    "Google Sheets is a perfectly good database for a small team with simple data, and most businesses outgrow it in a predictable order: editing rules first, then lookups between tabs, broken automations, slow formulas and finally permissions. Once three or more of those signs show up, move the data to Postgres and keep the sheet as a read-only view while you switch over one piece at a time.",
   datePublished: "2026-10-14",
-  facts: [
-    { label: "Works best for", value: "Small teams, low volume" },
-    { label: "Cell limit", value: "10 million per file, all tabs" },
-    { label: "API quota", value: "Counted per minute, not per day" },
-    { label: "Usual next step", value: "Postgres, Sheets for reports" },
-  ],
   sections: [
     {
-      id: "when-it-works",
-      heading: "Can you use Google Sheets as a database?",
+      id: "a-business-on-a-sheet",
+      heading: "Picture a business that runs on one spreadsheet",
       blocks: [
         {
           type: "paragraph",
-          text: "Yes, and for a lot of small businesses it's the right call. If you already pay for Google Workspace it costs nothing extra, everyone on the team knows how to use it, and you can change the structure in ten seconds without asking a developer. That last part is worth more than people admit.",
+          text: "A spreadsheet is a fine database for a small business, right up until the day it quietly isn't. Picture an imaginary cleaning company with a handful of staff. Bookings arrive through a Google Form and land as rows in a sheet. The owner and one coordinator assign cleaners by typing a name into a column, and a short Apps Script emails the cleaner the address.",
         },
         {
           type: "paragraph",
-          text: "It works when the data is modest and the stakes are low. A typical good fit:",
-        },
-        {
-          type: "list",
-          items: [
-            "A Google Form or a single automation feeds one main sheet: enquiries, bookings, orders, job applications.",
-            "Hundreds or a few thousand rows, growing slowly.",
-            "Two or three trusted people edit it, and it's fine for all of them to see everything.",
-            "If the sheet broke for a day you'd be irritated, not out of business.",
-          ],
+          text: "At that size, the sheet is the right call. It costs nothing extra on Google Workspace, everyone knows how to use it, and the structure changes in ten seconds without a developer.",
         },
         {
           type: "paragraph",
-          text: "The trouble starts when the sheet quietly turns into the backend for something customers rely on, usually without anyone deciding that it should.",
+          text: "Now let it grow for two years: more staff, regular clients, invoices, a promised client portal. The sheet doesn't fail all at once. It fails in a fairly predictable sequence, and knowing where you are in it tells you how long you've got.",
         },
       ],
     },
     {
-      id: "how-people-set-it-up",
-      heading: "How do people use Google Sheets as a backend?",
+      id: "warning-signs",
+      heading: "The warning signs, in the order they usually appear",
       blocks: [
         {
           type: "paragraph",
-          text: "Usually with Google Forms or an automation tool putting rows in, and Apps Script or the Sheets API doing something with them. Most setups we see use some mix of these:",
+          text: "The early signs are about people, the middle ones about automations, the late ones about access and safety.",
         },
-        {
-          type: "list",
-          items: [
-            {
-              term: "Google Forms",
-              text: "Each response lands as a new row in a linked sheet. Using Google Forms as a database is really using the sheet behind it; the form can add rows but can't look up or edit existing ones.",
-            },
-            {
-              term: "Apps Script",
-              text: "JavaScript that runs inside Workspace. It can fire on a form submission or an edit, send emails, call other APIs and run on a timer. At the time of writing a single run is capped at six minutes, so anything heavy has to be chunked.",
-            },
-            {
-              term: "The Sheets API",
-              text: "Lets your own code read and write the sheet over HTTP. This is how a website or small app ends up with a Google Sheet as its backend.",
-            },
-            {
-              term: "No-code layers",
-              text: "Glide, Softr and AppSheet put an app interface over a sheet. Zapier, Make and n8n shuttle rows between it and everything else.",
-            },
-          ],
-        },
+        { type: "subheading", text: "1. A row of red cells saying do not touch" },
         {
           type: "paragraph",
-          text: "Each piece is easy on its own. The glue is what breaks. Someone inserts a column between Email and Phone, and the script that reads column D starts sending texts to email addresses. Nobody remembers who wrote the script, and the error only shows up in an execution log nobody checks.",
+          text: "More people start editing. Someone sorts one column on its own and scrambles a week of bookings, so a coloured row appears listing columns nobody may change. Meanwhile the sheet accepts a mistyped date, a duplicate email or a blank required field without complaint.",
         },
-      ],
-    },
-    {
-      id: "limits",
-      heading: "What are the limits of Google Sheets as a database?",
-      blocks: [
+        { type: "subheading", text: "2. More lookups than data" },
         {
           type: "paragraph",
-          text: "The published limits are cell count and API quotas, but most teams hit the unwritten ones first: no data rules, no row-level permissions and a file that gets slow long before any official ceiling.",
+          text: "Regular clients get their own tab with an ID, and bookings pull details across with XLOOKUP. Nothing enforces the link: delete a client and their bookings point at nothing, change an ID and every lookup quietly returns blank. This is the sheet trying to be a relational database.",
         },
+        { type: "subheading", text: "3. An automation breaks because a column moved" },
         {
-          type: "list",
-          items: [
-            {
-              term: "Cells per spreadsheet",
-              text: "A spreadsheet holds up to 10 million cells, and Google raises that figure every few years, so check the current one. It's shared across every tab, and empty cells inside the grid count.",
-            },
-            {
-              term: "API quotas",
-              text: "The Sheets API limits requests per minute, per project and per user. The published figures at the time of writing are 300 reads and 300 writes a minute per project, and 60 of each per user. Go over and you get 429 errors until the minute resets.",
-            },
-            {
-              term: "No relationships or constraints",
-              text: "A mistyped customer ID, a duplicate email, a date typed as text, a blank required field: the sheet accepts all of them without complaint.",
-            },
-            {
-              term: "Concurrent writes",
-              text: "People editing together in the browser is fine. Scripts are another matter. Two automations reading a row, changing it and writing it back at the same moment will overwrite each other, and there are no transactions to undo a half-finished update.",
-            },
-            {
-              term: "All or nothing sharing",
-              text: "Access is per file. Anyone who can open the spreadsheet can see every tab and every row. Protected ranges stop edits, not reading, so keeping one client's data away from another means separate files.",
-            },
-            {
-              term: "History and backups",
-              text: "Version history exists, but restoring rolls back the whole file, including the good changes made since. There's no independent backup, and one accidental sort on a single column can scramble months of data.",
-            },
-            {
-              term: "Speed",
-              text: "XLOOKUP, IMPORTRANGE and array formulas recalculate across the file. In practice a formula-heavy sheet gets painful at a few tens of thousands of rows, nowhere near the cell limit.",
-            },
-          ],
+          type: "paragraph",
+          text: "Someone inserts a Phone column between Email and Address, and the script that reads column D starts sending texts to email addresses. The error only shows in an execution log nobody checks. Once Zapier or a website also read the sheet, every column rename is a small outage.",
+        },
+        { type: "subheading", text: "4. Clean-up becomes a weekly job" },
+        {
+          type: "paragraph",
+          text: "The same client spelled three ways, dates in four formats, phone numbers that lost their leading zero. Someone spends Friday afternoon fixing it, every Friday.",
+        },
+        { type: "subheading", text: "5. The file gets slow" },
+        {
+          type: "paragraph",
+          text: "Lookups, IMPORTRANGE and array formulas recalculate across the file. A formula-heavy sheet often gets painful at a few tens of thousands of rows, nowhere near the official limit of 10 million cells per spreadsheet, which is shared across every tab and counts empty cells inside the grid.",
+        },
+        { type: "subheading", text: "6. Quota errors and timeouts" },
+        {
+          type: "paragraph",
+          text: "The Sheets API limits requests per minute: at the time of writing, 300 reads and 300 writes per project, and 60 of each per user. Go over and you get 429 errors until the minute resets. An Apps Script run is capped at six minutes, so the nightly invoicing script needs chunking. Adding delays and retries means you're working around the tool.",
+        },
+        { type: "subheading", text: "7. A client wants to see only their own records" },
+        {
+          type: "paragraph",
+          text: "This is usually the hard stop. Sharing is per file, so anyone who can open the spreadsheet sees every tab and row; protected ranges stop edits, not reading. Separating clients means a file per client, synced by hand.",
+        },
+        { type: "subheading", text: "8. Nobody can say who has access" },
+        {
+          type: "paragraph",
+          text: "The sheet holds names, addresses and door codes, it's shared with former staff and a contractor's personal Gmail, and version history only rolls back the whole file. There's no independent backup. With personal data, that's more than an inconvenience.",
         },
         {
           type: "callout",
-          title: "If you're on the Sheets API, batch everything",
-          text: "A batch request counts as one request towards the quota. Read a whole range in one call instead of looping cell by cell, and you'll rarely see a 429.",
+          title: "Count the signs",
+          text: "One of these on its own can be patched inside Sheets. Three or more and we'd stop patching and start planning the move.",
         },
       ],
     },
     {
-      id: "relational",
-      heading: "Can Google Sheets work as a relational database?",
+      id: "what-to-move-to",
+      heading: "What to move to",
       blocks: [
         {
           type: "paragraph",
-          text: "Not really. You can fake it: give each customer an ID, store that ID on the Orders tab and pull details across with XLOOKUP or QUERY. For a few hundred rows that's fine. But nothing enforces the link. Delete a customer and their orders point at nothing. Change an ID and every lookup that used it quietly returns blank.",
-        },
-        {
-          type: "paragraph",
-          text: "Postgres enforces those links with foreign keys, rejects bad values with constraints and joins tables in one query instead of ten thousand formulas. If you're writing more lookups than data, that's the clearest sign you want a relational database.",
-        },
-      ],
-    },
-    {
-      id: "signs-to-move",
-      heading: "When should you move off Google Sheets?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Move when you're spending more time protecting the sheet than using it. The person who maintains it usually knows before anyone else. Watch for these:",
+          text: "For most businesses here, the answer is Postgres behind a small app. It enforces links with foreign keys, rejects bad values with constraints, joins tables in one query instead of ten thousand formulas, and shows each person only their rows.",
         },
         {
           type: "list",
           items: [
-            "An app or website reads and writes the sheet, and it has already broken because someone renamed a column.",
-            "There's a tab, or a row of red cells, telling people which columns not to touch.",
-            "Clients or contractors need to see their own records and nobody else's.",
-            "Automations hit quota errors or time out, and you've started adding delays and retries.",
-            "Clearing up duplicates and blanks is a regular weekly job.",
-            "You hold personal data and couldn't quickly say who has access to it.",
+            {
+              term: "Postgres and an app",
+              text: "The right home when customers or staff log in, when automations can't afford to break, or when the data holds anything personal. Managed providers include automated backups and point in time recovery.",
+            },
+            {
+              term: "A CRM",
+              text: "If the sheet is really a client list with notes and follow-ups, an off-the-shelf CRM may solve it without a build.",
+            },
+            {
+              term: "Airtable",
+              text: "A reasonable halfway house for linked records and field types, with its own record limits and per-seat pricing, and the same ownership questions later on.",
+            },
           ],
         },
         {
           type: "paragraph",
-          text: "One of these on its own can be patched inside Sheets. Three or more and we'd stop patching. If the sheet has become something customers pay for, our piece on when to turn your automations into a SaaS product covers what comes next.",
+          text: "An outgrown spreadsheet also makes a surprisingly good spec: it shows exactly how the business already works.",
         },
       ],
     },
     {
-      id: "how-to-move",
-      heading: "How do you move from Google Sheets to Postgres?",
+      id: "move-gradually",
+      heading: "Move gradually, and keep the sheet as a view",
       blocks: [
         {
           type: "paragraph",
-          text: "Design the tables, script the import so you can run it again and again, rebuild the inputs against the database, then cut over once the numbers match. Keep the sheet as the working system until the new one has earned its place.",
+          text: "Don't switch everything in one weekend. Put the database underneath, keep the team looking at a sheet they recognise, and move the inputs across one at a time, so each tab only ever has one place where it's edited.",
         },
         {
           type: "list",
@@ -180,56 +129,29 @@ export const googleSheetsDatabase: BlogPost = {
           items: [
             {
               term: "Map what exists",
-              text: "List every tab, column, formula, form, Apps Script and automation, and who relies on each. Hidden columns and helper tabs are where the undocumented business rules live.",
+              text: "Every tab, column, formula, form, script and automation, and who relies on each. Hidden columns and helper tabs are where the undocumented rules live.",
             },
             {
-              term: "Design the tables",
-              text: "One table per kind of thing: customers, orders, products. Real types, primary keys, foreign keys, and not null, unique and check constraints for every rule the sheet only hoped people would follow.",
+              term: "Design and clean",
+              text: "One table per kind of thing, with real types and constraints for every rule the sheet only hoped people would follow. Then clean: duplicates, dates, phone numbers kept as text, and cells like 'red, blue, green' split into rows. This step takes longest, because someone who knows the business has to decide each case.",
             },
             {
-              term: "Clean the data",
-              text: "Remove duplicates, normalise dates, keep phone numbers as text so the leading zero survives, and split cells like 'red, blue, green' into their own rows.",
+              term: "Import on repeat",
+              text: "Script the import from the Sheets API or a CSV export, keep the original row number in a legacy column, and rerun against fresh copies until the counts match. At this stage the sheet is still the master.",
             },
             {
-              term: "Script the import",
-              text: "Pull the data through the Sheets API or a CSV export, transform it and load it. Keep the original row number in a legacy column, and rerun against fresh copies until the counts match.",
+              term: "Flip one input at a time",
+              text: "Replace the Google Form with a form in the app, so new bookings land in the database. From then on, a scheduled job writes that data back to its tab, so the team still sees it in the sheet. Repeat for each input, and move Apps Script logic into server jobs you can monitor and retry.",
             },
             {
-              term: "Rebuild the inputs",
-              text: "Replace the Google Form with a form in your app, and move Apps Script logic into server code and scheduled jobs you can actually monitor and retry.",
-            },
-            {
-              term: "Cut over",
-              text: "Make the sheet read-only, run the final import, point every automation at the database and leave the old file alone for a few weeks as a reference.",
+              term: "Lock the sheet",
+              text: "Once nothing writes to the sheet directly, make it view-only. It stays as a reporting view for the people who like to filter and chart in a spreadsheet, fed one way from the database.",
             },
           ],
         },
         {
           type: "paragraph",
-          text: "In practice the cleaning step is where most of the time goes. A sheet edited by hand for three years will have dates in four formats and the same customer spelled three ways, and someone who knows the business has to decide each one.",
-        },
-        {
-          type: "callout",
-          title: "Turn on backups and test a restore",
-          text: "Managed Postgres providers typically include automated backups and point in time recovery. Check they're on, and restore to a test database once before you need it for real.",
-        },
-      ],
-    },
-    {
-      id: "sheets-as-reporting",
-      heading: "Can you keep Google Sheets connected to the database?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Yes, and you should. The database becomes the source of truth, and Sheets becomes a read-only reporting view for the people who like to filter and chart in a spreadsheet. Data flows one way: database to sheet, never back.",
-        },
-        {
-          type: "paragraph",
-          text: "For most teams we'd use a small scheduled job in the app that runs a query every hour or overnight and overwrites a tab through the Sheets API. It lives in your codebase and you control exactly which columns leave the database. The alternative is to connect Google Sheets to PostgreSQL or MySQL directly through Apps Script's JDBC service. It works, but your database then has to accept connections from Google's address ranges, which isn't something we'd do for a database holding customer data. Connector add-ons sit in between: convenient, but they need database credentials, so treat them like any other supplier with access.",
-        },
-        {
-          type: "paragraph",
-          text: "Whichever route you take, connect with a read-only database user and send only the columns the report needs. At Scryptic the apps we build usually run on TypeScript, Next.js and Postgres, and a spreadsheet that has outgrown itself makes a surprisingly good spec, because it shows exactly how the business already works.",
+          text: "For the sync, we'd use a scheduled job in the app that runs a query hourly or overnight and overwrites a tab through the Sheets API, batching requests so it barely touches the quota. Apps Script's JDBC service can connect Sheets to Postgres directly, but your database then has to accept connections from Google's address ranges, which we wouldn't do for customer data. Either way, use a read-only database user and send only the columns the report needs.",
         },
       ],
     },
@@ -248,17 +170,12 @@ export const googleSheetsDatabase: BlogPost = {
     {
       question: "How many rows can Google Sheets handle?",
       answer:
-        "The limit is on cells, not rows: a spreadsheet holds up to 10 million cells, shared across all tabs, though Google raises that figure every few years. A sheet full of lookup formulas usually slows down well before that, often at a few tens of thousands of rows.",
+        "The limit is on cells, not rows: a spreadsheet holds up to 10 million cells, shared across all tabs, and Google has raised that figure before, so check the current one. A sheet full of lookup formulas usually slows down well before the limit, often at a few tens of thousands of rows.",
     },
     {
       question: "How do I connect Google Sheets to PostgreSQL or MySQL?",
       answer:
-        "The option we'd pick is a scheduled job that runs a query and writes the results into the sheet through the Sheets API. Apps Script's JDBC service and connector add-ons also work. Use a read-only database user and treat the sheet as a report, not a place to edit data.",
-    },
-    {
-      question: "Is Airtable a better database than Google Sheets?",
-      answer:
-        "For linked data, yes. Airtable has real linked records, field types and per-view interfaces, which Sheets doesn't. It still has record limits and per-seat pricing, and the same ownership questions come up as you grow, which our guide to migrating from Airtable to a production app covers.",
+        "The safest option is a scheduled job that runs a query and writes the results into the sheet through the Sheets API. Apps Script's JDBC service and connector add-ons also work, though add-ons need database credentials. Use a read-only database user and treat the sheet as a report, not a place to edit data.",
     },
   ],
 }

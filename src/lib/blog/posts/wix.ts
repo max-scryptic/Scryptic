@@ -13,6 +13,7 @@ export const wix: BlogPost = {
   summary:
     "Wix and Velo run out when a website starts doing the job of software: relational data, real permissions, long running backend work and an API for other apps. The usual answer is to keep the marketing site on Wix and build the product as a separate app on a subdomain, moving fully only when you need one codebase.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
     { label: "Code export", value: "None for pages, Velo code can be copied" },
     { label: "Data export", value: "CMS collections and contacts as CSV" },

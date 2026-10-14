@@ -13,6 +13,7 @@ export const bolt: BlogPost = {
   summary:
     "A Bolt.new app that works in the preview usually has seven gaps before it is safe for real users: sandbox-only behaviour, exposed secrets, open database tables, a backend you don't fully own, half-configured auth, fragile deploys and no monitoring. All seven are fixable in the code Bolt wrote, so most apps need hardening rather than a rebuild.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   sections: [
     {
       id: "webcontainer-gap",

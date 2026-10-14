@@ -13,6 +13,7 @@ export const retool: BlogPost = {
   summary:
     "When customers rather than staff start logging in, a Retool app stops being the right home for that part of the business. The interface cannot be exported as code, so the customer side is rebuilt as a proper web app on the same database, while Retool stays for internal admin. The work is less about screens and more about trust, tenancy and billing.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   sections: [
     {
       id: "the-example",

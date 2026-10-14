@@ -13,6 +13,7 @@ export const bubble: BlogPost = {
   summary:
     "You cannot export code from Bubble, so leaving means rebuilding the app on a stack such as TypeScript and Postgres while your data moves across by CSV or the Data API. Users come with you without their passwords, the Bubble app stays live until the new one has proved itself, and a typical rebuild takes four to eight weeks.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
     { label: "Code export", value: "No, the app file only opens in Bubble" },
     { label: "Data export", value: "CSV per data type, or the Data API" },

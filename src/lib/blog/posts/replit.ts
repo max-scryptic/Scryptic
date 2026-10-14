@@ -13,6 +13,7 @@ export const replit: BlogPost = {
   summary:
     "A Replit Agent app is ordinary code on a Postgres database, so you can usually keep it and harden it rather than rebuild it. This walkthrough follows a hypothetical booking tool from the first git push to launch day over about six weeks, and shows where the Replit specific decisions come up.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   sections: [
     {
       id: "the-example",

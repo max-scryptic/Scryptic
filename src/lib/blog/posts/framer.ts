@@ -13,6 +13,7 @@ export const framer: BlogPost = {
   summary:
     "Most founders who outgrow Framer should not leave it. Keep the marketing site in Framer, build the product as a proper app on a subdomain such as app.yourdomain.com, and only rebuild the site when you need one codebase or more control than Framer gives.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   sections: [
     {
       id: "keep-the-site",

@@ -13,10 +13,11 @@ export const softr: BlogPost = {
   summary:
     "Softr doesn't export code, so replacing it means rebuilding the app, but your data usually already sits in Airtable, Google Sheets or a database you control. That lets you build the new app against the same data, run both side by side, and only then move everything into Postgres. Most Softr rebuilds reach a first production release in three to six weeks.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   sections: [
     {
       id: "before-you-start",
-      heading: "Before you start",
+      heading: "Before you touch any data",
       blocks: [
         {
           type: "paragraph",

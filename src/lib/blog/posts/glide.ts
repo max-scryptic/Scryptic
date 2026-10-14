@@ -13,6 +13,7 @@ export const glide: BlogPost = {
   summary:
     "Leave Glide when the app has become a customer-facing product or a critical system, not just because it feels limited. Glide does not export code, so leaving means a rebuild, but your data comes with you and your users will barely notice the sign-in change.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
     { label: "Code export", value: "No, the app is rebuilt" },
     { label: "Data export", value: "CSV, the Glide API, or your own sheets" },

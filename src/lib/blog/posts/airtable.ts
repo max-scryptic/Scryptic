@@ -13,6 +13,7 @@ export const airtable: BlogPost = {
   summary:
     "Every Airtable field type has a Postgres equivalent, but only some become columns: linked records become foreign keys or join tables, lookups and rollups become queries, and attachments become files in your own storage. Automations turn into backend jobs and Interfaces into app screens, while Airtable can stay on as a back office.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
     { label: "Code export", value: "None, Interfaces stay in Airtable" },
     { label: "Data export", value: "CSV per view, or the Web API" },

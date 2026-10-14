@@ -13,6 +13,7 @@ export const base44: BlogPost = {
   summary:
     "Yes. Base44 exports your React frontend, but the database, login and backend functions stay on Base44 and the exported code still calls them. Moving means keeping the interface, building a backend you own behind it, and moving data and users in one planned cutover.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
     { label: "Code export", value: "Frontend yes, backend stays on Base44" },
     { label: "Data export", value: "CSV per table from the dashboard" },

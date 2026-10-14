@@ -13,6 +13,7 @@ export const flutterflow: BlogPost = {
   summary:
     "Most of a FlutterFlow export is worth keeping: it is standard Flutter, and the routing, backend wiring and custom code are usable as they are. The global app state, the generated API calls and any public Flutter web build are the parts that usually need refactoring or replacing, and the release pipeline has to be built from scratch.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
     { label: "Code export", value: "Flutter project, download or GitHub" },
     { label: "Backend", value: "Your own Firebase or Supabase project" },

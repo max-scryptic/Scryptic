@@ -13,6 +13,7 @@ export const webflow: BlogPost = {
   summary:
     "Keep the pages that rank on Webflow and build the product on a subdomain such as app.yourdomain.com. Your rankings belong to public URLs, and logged-in screens never ranked anyway. If you do leave Webflow entirely, a complete URL map with permanent redirects is what keeps the traffic.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
     { label: "Code export", value: "Static HTML, CSS and JS on paid Workspace plans" },
     { label: "CMS export", value: "CSV per collection, per locale" },

@@ -13,6 +13,7 @@ export const lovable: BlogPost = {
   summary:
     "You harden a Lovable app rather than rebuild it, because the export is ordinary React, TypeScript and Supabase. The work runs in phases: take ownership of the code and backend, lock down the database, add environments and tests, decide how pages render, then cut over with a fallback.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
     { label: "Code export", value: "Yes, full source through GitHub sync" },
     { label: "Backend", value: "Supabase, or Lovable Cloud built on it" },

@@ -13,6 +13,7 @@ export const v0: BlogPost = {
   summary:
     "v0 builds the part of an app you can see: polished screens in Next.js, React and shadcn/ui, as real code you own. What it often doesn't build is the part you can't see, such as a proper database, secure sign-in and the checks that keep one customer's data away from another's. That's the work between a v0 project and a launch.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
     { label: "Code export", value: "Yes, GitHub branches or a ZIP download" },
     { label: "What it builds", value: "Mostly the frontend" },
