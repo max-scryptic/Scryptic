@@ -2,11 +2,11 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const n8nVsZapierVsMake: BlogPost = {
   slug: "n8n-vs-zapier-vs-make",
-  title: "n8n vs Zapier vs Make for a growing business",
+  title: "n8n vs Zapier vs Make, scored for a growing business",
   series: "automation",
   topic: "n8n",
   description:
-    "n8n vs Zapier vs Make compared for a growing business: how each one charges, ease of use, integrations, AI agents, self-hosting and GDPR.",
+    "n8n vs Zapier vs Make scored side by side on pricing, ease of use, integrations, AI agents, self-hosting and GDPR, with a clear pick for each kind of team.",
   summary:
     "If you have anyone technical on the team, n8n is usually the best long-term pick: it charges per workflow run, handles real code and is the only one of the three you can host yourself. Zapier is the easiest to start with and connects to the most apps, and Make sits in between, cheaper than Zapier and friendlier than n8n.",
   datePublished: "2026-10-14",
@@ -18,171 +18,152 @@ export const n8nVsZapierVsMake: BlogPost = {
   ],
   sections: [
     {
-      id: "quick-verdict",
-      heading: "What is the quick verdict on n8n vs Zapier vs Make?",
+      id: "scorecard",
+      heading: "How do n8n, Zapier and Make compare at a glance?",
       blocks: [
         {
           type: "paragraph",
-          text: "Pick Zapier if non-technical people will build the automations and volumes are low. Pick Make if an ops person wants branching and data mapping without paying Zapier prices. Pick n8n if you've got a developer, even part time, or your data has to stay on servers you control.",
+          text: "Who builds and maintains the automations decides it. Zapier suits non-technical teams, Make suits an ops person who wants more control without code, and n8n suits anyone with a developer, even a part-time one. Here's how they score on the things that matter once automations are running real parts of the business.",
         },
         {
-          type: "paragraph",
-          text: "With ten small automations you could flip a coin. The differences show up later, when automations are running your invoicing, onboarding and reporting, and you're looking at the bill, at a workflow nobody can debug, or at a customer contract that asks where their data is processed. That's when the pricing unit, the escape hatch into code and the hosting model start to matter.",
+          type: "table",
+          caption: "n8n, Zapier and Make compared on the criteria that matter for a growing business",
+          columns: ["Criterion", "Zapier", "Make", "n8n"],
+          rows: [
+            ["Best for", "Non-technical teams, modest volume", "Ops people who want branching without code", "Teams with a developer, even part time"],
+            ["Pricing unit", "Tasks, roughly one per action step", "Credits, one per module run for most apps", "Executions, one per workflow run"],
+            ["Cost at volume", "Highest", "Middle", "Lowest, especially self-hosted"],
+            ["Learning curve", "Gentle, minutes to a first Zap", "Moderate, data bundles take a while", "Steep, expect JSON and expressions"],
+            ["Ready-made integrations", "The most, in the thousands", "Fewer, often deeper per app", "The fewest, plus an HTTP node for anything"],
+            ["Custom code", "Code steps with tight limits", "Mostly built-in functions", "JavaScript or Python nodes and sub-workflows"],
+            ["AI agents", "Zapier Agents and AI steps", "AI Agents and AI modules", "AI Agent node with memory and tools"],
+            ["Self-hosting", "No", "No", "Yes, Community Edition"],
+            ["Data location", "Mainly the US", "Choose a region, including the EU", "EU on n8n Cloud, or wherever you host it"],
+          ],
+        },
+        {
+          type: "callout",
+          title: "How each one counts usage",
+          text: "Zapier counts a task for each action that runs, Make counts credits for each module that runs, trigger included, and n8n counts one execution per workflow run however many steps it has. Loop over a list and the Zapier and Make counts multiply while n8n's stays put. Plans and allowances change often, so compare the units, then check current prices with each vendor.",
         },
       ],
     },
     {
-      id: "pricing-models",
-      heading: "How do Zapier, Make and n8n charge?",
+      id: "choose-zapier",
+      heading: "Choose Zapier if the people building automations aren't technical",
       blocks: [
         {
           type: "paragraph",
-          text: "They each count something different, and the unit decides your bill far more than the plan price on the pricing page. Plans and allowances change every year or so, so compare the model and then check current numbers with each vendor.",
+          text: "Zapier is the right pick when sales, ops or admin staff will build their own automations and volumes are modest. A Zap is a simple list of steps, each one asks plain questions, and most people have something working in ten minutes. Its copilot will even draft a Zap from a description.",
+        },
+        {
+          type: "paragraph",
+          text: "It also has the biggest catalogue by a wide margin, in the thousands, and many integrations are maintained by the app vendors themselves. If you depend on a niche industry tool, check Zapier first. Don't choose on the count alone, though. Most businesses lean on a dozen core apps that all three support, and what catches people out is a missing action, an integration that can create a record but not update one. Check the exact triggers and actions you need.",
+        },
+        {
+          type: "paragraph",
+          text: "The cost is the catch. Zapier charges roughly one task for each action step that completes. The trigger is free and some built-in utility steps don't count, but a Zap with five actions costs about five tasks every time it fires, and that's the usual reason people go looking for a Zapier alternative. Code by Zapier runs JavaScript or Python, with tight time and memory limits, and anything with real branching gets clumsy quickly.",
+        },
+        {
+          type: "paragraph",
+          text: "On data, Zapier is cloud only and processes data mainly in the US, so a UK business relies on the international transfer safeguards in its terms.",
+        },
+      ],
+    },
+    {
+      id: "choose-make",
+      heading: "Choose Make if you've outgrown Zapier's prices but not its comfort",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Make is the gentlest step up from Zapier: usually cheaper for the same workload, and much better at loops, branches and reshaping data, without asking anyone to write code. It suits an ops person who's comfortable with logic but isn't a developer.",
+        },
+        {
+          type: "paragraph",
+          text: "A scenario is drawn as a map of connected modules, which makes routers, filters and error routes easy to see. Its catalogue is smaller than Zapier's but often goes deeper into each app's API, and the HTTP module, iterators, aggregators and built-in functions cover most data shaping. The learning curve is understanding how bundles of data move between modules. Until that clicks, things run five times when you expected once.",
+        },
+        {
+          type: "paragraph",
+          text: "Make switched from operations to credits in 2025. For ordinary apps it's one credit per module run, the trigger module counts too, and its own AI features can cost more per run. An iterator over 20 order lines runs every module after it 20 times, and you pay for each.",
+        },
+        {
+          type: "callout",
+          title: "The polling trap",
+          text: "A polling trigger set to check every few minutes uses credits on each check, even when there's nothing new. Switch to an instant webhook trigger wherever the app supports one.",
+        },
+        {
+          type: "paragraph",
+          text: "Make is cloud only too, but you pick a hosting region, including the EU, when you create your organisation. It also has AI Agents and AI modules for summarising, classifying and drafting.",
+        },
+      ],
+    },
+    {
+      id: "choose-n8n",
+      heading: "Choose n8n if anyone on the team can read JSON",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "n8n is the one we'd pick for most growing businesses with any technical help: it's cheapest at volume, it handles real code, and it's the only one of the three you can run on your own servers. You pay for that in ease of use. Expect to read JSON, write expressions and configure HTTP requests within the first hour.",
         },
         {
           type: "list",
           items: [
             {
-              term: "Zapier counts tasks",
-              text: "Roughly one task for each action step that completes successfully. The trigger is free and Zapier doesn't charge for some built-in utility steps, but a Zap with five actions costs about five tasks every time it fires.",
+              term: "Pricing that ignores workflow length",
+              text: "One execution is one run of the whole workflow, whether it has three nodes or thirty. n8n Cloud plans include a monthly allowance, and the self-hosted Community Edition has no execution limit; you pay for the server instead.",
             },
             {
-              term: "Make counts credits",
-              text: "Make switched from operations to credits in 2025. For ordinary apps it's one credit per module run, and the trigger module counts too. Its own AI features can cost more per run. An iterator over 20 order lines runs every module after it 20 times, and you pay for each one.",
+              term: "Ways around missing integrations",
+              text: "It has the fewest native integrations, but an HTTP Request node talks to almost any API, a Code node runs JavaScript or Python, sub-workflows can be called like functions, and community nodes fill gaps.",
             },
             {
-              term: "n8n counts executions",
-              text: "One execution is one run of the whole workflow, whether it has three nodes or thirty. n8n Cloud plans include a monthly allowance. The self-hosted Community Edition has no execution limit at all; you pay for the server instead.",
-            },
-          ],
-        },
-        {
-          type: "callout",
-          title: "Why Zapier gets too expensive",
-          text: "Take a workflow with a trigger and five actions that runs 1,000 times a month. That's about 5,000 Zapier tasks, about 6,000 Make credits and 1,000 n8n executions. Loop over order lines and the Zapier and Make numbers multiply while n8n's stays put. This is the usual reason people start looking for a Zapier alternative.",
-        },
-        {
-          type: "paragraph",
-          text: "One Make trap to know about: a polling trigger set to check every few minutes uses credits on each check, even when there's nothing new. Switch to an instant webhook trigger where the app supports one.",
-        },
-      ],
-    },
-    {
-      id: "ease-of-use",
-      heading: "Which is easiest to use?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Zapier, comfortably. You build a Zap as a simple list of steps, each one asks plain questions, and most people have something working in ten minutes. It's the right tool for letting a sales or ops team automate their own work without asking anyone.",
-        },
-        {
-          type: "paragraph",
-          text: "Make draws your scenario as a map of connected bubbles, which makes routers, filters and error routes easy to see. The catch is learning how data bundles move between modules; until that clicks, things run five times when you expected once. n8n also has a visual canvas, but you'll be reading JSON, writing expressions and configuring HTTP requests within the first hour. So on Make vs Zapier, Zapier wins for ease. On Make vs n8n, Make is kinder to non-developers and n8n pays back the effort if you're technical.",
-        },
-      ],
-    },
-    {
-      id: "integrations-and-flexibility",
-      heading: "Which has the most integrations, and which is most flexible?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Zapier has the most ready-made integrations by a wide margin, in the thousands, and many are maintained by the app vendors themselves. If you rely on a niche industry tool, check Zapier first. Its Code by Zapier step runs JavaScript or Python, but with tight time and memory limits, and anything with real branching gets clumsy quickly.",
-        },
-        {
-          type: "paragraph",
-          text: "Make's catalogue is smaller but often goes deeper into each app's API, and its HTTP module, routers, iterators, aggregators and built-in functions cover most data shaping without code. n8n has the fewest native integrations of the three and the most ways around that: an HTTP Request node that talks to almost any API, a Code node for JavaScript or Python, sub-workflows you can call like functions, and community nodes. Self-hosted, it can also reach a database or internal service that never touches the public internet, which neither of the others can do.",
-        },
-        {
-          type: "paragraph",
-          text: "Don't choose on the integration count. Most businesses lean on a dozen core apps that all three support. What catches people out is a missing action, say an integration that can create a record but not update one, so check the exact triggers and actions you need.",
-        },
-      ],
-    },
-    {
-      id: "ai-and-agents",
-      heading: "Which is best for AI and agent workflows?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "n8n, if you're building an agent rather than dropping one AI step into a workflow. Its AI Agent node handles memory, vector stores and tool calling, and any other node or workflow can be a tool. Self-hosted, it can also call an open model running on your own hardware.",
-        },
-        {
-          type: "paragraph",
-          text: "Zapier and Make are perfectly good for the simpler jobs: summarise this email, classify this ticket, draft this reply. Zapier has Zapier Agents and a copilot that drafts Zaps from a description, and Make has AI Agents and AI modules of its own. All three let you plug in your own OpenAI or Anthropic key.",
-        },
-        {
-          type: "callout",
-          title: "Agents and per-step billing don't mix well",
-          text: "An agent calls the model and its tools several times per run. On a per-step pricing model, one agent run can burn through many tasks or credits before you've paid the model provider anything.",
-        },
-      ],
-    },
-    {
-      id: "data-and-gdpr",
-      heading: "Where does your data live, and what about GDPR?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Only n8n can run entirely on servers you choose, so it's the straightforward answer when a contract or regulator wants data kept in the UK or on your own infrastructure. Zapier and Make are cloud only: your data passes through them and you rely on their data processing agreements.",
-        },
-        {
-          type: "paragraph",
-          text: "Zapier processes data mainly in the US, so a UK business relies on the international transfer safeguards in its terms. Make lets you pick a hosting region, including the EU, when you create your organisation. n8n Cloud is hosted in the EU at the time of writing. None of that makes you compliant on its own. Every automation that touches personal data belongs in your record of processing, the vendor belongs on your processor list, and you should read the current DPA and sub-processor list yourself rather than trust a comparison post, this one included.",
-        },
-      ],
-    },
-    {
-      id: "when-each-wins",
-      heading: "When does each one win?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "It depends mostly on who builds and maintains the automations. Today's price matters less than that.",
-        },
-        {
-          type: "list",
-          items: [
-            {
-              term: "Zapier",
-              text: "Non-technical staff building their own automations, modest volumes, or an app only Zapier supports. Paying more per run is fine when it saves a developer's time.",
+              term: "Private systems",
+              text: "Self-hosted, it can reach a database or internal service that never touches the public internet, which neither of the others can.",
             },
             {
-              term: "Make",
-              text: "An ops person who wants loops, branches and data transformation without code, and who has started to find Zapier too expensive. Of the Zapier competitors, it's the gentlest step up.",
+              term: "Agents",
+              text: "Its AI Agent node handles memory, vector stores and tool calling, and any other node or workflow can become a tool. Self-hosted, it can call an open model on your own hardware.",
             },
             {
-              term: "n8n",
-              text: "A developer in the loop, high volumes, long workflows, custom code, private systems, agent workflows, or strict data residency. For most growing businesses with any technical help, this is the one we'd pick.",
+              term: "Data residency",
+              text: "When a contract or regulator wants data kept in the UK or on your own infrastructure, self-hosting is the straightforward answer. n8n Cloud is hosted in the EU at the time of writing.",
             },
           ],
         },
         {
           type: "paragraph",
-          text: "Plenty of teams run two. A common split keeps Zapier for quick team automations and moves the high-volume, business-critical ones to n8n, where they're cheaper and easier to version.",
+          text: "Agents are where the pricing gap matters most. An agent calls the model and its tools several times per run, so on per-step billing one agent run can burn through many tasks or credits before you've paid the model provider anything. All three let you plug in your own OpenAI or Anthropic key, but only n8n counts the whole run once.",
+        },
+        {
+          type: "paragraph",
+          text: "Self-hosting isn't free, just differently priced: someone has to patch it, back it up and notice when it stops. Plenty of teams end up running two tools, keeping Zapier for quick team automations and moving the high-volume, business-critical ones to n8n, where they're cheaper and easier to version.",
         },
       ],
     },
     {
-      id: "when-to-write-code",
-      heading: "When is none of them the answer?",
+      id: "none-of-the-three",
+      heading: "When none of the three is the answer",
       blocks: [
         {
           type: "paragraph",
-          text: "When the automation has turned into the product, or into a system the business can't run a day without. Apps like Zapier are excellent glue, but they weren't built to be the core of something customers log into and pay for.",
+          text: "When the automation has turned into the product, or into a system the business can't run a day without. These tools are excellent glue, but they weren't built to be the core of something customers log into and pay for. The signs:",
         },
         {
           type: "list",
           items: [
             "Customers trigger workflows themselves through forms, portals or a dashboard bolted onto webhooks.",
-            "A workflow has grown to a hundred nodes, only one person understands it, and there are no tests or reviewed changes.",
+            "A workflow has grown to a hundred nodes, only one person understands it, and changes go live without tests or review.",
             "A Stripe webhook arrives twice and the workflow books the same appointment twice, because there's nowhere sensible to make it idempotent.",
             "You need proper user accounts, roles, billing or an audit trail.",
           ],
         },
         {
           type: "paragraph",
-          text: "Our guide When to turn your automations into a SaaS product covers that call in more depth, and Self-hosting n8n in production covers the middle step of running n8n yourself. At Scryptic, full builds that turn proven automations into a production app start from £10,000, depending on complexity.",
+          text: "Whichever tool you're on, GDPR doesn't change the answer here: every automation that touches personal data belongs in your record of processing, and the vendor belongs on your processor list. Read the current DPA and sub-processor list yourself rather than trusting a comparison post, this one included.",
+        },
+        {
+          type: "paragraph",
+          text: "Our guide on when to turn your automations into a SaaS product covers that call in more depth. At Scryptic, full builds that turn proven automations into a production app start from £10,000, depending on complexity.",
         },
       ],
     },
@@ -211,7 +192,7 @@ export const n8nVsZapierVsMake: BlogPost = {
     {
       question: "Which is best for a UK business worried about GDPR?",
       answer:
-        "Self-hosted n8n gives you the most control, because the data stays on servers you pick, including in the UK. Make offers an EU hosting region and n8n Cloud is hosted in the EU at the time of writing. Any of the three can be used lawfully with the right agreements and records in place.",
+        "Self-hosted n8n gives you the most control, because the data stays on servers you pick, including in the UK. Make offers an EU hosting region and n8n Cloud is hosted in the EU at the time of writing, while Zapier processes data mainly in the US. Any of the three can be used lawfully with the right agreements and records in place.",
     },
   ],
 }

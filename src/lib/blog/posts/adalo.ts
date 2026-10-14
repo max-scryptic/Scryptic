@@ -3,194 +3,200 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const adalo: BlogPost = {
   slug: "migrate-from-adalo",
-  title: "Migrating from Adalo to a production app",
+  title: "What it really costs to rebuild an Adalo app in code",
   series: "migration",
   topic: "Adalo",
   logo: adaloLogo,
   category: "No-code app builders",
   description:
-    "How to move an Adalo app to production code: exporting collections, moving users, keeping your App Store listing, and a step by step plan for a safe cutover.",
+    "The time, money and risk in rebuilding an Adalo app as code you own: a work breakdown with durations, running costs, data traps and keeping your store listing.",
   summary:
-    "Adalo does not export code, so moving to production means rebuilding the app on a modern stack, usually a TypeScript backend with Postgres and a React Native or web frontend. Your data leaves as CSV or through the Adalo API, users move with a password reset or magic link, and a native app ships as an update to your existing store listing.",
+    "Rebuilding an Adalo app in code usually takes five to eight weeks and, with us, starts from £10,000, because Adalo exports your data but not your screens or logic. Most of the risk sits in a few predictable places: relationships missing from the CSV exports, users who never update, and automations that live outside Adalo. Ship the rebuild as an update to your existing store listing and users get it automatically, with your reviews intact.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
-    { label: "Code export", value: "No, screens and logic are rebuilt" },
+    { label: "Code export", value: "None, screens and logic are rebuilt" },
     { label: "Data export", value: "CSV per collection, or the Adalo API" },
-    { label: "Usual approach", value: "Planned rebuild, run in parallel" },
     { label: "Typical timeline", value: "5 to 8 weeks" },
+    { label: "Store listing", value: "Kept, shipped as an update" },
   ],
   sections: [
     {
-      id: "when-to-move",
-      heading: "When is it time to move off Adalo?",
+      id: "short-answer",
+      heading: "Five to eight weeks, from £10,000, with four risks to plan for",
       blocks: [
         {
           type: "paragraph",
-          text: "It is time when the app has real users and the limits of the builder start to show in their experience. Adalo is a quick way to get a native iOS and Android app, or a web app, in front of people without writing code. It is less suited to an app with growing data, complex rules and a team of developers.",
+          text: "A typical Adalo app, with a few user roles and a few dozen screens, takes five to eight weeks to rebuild and release, and our builds start from £10,000. Screen count, roles, payments and the state of the data move the number. The risks are predictable, which means they can be planned out.",
         },
-        { type: "paragraph", text: "The signs usually look like this:" },
         {
-          type: "list",
-          items: [
-            "Screens with long lists or nested data take noticeably longer to load as your collections grow.",
-            "You need logic the builder makes awkward: multi-step transactions, background jobs, detailed roles or calculations across many records.",
-            "Store reviews mention speed, crashes or missing features, and you cannot fix the cause from inside the editor.",
-            "You rely on a chain of Zapier or Make automations and custom actions that nobody fully understands any more.",
-            "A partner, investor or enterprise customer wants to know where the data lives, who owns the code and how it is tested.",
-          ],
+          type: "paragraph",
+          text: "It is a rebuild because Adalo has no code export. Your data comes out as a CSV file per collection, or through the Adalo API on plans that include it. Screens, actions and custom actions stay behind, so screenshot and document them: they are the specification.",
         },
       ],
     },
     {
-      id: "what-you-can-export",
-      heading: "What can you take out of Adalo?",
+      id: "where-the-time-goes",
+      heading: "Where the time goes",
       blocks: [
         {
           type: "paragraph",
-          text: "You can take your data, but not your app. Adalo has no code export, so screens, actions and logic are rebuilt. The records in your collections can be downloaded and moved to a database you own.",
+          text: "Most of the calendar goes on the data model and the core screens. Moving the data is a few days of work spread across rehearsals. Several items run in parallel, which is how they add up to five to eight weeks rather than the sum of the column.",
         },
         {
-          type: "list",
-          items: [
-            {
-              term: "Collections",
-              text: "Each collection downloads as a CSV file from the database panel, one collection at a time. There is no single export of the whole database.",
-            },
-            {
-              term: "Relationships",
-              text: "Fields on the many side of a relationship do not appear in the CSV. Rebuild links from the one side, or pull records through the Adalo API, which is available on some paid plans, so check what yours includes.",
-            },
-            {
-              term: "External collections",
-              text: "If some data already lives in Airtable, Xano or another API connected as an external collection, it is already outside Adalo and can stay where it is during the rebuild.",
-            },
-            {
-              term: "User accounts",
-              text: "The Users collection exports with emails and your custom fields, but not passwords. Plan a reset or magic link flow for every existing user.",
-            },
-            {
-              term: "What stays behind",
-              text: "Screens, components, actions, custom actions and the builder's hosting. Screenshot and document them, because they are the specification for the rebuild.",
-            },
+          type: "table",
+          caption: "Typical work items in an Adalo rebuild and their rough durations",
+          columns: ["Work item", "What it involves", "Rough duration"],
+          rows: [
+            [
+              "Inventory and spec",
+              "Every screen, collection, action and outside automation",
+              "3 to 5 days",
+            ],
+            [
+              "Data model and API",
+              "Collections mapped to Postgres tables, relationships rebuilt",
+              "1 to 2 weeks",
+            ],
+            [
+              "Sign-in and user move",
+              "Accounts imported without passwords, magic link on first launch",
+              "2 to 4 days",
+            ],
+            [
+              "Core screens",
+              "React Native with Expo for iOS, Android and, if needed, web",
+              "2 to 3 weeks",
+            ],
+            [
+              "Payments, notifications, jobs",
+              "Stripe, push, and server jobs replacing Zapier or Make chains",
+              "3 days to 1 week",
+            ],
+            [
+              "Data migration rehearsals",
+              "Export, transform, import, check counts, repeat",
+              "3 to 5 days",
+            ],
+            [
+              "Beta testing",
+              "TestFlight and a Google Play testing track",
+              "1 to 2 weeks",
+            ],
+            [
+              "Store review and release",
+              "Submitting the update, answering reviewer questions",
+              "A few days, sometimes longer",
+            ],
           ],
         },
         {
-          type: "callout",
-          title: "Keep your store listings",
-          text: "If your app is in the App Store or Google Play, check that both developer accounts are in your company's name. The new app should ship as an update under the same listing, so users keep their reviews and get it automatically.",
+          type: "paragraph",
+          text: "Two things stretch the timeline most: a payment flow with unwritten edge cases, and real logic living in external automations. Both show up in the inventory, which is why the first week is not optional.",
         },
       ],
     },
     {
-      id: "what-is-missing",
-      heading: "What does a production version need that Adalo cannot give you?",
+      id: "the-money",
+      heading: "The money, beyond the build",
       blocks: [
         {
           type: "paragraph",
-          text: "Mostly control over performance, data and release quality. A coded app lets you decide how data is loaded, where rules are enforced and how changes are tested before they reach the stores.",
+          text: "The build is the big number, but not the only one. Expect to pay for both systems for a while, plus running costs that used to be bundled into your Adalo plan.",
         },
         {
           type: "list",
           items: [
             {
-              term: "A proper database and API",
-              text: "Postgres with indexes and relationships that hold, behind an API that returns only what each screen needs. This is usually where the biggest speed gains come from.",
+              term: "The build",
+              text: "From £10,000 with us. Screens, roles and integrations move the price far more than user numbers do.",
             },
             {
-              term: "Server-side rules",
-              text: "Visibility settings on a screen are not security. Who can read and change each record should be checked on the server, for every request.",
+              term: "Overlap with Adalo",
+              text: "Keep Adalo until the cutover is done and the old app has sat read-only for a few weeks. Budget for one to three extra months.",
             },
             {
-              term: "A maintainable mobile codebase",
-              text: "React Native with Expo lets one TypeScript codebase produce iOS, Android and, if you need it, a web version, with over-the-air fixes for small changes.",
+              term: "Hosting and database",
+              text: "A managed Postgres database, an API host and file storage: a modest monthly line that grows with usage rather than plan tier.",
             },
             {
-              term: "Background work",
-              text: "Notifications, reminders and integrations run as jobs on the server instead of external automations, so they can be retried and monitored.",
+              term: "Build and monitoring services",
+              text: "A mobile build service such as Expo's, plus crash reporting. Free tiers often cover a small app; check the limits.",
             },
             {
-              term: "Tests and release process",
-              text: "Automated tests on sign-up and the core flow, a staging build for testers, and crash reporting, so a bad release is caught before most users see it.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "migration-plan",
-      heading: "How do you migrate an Adalo app, step by step?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Keep the Adalo app live, build the new one beside it, then switch in a single planned release. For a native app, the switch is a store update rather than a domain change, so plan the timing around review.",
-        },
-        {
-          type: "list",
-          ordered: true,
-          items: [
-            {
-              term: "Inventory the app",
-              text: "List every screen, collection, property, relationship, action, custom action, external collection and automation. Mark which ones users actually use.",
+              term: "Developer accounts",
+              text: "The Apple and Google fees you already pay. Nothing changes, as long as the accounts are in your company's name.",
             },
             {
-              term: "Secure the accounts",
-              text: "Make sure your company owns the Apple and Google developer accounts, the domain, and every connected service, such as Stripe, Zapier or Make.",
-            },
-            {
-              term: "Design the data model",
-              text: "Map each collection to a Postgres table, turn many to many relationships into join tables, and keep the Adalo record ID in a legacy column so links can be rebuilt.",
-            },
-            {
-              term: "Rebuild the core",
-              text: "Build the API, sign-in, the main flow and payments first, then the remaining screens. Replace automations with server jobs where it makes sense.",
-            },
-            {
-              term: "Script and rehearse the data move",
-              text: "Export each collection, transform it, import it and check the counts and relationships. Repeat on fresh exports until it runs cleanly.",
-            },
-            {
-              term: "Plan the user move",
-              text: "Import users without passwords. On first launch of the new version, they confirm their email with a magic link or one-time code, or set a new password.",
-            },
-            {
-              term: "Test with real users",
-              text: "Use TestFlight and Google Play's testing tracks to give a small group the new app while Adalo still serves everyone else.",
-            },
-            {
-              term: "Cut over",
-              text: "Freeze changes in Adalo, run the final data migration, release the store update and point any web domain at the new hosting. Keep Adalo read-only until you are sure nothing is missing.",
+              term: "Changes after launch",
+              text: "New features become developer time rather than an afternoon in the editor. That is the real trade.",
             },
           ],
         },
       ],
     },
     {
-      id: "pitfalls",
-      heading: "What goes wrong in Adalo migrations?",
+      id: "the-risks",
+      heading: "The risks, ranked by how often they bite",
       blocks: [
         {
           type: "paragraph",
-          text: "The usual problems are lost relationships, people still running the old app version, and logic hidden in external automations.",
+          text: "Broken relationships come first, then users stuck on the old app, then logic hidden outside Adalo. Each is cheap to fix if planned for and expensive if found after launch.",
         },
+        { type: "subheading", text: "1. Relationships missing from the CSV" },
         {
-          type: "list",
-          items: [
-            "Relying on CSV exports alone and losing the many side of relationships, so records arrive disconnected.",
-            "Publishing the new app as a separate store listing, so existing users never get it and reviews start from zero.",
-            "Forgetting that some users will not update straight away. Decide what the old version shows once Adalo is switched off, and consider a forced update screen.",
-            "Missing a Zapier or Make scenario that sent emails or updated records, because it lived outside Adalo.",
-            "Leaving data changing in Adalo while store review takes longer than expected, then losing the records created in between.",
-          ],
+          type: "paragraph",
+          text: "Fields on the many side of a relationship do not appear in Adalo's CSV exports, so records arrive disconnected. Rebuild links from the one side, or read records through the API where your plan includes it, and keep each Adalo record ID in a legacy column so links can be checked after import.",
+        },
+        { type: "subheading", text: "2. Users who never update" },
+        {
+          type: "paragraph",
+          text: "Some people keep the old version for weeks. Decide what the Adalo build shows once its backend is off, and ship a forced update screen in the new app's first release.",
+        },
+        { type: "subheading", text: "3. Logic that lives somewhere else" },
+        {
+          type: "paragraph",
+          text: "Zapier or Make scenarios, external collections in Airtable or Xano, custom actions calling outside APIs: none of it is visible in the editor. List every connected service before estimating, because each is either rebuilt as a server job or deliberately dropped.",
+        },
+        { type: "subheading", text: "4. Data changing during review" },
+        {
+          type: "paragraph",
+          text: "If users keep writing to Adalo while review drags on, records created in between can be lost. Freeze changes, run the final migration, then release, and keep Adalo read-only until you are sure nothing is missing.",
         },
       ],
     },
     {
-      id: "when-to-stay",
-      heading: "Should you stay on Adalo instead?",
+      id: "store-update",
+      heading: "Ship the rebuild as an update, not a new app",
       blocks: [
         {
           type: "paragraph",
-          text: "Stay if the app does what users need and is fast enough. Adalo is a sensible home for a simple app, an internal tool or a product that is still finding its audience. Move when performance, missing features or ownership questions are costing you users, reviews or deals, not just because the builder feels limiting on a bad day.",
+          text: "Publish the new app under your existing App Store and Google Play listings, so current users receive it automatically and your ratings stay. A new listing starts from zero and strands every existing user. Before the build starts, confirm:",
+        },
+        {
+          type: "checklist",
+          items: [
+            "Both developer accounts are registered to your company, not to a freelancer or whoever first set up Adalo",
+            "The iOS build uses the same bundle identifier as the Adalo app",
+            "The Android build uses the same package name",
+            "You can sign Android updates, or, if the app uses Play App Signing, you know how to request an upload key reset",
+            "Version and build numbers will be higher than the last Adalo release",
+            "Release notes explain the new sign-in step to existing users",
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Plan the release around review, not the other way round. Updates are usually reviewed within days, but the first build from a new codebase can draw questions, so leave slack before any announced launch.",
+        },
+      ],
+    },
+    {
+      id: "when-the-sums-say-wait",
+      heading: "When the sums say wait",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "If the app is fast enough, reviews are fine and nobody asks who owns the code, a rebuild is money spent on a problem you do not have yet. Adalo is a sensible home for a simple app or a product still finding its audience. The sums change when slow screens, missing features or ownership questions start costing users, reviews or deals.",
         },
       ],
     },
@@ -199,22 +205,22 @@ export const adalo: BlogPost = {
     {
       question: "Can I export my code from Adalo?",
       answer:
-        "No. Adalo does not export source code. You can download each collection as a CSV file or read records through the Adalo API on plans that include it, but the screens and logic have to be rebuilt in code.",
+        "No. Adalo does not export source code. You can download each collection as a CSV file, or read records through the Adalo API on plans that include it, but the screens and logic have to be rebuilt in code.",
     },
     {
       question: "How do I move my Adalo users to a new app?",
       answer:
-        "Export the Users collection with emails and profile fields, then import the accounts into the new app without passwords, because Adalo does not export them. Users then sign in with a magic link or one-time code, or set a new password.",
-    },
-    {
-      question: "How long does it take to migrate from Adalo?",
-      answer:
-        "Typically five to eight weeks to a production first release, depending on the number of screens and roles, how much data needs moving, and how long app store review takes for the update.",
+        "Export the Users collection with emails and profile fields, then import the accounts into the new app without passwords, because Adalo does not export them. On first launch of the new version, users sign in with a magic link or one-time code, or set a new password.",
     },
     {
       question: "Will I lose my App Store listing if I leave Adalo?",
       answer:
-        "Not if the listing is in your own developer account. Build the new app with the same bundle identifier on iOS and package name on Android, and publish it as an update, so existing users receive it and keep their reviews and ratings.",
+        "Not if the listing is in your own developer account. Build the new app with the same bundle identifier on iOS and the same package name on Android, and publish it as an update, so existing users receive it and keep their reviews and ratings.",
+    },
+    {
+      question: "How much does it cost to rebuild an Adalo app?",
+      answer:
+        "At Scryptic, rebuilding an Adalo app in code starts from £10,000 and usually takes five to eight weeks, depending on the number of screens, roles, payments and how much data needs moving. Budget separately for hosting, a few months of overlap on your Adalo plan, and ongoing development after launch.",
     },
   ],
 }

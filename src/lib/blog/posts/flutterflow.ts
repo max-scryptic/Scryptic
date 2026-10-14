@@ -3,218 +3,184 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const flutterflow: BlogPost = {
   slug: "migrate-from-flutterflow",
-  title: "Migrating from FlutterFlow to a production app",
+  title: "What to keep, refactor or rewrite in a FlutterFlow code export",
   series: "migration",
   topic: "FlutterFlow",
   logo: flutterflowLogo,
   category: "No-code app builders",
   description:
-    "How to take a FlutterFlow app to production: what the exported Flutter code gives you, when to keep it, when to rebuild the web side, and a step by step plan.",
+    "A part by part assessment of FlutterFlow's exported Flutter code: which widgets, state, custom code, backend wiring and routing to keep, refactor or rewrite.",
   summary:
-    "FlutterFlow generates real Flutter and Dart code, so a native mobile app can usually be kept and hardened rather than rebuilt. The web side is different: Flutter web struggles with search, load time and accessibility, so public and browser-first products often move to a React or Next.js web app that shares the same backend.",
+    "Most of a FlutterFlow export is worth keeping: it is standard Flutter, and the routing, backend wiring and custom code are usable as they are. The global app state, the generated API calls and any public Flutter web build are the parts that usually need refactoring or replacing, and the release pipeline has to be built from scratch.",
   datePublished: "2026-10-13",
+  dateModified: "2026-10-14",
   facts: [
-    { label: "Code export", value: "Yes, Flutter code on paid plans" },
-    { label: "Data export", value: "Already yours, in Firebase or Supabase" },
-    { label: "Usual approach", value: "Harden mobile, rebuild web if needed" },
+    { label: "Code export", value: "Flutter project, download or GitHub" },
+    { label: "Backend", value: "Your own Firebase or Supabase project" },
+    { label: "Usual verdict", value: "Keep mobile, refactor state" },
     { label: "Typical timeline", value: "4 to 8 weeks" },
   ],
   sections: [
     {
-      id: "when-to-move",
-      heading: "When is it time to move a FlutterFlow app to production?",
+      id: "verdict",
+      heading: "The export is better than its reputation",
       blocks: [
         {
           type: "paragraph",
-          text: "It is time when you are spending more effort working around the visual builder than building with it. FlutterFlow is a fast way to design and ship a cross-platform app. It gets harder to live with once the app has paying users, a growing team and logic that does not fit in a drag and drop editor.",
+          text: "Keep it. For a native iOS and Android app, the code FlutterFlow generates is a reasonable starting point for a production codebase, and rewriting it from scratch usually costs months for very little gain. It is verbose and it repeats itself, but it is ordinary Flutter and Dart, it builds with the standard Flutter tools, and your data already lives in a Firebase or Supabase project that FlutterFlow never hosted.",
         },
-        { type: "paragraph", text: "The signs usually look like this:" },
+        {
+          type: "paragraph",
+          text: "On paid plans you can download the project or push it to a GitHub repository. Check which plan you are on, because code and GitHub features are tied to the plan tier. The one rule to understand before anything else is that the export is one way. FlutterFlow regenerates its files on every push, so hand edits to generated files get overwritten, and nothing you change in the repository flows back into the editor. Once you start editing by hand, the editor is retired.",
+        },
+      ],
+    },
+    {
+      id: "what-is-inside",
+      heading: "What is inside the exported project",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "The project follows a predictable layout, and knowing it makes the assessment much quicker. These are the parts worth recognising in the lib folder:",
+        },
         {
           type: "list",
           items: [
-            "Most new features need custom code, and you are pasting Dart into custom widgets and actions that the editor cannot check or test.",
-            "Two people cannot work on the same screens without stepping on each other, and there is no proper code review before a release.",
-            "Your web version is slow to load, hard to use with a screen reader, or not showing up in Google.",
-            "You need background jobs, webhooks, complex permissions or an integration that is awkward to express as a visual action.",
-            "An investor, acquirer or new developer wants to see the code and the release process, and both live inside a third-party tool.",
+            {
+              term: "Page folders",
+              text: "One folder per page or component, each with a widget file and a matching model file that holds the page's controllers and local state.",
+            },
+            {
+              term: "app_state.dart",
+              text: "A single FFAppState class holding every app state variable, with persisted values written to local storage on the device.",
+            },
+            {
+              term: "flutter_flow",
+              text: "FlutterFlow's own helpers: the theme class, utility functions, shared widgets such as its button, custom functions and the navigation setup.",
+            },
+            {
+              term: "backend",
+              text: "Generated record classes for Firestore collections or Supabase tables, plus the API calls you defined in the editor.",
+            },
+            {
+              term: "custom_code",
+              text: "Your custom actions and custom widgets, written in Dart, usually the most valuable code in the project.",
+            },
+            {
+              term: "auth",
+              text: "A wrapper around Firebase Auth or Supabase Auth with the sign-in methods you switched on.",
+            },
           ],
         },
       ],
     },
     {
-      id: "what-you-can-export",
-      heading: "What can you take out of FlutterFlow?",
+      id: "part-by-part",
+      heading: "Keep, refactor or rewrite, part by part",
       blocks: [
         {
           type: "paragraph",
-          text: "You can take the full Flutter project. On paid plans FlutterFlow lets you download the generated code or push it to a GitHub repository, and the backend is usually Firebase or Supabase, which you already own. Check which plan includes GitHub push, as code features are tied to the plan you are on.",
+          text: "Most parts are a keep or a refactor. Only a handful need replacing, and they are the parts FlutterFlow handled for you behind the scenes: security rules, deployment and the web build.",
         },
         {
-          type: "list",
-          items: [
-            {
-              term: "App code",
-              text: "A standard Flutter project in Dart, including your custom widgets, actions and functions. It builds with the normal Flutter tools for iOS, Android and the web.",
-            },
-            {
-              term: "Database and auth",
-              text: "FlutterFlow does not host your data. If you used Firebase, your Firestore data, users and storage sit in a Firebase project. If you used Supabase, it is a Postgres database you can connect to directly. Make sure the project is in your own account, not a freelancer's.",
-            },
-            {
-              term: "Server logic",
-              text: "Cloud Functions or Supabase edge functions you deployed are separate from FlutterFlow and keep running. Logic built only as client-side actions moves with the app code.",
-            },
-            {
-              term: "What stays behind",
-              text: "The visual editor, FlutterFlow's one-click deployment and any FlutterFlow-specific settings. You will need your own build and release pipeline for the app stores and the web.",
-            },
+          type: "table",
+          caption: "Each part of a FlutterFlow export, with a verdict and the reason for it",
+          columns: ["Part of the export", "Verdict", "Why"],
+          rows: [
+            ["Page and component widgets", "Refactor when touched", "They work, but layouts are deeply nested with styling inline. Tidy the screens you change most."],
+            ["Page model files", "Keep", "A sensible home for controllers and local state. Move business logic out into services."],
+            ["FFAppState global state", "Refactor", "One class for everything means every change rebuilds widely. Split it by feature with Provider, Riverpod or Bloc."],
+            ["Custom actions and widgets", "Keep", "Already your own Dart. Add tests, since the editor never checked them."],
+            ["Custom functions", "Keep", "Small pure functions, easy to test as they are."],
+            ["Firestore record classes", "Keep", "Generated but readable. Put a repository layer in front so screens stop querying directly."],
+            ["Supabase table classes", "Keep", "Built on the standard supabase_flutter package. Same advice on a repository layer."],
+            ["Generated API calls", "Refactor", "JSON is read by path with little typing. Replace with typed models, and move secret keys to a server."],
+            ["Auth wrapper", "Keep", "Thin and standard. Review the sign-in flows and account deletion."],
+            ["Routing and navigation", "Keep", "Built on go_router. Rename routes sensibly and test deep links."],
+            ["FlutterFlowTheme", "Keep, then migrate", "Works fine, but standard widgets ignore it. Map colours and text styles into ThemeData over time."],
+            ["FlutterFlow helper widgets", "Keep for now", "Replace with plain Flutter widgets as screens are rewritten, not in one go."],
+            ["Firestore rules or row level security", "Rewrite", "Generated or test mode rules are a starting point. Write and test a rule for every collection or table."],
+            ["Flutter web build", "Rewrite if public", "Fine behind a login. Public pages that must rank and load fast belong in a framework such as Next.js."],
+            ["Build and release", "Rewrite", "One-click deploys stay in the editor. You need your own signed builds for both stores."],
           ],
         },
         {
           type: "callout",
-          title: "Export is a one-way street",
-          text: "FlutterFlow regenerates its code on every push. Hand edits made to the generated files are overwritten, and changes made in your repository do not flow back into the editor. Once you start editing the code by hand, plan to stop building in FlutterFlow.",
+          title: "Where the real risk sits",
+          text: "The app talks to Firestore or Supabase straight from the device, so the security rules or row level security policies are the only thing between one user and another user's data. Of everything in the table, that row deserves the most time. Test each rule as a normal user and as a signed-out visitor before launch.",
         },
       ],
     },
     {
-      id: "what-is-missing",
-      heading: "What does a FlutterFlow app usually need before launch?",
+      id: "what-shifts-the-verdict",
+      heading: "Three things that change the verdict for your app",
       blocks: [
         {
           type: "paragraph",
-          text: "Most FlutterFlow apps need security rules, structure and a release process before they can carry real users. The generated code works, but it was written for the editor to regenerate, not for a team to maintain.",
+          text: "The table is the usual case. Three questions move individual rows towards keep or towards rewrite.",
         },
         {
           type: "list",
           items: [
             {
-              term: "Database rules",
-              text: "The app talks to Firestore or Supabase directly from the device, so Firebase security rules or Supabase row level security are the only thing protecting each user's data. Test them as an ordinary user and as a signed-out visitor.",
+              term: "How much is custom code?",
+              text: "If most features already live in custom actions and widgets, the project is closer to hand-written Flutter than it looks, and the case for keeping it is stronger.",
             },
             {
-              term: "Secrets off the device",
-              text: "Any key compiled into a mobile or web app can be extracted. Payment, email and AI provider keys belong in Cloud Functions, edge functions or a server.",
+              term: "Is the web side public?",
+              text: "Flutter web draws the interface itself rather than using normal HTML, which makes search indexing, first load size, text selection and screen readers harder. Flutter's own guidance aims it at app-like experiences, not content sites.",
             },
             {
-              term: "Code structure",
-              text: "Generated code is verbose and repeats itself across screens. Pulling shared logic into services and state management makes later changes far cheaper.",
-            },
-            {
-              term: "Tests and builds",
-              text: "Automated tests on sign-up, payment and the core flow, plus a build pipeline that produces signed iOS and Android releases without anyone clicking through the editor.",
-            },
-            {
-              term: "Monitoring",
-              text: "Crash reporting, error tracking and backups. Firebase Crashlytics or a similar service is quick to add once the code is yours.",
-            },
-            {
-              term: "A web app that suits the web",
-              text: "Flutter web draws the interface itself instead of using normal HTML, which makes search indexing, first load size, text selection and screen reader support harder than in a regular web app. Flutter's own guidance points it at app-like experiences, not content sites.",
+              term: "How old are the packages?",
+              text: "The generated pubspec pins package versions to whatever FlutterFlow used at the time. Upgrading Flutter and those packages is a task of its own, and it is better done early, while the code is still close to what was generated.",
             },
           ],
         },
       ],
     },
     {
-      id: "migration-plan",
-      heading: "How do you migrate a FlutterFlow app, step by step?",
+      id: "plan",
+      heading: "A short plan for the first few weeks",
       blocks: [
         {
           type: "paragraph",
-          text: "Decide what each platform needs first, then take ownership, secure the backend and build the release process. Mobile and web can follow different paths while sharing one backend.",
+          text: "Take ownership first, protect the data second, and refactor only where the product is actually changing. A mobile app that is mostly kept typically reaches a proper release process in four to eight weeks, longer if the web side is being rebuilt alongside it.",
         },
         {
           type: "list",
           ordered: true,
           items: [
-            {
-              term: "Choose the path per platform",
-              text: "For iOS and Android, keeping the Flutter code is usually right. For the web, keep Flutter only if it is an app behind a login. If it needs to rank, load fast or work well with assistive technology, plan a React or Next.js web app.",
-            },
-            {
-              term: "Freeze and take ownership",
-              text: "Push the final version to a GitHub repository in your own organisation, stop editing in FlutterFlow, and confirm you own the Firebase or Supabase project, the app store accounts, signing keys and the domain.",
-            },
-            {
-              term: "Audit",
-              text: "List every collection or table, security rule, function, API call, custom code file and third-party package. Note what users actually rely on today.",
-            },
-            {
-              term: "Lock down the backend",
-              text: "Write and test security rules or row level security policies for every collection or table, and move secret keys into server functions.",
-            },
-            {
-              term: "Set up environments and builds",
-              text: "Create separate development, staging and production backends, and a pipeline that builds, signs and uploads releases to TestFlight and the Play Console.",
-            },
-            {
-              term: "Refactor where it hurts",
-              text: "Restructure the screens and data access you change most. Leave stable screens alone.",
-            },
-            {
-              term: "Build the web app if needed",
-              text: "Build the web product against the same backend, with server rendering for public pages. Reuse the data model and rules so mobile and web stay consistent.",
-            },
-            {
-              term: "Release and cut over",
-              text: "Ship an app store update built from your repository, point the domain at the new web app, and keep the FlutterFlow project read-only for a few weeks before retiring it.",
-            },
+            "Push the final version to a GitHub repository in your own organisation, stop editing in FlutterFlow, and confirm you own the Firebase or Supabase project, both store accounts, the signing keys and the domain.",
+            "Write and test security rules or row level security policies for every collection or table, and move payment, email and AI keys into Cloud Functions, edge functions or a server.",
+            "Set up separate development, staging and production backends.",
+            "Build a pipeline that produces signed releases and uploads them to TestFlight and the Play Console without anyone opening the editor.",
+            "Add crash reporting, error tracking and tests on sign-up, payment and the core flow.",
+            "Upgrade Flutter and the pinned packages, then start on the refactors in the table, beginning with app state.",
+            "If the web side is public, build it as a separate web app on the same backend and data model.",
           ],
         },
-      ],
-    },
-    {
-      id: "pitfalls",
-      heading: "What goes wrong in FlutterFlow migrations?",
-      blocks: [
         {
           type: "paragraph",
-          text: "The common mistakes are carrying on in the editor after the code has been hand edited, and treating Flutter web as a drop-in website.",
-        },
-        {
-          type: "list",
-          items: [
-            "Editing the generated code and then pushing again from FlutterFlow, which overwrites the hand edits.",
-            "Losing the app signing keys or store access, which can block updates to the existing listing.",
-            "Leaving Firestore rules in test mode, or Supabase tables without row level security, because the app looked fine in testing.",
-            "Rewriting the mobile app from scratch when the Flutter code only needed restructuring, and losing months.",
-            "Keeping a Flutter web build for a marketing site and wondering why it does not rank.",
-          ],
-        },
-      ],
-    },
-    {
-      id: "when-to-stay",
-      heading: "Should you stay on FlutterFlow instead?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Stay while the app is mostly screens, forms and standard data, and your team builds faster in the editor than they would in code. FlutterFlow is good at cross-platform mobile apps, and plenty run happily on it. Move when custom code dominates, when you need a proper review and release process, or when the web side needs to behave like a real website.",
+          text: "The mistake to avoid is the full rewrite. The mobile app usually only needs restructuring, and starting from nothing throws away working screens and months of fixes along with the clutter.",
         },
       ],
     },
   ],
   faqs: [
     {
-      question: "Can I export my code from FlutterFlow?",
-      answer:
-        "Yes, on paid plans. You can download the generated Flutter project or push it to a GitHub repository. It is standard Flutter and Dart code that builds with the normal Flutter tools, without FlutterFlow.",
-    },
-    {
       question: "Can I keep editing in FlutterFlow after I change the exported code?",
       answer:
-        "Not safely. FlutterFlow regenerates the code on each push and overwrites hand edits, and changes made in your repository do not sync back into the editor. Pick one place to work: the editor or the code.",
+        "Not safely. FlutterFlow regenerates its code on each push and overwrites hand edits to generated files, and changes made in your repository do not sync back into the editor. Choose one place to work: the editor or the code.",
     },
     {
       question: "Is Flutter web good enough for a production web app?",
       answer:
-        "For an app behind a login, it can be. For public pages that need to rank in search, load quickly and work well with screen readers, a standard web framework such as Next.js is usually the better choice.",
+        "For an app behind a login, it can be. For public pages that need to rank in search, load quickly and work well with screen readers, a standard web framework such as Next.js is usually the better choice, sharing the same backend as the Flutter mobile app.",
     },
     {
-      question: "How long does it take to move a FlutterFlow app to production?",
+      question: "Can I export code from FlutterFlow on the free plan?",
       answer:
-        "Typically four to eight weeks, depending on how much custom code the app has, how many user roles it needs, and whether the web side is being rebuilt as a separate web app.",
+        "Code download and GitHub push are features of FlutterFlow's paid plans, and the exact features vary by tier. Check the current plan comparison before you rely on an export, and take one as soon as you are on a plan that allows it.",
     },
   ],
 }

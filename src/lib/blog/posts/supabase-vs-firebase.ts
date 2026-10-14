@@ -6,9 +6,9 @@ export const supabaseVsFirebase: BlogPost = {
   series: "stack",
   topic: "Supabase",
   description:
-    "Supabase vs Firebase for a startup: how the databases, auth, security rules, pricing, realtime and offline support differ, and when each is the better choice.",
+    "Supabase vs Firebase side by side: database, pricing as you grow, lock-in, auth, realtime and offline, then a simple rule for which one a startup should pick.",
   summary:
-    "For most startups building a web app or SaaS product, pick Supabase: your data lives in Postgres, a relational SQL database you can query, report on and take anywhere. Pick Firebase when the product is a mobile app that has to work offline and you want push notifications, crash reporting and analytics from one place.",
+    "For most startups building a web app or SaaS product, pick Supabase: your data lives in Postgres, which you can query, report on and take anywhere. Pick Firebase when the product is a mobile app that has to work offline and you want push notifications, crash reporting and analytics in one place.",
   datePublished: "2026-10-14",
   facts: [
     { label: "Supabase database", value: "Postgres, relational with SQL" },
@@ -19,172 +19,141 @@ export const supabaseVsFirebase: BlogPost = {
   ],
   sections: [
     {
-      id: "which-to-choose",
-      heading: "Supabase or Firebase: which should a startup choose?",
+      id: "at-a-glance",
+      heading: "Supabase vs Firebase at a glance",
       blocks: [
         {
           type: "paragraph",
-          text: "If you're building a web app or a SaaS product, choose Supabase. If you're building a mobile app that people will use on the Tube with no signal, choose Firebase. Both give you a hosted database, sign-in, file storage and server functions, so either will get an MVP live.",
+          text: "Twelve rows of differences, and two of them decide almost every project: the shape of your data and whether the app must work offline. Both platforms give you a hosted database, sign-in, file storage and server functions, so either will get an MVP live.",
         },
         {
-          type: "paragraph",
-          text: "What actually decides it is the database underneath. Supabase is Postgres. Firebase is, for most people, Firestore. Once you know whether your data is rows in related tables or documents in collections, the Supabase or Firebase question mostly answers itself.",
+          type: "table",
+          caption: "Supabase and Firebase compared feature by feature",
+          columns: ["Area", "Supabase", "Firebase"],
+          rows: [
+            ["Main database", "Postgres, relational tables", "Cloud Firestore, NoSQL documents"],
+            ["Querying", "SQL with joins, views and transactions", "Document queries, no joins"],
+            ["SQL option", "Native", "SQL Connect, Postgres behind GraphQL, still young"],
+            ["Access rules", "Row level security policies in SQL", "Security rules in Firebase's own language"],
+            ["Auth", "Email, magic links, social, phone, MFA", "Email, links, social, phone, MFA, anonymous accounts"],
+            ["Where users live", "A table in your own database", "Firebase Auth, separate from your data"],
+            ["Realtime", "Postgres changes, broadcast and presence", "Live listeners on documents and queries"],
+            ["Offline", "Not built in, needs a sync layer", "Built into the mobile and web SDKs"],
+            ["Mobile extras", "Separate services", "Push, crash reporting, remote config, App Check"],
+            ["Server code", "Edge Functions on Deno", "Cloud Functions on Node.js or Python"],
+            ["Pricing model", "Monthly plan plus compute and usage", "Pay per operation on the Blaze plan"],
+            ["Open source", "Yes, can be self-hosted", "No, runs only on Google Cloud"],
+          ],
         },
       ],
     },
     {
-      id: "core-difference",
-      heading: "What is the core difference between Supabase and Firebase?",
+      id: "data-model",
+      heading: "The data model decides most projects",
       blocks: [
         {
           type: "paragraph",
-          text: "Supabase is built on Postgres, a relational database you query with SQL. Firebase's main databases are NoSQL: Cloud Firestore stores JSON-like documents in collections, and the older Realtime Database stores one big JSON tree.",
+          text: "If your data is related records, choose Supabase. Most startup software is: users belong to teams, teams have subscriptions, subscriptions have invoices. Sooner or later someone asks for every customer whose trial ends this week and who hasn't added a card. In Postgres that's one query with a join.",
         },
         {
           type: "paragraph",
-          text: "That matters more than it sounds, because most startup software is relational. Users belong to teams, teams have subscriptions, subscriptions have invoices. Sooner or later someone asks for every customer whose trial ends this week and who hasn't added a card. In Postgres that's one query with a join. In Firestore there are no joins, so you copy data into several documents so each screen can read it in one go, then write code to keep the copies in step. That's where Firestore projects get messy: a team gets renamed and the old name still shows on half the screens.",
+          text: "Firestore has no joins, so you copy data into several documents so each screen can load in one read, then write code to keep the copies in step. That's where Firestore projects get messy: a team gets renamed and the old name still shows on half the screens. Postgres also brings foreign keys, transactions, views for reporting, and extensions such as pgvector for AI search over your own data.",
         },
         {
           type: "paragraph",
-          text: "Postgres also gives you foreign keys, transactions, views for reporting and extensions such as pgvector for AI search, and any tool that speaks Postgres can connect to it.",
-        },
-        {
-          type: "callout",
-          title: "Firebase does have Postgres now",
-          text: "Firebase SQL Connect, launched as Data Connect and renamed in 2026, puts a Cloud SQL for PostgreSQL database behind a GraphQL layer with generated client SDKs. It's a real option, but it's young, and nearly every Firebase tutorial and library still assumes Firestore. If you want Postgres, Supabase is the more established route today.",
+          text: "Firestore fits data that really is document shaped: chat messages, user-generated posts, settings, content read far more often than it's cross-referenced. Firebase's newer SQL Connect, which launched as Data Connect, puts a Cloud SQL for PostgreSQL database behind a GraphQL layer. It's a genuine option, but nearly every Firebase tutorial and library still assumes Firestore, so if you want Postgres, Supabase is the well-trodden route.",
         },
       ],
     },
     {
-      id: "auth-and-security",
-      heading: "How do authentication and security compare?",
+      id: "pricing-growth",
+      heading: "How the bill behaves as you grow",
       blocks: [
         {
           type: "paragraph",
-          text: "Authentication is close to a draw. Security works differently: Firebase uses its own security rules language, and Supabase uses Postgres row level security written in SQL. On both, the app talks to the database straight from the browser or phone, so those rules are the only thing between one user and another user's data.",
+          text: "Firebase bills track how your app reads data. Supabase bills track how big a database server you need. That difference matters more than either price list.",
         },
         {
           type: "paragraph",
-          text: "Both support email and password, magic links, Google and Apple sign-in, SMS codes and multi-factor authentication. Firebase's anonymous accounts, which upgrade when the user signs up, suit apps that let people try before registering. Supabase keeps users in your own database, so a user is a row you can join to everything else.",
+          text: "On Firebase's pay as you go Blaze plan, every Firestore document read, write and delete above the free allowance costs money, plus storage and network transfer. At the time of writing the free allowance includes 50,000 reads a day, which sounds generous until you do the sums on your busiest screen. A feed that loads 50 documents, opened 10 times a day by 1,000 users, is 500,000 reads a day before anyone scrolls. Live listeners are billed for every document change they receive, and Google Cloud budgets send alerts rather than stopping the spending.",
+        },
+        {
+          type: "paragraph",
+          text: "Supabase grows in steps. Free projects pause after a week of inactivity, so nothing real belongs there. Pro starts at about $25 a month at the time of writing, with some compute credit and a spend cap on by default. After that you pay for a larger compute size when you need one, plus egress, storage or monthly active users above the quota. For a busy SaaS product it's easier to forecast. Check both pricing pages before committing, because the numbers change.",
+        },
+      ],
+    },
+    {
+      id: "lock-in",
+      heading: "Lock-in and portability",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Supabase is open source and can be self-hosted. Firebase is proprietary and only runs on Google. This is the biggest long-term difference between them, and the one you can't change your mind about cheaply.",
+        },
+        {
+          type: "paragraph",
+          text: "Leaving Supabase is mostly a pg_dump and a restore. Your schema, data and policies are standard Postgres, so they move to any managed Postgres host or to the Supabase stack in Docker on your own servers. Auth, Storage and Edge Functions still need replacing, but the data, the part that hurts to move, comes with you untouched.",
+        },
+        {
+          type: "paragraph",
+          text: "Leaving Firebase means redesigning Firestore documents as tables and undoing the duplicated data, exporting Firebase Auth users, rewriting every security rule, and replacing every Firebase SDK call in the app. One helpful detail: the Auth export includes password hashes, so users can move without a forced reset if the new system supports Firebase's hashing. It's weeks of work, not a setting.",
+        },
+      ],
+    },
+    {
+      id: "auth",
+      heading: "Auth and access rules",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Sign-in is close to a draw. Access rules are where they differ, and on both platforms they matter more than usual, because the app talks to the database straight from the browser or phone.",
         },
         {
           type: "list",
           items: [
             {
               term: "Firebase security rules",
-              text: "A rules file saying who can read or write each collection or path, which you can unit test locally with the Emulator Suite. Rules aren't filters: a query has to ask only for documents the user may see, or the whole query fails.",
+              text: "A rules file saying who can read or write each collection or path, which you can unit test locally with the Emulator Suite. Rules aren't filters: a query must ask only for documents the user may see, or the whole query fails.",
             },
             {
               term: "Supabase row level security",
-              text: "Policies on each table that Postgres checks on every query, usually against auth.uid(). More powerful, because a policy can look up other tables to check team membership. The catch is that a table with row level security switched off is readable by anyone holding your public key.",
+              text: "Policies on each table that Postgres checks on every query, usually against auth.uid(). More powerful, because a policy can look up other tables to check team membership. A table with it switched off is readable by anyone holding your public key.",
             },
           ],
+        },
+        {
+          type: "paragraph",
+          text: "Firebase's anonymous accounts, which upgrade when the user signs up, suit apps that let people try before registering. Supabase keeps users in your own database, so a user is a row you can join to everything else. Before launch on either, sign in as an ordinary user and try to read someone else's records: on Firebase look for rules still in test mode, on Supabase fix everything the Security Advisor flags.",
+        },
+      ],
+    },
+    {
+      id: "realtime-offline",
+      heading: "Realtime and offline",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Realtime is close. Offline is Firebase's clearest win. Firestore's Android, iOS, Flutter and web SDKs cache data on the device, let users keep reading and writing with no connection, and sync when the signal comes back, with almost no code from you.",
+        },
+        {
+          type: "paragraph",
+          text: "Supabase has nothing equivalent built in. An offline-first app on Supabase needs a sync layer such as PowerSync or a local cache you write yourself, and conflict handling is where the time goes. For live features, Supabase Realtime streams Postgres changes and adds broadcast and presence, which covers chat, live dashboards and showing who's online. Firebase also bundles Cloud Messaging for push, Crashlytics for crash reports and Remote Config for feature switches into the same project, which on Supabase means separate services and more glue.",
+        },
+      ],
+    },
+    {
+      id: "the-rule",
+      heading: "The rule",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Choose Supabase unless the app must work offline on a phone. If it must, choose Firebase. If you're only testing demand with a throwaway prototype, use whichever your developer knows best.",
         },
         {
           type: "callout",
-          title: "Check this before launch",
-          text: "On Firebase, look for rules still in test mode, which allow every read and write until a set date. On Supabase, open the Security Advisor in the dashboard and fix every table it flags. Then sign in as an ordinary user and try to read someone else's records.",
-        },
-      ],
-    },
-    {
-      id: "pricing",
-      heading: "How do Firebase and Supabase pricing grow as you scale?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Firebase charges Firestore per operation: on the pay as you go Blaze plan, every document read, write and delete above the free allowance costs money, along with storage and network transfer. Supabase charges a monthly plan per organisation, a compute size per project, and usage above each plan's quotas. So Firebase bills track how your app reads data, and Supabase bills track how big a database server you need.",
-        },
-        {
-          type: "paragraph",
-          text: "The per-read model is cheap when you're small. At the time of writing Firestore includes 50,000 free document reads a day. But do the sums on your busiest screen. A feed that loads 50 documents, opened 10 times a day by 1,000 users, is 500,000 reads a day before anyone scrolls. Live listeners count reads too, so a dashboard listening to a whole collection is billed for every change to it. And Google Cloud budgets send alerts; they don't stop the spending.",
-        },
-        {
-          type: "paragraph",
-          text: "Supabase grows in steps. The free plan pauses projects after a week of inactivity, so don't run anything real on it. Pro starts at about $25 a month at the time of writing, with some compute credit and a spend cap on by default. After that you pay for a bigger compute size when you need it, plus egress, storage or monthly active users above the quota. For a busy SaaS product the Supabase bill is easier to forecast. Check both pricing pages before you commit, because the numbers change.",
-        },
-      ],
-    },
-    {
-      id: "realtime-offline-mobile",
-      heading: "Which is better for realtime, offline and mobile apps?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Firebase wins on offline and mobile. Realtime is close. Firestore's Android, iOS and Flutter SDKs cache data on the device, let users keep reading and writing with no connection, and sync when the signal comes back, with almost no code from you. Supabase has nothing built in. An offline-first app on Supabase needs a sync layer such as PowerSync, or a local cache you write yourself, and conflict handling is where that time goes.",
-        },
-        {
-          type: "paragraph",
-          text: "For realtime, Firestore listeners push changes to every connected client. Supabase Realtime streams Postgres changes and adds broadcast and presence, which is plenty for chat, live dashboards and showing who's online.",
-        },
-        {
-          type: "paragraph",
-          text: "Firebase also bundles mobile extras into the same project, which on Supabase means separate services and more glue:",
-        },
-        {
-          type: "list",
-          items: [
-            "Cloud Messaging for push notifications on Android, iOS and the web.",
-            "Crashlytics for crash reports with stack traces from real devices.",
-            "Remote Config for switching features on and off without an app store release.",
-            "App Check to make it harder for anything other than your real app to call your backend.",
-          ],
-        },
-      ],
-    },
-    {
-      id: "lock-in",
-      heading: "Can you self-host Supabase or Firebase, and how hard is it to leave?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Supabase is open source and you can self-host it. Firebase is proprietary and only runs on Google. This is the biggest long-term difference between them, and the main reason people go looking for a Firebase alternative.",
-        },
-        {
-          type: "paragraph",
-          text: "Leaving Supabase is mostly a pg_dump and a restore. Your schema, data and policies are standard Postgres, so they move to any managed Postgres host, or to the Supabase stack in Docker on your own servers. You'd still replace Auth, Storage and Edge Functions, but the data, which is the part that hurts to move, comes with you untouched.",
-        },
-        { type: "paragraph", text: "Leaving Firebase is a proper migration:" },
-        {
-          type: "list",
-          ordered: true,
-          items: [
-            "Export Firestore collections and redesign the documents as tables, undoing the duplicated data as you go.",
-            "Export users from Firebase Auth. The export includes password hashes, so accounts can move without a forced reset if the new system supports Firebase's hashing.",
-            "Rewrite the security rules as row level security policies or server-side checks, and test each one.",
-            "Replace every Firestore and Firebase SDK call in the app, which is usually the longest step because they're spread across every screen.",
-          ],
-        },
-        {
-          type: "paragraph",
-          text: "It's doable, but it's weeks of work, not a setting. Make the choice on purpose at the start.",
-        },
-      ],
-    },
-    {
-      id: "when-each-wins",
-      heading: "When is each the better choice?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Firebase vs Supabase is rarely a close call once you know two things: what shape your data is, and where your users are.",
-        },
-        {
-          type: "list",
-          items: [
-            {
-              term: "Supabase",
-              text: "Web apps and SaaS products, anything with teams, roles, billing and reporting, AI features that search your own data, and any founder who wants to be able to leave without a rewrite.",
-            },
-            {
-              term: "Firebase",
-              text: "Mobile-first apps that must work offline, products that need push and crash reporting from day one, data that really is document shaped, and teams who already know Firestore well.",
-            },
-          ],
-        },
-        {
-          type: "paragraph",
-          text: "For a quick prototype to test demand, use whichever your developer knows best. At Scryptic we usually build with TypeScript, Next.js and Postgres, through Supabase or another managed host, because most products are relational and any developer can pick up a Postgres database after us. For an offline-first field app, we'd say Firebase was the better fit.",
+          title: "What we build with",
+          text: "At Scryptic we usually build with TypeScript, Next.js and Postgres, through Supabase or another managed host, because most products are relational and any developer can pick up a Postgres database after us. For an offline-first field app, we'd tell you Firebase was the better fit.",
         },
       ],
     },
@@ -193,22 +162,22 @@ export const supabaseVsFirebase: BlogPost = {
     {
       question: "Is Supabase a good Firebase alternative?",
       answer:
-        "Yes, for most web apps and SaaS products. It covers the same ground but uses Postgres instead of a NoSQL store. It's weaker than Firebase on offline sync and mobile extras such as push notifications.",
+        "Yes, for most web apps and SaaS products. It covers the same ground, with a hosted database, auth, storage and functions, but uses Postgres instead of a NoSQL store. It is weaker than Firebase on offline sync and on mobile extras such as push notifications and crash reporting.",
     },
     {
       question: "Is Supabase cheaper than Firebase?",
       answer:
-        "It depends on how your app reads data. Firebase charges for every document read, write and delete beyond a free daily allowance, so read-heavy apps get expensive quickly. Supabase charges a plan fee plus compute and usage, which is easier to forecast once you have real traffic.",
+        "It depends on how your app reads data. Firebase charges for every Firestore document read, write and delete beyond a free daily allowance, so read-heavy apps get expensive quickly. Supabase charges a plan fee plus compute and usage, which is easier to forecast once you have real traffic.",
     },
     {
       question: "Can Firebase use SQL?",
       answer:
-        "Yes, through Firebase SQL Connect, which launched as Data Connect. It runs a Cloud SQL for PostgreSQL database behind a GraphQL layer with generated SDKs. Firestore and Realtime Database, the databases most Firebase apps use, are NoSQL and don't support SQL.",
+        "Yes, through Firebase SQL Connect, which launched as Data Connect. It runs a Cloud SQL for PostgreSQL database behind a GraphQL layer with generated SDKs. Firestore and the Realtime Database, which most Firebase apps use, are NoSQL and do not support SQL.",
     },
     {
       question: "Can I migrate from Firebase to Supabase?",
       answer:
-        "Yes. You reshape exported Firestore data into Postgres tables, export Firebase Auth users with their password hashes, and rewrite security rules as row level security policies. Every Firebase call in the app also changes, so plan a few weeks.",
+        "Yes. You reshape exported Firestore data into Postgres tables, export Firebase Auth users with their password hashes, and rewrite security rules as row level security policies. Every Firebase call in the app also changes, so plan for a few weeks of work.",
     },
     {
       question: "Which is better for a mobile app, Supabase or Firebase?",

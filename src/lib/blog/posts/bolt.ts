@@ -3,192 +3,206 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const bolt: BlogPost = {
   slug: "migrate-from-bolt",
-  title: "Migrating from Bolt.new to a production app",
+  title: "Seven things to fix before your Bolt.new app goes live",
   series: "migration",
   topic: "Bolt.new",
   logo: boltLogo,
   category: "AI app builders",
   description:
-    "Moving a Bolt.new app to production: how to get the code and Bolt Database out, what the app needs before real users arrive, and a step by step migration plan.",
+    "Seven problems that break Bolt.new apps once real users arrive, from the WebContainer gap and leaked keys to Supabase auth and Netlify deploys, and the fixes.",
   summary:
-    "Bolt.new writes ordinary JavaScript and TypeScript projects, so the code you built is yours to keep and improve. Moving to production means putting that code in your own GitHub repository, claiming the database into a Supabase account you control, and adding the security, testing and hosting setup that a browser preview never needed.",
+    "A Bolt.new app that works in the preview usually has seven gaps before it is safe for real users: sandbox-only behaviour, exposed secrets, open database tables, a backend you don't fully own, half-configured auth, fragile deploys and no monitoring. All seven are fixable in the code Bolt wrote, so most apps need hardening rather than a rebuild.",
   datePublished: "2026-10-13",
-  facts: [
-    { label: "Code export", value: "Yes, GitHub sync or a ZIP download" },
-    { label: "Data export", value: "Claim Bolt Database into Supabase" },
-    { label: "Usual approach", value: "Harden and extend, not rebuild" },
-    { label: "Typical timeline", value: "3 to 8 weeks" },
-  ],
+  dateModified: "2026-10-14",
   sections: [
     {
-      id: "when-to-move",
-      heading: "When is it time to move a Bolt.new app to production?",
+      id: "webcontainer-gap",
+      heading: "1. It only works inside the WebContainer",
       blocks: [
         {
           type: "paragraph",
-          text: "Move when the app stops being an experiment and starts carrying real customers, real money or real data. Bolt.new is very quick at turning a prompt into a running full stack app in your browser, but that environment is built for trying things, not for running a business.",
+          text: "Don't trust the preview. Bolt runs your project in a StackBlitz WebContainer, a Node.js environment that lives inside your browser tab, and plenty of code that runs happily there fails a clean production build somewhere else. The preview has been patched up by prompt after prompt; nobody has ever installed it from scratch.",
         },
-        { type: "paragraph", text: "These are the usual signs:" },
+        {
+          type: "paragraph",
+          text: "WebContainers can't run native binaries, so Bolt quietly reaches for pure JavaScript alternatives. Dependency versions drift as the AI adds packages. Type errors that the dev server shrugs off stop a strict build dead.",
+        },
         {
           type: "list",
           items: [
-            "Prompts that used to take seconds now loop on the same error, and a growing share of your tokens goes on repairs.",
-            "You need a second developer, and they want to work in their own editor with branches, reviews and tests.",
-            "A customer, investor or partner is asking about security, backups or where their data is stored.",
-            "You need things that are awkward to build by prompting: scheduled jobs, webhooks from payment providers, role based permissions or a mobile release.",
+            {
+              term: "How to spot it",
+              text: "Push the project to GitHub, clone it onto a laptop, delete node_modules, then run a fresh install and a production build. Anything that fails here would have failed on your host.",
+            },
+            {
+              term: "The fix",
+              text: "Pin the Node version in the project, commit the lockfile, fix every build error rather than switching checks off, and make that clean build the thing your host runs on every deploy.",
+            },
           ],
         },
       ],
     },
     {
-      id: "what-you-can-export",
-      heading: "What can you take out of Bolt.new?",
+      id: "secrets",
+      heading: "2. Your secrets are in the bundle, or in Git",
       blocks: [
         {
           type: "paragraph",
-          text: "You can take out all of the code and, with a little care, all of the data. Bolt runs projects in StackBlitz WebContainers, a Node.js environment inside the browser, and the files it writes are a normal project for whichever framework you chose, often React with Vite, sometimes Next.js, Astro or an Expo app.",
+          text: "Assume at least one key has leaked until you've checked. Most Bolt apps are React with Vite, and Vite copies any environment variable starting with VITE_ straight into the JavaScript every visitor downloads. When a prompt says to add a Stripe or OpenAI key, it often ends up there.",
+        },
+        {
+          type: "paragraph",
+          text: "The second leak is the .env file itself. Bolt keeps it in the project so the preview works, and depending on how the repository was set up, it can be pushed to GitHub along with everything else.",
         },
         {
           type: "list",
           items: [
             {
-              term: "Source code",
-              text: "Connect GitHub and Bolt creates a repository and pushes changes to it, or download the project as a ZIP file from the project menu. A connected repository is better, because it keeps a full history outside Bolt.",
+              term: "How to spot it",
+              text: "Search the built files for anything that looks like a secret key, and search the repository history, not just the latest commit, for a .env file.",
             },
             {
-              term: "Database and auth",
-              text: "Newer projects use Bolt Database, which is built on Supabase. You can claim it into a Supabase organisation you own, which keeps the data in place. If you connected your own Supabase project from the start, it is already yours.",
+              term: "The fix",
+              text: "Rotate every key that was exposed, because deleting the file doesn't remove it from history. Move secret calls into Supabase edge functions or a small server, keep only the public Supabase URL and anon key in the frontend, and add .env to .gitignore.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "open-tables",
+      heading: "3. Anyone can read the database",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "If row level security is off or loosely written, any visitor can query your tables directly. The browser talks to Supabase with the anon key, which is public by design, so the only thing standing between one user and another user's records is the policy on each table.",
+        },
+        {
+          type: "paragraph",
+          text: "AI-written policies tend to fail in a specific way: they exist, but they say any signed-in user can read every row. The app looks right because the interface filters to your own data. The database doesn't.",
+        },
+        {
+          type: "list",
+          items: [
+            {
+              term: "How to spot it",
+              text: "Open the security advisor in the Supabase dashboard, which flags tables with security switched off. Then sign in as a test user and query another user's rows from the browser console.",
             },
             {
-              term: "Server logic",
-              text: "Supabase edge functions and SQL migration files usually sit in the project, so they travel with the code and can be deployed with the Supabase CLI.",
+              term: "The fix",
+              text: "Turn on row level security for every table, write policies that match each real role, and move anything that charges money or changes another user's data into an edge function that checks permissions on the server.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "backend-ownership",
+      heading: "4. The backend isn't in your account yet",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Check who owns the database before you change anything else. Newer Bolt projects use Bolt Database, which is built on Supabase, and until you claim it into a Supabase organisation you control, you don't hold the keys to your own users and data.",
+        },
+        {
+          type: "paragraph",
+          text: "The trap here is connecting a fresh Supabase project to an app that already has a Bolt Database. Bolt warns that this replaces the connection and can lose data. Claiming moves the existing database across; reconnecting starts again.",
+        },
+        {
+          type: "list",
+          items: [
+            {
+              term: "How to spot it",
+              text: "Look for the project in your own Supabase dashboard. If it isn't there, or it sits under a personal account rather than the company, it isn't fully yours.",
             },
             {
-              term: "What stays behind",
-              text: "Your chat history, Bolt's version history and Bolt's built-in hosting. The published address on Bolt hosting does not move, so plan for a custom domain you control.",
+              term: "The fix",
+              text: "Claim the database, then compare tables, users, storage buckets and edge function secrets against what the live app uses. Confirm with Bolt what the claim covers for your project before cancelling anything.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "auth-edge-cases",
+      heading: "5. Sign-up works for you and nobody else",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Auth is usually tested once, by the founder, on the happy path. Real users click confirmation links on their phones, reset passwords and sign in with Google, and each of those depends on settings the preview never exercised.",
+        },
+        {
+          type: "list",
+          items: [
+            {
+              term: "How to spot it",
+              text: "Sign up with a new email address on the deployed site, on a phone. Then reset the password, and sign in with every social provider you offer. Watch which address each email link points at.",
+            },
+            {
+              term: "The fix",
+              text: "Set the Site URL and redirect URLs in Supabase to your real domain. Add a page that actually handles password resets. Connect your own email provider through custom SMTP, because Supabase's built-in email is rate limited and meant for testing. Register each OAuth provider's callback for the production domain.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "deploy-defaults",
+      heading: "6. The deploy depends on Netlify defaults you never chose",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "A one-click deploy from Bolt gets a site online, not a release process. Bolt's Netlify integration and its own hosting both make sensible guesses, and the gaps show up as soon as someone refreshes a page or you change a setting.",
+        },
+        {
+          type: "list",
+          items: [
+            "Refreshing any page other than the home page returns a 404, because a single page app needs a rewrite rule sending every path to index.html.",
+            "Changing an environment variable in the host does nothing until the next build, because Vite bakes values in at build time.",
+            "The Netlify site sits in an account Bolt created for you, unclaimed, so nobody on your team can see the build logs.",
+            "There are no preview builds, so every change goes straight to the address your customers use.",
+          ],
+        },
+        {
+          type: "list",
+          items: [
+            {
+              term: "How to spot it",
+              text: "Deep link to an inner page and refresh it. Then try to find the build log for the last deploy.",
+            },
+            {
+              term: "The fix",
+              text: "Claim or recreate the site in your own Netlify or Vercel account, deploy from GitHub, add the single page app rewrite, keep variables per environment and turn on preview builds for every pull request. Put the app on a custom domain you control.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "no-safety-net",
+      heading: "7. Nothing tells you when it breaks",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "A Bolt app usually ships with no error tracking, no tested backups and no staging copy, and schema changes have been made by prompt directly against the only database there is. You find out about problems from customers.",
+        },
+        {
+          type: "list",
+          items: [
+            {
+              term: "How to spot it",
+              text: "Ask three questions. Where would I see an error a user hit an hour ago? When did I last restore a backup? Where can I try a schema change without touching live data?",
+            },
+            {
+              term: "The fix",
+              text: "Add error tracking such as Sentry and an uptime check. Create a separate staging Supabase project, keep every schema change in a migration file in the repository, and check what backups your Supabase plan includes. Write automated tests for sign-up, payment and the one job the app exists to do.",
             },
           ],
         },
         {
           type: "callout",
-          title: "Check the database claim first",
-          text: "Before you cancel anything, confirm with Bolt what a claim moves for your project: tables, user accounts, stored files and secrets. Bolt also warns that connecting a different Supabase project to an app that already has a Bolt Database replaces the connection and can lose data, so claim rather than reconnect.",
-        },
-      ],
-    },
-    {
-      id: "what-is-missing",
-      heading: "What does a Bolt.new app usually need before launch?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "It usually needs security work, a proper hosting and environment setup, and tests. The app ran in a browser sandbox where the only user was you, so nothing forced it to handle hostile input, many users at once or a bad deploy.",
-        },
-        {
-          type: "list",
-          items: [
-            {
-              term: "Database access rules",
-              text: "The frontend talks to Supabase directly, so row level security policies decide who can read and change each row. Check that every table has policies and that they match your real roles.",
-            },
-            {
-              term: "Secrets out of the frontend",
-              text: "Keys for payments, email and AI providers must live in edge functions or a server. Also check that no .env file with real keys has been committed to the repository.",
-            },
-            {
-              term: "Behaviour outside the browser sandbox",
-              text: "WebContainers cannot run native binaries, so a few packages behave differently once deployed to a real server. Run a clean install and a production build on your own machine and fix whatever breaks.",
-            },
-            {
-              term: "Code structure",
-              text: "Long prompt sessions leave large files, copied logic and half removed features. Tidy the parts you will keep changing so the next developer can work quickly.",
-            },
-            {
-              term: "Environments and operations",
-              text: "Separate development, staging and production, schema changes through migrations, error tracking, uptime checks and tested backups.",
-            },
-            {
-              term: "Search and performance",
-              text: "If you built with Vite, public pages render in the browser. Pages that need to rank should be server rendered or served from a separate marketing site.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "migration-plan",
-      heading: "How do you migrate a Bolt.new app, step by step?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Take ownership first, then make it safe, then make it pleasant to change, and only then switch the domain. Done in this order, the live app keeps working at every stage.",
-        },
-        {
-          type: "list",
-          ordered: true,
-          items: [
-            {
-              term: "Connect GitHub and stop prompting",
-              text: "Push the project to a repository owned by your organisation, not a personal account, and agree a date after which changes happen in code rather than in Bolt.",
-            },
-            {
-              term: "Claim the backend",
-              text: "Claim Bolt Database into your own Supabase organisation, then check the tables, users, storage buckets and edge function secrets against what the live app uses.",
-            },
-            {
-              term: "Run it locally",
-              text: "Install dependencies from scratch, build for production and run the app on your own machine. This is where sandbox only behaviour shows up.",
-            },
-            {
-              term: "Secure the data",
-              text: "Review row level security on every table, move secret keys server side and add server checks for anything that charges money or sends messages.",
-            },
-            {
-              term: "Set up environments and hosting",
-              text: "Create staging and production Supabase projects, keep schema changes in migration files, and deploy from GitHub to a host such as Netlify or Vercel with preview builds for each change.",
-            },
-            {
-              term: "Refactor and test the core flows",
-              text: "Clean up the screens you change most and add automated tests for sign-up, sign-in, payments and the main job your app does.",
-            },
-            {
-              term: "Add monitoring",
-              text: "Turn on error tracking, uptime alerts and scheduled backups before real users arrive, not after the first incident.",
-            },
-            {
-              term: "Move the domain",
-              text: "Point your domain at the new hosting, redirect any old Bolt address you shared, and keep the Bolt project untouched for a few weeks as a reference.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "pitfalls",
-      heading: "What goes wrong in Bolt.new migrations?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Most problems come from losing track of which copy is the real one, or from moving data in a way that drops part of it.",
-        },
-        {
-          type: "list",
-          items: [
-            "Connecting a fresh Supabase project instead of claiming the existing database, and finding the live data is no longer attached.",
-            "Carrying on prompting in Bolt after developers have started work in the repository, so two versions drift apart.",
-            "Assuming the preview proves the app works. Code that ran inside WebContainers can still fail a clean production build.",
-            "Committing real API keys to GitHub along with the code, then having to rotate them all.",
-          ],
-        },
-      ],
-    },
-    {
-      id: "when-to-stay",
-      heading: "Should you stay on Bolt.new instead?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "Stay while you are still finding out what to build. If the app is a demo, an internal tool for a handful of people or an idea you are testing with early users, Bolt and Bolt Cloud are a fast and reasonable home for it. Move when a failure would cost you customers, money or trust, and keep using Bolt to sketch new features before they are built properly.",
+          title: "Stop prompting once developers start",
+          text: "Pick a date after which changes happen in the repository, not in Bolt. Two copies edited in parallel drift apart within days. Bolt is still useful afterwards for sketching a feature before it's built properly.",
         },
       ],
     },
@@ -197,22 +211,22 @@ export const bolt: BlogPost = {
     {
       question: "Can I export my code from Bolt.new?",
       answer:
-        "Yes. You can connect GitHub so Bolt pushes the project to a repository you own, or download it as a ZIP file. The result is a standard project for the framework you chose, such as React with Vite, and it runs without Bolt.",
+        "Yes. Connect GitHub so Bolt pushes the project to a repository you own, or download it as a ZIP file. The result is a standard project for the framework you chose, often React with Vite, and it runs without Bolt.",
     },
     {
       question: "Do I need to rebuild my Bolt.new app from scratch?",
       answer:
-        "Usually not. Most Bolt apps can be kept and hardened: securing the database, moving secrets to the server, cleaning up the busiest code and adding tests. A rebuild only makes sense when the app's basic design no longer fits what the business needs.",
+        "Usually not. Most Bolt.new apps can be kept and hardened: claiming the database, securing it with row level security, moving secrets to the server, fixing the deploy and adding tests. A rebuild only makes sense when the app's basic design no longer fits the business.",
     },
     {
-      question: "How do I get my data out of Bolt Database?",
+      question: "How long does it take to get a Bolt.new app ready for production?",
       answer:
-        "Claim the database into a Supabase organisation you own. Bolt Database is built on Supabase, so claiming keeps your tables in place. Confirm with Bolt what the claim covers for your project, including user accounts and stored files, before cancelling anything.",
+        "Typically three to eight weeks, depending on how many features and user roles the app has, how much of the code needs tidying, and whether public pages need server rendering to rank in search.",
     },
     {
-      question: "How long does it take to move a Bolt.new app to production?",
+      question: "Should I keep using Bolt.new after moving my app to GitHub?",
       answer:
-        "Typically three to eight weeks, depending on how many features and user roles the app has, how much of the code needs tidying, and whether public pages need server rendering for search.",
+        "Use Bolt.new for sketching new ideas, not for editing the live app. Once developers work in the GitHub repository, prompting changes in Bolt at the same time creates two versions that drift apart. Prototype in Bolt, then build the feature properly in the repository.",
     },
   ],
 }

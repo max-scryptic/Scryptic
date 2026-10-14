@@ -49,6 +49,89 @@ function Block({ block }: { block: PostBlock }) {
     )
   }
 
+  if (block.type === "subheading") {
+    return <h3 className="pt-2 text-xl tracking-tight text-balance">{block.text}</h3>
+  }
+
+  if (block.type === "caseStudy") {
+    return (
+      <figure className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-6">
+        <p className="font-mono text-xs tracking-widest text-primary uppercase">
+          Case study &middot; {block.company}
+        </p>
+        <p className="text-pretty">{block.text}</p>
+        <figcaption className="text-sm text-muted-foreground">
+          Source:{" "}
+          <a
+            href={block.source.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline"
+          >
+            {block.source.title}
+          </a>
+          , {block.source.publisher}
+        </figcaption>
+      </figure>
+    )
+  }
+
+  if (block.type === "checklist") {
+    return (
+      <ul className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-6">
+        {block.items.map((item) => (
+          <li key={item} className="flex gap-4">
+            <span
+              aria-hidden="true"
+              className="mt-1 size-4 shrink-0 rounded border border-primary/60"
+            />
+            <p className="text-pretty text-muted-foreground">{item}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  if (block.type === "table") {
+    return (
+      <div className="overflow-x-auto rounded-2xl border border-border">
+        <table className="w-full min-w-xl text-left text-sm">
+          <caption className="sr-only">{block.caption}</caption>
+          <thead className="bg-card">
+            <tr>
+              {block.columns.map((column) => (
+                <th
+                  key={column}
+                  scope="col"
+                  className="p-4 font-mono text-xs font-normal text-muted-foreground"
+                >
+                  {column}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border border-t border-border">
+            {block.rows.map((row) => (
+              <tr key={row[0]}>
+                {row.map((cell, index) =>
+                  index === 0 ? (
+                    <th key={index} scope="row" className="p-4 align-top font-medium">
+                      {cell}
+                    </th>
+                  ) : (
+                    <td key={index} className="p-4 align-top text-pretty text-muted-foreground">
+                      {cell}
+                    </td>
+                  ),
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
   const List = block.ordered ? "ol" : "ul"
 
   return (
@@ -94,6 +177,10 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
   const series = getSeries(post.series)
   const published = formatPostDate(post.datePublished)
   const faqHeadingId = "faq-heading"
+  const faqHeading = post.faqHeading ?? "Frequently asked questions"
+  const hasFaqs = post.faqs.length > 0
+  // A short post reads better without a contents list beside it.
+  const showContents = post.sections.length + (hasFaqs ? 1 : 0) >= 4
 
   return (
     <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
@@ -107,7 +194,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             authorName: founder.name,
             authorUrl: absoluteUrl("/#about"),
           }),
-          faqJsonLd(page, post.faqs),
+          ...(hasFaqs ? [faqJsonLd(page, post.faqs)] : []),
         ]}
       />
 
@@ -127,7 +214,13 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             </ol>
           </nav>
 
-          <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-14">
+          <div
+            className={
+              post.facts
+                ? "grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-14"
+                : "grid gap-10"
+            }
+          >
             <div className="flex flex-col items-start gap-6">
               <div className="flex items-center gap-4">
                 <ToolLogo post={post} />
@@ -156,43 +249,55 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               </p>
             </div>
 
-            <dl className="grid gap-5 rounded-2xl border border-border bg-card p-6 text-sm sm:grid-cols-2">
-              {post.facts.map((fact) => (
-                <div key={fact.label} className="flex flex-col gap-1">
-                  <dt className="font-mono text-xs text-muted-foreground">{fact.label}</dt>
-                  <dd>{fact.value}</dd>
-                </div>
-              ))}
-            </dl>
+            {post.facts ? (
+              <dl className="grid gap-5 rounded-2xl border border-border bg-card p-6 text-sm sm:grid-cols-2">
+                {post.facts.map((fact) => (
+                  <div key={fact.label} className="flex flex-col gap-1">
+                    <dt className="font-mono text-xs text-muted-foreground">{fact.label}</dt>
+                    <dd>{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
           </div>
         </header>
 
-        <div className="grid gap-12 border-t border-border pt-12 lg:grid-cols-[14rem_1fr] lg:gap-16">
-          <nav aria-label="On this page" className="lg:sticky lg:top-32 lg:self-start">
-            <p className="mb-4 font-mono text-xs tracking-widest text-muted-foreground uppercase">
-              On this page
-            </p>
-            <ol className="flex flex-col gap-3 text-sm">
-              {post.sections.map((section) => (
-                <li key={section.id}>
-                  <Link
-                    href={`#${section.id}`}
-                    className="text-pretty text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {section.heading}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  href="#faq"
-                  className="text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  Frequently asked questions
-                </Link>
-              </li>
-            </ol>
-          </nav>
+        <div
+          className={
+            showContents
+              ? "grid gap-12 border-t border-border pt-12 lg:grid-cols-[14rem_1fr] lg:gap-16"
+              : "grid gap-12 border-t border-border pt-12"
+          }
+        >
+          {showContents ? (
+            <nav aria-label="On this page" className="lg:sticky lg:top-32 lg:self-start">
+              <p className="mb-4 font-mono text-xs tracking-widest text-muted-foreground uppercase">
+                On this page
+              </p>
+              <ol className="flex flex-col gap-3 text-sm">
+                {post.sections.map((section) => (
+                  <li key={section.id}>
+                    <Link
+                      href={`#${section.id}`}
+                      className="text-pretty text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {section.heading}
+                    </Link>
+                  </li>
+                ))}
+                {hasFaqs ? (
+                  <li>
+                    <Link
+                      href="#faq"
+                      className="text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {faqHeading}
+                    </Link>
+                  </li>
+                ) : null}
+              </ol>
+            </nav>
+          ) : null}
 
           <div className="flex max-w-3xl flex-col gap-14">
             {post.sections.map((section) => (
@@ -214,23 +319,25 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               </section>
             ))}
 
-            <section
-              id="faq"
-              aria-labelledby={faqHeadingId}
-              className="flex scroll-mt-28 flex-col gap-6 border-t border-border pt-12"
-            >
-              <h2 id={faqHeadingId} className="text-2xl tracking-tight text-balance sm:text-3xl">
-                Frequently asked questions
-              </h2>
-              <dl className="flex flex-col divide-y divide-border border-y border-border">
-                {post.faqs.map((faq) => (
-                  <div key={faq.question} className="flex flex-col gap-2 py-6">
-                    <dt className="text-lg">{faq.question}</dt>
-                    <dd className="text-pretty text-muted-foreground">{faq.answer}</dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
+            {hasFaqs ? (
+              <section
+                id="faq"
+                aria-labelledby={faqHeadingId}
+                className="flex scroll-mt-28 flex-col gap-6 border-t border-border pt-12"
+              >
+                <h2 id={faqHeadingId} className="text-2xl tracking-tight text-balance sm:text-3xl">
+                  {faqHeading}
+                </h2>
+                <dl className="flex flex-col divide-y divide-border border-y border-border">
+                  {post.faqs.map((faq) => (
+                    <div key={faq.question} className="flex flex-col gap-2 py-6">
+                      <dt className="text-lg">{faq.question}</dt>
+                      <dd className="text-pretty text-muted-foreground">{faq.answer}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
+            ) : null}
           </div>
         </div>
 
