@@ -174,17 +174,14 @@ function SectionHeading({
   title,
   children,
   id,
-  wide = false,
 }: {
   eyebrow: string
   title: string
   children: React.ReactNode
   id: string
-  /** Let the intro run the full width of the section instead of capping it. */
-  wide?: boolean
 }) {
   return (
-    <div data-reveal="children" className={`flex flex-col gap-4 ${wide ? "" : "max-w-2xl"}`}>
+    <div data-reveal="children" className="flex max-w-2xl flex-col gap-4">
       <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
       <h2 id={id} className="text-3xl tracking-tight text-balance sm:text-4xl">
         {title}
@@ -307,9 +304,8 @@ export default function Home() {
               , without hiring a dev team.
             </h1>
             <p className="max-w-xl text-lg text-pretty text-white/80">
-              {siteConfig.name} is an MVP and app development studio in Brighton. We plan, design
-              and build production web apps and SaaS products for founders and small teams across
-              the UK, usually from first call to launch in one to two months.
+              {siteConfig.name} is an MVP and app development studio in Brighton, building web apps
+              and SaaS products for UK founders in one to two months.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
@@ -369,8 +365,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Service" title="One service: your app, all the way to market" id="services-heading">
             Whether it is an MVP to test the market or a SaaS product ready for paying customers,
-            we plan, design, build, deploy and launch it as one engagement. Full builds go live in
-            one to two months and start {service.price.toLowerCase()}, depending on complexity.
+            we plan, design, build, deploy and launch it as one engagement.
           </SectionHeading>
 
           {/* The card holds the offer; what it includes sits beside it on the section background. */}
@@ -449,10 +444,9 @@ export default function Home() {
         className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Process" title="How a project runs" id="process-heading" wide>
-            Most projects go from first call to launch in one to two months, following the same
-            four steps with one team throughout and a catch-up every Friday along the way. No
-            handoffs between agencies, and no guessing what happens next.
+          <SectionHeading eyebrow="Process" title="How a project runs" id="process-heading">
+            Most projects go from first call to launch in one to two months, in four steps with one
+            team throughout and a catch-up every Friday.
           </SectionHeading>
           {/* Phones stack each step's text above its bar; wider screens put it in a first column. */}
           <div className="overflow-hidden rounded-2xl border border-border bg-card">
