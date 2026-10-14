@@ -2,6 +2,7 @@ import Link from "next/link"
 
 import { BrandLogo, BrandWordmark } from "@/components/brand-logo"
 import { VoxelHills } from "@/components/voxel-hills"
+import { postSeries } from "@/lib/blog"
 import { pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { caseStudies } from "@/lib/work"
@@ -21,8 +22,11 @@ const workLinks = [
   { name: "All work", href: pages.work.path },
 ]
 
-// No posts are published yet; list each one here ahead of "All posts" as they go live.
-const blogLinks = [{ name: "All posts", href: pages.blog.path }]
+// Each series links to its section on /blog.
+const blogLinks = [
+  ...postSeries.map((series) => ({ name: series.name, href: `${pages.blog.path}#${series.id}` })),
+  { name: "All posts", href: pages.blog.path },
+]
 
 function FooterColumn({
   title,
@@ -74,9 +78,7 @@ export function SiteFooter() {
         </div>
         <FooterColumn title={siteConfig.name} links={homeLinks} />
         <FooterColumn title="Work" links={workLinks} />
-        <FooterColumn title="Blog" links={blogLinks}>
-          <p className="text-sm text-muted-foreground/70">First posts coming soon.</p>
-        </FooterColumn>
+        <FooterColumn title="Blog" links={blogLinks} />
       </div>
       <div className="mx-auto max-w-6xl px-4 pb-10 font-mono text-xs text-muted-foreground sm:px-6">
         &copy; {new Date().getFullYear()} {siteConfig.organization.legalName}
