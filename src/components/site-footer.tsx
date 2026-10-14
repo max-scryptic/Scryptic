@@ -69,9 +69,12 @@ export function SiteFooter() {
           <p className="max-w-xs text-sm text-muted-foreground">
             {siteConfig.tagline}. From first call to launched app.
           </p>
-          <Link href={pages.bookCall.path} className="text-sm text-primary hover:underline">
-            Book a discovery call
-          </Link>
+          <a
+            href={`mailto:${siteConfig.organization.email}`}
+            className="text-sm text-primary hover:underline"
+          >
+            {siteConfig.organization.email}
+          </a>
         </div>
         <FooterColumn title={siteConfig.name} links={homeLinks} />
         <FooterColumn title="Work" links={workLinks} />

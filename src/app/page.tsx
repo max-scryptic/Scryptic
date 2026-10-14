@@ -744,6 +744,12 @@ export default function Home() {
           >
             Book a discovery call
           </Button>
+          <p className="font-mono text-xs text-muted-foreground">
+            or email{" "}
+            <a href={`mailto:${siteConfig.organization.email}`} className="text-primary hover:underline">
+              {siteConfig.organization.email}
+            </a>
+          </p>
         </div>
       </section>
     </main>

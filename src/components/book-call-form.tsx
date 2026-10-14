@@ -22,6 +22,7 @@ import {
   type BookingAnswers,
   type BookingQuestion,
 } from "@/lib/booking"
+import { siteConfig } from "@/lib/site"
 
 type Errors = Partial<Record<string, string>>
 
@@ -66,6 +67,7 @@ export function BookCallForm() {
   const pickedWithPointer = useRef(false)
   const autoAdvance = useRef<ReturnType<typeof setTimeout>>(undefined)
   const moved = useRef(false)
+  const sendsEmail = !siteConfig.bookingUrl
 
   // Keep the card in view: the confirmation and some slides are shorter than others.
   useEffect(() => {
@@ -212,11 +214,12 @@ export function BookCallForm() {
       {destination ? (
         <div role="status" className="flex flex-col items-start gap-4 p-5 sm:p-8">
           <h2 className="text-2xl tracking-tight">
-            Opening the calendar
+            {sendsEmail ? "Check your email app" : "Opening the calendar"}
           </h2>
           <p className="text-pretty text-muted-foreground">
-            Your answers are attached, so pick a time that suits you and the call can start where
-            it matters.
+            {sendsEmail
+              ? "A message with your answers should have opened. Send it and we will reply with times for your call."
+              : "Your answers are attached, so pick a time that suits you and the call can start where it matters."}
           </p>
           <Button
             size="lg"
@@ -224,7 +227,7 @@ export function BookCallForm() {
             render={<a href={destination} />}
             className="h-11 rounded-full px-5 text-base"
           >
-            Go to the calendar
+            {sendsEmail ? "Open the email again" : "Go to the calendar"}
           </Button>
         </div>
       ) : (
