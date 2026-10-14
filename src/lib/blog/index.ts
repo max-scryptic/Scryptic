@@ -94,7 +94,7 @@ export const postSeries: PostSeries[] = [
       "What it costs, how long it takes and how to get an app built well: plain answers for founders planning their first product or their next one.",
     cta: {
       heading: () => "Planning an app?",
-      text: "Book a free discovery call and tell us what you want to build. You get straight advice on scope, stack, cost and timeline, then a written estimate before any work starts. Most builds go live in one to two months.",
+      text: "Tell us what you want to build on a free call. You get straight advice on scope, stack, cost and timeline, then a written estimate before any work starts.",
     },
   },
   {
@@ -105,7 +105,7 @@ export const postSeries: PostSeries[] = [
       "Zapier, Make, n8n and spreadsheets run a lot of businesses. These guides compare the tools, and explain when a set of automations is ready to become software of its own.",
     cta: {
       heading: () => "Outgrowing your automations?",
-      text: "Book a free discovery call and walk us through your workflows. We look at what runs where and what it costs, then send a plan, a written estimate and a timeline for turning it into an app you own.",
+      text: "Walk us through your workflows on a free call. We look at what runs where and what it costs, then send a plan and a written estimate for an app you own.",
     },
   },
   {
@@ -116,7 +116,7 @@ export const postSeries: PostSeries[] = [
       "Head to head comparisons of the platforms and frameworks founders weigh up most, written by developers who ship production apps on them.",
     cta: {
       heading: () => "Not sure which stack fits?",
-      text: "Book a free discovery call and tell us what you are building. We recommend a stack for your product, not ours, then send a written estimate and a timeline.",
+      text: "Tell us what you are building on a free call. We recommend a stack for your product, not ours, then send a written estimate and a timeline.",
     },
   },
   {
@@ -127,7 +127,7 @@ export const postSeries: PostSeries[] = [
       "One guide per tool on moving an app built with a low-code, no-code or AI app builder to a production stack you own: what you can export, what is missing, and a step by step plan.",
     cta: {
       heading: (post) => `Ready to move your ${post.topic} app to production?`,
-      text: "Book a free discovery call and walk us through what you have built. We review the app, its data and its accounts, then send a plan, a written estimate and a timeline. Most builds go live in one to two months.",
+      text: "Walk us through what you have built on a free call. We review the app, its data and its accounts, then send a plan and a written estimate.",
     },
   },
 ]

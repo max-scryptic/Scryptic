@@ -345,21 +345,26 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
         </div>
 
         <footer className="flex flex-col gap-12 border-t border-border pt-12">
-          <AuthorBio />
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="grid lg:col-span-2">
+              <AuthorBio />
+            </div>
 
-          <div className="flex flex-col items-start gap-4 rounded-2xl border border-primary/50 bg-card p-6 sm:p-10">
-            <p className="text-2xl tracking-tight text-balance">
-              {series.cta.heading(post)}
-            </p>
-            <p className="text-pretty text-muted-foreground">{series.cta.text}</p>
-            <Button
-              size="lg"
-              nativeButton={false}
-              render={<Link href={pages.bookCall.path} />}
-              className="h-11 rounded-full px-6 text-base"
-            >
-              Book a discovery call
-            </Button>
+            {/* Same Lapis band as the home hero, in both themes. */}
+            <div className="flex flex-col items-start gap-4 rounded-2xl bg-[#2b3fd6] p-6 text-white sm:p-10 lg:p-8">
+              <p className="text-2xl tracking-tight text-balance">
+                {series.cta.heading(post)}
+              </p>
+              <p className="text-pretty text-white/80">{series.cta.text}</p>
+              <Button
+                size="lg"
+                nativeButton={false}
+                render={<Link href={pages.bookCall.path} />}
+                className="h-11 rounded-full bg-white px-6 text-base text-[#2b3fd6] hover:bg-white/90 lg:mt-auto"
+              >
+                Book a discovery call
+              </Button>
+            </div>
           </div>
 
           <section aria-labelledby="related-heading" className="flex flex-col gap-6">
