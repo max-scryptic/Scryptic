@@ -190,6 +190,7 @@ function blockText(block: PostBlock) {
   if (block.type === "paragraph") return block.text
   if (block.type === "callout") return `${block.title} ${block.text}`
   if (block.type === "subheading") return block.text
+  if (block.type === "caseStudy") return `${block.company} ${block.text}`
   if (block.type === "checklist") return block.items.join(" ")
   if (block.type === "table") return [...block.columns, ...block.rows.flat()].join(" ")
   return block.items

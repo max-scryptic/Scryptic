@@ -53,6 +53,29 @@ function Block({ block }: { block: PostBlock }) {
     return <h3 className="pt-2 text-xl tracking-tight text-balance">{block.text}</h3>
   }
 
+  if (block.type === "caseStudy") {
+    return (
+      <figure className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-6">
+        <p className="font-mono text-xs tracking-widest text-primary uppercase">
+          Case study &middot; {block.company}
+        </p>
+        <p className="text-pretty">{block.text}</p>
+        <figcaption className="text-sm text-muted-foreground">
+          Source:{" "}
+          <a
+            href={block.source.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline"
+          >
+            {block.source.title}
+          </a>
+          , {block.source.publisher}
+        </figcaption>
+      </figure>
+    )
+  }
+
   if (block.type === "checklist") {
     return (
       <ul className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-6">

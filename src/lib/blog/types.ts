@@ -36,6 +36,17 @@ export type PostBlock =
   | { type: "checklist"; items: string[] }
   /** An <h3> that splits a long section. */
   | { type: "subheading"; text: string }
+  /**
+   * A real, publicly documented case, summarised only as far as the source
+   * says, with a link to that source. Never an invented or anonymised example.
+   */
+  | {
+      type: "caseStudy"
+      /** The company or product, as the source names it. */
+      company: string
+      text: string
+      source: { title: string; publisher: string; url: string }
+    }
 
 export type PostSection = {
   /** Anchor id for the table of contents, e.g. "when-to-move". */
