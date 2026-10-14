@@ -40,7 +40,7 @@ export default function WorkPage() {
           <h2 id="work-cta-heading" className="text-2xl tracking-tight text-balance">
             Want yours on this page?
           </h2>
-          <p className="max-w-xl text-pretty text-muted-foreground">
+          <p className="text-pretty text-muted-foreground">
             Book a free discovery call and talk through your idea. You get a scoped first release
             and a written estimate before any build starts.
           </p>
