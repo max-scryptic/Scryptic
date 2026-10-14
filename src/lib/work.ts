@@ -242,11 +242,11 @@ const untilThen: CaseStudy = {
   gallery: [
     {
       src: untilThenDetail1,
-      alt: "Until Then's How it works section: write or record, choose who and when, and it arrives on the day, above the three message types",
+      alt: "A delivered Until Then message as the recipient sees it: the title Happy 30th, Max, a video ready to play, and a letter beginning Dear Max",
     },
     {
       src: untilThenDetail2,
-      alt: "Until Then's pricing: written letters free, voice or video paid once per message, or lifetime access in one payment",
+      alt: "The Until Then messages dashboard: video messages with their sealed or expired status, delivery date, created date and recipients, with search and filters",
     },
   ],
 }
