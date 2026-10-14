@@ -173,9 +173,11 @@ export function serviceJsonLd(page: PageEntry, service: ServiceOffer): Service {
     "@type": "Service",
     "@id": url,
     name: service.name,
+    serviceType: service.serviceType,
     description: service.summary,
     url,
     provider: { "@id": ids.organization },
+    areaServed: { "@type": "Country", name: service.areaServed },
     offers: {
       "@type": "Offer",
       url,
