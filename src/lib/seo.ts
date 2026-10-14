@@ -42,9 +42,17 @@ const home = {
   path: "/",
   title: siteConfig.name,
   description: siteConfig.description,
+  // The last real change to the home page copy. Bump it when the copy changes.
+  lastModified: "2026-10-14",
   changeFrequency: "weekly",
   priority: 1,
 } satisfies PageEntry
+
+/** The newest post's date, so /blog's sitemap row moves when a post is added or updated. */
+const latestPostDate = posts
+  .map((post) => post.dateModified ?? post.datePublished)
+  .sort()
+  .at(-1)
 
 export const pages = {
   home,
@@ -68,6 +76,7 @@ export const pages = {
     path: "/blog",
     title: "Blog",
     description: `Practical guides from the ${siteConfig.name} studio on planning, building, launching and growing apps, written by the developers who build them for founders.`,
+    lastModified: latestPostDate,
     changeFrequency: "weekly",
     priority: 0.7,
   },
