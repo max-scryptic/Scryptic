@@ -14,6 +14,7 @@ import { googleSheetsDatabase } from "@/lib/blog/posts/google-sheets-database"
 import { lovable } from "@/lib/blog/posts/lovable"
 import { n8nAlternatives } from "@/lib/blog/posts/n8n-alternatives"
 import { n8nVsZapierVsMake } from "@/lib/blog/posts/n8n-vs-zapier-vs-make"
+import { outsystems } from "@/lib/blog/posts/outsystems"
 import { reactNativeVsFlutter } from "@/lib/blog/posts/react-native-vs-flutter"
 import { replit } from "@/lib/blog/posts/replit"
 import { retool } from "@/lib/blog/posts/retool"
@@ -70,6 +71,7 @@ export const posts: BlogPost[] = [
   wix,
   retool,
   airtable,
+  outsystems,
 ]
 
 export type PostSeries = {
