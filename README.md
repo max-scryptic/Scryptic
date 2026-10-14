@@ -42,6 +42,8 @@ src/
     brand-logo.tsx      The split glass mark, inline so it follows the theme
     theme-toggle.tsx    Light and dark mode: the navbar toggle and the pre-paint script
     post-card.tsx       A blog post card, used on /blog and under each post
+    author-bio.tsx      "About the author" at the end of each blog post
+    social-links.tsx    The founder's profile icon links (LinkedIn, X, Instagram)
     tool-logo.tsx       The migrated-from tool's logo: a watermark on post cards, a tile in post headers
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
     em-dash-guard.tsx   Dev guard against em dashes in rendered text

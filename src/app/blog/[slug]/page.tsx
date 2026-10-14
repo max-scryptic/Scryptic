@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
+import { AuthorBio } from "@/components/author-bio"
 import { PageJsonLd } from "@/components/json-ld"
 import { PostCard } from "@/components/post-card"
 import { ToolLogo } from "@/components/tool-logo"
@@ -191,8 +192,10 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             headline: post.title,
             datePublished: post.datePublished,
             dateModified: post.dateModified,
-            authorName: founder.name,
+            authorName: founder.fullName,
             authorUrl: absoluteUrl("/#about"),
+            authorSameAs: founder.socials.map((profile) => profile.href),
+            image: page.image,
           }),
           ...(hasFaqs ? [faqJsonLd(page, post.faqs)] : []),
         ]}
@@ -232,7 +235,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">{post.title}</h1>
               <p className="max-w-2xl text-lg text-pretty text-muted-foreground">{post.summary}</p>
               <p className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-muted-foreground">
-                <span>By {founder.name}</span>
+                <span>By {founder.fullName}</span>
                 <span aria-hidden="true">/</span>
                 <time dateTime={post.datePublished}>{published}</time>
                 {post.dateModified ? (
@@ -342,6 +345,8 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
         </div>
 
         <footer className="flex flex-col gap-12 border-t border-border pt-12">
+          <AuthorBio />
+
           <div className="flex flex-col items-start gap-4 rounded-2xl border border-primary/50 bg-card p-6 sm:p-10">
             <p className="text-2xl tracking-tight text-balance">
               {series.cta.heading(post)}

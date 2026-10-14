@@ -5,6 +5,7 @@ import { cn } from "cn"
 import { CaseStudyCard } from "@/components/case-study-card"
 import { PageJsonLd } from "@/components/json-ld"
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { SocialLinks } from "@/components/social-links"
 import { Button } from "@/components/ui/button"
 import { VoxelField } from "@/components/voxel-field"
 import { createMetadata, pages } from "@/lib/seo"
@@ -688,6 +689,7 @@ export default function Home() {
                   {paragraph}
                 </p>
               ))}
+              <SocialLinks name={founder.fullName} profiles={founder.socials} />
             </div>
           </article>
         </div>

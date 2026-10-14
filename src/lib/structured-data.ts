@@ -143,6 +143,8 @@ export function articleJsonLd(
     dateModified?: string
     authorName: string
     authorUrl?: string
+    /** The author's profiles elsewhere, which tie the byline to one person. */
+    authorSameAs?: string[]
     image?: string
   },
 ): Article {
@@ -158,6 +160,7 @@ export function articleJsonLd(
       "@type": "Person",
       name: article.authorName,
       ...optional(article.authorUrl, { url: article.authorUrl }),
+      ...optional(article.authorSameAs, { sameAs: article.authorSameAs }),
     },
     publisher: { "@id": ids.organization },
     image: absoluteUrl(article.image ?? "/opengraph-image"),
