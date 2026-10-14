@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const base44: BlogPost = {
   slug: "migrate-from-base44",
   title: "Migrating from Base44 to a production app",
-  tool: "Base44",
+  series: "migration",
+  topic: "Base44",
   logo: base44Logo,
   category: "AI app builders",
   description:

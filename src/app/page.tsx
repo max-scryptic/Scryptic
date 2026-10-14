@@ -126,7 +126,7 @@ const faqs = [
   {
     question: "Can you take over an app built with Lovable, Bubble or another builder?",
     answer:
-      "Yes. Apps from AI app builders such as Lovable, Bolt.new, v0 and Replit are real code, so the move is usually about owning and hardening what is there. No-code tools such as Bubble, Adalo and Glide keep the app on their platform, so the move is a planned rebuild that brings your data and users across. Our free migration guides cover sixteen tools step by step.",
+      "Yes. Apps from AI app builders such as Lovable, Bolt.new, v0 and Replit are real code, so the move is usually about owning and hardening what is there. No-code tools such as Bubble, Adalo and Glide keep the app on their platform, so the move is a planned rebuild that brings your data and users across. Enterprise platforms such as OutSystems are rebuilt app by app. Our free migration guides cover seventeen tools step by step.",
   },
   {
     question: "Can you work on an existing app or codebase?",

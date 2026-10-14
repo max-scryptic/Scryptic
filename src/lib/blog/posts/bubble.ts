@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const bubble: BlogPost = {
   slug: "migrate-from-bubble",
   title: "Migrating from Bubble to a production app",
-  tool: "Bubble",
+  series: "migration",
+  topic: "Bubble",
   logo: bubbleLogo,
   category: "No-code app builders",
   description:

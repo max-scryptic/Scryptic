@@ -3,7 +3,7 @@ import Link from "next/link"
 import { PageJsonLd } from "@/components/json-ld"
 import { PostCard } from "@/components/post-card"
 import { Button } from "@/components/ui/button"
-import { migrationSeries, postCategories, postsInCategory } from "@/lib/blog"
+import { postCategories, postSeries, postsInCategory, postsInSeries } from "@/lib/blog"
 import { blogPostPages, createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
@@ -26,15 +26,15 @@ export default function BlogPage() {
             Practical guides on building, launching and growing apps, from the team that builds
             them.
           </p>
-          <nav aria-label="Guide categories">
+          <nav aria-label="Blog series">
             <ul className="flex flex-wrap gap-2 font-mono text-xs">
-              {postCategories.map((category) => (
-                <li key={category.name}>
+              {postSeries.map((series) => (
+                <li key={series.id}>
                   <Link
-                    href={`#${categoryId(category.name)}`}
+                    href={`#${series.id}`}
                     className="block rounded-full bg-primary/10 px-3 py-1 text-primary transition-colors hover:bg-primary/20"
                   >
-                    {category.name}
+                    {series.name}
                   </Link>
                 </li>
               ))}
@@ -42,54 +42,80 @@ export default function BlogPage() {
           </nav>
         </div>
 
-        <section aria-labelledby="series-heading" className="flex flex-col gap-14">
-          <div className="flex max-w-2xl flex-col gap-3">
-            <p className="font-mono text-xs tracking-widest text-primary uppercase">Series</p>
-            <h2 id="series-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
-              {migrationSeries.name}
-            </h2>
-            <p className="text-lg text-pretty text-muted-foreground">{migrationSeries.intro}</p>
-          </div>
+        {postSeries.map((series) => {
+          const seriesPosts = postsInSeries(series.id)
+          if (seriesPosts.length === 0) return null
 
-          {postCategories.map((category) => {
-            const id = categoryId(category.name)
-            const categoryPosts = postsInCategory(category.name)
-            if (categoryPosts.length === 0) return null
+          return (
+            <section
+              key={series.id}
+              id={series.id}
+              aria-labelledby={`${series.id}-heading`}
+              className="flex scroll-mt-28 flex-col gap-10"
+            >
+              <div className="flex max-w-2xl flex-col gap-3">
+                <p className="font-mono text-xs tracking-widest text-primary uppercase">Series</p>
+                <h2
+                  id={`${series.id}-heading`}
+                  className="text-3xl tracking-tight text-balance sm:text-4xl"
+                >
+                  {series.name}
+                </h2>
+                <p className="text-lg text-pretty text-muted-foreground">{series.intro}</p>
+              </div>
 
-            return (
-              <section
-                key={category.name}
-                id={id}
-                aria-labelledby={`${id}-heading`}
-                className="flex scroll-mt-28 flex-col gap-6 border-t border-border pt-10"
-              >
-                <div className="flex flex-col gap-2">
-                  <h3 id={`${id}-heading`} className="text-2xl tracking-tight">
-                    {category.name}
-                  </h3>
-                  <p className="max-w-2xl text-pretty text-muted-foreground">{category.text}</p>
-                </div>
+              {series.id === "migration" ? (
+                // The migration guides are many, so they sit in one group per kind of tool.
+                postCategories.map((category) => {
+                  const id = categoryId(category.name)
+                  const categoryPosts = postsInCategory(category.name)
+                  if (categoryPosts.length === 0) return null
+
+                  return (
+                    <section
+                      key={category.name}
+                      id={id}
+                      aria-labelledby={`${id}-heading`}
+                      className="flex scroll-mt-28 flex-col gap-6 border-t border-border pt-10"
+                    >
+                      <div className="flex flex-col gap-2">
+                        <h3 id={`${id}-heading`} className="text-2xl tracking-tight">
+                          {category.name}
+                        </h3>
+                        <p className="max-w-2xl text-pretty text-muted-foreground">
+                          {category.text}
+                        </p>
+                      </div>
+                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {categoryPosts.map((post) => (
+                          <PostCard key={post.slug} post={post} headingLevel="h4" />
+                        ))}
+                      </div>
+                    </section>
+                  )
+                })
+              ) : (
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {categoryPosts.map((post) => (
-                    <PostCard key={post.slug} post={post} headingLevel="h4" />
+                  {seriesPosts.map((post) => (
+                    <PostCard key={post.slug} post={post} />
                   ))}
                 </div>
-              </section>
-            )
-          })}
-        </section>
+              )}
+            </section>
+          )
+        })}
 
         <section
           aria-labelledby="blog-cta-heading"
           className="flex flex-col items-start gap-4 rounded-2xl border border-border bg-card p-6 sm:p-10"
         >
           <h2 id="blog-cta-heading" className="text-2xl tracking-tight text-balance">
-            Not sure whether to harden or rebuild?
+            Planning an app, or stuck with one?
           </h2>
           <p className="max-w-xl text-pretty text-muted-foreground">
-            Book a free discovery call and show us what you have. We review the app, its data and
-            its accounts, then you get a plan, a written estimate and a timeline before any work
-            starts.
+            Book a free discovery call and tell us what you are building or show us what you have.
+            You get straight advice on scope, stack, cost and timeline, then a written estimate
+            before any work starts.
           </p>
           <Button
             size="lg"

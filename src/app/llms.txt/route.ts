@@ -1,5 +1,5 @@
-import { migrationSeries } from "@/lib/blog"
-import { blogPostPages, publicPages, type PageEntry } from "@/lib/seo"
+import { postSeries, postsInSeries } from "@/lib/blog"
+import { blogPostPage, blogPostPages, publicPages, type PageEntry } from "@/lib/seo"
 import { absoluteUrl, siteConfig } from "@/lib/site"
 
 /*
@@ -28,12 +28,14 @@ export function GET() {
     "",
     ...otherPages.map(link),
     "",
-    `## ${migrationSeries.name}`,
-    "",
-    migrationSeries.intro,
-    "",
-    ...guides.map(link),
-    "",
+    ...postSeries.flatMap((series) => {
+      const seriesPages = postsInSeries(series.id)
+        .map(blogPostPage)
+        .filter((page) => !page.noIndex)
+      if (seriesPages.length === 0) return []
+
+      return [`## ${series.name}`, "", series.intro, "", ...seriesPages.map(link), ""]
+    }),
   ]
 
   return new Response(lines.join("\n"), {

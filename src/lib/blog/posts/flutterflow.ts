@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const flutterflow: BlogPost = {
   slug: "migrate-from-flutterflow",
   title: "Migrating from FlutterFlow to a production app",
-  tool: "FlutterFlow",
+  series: "migration",
+  topic: "FlutterFlow",
   logo: flutterflowLogo,
   category: "No-code app builders",
   description:

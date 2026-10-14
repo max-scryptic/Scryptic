@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import {
   formatPostDate,
   getPost,
+  getSeries,
   posts,
   readingMinutes,
   relatedPosts,
@@ -90,6 +91,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
   if (!post) notFound()
 
   const page = blogPostPage(post)
+  const series = getSeries(post.series)
   const published = formatPostDate(post.datePublished)
   const faqHeadingId = "faq-heading"
 
@@ -120,7 +122,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               </li>
               <li aria-hidden="true">/</li>
               <li aria-current="page" className="text-foreground">
-                {post.tool}
+                {post.topic}
               </li>
             </ol>
           </nav>
@@ -130,7 +132,8 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               <div className="flex items-center gap-4">
                 <ToolLogo post={post} />
                 <p className="font-mono text-xs tracking-widest text-primary uppercase">
-                  Migration guide &middot; {post.category}
+                  {series.label}
+                  {post.category ? <> &middot; {post.category}</> : null}
                 </p>
               </div>
               <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">{post.title}</h1>
@@ -234,13 +237,9 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
         <footer className="flex flex-col gap-12 border-t border-border pt-12">
           <div className="flex flex-col items-start gap-4 rounded-2xl border border-primary/50 bg-card p-6 sm:p-10">
             <p className="text-2xl tracking-tight text-balance">
-              Ready to move your {post.tool} app to production?
+              {series.cta.heading(post)}
             </p>
-            <p className="max-w-xl text-pretty text-muted-foreground">
-              Book a free discovery call and walk us through what you have built. We review the
-              app, its data and its accounts, then send a plan, a written estimate and a timeline.
-              Most builds go live in one to two months.
-            </p>
+            <p className="max-w-xl text-pretty text-muted-foreground">{series.cta.text}</p>
             <Button
               size="lg"
               nativeButton={false}
@@ -254,10 +253,10 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           <section aria-labelledby="related-heading" className="flex flex-col gap-6">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 id="related-heading" className="text-2xl tracking-tight">
-                More migration guides
+                Keep reading
               </h2>
               <Link href={pages.blog.path} className="text-sm text-primary hover:underline">
-                All {posts.length} guides
+                All {posts.length} posts
               </Link>
             </div>
             <div className="grid gap-6 md:grid-cols-3">

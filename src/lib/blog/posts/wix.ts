@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const wix: BlogPost = {
   slug: "migrate-from-wix",
   title: "Migrating from Wix to a production app",
-  tool: "Wix",
+  series: "migration",
+  topic: "Wix",
   logo: wixLogo,
   category: "Website builders",
   description:
