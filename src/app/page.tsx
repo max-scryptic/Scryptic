@@ -19,7 +19,7 @@ import { featuredCaseStudies } from "@/lib/work"
 // registry title stays "Scryptic" for breadcrumbs, JSON-LD and llms.txt.
 export const metadata = createMetadata({
   ...pages.home,
-  title: `${siteConfig.name} | App development studio`,
+  title: `${siteConfig.name} | MVP and app development studio in Brighton`,
 })
 
 // The process timetable: a typical eight week build. `start` and `weeks` place
@@ -112,7 +112,16 @@ const faqs = [
   {
     question: "What kind of apps do you build?",
     answer:
-      "Production web apps and SaaS products, often with AI at their core. Recent launches include ReelEstate, which turns listing photos into property videos, Viewlio, AI analytics for YouTube creators, Until Then, which delivers messages years into the future, and Pretty Metrics, shareable revenue charts. Most are built with TypeScript, Next.js and Postgres, with Stripe for payments.",
+      "MVPs, SaaS products and production web apps, often with AI at their core. Recent launches include ReelEstate, which turns listing photos into property videos, Viewlio, AI analytics for YouTube creators, Until Then, which delivers messages years into the future, and Pretty Metrics, shareable revenue charts. Most are built with TypeScript, Next.js and Postgres, with Stripe for payments.",
+  },
+  {
+    question: "What is MVP development?",
+    answer:
+      "MVP development is building the smallest version of a product that real customers can use and pay for, so you learn what works before spending more. A Scryptic MVP is production code, not a throwaway prototype: it launches with authentication, payments and analytics in place, and the next version builds on it rather than starting again.",
+  },
+  {
+    question: "Do you only work with founders in Brighton?",
+    answer: `No. ${siteConfig.name} is based in Brighton and works with founders across the UK. The Friday catch-ups run over video, so where you are makes no difference to the build.`,
   },
   {
     question: "Can you take over an app built with Lovable, Bubble or another builder?",
@@ -298,9 +307,9 @@ export default function Home() {
               , without hiring a dev team.
             </h1>
             <p className="max-w-xl text-lg text-pretty text-white/80">
-              {siteConfig.name} plans, designs and builds production web apps for founders and
-              small teams, usually from first call to launch in one to two months. Start with a
-              discovery call, then let us take the whole thing to market.
+              {siteConfig.name} is an MVP and app development studio in Brighton. We plan, design
+              and build production web apps and SaaS products for founders and small teams across
+              the UK, usually from first call to launch in one to two months.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
@@ -359,9 +368,9 @@ export default function Home() {
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Service" title="One service: your app, all the way to market" id="services-heading">
-            We plan, design, build, deploy and launch your app as one engagement. Full builds go
-            live in one to two months and start {service.price.toLowerCase()}, depending on
-            complexity.
+            Whether it is an MVP to test the market or a SaaS product ready for paying customers,
+            we plan, design, build, deploy and launch it as one engagement. Full builds go live in
+            one to two months and start {service.price.toLowerCase()}, depending on complexity.
           </SectionHeading>
 
           {/* The card holds the offer; what it includes sits beside it on the section background. */}
