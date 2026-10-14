@@ -1,16 +1,28 @@
 import { adalo } from "@/lib/blog/posts/adalo"
 import { airtable } from "@/lib/blog/posts/airtable"
+import { appCostUk } from "@/lib/blog/posts/app-cost-uk"
+import { automationsToSaas } from "@/lib/blog/posts/automations-to-saas"
 import { base44 } from "@/lib/blog/posts/base44"
 import { bolt } from "@/lib/blog/posts/bolt"
 import { bubble } from "@/lib/blog/posts/bubble"
+import { buildAnMvp } from "@/lib/blog/posts/build-an-mvp"
+import { chooseAppDevelopmentCompany } from "@/lib/blog/posts/choose-app-development-company"
 import { flutterflow } from "@/lib/blog/posts/flutterflow"
 import { framer } from "@/lib/blog/posts/framer"
 import { glide } from "@/lib/blog/posts/glide"
+import { googleSheetsDatabase } from "@/lib/blog/posts/google-sheets-database"
 import { lovable } from "@/lib/blog/posts/lovable"
+import { n8nAlternatives } from "@/lib/blog/posts/n8n-alternatives"
+import { n8nVsZapierVsMake } from "@/lib/blog/posts/n8n-vs-zapier-vs-make"
+import { reactNativeVsFlutter } from "@/lib/blog/posts/react-native-vs-flutter"
 import { replit } from "@/lib/blog/posts/replit"
 import { retool } from "@/lib/blog/posts/retool"
+import { selfHostingN8n } from "@/lib/blog/posts/self-hosting-n8n"
 import { softr } from "@/lib/blog/posts/softr"
+import { supabaseVsFirebase } from "@/lib/blog/posts/supabase-vs-firebase"
 import { v0 } from "@/lib/blog/posts/v0"
+import { vibeCoding } from "@/lib/blog/posts/vibe-coding"
+import { webAppVsMobileApp } from "@/lib/blog/posts/web-app-vs-mobile-app"
 import { webflow } from "@/lib/blog/posts/webflow"
 import { weweb } from "@/lib/blog/posts/weweb"
 import { wix } from "@/lib/blog/posts/wix"
@@ -30,6 +42,18 @@ export type {
  * sitemap row, llms.txt line and JSON-LD all follow from that.
  */
 export const posts: BlogPost[] = [
+  appCostUk,
+  buildAnMvp,
+  chooseAppDevelopmentCompany,
+  vibeCoding,
+  automationsToSaas,
+  n8nVsZapierVsMake,
+  selfHostingN8n,
+  n8nAlternatives,
+  googleSheetsDatabase,
+  webAppVsMobileApp,
+  supabaseVsFirebase,
+  reactNativeVsFlutter,
   lovable,
   bolt,
   v0,
