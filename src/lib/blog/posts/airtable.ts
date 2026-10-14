@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const airtable: BlogPost = {
   slug: "migrate-from-airtable",
   title: "Migrating from Airtable to a production app",
-  tool: "Airtable",
+  series: "migration",
+  topic: "Airtable",
   logo: airtableLogo,
   category: "Internal tool builders",
   description:

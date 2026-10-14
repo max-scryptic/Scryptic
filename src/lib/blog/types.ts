@@ -30,7 +30,10 @@ export type PostSection = {
   blocks: PostBlock[]
 }
 
-/** Groups posts on /blog. */
+/** The series a post belongs to, each listed as its own section on /blog. */
+export type PostSeriesId = "launch" | "automation" | "stack" | "migration"
+
+/** Groups the migration guides within their series on /blog. */
 export type PostCategory =
   | "AI app builders"
   | "No-code app builders"
@@ -42,14 +45,20 @@ export type BlogPost = {
   slug: string
   /** The <h1> and the page title. No colons or dashes as separators. */
   title: string
-  /** The tool the post is about, shown on the card. */
-  tool: string
+  series: PostSeriesId
+  /**
+   * A word or two on what the post is about, shown above the title on its
+   * card and in the breadcrumb: the tool for a migration guide ("Bubble"),
+   * otherwise the subject ("App cost", "n8n").
+   */
+  topic: string
   /**
    * The tool's logo, an SVG from src/assets/blog/logos/: a watermark on the
    * card and a tile in the post header. Leave it out to show neither.
    */
   logo?: StaticImageData
-  category: PostCategory
+  /** Migration guides only: the group the guide sits in on /blog. */
+  category?: PostCategory
   /** 120 to 160 characters, for the meta description and llms.txt. */
   description: string
   /** Two or three sentences under the <h1> that answer the title outright. */

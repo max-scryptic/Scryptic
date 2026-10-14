@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const adalo: BlogPost = {
   slug: "migrate-from-adalo",
   title: "Migrating from Adalo to a production app",
-  tool: "Adalo",
+  series: "migration",
+  topic: "Adalo",
   logo: adaloLogo,
   category: "No-code app builders",
   description:

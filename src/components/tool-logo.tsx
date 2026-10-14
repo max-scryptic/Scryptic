@@ -1,6 +1,6 @@
 import type { BlogPost } from "@/lib/blog"
 
-type LogoProps = { post: Pick<BlogPost, "tool" | "logo"> }
+type LogoProps = { post: Pick<BlogPost, "topic" | "logo"> }
 
 /*
  * The tool's logo, large and faint in the corner of a post card. The logo is
@@ -39,7 +39,7 @@ export function ToolLogo({ post }: LogoProps) {
     <span className="flex size-16 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 p-3 sm:size-20 sm:p-4">
       <span
         role="img"
-        aria-label={`${post.tool} logo`}
+        aria-label={`${post.topic} logo`}
         className="size-full bg-primary mask-contain mask-center mask-no-repeat"
         style={{ maskImage: `url(${post.logo.src})` }}
       />

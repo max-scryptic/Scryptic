@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const retool: BlogPost = {
   slug: "migrate-from-retool",
   title: "Migrating from Retool to a production app",
-  tool: "Retool",
+  series: "migration",
+  topic: "Retool",
   logo: retoolLogo,
   category: "Internal tool builders",
   description:

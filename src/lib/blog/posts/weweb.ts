@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const weweb: BlogPost = {
   slug: "migrate-from-weweb",
   title: "Migrating from WeWeb to a production app",
-  tool: "WeWeb",
+  series: "migration",
+  topic: "WeWeb",
   logo: wewebLogo,
   category: "No-code app builders",
   description:

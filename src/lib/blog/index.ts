@@ -14,9 +14,15 @@ import { v0 } from "@/lib/blog/posts/v0"
 import { webflow } from "@/lib/blog/posts/webflow"
 import { weweb } from "@/lib/blog/posts/weweb"
 import { wix } from "@/lib/blog/posts/wix"
-import type { BlogPost, PostBlock, PostCategory } from "@/lib/blog/types"
+import type { BlogPost, PostBlock, PostCategory, PostSeriesId } from "@/lib/blog/types"
 
-export type { BlogPost, PostBlock, PostCategory, PostSection } from "@/lib/blog/types"
+export type {
+  BlogPost,
+  PostBlock,
+  PostCategory,
+  PostSection,
+  PostSeriesId,
+} from "@/lib/blog/types"
 
 /*
  * Every published post, in the order /blog lists them within a category. A
@@ -42,13 +48,65 @@ export const posts: BlogPost[] = [
   airtable,
 ]
 
-/** The migration guides series on /blog, one group per kind of tool. */
-export const migrationSeries = {
-  name: "Low-code migration guides",
-  intro:
-    "One guide per tool on moving an app built with a low-code, no-code or AI app builder to a production stack you own: what you can export, what is missing, and a step by step plan.",
+export type PostSeries = {
+  id: PostSeriesId
+  name: string
+  /** Shown above a post's <h1>, e.g. "Migration guide". */
+  label: string
+  intro: string
+  /** The closing call to action on each post in the series. */
+  cta: { heading: (post: BlogPost) => string; text: string }
 }
 
+/** The series on /blog, in the order the page lists them. */
+export const postSeries: PostSeries[] = [
+  {
+    id: "launch",
+    name: "From idea to launch",
+    label: "Guide",
+    intro:
+      "What it costs, how long it takes and how to get an app built well: plain answers for founders planning their first product or their next one.",
+    cta: {
+      heading: () => "Planning an app?",
+      text: "Book a free discovery call and tell us what you want to build. You get straight advice on scope, stack, cost and timeline, then a written estimate before any work starts. Most builds go live in one to two months.",
+    },
+  },
+  {
+    id: "automation",
+    name: "Automation to product",
+    label: "Automation guide",
+    intro:
+      "Zapier, Make, n8n and spreadsheets run a lot of businesses. These guides compare the tools, and explain when a set of automations is ready to become software of its own.",
+    cta: {
+      heading: () => "Outgrowing your automations?",
+      text: "Book a free discovery call and walk us through your workflows. We look at what runs where and what it costs, then send a plan, a written estimate and a timeline for turning it into an app you own.",
+    },
+  },
+  {
+    id: "stack",
+    name: "Choosing your stack",
+    label: "Comparison",
+    intro:
+      "Head to head comparisons of the platforms and frameworks founders weigh up most, written by developers who ship production apps on them.",
+    cta: {
+      heading: () => "Not sure which stack fits?",
+      text: "Book a free discovery call and tell us what you are building. We recommend a stack for your product, not ours, then send a written estimate and a timeline.",
+    },
+  },
+  {
+    id: "migration",
+    name: "Low-code migration guides",
+    label: "Migration guide",
+    intro:
+      "One guide per tool on moving an app built with a low-code, no-code or AI app builder to a production stack you own: what you can export, what is missing, and a step by step plan.",
+    cta: {
+      heading: (post) => `Ready to move your ${post.topic} app to production?`,
+      text: "Book a free discovery call and walk us through what you have built. We review the app, its data and its accounts, then send a plan, a written estimate and a timeline. Most builds go live in one to two months.",
+    },
+  },
+]
+
+/** The groups within the migration guides series, one per kind of tool. */
 export const postCategories: { name: PostCategory; text: string }[] = [
   {
     name: "AI app builders",
@@ -72,16 +130,29 @@ export function getPost(slug: string) {
   return posts.find((post) => post.slug === slug)
 }
 
+export function getSeries(id: PostSeriesId) {
+  return postSeries.find((series) => series.id === id)!
+}
+
+export function postsInSeries(id: PostSeriesId) {
+  return posts.filter((post) => post.series === id)
+}
+
 export function postsInCategory(category: PostCategory) {
   return posts.filter((post) => post.category === category)
 }
 
-/** Other posts to read next: the same category first, then the rest of the series. */
+/**
+ * Other posts to read next: the same category first, then the rest of the
+ * series, then the other series.
+ */
 export function relatedPosts(post: BlogPost, count = 3) {
   const others = posts.filter((other) => other.slug !== post.slug)
+  const sameSeries = others.filter((other) => other.series === post.series)
   return [
-    ...others.filter((other) => other.category === post.category),
-    ...others.filter((other) => other.category !== post.category),
+    ...sameSeries.filter((other) => other.category === post.category),
+    ...sameSeries.filter((other) => other.category !== post.category),
+    ...others.filter((other) => other.series !== post.series),
   ].slice(0, count)
 }
 

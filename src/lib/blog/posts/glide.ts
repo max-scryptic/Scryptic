@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const glide: BlogPost = {
   slug: "migrate-from-glide",
   title: "Migrating from Glide to a production app",
-  tool: "Glide",
+  series: "migration",
+  topic: "Glide",
   logo: glideLogo,
   category: "No-code app builders",
   description:

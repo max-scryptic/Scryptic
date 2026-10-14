@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const softr: BlogPost = {
   slug: "migrate-from-softr",
   title: "Migrating from Softr to a production app",
-  tool: "Softr",
+  series: "migration",
+  topic: "Softr",
   logo: softrLogo,
   category: "No-code app builders",
   description:

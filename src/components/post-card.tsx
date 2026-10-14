@@ -4,8 +4,8 @@ import { ToolLogoWatermark } from "@/components/tool-logo"
 import { readingMinutes, type BlogPost } from "@/lib/blog"
 
 /**
- * A blog post in a grid: the tool, title, summary and reading time, with the
- * tool's logo as a watermark behind them. The whole card is one link, named
+ * A blog post in a grid: the topic, title, summary and reading time, with the
+ * tool's logo, when it has one, as a watermark behind them. The whole card is one link, named
  * after the post so the link text says where it goes.
  */
 export function PostCard({
@@ -19,7 +19,7 @@ export function PostCard({
   return (
     <article className="group relative isolate flex flex-col gap-3 rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/50">
       <ToolLogoWatermark post={post} />
-      <p className="font-mono text-xs tracking-widest text-primary uppercase">{post.tool}</p>
+      <p className="font-mono text-xs tracking-widest text-primary uppercase">{post.topic}</p>
       <Heading className="text-xl tracking-tight text-balance">
         <Link
           href={`/blog/${post.slug}`}

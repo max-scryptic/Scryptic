@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const framer: BlogPost = {
   slug: "migrate-from-framer",
   title: "Migrating from Framer to a production app",
-  tool: "Framer",
+  series: "migration",
+  topic: "Framer",
   logo: framerLogo,
   category: "Website builders",
   description:

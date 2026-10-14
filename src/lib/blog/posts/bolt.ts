@@ -4,7 +4,8 @@ import type { BlogPost } from "@/lib/blog/types"
 export const bolt: BlogPost = {
   slug: "migrate-from-bolt",
   title: "Migrating from Bolt.new to a production app",
-  tool: "Bolt.new",
+  series: "migration",
+  topic: "Bolt.new",
   logo: boltLogo,
   category: "AI app builders",
   description:
