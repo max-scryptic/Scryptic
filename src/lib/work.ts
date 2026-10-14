@@ -3,19 +3,15 @@ import type { StaticImageData } from "next/image"
 import prettyMetricsDetail1 from "@/assets/work/prettymetrics/detail-1.webp"
 import prettyMetricsDetail2 from "@/assets/work/prettymetrics/detail-2.webp"
 import prettyMetricsHero from "@/assets/work/prettymetrics/hero.webp"
-import prettyMetricsMobile from "@/assets/work/prettymetrics/mobile.webp"
 import reelEstateDetail1 from "@/assets/work/reelestate/detail-1.webp"
 import reelEstateDetail2 from "@/assets/work/reelestate/detail-2.webp"
 import reelEstateHero from "@/assets/work/reelestate/hero.webp"
-import reelEstateMobile from "@/assets/work/reelestate/mobile.webp"
 import untilThenDetail1 from "@/assets/work/until-then/detail-1.webp"
 import untilThenDetail2 from "@/assets/work/until-then/detail-2.webp"
 import untilThenHero from "@/assets/work/until-then/hero.webp"
-import untilThenMobile from "@/assets/work/until-then/mobile.webp"
 import viewlioDetail1 from "@/assets/work/viewlio/detail-1.webp"
 import viewlioDetail2 from "@/assets/work/viewlio/detail-2.webp"
 import viewlioHero from "@/assets/work/viewlio/hero.webp"
-import viewlioMobile from "@/assets/work/viewlio/mobile.webp"
 
 /*
  * Case studies for /work and the home page's work section. Each entry drives
@@ -24,7 +20,7 @@ import viewlioMobile from "@/assets/work/viewlio/mobile.webp"
  *
  * Screenshots live in src/assets/work/<slug>/ and are imported statically, so
  * next/image knows their size and can show a blurred placeholder. They are
- * captured at 1440x900 (desktop) and 390x844 (mobile), at 2x and 3x.
+ * desktop captures at 2x.
  */
 
 export type Screenshot = {
@@ -57,7 +53,6 @@ export type CaseStudy = {
   stack: string[]
   cover: Screenshot
   gallery: Screenshot[]
-  mobile?: Screenshot
 }
 
 const reelEstate: CaseStudy = {
@@ -156,10 +151,6 @@ const reelEstate: CaseStudy = {
       alt: "ReelEstate's video editor: reel, widescreen, portrait and square shapes, a transition and logo watermark picker, above numbered clips with their durations",
     },
   ],
-  mobile: {
-    src: reelEstateMobile,
-    alt: "The ReelEstate home page on a phone, playing a property video",
-  },
 }
 
 const untilThen: CaseStudy = {
@@ -258,10 +249,6 @@ const untilThen: CaseStudy = {
       alt: "Until Then's pricing: written letters free, voice or video paid once per message, or lifetime access in one payment",
     },
   ],
-  mobile: {
-    src: untilThenMobile,
-    alt: "The Until Then home page on a phone",
-  },
 }
 
 const viewlio: CaseStudy = {
@@ -353,17 +340,13 @@ const viewlio: CaseStudy = {
   gallery: [
     {
       src: viewlioDetail1,
-      alt: "Viewlio's features section: a video report listing the hook, a drop-off, a hold and a gain, above a frame-by-frame deep dive",
+      alt: "A Viewlio video report: the audience retention curve for an eight-minute video with the hook, drop-offs and pacing moments marked, above the hook findings and a suggested fix for each",
     },
     {
       src: viewlioDetail2,
-      alt: "Viewlio's pricing: Free, Starter and Pro plans with monthly analyses and deep-dive credits",
+      alt: "Viewlio's Analyse a Video page: a field for a YouTube link above the creator's recent uploads with their views, subscribers gained and comments",
     },
   ],
-  mobile: {
-    src: viewlioMobile,
-    alt: "The Viewlio home page on a phone",
-  },
 }
 
 const prettyMetrics: CaseStudy = {
@@ -461,10 +444,6 @@ const prettyMetrics: CaseStudy = {
       alt: "The Pretty Metrics backdrop browser previewing an MRR card on the animated Coin Shower backdrop, beside a grid of live backdrops",
     },
   ],
-  mobile: {
-    src: prettyMetricsMobile,
-    alt: "The Pretty Metrics home page on a phone",
-  },
 }
 
 export const caseStudies: CaseStudy[] = [viewlio, prettyMetrics, reelEstate, untilThen]
