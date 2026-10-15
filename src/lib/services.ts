@@ -35,7 +35,7 @@ export const service = {
   minPrice: 10000,
   timeline: "1 to 2 months from kickoff to launch",
   summary:
-    "A production app planned, designed, built, deployed and launched by one team in one to two months, with a catch-up every Friday so you are in the loop the whole way.",
+    "A production app priced on its complexity, with the code and every account in your name, so nothing is locked to us.",
   includes: [
     "Discovery call to map your goals, users and constraints",
     "Prioritised scope, recommended stack, a written estimate and a timeline",
