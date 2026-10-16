@@ -352,11 +352,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services */}
+      {/* Services. Sections with py-24 take scroll-mt-4, not scroll-mt-28: with the
+          6rem top padding their heading still lands 7rem down, just under the fixed header. */}
       <section
         aria-labelledby="pricing-heading"
         id="pricing"
-        className="scroll-mt-28 px-4 py-24 sm:px-6"
+        className="scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Pricing" title="A fully built MVP, ready to take to market" id="pricing-heading">
@@ -422,7 +423,7 @@ export default function Home() {
       <section
         aria-labelledby="process-heading"
         id="process"
-        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
+        className="scroll-mt-4 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Process" title="From first call to launch" id="process-heading">
@@ -547,7 +548,7 @@ export default function Home() {
       <section
         aria-labelledby="work-heading"
         id="work"
-        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
+        className="scroll-mt-4 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -577,7 +578,7 @@ export default function Home() {
       <section
         aria-labelledby="compare-heading"
         id="compare"
-        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
+        className="scroll-mt-4 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -658,7 +659,7 @@ export default function Home() {
       <section
         aria-labelledby="about-heading"
         id="about"
-        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
+        className="scroll-mt-4 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-16">
           <div className="flex flex-col gap-6">
@@ -711,7 +712,7 @@ export default function Home() {
       <section
         aria-labelledby="faq-heading"
         id="faq"
-        className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
+        className="scroll-mt-4 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]">
           <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading">
