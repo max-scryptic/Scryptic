@@ -15,11 +15,11 @@ const agenda = [
   },
   {
     name: "Straight advice",
-    text: "An honest view on scope, stack, rough cost and how long it will take, including what is not worth building yet. Useful even if we are not the right fit.",
+    text: "An honest view on scope, stack and which package fits, including what is not worth building yet. Useful even if we are not the right fit.",
   },
   {
     name: "A clear next step",
-    text: "If it makes sense to work together, you get a written estimate and timeline for the build before anything starts. Most builds launch within one to two months.",
+    text: "If it makes sense to work together, the scope and price are agreed before anything starts. The MVP launches after a 2 week sprint, followed by a week of handover.",
   },
 ]
 

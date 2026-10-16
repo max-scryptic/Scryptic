@@ -19,6 +19,8 @@ export type ServiceOffer = {
   /** The same price as a number in `currency`, for structured data. */
   amount: number
   includes: string[]
+  /** Highlighted with a "Preferred" tag. At most one package should set it. */
+  preferred?: boolean
 }
 
 export const currency = "GBP"
@@ -28,14 +30,15 @@ const shared = {
   areaServed: "United Kingdom",
 }
 
-export const services = [
+export const services: ServiceOffer[] = [
   {
     ...shared,
-    id: "initial-mvp",
-    name: "Initial MVP",
+    id: "mvp",
+    name: "MVP",
     sprint: "2 week development sprint",
     price: "£10,000",
     amount: 10000,
+    preferred: true,
     includes: [
       "A fully built MVP, ready to take to market",
       "1 week of development by our team",
@@ -57,4 +60,4 @@ export const services = [
       "1 week of handover after launch: bug fixes and a smooth rollout",
     ],
   },
-] satisfies ServiceOffer[]
+]

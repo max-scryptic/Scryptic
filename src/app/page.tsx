@@ -23,40 +23,47 @@ export const metadata = createMetadata({
   title: `${siteConfig.name} | MVP and app development studio`,
 })
 
-// The process timetable: a typical eight week build. `start` and `weeks` place
-// each step's bar on the week grid.
-const timetableWeeks = 8
+// The process timetable: the preferred package's 2 week sprint and the week of
+// handover after it. `start` and `weeks` place each step's bar on the week grid.
+const timetablePackage = services.find((s) => s.preferred) ?? services[0]
+const timetableWeeks = 3
 
 const steps = [
   {
-    name: "Discover",
-    text: "A call on your goals, users and what exists.",
-    bar: "Call",
+    name: "Develop",
+    text: "Our team builds your MVP to the agreed scope.",
+    bar: "Build",
+    tone: "build",
     start: 1,
     weeks: 1,
   },
   {
-    name: "Plan",
-    text: "Scope, stack, a written estimate and a timeline.",
-    bar: "Estimate",
+    name: "Iterate",
+    text: "We refine it on your feedback, then launch.",
+    bar: "Iteration",
+    tone: "iterate",
     start: 2,
     weeks: 1,
   },
   {
-    name: "Build",
-    text: "Design and code together, reviewed every Friday.",
-    bar: "Build",
+    name: "Handover",
+    text: "Live, with bug fixes and a smooth rollout.",
+    bar: "Handover",
+    tone: "live",
     start: 3,
-    weeks: 5,
-  },
-  {
-    name: "Launch",
-    text: "Deploy, set up analytics, launch and hand over.",
-    bar: "Live",
-    start: 8,
     weeks: 1,
   },
-]
+] as const
+
+// Bar and Friday-diamond colours for each kind of timetable step.
+const stepTones = {
+  build: { bar: "bg-primary text-primary-foreground", mark: "bg-primary-foreground/80" },
+  iterate: {
+    bar: "bg-primary/15 text-primary dark:bg-primary/30 dark:text-foreground",
+    mark: "bg-primary dark:bg-foreground/80",
+  },
+  live: { bar: "bg-chart-2 text-[#14131b]", mark: "bg-[#14131b]/70" },
+}
 
 // The comparison table. `scryptic` is always true, so it is drawn from the
 // column rather than stored per row.
@@ -69,7 +76,7 @@ const comparison: {
 }[] = [
   {
     name: "Speed",
-    text: "Live in 1 to 2 months, not after a hiring round",
+    text: "Launched after a 2 or 3 week sprint, not a hiring round",
     values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
   },
   {
@@ -89,7 +96,7 @@ const comparison: {
   },
   {
     name: "Cost vs value",
-    text: "A fixed estimate for a launched product",
+    text: "A fixed price for a launched product",
     values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
   },
 ]
@@ -103,12 +110,12 @@ const faqs = [
   {
     question: "How long does it take to build an app?",
     answer:
-      "Most full app to market builds take one to two months from kickoff to launch, and a typical build runs about eight weeks. A focused first release sits at the shorter end; more user roles, integrations or an existing codebase to work around push it towards two months. Your timeline comes with the written estimate, so you know the launch window before the build starts.",
+      "The MVP is a 2 week development sprint: one week of development and one of iteration on your feedback, then launch. The Extended MVP adds a second week of development, so it runs for three weeks. Both are followed by a week of handover after launch for bug fixes and a smooth rollout. The sprint starts once the scope is agreed after the discovery call.",
   },
   {
     question: "What is included in an MVP package?",
     answer:
-      "A fully built MVP, ready to take to market. The Initial MVP has one week of development by our team and one week of iteration on your feedback; the Extended MVP has two weeks of development and one of iteration. Both finish with a week of handover after launch for bug fixes and a smooth rollout.",
+      "A fully built MVP, ready to take to market. The MVP has one week of development by our team and one week of iteration on your feedback; the Extended MVP has two weeks of development and one of iteration. Both finish with a week of handover after launch for bug fixes and a smooth rollout.",
   },
   {
     question: "What kind of apps do you build?",
@@ -132,7 +139,7 @@ const faqs = [
   {
     question: "Can you work on an existing app or codebase?",
     answer:
-      "Yes. We review existing code, infrastructure and prototypes during discovery. Often the best plan is to build on what you have rather than start again, and the estimate says which parts we would keep, fix or replace.",
+      "Yes. We review existing code, infrastructure and prototypes during discovery. Often the best plan is to build on what you have rather than start again, and the agreed scope says which parts we would keep, fix or replace.",
   },
   {
     question: "Who owns the code once the app is built?",
@@ -142,7 +149,7 @@ const faqs = [
   {
     question: "How is Scryptic different from an agency, a freelancer or an in-house hire?",
     answer:
-      "You get agency-quality software at freelancer speed, with code you own outright. Hiring in-house means a recruitment round before any work starts, agencies tend to be slower and fix the plan up front, freelancers vary in quality, and AI-only tools rarely hold up with real users. With Scryptic you get a launched product in one to two months, a fixed estimate and priorities revisited every week.",
+      "You get agency-quality software at freelancer speed, with code you own outright. Hiring in-house means a recruitment round before any work starts, agencies tend to be slower and fix the plan up front, freelancers vary in quality, and AI-only tools rarely hold up with real users. With Scryptic you get a launched product after a 2 or 3 week sprint, a fixed price and priorities revisited every week.",
   },
   {
     question: "How do you keep me updated during the build?",
@@ -156,7 +163,7 @@ const faqs = [
   {
     question: "What happens on the discovery call?",
     answer:
-      "It is a free 30 minute call about your idea or product, who it is for and where it is stuck. You get straight advice on scope, stack, rough cost and timeline, including what is not worth building yet. If it makes sense to work together, a written estimate and timeline follow before anything starts.",
+      "It is a free 30 minute call about your idea or product, who it is for and where it is stuck. You get straight advice on scope, stack and which package fits, including what is not worth building yet. If it makes sense to work together, the scope and price are agreed before the sprint starts.",
   },
 ]
 
@@ -164,10 +171,10 @@ const terminalLines = [
   { prompt: true, text: "scryptic discover" },
   { prompt: false, text: "goals, users and constraints mapped" },
   { prompt: false, text: "stack and architecture chosen" },
-  { prompt: false, text: "first release scoped and estimated" },
+  { prompt: false, text: "first release scoped and priced" },
   { prompt: true, text: "scryptic ship --to market" },
   { prompt: false, text: "progress reviewed every Friday" },
-  { prompt: false, text: "launched in 1 to 2 months" },
+  { prompt: false, text: "launched in a 2 week sprint" },
 ]
 
 function SectionHeading({
@@ -275,7 +282,7 @@ export default function Home() {
             </h1>
             <p className="max-w-xl text-lg text-pretty text-white/80">
               {siteConfig.name} is an MVP and app development studio in Brighton, building web apps
-              and SaaS products for UK founders in one to two months.
+              and SaaS products for UK founders, with an MVP launched in a 2 week sprint.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
@@ -338,16 +345,26 @@ export default function Home() {
             scope; both end with a week of handover after launch.
           </SectionHeading>
 
-          {/* One card per package: name and sprint, the price, what is included, then the call. */}
-          <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
+          {/* One card per package: name and sprint, the price, what is included, then the call.
+              The preferred package gets a Lapis border and a tag sitting on its top edge. */}
+          <div data-reveal="children" className="grid gap-6 pt-4 md:grid-cols-2">
             {services.map((service) => (
               <article
                 key={service.id}
                 id={service.id}
                 aria-labelledby={`${service.id}-name`}
-                className="relative flex scroll-mt-28 flex-col gap-8 overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
+                className={cn(
+                  "relative flex scroll-mt-28 flex-col gap-8 rounded-2xl bg-card p-6 sm:p-8 lg:p-10",
+                  service.preferred
+                    ? "border-2 border-primary shadow-xl shadow-primary/15"
+                    : "border border-border shadow-xl shadow-black/5",
+                )}
               >
-                <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-primary" />
+                {service.preferred && (
+                  <p className="absolute -top-3.5 right-6 rounded-full bg-primary px-4 py-1 font-mono text-xs tracking-widest text-primary-foreground uppercase sm:right-10">
+                    Preferred
+                  </p>
+                )}
                 <div className="flex flex-col gap-1">
                   <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
                     {service.name}
@@ -387,13 +404,27 @@ export default function Home() {
         className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Process" title="How a project runs" id="process-heading">
-            Most projects go from first call to launch in one to two months, in four steps with one
-            team throughout and a catch-up every Friday.
+          <SectionHeading eyebrow="Process" title={`How the ${timetablePackage.name} sprint runs`} id="process-heading">
+            The timeline below shows the {timetablePackage.name} package: a{" "}
+            {timetablePackage.sprint}, then a week of handover once your app is live. One team
+            throughout, with a catch-up every Friday.
           </SectionHeading>
           {/* Phones stack each step's text above its bar; wider screens put it in a first column. */}
           <div className="overflow-hidden rounded-2xl border border-border bg-card">
-            <div className="grid grid-cols-8 sm:grid-cols-[minmax(11rem,2.2fr)_repeat(8,minmax(0,1fr))]">
+            <div className="grid grid-cols-3 sm:grid-cols-[minmax(11rem,2.2fr)_repeat(3,minmax(0,1fr))]">
+              {/* Two header rows: the phases the weeks fall into, then the weeks themselves. */}
+              <div
+                aria-hidden="true"
+                className="col-span-full grid grid-cols-subgrid border-b border-border font-mono text-xs uppercase"
+              >
+                <span className="hidden px-6 py-4 text-muted-foreground sm:block">Phase</span>
+                <span className="col-span-2 flex items-center justify-center gap-3 bg-primary/10 px-3 py-4 text-center text-primary sm:border-l sm:border-border dark:text-foreground">
+                  {timetablePackage.sprint}
+                </span>
+                <span className="flex items-center justify-center bg-chart-2/15 px-3 py-4 text-center text-foreground sm:border-l sm:border-border">
+                  Live + handover
+                </span>
+              </div>
               <div
                 aria-hidden="true"
                 className="col-span-full grid grid-cols-subgrid border-b border-border font-mono text-xs text-muted-foreground uppercase"
@@ -401,7 +432,7 @@ export default function Home() {
                 <span className="hidden px-6 py-4 sm:block">Step</span>
                 {Array.from({ length: timetableWeeks }, (_, week) => (
                   <span key={week} className="py-4 text-center sm:border-l sm:border-border">
-                    W{week + 1}
+                    Week {week + 1}
                   </span>
                 ))}
               </div>
@@ -420,7 +451,7 @@ export default function Home() {
                       </h3>
                       <p className="text-sm text-pretty text-muted-foreground">{step.text}</p>
                     </div>
-                    <div className="relative col-span-8 grid grid-cols-subgrid py-4 sm:py-5">
+                    <div className="relative col-span-3 grid grid-cols-subgrid py-4 sm:py-5">
                       {Array.from({ length: timetableWeeks }, (_, week) => (
                         <span
                           key={week}
@@ -432,11 +463,7 @@ export default function Home() {
                       <p
                         className={cn(
                           "reveal-wipe relative mx-1 flex h-9 items-center gap-2 overflow-hidden rounded-lg px-3 font-mono text-xs whitespace-nowrap sm:mx-2",
-                          step.bar === "Live"
-                            ? "bg-chart-2 text-[#14131b]"
-                            : step.bar === "Build"
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-primary/15 text-primary dark:bg-primary/30 dark:text-foreground",
+                          stepTones[step.tone].bar,
                         )}
                         style={{ gridColumn: `${step.start} / span ${step.weeks}` }}
                       >
@@ -445,17 +472,13 @@ export default function Home() {
                             ? `Weeks ${step.start} to ${step.start + step.weeks - 1}: `
                             : `Week ${step.start}: `}
                         </span>
-                        {/* A one week bar is too narrow for its label below lg; the step name sits beside it. */}
-                        <span className={cn("truncate", step.weeks === 1 && "max-lg:sr-only")}>
-                          {step.bar}
+                        <span className="truncate">{step.bar}</span>
+                        {/* Each week closes with the Friday catch-up. */}
+                        <span aria-hidden="true" className="ml-auto flex shrink-0 gap-[clamp(0.5rem,2vw,1.4rem)]">
+                          {Array.from({ length: step.weeks }, (_, week) => (
+                            <span key={week} className={cn("size-1.5 rotate-45", stepTones[step.tone].mark)} />
+                          ))}
                         </span>
-                        {step.bar === "Build" && (
-                          <span aria-hidden="true" className="ml-auto flex gap-[clamp(0.5rem,2vw,1.4rem)]">
-                            {Array.from({ length: step.weeks }, (_, week) => (
-                              <span key={week} className="size-1.5 rotate-45 bg-primary-foreground/80" />
-                            ))}
-                          </span>
-                        )}
                       </p>
                     </div>
                   </li>
@@ -467,7 +490,10 @@ export default function Home() {
                 <span aria-hidden="true" className="size-1.5 rotate-45 bg-primary" />
                 Friday catch-up
               </span>
-              <span>A typical eight week build. Smaller first releases land sooner.</span>
+              <span>
+                Showing the {timetablePackage.name} package. The Extended MVP adds a second week of
+                development before iteration.
+              </span>
             </p>
           </div>
         </div>
