@@ -316,7 +316,7 @@ export default function Home() {
                 size="lg"
                 variant="outline"
                 nativeButton={false}
-                render={<Link href="/#services" />}
+                render={<Link href="/#pricing" />}
                 className="h-11 rounded-full border-white/40 bg-transparent px-5 text-base text-white hover:bg-white/10 hover:text-white dark:border-white/40 dark:bg-transparent dark:hover:bg-white/10"
               >
                 See pricing
@@ -354,12 +354,12 @@ export default function Home() {
 
       {/* Services */}
       <section
-        aria-labelledby="services-heading"
-        id="services"
+        aria-labelledby="pricing-heading"
+        id="pricing"
         className="scroll-mt-28 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Pricing" title="A fully built MVP, ready to take to market" id="services-heading">
+          <SectionHeading eyebrow="Pricing" title="A fully built MVP, ready to take to market" id="pricing-heading">
             Two fixed-price sprints, agreed before the build starts.
           </SectionHeading>
 
