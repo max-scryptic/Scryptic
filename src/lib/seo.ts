@@ -43,7 +43,7 @@ const home = {
   title: siteConfig.name,
   description: siteConfig.description,
   // The last real change to the home page copy. Bump it when the copy changes.
-  lastModified: "2026-10-14",
+  lastModified: "2026-10-16",
   changeFrequency: "weekly",
   priority: 1,
 } satisfies PageEntry
@@ -79,14 +79,6 @@ export const pages = {
     lastModified: latestPostDate,
     changeFrequency: "weekly",
     priority: 0.7,
-  },
-  // Draft layouts for the home page process section, for review only.
-  processExamples: {
-    path: "/process-examples",
-    title: "Process examples",
-    description:
-      "Draft designs for the home page process section, showing a Scryptic project from the first call through the sprint to handover and support.",
-    noIndex: true,
   },
 } satisfies Record<string, PageEntry>
 
