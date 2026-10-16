@@ -283,7 +283,7 @@ export default function Home() {
             </h1>
             <p className="max-w-xl text-lg text-pretty text-white/80">
               {siteConfig.name} is an MVP and app development studio in Brighton, building web apps
-              and SaaS products for UK founders, with an MVP launched in a 2 week sprint.
+              and SaaS products for UK founders.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
@@ -342,8 +342,7 @@ export default function Home() {
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Pricing" title="A fully built MVP, ready to take to market" id="services-heading">
-            Two fixed-price sprints, agreed before the build starts. Pick the one that fits your
-            scope; both end with a week of handover after launch.
+            Two fixed-price sprints, agreed before the build starts.
           </SectionHeading>
 
           {/* One card per package: name and sprint, the price, what is included, then the call.
