@@ -52,6 +52,7 @@ src/
     services.ts         The service offer: card, price and Service JSON-LD
     booking.ts          /book-a-call questions, and how answers reach the booking link or email
     team.ts             The founder profile used on /, /book-a-call and as blog author
+    stack.ts            The "Our stack" tiles on /, each with its logo from src/assets/stack/
     blog/               Blog posts as data: types.ts (the shape), posts/<tool>.ts (one per post),
                         index.ts (the list, categories and helpers). A post is a file plus a line in index.ts;
                         its optional tool logo is an SVG in src/assets/blog/logos/ imported as the post's `logo`
