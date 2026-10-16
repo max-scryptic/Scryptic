@@ -11,6 +11,7 @@ import { VoxelField } from "@/components/voxel-field"
 import { createMetadata, pages } from "@/lib/seo"
 import { service } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
+import { stack } from "@/lib/stack"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 import { featuredCaseStudies } from "@/lib/work"
@@ -528,6 +529,60 @@ export default function Home() {
               <span>A typical eight week build. Smaller first releases land sooner.</span>
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Stack: the same Lapis as the hero, in both themes, with each logo on a white tile. */}
+      <section aria-labelledby="stack-heading" id="stack" className="scroll-mt-28 px-4 pb-24 sm:px-6">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 rounded-3xl bg-[#2b3fd6] px-6 py-12 text-white sm:px-10 sm:py-16 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-14">
+          <div data-reveal="children" className="flex flex-col gap-5">
+            <p className="font-mono text-xs tracking-widest text-[#c3caff] uppercase">Our stack</p>
+            <h2 id="stack-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
+              A stack built for a fast, scalable launch
+            </h2>
+            <p className="text-lg text-pretty text-white/80">
+              We build on Neon or Supabase for the database, Vercel for hosting, Cloudflare for
+              storage, and Tailwind CSS and Node.js for the app itself.
+            </p>
+            <p className="text-pretty text-white/80">
+              Each one is widely used and well documented, and every account sits in your name, so
+              any developer can pick the app up later. Claude Code speeds up the build while a
+              developer reviews every change, which is how a full launch fits into one to two
+              months.
+            </p>
+          </div>
+          <ul data-reveal="children" className="grid grid-cols-2 gap-3 sm:gap-4">
+            {stack.map((tool, index) => (
+              <li
+                key={tool.name}
+                className={cn(
+                  "flex flex-col items-center justify-center gap-4 rounded-2xl bg-white px-4 py-6 text-[#14131b] sm:py-8",
+                  index === stack.length - 1 && "col-span-2",
+                )}
+              >
+                {/* Wordmarks get the same area rather than the same height, so a long
+                    one does not shrink to a sliver and a tall one does not dwarf the rest. */}
+                <span className="flex h-14 items-center gap-3">
+                  <Image
+                    src={tool.logo}
+                    alt={tool.wordmark ? tool.name : ""}
+                    className="w-auto max-w-full object-contain"
+                    style={{
+                      height: tool.wordmark
+                        ? `${Math.sqrt(20 / (tool.logo.width / tool.logo.height))}rem`
+                        : "2.5rem",
+                    }}
+                  />
+                  {!tool.wordmark && (
+                    <span className="text-2xl font-semibold tracking-tight">{tool.name}</span>
+                  )}
+                </span>
+                <span className="font-mono text-xs tracking-widest text-[#14131b]/60 uppercase">
+                  {tool.role}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
