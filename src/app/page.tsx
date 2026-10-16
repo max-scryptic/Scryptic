@@ -512,9 +512,7 @@ export default function Home() {
               A stack built for a fast, scalable launch
             </h2>
             <p className="text-lg text-pretty text-white/80">
-              Every app we ship runs on a modern, production-grade stack: Neon or Supabase for the
-              database, Vercel for hosting, Cloudflare for storage, and Tailwind CSS and Node.js for
-              the app itself.
+              Every app we ship runs on a modern, production-grade stack.
             </p>
             <p className="text-pretty text-white/80">
               These are the tools today&apos;s leading web products are built on, so your app is
