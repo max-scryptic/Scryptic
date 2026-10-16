@@ -342,8 +342,7 @@ export default function Home() {
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Pricing" title="A fully built MVP, ready to take to market" id="services-heading">
-            Two fixed-price sprints, agreed before the build starts. Pick the one that fits your
-            scope; both end with a week of handover after launch.
+            Two fixed-price sprints, agreed before the build starts.
           </SectionHeading>
 
           {/* One card per package: name and sprint, the price, what is included, then the call.
