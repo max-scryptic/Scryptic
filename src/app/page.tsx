@@ -301,7 +301,7 @@ export default function Home() {
           <div className="hero-rise flex flex-col items-start gap-7">
             <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">
               From idea to{" "}
-              <span className="text-[#c3caff]">launched MVP</span>
+              <span className="text-[#c3caff]">MVP</span>
               , without hiring a dev team.
             </h1>
             <p className="max-w-xl text-lg text-pretty text-white/80">
