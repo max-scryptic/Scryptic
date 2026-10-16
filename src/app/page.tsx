@@ -487,15 +487,9 @@ export default function Home() {
                 </li>
               ))}
             </ol>
-            <p className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border px-5 py-4 font-mono text-xs text-muted-foreground">
-              <span className="flex items-center gap-2">
-                <span aria-hidden="true" className="size-1.5 rotate-45 bg-primary" />
-                Friday demo
-              </span>
-              <span>
-                An example schedule for the {calendarPackage.name}. The Extended MVP adds a second
-                week of development.
-              </span>
+            <p className="border-t border-border px-5 py-4 font-mono text-xs text-muted-foreground">
+              An example schedule for the {calendarPackage.name}. The Extended MVP adds a second
+              week of development.
             </p>
           </div>
         </div>
