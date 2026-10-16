@@ -1,6 +1,5 @@
 import type { StaticImageData } from "next/image"
 
-import claudeCodeLogo from "@/assets/stack/claude-code.svg"
 import cloudflareLogo from "@/assets/stack/cloudflare.svg"
 import neonLogo from "@/assets/stack/neon.svg"
 import nodejsLogo from "@/assets/stack/nodejs.svg"
@@ -19,7 +18,7 @@ export type StackTool = {
 }
 
 // The tools behind every build, in the order the home page tiles show them.
-// The last one spans the full row, so keep it the one to highlight.
+// Tiles sit two to a row, so keep the count even.
 export const stack: StackTool[] = [
   { name: "Neon", role: "Database", logo: neonLogo, wordmark: true },
   { name: "Supabase", role: "Database", logo: supabaseLogo, wordmark: true },
@@ -27,5 +26,4 @@ export const stack: StackTool[] = [
   { name: "Cloudflare", role: "Storage", logo: cloudflareLogo, wordmark: true },
   { name: "Tailwind CSS", role: "Styling", logo: tailwindLogo, wordmark: true },
   { name: "Node.js", role: "Runtime", logo: nodejsLogo, wordmark: true },
-  { name: "Claude Code", role: "Building", logo: claudeCodeLogo, wordmark: false },
 ]

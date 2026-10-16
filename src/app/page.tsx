@@ -517,19 +517,14 @@ export default function Home() {
             </p>
             <p className="text-pretty text-white/80">
               Each one is widely used and well documented, and every account sits in your name, so
-              any developer can pick the app up later. Claude Code speeds up the build while a
-              developer reviews every change, which is how a full launch fits into one to two
-              months.
+              any developer can pick the app up later.
             </p>
           </div>
           <ul data-reveal="children" className="grid grid-cols-2 gap-3 sm:gap-4">
-            {stack.map((tool, index) => (
+            {stack.map((tool) => (
               <li
                 key={tool.name}
-                className={cn(
-                  "flex flex-col items-center justify-center gap-4 rounded-2xl bg-white px-4 py-6 text-[#14131b] sm:py-8",
-                  index === stack.length - 1 && "col-span-2",
-                )}
+                className="flex flex-col items-center justify-center gap-4 rounded-2xl bg-white px-4 py-6 text-[#14131b] sm:py-8"
               >
                 {/* Wordmarks get the same area rather than the same height, so a long
                     one does not shrink to a sliver and a tall one does not dwarf the rest. */}
