@@ -80,6 +80,14 @@ export const pages = {
     changeFrequency: "weekly",
     priority: 0.7,
   },
+  // Draft layouts for the home page process section, for review only.
+  processExamples: {
+    path: "/process-examples",
+    title: "Process examples",
+    description:
+      "Draft designs for the home page process section, showing a Scryptic project from the first call through the sprint to handover and support.",
+    noIndex: true,
+  },
 } satisfies Record<string, PageEntry>
 
 /** The registry entry for a case study's /work/<slug> page, built from src/lib/work.ts. */
