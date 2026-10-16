@@ -9,7 +9,7 @@ import { SocialLinks } from "@/components/social-links"
 import { Button } from "@/components/ui/button"
 import { VoxelField } from "@/components/voxel-field"
 import { createMetadata, pages } from "@/lib/seo"
-import { service } from "@/lib/services"
+import { services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
@@ -98,7 +98,7 @@ const comparison: {
 const faqs = [
   {
     question: "How much does it cost to build an app with Scryptic?",
-    answer: `A full app to market build starts ${service.price.toLowerCase()}. The final price depends on complexity: the number of screens and user roles, the integrations involved and how much already exists. After the discovery call you get a written estimate and timeline, so the price is agreed before any build starts.`,
+    answer: `There are two fixed prices. ${services.map((s) => `The ${s.name} is ${s.price}, a ${s.sprint}`).join(". ")}. Both end with a week of handover after launch for bug fixes and a smooth rollout. The discovery call settles which one fits, so the price is agreed before any build starts.`,
   },
   {
     question: "How long does it take to build an app?",
@@ -106,9 +106,9 @@ const faqs = [
       "Most full app to market builds take one to two months from kickoff to launch, and a typical build runs about eight weeks. A focused first release sits at the shorter end; more user roles, integrations or an existing codebase to work around push it towards two months. Your timeline comes with the written estimate, so you know the launch window before the build starts.",
   },
   {
-    question: "What is included in a full app to market build?",
+    question: "What is included in an MVP package?",
     answer:
-      "Everything from the first call to launch day, delivered by one team: scoping and a written estimate, product design and a clickable prototype, the full-stack build, authentication, payments and integrations, hosting, analytics and search, launch support and a clean handover.",
+      "A fully built MVP, ready to take to market. The Initial MVP has one week of development by our team and one week of iteration on your feedback; the Extended MVP has two weeks of development and one of iteration. Both finish with a week of handover after launch for bug fixes and a smooth rollout.",
   },
   {
     question: "What kind of apps do you build?",
@@ -209,34 +209,6 @@ function CheckIcon() {
   )
 }
 
-/* The service card's detail icons: a clock for the timeline, people for who it suits. */
-function DetailIcon({ kind }: { kind: "clock" | "people" }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="size-4"
-      aria-hidden="true"
-    >
-      {kind === "clock" ? (
-        <>
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v5l3 2" />
-        </>
-      ) : (
-        <>
-          <circle cx="9" cy="8" r="3.5" />
-          <path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6" />
-        </>
-      )}
-    </svg>
-  )
-}
-
 function ComparisonMark({ value, highlight = false }: { value: boolean; highlight?: boolean }) {
   return (
     <>
@@ -276,16 +248,13 @@ function ComparisonMark({ value, highlight = false }: { value: boolean; highligh
   )
 }
 
-// "From £10,000" shows its qualifier small beside the figure.
-const [, pricePrefix, priceAmount] = /^(?:(From)\s+)?(.*)$/.exec(service.price)!
-
 export default function Home() {
   return (
     <main className="flex flex-col">
       <PageJsonLd
         page={pages.home}
         nodes={[
-          serviceJsonLd(pages.home, service),
+          ...services.map((service) => serviceJsonLd(pages.home, service)),
           faqJsonLd(pages.home, faqs),
         ]}
       />
@@ -364,77 +333,50 @@ export default function Home() {
         className="scroll-mt-28 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Service" title="One service: your app, all the way to market" id="services-heading">
-            Whether it is an MVP to test the market or a SaaS product ready for paying customers,
-            we plan, design, build, deploy and launch it as one engagement.
+          <SectionHeading eyebrow="Pricing" title="A fully built MVP, ready to take to market" id="services-heading">
+            Two fixed-price sprints, agreed before the build starts. Pick the one that fits your
+            scope; both end with a week of handover after launch.
           </SectionHeading>
 
-          {/* The card holds the offer; what it includes sits beside it on the section background. */}
-          <article
-            id={service.id}
-            aria-labelledby={`${service.id}-name`}
-            className="grid scroll-mt-28 items-center gap-12 lg:grid-cols-2 lg:gap-16"
-          >
-            {/* A thin Lapis rule tops the card; the price leads, then the details and the call. */}
-            <div
-              data-reveal
-              className="relative flex flex-col gap-8 overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
-            >
-              <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-primary" />
-              <div className="flex flex-col gap-5">
-                <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
-                  {service.name}
-                </h3>
-                <p className="flex items-baseline gap-2">
-                  {pricePrefix && <span className="text-lg text-muted-foreground">{pricePrefix}</span>}
-                  <span className="text-5xl font-semibold tracking-tight">{priceAmount}</span>
-                </p>
-              </div>
-              <p className="text-pretty text-muted-foreground">{service.summary}</p>
-              <dl className="flex flex-col gap-4 border-t border-border pt-6">
-                {(
-                  [
-                    { icon: "clock", label: "Timeline", value: service.timeline },
-                    { icon: "people", label: "Best for", value: service.bestFor },
-                  ] as const
-                ).map((detail) => (
-                  <div key={detail.label} className="flex gap-4">
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                      <DetailIcon kind={detail.icon} />
-                    </span>
-                    <div className="flex flex-col gap-0.5 text-sm">
-                      <dt className="font-medium">{detail.label}</dt>
-                      <dd className="text-pretty text-muted-foreground">{detail.value}</dd>
-                    </div>
-                  </div>
-                ))}
-              </dl>
-              <Button
-                size="lg"
-                nativeButton={false}
-                render={<Link href={pages.bookCall.path} />}
-                className="h-12 w-full rounded-full text-base"
+          {/* One card per package: name and sprint, the price, what is included, then the call. */}
+          <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
+            {services.map((service) => (
+              <article
+                key={service.id}
+                id={service.id}
+                aria-labelledby={`${service.id}-name`}
+                className="relative flex scroll-mt-28 flex-col gap-8 overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
               >
-                {service.cta}
-              </Button>
-            </div>
-            <div className="flex flex-col gap-6">
-              <div data-reveal className="flex flex-col gap-2">
-                <h4 className="text-xl tracking-tight">What is included</h4>
-                <p className="text-pretty text-muted-foreground">
-                  Everything from the first call to launch day, delivered by one team.
-                </p>
-              </div>
-              <ul data-reveal="children" className="flex flex-col gap-4">
-                {service.includes.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <CheckIcon />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </article>
+                <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-primary" />
+                <div className="flex flex-col gap-1">
+                  <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
+                    {service.name}
+                  </h3>
+                  <p className="text-muted-foreground">{service.sprint}</p>
+                </div>
+                <p className="text-5xl font-semibold tracking-tight">{service.price}</p>
+                <div className="flex flex-col gap-4">
+                  <h4 className="font-medium">What is included</h4>
+                  <ul className="flex flex-col gap-3 text-pretty">
+                    {service.includes.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <CheckIcon />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Button
+                  size="lg"
+                  nativeButton={false}
+                  render={<Link href={pages.bookCall.path} />}
+                  className="mt-auto h-12 w-full rounded-full text-base"
+                >
+                  Book a discovery call
+                </Button>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

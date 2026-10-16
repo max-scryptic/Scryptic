@@ -1,7 +1,7 @@
 /*
- * The one thing Scryptic sells. The home page's service card, its Service
- * JSON-LD and the pricing answer in the FAQ all read from here, so a price or
- * scope change is one edit.
+ * What Scryptic sells: two fixed-price MVP packages. The home page's pricing
+ * cards, their Service JSON-LD and the pricing answers in the FAQ all read
+ * from here, so a price or scope change is one edit.
  */
 
 export type ServiceOffer = {
@@ -12,41 +12,49 @@ export type ServiceOffer = {
   serviceType: string
   /** Where the service is offered, as a country name. Structured data only. */
   areaServed: string
+  /** Shown under the name, e.g. "2 week development sprint". */
+  sprint: string
   /** Shown large on the card. */
   price: string
-  /** Lowest price in `currency`, for structured data. Omit when unpublished. */
-  minPrice?: number
-  /** Typical time from kickoff to launch. */
-  timeline: string
-  summary: string
+  /** The same price as a number in `currency`, for structured data. */
+  amount: number
   includes: string[]
-  bestFor: string
-  cta: string
 }
 
 export const currency = "GBP"
 
-export const service = {
-  id: "app-to-market",
-  name: "Full app to market",
-  serviceType: "MVP and app development",
+const shared = {
+  serviceType: "MVP development",
   areaServed: "United Kingdom",
-  price: "From £10,000",
-  minPrice: 10000,
-  timeline: "1 to 2 months from kickoff to launch",
-  summary:
-    "A production app priced on its complexity, with the code and every account in your name, so nothing is locked to us.",
-  includes: [
-    "Discovery call to map your goals, users and constraints",
-    "Prioritised scope, recommended stack, a written estimate and a timeline",
-    "Product design and a clickable prototype",
-    "Full-stack build: web app, API and database",
-    "Authentication, payments and third-party integrations",
-    "A catch-up every Friday on progress, priorities and what is next",
-    "Hosting, analytics and search set up for launch",
-    "Launch support and a clean handover",
-  ],
-  bestFor:
-    "Founders and small teams who need a real product in front of customers, whether starting from an idea or an existing app.",
-  cta: "Book a discovery call",
-} satisfies ServiceOffer
+}
+
+export const services = [
+  {
+    ...shared,
+    id: "initial-mvp",
+    name: "Initial MVP",
+    sprint: "2 week development sprint",
+    price: "£10,000",
+    amount: 10000,
+    includes: [
+      "A fully built MVP, ready to take to market",
+      "1 week of development by our team",
+      "1 week of iteration based on your feedback",
+      "1 week of handover after launch: bug fixes and a smooth rollout",
+    ],
+  },
+  {
+    ...shared,
+    id: "extended-mvp",
+    name: "Extended MVP",
+    sprint: "3 week development sprint",
+    price: "£20,000",
+    amount: 20000,
+    includes: [
+      "A fully built MVP, ready to take to market",
+      "2 weeks of development by our team",
+      "1 week of iteration based on your feedback",
+      "1 week of handover after launch: bug fixes and a smooth rollout",
+    ],
+  },
+] satisfies ServiceOffer[]
