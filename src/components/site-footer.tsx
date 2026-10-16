@@ -9,7 +9,7 @@ import { caseStudies } from "@/lib/work"
 
 // The home page's sections, in the order they appear on it.
 const homeLinks = [
-  { name: "Services", href: "/#services" },
+  { name: "Pricing", href: "/#pricing" },
   { name: "Process", href: "/#process" },
   { name: "Our work", href: "/#work" },
   { name: `Why ${siteConfig.name}`, href: "/#compare" },
