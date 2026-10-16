@@ -24,46 +24,64 @@ export const metadata = createMetadata({
   title: `${siteConfig.name} | MVP and app development studio`,
 })
 
-// The process timetable: the preferred package's 2 week sprint and the week of
-// handover after it. `start` and `weeks` place each step's bar on the week grid.
-const timetablePackage = services.find((s) => s.preferred) ?? services[0]
-const timetableWeeks = 3
+// The process calendar: an example schedule for the preferred package, one row
+// per week, from the two calls through the sprint to the week of support.
+// `day` (1 is Monday) and `span` place each event on the Monday to Friday grid.
+const calendarPackage = services.find((s) => s.preferred) ?? services[0]
+const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"]
 
-const steps = [
-  {
-    name: "Develop",
-    text: "Our team builds your MVP to the agreed scope.",
-    bar: "Build",
-    tone: "build",
-    start: 1,
-    weeks: 1,
-  },
-  {
-    name: "Iterate",
-    text: "We refine it on your feedback, then launch.",
-    bar: "Iteration",
-    tone: "iterate",
-    start: 2,
-    weeks: 1,
-  },
-  {
-    name: "Handover",
-    text: "Live, with bug fixes and a smooth rollout.",
-    bar: "Handover",
-    tone: "live",
-    start: 3,
-    weeks: 1,
-  },
-] as const
+const calendarTones = {
+  call: "border border-border bg-background text-foreground",
+  build: "bg-primary text-primary-foreground",
+  iterate: "bg-primary/15 text-primary dark:bg-primary/30 dark:text-foreground",
+  demo: "border border-primary bg-card text-primary dark:text-foreground",
+  handover: "bg-chart-2 text-[#14131b]",
+  support: "bg-chart-2/15 text-foreground",
+}
 
-// Bar and Friday-diamond colours for each kind of timetable step.
-const stepTones = {
-  build: { bar: "bg-primary text-primary-foreground", mark: "bg-primary-foreground/80" },
-  iterate: {
-    bar: "bg-primary/15 text-primary dark:bg-primary/30 dark:text-foreground",
-    mark: "bg-primary dark:bg-foreground/80",
+const calendar: {
+  week: string
+  note: string
+  events: { label: string; day: number; span: number; tone: keyof typeof calendarTones }[]
+}[] = [
+  {
+    week: "Before",
+    note: "Booked around you",
+    events: [
+      { label: "Initial call", day: 1, span: 1, tone: "call" },
+      { label: "Discovery call", day: 3, span: 1, tone: "call" },
+      { label: "Scope and price agreed", day: 4, span: 2, tone: "call" },
+    ],
   },
-  live: { bar: "bg-chart-2 text-[#14131b]", mark: "bg-[#14131b]/70" },
+  {
+    week: "Week 1",
+    note: "Development",
+    events: [
+      { label: "Development begins", day: 1, span: 4, tone: "build" },
+      { label: "Demo", day: 5, span: 1, tone: "demo" },
+    ],
+  },
+  {
+    week: "Week 2",
+    note: "Iteration",
+    events: [
+      { label: "Iteration and refinement", day: 1, span: 4, tone: "iterate" },
+      { label: "Demo + launch", day: 5, span: 1, tone: "demo" },
+    ],
+  },
+  {
+    week: "Week 3",
+    note: "Live",
+    events: [
+      { label: "Full handover", day: 1, span: 1, tone: "handover" },
+      { label: "1 week of support", day: 2, span: 4, tone: "support" },
+    ],
+  },
+]
+
+// "Mon" or "Mon to Thu", shown on phones where the day columns are dropped.
+function dayRange(day: number, span: number) {
+  return span > 1 ? `${weekdays[day - 1]} to ${weekdays[day + span - 2]}` : weekdays[day - 1]
 }
 
 // The comparison table. `scryptic` is always true, so it is drawn from the
@@ -407,96 +425,70 @@ export default function Home() {
         className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Process" title={`How the ${timetablePackage.name} sprint runs`} id="process-heading">
-            The timeline below shows the {timetablePackage.name} package: a{" "}
-            {timetablePackage.sprint}, then a week of handover once your app is live. One team
-            throughout, with a catch-up every Friday.
+          <SectionHeading eyebrow="Process" title="From first call to launch" id="process-heading">
+            Two calls, a {calendarPackage.sprint}, then handover and a week of support, with a demo
+            every Friday.
           </SectionHeading>
-          {/* Phones stack each step's text above its bar; wider screens put it in a first column. */}
+          {/* One row per week on a Monday to Friday grid, Friday shaded as demo day. Phones drop
+              the day columns and list each week's events with their days. */}
           <div className="overflow-hidden rounded-2xl border border-border bg-card">
-            <div className="grid grid-cols-3 sm:grid-cols-[minmax(11rem,2.2fr)_repeat(3,minmax(0,1fr))]">
-              {/* Two header rows: the phases the weeks fall into, then the weeks themselves. */}
-              <div
-                aria-hidden="true"
-                className="col-span-full grid grid-cols-subgrid border-b border-border font-mono text-xs uppercase"
-              >
-                <span className="hidden px-6 py-4 text-muted-foreground sm:block">Phase</span>
-                <span className="col-span-2 flex items-center justify-center gap-3 bg-primary/10 px-3 py-4 text-center text-primary sm:border-l sm:border-border dark:text-foreground">
-                  {timetablePackage.sprint}
+            <div
+              aria-hidden="true"
+              className="hidden grid-cols-[7.5rem_repeat(5,minmax(0,1fr))] border-b border-border font-mono text-xs text-muted-foreground uppercase sm:grid"
+            >
+              <span className="px-5 py-4">Week</span>
+              {weekdays.map((day) => (
+                <span
+                  key={day}
+                  className={cn(
+                    "flex items-center justify-center gap-2 border-l border-border py-4",
+                    day === "Fri" && "bg-primary/5 text-primary dark:text-foreground",
+                  )}
+                >
+                  {day === "Fri" && <span className="size-1.5 rotate-45 bg-primary" />}
+                  {day}
                 </span>
-                <span className="flex items-center justify-center bg-chart-2/15 px-3 py-4 text-center text-foreground sm:border-l sm:border-border">
-                  Live + handover
-                </span>
-              </div>
-              <div
-                aria-hidden="true"
-                className="col-span-full grid grid-cols-subgrid border-b border-border font-mono text-xs text-muted-foreground uppercase"
-              >
-                <span className="hidden px-6 py-4 sm:block">Step</span>
-                {Array.from({ length: timetableWeeks }, (_, week) => (
-                  <span key={week} className="py-4 text-center sm:border-l sm:border-border">
-                    Week {week + 1}
-                  </span>
-                ))}
-              </div>
-              <ol data-reveal="children" className="col-span-full grid grid-cols-subgrid">
-                {steps.map((step, index) => (
-                  <li
-                    key={step.name}
-                    className="col-span-full grid grid-cols-subgrid border-b border-border last:border-b-0"
-                  >
-                    <div className="col-span-full flex flex-col gap-1 px-4 pt-5 sm:col-span-1 sm:px-6 sm:py-5">
-                      <h3 className="flex items-baseline gap-3 text-lg">
-                        <span className="font-mono text-sm text-primary">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        {step.name}
-                      </h3>
-                      <p className="text-sm text-pretty text-muted-foreground">{step.text}</p>
-                    </div>
-                    <div className="relative col-span-3 grid grid-cols-subgrid py-4 sm:py-5">
-                      {Array.from({ length: timetableWeeks }, (_, week) => (
-                        <span
-                          key={week}
-                          aria-hidden="true"
-                          className="absolute inset-y-0 hidden border-l border-border sm:block"
-                          style={{ left: `${(week / timetableWeeks) * 100}%` }}
-                        />
-                      ))}
-                      <p
-                        className={cn(
-                          "reveal-wipe relative mx-1 flex h-9 items-center gap-2 overflow-hidden rounded-lg px-3 font-mono text-xs whitespace-nowrap sm:mx-2",
-                          stepTones[step.tone].bar,
-                        )}
-                        style={{ gridColumn: `${step.start} / span ${step.weeks}` }}
-                      >
-                        <span className="sr-only">
-                          {step.weeks > 1
-                            ? `Weeks ${step.start} to ${step.start + step.weeks - 1}: `
-                            : `Week ${step.start}: `}
-                        </span>
-                        <span className="truncate">{step.bar}</span>
-                        {/* Each week closes with the Friday catch-up. */}
-                        <span aria-hidden="true" className="ml-auto flex shrink-0 gap-[clamp(0.5rem,2vw,1.4rem)]">
-                          {Array.from({ length: step.weeks }, (_, week) => (
-                            <span key={week} className={cn("size-1.5 rotate-45", stepTones[step.tone].mark)} />
-                          ))}
-                        </span>
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+              ))}
             </div>
-            <p className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border px-4 py-4 font-mono text-xs text-muted-foreground sm:px-6">
-              <span className="flex items-center gap-2">
-                <span aria-hidden="true" className="size-1.5 rotate-45 bg-primary" />
-                Friday catch-up
-              </span>
-              <span>
-                Showing the {timetablePackage.name} package. The Extended MVP adds a second week of
-                development before iteration.
-              </span>
+            <ol data-reveal="children">
+              {calendar.map((week) => (
+                <li
+                  key={week.week}
+                  className="grid gap-2 border-b border-border p-4 last:border-b-0 sm:grid-cols-[7.5rem_repeat(5,minmax(0,1fr))] sm:gap-0 sm:p-0"
+                >
+                  <div className="flex items-baseline gap-3 sm:flex-col sm:gap-0.5 sm:px-5 sm:py-5 sm:[grid-area:1/1]">
+                    <h3 className="text-base">{week.week}</h3>
+                    <p className="font-mono text-xs text-muted-foreground">{week.note}</p>
+                  </div>
+                  {weekdays.map((day, index) => (
+                    <span
+                      key={day}
+                      aria-hidden="true"
+                      className={cn("hidden border-l border-border sm:block", day === "Fri" && "bg-primary/5")}
+                      style={{ gridArea: `1 / ${index + 2}` }}
+                    />
+                  ))}
+                  {week.events.map((event) => (
+                    <p
+                      key={event.label}
+                      className={cn(
+                        "reveal-wipe flex items-center gap-2 self-center rounded-lg px-3 py-2 text-sm sm:mx-1.5 sm:[grid-area:var(--area)]",
+                        calendarTones[event.tone],
+                      )}
+                      style={{ "--area": `1 / ${event.day + 1} / 2 / span ${event.span}` } as React.CSSProperties}
+                    >
+                      <span className="font-mono text-xs opacity-70 sm:sr-only">
+                        {dayRange(event.day, event.span)}
+                      </span>
+                      <span className="truncate">{event.label}</span>
+                    </p>
+                  ))}
+                </li>
+              ))}
+            </ol>
+            <p className="border-t border-border px-5 py-4 font-mono text-xs text-muted-foreground">
+              An example schedule for the {calendarPackage.name}. The Extended MVP adds a second
+              week of development.
             </p>
           </div>
         </div>

@@ -43,7 +43,7 @@ const home = {
   title: siteConfig.name,
   description: siteConfig.description,
   // The last real change to the home page copy. Bump it when the copy changes.
-  lastModified: "2026-10-14",
+  lastModified: "2026-10-16",
   changeFrequency: "weekly",
   priority: 1,
 } satisfies PageEntry

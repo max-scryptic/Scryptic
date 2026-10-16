@@ -196,7 +196,7 @@
   [data-reveal-state="play"][data-reveal="zoom"] {
     animation-name: zoom-in;
   }
-  /* Inside a played reveal: timetable bars wipe in from the left, after their row. */
+  /* Inside a played reveal: process calendar bars wipe in from the left, after their row. */
   [data-reveal-state="play"] .reveal-wipe {
     animation: wipe 0.9s var(--ease-out) backwards;
     animation-delay: calc(250ms + var(--i, 0) * 150ms);
