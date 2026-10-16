@@ -9,7 +9,7 @@ import { SocialLinks } from "@/components/social-links"
 import { Button } from "@/components/ui/button"
 import { VoxelField } from "@/components/voxel-field"
 import { createMetadata, pages } from "@/lib/seo"
-import { service } from "@/lib/services"
+import { services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { stack } from "@/lib/stack"
 import { founder } from "@/lib/team"
@@ -24,40 +24,47 @@ export const metadata = createMetadata({
   title: `${siteConfig.name} | MVP and app development studio`,
 })
 
-// The process timetable: a typical eight week build. `start` and `weeks` place
-// each step's bar on the week grid.
-const timetableWeeks = 8
+// The process timetable: the preferred package's 2 week sprint and the week of
+// handover after it. `start` and `weeks` place each step's bar on the week grid.
+const timetablePackage = services.find((s) => s.preferred) ?? services[0]
+const timetableWeeks = 3
 
 const steps = [
   {
-    name: "Discover",
-    text: "A call on your goals, users and what exists.",
-    bar: "Call",
+    name: "Develop",
+    text: "Our team builds your MVP to the agreed scope.",
+    bar: "Build",
+    tone: "build",
     start: 1,
     weeks: 1,
   },
   {
-    name: "Plan",
-    text: "Scope, stack, a written estimate and a timeline.",
-    bar: "Estimate",
+    name: "Iterate",
+    text: "We refine it on your feedback, then launch.",
+    bar: "Iteration",
+    tone: "iterate",
     start: 2,
     weeks: 1,
   },
   {
-    name: "Build",
-    text: "Design and code together, reviewed every Friday.",
-    bar: "Build",
+    name: "Handover",
+    text: "Live, with bug fixes and a smooth rollout.",
+    bar: "Handover",
+    tone: "live",
     start: 3,
-    weeks: 5,
-  },
-  {
-    name: "Launch",
-    text: "Deploy, set up analytics, launch and hand over.",
-    bar: "Live",
-    start: 8,
     weeks: 1,
   },
-]
+] as const
+
+// Bar and Friday-diamond colours for each kind of timetable step.
+const stepTones = {
+  build: { bar: "bg-primary text-primary-foreground", mark: "bg-primary-foreground/80" },
+  iterate: {
+    bar: "bg-primary/15 text-primary dark:bg-primary/30 dark:text-foreground",
+    mark: "bg-primary dark:bg-foreground/80",
+  },
+  live: { bar: "bg-chart-2 text-[#14131b]", mark: "bg-[#14131b]/70" },
+}
 
 // The comparison table. `scryptic` is always true, so it is drawn from the
 // column rather than stored per row.
@@ -70,7 +77,7 @@ const comparison: {
 }[] = [
   {
     name: "Speed",
-    text: "Live in 1 to 2 months, not after a hiring round",
+    text: "Launched after a 2 or 3 week sprint, not a hiring round",
     values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
   },
   {
@@ -90,7 +97,7 @@ const comparison: {
   },
   {
     name: "Cost vs value",
-    text: "A fixed estimate for a launched product",
+    text: "A fixed price for a launched product",
     values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
   },
 ]
@@ -99,17 +106,17 @@ const comparison: {
 const faqs = [
   {
     question: "How much does it cost to build an app with Scryptic?",
-    answer: `A full app to market build starts ${service.price.toLowerCase()}. The final price depends on complexity: the number of screens and user roles, the integrations involved and how much already exists. After the discovery call you get a written estimate and timeline, so the price is agreed before any build starts.`,
+    answer: `There are two fixed prices, both plus VAT. ${services.map((s) => `The ${s.name} is ${s.price}, a ${s.sprint}`).join(". ")}. Both end with a week of handover after launch for bug fixes and a smooth rollout. The discovery call settles which one fits, so the price is agreed before any build starts.`,
   },
   {
     question: "How long does it take to build an app?",
     answer:
-      "Most full app to market builds take one to two months from kickoff to launch, and a typical build runs about eight weeks. A focused first release sits at the shorter end; more user roles, integrations or an existing codebase to work around push it towards two months. Your timeline comes with the written estimate, so you know the launch window before the build starts.",
+      "The MVP is a 2 week development sprint: one week of development and one of iteration on your feedback, then launch. The Extended MVP adds a second week of development, so it runs for three weeks. Both are followed by a week of handover after launch for bug fixes and a smooth rollout. The sprint starts once the scope is agreed after the discovery call.",
   },
   {
-    question: "What is included in a full app to market build?",
+    question: "What is included in an MVP package?",
     answer:
-      "Everything from the first call to launch day, delivered by one team: scoping and a written estimate, product design and a clickable prototype, the full-stack build, authentication, payments and integrations, hosting, analytics and search, launch support and a clean handover.",
+      "A fully built MVP, ready to take to market. The MVP has one week of development by our team and one week of iteration on your feedback; the Extended MVP has two weeks of development and one of iteration. Both finish with a week of handover after launch for bug fixes and a smooth rollout.",
   },
   {
     question: "What kind of apps do you build?",
@@ -133,7 +140,7 @@ const faqs = [
   {
     question: "Can you work on an existing app or codebase?",
     answer:
-      "Yes. We review existing code, infrastructure and prototypes during discovery. Often the best plan is to build on what you have rather than start again, and the estimate says which parts we would keep, fix or replace.",
+      "Yes. We review existing code, infrastructure and prototypes during discovery. Often the best plan is to build on what you have rather than start again, and the agreed scope says which parts we would keep, fix or replace.",
   },
   {
     question: "Who owns the code once the app is built?",
@@ -143,7 +150,7 @@ const faqs = [
   {
     question: "How is Scryptic different from an agency, a freelancer or an in-house hire?",
     answer:
-      "You get agency-quality software at freelancer speed, with code you own outright. Hiring in-house means a recruitment round before any work starts, agencies tend to be slower and fix the plan up front, freelancers vary in quality, and AI-only tools rarely hold up with real users. With Scryptic you get a launched product in one to two months, a fixed estimate and priorities revisited every week.",
+      "You get agency-quality software at freelancer speed, with code you own outright. Hiring in-house means a recruitment round before any work starts, agencies tend to be slower and fix the plan up front, freelancers vary in quality, and AI-only tools rarely hold up with real users. With Scryptic you get a launched product after a 2 or 3 week sprint, a fixed price and priorities revisited every week.",
   },
   {
     question: "How do you keep me updated during the build?",
@@ -157,7 +164,7 @@ const faqs = [
   {
     question: "What happens on the discovery call?",
     answer:
-      "It is a free 30 minute call about your idea or product, who it is for and where it is stuck. You get straight advice on scope, stack, rough cost and timeline, including what is not worth building yet. If it makes sense to work together, a written estimate and timeline follow before anything starts.",
+      "It is a free 30 minute call about your idea or product, who it is for and where it is stuck. You get straight advice on scope, stack and which package fits, including what is not worth building yet. If it makes sense to work together, the scope and price are agreed before the sprint starts.",
   },
 ]
 
@@ -165,10 +172,10 @@ const terminalLines = [
   { prompt: true, text: "scryptic discover" },
   { prompt: false, text: "goals, users and constraints mapped" },
   { prompt: false, text: "stack and architecture chosen" },
-  { prompt: false, text: "first release scoped and estimated" },
+  { prompt: false, text: "first release scoped and priced" },
   { prompt: true, text: "scryptic ship --to market" },
   { prompt: false, text: "progress reviewed every Friday" },
-  { prompt: false, text: "launched in 1 to 2 months" },
+  { prompt: false, text: "launched in a 2 week sprint" },
 ]
 
 function SectionHeading({
@@ -206,34 +213,6 @@ function CheckIcon() {
       aria-hidden="true"
     >
       <path d="M20 6 9 17l-5-5" />
-    </svg>
-  )
-}
-
-/* The service card's detail icons: a clock for the timeline, people for who it suits. */
-function DetailIcon({ kind }: { kind: "clock" | "people" }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="size-4"
-      aria-hidden="true"
-    >
-      {kind === "clock" ? (
-        <>
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v5l3 2" />
-        </>
-      ) : (
-        <>
-          <circle cx="9" cy="8" r="3.5" />
-          <path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6" />
-        </>
-      )}
     </svg>
   )
 }
@@ -277,16 +256,13 @@ function ComparisonMark({ value, highlight = false }: { value: boolean; highligh
   )
 }
 
-// "From £10,000" shows its qualifier small beside the figure.
-const [, pricePrefix, priceAmount] = /^(?:(From)\s+)?(.*)$/.exec(service.price)!
-
 export default function Home() {
   return (
     <main className="flex flex-col">
       <PageJsonLd
         page={pages.home}
         nodes={[
-          serviceJsonLd(pages.home, service),
+          ...services.map((service) => serviceJsonLd(pages.home, service)),
           faqJsonLd(pages.home, faqs),
         ]}
       />
@@ -307,7 +283,7 @@ export default function Home() {
             </h1>
             <p className="max-w-xl text-lg text-pretty text-white/80">
               {siteConfig.name} is an MVP and app development studio in Brighton, building web apps
-              and SaaS products for UK founders in one to two months.
+              and SaaS products for UK founders, with an MVP launched in a 2 week sprint.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
@@ -365,77 +341,63 @@ export default function Home() {
         className="scroll-mt-28 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Service" title="One service: your app, all the way to market" id="services-heading">
-            Whether it is an MVP to test the market or a SaaS product ready for paying customers,
-            we plan, design, build, deploy and launch it as one engagement.
+          <SectionHeading eyebrow="Pricing" title="A fully built MVP, ready to take to market" id="services-heading">
+            Two fixed-price sprints, agreed before the build starts. Pick the one that fits your
+            scope; both end with a week of handover after launch.
           </SectionHeading>
 
-          {/* The card holds the offer; what it includes sits beside it on the section background. */}
-          <article
-            id={service.id}
-            aria-labelledby={`${service.id}-name`}
-            className="grid scroll-mt-28 items-center gap-12 lg:grid-cols-2 lg:gap-16"
-          >
-            {/* A thin Lapis rule tops the card; the price leads, then the details and the call. */}
-            <div
-              data-reveal
-              className="relative flex flex-col gap-8 overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
-            >
-              <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-primary" />
-              <div className="flex flex-col gap-5">
-                <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
-                  {service.name}
-                </h3>
-                <p className="flex items-baseline gap-2">
-                  {pricePrefix && <span className="text-lg text-muted-foreground">{pricePrefix}</span>}
-                  <span className="text-5xl font-semibold tracking-tight">{priceAmount}</span>
-                </p>
-              </div>
-              <p className="text-pretty text-muted-foreground">{service.summary}</p>
-              <dl className="flex flex-col gap-4 border-t border-border pt-6">
-                {(
-                  [
-                    { icon: "clock", label: "Timeline", value: service.timeline },
-                    { icon: "people", label: "Best for", value: service.bestFor },
-                  ] as const
-                ).map((detail) => (
-                  <div key={detail.label} className="flex gap-4">
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                      <DetailIcon kind={detail.icon} />
-                    </span>
-                    <div className="flex flex-col gap-0.5 text-sm">
-                      <dt className="font-medium">{detail.label}</dt>
-                      <dd className="text-pretty text-muted-foreground">{detail.value}</dd>
-                    </div>
-                  </div>
-                ))}
-              </dl>
-              <Button
-                size="lg"
-                nativeButton={false}
-                render={<Link href={pages.bookCall.path} />}
-                className="h-12 w-full rounded-full text-base"
+          {/* One card per package: name and sprint, the price, what is included, then the call.
+              The preferred package gets a Lapis border and a tag sitting on its top edge. */}
+          <div data-reveal="children" className="grid gap-6 pt-4 md:grid-cols-2">
+            {services.map((service) => (
+              <article
+                key={service.id}
+                id={service.id}
+                aria-labelledby={`${service.id}-name`}
+                className={cn(
+                  "relative flex scroll-mt-28 flex-col gap-8 rounded-2xl bg-card p-6 sm:p-8 lg:p-10",
+                  service.preferred
+                    ? "border-2 border-primary shadow-xl shadow-primary/15"
+                    : "border border-border shadow-xl shadow-black/5",
+                )}
               >
-                {service.cta}
-              </Button>
-            </div>
-            <div className="flex flex-col gap-6">
-              <div data-reveal className="flex flex-col gap-2">
-                <h4 className="text-xl tracking-tight">What is included</h4>
-                <p className="text-pretty text-muted-foreground">
-                  Everything from the first call to launch day, delivered by one team.
+                {service.preferred && (
+                  <p className="absolute -top-3.5 right-6 rounded-full bg-primary px-4 py-1 font-mono text-xs tracking-widest text-primary-foreground uppercase sm:right-10">
+                    Preferred
+                  </p>
+                )}
+                <div className="flex flex-col gap-1">
+                  <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
+                    {service.name}
+                  </h3>
+                  <p className="text-muted-foreground">{service.sprint}</p>
+                </div>
+                <p className="flex items-baseline gap-2">
+                  <span className="text-5xl font-semibold tracking-tight">{service.price}</span>
+                  <span className="text-lg text-muted-foreground">+ VAT</span>
                 </p>
-              </div>
-              <ul data-reveal="children" className="flex flex-col gap-4">
-                {service.includes.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <CheckIcon />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </article>
+                <div className="flex flex-col gap-4">
+                  <h4 className="font-medium">What is included</h4>
+                  <ul className="flex flex-col gap-3 text-pretty">
+                    {service.includes.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <CheckIcon />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Button
+                  size="lg"
+                  nativeButton={false}
+                  render={<Link href={pages.bookCall.path} />}
+                  className="mt-auto h-12 w-full rounded-full text-base"
+                >
+                  Book a discovery call
+                </Button>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -446,13 +408,27 @@ export default function Home() {
         className="scroll-mt-28 border-t border-border px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Process" title="How a project runs" id="process-heading">
-            Most projects go from first call to launch in one to two months, in four steps with one
-            team throughout and a catch-up every Friday.
+          <SectionHeading eyebrow="Process" title={`How the ${timetablePackage.name} sprint runs`} id="process-heading">
+            The timeline below shows the {timetablePackage.name} package: a{" "}
+            {timetablePackage.sprint}, then a week of handover once your app is live. One team
+            throughout, with a catch-up every Friday.
           </SectionHeading>
           {/* Phones stack each step's text above its bar; wider screens put it in a first column. */}
           <div className="overflow-hidden rounded-2xl border border-border bg-card">
-            <div className="grid grid-cols-8 sm:grid-cols-[minmax(11rem,2.2fr)_repeat(8,minmax(0,1fr))]">
+            <div className="grid grid-cols-3 sm:grid-cols-[minmax(11rem,2.2fr)_repeat(3,minmax(0,1fr))]">
+              {/* Two header rows: the phases the weeks fall into, then the weeks themselves. */}
+              <div
+                aria-hidden="true"
+                className="col-span-full grid grid-cols-subgrid border-b border-border font-mono text-xs uppercase"
+              >
+                <span className="hidden px-6 py-4 text-muted-foreground sm:block">Phase</span>
+                <span className="col-span-2 flex items-center justify-center gap-3 bg-primary/10 px-3 py-4 text-center text-primary sm:border-l sm:border-border dark:text-foreground">
+                  {timetablePackage.sprint}
+                </span>
+                <span className="flex items-center justify-center bg-chart-2/15 px-3 py-4 text-center text-foreground sm:border-l sm:border-border">
+                  Live + handover
+                </span>
+              </div>
               <div
                 aria-hidden="true"
                 className="col-span-full grid grid-cols-subgrid border-b border-border font-mono text-xs text-muted-foreground uppercase"
@@ -460,7 +436,7 @@ export default function Home() {
                 <span className="hidden px-6 py-4 sm:block">Step</span>
                 {Array.from({ length: timetableWeeks }, (_, week) => (
                   <span key={week} className="py-4 text-center sm:border-l sm:border-border">
-                    W{week + 1}
+                    Week {week + 1}
                   </span>
                 ))}
               </div>
@@ -479,7 +455,7 @@ export default function Home() {
                       </h3>
                       <p className="text-sm text-pretty text-muted-foreground">{step.text}</p>
                     </div>
-                    <div className="relative col-span-8 grid grid-cols-subgrid py-4 sm:py-5">
+                    <div className="relative col-span-3 grid grid-cols-subgrid py-4 sm:py-5">
                       {Array.from({ length: timetableWeeks }, (_, week) => (
                         <span
                           key={week}
@@ -491,11 +467,7 @@ export default function Home() {
                       <p
                         className={cn(
                           "reveal-wipe relative mx-1 flex h-9 items-center gap-2 overflow-hidden rounded-lg px-3 font-mono text-xs whitespace-nowrap sm:mx-2",
-                          step.bar === "Live"
-                            ? "bg-chart-2 text-[#14131b]"
-                            : step.bar === "Build"
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-primary/15 text-primary dark:bg-primary/30 dark:text-foreground",
+                          stepTones[step.tone].bar,
                         )}
                         style={{ gridColumn: `${step.start} / span ${step.weeks}` }}
                       >
@@ -504,17 +476,13 @@ export default function Home() {
                             ? `Weeks ${step.start} to ${step.start + step.weeks - 1}: `
                             : `Week ${step.start}: `}
                         </span>
-                        {/* A one week bar is too narrow for its label below lg; the step name sits beside it. */}
-                        <span className={cn("truncate", step.weeks === 1 && "max-lg:sr-only")}>
-                          {step.bar}
+                        <span className="truncate">{step.bar}</span>
+                        {/* Each week closes with the Friday catch-up. */}
+                        <span aria-hidden="true" className="ml-auto flex shrink-0 gap-[clamp(0.5rem,2vw,1.4rem)]">
+                          {Array.from({ length: step.weeks }, (_, week) => (
+                            <span key={week} className={cn("size-1.5 rotate-45", stepTones[step.tone].mark)} />
+                          ))}
                         </span>
-                        {step.bar === "Build" && (
-                          <span aria-hidden="true" className="ml-auto flex gap-[clamp(0.5rem,2vw,1.4rem)]">
-                            {Array.from({ length: step.weeks }, (_, week) => (
-                              <span key={week} className="size-1.5 rotate-45 bg-primary-foreground/80" />
-                            ))}
-                          </span>
-                        )}
                       </p>
                     </div>
                   </li>
@@ -526,7 +494,10 @@ export default function Home() {
                 <span aria-hidden="true" className="size-1.5 rotate-45 bg-primary" />
                 Friday catch-up
               </span>
-              <span>A typical eight week build. Smaller first releases land sooner.</span>
+              <span>
+                Showing the {timetablePackage.name} package. The Extended MVP adds a second week of
+                development before iteration.
+              </span>
             </p>
           </div>
         </div>

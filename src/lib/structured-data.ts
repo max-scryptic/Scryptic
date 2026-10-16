@@ -177,21 +177,23 @@ export function serviceJsonLd(page: PageEntry, service: ServiceOffer): Service {
     "@id": url,
     name: service.name,
     serviceType: service.serviceType,
-    description: service.summary,
+    // Built from what the card shows, so the markup never says more than the page.
+    description: `${service.sprint}. ${service.includes.join(". ")}.`,
     url,
     provider: { "@id": ids.organization },
     areaServed: { "@type": "Country", name: service.areaServed },
     offers: {
       "@type": "Offer",
       url,
+      price: service.amount,
       priceCurrency: currency,
-      ...optional(service.minPrice, {
-        priceSpecification: {
-          "@type": "PriceSpecification",
-          minPrice: service.minPrice,
-          priceCurrency: currency,
-        },
-      }),
+      // Prices are shown and charged plus VAT.
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        price: service.amount,
+        priceCurrency: currency,
+        valueAddedTaxIncluded: false,
+      },
     },
   }
 }

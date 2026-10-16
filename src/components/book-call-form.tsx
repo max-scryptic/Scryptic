@@ -408,7 +408,7 @@ function QuestionSlide({
       </div>
       {question.name === "budget" && budget === underMinimumBudget && (
         <FieldDescription>
-          Full builds start from £10,000. The call is still worth booking: we can scope a smaller
+          MVP builds start from £10,000 + VAT. The call is still worth booking: we can scope a smaller
           first release, or point you to a better fit.
         </FieldDescription>
       )}

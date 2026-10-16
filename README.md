@@ -1,6 +1,6 @@
 # Scryptic
 
-Marketing site for Scryptic, a development-as-a-service studio. One service: a full app to market build (from £10,000). Next.js 16 with [Base UI](https://base-ui.com) as the UI primitive layer, styled with Tailwind CSS v4.
+Marketing site for Scryptic, a development-as-a-service studio. Two fixed-price MVP packages: MVP (£10,000 + VAT, 2 week sprint) and Extended MVP (£20,000 + VAT, 3 week sprint), both with a week of handover after launch. Next.js 16 with [Base UI](https://base-ui.com) as the UI primitive layer, styled with Tailwind CSS v4.
 
 Brand: light surfaces (`#ffffff`) with ink text (`#0a0a0f`), one green signal colour (`#047857`) and no gradients, Geist and Geist Mono, and an "S_" terminal-cursor mark. Tokens live in `src/app/globals.css`, mirrored in `siteConfig.colors` for the generated images.
 
