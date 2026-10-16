@@ -12,12 +12,12 @@ export const siteConfig = {
   // summary. Aim for one plain sentence of 120 to 160 characters that says what
   // the product is and who it is for: answer engines quote it verbatim.
   description:
-    "Scryptic is a Brighton-based MVP and app development studio that takes UK founders from idea to a launched MVP in a 2 week sprint, from £10,000.",
+    "Scryptic is a Brighton-based MVP and app development studio that takes UK founders from idea to a launched MVP in a 2 week sprint, from £10,000 + VAT.",
   // Short line used in the footer.
   tagline: "Development as a service",
   // Optional longer context for llms.txt. Leave empty to omit.
   summary:
-    "Scryptic builds MVPs ready to take to market, in two fixed-price packages. The MVP is a 2 week development sprint for £10,000: a week of development and a week of iteration on your feedback. The Extended MVP is a 3 week sprint for £20,000 with two weeks of development. Both end with a week of handover after launch for bug fixes and a smooth rollout, with a catch-up every Friday.",
+    "Scryptic builds MVPs ready to take to market, in two fixed-price packages. The MVP is a 2 week development sprint for £10,000 plus VAT: a week of development and a week of iteration on your feedback. The Extended MVP is a 3 week sprint for £20,000 plus VAT with two weeks of development. Both end with a week of handover after launch for bug fixes and a smooth rollout, with a catch-up every Friday.",
   keywords: [
     "MVP development",
     "app development studio",

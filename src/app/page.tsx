@@ -105,7 +105,7 @@ const comparison: {
 const faqs = [
   {
     question: "How much does it cost to build an app with Scryptic?",
-    answer: `There are two fixed prices. ${services.map((s) => `The ${s.name} is ${s.price}, a ${s.sprint}`).join(". ")}. Both end with a week of handover after launch for bug fixes and a smooth rollout. The discovery call settles which one fits, so the price is agreed before any build starts.`,
+    answer: `There are two fixed prices, both plus VAT. ${services.map((s) => `The ${s.name} is ${s.price}, a ${s.sprint}`).join(". ")}. Both end with a week of handover after launch for bug fixes and a smooth rollout. The discovery call settles which one fits, so the price is agreed before any build starts.`,
   },
   {
     question: "How long does it take to build an app?",
@@ -371,7 +371,10 @@ export default function Home() {
                   </h3>
                   <p className="text-muted-foreground">{service.sprint}</p>
                 </div>
-                <p className="text-5xl font-semibold tracking-tight">{service.price}</p>
+                <p className="flex items-baseline gap-2">
+                  <span className="text-5xl font-semibold tracking-tight">{service.price}</span>
+                  <span className="text-lg text-muted-foreground">+ VAT</span>
+                </p>
                 <div className="flex flex-col gap-4">
                   <h4 className="font-medium">What is included</h4>
                   <ul className="flex flex-col gap-3 text-pretty">

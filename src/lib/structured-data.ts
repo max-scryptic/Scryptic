@@ -187,6 +187,13 @@ export function serviceJsonLd(page: PageEntry, service: ServiceOffer): Service {
       url,
       price: service.amount,
       priceCurrency: currency,
+      // Prices are shown and charged plus VAT.
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        price: service.amount,
+        priceCurrency: currency,
+        valueAddedTaxIncluded: false,
+      },
     },
   }
 }
