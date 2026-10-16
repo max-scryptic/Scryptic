@@ -283,7 +283,7 @@ export default function Home() {
             </h1>
             <p className="max-w-xl text-lg text-pretty text-white/80">
               {siteConfig.name} is an MVP and app development studio in Brighton, building web apps
-              and SaaS products for UK founders, with an MVP launched in a 2 week sprint.
+              and SaaS products for UK founders.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
