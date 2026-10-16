@@ -512,24 +512,19 @@ export default function Home() {
               A stack built for a fast, scalable launch
             </h2>
             <p className="text-lg text-pretty text-white/80">
-              We build on Neon or Supabase for the database, Vercel for hosting, Cloudflare for
-              storage, and Tailwind CSS and Node.js for the app itself.
+              Every app we ship runs on a modern, production-grade stack.
             </p>
             <p className="text-pretty text-white/80">
-              Each one is widely used and well documented, and every account sits in your name, so
-              any developer can pick the app up later. Claude Code speeds up the build while a
-              developer reviews every change, which is how a full launch fits into one to two
-              months.
+              These are the tools today&apos;s leading web products are built on, so your app is
+              fast for users from day one and scales as you grow without a rebuild. Every account
+              sits in your name, so any developer can pick the app up later.
             </p>
           </div>
           <ul data-reveal="children" className="grid grid-cols-2 gap-3 sm:gap-4">
-            {stack.map((tool, index) => (
+            {stack.map((tool) => (
               <li
                 key={tool.name}
-                className={cn(
-                  "flex flex-col items-center justify-center gap-4 rounded-2xl bg-white px-4 py-6 text-[#14131b] sm:py-8",
-                  index === stack.length - 1 && "col-span-2",
-                )}
+                className="flex flex-col items-center justify-center gap-4 rounded-2xl bg-white px-4 py-6 text-[#14131b] sm:py-8"
               >
                 {/* Wordmarks get the same area rather than the same height, so a long
                     one does not shrink to a sliver and a tall one does not dwarf the rest. */}
