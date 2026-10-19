@@ -372,90 +372,89 @@ export default function Home() {
         className="scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Pricing" title="A fully built MVP, ready to take to market" id="pricing-heading">
-            Two fixed-price sprints, agreed before the build starts.
-          </SectionHeading>
-
-          <div className="flex flex-col gap-6">
+          {/* The heading, with the limited offer beside it on wide screens. */}
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHeading eyebrow="Pricing" title="A fully built MVP, ready to take to market" id="pricing-heading">
+              Two fixed-price sprints, agreed before the build starts.
+            </SectionHeading>
             {launchOffer && (
               <p
                 data-reveal
-                className="flex flex-wrap items-center gap-x-3 gap-y-1 self-start rounded-2xl border border-primary/30 bg-primary/5 px-5 py-3 text-pretty"
+                className="flex flex-wrap items-center gap-x-3 gap-y-1 self-start rounded-2xl border border-primary/30 bg-primary/5 px-5 py-3 text-pretty lg:self-end"
               >
                 <span className="font-mono text-xs tracking-widest text-primary uppercase">
                   Limited offer
                 </span>
                 <span>
-                  {launchOffer.percentOff}% off {launchOffer.appliesTo}, on either package. Once
-                  they are booked, prices go back to normal.
+                  {launchOffer.percentOff}% off {launchOffer.appliesTo}, on either package.
                 </span>
               </p>
             )}
+          </div>
 
-            {/* One card per package: name and sprint, the price, what is included, then the call.
-                The preferred package gets a Lapis border and a tag sitting on its top edge. */}
-            <div data-reveal="children" className="grid gap-6 pt-4 md:grid-cols-2">
-              {services.map((service) => (
-                <article
-                  key={service.id}
-                  id={service.id}
-                  aria-labelledby={`${service.id}-name`}
-                  className={cn(
-                    "relative flex scroll-mt-28 flex-col gap-8 rounded-2xl bg-card p-6 sm:p-8 lg:p-10",
-                    service.preferred
-                      ? "border-2 border-primary shadow-xl shadow-primary/15"
-                      : "border border-border shadow-xl shadow-black/5",
+          {/* One card per package: name and sprint, the price, what is included, then the call.
+              The preferred package gets a Lapis border and a tag sitting on its top edge. */}
+          <div data-reveal="children" className="grid gap-6 pt-4 md:grid-cols-2">
+            {services.map((service) => (
+              <article
+                key={service.id}
+                id={service.id}
+                aria-labelledby={`${service.id}-name`}
+                className={cn(
+                  "relative flex scroll-mt-28 flex-col gap-8 rounded-2xl bg-card p-6 sm:p-8 lg:p-10",
+                  service.preferred
+                    ? "border-2 border-primary shadow-xl shadow-primary/15"
+                    : "border border-border shadow-xl shadow-black/5",
+                )}
+              >
+                {service.preferred && (
+                  <p className="absolute -top-3.5 right-6 rounded-full bg-primary px-4 py-1 font-mono text-xs tracking-widest text-primary-foreground uppercase sm:right-10">
+                    Preferred
+                  </p>
+                )}
+                <div className="flex flex-col gap-1">
+                  <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
+                    {service.name}
+                  </h3>
+                  <p className="text-muted-foreground">{service.sprint}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  {launchOffer && (
+                    <p className="flex items-center gap-3 text-lg text-muted-foreground">
+                      <span className="sr-only">Usually</span>
+                      <s>{service.price}</s>
+                      <span className="rounded-full bg-primary/10 px-2.5 py-0.5 font-mono text-xs tracking-widest text-primary uppercase dark:bg-primary/30 dark:text-foreground">
+                        {launchOffer.percentOff}% off
+                      </span>
+                    </p>
                   )}
+                  <p className="flex items-baseline gap-2">
+                    {launchOffer && <span className="sr-only">Now</span>}
+                    <span className="text-5xl font-semibold tracking-tight">{offerPrice(service)}</span>
+                    <span className="text-lg text-muted-foreground">+ VAT</span>
+                  </p>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h4 className="font-medium">What is included</h4>
+                  <ul className="flex flex-col gap-3 text-pretty">
+                    {service.includes.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <CheckIcon />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Button
+                  size="lg"
+                  nativeButton={false}
+                  render={<Link href={pages.bookCall.path} />}
+                  className="mt-auto h-12 w-full rounded-full text-base"
                 >
-                  {service.preferred && (
-                    <p className="absolute -top-3.5 right-6 rounded-full bg-primary px-4 py-1 font-mono text-xs tracking-widest text-primary-foreground uppercase sm:right-10">
-                      Preferred
-                    </p>
-                  )}
-                  <div className="flex flex-col gap-1">
-                    <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
-                      {service.name}
-                    </h3>
-                    <p className="text-muted-foreground">{service.sprint}</p>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    {launchOffer && (
-                      <p className="flex items-center gap-3 text-lg text-muted-foreground">
-                        <span className="sr-only">Usually</span>
-                        <s>{service.price}</s>
-                        <span className="rounded-full bg-primary/10 px-2.5 py-0.5 font-mono text-xs tracking-widest text-primary uppercase dark:bg-primary/30 dark:text-foreground">
-                          {launchOffer.percentOff}% off
-                        </span>
-                      </p>
-                    )}
-                    <p className="flex items-baseline gap-2">
-                      {launchOffer && <span className="sr-only">Now</span>}
-                      <span className="text-5xl font-semibold tracking-tight">{offerPrice(service)}</span>
-                      <span className="text-lg text-muted-foreground">+ VAT</span>
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-4">
-                    <h4 className="font-medium">What is included</h4>
-                    <ul className="flex flex-col gap-3 text-pretty">
-                      {service.includes.map((item) => (
-                        <li key={item} className="flex gap-3">
-                          <CheckIcon />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <Button
-                    size="lg"
-                    nativeButton={false}
-                    render={<Link href={pages.bookCall.path} />}
-                    className="mt-auto h-12 w-full rounded-full text-base"
-                  >
-                    Book a discovery call
-                  </Button>
-                </article>
-              ))}
-            </div>
+                  Book a discovery call
+                </Button>
+              </article>
+            ))}
           </div>
         </div>
       </section>
