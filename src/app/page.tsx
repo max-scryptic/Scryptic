@@ -207,7 +207,7 @@ function SectionHeading({
   title: string
   children: React.ReactNode
   id: string
-  /** Shown level with the title on wide screens, and after the intro on phones. */
+  /** Shown right after the title on wide screens, and after the intro on narrower ones. */
   aside?: React.ReactNode
 }) {
   return (
@@ -215,16 +215,16 @@ function SectionHeading({
       data-reveal="children"
       className={cn(
         "grid gap-4",
-        aside ? "lg:grid-cols-[minmax(0,42rem)_auto] lg:justify-between lg:gap-x-8" : "max-w-2xl",
+        aside ? "xl:grid-cols-[auto_auto] xl:justify-start xl:gap-x-6" : "max-w-2xl",
       )}
     >
-      <p className="font-mono text-xs tracking-widest text-primary uppercase lg:col-start-1">{eyebrow}</p>
-      <h2 id={id} className="max-w-2xl text-3xl tracking-tight text-balance sm:text-4xl lg:col-start-1 lg:self-center">
+      <p className="font-mono text-xs tracking-widest text-primary uppercase xl:col-start-1">{eyebrow}</p>
+      <h2 id={id} className="max-w-2xl text-3xl tracking-tight text-balance sm:text-4xl xl:col-start-1 xl:self-center">
         {title}
       </h2>
-      <p className="max-w-2xl text-lg text-pretty text-muted-foreground lg:col-start-1">{children}</p>
+      <p className="max-w-2xl text-lg text-pretty text-muted-foreground xl:col-start-1">{children}</p>
       {aside && (
-        <div className="mt-2 justify-self-start lg:col-start-2 lg:row-start-2 lg:mt-0 lg:self-center">
+        <div className="mt-2 justify-self-start xl:col-start-2 xl:row-start-2 xl:mt-0 xl:self-center">
           {aside}
         </div>
       )}
