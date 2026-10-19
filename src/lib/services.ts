@@ -25,6 +25,27 @@ export type ServiceOffer = {
 
 export const currency = "GBP"
 
+/**
+ * A limited discount on the next few builds, on either package. The hero, the
+ * pricing cards and the pricing FAQ all show it. Set to null once the last
+ * discounted build is booked and the full prices come back everywhere.
+ */
+export const launchOffer: {
+  percentOff: number
+  /** What the discount covers, completing "25% off ...". */
+  appliesTo: string
+} | null = {
+  percentOff: 25,
+  appliesTo: "our next two MVPs",
+}
+
+/** The offer's price for a package, formatted like `price`, e.g. "£7,500". */
+export function offerPrice(service: ServiceOffer) {
+  if (!launchOffer) return service.price
+  const amount = Math.round(service.amount * (1 - launchOffer.percentOff / 100))
+  return `£${amount.toLocaleString("en-GB")}`
+}
+
 const shared = {
   serviceType: "MVP development",
   areaServed: "United Kingdom",
