@@ -201,19 +201,33 @@ function SectionHeading({
   title,
   children,
   id,
+  aside,
 }: {
   eyebrow: string
   title: string
   children: React.ReactNode
   id: string
+  /** Shown level with the title on wide screens, and after the intro on phones. */
+  aside?: React.ReactNode
 }) {
   return (
-    <div data-reveal="children" className="flex max-w-2xl flex-col gap-4">
-      <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
-      <h2 id={id} className="text-3xl tracking-tight text-balance sm:text-4xl">
+    <div
+      data-reveal="children"
+      className={cn(
+        "grid gap-4",
+        aside ? "lg:grid-cols-[minmax(0,42rem)_auto] lg:justify-between lg:gap-x-8" : "max-w-2xl",
+      )}
+    >
+      <p className="font-mono text-xs tracking-widest text-primary uppercase lg:col-start-1">{eyebrow}</p>
+      <h2 id={id} className="max-w-2xl text-3xl tracking-tight text-balance sm:text-4xl lg:col-start-1 lg:self-center">
         {title}
       </h2>
-      <p className="text-lg text-pretty text-muted-foreground">{children}</p>
+      <p className="max-w-2xl text-lg text-pretty text-muted-foreground lg:col-start-1">{children}</p>
+      {aside && (
+        <div className="mt-2 justify-self-start lg:col-start-2 lg:row-start-2 lg:mt-0 lg:self-center">
+          {aside}
+        </div>
+      )}
     </div>
   )
 }
@@ -372,25 +386,25 @@ export default function Home() {
         className="scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          {/* The heading, with the limited offer beside it on wide screens. */}
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <SectionHeading eyebrow="Pricing" title="A fully built MVP, ready to take to market" id="pricing-heading">
-              Two fixed-price sprints, agreed before the build starts.
-            </SectionHeading>
-            {launchOffer && (
-              <p
-                data-reveal
-                className="flex flex-wrap items-center gap-x-3 gap-y-1 self-start rounded-2xl border border-primary/30 bg-primary/5 px-5 py-3 text-pretty lg:self-end"
-              >
-                <span className="font-mono text-xs tracking-widest text-primary uppercase">
-                  Limited offer
-                </span>
-                <span>
-                  {launchOffer.percentOff}% off {launchOffer.appliesTo}, on either package.
-                </span>
-              </p>
-            )}
-          </div>
+          <SectionHeading
+            eyebrow="Pricing"
+            title="A fully built MVP, ready to take to market"
+            id="pricing-heading"
+            aside={
+              launchOffer && (
+                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-primary/30 bg-primary/5 px-4 py-2">
+                  <span className="font-mono text-xs tracking-widest text-primary uppercase">
+                    Limited offer
+                  </span>
+                  <span>
+                    {launchOffer.percentOff}% off {launchOffer.appliesTo}
+                  </span>
+                </p>
+              )
+            }
+          >
+            Two fixed-price sprints, agreed before the build starts.
+          </SectionHeading>
 
           {/* One card per package: name and sprint, the price, what is included, then the call.
               The preferred package gets a Lapis border and a tag sitting on its top edge. */}
