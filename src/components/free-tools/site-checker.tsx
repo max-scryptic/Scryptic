@@ -208,18 +208,18 @@ function CheckRow({ check }: { check: CheckResult }) {
 }
 
 function ScoreRing({ score }: { score: number }) {
-  const radius = 42
+  const radius = 45
   const circumference = 2 * Math.PI * radius
   return (
-    <div className="relative size-28 shrink-0">
+    <div className="relative size-32 shrink-0 sm:size-36">
       <svg viewBox="0 0 100 100" aria-hidden="true" className="size-full -rotate-90">
-        <circle cx="50" cy="50" r={radius} fill="none" strokeWidth="8" className="stroke-muted" />
+        <circle cx="50" cy="50" r={radius} fill="none" strokeWidth="6" className="stroke-muted" />
         <circle
           cx="50"
           cy="50"
           r={radius}
           fill="none"
-          strokeWidth="8"
+          strokeWidth="6"
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={circumference * (1 - score / 100)}
@@ -229,9 +229,9 @@ function ScoreRing({ score }: { score: number }) {
           )}
         />
       </svg>
-      <p className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-3xl font-medium tracking-tight">{score}</span>
-        <span className="font-mono text-xs text-muted-foreground">out of 100</span>
+      <p className="absolute inset-0 flex flex-col items-center justify-center gap-1.5">
+        <span className="text-4xl leading-none font-medium tracking-tight">{score}</span>
+        <span className="font-mono text-[0.6875rem] leading-none text-muted-foreground">out of 100</span>
       </p>
     </div>
   )
