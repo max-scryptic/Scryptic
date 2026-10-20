@@ -80,7 +80,7 @@ export function CostCalculator() {
           </p>
         </div>
 
-        {service ? (
+        {service && (
           <p className="text-pretty">
             That is our <strong className="font-medium">{service.name}</strong> package: launched
             after a {service.sprint}, then a week of handover.
@@ -91,12 +91,6 @@ export function CostCalculator() {
                 <strong className="font-medium text-primary">{offerPrice(service)}</strong>.
               </>
             )}
-          </p>
-        ) : (
-          <p className="text-pretty">
-            That is past our fixed-price packages, so it would be a custom build: launch after
-            about {estimate.sprintWeeks} weeks, then a week of handover. Most builds this size
-            launch faster as phases, starting with the core on the Extended MVP.
           </p>
         )}
 
