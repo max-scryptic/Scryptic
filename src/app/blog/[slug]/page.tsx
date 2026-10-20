@@ -84,7 +84,7 @@ function Block({ block }: { block: PostBlock }) {
           <li key={item} className="flex gap-4">
             <span
               aria-hidden="true"
-              className="mt-1 size-4 shrink-0 rounded border border-primary/60"
+              className="mt-1 size-4 shrink-0 rounded-xs border border-primary/60"
             />
             <p className="text-pretty text-muted-foreground">{item}</p>
           </li>

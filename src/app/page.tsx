@@ -301,7 +301,7 @@ export default function Home() {
       <ScrollReveal />
 
       {/* Hero: a full-width Lapis band, rounded at the bottom, the same Lapis in both themes. */}
-      <section className="relative isolate overflow-hidden rounded-b-3xl bg-[#2b3fd6] px-4 pt-36 pb-24 text-white sm:rounded-b-[2.5rem] sm:px-6 sm:pt-44 sm:pb-32">
+      <section className="relative isolate overflow-hidden rounded-b-3xl bg-[#2b3fd6] px-4 pt-36 pb-24 text-white sm:rounded-b-[1.25rem] sm:px-6 sm:pt-44 sm:pb-32">
         <VoxelField
           faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
           className="hero-parallax absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
