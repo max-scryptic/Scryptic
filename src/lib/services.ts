@@ -14,6 +14,8 @@ export type ServiceOffer = {
   areaServed: string
   /** Shown under the name, e.g. "2 week development sprint". */
   sprint: string
+  /** Weeks of development in the sprint, not counting iteration or handover. Prices are per development week. */
+  developmentWeeks: number
   /** Shown large on the card. */
   price: string
   /** The same price as a number in `currency`, for structured data. */
@@ -42,8 +44,7 @@ export const launchOffer: {
 /** The offer's price for a package, formatted like `price`, e.g. "£7,500". */
 export function offerPrice(service: ServiceOffer) {
   if (!launchOffer) return service.price
-  const amount = Math.round(service.amount * (1 - launchOffer.percentOff / 100))
-  return `£${amount.toLocaleString("en-GB")}`
+  return formatPrice(service.amount * (1 - launchOffer.percentOff / 100))
 }
 
 const shared = {
@@ -57,6 +58,7 @@ export const services: ServiceOffer[] = [
     id: "mvp",
     name: "MVP",
     sprint: "2 week development sprint",
+    developmentWeeks: 1,
     price: "£10,000",
     amount: 10000,
     preferred: true,
@@ -72,6 +74,7 @@ export const services: ServiceOffer[] = [
     id: "extended-mvp",
     name: "Extended MVP",
     sprint: "3 week development sprint",
+    developmentWeeks: 2,
     price: "£20,000",
     amount: 20000,
     includes: [
@@ -82,3 +85,11 @@ export const services: ServiceOffer[] = [
     ],
   },
 ]
+
+/** What a week of development costs, read off the packages: the MVP is one week for £10,000. */
+export const weeklyRate = services[0].amount / services[0].developmentWeeks
+
+/** "£10,000" for 10000. */
+export function formatPrice(amount: number) {
+  return `£${Math.round(amount).toLocaleString("en-GB")}`
+}

@@ -1,5 +1,5 @@
 import { postSeries, postsInSeries } from "@/lib/blog"
-import { blogPostPage, blogPostPages, publicPages, type PageEntry } from "@/lib/seo"
+import { blogPostPage, blogPostPages, publicPages, toolPages, type PageEntry } from "@/lib/seo"
 import { absoluteUrl, siteConfig } from "@/lib/site"
 
 /*
@@ -16,7 +16,8 @@ const link = (page: PageEntry) =>
 
 export function GET() {
   const guides = blogPostPages.filter((page) => !page.noIndex)
-  const otherPages = publicPages.filter((page) => !guides.includes(page))
+  const tools = toolPages.filter((page) => !page.noIndex)
+  const otherPages = publicPages.filter((page) => !guides.includes(page) && !tools.includes(page))
 
   const lines = [
     `# ${siteConfig.name}`,
@@ -27,6 +28,12 @@ export function GET() {
     "## Pages",
     "",
     ...otherPages.map(link),
+    "",
+    "## Free tools",
+    "",
+    "Free tools for founders, used in the browser with no sign up.",
+    "",
+    ...tools.map(link),
     "",
     ...postSeries.flatMap((series) => {
       const seriesPages = postsInSeries(series.id)

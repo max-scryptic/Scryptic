@@ -1,3 +1,4 @@
+import { pages } from "@/lib/seo"
 import { bookingHref, siteConfig } from "@/lib/site"
 
 /*
@@ -58,6 +59,19 @@ export function summarizeAnswers(answers: BookingAnswers) {
   )
   if (answers.details) lines.push(`Anything else: ${answers.details}`)
   return lines.join("\n")
+}
+
+/** The URL parameter that prefills "Anything else we should know?" on /book-a-call. */
+export const detailsParam = "details"
+
+/**
+ * A link to /book-a-call with the details box already filled in, so a free
+ * tool's result (an estimate, a scope, a checklist) comes along to the call.
+ * Cut short so the booking link it ends up in stays a sensible length.
+ */
+export function bookCallWith(details: string) {
+  const trimmed = details.length > 1500 ? `${details.slice(0, 1497)}...` : details
+  return `${pages.bookCall.path}?${new URLSearchParams({ [detailsParam]: trimmed })}`
 }
 
 /*

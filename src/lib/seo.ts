@@ -1,6 +1,7 @@
 import type { Metadata, MetadataRoute } from "next"
 
 import { posts, type BlogPost } from "@/lib/blog"
+import { freeTools, type FreeTool } from "@/lib/free-tools"
 import { isIndexable, siteConfig } from "@/lib/site"
 import { caseStudies, type CaseStudy } from "@/lib/work"
 
@@ -66,9 +67,16 @@ export const pages = {
   },
   work: {
     path: "/work",
-    title: "Our work",
+    title: "Case studies",
     description:
       "Case studies of web apps Scryptic designed, built and launched, covering the problem each one solves, the product we shipped and the engineering behind it.",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  tools: {
+    path: "/tools",
+    title: "Free tools",
+    description: `Free tools for founders from ${siteConfig.name}: an MVP cost calculator, scope planner, no-code quiz, launch checklist, and SEO and AI agent readiness checks.`,
     changeFrequency: "monthly",
     priority: 0.8,
   },
@@ -96,6 +104,20 @@ export function caseStudyPage(study: CaseStudy): PageEntry {
 
 export const caseStudyPages: PageEntry[] = caseStudies.map(caseStudyPage)
 
+/** The registry entry for a free tool's /tools/<slug> page, built from src/lib/free-tools. */
+export function toolPage(tool: FreeTool): PageEntry {
+  return {
+    path: `/tools/${tool.slug}`,
+    title: tool.name,
+    description: tool.description,
+    parents: [pages.tools],
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }
+}
+
+export const toolPages: PageEntry[] = freeTools.map(toolPage)
+
 /** The registry entry for a post's /blog/<slug> page, built from src/lib/blog. */
 export function blogPostPage(post: BlogPost): PageEntry {
   return {
@@ -117,6 +139,7 @@ export const blogPostPages: PageEntry[] = posts.map(blogPostPage)
 export const publicPages: PageEntry[] = [
   ...Object.values(pages),
   ...caseStudyPages,
+  ...toolPages,
   ...blogPostPages,
 ].filter((page: PageEntry) => !page.noIndex)
 

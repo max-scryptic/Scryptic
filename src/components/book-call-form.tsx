@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea"
 import {
   bookingDestination,
   bookingQuestions,
+  detailsParam,
   underMinimumBudget,
   type BookingAnswers,
   type BookingQuestion,
@@ -67,7 +68,14 @@ export function BookCallForm() {
   const pickedWithPointer = useRef(false)
   const autoAdvance = useRef<ReturnType<typeof setTimeout>>(undefined)
   const moved = useRef(false)
+  const detailsRef = useRef<HTMLTextAreaElement>(null)
   const sendsEmail = !siteConfig.bookingUrl
+
+  // A free tool can send its result along (see bookCallWith): start the details box with it.
+  useEffect(() => {
+    const details = new URLSearchParams(window.location.search).get(detailsParam)
+    if (details && detailsRef.current && !detailsRef.current.value) detailsRef.current.value = details
+  }, [])
 
   // Keep the card in view: the confirmation and some slides are shorter than others.
   useEffect(() => {
@@ -288,7 +296,13 @@ export function BookCallForm() {
                       Optional. A link to your site or deck, what is stuck, or what a good outcome
                       looks like.
                     </FieldDescription>
-                    <Textarea id="book-details" name="details" rows={4} className="min-h-32" />
+                    <Textarea
+                      ref={detailsRef}
+                      id="book-details"
+                      name="details"
+                      rows={4}
+                      className="min-h-32"
+                    />
                   </Field>
                 )}
 

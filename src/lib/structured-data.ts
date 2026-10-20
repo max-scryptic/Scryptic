@@ -12,6 +12,7 @@ import type {
   WebSite,
 } from "schema-dts"
 
+import type { FreeTool } from "@/lib/free-tools"
 import { pages, type PageEntry } from "@/lib/seo"
 import { currency, type ServiceOffer } from "@/lib/services"
 import { absoluteUrl, siteConfig } from "@/lib/site"
@@ -227,6 +228,23 @@ export function caseStudyJsonLd(page: PageEntry, study: CaseStudy): WebApplicati
     image: absoluteUrl(study.cover.src.src),
     creator: { "@id": ids.organization },
     subjectOf: { "@id": ids.webPage(page.path) },
+  }
+}
+
+/** A free tool that runs on its own page, offered by the organization at no cost. */
+export function toolJsonLd(page: PageEntry, tool: FreeTool): WebApplication {
+  return {
+    "@type": "WebApplication",
+    "@id": `${absoluteUrl(page.path)}#app`,
+    name: tool.name,
+    url: absoluteUrl(page.path),
+    description: tool.description,
+    applicationCategory: tool.category,
+    operatingSystem: "Web browser",
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: 0, priceCurrency: currency },
+    provider: { "@id": ids.organization },
+    mainEntityOfPage: { "@id": ids.webPage(page.path) },
   }
 }
 
