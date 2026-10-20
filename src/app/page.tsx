@@ -214,7 +214,7 @@ function SectionHeading({
     <div
       data-reveal="children"
       className={cn(
-        "grid gap-4",
+        "grid content-start gap-4",
         aside ? "xl:grid-cols-[auto_auto] xl:justify-start xl:gap-x-6" : "max-w-2xl",
       )}
     >
