@@ -308,18 +308,6 @@ export default function Home() {
         />
         <div className="hero-recede mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
           <div className="hero-rise flex flex-col items-start gap-7">
-            {launchOffer && (
-              <Link
-                href="/#pricing"
-                className="-mb-2 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 py-1 pr-3 pl-1 text-sm text-white transition-colors hover:bg-white/20"
-              >
-                <span className="rounded-full bg-white px-2.5 py-0.5 font-mono text-xs tracking-widest text-[#2b3fd6] uppercase">
-                  {launchOffer.percentOff}% off
-                </span>
-                {launchOffer.appliesTo}
-                <span aria-hidden="true">→</span>
-              </Link>
-            )}
             <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">
               From idea to{" "}
               <span className="text-[#c3caff]">MVP</span>
