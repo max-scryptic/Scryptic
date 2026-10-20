@@ -1,19 +1,17 @@
 /*
  * The free tools on /tools. Each entry drives its card on the hub (and under
  * the other tools), its /tools/<slug> page's registry entry in src/lib/seo.ts
- * (and so its metadata, sitemap row and llms.txt line) and its JSON-LD.
+ * (and so its metadata, sitemap row and llms.txt line) and its JSON-LD. A new
+ * tool also needs an example result in src/components/free-tools/tool-preview.tsx.
  *
  * A tool's working part lives in src/components/free-tools/ and its logic,
  * questions and FAQ next to this file, one module per tool.
  */
 
-export type FreeToolIcon = "calculator" | "scissors" | "signpost" | "checklist" | "bot" | "search"
-
 export type FreeTool = {
   /** URL segment: /tools/<slug>. */
   slug: string
   name: string
-  icon: FreeToolIcon
   /** One sentence on the card: what you put in and what you get back. */
   summary: string
   /** The card's call to action, e.g. "Estimate your build". */
@@ -28,7 +26,6 @@ export const freeTools = [
   {
     slug: "mvp-cost-calculator",
     name: "MVP Cost Calculator",
-    icon: "calculator",
     summary: "Eight quick questions and a ballpark price and timeline for your MVP, in about a minute.",
     cta: "Estimate your build",
     description:
@@ -38,7 +35,6 @@ export const freeTools = [
   {
     slug: "mvp-scope-planner",
     name: "MVP Scope Planner",
-    icon: "scissors",
     summary: "List your features, size them and see what fits a one week build and what can wait.",
     cta: "Plan your scope",
     description:
@@ -48,7 +44,6 @@ export const freeTools = [
   {
     slug: "build-or-no-code",
     name: "Build or No-Code Quiz",
-    icon: "signpost",
     summary: "Seven questions to find out whether no-code will do for your idea or it needs real code.",
     cta: "Take the quiz",
     description:
@@ -58,7 +53,6 @@ export const freeTools = [
   {
     slug: "app-launch-checklist",
     name: "App Launch Checklist",
-    icon: "checklist",
     summary: "A launch checklist built for your app, covering legal, payments, SEO, analytics and app stores.",
     cta: "Build your checklist",
     description:
@@ -68,7 +62,6 @@ export const freeTools = [
   {
     slug: "agent-readiness-check",
     name: "Agent Readiness Check",
-    icon: "bot",
     summary: "Scan your site to see whether ChatGPT, Claude and other AI agents can find, read and use it.",
     cta: "Check your site",
     description:
@@ -78,7 +71,6 @@ export const freeTools = [
   {
     slug: "seo-check",
     name: "SEO Check",
-    icon: "search",
     summary: "Audit any page for titles, descriptions, headings, indexing, structured data and share previews.",
     cta: "Run the audit",
     description:
