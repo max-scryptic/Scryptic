@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { ToolCard } from "@/components/free-tools/tool-card"
+import { ToolList } from "@/components/free-tools/tool-list"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import { freeTools, type FreeTool, type ToolFaq } from "@/lib/free-tools"
@@ -124,11 +124,7 @@ export function ToolPage({
               All free tools
             </Link>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {more.map((other) => (
-              <ToolCard key={other.slug} tool={other} headingLevel="h3" />
-            ))}
-          </div>
+          <ToolList tools={more} />
         </section>
       </div>
     </main>
