@@ -28,8 +28,8 @@ export type ServiceOffer = {
 export const currency = "GBP"
 
 /**
- * A limited discount on the next few builds, on either package. The hero, the
- * pricing cards and the pricing FAQ all show it. Set to null once the last
+ * A limited discount on the next few builds, on either package. The pricing
+ * section and the pricing FAQ both show it. Set to null once the last
  * discounted build is booked and the full prices come back everywhere.
  */
 export const launchOffer: {
