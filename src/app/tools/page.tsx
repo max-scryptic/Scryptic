@@ -1,5 +1,8 @@
+import Link from "next/link"
+
 import { ToolCard } from "@/components/free-tools/tool-card"
 import { PageJsonLd } from "@/components/json-ld"
+import { Button } from "@/components/ui/button"
 import { freeTools } from "@/lib/free-tools"
 import { createMetadata, pages, toolPages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
@@ -28,6 +31,28 @@ export default function ToolsPage() {
           {freeTools.map((tool) => (
             <ToolCard key={tool.slug} tool={tool} />
           ))}
+        </section>
+
+        <section
+          aria-labelledby="tools-cta-heading"
+          className="flex flex-col items-start gap-4 rounded-2xl border border-border bg-card p-6 sm:p-10"
+        >
+          <h2 id="tools-cta-heading" className="text-2xl tracking-tight text-balance">
+            Want a second opinion on your plan?
+          </h2>
+          <p className="text-pretty text-muted-foreground">
+            The tools give you a starting point. Book a free discovery call and we will go through
+            your scope, stack, cost and timeline with you, then send a written estimate before any
+            work starts.
+          </p>
+          <Button
+            size="lg"
+            nativeButton={false}
+            render={<Link href={pages.bookCall.path} />}
+            className="h-11 rounded-full px-6 text-base"
+          >
+            Book a discovery call
+          </Button>
         </section>
       </div>
     </main>
