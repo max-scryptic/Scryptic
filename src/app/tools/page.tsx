@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { ToolCard } from "@/components/free-tools/tool-card"
+import { ToolList } from "@/components/free-tools/tool-list"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import { freeTools } from "@/lib/free-tools"
@@ -27,11 +27,7 @@ export default function ToolsPage() {
           </p>
         </div>
 
-        <section aria-label="Free tools" className="grid gap-6 md:grid-cols-2">
-          {freeTools.map((tool) => (
-            <ToolCard key={tool.slug} tool={tool} />
-          ))}
-        </section>
+        <ToolList tools={freeTools} grouped />
 
         <section
           aria-labelledby="tools-cta-heading"

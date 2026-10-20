@@ -1,7 +1,8 @@
 /*
- * The free tools on /tools. Each entry drives its card on the hub (and under
- * the other tools), its /tools/<slug> page's registry entry in src/lib/seo.ts
- * (and so its metadata, sitemap row and llms.txt line) and its JSON-LD.
+ * The free tools on /tools. Each entry drives its row in the list on the hub
+ * (and under the other tools), its /tools/<slug> page's registry entry in
+ * src/lib/seo.ts (and so its metadata, sitemap row and llms.txt line) and its
+ * JSON-LD.
  *
  * A tool's working part lives in src/components/free-tools/ and its logic,
  * questions and FAQ next to this file, one module per tool.
@@ -9,14 +10,23 @@
 
 export type FreeToolIcon = "calculator" | "scissors" | "signpost" | "checklist" | "bot" | "search"
 
+/** The hub lists the tools in these groups, in this order. */
+export const toolGroups = [
+  { id: "plan", name: "Plan your build" },
+  { id: "check", name: "Check your site" },
+] as const
+
+export type ToolGroup = (typeof toolGroups)[number]["id"]
+
 export type FreeTool = {
   /** URL segment: /tools/<slug>. */
   slug: string
   name: string
   icon: FreeToolIcon
-  /** One sentence on the card: what you put in and what you get back. */
+  group: ToolGroup
+  /** One sentence in the list: what you put in and what you get back. */
   summary: string
-  /** The card's call to action, e.g. "Estimate your build". */
+  /** The row's call to action, e.g. "Estimate your build". */
   cta: string
   /** 120 to 160 characters, for search results and llms.txt. */
   description: string
@@ -29,6 +39,7 @@ export const freeTools = [
     slug: "mvp-cost-calculator",
     name: "MVP Cost Calculator",
     icon: "calculator",
+    group: "plan",
     summary: "Eight quick questions and a ballpark price and timeline for your MVP, in about a minute.",
     cta: "Estimate your build",
     description:
@@ -39,6 +50,7 @@ export const freeTools = [
     slug: "mvp-scope-planner",
     name: "MVP Scope Planner",
     icon: "scissors",
+    group: "plan",
     summary: "List your features, size them and see what fits a one week build and what can wait.",
     cta: "Plan your scope",
     description:
@@ -49,6 +61,7 @@ export const freeTools = [
     slug: "build-or-no-code",
     name: "Build or No-Code Quiz",
     icon: "signpost",
+    group: "plan",
     summary: "Seven questions to find out whether no-code will do for your idea or it needs real code.",
     cta: "Take the quiz",
     description:
@@ -59,6 +72,7 @@ export const freeTools = [
     slug: "app-launch-checklist",
     name: "App Launch Checklist",
     icon: "checklist",
+    group: "plan",
     summary: "A launch checklist built for your app, covering legal, payments, SEO, analytics and app stores.",
     cta: "Build your checklist",
     description:
@@ -69,6 +83,7 @@ export const freeTools = [
     slug: "agent-readiness-check",
     name: "Agent Readiness Check",
     icon: "bot",
+    group: "check",
     summary: "Scan your site to see whether ChatGPT, Claude and other AI agents can find, read and use it.",
     cta: "Check your site",
     description:
@@ -79,6 +94,7 @@ export const freeTools = [
     slug: "seo-check",
     name: "SEO Check",
     icon: "search",
+    group: "check",
     summary: "Audit any page for titles, descriptions, headings, indexing, structured data and share previews.",
     cta: "Run the audit",
     description:
