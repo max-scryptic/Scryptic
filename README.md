@@ -25,7 +25,9 @@ Open [http://localhost:3000](http://localhost:3000).
 ```
 src/
   app/                  Routes: / (landing page), /book-a-call (qualifying questions, then the booking link),
-                        /work and /work/[slug] (case studies), /blog and /blog/[slug] (migration guides)
+                        /work and /work/[slug] (case studies), /blog and /blog/[slug] (migration guides),
+                        /tools and /tools/<slug> (free tools), /api/site-check (the server side of the SEO
+                        and Agent Readiness checks)
     globals.css         Theme tokens (light) and Tailwind setup
     robots.ts           robots.txt, sitemap.xml, manifest, llms.txt, icons and the
     sitemap.ts            Open Graph image are all generated from src/lib (see
@@ -46,16 +48,22 @@ src/
     social-links.tsx    The founder's profile icon links (LinkedIn, X, Instagram)
     tool-logo.tsx       The migrated-from tool's logo: a watermark on post cards, a tile in post headers
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
+    free-tools/         The free tools: the shared page frame (tool-page.tsx), cards, question and
+                        result widgets, and one component per tool
     em-dash-guard.tsx   Dev guard against em dashes in rendered text
   lib/
     site.ts             Brand facts, contact email and booking link, site URL, indexability
-    services.ts         The service offer: card, price and Service JSON-LD
+    services.ts         The service offer: card, price and Service JSON-LD, and the weekly rate the
+                        MVP Cost Calculator and Scope Planner price with
     booking.ts          /book-a-call questions, and how answers reach the booking link or email
     team.ts             The founder profile used on /, /book-a-call and as blog author
     stack.ts            The "Our stack" tiles on /, each with its logo from src/assets/stack/
     blog/               Blog posts as data: types.ts (the shape), posts/<tool>.ts (one per post),
                         index.ts (the list, categories and helpers). A post is a file plus a line in index.ts;
                         its optional tool logo is an SVG in src/assets/blog/logos/ imported as the post's `logo`
+    free-tools/         The free tools as data: index.ts (the list, which drives /tools, the cards and each
+                        tool's registry entry), then one module per tool with its questions and logic.
+                        site-check.server.ts fetches and checks a public URL for the two site checks
     seo.ts              Page registry + createMetadata()
     structured-data.ts  schema.org builders (Organization, WebSite, WebPage, FAQ, Article, ...)
     em-dash.ts          Em dash helpers used by the guard and the check script
