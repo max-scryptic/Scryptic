@@ -96,12 +96,6 @@ export function SiteChecker({ kind }: { kind: SiteCheckKind }) {
             {checking ? "Checking..." : kind === "agent" ? "Check my site" : "Run the audit"}
           </Button>
         </div>
-        <p className="text-sm text-muted-foreground">
-          {kind === "agent"
-            ? "Checks the home page, robots.txt, llms.txt and sitemap the way an AI crawler sees them."
-            : "Checks the page you enter, plus the site's robots.txt and sitemap."}{" "}
-          Takes a few seconds. Nothing is stored.
-        </p>
         {state.phase === "error" && (
           <p id={`${kind}-error`} role="alert" className="text-sm text-destructive">
             {state.message}
