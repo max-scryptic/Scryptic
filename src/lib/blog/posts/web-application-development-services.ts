@@ -1,3 +1,4 @@
+import firstReleaseWorkflow from "@/assets/blog/images/first-release-workflow.webp"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const webApplicationDevelopmentServices: BlogPost = {
@@ -38,8 +39,13 @@ export const webApplicationDevelopmentServices: BlogPost = {
           text: "Your first web app should let one specific kind of user complete one valuable task, reliably enough to use outside a demo.",
         },
         {
+          type: "image",
+          image: firstReleaseWorkflow,
+          alt: "A complete booking workflow of availability, request and confirmation, with payroll, resources and referrals set aside for later.",
+        },
+        {
           type: "paragraph",
-          text: "Take a booking product. A useful first release might let a provider publish their availability and a customer request a slot, with both sides able to see where each request stands. Payroll, resource libraries and a referral scheme can all wait until people are using that core flow.",
+          text: "Take a booking product. A useful first release might let a provider publish their availability, a customer request a slot and the provider confirm it, with both sides able to see where each request stands. Payroll, resource libraries and a referral scheme can all wait until people are using that core flow.",
         },
         { type: "subheading", text: "Define the complete workflow" },
         {

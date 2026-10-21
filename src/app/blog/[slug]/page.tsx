@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -52,6 +53,28 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "subheading") {
     return <h3 className="pt-2 text-xl tracking-tight text-balance">{block.text}</h3>
+  }
+
+  if (block.type === "image") {
+    return (
+      // White in both themes: the diagrams are drawn on white.
+      <figure className="flex flex-col gap-3">
+        <div className="overflow-hidden rounded-2xl border border-border bg-white">
+          <Image
+            src={block.image}
+            alt={block.alt}
+            sizes="(min-width: 768px) 768px, 100vw"
+            placeholder="blur"
+            className="block h-auto w-full"
+          />
+        </div>
+        {block.caption ? (
+          <figcaption className="text-sm text-pretty text-muted-foreground">
+            {block.caption}
+          </figcaption>
+        ) : null}
+      </figure>
+    )
   }
 
   if (block.type === "caseStudy") {
@@ -302,7 +325,8 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             </nav>
           ) : null}
 
-          <div className="flex max-w-3xl flex-col gap-14">
+          {/* min-w-0 lets a wide table scroll in its own box instead of widening the page. */}
+          <div className="flex min-w-0 max-w-3xl flex-col gap-14">
             {post.sections.map((section) => (
               <section
                 key={section.id}
