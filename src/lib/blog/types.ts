@@ -11,8 +11,8 @@
 import type { StaticImageData } from "next/image"
 
 /**
- * A paragraph, a list, a highlighted note, a table, a checklist or a
- * subheading inside a section.
+ * A paragraph, a list, a highlighted note, a table, a checklist, a
+ * subheading or an image inside a section.
  */
 export type PostBlock =
   | { type: "paragraph"; text: string }
@@ -36,6 +36,18 @@ export type PostBlock =
   | { type: "checklist"; items: string[] }
   /** An <h3> that splits a long section. */
   | { type: "subheading"; text: string }
+  /**
+   * A diagram or screenshot, a WebP from src/assets/blog/images/ cropped to
+   * its content. It shows at the text column's width (768px), so export it
+   * about 1536px wide for sharp high-density screens.
+   */
+  | {
+      type: "image"
+      image: StaticImageData
+      /** What the image shows, for screen readers and search. */
+      alt: string
+      caption?: string
+    }
   /**
    * A real, publicly documented case, summarised only as far as the source
    * says, with a link to that source. Never an invented or anonymised example.

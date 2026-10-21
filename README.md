@@ -60,7 +60,8 @@ src/
     stack.ts            The "Our stack" tiles on /, each with its logo from src/assets/stack/
     blog/               Blog posts as data: types.ts (the shape), posts/<tool>.ts (one per post),
                         index.ts (the list, categories and helpers). A post is a file plus a line in index.ts;
-                        its optional tool logo is an SVG in src/assets/blog/logos/ imported as the post's `logo`
+                        its optional tool logo is an SVG in src/assets/blog/logos/ imported as the post's `logo`,
+                        and in-post images are WebPs in src/assets/blog/images/ used by an `image` block
     free-tools/         The free tools as data: index.ts (the list, which drives /tools, the cards and each
                         tool's registry entry), then one module per tool with its questions and logic.
                         site-check.server.ts fetches and checks a public URL for the two site checks
