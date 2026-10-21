@@ -24,6 +24,7 @@ import { supabaseVsFirebase } from "@/lib/blog/posts/supabase-vs-firebase"
 import { v0 } from "@/lib/blog/posts/v0"
 import { vibeCoding } from "@/lib/blog/posts/vibe-coding"
 import { webAppVsMobileApp } from "@/lib/blog/posts/web-app-vs-mobile-app"
+import { webApplicationDevelopmentServices } from "@/lib/blog/posts/web-application-development-services"
 import { webflow } from "@/lib/blog/posts/webflow"
 import { weweb } from "@/lib/blog/posts/weweb"
 import { wix } from "@/lib/blog/posts/wix"
@@ -46,6 +47,7 @@ export const posts: BlogPost[] = [
   appCostUk,
   buildAnMvp,
   chooseAppDevelopmentCompany,
+  webApplicationDevelopmentServices,
   vibeCoding,
   automationsToSaas,
   n8nVsZapierVsMake,
