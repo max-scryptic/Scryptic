@@ -350,7 +350,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               <section
                 id="faq"
                 aria-labelledby={faqHeadingId}
-                className="flex scroll-mt-28 flex-col gap-6 border-t border-border pt-12"
+                className="flex scroll-mt-28 flex-col gap-6"
               >
                 <h2 id={faqHeadingId} className="text-2xl tracking-tight text-balance sm:text-3xl">
                   {faqHeading}
@@ -368,7 +368,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           </div>
         </div>
 
-        <footer className="flex flex-col gap-12 border-t border-border pt-12">
+        <footer className="flex flex-col gap-12 pt-12">
           <div className="grid gap-6 lg:grid-cols-3">
             <div className="grid lg:col-span-2">
               <AuthorBio />
