@@ -3,6 +3,7 @@ import { airtable } from "@/lib/blog/posts/airtable"
 import { appCostUk } from "@/lib/blog/posts/app-cost-uk"
 import { automationsToSaas } from "@/lib/blog/posts/automations-to-saas"
 import { base44 } from "@/lib/blog/posts/base44"
+import { bestSaasDevelopmentCompany } from "@/lib/blog/posts/best-saas-development-company"
 import { bolt } from "@/lib/blog/posts/bolt"
 import { bubble } from "@/lib/blog/posts/bubble"
 import { buildAnMvp } from "@/lib/blog/posts/build-an-mvp"
@@ -48,6 +49,7 @@ export const posts: BlogPost[] = [
   buildAnMvp,
   chooseAppDevelopmentCompany,
   webApplicationDevelopmentServices,
+  bestSaasDevelopmentCompany,
   vibeCoding,
   automationsToSaas,
   n8nVsZapierVsMake,
