@@ -355,10 +355,9 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
                 <h2 id={faqHeadingId} className="text-2xl tracking-tight text-balance sm:text-3xl">
                   {faqHeading}
                 </h2>
-                {/* Filled cards rather than rules, so the FAQ doesn't stack lines on the footer's. */}
-                <dl className="flex flex-col gap-3">
+                <dl className="flex flex-col divide-y divide-border border-y border-border">
                   {post.faqs.map((faq) => (
-                    <div key={faq.question} className="flex flex-col gap-2 rounded-2xl bg-card p-6">
+                    <div key={faq.question} className="flex flex-col gap-2 py-6">
                       <dt className="text-lg">{faq.question}</dt>
                       <dd className="text-pretty text-muted-foreground">{faq.answer}</dd>
                     </div>
@@ -369,7 +368,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           </div>
         </div>
 
-        <footer className="flex flex-col gap-12 border-t border-border pt-12">
+        <footer className="flex flex-col gap-12 pt-12">
           <div className="grid gap-6 lg:grid-cols-3">
             <div className="grid lg:col-span-2">
               <AuthorBio />
