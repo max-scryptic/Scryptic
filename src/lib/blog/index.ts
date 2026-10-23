@@ -6,6 +6,7 @@ import { base44 } from "@/lib/blog/posts/base44"
 import { bestSaasDevelopmentCompany } from "@/lib/blog/posts/best-saas-development-company"
 import { bolt } from "@/lib/blog/posts/bolt"
 import { bubble } from "@/lib/blog/posts/bubble"
+import { buildAWebApp } from "@/lib/blog/posts/build-a-web-app"
 import { buildAnMvp } from "@/lib/blog/posts/build-an-mvp"
 import { chooseAppDevelopmentCompany } from "@/lib/blog/posts/choose-app-development-company"
 import { flutterflow } from "@/lib/blog/posts/flutterflow"
@@ -50,6 +51,7 @@ export const posts: BlogPost[] = [
   chooseAppDevelopmentCompany,
   webApplicationDevelopmentServices,
   bestSaasDevelopmentCompany,
+  buildAWebApp,
   vibeCoding,
   automationsToSaas,
   n8nVsZapierVsMake,
