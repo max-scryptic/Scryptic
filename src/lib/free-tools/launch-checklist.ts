@@ -228,6 +228,12 @@ export const checklistGroups: { name: string; items: ChecklistItem[] }[] = [
         when: web,
       },
       {
+        id: "indexnow",
+        text: "Ping IndexNow when you publish or change a page",
+        detail: "Host your key file, then submit changed URLs so Bing, Yandex and others recrawl them within hours. Google does not use it, so keep your sitemap up to date as well.",
+        when: web,
+      },
+      {
         id: "agents",
         text: "Make sure AI assistants can read and cite your site",
         detail: "Allow AI search crawlers in robots.txt, add an llms.txt and serve content without JavaScript.",
