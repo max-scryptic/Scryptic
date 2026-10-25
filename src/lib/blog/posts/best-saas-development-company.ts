@@ -1,5 +1,6 @@
 import providerChecksGates from "@/assets/blog/images/provider-checks-gates.webp"
 import type { BlogPost } from "@/lib/blog/types"
+import { extendedMvp, mvp } from "@/lib/services"
 
 export const bestSaasDevelopmentCompany: BlogPost = {
   slug: "best-saas-development-company",
@@ -66,7 +67,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
               "UK, founder-led, one developer",
               "Coded web apps and SaaS MVPs",
               "Fixed price per sprint",
-              "£10,000 + VAT for 2 weeks, or £20,000 + VAT for 3 weeks",
+              `${mvp.price} + VAT for 2 weeks, or ${extendedMvp.price} + VAT for 3 weeks`,
             ],
             [
               "Goodspeed",
@@ -176,37 +177,6 @@ export const bestSaasDevelopmentCompany: BlogPost = {
       ],
     },
     {
-      id: "where-scryptic-fits",
-      heading: "Where does Scryptic fit?",
-      blocks: [
-        {
-          type: "paragraph",
-          text: "We suit UK founders who need a working web app or SaaS MVP without hiring an in-house team. You work directly with our founder, a full-stack developer with five years of experience building for enterprise clients and startups, from the first discovery call to launch.",
-        },
-        {
-          type: "paragraph",
-          text: "There are two packages. Both are fixed price, both deliver a working MVP, and both end with a handover week after launch.",
-        },
-        {
-          type: "table",
-          caption: "Scryptic's two fixed-price MVP packages, with the price, the sprint and what follows launch",
-          columns: ["Package", "Fixed price", "Sprint", "After launch"],
-          rows: [
-            ["MVP", "£10,000 + VAT", "2 weeks: 1 of development, 1 of changes from your feedback", "1 handover week"],
-            ["Extended MVP", "£20,000 + VAT", "3 weeks: 2 of development, 1 of changes from your feedback", "1 handover week"],
-          ],
-        },
-        {
-          type: "paragraph",
-          text: "We agree the scope and price before the sprint starts. Every Friday we get on a video call to go through what shipped and what comes next.",
-        },
-        {
-          type: "paragraph",
-          text: "We are the wrong choice if you need a large delivery team or a long-term maintenance contract. Our support covers the handover week, so if you will need help for months afterwards, line that up before the build starts.",
-        },
-      ],
-    },
-    {
       id: "define-the-release",
       heading: "What should you define before comparing quotes?",
       blocks: [
@@ -281,7 +251,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "We review existing code, hosting and prototypes during discovery and keep the parts worth keeping. That includes apps made with Lovable, Bolt.new, v0, Replit, Bubble, Adalo and Glide, which we either harden into production code or rebuild, bringing the data and users across.",
+          text: "How much survives depends on how the app was made. Code from AI builders such as Lovable, Bolt.new, v0 or Replit can often be hardened rather than replaced. Bubble, Adalo and Glide apps have no code to take away, so they are rebuilt with the data and users brought across. We make that call during discovery, before quoting.",
         },
         {
           type: "paragraph",
@@ -303,7 +273,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "With us, the code lives in your repository and the hosting, database, payment and other accounts are in your name, handed over at launch. It matters the day you hire your first developer or switch supplier.",
+          text: "With us, all four are in your name and handed over at launch. It matters the day you hire your first developer or switch supplier.",
         },
         {
           type: "paragraph",
@@ -320,7 +290,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Agree what happens after launch as well. Our packages include a handover week of bug fixes and support. After that you need a plan for changes, security updates and future technical help, whether that is a retainer, a freelancer or your own hire.",
+          text: "Agree what happens after launch as well: who makes changes, applies security updates and gives technical help once the build is finished, whether that is a retainer, a freelancer or your own hire.",
         },
         { type: "subheading", text: "7. Ask what they need from you" },
         {
@@ -339,7 +309,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "If your release fits a focused MVP sprint, book a free 30 minute discovery call with us. Bring your core user journey and anything you have already built, and we will talk through the scope, the tech stack and which package fits.",
+          text: "If your release fits a focused MVP sprint, send us the brief you wrote for the quotes. On a discovery call we will tell you which of our two packages it fits, or that it fits neither.",
         },
         {
           type: "paragraph",
@@ -352,7 +322,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
     {
       question: "How much does a SaaS development company charge in the UK?",
       answer:
-        "Among the UK companies we compared, published MVP prices run from about £8,000 at the low end to $50,000 or more, and larger consultancies such as thoughtbot and Studio Graphene do not publish rates. Our fixed prices are £10,000 plus VAT for a two week sprint and £20,000 plus VAT for a three week sprint.",
+        `Among the UK companies we compared, published MVP prices run from about £8,000 at the low end to $50,000 or more, and larger consultancies such as thoughtbot and Studio Graphene do not publish rates. Ours are fixed: ${mvp.price} plus VAT for the two week MVP sprint, or ${extendedMvp.price} plus VAT for the three week Extended MVP.`,
     },
     {
       question: "How long does it take to build a SaaS MVP?",

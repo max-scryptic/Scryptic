@@ -160,7 +160,7 @@ export const softr: BlogPost = {
     {
       question: "How long does it take to replace a Softr app?",
       answer:
-        "Typically three to six weeks to a production first release, depending on the number of pages and user groups, how complex the permission rules are, and how much data needs cleaning.",
+        "Three to six weeks gets most Softr apps to a production first release. Pages and user groups set the size of the job; complex permission rules and data that needs cleaning stretch it.",
     },
   ],
 }

@@ -86,6 +86,9 @@ export const services: ServiceOffer[] = [
   },
 ]
 
+/** Each package on its own, for copy that quotes one, such as a blog post's "from £10,000". */
+export const [mvp, extendedMvp] = services
+
 /** What a week of development costs, read off the packages: the MVP is one week for £10,000. */
 export const weeklyRate = services[0].amount / services[0].developmentWeeks
 

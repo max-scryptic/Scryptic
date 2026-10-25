@@ -127,7 +127,7 @@ export const wix: BlogPost = {
     {
       question: "Will I lose my SEO if I move off Wix?",
       answer:
-        "Not if you plan it. Crawl the old site, map every URL to its new address, set up 301 redirects on the new host, carry over titles and meta descriptions, and submit the new sitemap in Google Search Console. Keeping the marketing site on Wix and moving only the app avoids the risk entirely.",
+        "The safest route is not to move the marketing site at all: keep it on Wix and move only the app. If the site has to go, crawl it first, map every URL to its new address, set up 301 redirects on the new host, keep each page's title and meta description, and submit the new sitemap in Google Search Console.",
     },
     {
       question: "Can I reuse my Wix Velo code in a new app?",

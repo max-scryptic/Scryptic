@@ -63,7 +63,7 @@ export const framer: BlogPost = {
     {
       question: "Will I lose my SEO if I move off Framer?",
       answer:
-        "Not if you plan the move. Keep URLs the same where possible, add a permanent 301 redirect for every one that changes, carry over titles and meta descriptions, and submit the new sitemap in Google Search Console. If you only add an app on a subdomain and keep the site in Framer, your existing pages are not affected at all.",
+        "Not if you add the app on a subdomain and keep the site in Framer, because your existing pages are not touched at all. If the site itself moves, keep URLs the same where possible, add a permanent 301 redirect for every one that changes, give each new page the old title and meta description, and send Google the new sitemap through Search Console.",
     },
   ],
 }

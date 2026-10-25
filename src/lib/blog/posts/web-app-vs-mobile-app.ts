@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const webAppVsMobileApp: BlogPost = {
   slug: "web-app-or-mobile-app-first",
@@ -64,7 +65,7 @@ export const webAppVsMobileApp: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "When it points to the web, build so mobile can follow. Keep pricing, permissions and anything touching money on the server, where a future app can call the same endpoints. Use TypeScript throughout so React Native can share types and validation later. Choose sign-in that supports tokens as well as browser cookies. Do those three things and a mobile app becomes a new frontend rather than a rebuild. At Scryptic we start most founders on TypeScript, Next.js and Postgres for exactly this reason, and full builds start from £10,000 depending on complexity.",
+          text: `When it points to the web, build so mobile can follow. Keep pricing, permissions and anything touching money on the server, where a future app can call the same endpoints. Use TypeScript throughout so React Native can share types and validation later. Choose sign-in that supports tokens as well as browser cookies. Do those three things and a mobile app becomes a new frontend rather than a rebuild. It's the reason we start most founders on TypeScript, Next.js and Postgres, for builds from ${mvp.price} upwards.`,
         },
       ],
     },

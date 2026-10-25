@@ -1,5 +1,6 @@
 import pwaSaveStates from "@/assets/blog/images/pwa-save-states.webp"
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const pwaDevelopment: BlogPost = {
   slug: "pwa-development",
@@ -15,7 +16,6 @@ export const pwaDevelopment: BlogPost = {
     { label: "Built from", value: "Manifest, service worker, HTTPS" },
     { label: "Smallest job", value: "Making it installable" },
     { label: "Biggest job", value: "Offline editing and sync" },
-    { label: "Our fixed-price MVP", value: "From £10,000 + VAT" },
   ],
   sections: [
     {
@@ -62,7 +62,7 @@ export const pwaDevelopment: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "If you haven't settled on a web app or a native one yet, read our guide on whether to build a web app or a mobile app first. Decide that before you pay for features your platform can't reliably support.",
+          text: "If you haven't settled on a web app or a native one yet, start with our comparison of web and mobile apps. Decide that before you pay for features your platform can't reliably support.",
         },
       ],
     },
@@ -203,36 +203,10 @@ export const pwaDevelopment: BlogPost = {
           type: "paragraph",
           text: "Push notifications are the one people most often underestimate. Sending one message in a demo is quick. Deciding who gets which message, when, and how they turn it off takes longer, and so does handling the people who tap \"Don't allow\".",
         },
-      ],
-    },
-    {
-      id: "where-scryptic-fits",
-      heading: "Can Scryptic build your first PWA release?",
-      blocks: [
         {
           type: "paragraph",
-          text: "Often, yes. We build and launch web apps and SaaS MVPs for UK founders, and on the discovery call we work out which of the features above fit a fixed-price sprint. If offline editing won't fit, we'll say so before you commit to anything.",
-        },
-        {
-          type: "table",
-          caption: "Scryptic's two fixed-price MVP packages, with the price, the sprint and what follows launch",
-          columns: ["Package", "Fixed price", "Sprint", "After launch"],
-          rows: [
-            ["MVP", "£10,000 + VAT", "2 weeks: 1 of development, 1 of changes from your feedback", "1 week of bug fixes and support"],
-            ["Extended MVP", "£20,000 + VAT", "3 weeks: 2 of development, 1 of changes from your feedback", "1 week of bug fixes and support"],
-          ],
-        },
-        {
-          type: "paragraph",
-          text: "You work directly with our founder. We agree the scope and price before building starts, then go through progress and priorities on a call every Friday. The code lives in your repository and the accounts are in your name, and both are handed over at launch.",
-        },
-        {
-          type: "paragraph",
-          text: "Already have a prototype? We review the existing code and infrastructure during discovery and tell you what's worth keeping.",
-        },
-        {
-          type: "paragraph",
-          text: "Bring your main user journey, the devices your users have and any offline requirement to a free 30 minute discovery call. It's far better to talk through the awkward browser behaviour while we're agreeing the scope than to run into it halfway through the build.",
+          text: `We quote first PWA releases as a fixed price starting at ${mvp.price} plus VAT, and before you commit we work out which rows of this table fit the sprint.`,
+          link: { text: "Compare the two packages.", href: "/#pricing" },
         },
       ],
     },
@@ -251,7 +225,7 @@ export const pwaDevelopment: BlogPost = {
     {
       question: "Is a PWA cheaper than a native app?",
       answer:
-        "Usually, because one codebase covers phones, tablets and desktops and there is no app store release process. The saving shrinks as you add offline editing and device features, which is why we scope those separately. Our MVP package is £10,000 plus VAT for a two week sprint.",
+        "Usually, because one codebase covers phones, tablets and desktops and there is no app store release process. The saving shrinks as you add offline editing and device features, which is why we scope those separately.",
     },
   ],
 }

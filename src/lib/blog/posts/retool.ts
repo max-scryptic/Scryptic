@@ -153,7 +153,7 @@ export const retool: BlogPost = {
     {
       question: "How long does it take to turn a Retool tool into a customer product?",
       answer:
-        "Typically four to eight weeks for the customer-facing app, depending on how many workflows, user roles and billing rules it needs. Keeping internal tools in Retool rather than rebuilding them keeps the scope focused.",
+        "Four to eight weeks for the customer-facing app, as long as the internal tools stay in Retool rather than being rebuilt too. Within that, the number of workflows, user roles and billing rules decides the timeline.",
     },
   ],
 }

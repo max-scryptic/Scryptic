@@ -190,7 +190,7 @@ export const webflow: BlogPost = {
     {
       question: "Will I lose my SEO if I move off Webflow?",
       answer:
-        "Not if you plan it. Keep the same URLs where you can, add a permanent 301 redirect from every changed URL to its closest new page, carry over titles and meta descriptions, submit the new sitemap in Google Search Console, and check for 404s weekly for the first month.",
+        "Not if the redirects are right. Keep the same URLs where you can and add a permanent 301 from every changed URL to its closest new page. Then copy each page's title and meta description, submit the new sitemap in Google Search Console, and check for 404s weekly for the first month.",
     },
     {
       question: "Can I keep my marketing site in Webflow and build the app separately?",

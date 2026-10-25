@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const vibeCoding: BlogPost = {
   slug: "vibe-coding-to-production",
@@ -204,7 +205,7 @@ export const vibeCoding: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "If most areas came back as needs work, that's normal, and it still usually means hardening rather than rebuilding. A good developer keeps what works, fixes what the audit found and tidies only the files you change every week. If someone's first suggestion is a full rewrite, ask them why. Scryptic does this work as part of full builds, from £10,000 depending on complexity, and you keep the code and every account throughout.",
+          text: `If most areas came back as needs work, that's normal, and it still usually means hardening rather than rebuilding. A good developer keeps what works, fixes what the audit found and tidies only the files you change every week. If someone's first suggestion is a full rewrite, ask them why. This hardening is part of the full builds we do, from ${mvp.price}, and the code and every account stay yours throughout.`,
         },
       ],
     },

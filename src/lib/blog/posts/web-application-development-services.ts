@@ -1,5 +1,6 @@
 import firstReleaseWorkflow from "@/assets/blog/images/first-release-workflow.webp"
 import type { BlogPost } from "@/lib/blog/types"
+import { extendedMvp, mvp } from "@/lib/services"
 
 export const webApplicationDevelopmentServices: BlogPost = {
   slug: "web-application-development-services",
@@ -7,7 +8,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
   series: "launch",
   topic: "Web apps",
   description:
-    "Compare web application development options, decide what your MVP needs, and see Scryptic's fixed-price packages for UK founders, from £10,000 plus VAT.",
+    `Compare web application development options, decide what your MVP needs, and see Scryptic's fixed-price packages for UK founders, from ${mvp.price} plus VAT.`,
   summary:
     "To get a web application built, you can hire developers, commission an agency or studio, or use a builder tool, and the work runs through scope, build, testing and launch whichever you pick. For a first release, start with one useful workflow rather than the whole roadmap, and choose a supplier who can tell you what will ship, what it costs and who owns everything afterwards.",
   datePublished: "2026-10-21",
@@ -26,7 +27,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "For many first releases, software that runs in the browser is enough. If you are not sure whether you need an app people install from a store, our guide on whether to build a web app or a mobile app first walks through that decision.",
+          text: "For many first releases, software that runs in the browser is enough. If you are not sure whether you need an app people install from a store, our guide to web apps versus mobile apps shows which one your product needs first.",
         },
       ],
     },
@@ -119,7 +120,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Our buyer's checklist for choosing an app development company goes further, with the questions to ask, what good answers sound like and the red flags to walk away from.",
+          text: "Our buyer's checklist for choosing an app development company goes further: which questions to ask, how a good answer sounds and which red flags mean you should walk away.",
         },
         {
           type: "paragraph",
@@ -133,7 +134,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Scryptic's MVP package costs £10,000 plus VAT for a two week sprint, and the Extended MVP costs £20,000 plus VAT for a three week sprint.",
+          text: `Scryptic's MVP package costs ${mvp.price} plus VAT for a two week sprint, and the Extended MVP costs ${extendedMvp.price} plus VAT for a three week sprint.`,
         },
         {
           type: "paragraph",
@@ -144,8 +145,8 @@ export const webApplicationDevelopmentServices: BlogPost = {
           caption: "Scryptic's two fixed-price MVP packages, with the price, sprint length and what each sprint covers",
           columns: ["Package", "Price", "Sprint length", "What the sprint covers"],
           rows: [
-            ["MVP", "£10,000 plus VAT", "2 weeks", "1 week of development, 1 week of changes from your feedback"],
-            ["Extended MVP", "£20,000 plus VAT", "3 weeks", "2 weeks of development, 1 week of changes from your feedback"],
+            ["MVP", `${mvp.price} plus VAT`, "2 weeks", "1 week of development, 1 week of changes from your feedback"],
+            ["Extended MVP", `${extendedMvp.price} plus VAT`, "3 weeks", "2 weeks of development, 1 week of changes from your feedback"],
           ],
         },
         {
@@ -182,7 +183,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
     {
       question: "How much does Scryptic charge to build a web app?",
       answer:
-        "The MVP package is £10,000 plus VAT for a two week sprint, and the Extended MVP is £20,000 plus VAT for a three week sprint. Both are fixed prices, with the scope and price agreed on a free discovery call before the build starts.",
+        `The MVP package is ${mvp.price} plus VAT for a two week sprint, and the Extended MVP is ${extendedMvp.price} plus VAT for a three week sprint. Both are fixed prices, with the scope and price agreed on a free discovery call before the build starts.`,
     },
     {
       question: "Can you take over a web app built with Lovable, Replit or Bubble?",

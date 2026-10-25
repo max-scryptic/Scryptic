@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const n8nVsZapierVsMake: BlogPost = {
   slug: "n8n-vs-zapier-vs-make",
@@ -163,7 +164,7 @@ export const n8nVsZapierVsMake: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Our guide on when to turn your automations into a SaaS product covers that call in more depth. At Scryptic, full builds that turn proven automations into a production app start from £10,000, depending on complexity.",
+          text: `Our guide on when to turn your automations into a SaaS product covers that call in more depth. If you make the jump, our builds that turn proven automations into a production app start from ${mvp.price}.`,
         },
       ],
     },
