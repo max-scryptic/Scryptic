@@ -11,6 +11,7 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
   summary:
     "Choose the progressive web app development company that can show you the browser behaviour your product needs, ship a usable first release and leave you owning the code. You are buying a working user journey, not a promise that your website will feel like an app. For a lot of first releases, the honest answer is that you need very little PWA work at all.",
   datePublished: "2026-10-24",
+  dateModified: "2026-10-25",
   facts: [
     { label: "Routes compared", value: "5" },
     { label: "Hardest part to get right", value: "Saving work offline" },
@@ -49,7 +50,7 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "A PWA earns its place in between: people come back to it often, a home screen icon helps, and some of the work has to survive a weak signal. Pick the platform for the task, not for the appeal of an app icon.",
+          text: "A PWA earns its place in between: people come back to it often, a home screen icon helps, and some of the work has to survive a weak signal. Pick the platform for the task, not for the appeal of an app icon. Our guide to PWA development covers what each of those features involves and roughly what it adds to the build.",
         },
       ],
     },

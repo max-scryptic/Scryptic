@@ -7,13 +7,14 @@ export const pwaDevelopment: BlogPost = {
   series: "launch",
   topic: "PWAs",
   description:
-    "PWA development adds installing, offline use and notifications to a web app. What to build first, what a PWA can't do and what to test before launch.",
+    "PWA development adds installing, offline use and notifications to a web app. What each feature involves, which screens to cache and what it adds to a build.",
   summary:
-    "PWA development adds browser features such as installing to the home screen, working offline and sending notifications to a web app. Build only the ones your users need to finish their task. A PWA is still a website underneath, so don't expect it to do everything a native mobile app can.",
+    "PWA development adds browser features such as installing to the home screen, working offline and sending notifications to a web app. Making an app installable is a small job; letting people edit offline is a big one. Build only what your users need, because a PWA is still a website underneath and can't do everything a native app can.",
   datePublished: "2026-10-25",
   facts: [
     { label: "Built from", value: "Manifest, service worker, HTTPS" },
-    { label: "Hardest to get right", value: "Offline editing and sync" },
+    { label: "Smallest job", value: "Making it installable" },
+    { label: "Biggest job", value: "Offline editing and sync" },
     { label: "Our fixed-price MVP", value: "From £10,000 + VAT" },
   ],
   sections: [
@@ -31,7 +32,7 @@ export const pwaDevelopment: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "None of that makes every screen work offline by itself, and an install icon won't rescue an app that's slow or confusing. If people can't finish the main task in an ordinary browser tab, fix that first. Giving them another way to open it won't help.",
+          text: "An install icon won't rescue an app that's slow or confusing. If people can't finish the main task in an ordinary browser tab, fix that first. Giving them another way to open it won't help.",
         },
       ],
     },
@@ -103,78 +104,104 @@ export const pwaDevelopment: BlogPost = {
       ],
     },
     {
-      id: "before-launch",
-      heading: "What needs to happen before a PWA is ready to launch?",
+      id: "installable",
+      heading: "What does it take to make a web app installable?",
       blocks: [
         {
           type: "paragraph",
-          text: "The main journey has to work on the devices you agreed, failures have to be obvious to the user, and an update must never put someone's work at risk. A demo on the developer's laptop proves none of that. The checks below turn a feature list into something you can accept or send back.",
+          text: "Less than most people expect: a manifest, a set of icons and HTTPS. Once those are in place, Chrome and Edge offer to install the app, and you don't need offline support first.",
+        },
+        {
+          type: "paragraph",
+          text: "The manifest is a short file that tells the browser the app's name, the page it opens on, its colours and whether it opens in its own window without the address bar. On Next.js it's a single file in the project. The one for this website is about twenty lines.",
+        },
+        {
+          type: "paragraph",
+          text: "The icons take more care than the code. You need at least a 192 and a 512 pixel version. Android also crops icons into circles and rounded squares, so add a \"maskable\" icon with the logo inside a safe area in the middle. Without one, Android shrinks your icon onto a white background, which rarely looks good.",
+        },
+        { type: "subheading", text: "iPhones need their own instructions" },
+        {
+          type: "paragraph",
+          text: "Safari never offers to install a web app. People have to find Add to Home Screen in the Share menu themselves, and most don't know it's there. If installing matters to your product, add a small screen that shows iPhone users how, and hide it from anyone who already has the app on their home screen.",
+        },
+        {
+          type: "paragraph",
+          text: "Chrome and Edge also let you add your own install button. It's tempting, but it does nothing on an iPhone, so it can't be the only way in. The iPhone instructions matter even more if you plan to send notifications, because there web push only works once the app is on the home screen.",
+        },
+      ],
+    },
+    {
+      id: "offline-screens",
+      heading: "Which screens should work offline?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Decide screen by screen, because each kind of content needs its own caching rule. The service worker can serve a saved copy, fetch a fresh one or do both. Pick the wrong rule and the app either breaks offline or shows people out-of-date information.",
+        },
+        {
+          type: "table",
+          caption: "Four kinds of content in a PWA, how to cache each one and what users see without a connection",
+          columns: ["Content", "Example", "Caching rule", "What users see offline"],
+          rows: [
+            ["The app itself", "Layout, scripts, styles and icons", "Use the saved copy, update it in the background", "The app opens straight away"],
+            ["Data that rarely changes", "Help pages, a product catalogue", "Show the saved copy, refresh it when online", "The last version they loaded"],
+            ["Live data", "Availability, balances, stock levels", "Always fetch fresh, fall back to a saved copy", "The saved copy, marked with when it was last updated"],
+            ["Private or one-off", "Payment pages, one-time links", "Never save it on the device", "A message saying it needs a connection"],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "At the very least, add an offline page. Without one, anyone who opens the app with no signal gets the browser's own error screen (Chrome's dinosaur), and the app looks broken.",
+        },
+        {
+          type: "paragraph",
+          text: "The saved files also need replacing whenever you release a new version, or people carry on using yesterday's app. Get that right in the first release. If the update mechanism itself is broken, fixing it means waiting for every phone to pick up the fix.",
+        },
+        { type: "subheading", text: "Editing offline is a different job" },
+        {
+          type: "paragraph",
+          text: "Letting people add or change things offline is where the effort jumps. The app has to keep their work in the browser's own database, queue it, send it when the signal returns and cope when two people have changed the same record. And people need to see which stage their work is at.",
         },
         {
           type: "image",
           image: pwaSaveStates,
           alt: "Three boxes labelled local draft, waiting and server saved, joined by arrows, with a broken link icon above the waiting stage.",
-          caption: "Saved on the phone, waiting for a signal and saved on the server are three different states. The user should always be able to tell which one they're in.",
-        },
-        { type: "subheading", text: "Decide what happens without a connection" },
-        {
-          type: "paragraph",
-          text: "Treat viewing, editing and submitting as three separate promises. Showing a page the user already loaded is easy compared with accepting new work offline and sending it later.",
+          caption: "Offline editing adds a waiting stage between saving on the phone and saving on the server.",
         },
         {
           type: "paragraph",
-          text: "For the inspection tool, the acceptance test might run like this:",
+          text: "Frameworks are starting to help with the simplest part. Next.js now has an experimental setting that holds a request when the connection drops and sends it again when the signal returns. It only covers screens the app has already loaded, though, so someone opening the app from cold with no signal still needs a service worker and a local database.",
         },
         {
-          type: "list",
-          ordered: true,
-          items: [
-            "Open an assigned inspection while connected.",
-            "Switch to airplane mode and add a finding.",
-            "Close the app, reopen it and check the finding is still there.",
-            "Reconnect and submit.",
-            "Check the server holds exactly one copy of the finding and the user sees a receipt.",
+          type: "paragraph",
+          text: "Testing all this takes more than a demo on the developer's laptop. Our guide to choosing a progressive web app development company lists the checks to ask for, from dropped connections to app updates, so you can sign off the build yourself.",
+        },
+      ],
+    },
+    {
+      id: "feature-effort",
+      heading: "How much does each PWA feature add to the build?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Installing is the smallest job and offline editing the biggest, with most features somewhere in between. The table gives our rough sense of each, assuming the app already works well online.",
+        },
+        {
+          type: "table",
+          caption: "Common PWA features, their relative effort and what drives it, for a web app that already works online",
+          columns: ["Feature", "Relative effort", "What drives the effort"],
+          rows: [
+            ["Installable app", "Small", "The icons, plus instructions for iPhone users"],
+            ["Offline page and saved app files", "Small to medium", "Replacing saved files cleanly on every release"],
+            ["Reading saved data offline", "Medium", "How much data there is and how fresh it must be"],
+            ["Push notifications", "Medium", "A server to send them, asking permission at the right moment, the iPhone home screen rule"],
+            ["Offline editing and sync", "Large", "The local database, the upload queue, clashing edits and the testing"],
+            ["Finishing uploads after the app closes", "Large, or not possible", "Only Chrome and Edge support it, so other browsers need a fallback"],
           ],
         },
         {
           type: "paragraph",
-          text: "If offline submission isn't in the agreed scope, the interface should say so. \"Saved on this device\" and \"Submitted\" must never look the same.",
-        },
-        { type: "subheading", text: "Agree what happens when two edits clash" },
-        {
-          type: "paragraph",
-          text: "Two people can change the same record before either sees the other's edit. Decide up front whether the app rejects the older edit, asks someone to choose or follows some other written rule. Quietly overwriting one person's work shouldn't be the default.",
-        },
-        {
-          type: "paragraph",
-          text: "Uploads need the same thought. If the connection drops just after the server receives a request, the user can't tell whether it worked, so they try again. That retry must not create a second report, booking or payment.",
-        },
-        { type: "subheading", text: "Test updates, not just first visits" },
-        {
-          type: "paragraph",
-          text: "Because a PWA caches its files, an older version of the interface can keep running after you've deployed new code. Test someone who already has the app open going through an update, as well as a fresh visit in a clean browser.",
-        },
-        {
-          type: "paragraph",
-          text: "Check what happens if they have unsaved work when the new version arrives. A prompt to update is fine; reloading the page halfway through a form is not. For a while after each release, old cached screens will also be talking to the new server, so the two need to get along.",
-        },
-        { type: "subheading", text: "Check shared devices and sensitive data" },
-        {
-          type: "paragraph",
-          text: "Offline storage puts another copy of your data on the device. Decide what goes there, how long it stays and what happens when someone signs out. On a shared tablet, the next person shouldn't be able to see the last person's records.",
-        },
-        {
-          type: "paragraph",
-          text: "Permissions still have to be checked on the server. Hiding a button protects nothing, whether the app is installed or open in a browser tab.",
-        },
-        { type: "subheading", text: "Test on real devices" },
-        {
-          type: "paragraph",
-          text: "Before development starts, agree with whoever is building your PWA which browsers and operating systems it has to support. Then run the main journey on each of them, including refused permissions, dropped connections and people coming back a second time.",
-        },
-        {
-          type: "paragraph",
-          text: "Keep the brief specific. \"Works offline\" can mean almost anything. \"An inspector can reopen an unfinished inspection without a signal on the agreed devices\" is something both of you can test.",
+          text: "Push notifications are the one people most often underestimate. Sending one message in a demo is quick. Deciding who gets which message, when, and how they turn it off takes longer, and so does handling the people who tap \"Don't allow\".",
         },
       ],
     },
@@ -184,7 +211,7 @@ export const pwaDevelopment: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Often, yes. We build and launch web apps and SaaS MVPs for UK founders, and on the discovery call we check whether the PWA features you need fit a fixed-price sprint. Making an app installable is a small job. Offline editing with sync is a much bigger one, and if it won't fit, we'll say so before you commit to anything.",
+          text: "Often, yes. We build and launch web apps and SaaS MVPs for UK founders, and on the discovery call we work out which of the features above fit a fixed-price sprint. If offline editing won't fit, we'll say so before you commit to anything.",
         },
         {
           type: "table",
@@ -212,9 +239,9 @@ export const pwaDevelopment: BlogPost = {
   ],
   faqs: [
     {
-      question: "Do PWAs work on iPhone?",
+      question: "Do I need a service worker to build a PWA?",
       answer:
-        "Yes, with limits. Safari never shows an install prompt, so people add the app from the Share menu, and web push notifications only work once it has been added to the Home Screen. Test the features you need on the iPhones your users actually have.",
+        "Not to make it installable: Chrome and Edge only need a manifest and HTTPS. You do need one for an offline page, saved app files or push notifications, which is most of what makes a PWA worth installing.",
     },
     {
       question: "Does a PWA need to be in the App Store or Google Play?",
