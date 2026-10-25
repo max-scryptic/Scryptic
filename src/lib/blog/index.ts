@@ -197,7 +197,7 @@ export function relatedPosts(post: BlogPost, count = 3) {
 }
 
 function blockText(block: PostBlock) {
-  if (block.type === "paragraph") return block.text
+  if (block.type === "paragraph") return block.link ? `${block.text} ${block.link.text}` : block.text
   if (block.type === "callout") return `${block.title} ${block.text}`
   if (block.type === "subheading") return block.text
   if (block.type === "image") return block.caption ?? ""

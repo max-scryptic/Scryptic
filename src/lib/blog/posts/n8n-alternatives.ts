@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const n8nAlternatives: BlogPost = {
   slug: "n8n-alternatives",
@@ -145,7 +146,7 @@ export const n8nAlternatives: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "That doesn't mean writing a workflow engine. It means a TypeScript backend with Postgres, Trigger.dev or Inngest for background work, and direct API calls to the services your nodes used to reach. Leave the low stakes automations in whatever tool your team likes. That's the stack we usually build on at Scryptic, and full builds start from £10,000 depending on complexity.",
+          text: `That doesn't mean writing a workflow engine. It means a TypeScript backend with Postgres, Trigger.dev or Inngest for background work, and direct API calls to the services your nodes used to reach. Leave the low stakes automations in whatever tool your team likes. That's the stack we usually build on at Scryptic; a build like this starts from ${mvp.price}, and the quote grows with the number of workflows it replaces.`,
         },
       ],
     },

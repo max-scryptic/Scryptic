@@ -238,7 +238,7 @@ export const replit: BlogPost = {
     {
       question: "Do I need to rebuild a Replit Agent app from scratch?",
       answer:
-        "Usually not. Replit Agent writes standard code on common frameworks with a Postgres database, so most apps can be secured, tidied and tested in three to eight weeks rather than rewritten. A rebuild only makes sense when the original design no longer fits the product.",
+        "Usually not. Replit Agent writes standard code on common frameworks with a Postgres database, so most apps can be secured, tidied and tested in three to eight weeks rather than rewritten. Rewriting is worth it only when the product has moved past what the original design can carry.",
     },
   ],
 }

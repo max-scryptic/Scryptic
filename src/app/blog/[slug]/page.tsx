@@ -39,7 +39,19 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
 
 function Block({ block }: { block: PostBlock }) {
   if (block.type === "paragraph") {
-    return <p className="text-lg text-pretty text-muted-foreground">{block.text}</p>
+    return (
+      <p className="text-lg text-pretty text-muted-foreground">
+        {block.text}
+        {block.link ? (
+          <>
+            {" "}
+            <Link href={block.link.href} className="text-primary hover:underline">
+              {block.link.text}
+            </Link>
+          </>
+        ) : null}
+      </p>
+    )
   }
 
   if (block.type === "callout") {

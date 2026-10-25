@@ -216,12 +216,12 @@ export const bolt: BlogPost = {
     {
       question: "Do I need to rebuild my Bolt.new app from scratch?",
       answer:
-        "Usually not. Most Bolt.new apps can be kept and hardened: claiming the database, securing it with row level security, moving secrets to the server, fixing the deploy and adding tests. A rebuild only makes sense when the app's basic design no longer fits the business.",
+        "Usually not. Most Bolt.new apps can be kept and hardened: claiming the database, securing it with row level security, moving secrets to the server, fixing the deploy and adding tests. Start again only if the business has outgrown how the app is designed.",
     },
     {
       question: "How long does it take to get a Bolt.new app ready for production?",
       answer:
-        "Typically three to eight weeks, depending on how many features and user roles the app has, how much of the code needs tidying, and whether public pages need server rendering to rank in search.",
+        "Three to eight weeks for most apps. Features and user roles set the base, then it grows with how much of the code needs tidying and whether public pages need server rendering to rank in search.",
     },
     {
       question: "Should I keep using Bolt.new after moving my app to GitHub?",

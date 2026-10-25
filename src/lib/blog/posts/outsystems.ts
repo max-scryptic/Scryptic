@@ -1,5 +1,6 @@
 import outsystemsLogo from "@/assets/blog/logos/outsystems.svg"
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const outsystems: BlogPost = {
   slug: "migrate-from-outsystems",
@@ -310,7 +311,7 @@ export const outsystems: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Set the rebuild cost against what each app costs to keep: its share of application objects and end users at the next renewal, plus the specialist time it needs. Then add what you take on: hosting, monitoring, security patching and the developers who maintain the code. At Scryptic, rebuilding a single app or product usually takes one to two months and starts from £10,000, depending on complexity. Those figures are for one app, not an estate.",
+          text: `Set the rebuild cost against what each app costs to keep: its share of application objects and end users at the next renewal, plus the specialist time it needs. Then add what you take on: hosting, monitoring, security patching and the developers who maintain the code. For scale, we usually rebuild a single app or product in one to two months, from ${mvp.price} depending on complexity. Those figures are for one app, not an estate.`,
         },
       ],
     },

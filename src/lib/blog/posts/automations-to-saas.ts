@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const automationsToSaas: BlogPost = {
   slug: "turn-automations-into-a-saas-product",
@@ -111,7 +112,7 @@ export const automationsToSaas: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Keep the old automations running for existing clients until the product can serve them, then move them across one at a time. At Scryptic, a first version like this usually takes weeks to a couple of months, full builds start from £10,000 depending on complexity, and you own the code and every account.",
+          text: `Keep the old automations running for existing clients until the product can serve them, then move them across one at a time. When we build this kind of first version, it usually takes weeks to a couple of months and costs from ${mvp.price}, more for complex workflows, and the code and every account are yours.`,
         },
       ],
     },

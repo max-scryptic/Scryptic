@@ -111,7 +111,7 @@ export const weweb: BlogPost = {
     {
       question: "How long does it take to move a WeWeb app to custom code?",
       answer:
-        "Typically four to eight weeks, depending on the number of screens and workflows, how many user roles the app has, and whether the backend is changing as well as the frontend.",
+        "Usually four to eight weeks. Screens, workflows and user roles set the size of the job, and it runs longer when the backend is changing as well as the frontend.",
     },
   ],
 }

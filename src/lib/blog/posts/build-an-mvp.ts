@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const buildAnMvp: BlogPost = {
   slug: "how-to-build-an-mvp",
@@ -108,7 +109,7 @@ export const buildAnMvp: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Cost is driven by scope far more than technology. Each extra type of user, each integration with a poorly documented API, payments beyond a simple checkout, and AI features all add time. At Scryptic, full builds start from £10,000 depending on complexity and usually go live in one to two months, with the estimate agreed in this first week before any build starts. If one quote is far below the others for the same scope, ask what's been left out; testing, payment edge cases and handover are the usual gaps.",
+          text: `Cost is driven by scope far more than technology. Each extra type of user, each integration with a poorly documented API, payments beyond a simple checkout, and AI features all add time. Our own builds start from ${mvp.price} and rise with complexity; most go live in one to two months, and the estimate is agreed in this first week, before any build starts. If one quote is far below the others for the same scope, ask what's been left out; testing, payment edge cases and handover are the usual gaps.`,
         },
         {
           type: "checklist",

@@ -1,5 +1,6 @@
 import adaloLogo from "@/assets/blog/logos/adalo.svg"
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const adalo: BlogPost = {
   slug: "migrate-from-adalo",
@@ -11,7 +12,7 @@ export const adalo: BlogPost = {
   description:
     "The time, money and risk in rebuilding an Adalo app as code you own: a work breakdown with durations, running costs, data traps and keeping your store listing.",
   summary:
-    "Rebuilding an Adalo app in code usually takes five to eight weeks and, with us, starts from £10,000, because Adalo exports your data but not your screens or logic. Most of the risk sits in a few predictable places: relationships missing from the CSV exports, users who never update, and automations that live outside Adalo. Ship the rebuild as an update to your existing store listing and users get it automatically, with your reviews intact.",
+    `Rebuilding an Adalo app in code usually takes five to eight weeks and, with us, starts from ${mvp.price}, because Adalo exports your data but not your screens or logic. Most of the risk sits in a few predictable places: relationships missing from the CSV exports, users who never update, and automations that live outside Adalo. Ship the rebuild as an update to your existing store listing and users get it automatically, with your reviews intact.`,
   datePublished: "2026-10-13",
   dateModified: "2026-10-14",
   facts: [
@@ -23,11 +24,11 @@ export const adalo: BlogPost = {
   sections: [
     {
       id: "short-answer",
-      heading: "Five to eight weeks, from £10,000, with four risks to plan for",
+      heading: "Five to eight weeks, with four risks to plan for",
       blocks: [
         {
           type: "paragraph",
-          text: "A typical Adalo app, with a few user roles and a few dozen screens, takes five to eight weeks to rebuild and release, and our builds start from £10,000. Screen count, roles, payments and the state of the data move the number. The risks are predictable, which means they can be planned out.",
+          text: "A typical Adalo app, with a few user roles and a few dozen screens, takes five to eight weeks to rebuild and release. Screen count, roles, payments and the state of the data move both the timeline and the price. The risks are predictable, which means they can be planned out.",
         },
         {
           type: "paragraph",
@@ -109,7 +110,7 @@ export const adalo: BlogPost = {
           items: [
             {
               term: "The build",
-              text: "From £10,000 with us. Screens, roles and integrations move the price far more than user numbers do.",
+              text: `From ${mvp.price} with us. Screens, roles and integrations move the price far more than user numbers do.`,
             },
             {
               term: "Overlap with Adalo",
@@ -220,7 +221,7 @@ export const adalo: BlogPost = {
     {
       question: "How much does it cost to rebuild an Adalo app?",
       answer:
-        "At Scryptic, rebuilding an Adalo app in code starts from £10,000 and usually takes five to eight weeks, depending on the number of screens, roles, payments and how much data needs moving. Budget separately for hosting, a few months of overlap on your Adalo plan, and ongoing development after launch.",
+        `With us it starts from ${mvp.price} and usually takes five to eight weeks. Screens, roles, payments and the amount of data to move decide where you land. Budget separately for hosting, a few months of overlap on your Adalo plan, and ongoing development after launch.`,
     },
   ],
 }

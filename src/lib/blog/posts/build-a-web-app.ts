@@ -1,5 +1,6 @@
 import webAppInterfaceRulesData from "@/assets/blog/images/web-app-interface-rules-data.webp"
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const buildAWebApp: BlogPost = {
   slug: "how-to-build-a-web-app",
@@ -94,7 +95,7 @@ export const buildAWebApp: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "A responsive web app runs in the browser on phones, tablets and desktops. If your idea relies on phone features a browser can't reach, or you need to be in the app stores, read our guide on whether to build a web app or a mobile app first before you commit to either.",
+          text: "A responsive web app runs in the browser on phones, tablets and desktops. If your idea relies on phone features a browser can't reach, or you need to be in the app stores, find your situation in our web app vs mobile app comparison before you commit to either.",
         },
       ],
     },
@@ -179,24 +180,12 @@ export const buildAWebApp: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "If you can explain the task but can't build it, we can. Scryptic builds and launches web apps and SaaS MVPs for UK founders who don't have an in-house development team, at a fixed price.",
-        },
-        {
-          type: "table",
-          caption: "Scryptic's two fixed-price MVP packages, with the price, the sprint and what follows launch",
-          columns: ["Package", "Fixed price", "Sprint", "After launch"],
-          rows: [
-            ["MVP", "£10,000 + VAT", "2 weeks: 1 of development, 1 of changes from your feedback", "1 week of bug fixes and support"],
-            ["Extended MVP", "£20,000 + VAT", "3 weeks: 2 of development, 1 of changes from your feedback", "1 week of bug fixes and support"],
-          ],
+          text: "Then the brief from the first section is the most useful thing you can hand over. A named user, a mapped journey, written rules and a few acceptance checks let a developer price the work far more accurately than an idea can, whoever you end up hiring.",
         },
         {
           type: "paragraph",
-          text: "We agree the scope and price before building starts, then go through progress and priorities on a call every Friday. The code lives in your repository and the service accounts are in your name, and both are handed over at launch.",
-        },
-        {
-          type: "paragraph",
-          text: "Bring your workflow, and any prototype you already have, to a free 30 minute discovery call. We will talk through the scope, the tech stack and which package fits.",
+          text: `We build first releases like the tutor app at a fixed price, from ${mvp.price} plus VAT.`,
+          link: { text: "See what each package includes.", href: "/#pricing" },
         },
       ],
     },
@@ -215,7 +204,7 @@ export const buildAWebApp: BlogPost = {
     {
       question: "Can I keep a prototype I have already built?",
       answer:
-        "Often, at least in part. Review the code, hosting and data before deciding what to keep. We review existing work during discovery, then either improve an app built with a no-code or AI tool or rebuild it and bring the data and users across. Either way, moving data and users takes planning.",
+        "Often, at least in part. Get the code, hosting and data reviewed before you decide what to keep. An app made with an AI tool can often be hardened where it is, while a no-code app usually has to be rebuilt with its data and users brought across. Either way, moving data and users takes planning.",
     },
   ],
 }

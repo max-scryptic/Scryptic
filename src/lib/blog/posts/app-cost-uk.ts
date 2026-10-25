@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const appCostUk: BlogPost = {
   slug: "how-much-does-it-cost-to-build-an-app-uk",
@@ -201,7 +202,7 @@ export const appCostUk: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "At Scryptic, full app to market builds start from £10,000 depending on complexity, usually take 1 to 2 months from kickoff to launch, and the written estimate comes before any work starts. Whoever you go with, our guide on choosing an app development company in the UK covers what else to check before you sign.",
+          text: `Our own quotes start from ${mvp.price} for a full app to market build and rise with complexity. Most launch 1 to 2 months after kickoff, and the written estimate comes before any work starts. Whoever you go with, our guide on choosing an app development company in the UK covers what else to check before you sign.`,
         },
       ],
     },

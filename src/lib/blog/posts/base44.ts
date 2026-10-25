@@ -113,7 +113,7 @@ export const base44: BlogPost = {
     {
       question: "How long does it take to move a Base44 app to production?",
       answer:
-        "Typically four to eight weeks, because the backend has to be rebuilt while the React interface is kept. The number of entities, user roles, backend functions and integrations has the biggest effect on the timeline.",
+        "Most take four to eight weeks. The React interface stays, so the time goes on rebuilding the backend, and the number of entities, user roles, backend functions and integrations sets the pace.",
     },
   ],
 }

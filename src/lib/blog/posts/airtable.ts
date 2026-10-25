@@ -215,7 +215,7 @@ export const airtable: BlogPost = {
     {
       question: "How long does it take to move from Airtable to a production app?",
       answer:
-        "Typically four to eight weeks, depending on the number of tables, linked records and automations, how clean the data is, and how much of the operation moves rather than staying in Airtable as a back office.",
+        "Four to eight weeks is typical. Tables, linked records and automations each add time, and so does messy data, while keeping part of the operation in Airtable as a back office brings the number down.",
     },
   ],
 }

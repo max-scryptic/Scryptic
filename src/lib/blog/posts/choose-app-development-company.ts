@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
+import { mvp } from "@/lib/services"
 
 export const chooseAppDevelopmentCompany: BlogPost = {
   slug: "how-to-choose-an-app-development-company-uk",
@@ -140,11 +141,11 @@ export const chooseAppDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "For a focused first version, typical UK prices are roughly £5,000 to £25,000 with a freelancer, £10,000 to £60,000 with a small studio and £40,000 to £150,000 or more with an agency. Freelance day rates usually sit around £300 to £700. A mid-level to senior in-house developer typically costs £50,000 to £90,000 a year in salary, more in London, before National Insurance, pension and recruitment fees. Scope moves these numbers more than the type of supplier does; our guide to the cost of building an app in the UK goes into what pushes them up or down.",
+          text: "For a focused first version, expect to be quoted roughly £5,000 to £25,000 by a freelancer, £10,000 to £60,000 by a small studio, and anything from £40,000 to £150,000 or beyond by an agency. Freelance day rates usually sit around £300 to £700. A mid-level to senior in-house developer typically costs £50,000 to £90,000 a year in salary, more in London, before National Insurance, pension and recruitment fees. Scope moves these numbers more than the type of supplier does; our guide to the cost of building an app in the UK goes into what pushes them up or down.",
         },
         {
           type: "paragraph",
-          text: "For reference, Scryptic is a founder-led studio in Brighton. Full app to market builds start from £10,000, the client owns the code and every account, and there's a catch-up every Friday.",
+          text: `For reference, Scryptic is a founder-led studio in Brighton. Full app to market builds start from ${mvp.price}, the client owns the code and every account, and there's a catch-up every Friday.`,
         },
       ],
     },

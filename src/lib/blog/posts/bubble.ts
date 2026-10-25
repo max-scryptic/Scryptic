@@ -377,7 +377,7 @@ export const bubble: BlogPost = {
     {
       question: "How long does it take to rebuild a Bubble app in code?",
       answer:
-        "Typically four to eight weeks to a production first release, depending on how many workflows, user roles and integrations the app has, and how much data needs moving and checking.",
+        "Plan on four to eight weeks to a production first release. Every workflow, user role and integration is rebuilt by hand, and the data has to be moved and checked as well, so those numbers decide where you land.",
     },
     {
       question: "Will moving off Bubble reduce my costs?",

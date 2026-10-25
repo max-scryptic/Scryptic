@@ -1,5 +1,6 @@
 import offlineSaveStates from "@/assets/blog/images/offline-save-states.webp"
 import type { BlogPost } from "@/lib/blog/types"
+import { extendedMvp, mvp } from "@/lib/services"
 
 export const progressiveWebAppDevelopmentCompany: BlogPost = {
   slug: "progressive-web-app-development-company",
@@ -15,7 +16,7 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
   facts: [
     { label: "Routes compared", value: "5" },
     { label: "Hardest part to get right", value: "Saving work offline" },
-    { label: "Our fixed-price MVP", value: "From £10,000 + VAT" },
+    { label: "Best single test", value: "Drop the connection mid-task" },
   ],
   sections: [
     {
@@ -42,7 +43,7 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Often not for a first release. If your customers open the product now and then, have a connection and complete one short task, a responsive web app that works well on a phone covers them. Installation and offline working can wait until users give you a reason to add them.",
+          text: "Often not for a first release. If your customers open the product now and then, have a connection and complete one short task, an ordinary web app that is easy to use on a small screen is all they need. Installation and offline working can wait until users give you a reason to add them.",
         },
         {
           type: "paragraph",
@@ -192,40 +193,28 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
     },
     {
       id: "where-scryptic-fits",
-      heading: "Where does Scryptic fit?",
+      heading: "Which PWA work fits a Scryptic sprint?",
       blocks: [
         {
           type: "paragraph",
-          text: "We build and launch web apps and SaaS MVPs for UK founders, including non-technical founders who don't want to hire a development team. You work directly with our founder, a full-stack developer with five years of experience building for enterprise clients and startups.",
+          text: "Making the app installable, yes: that is a small job on a modern framework. Offline editing with sync is a large one, and like background processing and some device integrations it may not fit a short sprint, so we check those requirements on the discovery call before we agree the build.",
         },
         {
           type: "paragraph",
-          text: "That makes us worth a look for a focused first product. It doesn't mean complex offline sync, background processing or every device integration will fit a short sprint. Making a web app installable is a small job on a modern framework; letting people edit offline and sync later is a large one. Bring those requirements to the discovery call and we'll tell you honestly whether they fit before we agree the build.",
-        },
-        {
-          type: "paragraph",
-          text: "There are two fixed-price packages. Each sprint ends with a week of changes based on your feedback, and both include a handover week after launch.",
+          text: "The two packages differ in development time, which is what offline work uses up. Both are fixed price, and in both the build is followed by a week of changes from your feedback and a handover week after launch.",
         },
         {
           type: "table",
-          caption: "Scryptic's two fixed-price MVP packages, with the price, the sprint and what follows launch",
-          columns: ["Package", "Fixed price", "Sprint", "After launch"],
+          caption: "How much development time each Scryptic package gives a PWA build, with its fixed price and the weeks that follow",
+          columns: ["Package", "Fixed price", "Development time", "Then"],
           rows: [
-            ["MVP", "£10,000 + VAT", "2 weeks: 1 of development, 1 of changes from your feedback", "1 week of bug fixes and support"],
-            ["Extended MVP", "£20,000 + VAT", "3 weeks: 2 of development, 1 of changes from your feedback", "1 week of bug fixes and support"],
+            ["MVP", `${mvp.price} + VAT`, "1 week", "1 week of changes, then 1 handover week after launch"],
+            ["Extended MVP", `${extendedMvp.price} + VAT`, "2 weeks", "1 week of changes, then 1 handover week after launch"],
           ],
         },
         {
           type: "paragraph",
-          text: "We agree the scope and price before work starts. Every Friday we get on a video call to go through what shipped and what comes next, so you can reorder priorities early. New ideas still have to fit the agreed scope or replace something in it.",
-        },
-        {
-          type: "paragraph",
-          text: "If you already have a prototype or a codebase, we review it during discovery and keep the parts worth keeping. That includes apps made with no-code and AI builders, which we either harden into production code or rebuild, bringing your users and data across. That's a migration project, not a one-click conversion.",
-        },
-        {
-          type: "paragraph",
-          text: "The code lives in your repository, and the hosting, database, payment and other accounts are in your name, handed over at launch. If that sounds like the right fit, book a free 30 minute discovery call to talk through the idea, the scope, the tech stack and which package suits it.",
+          text: "And to answer the ownership question from the brief above: the code sits in a repository you own, and the hosting, database and payment accounts are registered to you and passed over at launch.",
         },
       ],
     },
@@ -283,7 +272,7 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
     {
       question: "How much does PWA development cost?",
       answer:
-        "It depends on the workflow, any app you already have and the browser behaviour you need, and offline editing with sync costs far more than installability alone. Our MVP package is £10,000 plus VAT for a two week sprint and the Extended MVP is £20,000 plus VAT for three weeks, with any PWA features assessed within that agreed scope.",
+        `It depends on the workflow, any app you already have and the browser behaviour you need, and offline editing with sync costs far more than installability alone. Our fixed-price packages start at ${mvp.price} plus VAT, and we check which PWA features fit that scope before the build starts.`,
     },
     {
       question: "What support should be agreed before launch?",
