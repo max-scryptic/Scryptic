@@ -93,6 +93,7 @@ export const wix: BlogPost = {
         {
           type: "paragraph",
           text: "In practice, the app runs at app.yourdomain.com with the same logo, colours and fonts, and the Wix site links to it. If your domain is managed in Wix, you add a DNS record for the subdomain and point it at the new hosting. Velo code you wrote can be copied out, or pulled into a repository through the Wix Studio GitHub integration, and its logic ported to the new server. Collections and contacts export as CSV for the first import.",
+          link: { text: "Whether the app should sit on a subdomain or a subpath.", href: "/blog/migrate-from-webflow#subdomain-or-subpath" },
         },
       ],
     },
@@ -120,12 +121,12 @@ export const wix: BlogPost = {
   ],
   faqs: [
     {
-      question: "Can I export my Wix site?",
+      question: "Can I download my Wix site's code?",
       answer:
         "No. Wix does not offer an HTML or code export of your pages. You can export CMS collections and contacts as CSV, download your media and copy any Velo code you wrote, but the pages themselves must be rebuilt elsewhere.",
     },
     {
-      question: "Will I lose my SEO if I move off Wix?",
+      question: "How do I keep my Google rankings if I leave Wix?",
       answer:
         "The safest route is not to move the marketing site at all: keep it on Wix and move only the app. If the site has to go, crawl it first, map every URL to its new address, set up 301 redirects on the new host, keep each page's title and meta description, and submit the new sitemap in Google Search Console.",
     },

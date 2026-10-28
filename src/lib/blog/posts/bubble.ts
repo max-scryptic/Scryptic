@@ -365,7 +365,7 @@ export const bubble: BlogPost = {
   faqHeading: "Questions about leaving Bubble",
   faqs: [
     {
-      question: "Can I export my code from Bubble?",
+      question: "Does Bubble generate code I can host elsewhere?",
       answer:
         "No. Bubble does not generate source code you can run elsewhere. You can export your data as CSV or through the Data API, and download a .bubble app file, but that file only imports back into Bubble. Moving off Bubble means rebuilding the app.",
     },

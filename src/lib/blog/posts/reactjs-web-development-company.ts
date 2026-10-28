@@ -139,7 +139,7 @@ export const reactjsWebDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Sometimes a rewrite is still the right call, but it should come out of a code review, not the first sales call. What generated apps tend to lack sits behind the screens: security rules on the database, secret keys kept out of the browser, tests and a repeatable deployment. Base44 is the exception to know about. Its exported screens still call Base44's own backend, so keeping them means building a backend you own behind them.",
+          text: "Sometimes a rewrite is still right. Decide that after someone has read the code, not on the first sales call. What generated apps tend to lack sits behind the screens: security rules on the database, secret keys kept out of the browser, tests and a repeatable deployment. Base44 is the exception to know about. Its exported screens still call Base44's own backend, so keeping them means building a backend you own behind them.",
         },
         {
           type: "paragraph",
@@ -158,7 +158,7 @@ export const reactjsWebDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Before you ask for prices, list the features you want and decide which ones the first release can't work without. Our free MVP Scope Planner helps with that: you list your features, size each one and see what fits a one week build and what can wait.",
+          text: "Before you ask for prices, list the features you want and decide which ones the first release can't work without. Our free MVP Scope Planner is built for that step: it sizes each feature you list and shows what fits a one week build and what can wait.",
           link: { text: "Plan your first release with the MVP Scope Planner.", href: "/tools/mvp-scope-planner" },
         },
         {
@@ -191,7 +191,7 @@ export const reactjsWebDevelopmentCompany: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "We build the whole release rather than the React layer alone: the interface, the server, the database, sign-in and hosting, mostly with Next.js and Postgres. You work directly with the founder, who writes the code. The code lives in your repository, and the hosting, database and payment accounts are registered to you and handed over at launch.",
+          text: "We build the whole release rather than the React layer alone: the interface, the server, the database, sign-in and hosting, mostly with Next.js and Postgres. You work directly with the founder, who writes the code. You own the repository from the first commit, and the hosting, database and payment accounts pass to you at launch.",
         },
         {
           type: "paragraph",
@@ -215,7 +215,7 @@ export const reactjsWebDevelopmentCompany: BlogPost = {
     {
       question: "Who keeps a React app up to date after launch?",
       answer:
-        "Agree that before launch. React and the libraries around it release updates and security fixes, and someone has to apply them, whether that is a retainer, a freelancer or your own developer. Our handover week covers bug fixes straight after launch; after that the code is in your repository, so any React developer can pick it up.",
+        "Agree that before launch. React and the libraries around it release updates and security fixes, and someone has to apply them: a developer on retainer, a freelancer you call in, or your own hire. Our handover week covers bug fixes straight after launch; after that the code is in your repository, so any React developer can pick it up.",
     },
   ],
 }

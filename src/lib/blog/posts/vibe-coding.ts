@@ -11,6 +11,7 @@ export const vibeCoding: BlogPost = {
   summary:
     "A vibe-coded app is rarely ready for production as it stands, but you can find out how far off it is yourself in an afternoon. Run the seven checks below, one area at a time, and compare what you find with what good looks like. Most apps need hardening, not a rewrite.",
   datePublished: "2026-10-14",
+  dateModified: "2026-10-28",
   facts: [
     { label: "Term coined", value: "Andrej Karpathy, early 2025" },
     { label: "Areas to audit", value: "Seven" },
@@ -205,7 +206,7 @@ export const vibeCoding: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `If most areas came back as needs work, that's normal, and it still usually means hardening rather than rebuilding. A good developer keeps what works, fixes what the audit found and tidies only the files you change every week. If someone's first suggestion is a full rewrite, ask them why. This hardening is part of the full builds we do, from ${mvp.price}, and the code and every account stay yours throughout.`,
+          text: `If most areas came back as needs work, that's normal, and it still usually means hardening rather than rebuilding. A good developer keeps what works, fixes what the audit found and tidies only the files you change every week. If someone's first suggestion is a full rewrite, ask them why. This hardening is part of every build we do, and our sprints start at ${mvp.price} + VAT.`,
         },
       ],
     },

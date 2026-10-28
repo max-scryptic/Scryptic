@@ -185,6 +185,7 @@ export const bolt: BlogPost = {
         {
           type: "paragraph",
           text: "A Bolt app usually ships with no error tracking, no tested backups and no staging copy, and schema changes have been made by prompt directly against the only database there is. You find out about problems from customers.",
+          link: { text: "Our production audit covers the same checks for any AI-built app.", href: "/blog/vibe-coding-to-production" },
         },
         {
           type: "list",
@@ -209,7 +210,7 @@ export const bolt: BlogPost = {
   ],
   faqs: [
     {
-      question: "Can I export my code from Bolt.new?",
+      question: "Can I move a Bolt.new project to my own GitHub?",
       answer:
         "Yes. Connect GitHub so Bolt pushes the project to a repository you own, or download it as a ZIP file. The result is a standard project for the framework you chose, often React with Vite, and it runs without Bolt.",
     },
@@ -219,7 +220,7 @@ export const bolt: BlogPost = {
         "Usually not. Most Bolt.new apps can be kept and hardened: claiming the database, securing it with row level security, moving secrets to the server, fixing the deploy and adding tests. Start again only if the business has outgrown how the app is designed.",
     },
     {
-      question: "How long does it take to get a Bolt.new app ready for production?",
+      question: "Is a Bolt.new app days or weeks away from launch?",
       answer:
         "Three to eight weeks for most apps. Features and user roles set the base, then it grows with how much of the code needs tidying and whether public pages need server rendering to rank in search.",
     },

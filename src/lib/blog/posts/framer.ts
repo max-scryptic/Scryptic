@@ -30,6 +30,7 @@ export const framer: BlogPost = {
         {
           type: "paragraph",
           text: "The split is straightforward. The site stays at yourdomain.com in Framer. The app is built separately, with a real database, server-side authentication, payments through a provider such as Stripe, and business logic as tested code in a repository, then deployed at app.yourdomain.com. Copy your colours, type styles and spacing into shared design tokens so the two look like one product, link the sign-up and log-in buttons on the site into the app, and you are done. Your search rankings do not move, because no public page changes address.",
+          link: { text: "Subdomain or subpath for the app, compared in our Webflow guide.", href: "/blog/migrate-from-webflow#subdomain-or-subpath" },
         },
         {
           type: "callout",
@@ -56,12 +57,12 @@ export const framer: BlogPost = {
   faqHeading: "Two questions we hear every time",
   faqs: [
     {
-      question: "Can I export my Framer site as code?",
+      question: "Does Framer have an HTML export?",
       answer:
         "Not officially. Framer does not offer HTML export for self-hosting. You can export CMS collections to CSV with a plugin and copy your code components and overrides, but the pages themselves need rebuilding if you leave Framer.",
     },
     {
-      question: "Will I lose my SEO if I move off Framer?",
+      question: "Will moving off Framer hurt my search rankings?",
       answer:
         "Not if you add the app on a subdomain and keep the site in Framer, because your existing pages are not touched at all. If the site itself moves, keep URLs the same where possible, add a permanent 301 redirect for every one that changes, give each new page the old title and meta description, and send Google the new sitemap through Search Console.",
     },

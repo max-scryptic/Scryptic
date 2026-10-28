@@ -1,4 +1,3 @@
-import offlineSaveStates from "@/assets/blog/images/offline-save-states.webp"
 import type { BlogPost } from "@/lib/blog/types"
 import { extendedMvp, mvp } from "@/lib/services"
 
@@ -12,7 +11,7 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
   summary:
     "Choose the progressive web app development company that can show you the browser behaviour your product needs, ship a usable first release and leave you owning the code. You are buying a working user journey, not a promise that your website will feel like an app. For a lot of first releases, the honest answer is that you need very little PWA work at all.",
   datePublished: "2026-10-24",
-  dateModified: "2026-10-25",
+  dateModified: "2026-10-28",
   facts: [
     { label: "Routes compared", value: "5" },
     { label: "Hardest part to get right", value: "Saving work offline" },
@@ -47,11 +46,13 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "At the other end, if the product depends on something the target browsers cannot do reliably, such as background location or Bluetooth on iPhone, build a native or cross-platform app rather than forcing the workflow into a PWA. Our guide on whether to build a web app or a mobile app first goes through that decision row by row.",
+          text: "At the other end, if the product depends on something the target browsers cannot do reliably, such as background location or Bluetooth on iPhone, build a native or cross-platform app rather than forcing the workflow into a PWA.",
+          link: { text: "Web app or mobile app first? The decision, row by row.", href: "/blog/web-app-or-mobile-app-first" },
         },
         {
           type: "paragraph",
-          text: "A PWA earns its place in between: people come back to it often, a home screen icon helps, and some of the work has to survive a weak signal. Pick the platform for the task, not for the appeal of an app icon. Our guide to PWA development covers what each of those features involves and roughly what it adds to the build.",
+          text: "A PWA earns its place in between: people come back to it often, a home screen icon helps, and some of the work has to survive a weak signal. Pick the platform for the task, not for the appeal of an app icon.",
+          link: { text: "What each PWA feature involves and adds to a build.", href: "/blog/pwa-development" },
         },
       ],
     },
@@ -108,12 +109,6 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
           text: "\"We'll sync it later\" is not a design. Saved on the phone and saved on the server are two different states, and the user needs to know which one they are in.",
         },
         {
-          type: "image",
-          image: offlineSaveStates,
-          alt: "A document moves from a local save, through a pending state while the connection is broken, to saved on the server, with an arrow showing the retry.",
-          caption: "Work saved offline sits in a pending state until the server confirms it. The app has to show that state and retry safely.",
-        },
-        {
           type: "paragraph",
           text: "Ask what happens when someone closes the app before it uploads, taps submit twice, or edits a record somebody else changed in the meantime. A retry must never quietly create a second booking, order or report.",
         },
@@ -167,14 +162,19 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
           text: "Send every company the same short brief built around one workflow you can test. Quotes are only comparable when they describe the same outcome, and a feature list headed \"modern PWA\" gives each supplier room to price something different.",
         },
         {
+          type: "paragraph",
+          text: "Start from the user, the task and what must work at launch, as you would for any web app.",
+          link: { text: "How to define the task at the heart of the brief.", href: "/blog/how-to-build-a-web-app" },
+        },
+        {
+          type: "paragraph",
+          text: "Then add the two things a PWA brief can't do without:",
+        },
+        {
           type: "list",
-          ordered: true,
           items: [
-            { term: "Name the user and the task.", text: "Who opens the app and what they need to get done, from start to finish." },
-            { term: "Describe the conditions.", text: "The browsers and devices, how often the connection drops and whether devices are shared." },
-            { term: "Draw the release boundary.", text: "Separate what must work at launch from later ideas such as notifications or full offline editing." },
-            { term: "Write checks you can watch.", text: "Include a dropped connection, a retry, signing out and an app update where they apply." },
-            { term: "Ask for delivery and ownership terms.", text: "Scope, changes, testing, launch, account access and who is responsible after launch." },
+            { term: "The conditions", text: "The browsers and devices, how often the connection drops and whether devices are shared." },
+            { term: "Checks you can watch", text: "A dropped connection, a retry, signing out and an app update, wherever they apply." },
           ],
         },
         {
@@ -187,7 +187,11 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Finally, ask who will write the code and who makes the technical decisions. Working directly with the developer and working through an agency's account team can both go well, as long as you know how a question or a change of plan reaches the person building the product.",
+          text: "The rest of the vetting, from who writes the code to whose name the accounts are in, is the same for any app.",
+          link: {
+            text: "The general questions to ask any app developer.",
+            href: "/blog/how-to-choose-an-app-development-company-uk",
+          },
         },
       ],
     },
@@ -214,7 +218,7 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "And to answer the ownership question from the brief above: the code sits in a repository you own, and the hosting, database and payment accounts are registered to you and passed over at launch.",
+          text: "The code lives in a repository you own and the accounts move to you at launch, so whoever works on the app next can pick it up straight away.",
         },
       ],
     },

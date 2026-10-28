@@ -91,7 +91,7 @@ export const base44: BlogPost = {
   ],
   faqs: [
     {
-      question: "Can I export my code from Base44?",
+      question: "Can I export a Base44 app and run it on my own?",
       answer:
         "Partly. On paid plans from Builder upwards you can sync the React frontend to GitHub or download it as a ZIP, so check what your plan includes. The exported code still uses the Base44 SDK to reach Base44's database, login and backend functions, so it does not run on its own.",
     },
@@ -111,7 +111,7 @@ export const base44: BlogPost = {
         "Not as they are. Base44 backend functions are written for Deno and call the Base44 SDK, so they will not run elsewhere unchanged. Their logic is still a useful specification, and a developer can rewrite each one as an endpoint or job on your own backend.",
     },
     {
-      question: "How long does it take to move a Base44 app to production?",
+      question: "Why does leaving Base44 take weeks if the frontend exports?",
       answer:
         "Most take four to eight weeks. The React interface stays, so the time goes on rebuilding the backend, and the number of entities, user roles, backend functions and integrations sets the pace.",
     },

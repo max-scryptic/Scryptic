@@ -151,7 +151,7 @@ export const retool: BlogPost = {
         "No. Many companies keep Retool for internal admin and build only the customer-facing product. Both can read and write the same database, as long as schema changes are planned with the Retool apps in mind and the new app uses its own, narrower database credentials.",
     },
     {
-      question: "How long does it take to turn a Retool tool into a customer product?",
+      question: "How big a job is turning a Retool tool into a customer product?",
       answer:
         "Four to eight weeks for the customer-facing app, as long as the internal tools stay in Retool rather than being rebuilt too. Within that, the number of workflows, user roles and billing rules decides the timeline.",
     },

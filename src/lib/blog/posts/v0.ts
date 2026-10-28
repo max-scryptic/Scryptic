@@ -144,7 +144,7 @@ export const v0: BlogPost = {
   ],
   faqs: [
     {
-      question: "Can I export my code from v0?",
+      question: "Can I keep working on v0 code outside v0?",
       answer:
         "Yes. You can connect a GitHub repository, where v0 works on branches and proposes changes for review, or download the project as a ZIP file. The code is a standard Next.js app using React, Tailwind CSS and shadcn/ui, which any web developer can work on.",
     },

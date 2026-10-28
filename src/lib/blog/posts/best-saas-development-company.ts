@@ -12,6 +12,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
   summary:
     "The best SaaS development company is the one that can ship your next usable release for an agreed price and leave you owning the code and the accounts. Below we compare six UK options, including Goodspeed, Augustova, Neptune Digital and ourselves, on what they build, how they charge and how long an MVP takes, then give you seven checks to run before you sign.",
   datePublished: "2026-10-22",
+  dateModified: "2026-10-28",
   facts: [
     { label: "Companies compared", value: "6" },
     { label: "Published MVP prices", value: "From about £8,000 to $50,000+" },
@@ -44,7 +45,11 @@ export const bestSaasDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "If you are still working out whether a service or a set of automations should become software at all, read our guide on when to turn automations into a SaaS product first. No development quote can tell you whether the problem is worth solving.",
+          text: "If you are still working out whether a service or a set of automations should become software at all, settle that first. No development quote can tell you whether the problem is worth solving.",
+          link: {
+            text: "Ten signs your automations should become a SaaS product.",
+            href: "/blog/turn-automations-into-a-saas-product",
+          },
         },
       ],
     },
@@ -114,7 +119,8 @@ export const bestSaasDevelopmentCompany: BlogPost = {
         { type: "subheading", text: "Goodspeed and Neptune Digital build on someone else's platform" },
         {
           type: "paragraph",
-          text: "Goodspeed builds on Bubble by default and Neptune Digital on Claris FileMaker. The other four write conventional code. A platform build can be quick to change in the early weeks, but the app runs on a service you rent, so its pricing, limits and roadmap become part of your business. Moving off later usually means a rebuild, which our Bubble migration guide covers in detail.",
+          text: "Goodspeed builds on Bubble by default and Neptune Digital on Claris FileMaker. The other four write conventional code. A platform build can be quick to change in the early weeks, but the app runs on a service you rent, so its pricing, limits and roadmap become part of your business. Moving off later usually means a rebuild.",
+          link: { text: "What rebuilding a Bubble app in code involves.", href: "/blog/migrate-from-bubble" },
         },
         {
           type: "paragraph",
@@ -182,30 +188,16 @@ export const bestSaasDevelopmentCompany: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Define the release as one complete user journey before you ask anyone for a price. \"A booking SaaS with payments and a dashboard\" is too loose to compare: one studio will price a simple booking flow, another will quietly assume calendar sync, refunds, staff permissions and reporting.",
+          text: "Define the release as one complete user journey before you ask anyone for a price. \"A SaaS with payments and a dashboard\" is too loose to compare: one studio will price a single checkout, another will quietly assume team accounts, refunds, staff permissions and reporting.",
         },
         {
           type: "paragraph",
-          text: "Say you are building software for training providers to manage course bookings. A sensible first release lets an organiser publish a course, lets a customer book and pay, and shows the organiser who is coming. The marketplace, referral scheme and custom reports can wait unless the booking cannot happen without them.",
+          text: "Write down what happens when things go wrong, too: a card payment fails, a customer cancels mid-month, a user loses access to their team. Those answers tell a developer more about the size of the job than another page of dashboard ideas.",
         },
         {
           type: "paragraph",
-          text: "Write down what happens when things go wrong, too: a card payment fails, a course sells out, someone cancels the day before. Those three answers tell a developer more about the size of the job than another page of dashboard ideas.",
-        },
-        {
-          type: "paragraph",
-          text: "Then send every provider the same short brief:",
-        },
-        {
-          type: "list",
-          items: [
-            { term: "User", text: "Who will use it and what they need to get done." },
-            { term: "Core journey", text: "Every step from starting the task to finishing it." },
-            { term: "Launch essentials", text: "The features without which that journey breaks." },
-            { term: "Existing assets", text: "Any code, prototypes, data, designs and accounts you already have." },
-            { term: "Constraints", text: "Budget, deadline, integrations and any sensitive data." },
-            { term: "Exclusions", text: "What you have deliberately left for later." },
-          ],
+          text: "Then send every provider the same written brief, with anything you already have attached (code, a prototype, designs, accounts) and a list of what you've deliberately left for later.",
+          link: { text: "Turn your idea into a brief a developer can price.", href: "/blog/how-to-build-a-web-app" },
         },
         {
           type: "paragraph",
@@ -269,11 +261,11 @@ export const bestSaasDevelopmentCompany: BlogPost = {
         { type: "subheading", text: "5. Check ownership before you pay a deposit" },
         {
           type: "paragraph",
-          text: "Owning your product means more than being sent a zip of source code. Read the ownership clause in the contract and ask whose name the code repository, hosting, database and payment accounts will be in.",
-        },
-        {
-          type: "paragraph",
-          text: "With us, all four are in your name and handed over at launch. It matters the day you hire your first developer or switch supplier.",
+          text: "Owning your product means more than being sent a zip of source code. Read the ownership clause in the contract and ask whose name the code repository, hosting, database and payment accounts will be in. With us, all four end up in yours at launch, which matters the day you hire your first developer or switch supplier.",
+          link: {
+            text: "What the contract should say about code ownership.",
+            href: "/blog/how-to-choose-an-app-development-company-uk",
+          },
         },
         {
           type: "paragraph",
@@ -333,11 +325,6 @@ export const bestSaasDevelopmentCompany: BlogPost = {
       question: "Should I use a no-code agency or a coded build for my SaaS?",
       answer:
         "A no-code agency building on Bubble can be quick to change early on, but the product runs on a platform you rent and moving off it later usually means a rebuild. A coded build need not cost more for a focused first release, and it gives you code you can host anywhere and hand to any developer.",
-    },
-    {
-      question: "Do I own the code when a development company builds my SaaS?",
-      answer:
-        "Only if the contract says so, so read the ownership clause and ask whose name the repository, hosting, database and payment accounts will be in. With Scryptic, the code is in your repository and every account is in your name, handed over at launch.",
     },
   ],
 }

@@ -11,6 +11,7 @@ export const webAppVsMobileApp: BlogPost = {
   summary:
     "Build a web app first unless your product can't work without a phone. Go mobile first only when the camera, sensors, offline use, reliable push notifications or a several-times-a-day consumer habit sit at the heart of the product. Everything else starts on the web, built so a mobile app can be added later.",
   datePublished: "2026-10-14",
+  dateModified: "2026-10-28",
   sections: [
     {
       id: "verdict",
@@ -65,7 +66,7 @@ export const webAppVsMobileApp: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `When it points to the web, build so mobile can follow. Keep pricing, permissions and anything touching money on the server, where a future app can call the same endpoints. Use TypeScript throughout so React Native can share types and validation later. Choose sign-in that supports tokens as well as browser cookies. Do those three things and a mobile app becomes a new frontend rather than a rebuild. It's the reason we start most founders on TypeScript, Next.js and Postgres, for builds from ${mvp.price} upwards.`,
+          text: `When it points to the web, build so mobile can follow. Keep pricing, permissions and anything touching money on the server, where a future app can call the same endpoints. Use TypeScript throughout so React Native can share types and validation later. Choose sign-in that supports tokens as well as browser cookies. Do those three things and a mobile app becomes a new frontend rather than a rebuild. It's why our builds, from ${mvp.price} + VAT, start most founders on TypeScript, Next.js and Postgres.`,
         },
       ],
     },

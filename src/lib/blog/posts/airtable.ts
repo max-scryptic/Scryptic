@@ -213,7 +213,7 @@ export const airtable: BlogPost = {
         "Yes. The Airtable Web API allows five requests per second per base and returns up to 100 records per page. A script that waits and retries after a 429 response can export even large bases reliably.",
     },
     {
-      question: "How long does it take to move from Airtable to a production app?",
+      question: "How long does an Airtable to Postgres move take?",
       answer:
         "Four to eight weeks is typical. Tables, linked records and automations each add time, and so does messy data, while keeping part of the operation in Airtable as a back office brings the number down.",
     },
