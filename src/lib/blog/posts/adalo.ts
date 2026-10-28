@@ -1,6 +1,6 @@
 import adaloLogo from "@/assets/blog/logos/adalo.svg"
 import type { BlogPost } from "@/lib/blog/types"
-import { mvp } from "@/lib/services"
+import { extendedMvp, mvp } from "@/lib/services"
 
 export const adalo: BlogPost = {
   slug: "migrate-from-adalo",
@@ -12,9 +12,9 @@ export const adalo: BlogPost = {
   description:
     "The time, money and risk in rebuilding an Adalo app as code you own: a work breakdown with durations, running costs, data traps and keeping your store listing.",
   summary:
-    `Rebuilding an Adalo app in code usually takes five to eight weeks and, with us, starts from ${mvp.price}, because Adalo exports your data but not your screens or logic. Most of the risk sits in a few predictable places: relationships missing from the CSV exports, users who never update, and automations that live outside Adalo. Ship the rebuild as an update to your existing store listing and users get it automatically, with your reviews intact.`,
+    "Rebuilding an Adalo app in code usually takes five to eight weeks, because Adalo exports your data but not your screens or logic. Most of the risk sits in a few predictable places: relationships missing from the CSV exports, users who never update, and automations that live outside Adalo. Ship the rebuild as an update to your existing store listing and users get it automatically, with your reviews intact.",
   datePublished: "2026-10-13",
-  dateModified: "2026-10-14",
+  dateModified: "2026-10-28",
   facts: [
     { label: "Code export", value: "None, screens and logic are rebuilt" },
     { label: "Data export", value: "CSV per collection, or the Adalo API" },
@@ -110,7 +110,7 @@ export const adalo: BlogPost = {
           items: [
             {
               term: "The build",
-              text: `From ${mvp.price} with us. Screens, roles and integrations move the price far more than user numbers do.`,
+              text: `Screens, roles and integrations move the price far more than user numbers do. We work in fixed-price sprints, and a discovery call settles whether your rebuild fits our two week one at ${mvp.price} + VAT or the three week one at ${extendedMvp.price} + VAT.`,
             },
             {
               term: "Overlap with Adalo",
@@ -204,7 +204,7 @@ export const adalo: BlogPost = {
   ],
   faqs: [
     {
-      question: "Can I export my code from Adalo?",
+      question: "Does Adalo let you download the source code?",
       answer:
         "No. Adalo does not export source code. You can download each collection as a CSV file, or read records through the Adalo API on plans that include it, but the screens and logic have to be rebuilt in code.",
     },
@@ -221,7 +221,7 @@ export const adalo: BlogPost = {
     {
       question: "How much does it cost to rebuild an Adalo app?",
       answer:
-        `With us it starts from ${mvp.price} and usually takes five to eight weeks. Screens, roles, payments and the amount of data to move decide where you land. Budget separately for hosting, a few months of overlap on your Adalo plan, and ongoing development after launch.`,
+        `Screens, roles, payments and the amount of data to move decide the cost, and a typical rebuild takes five to eight weeks. We quote a fixed price per sprint, starting at ${mvp.price} + VAT, and say on the first call whether your app fits. Budget separately for hosting, a few months of overlap on your Adalo plan, and ongoing development after launch.`,
     },
   ],
 }

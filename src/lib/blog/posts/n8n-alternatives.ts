@@ -11,6 +11,7 @@ export const n8nAlternatives: BlogPost = {
   summary:
     "The right n8n alternative depends on why you're leaving: Make or Zapier if you don't want to run servers, Activepieces if you want open source that feels like n8n, and Trigger.dev or Inngest if developers own the work. If the workflow has become the product, skip the next tool and write it as code in your own backend.",
   datePublished: "2026-10-14",
+  dateModified: "2026-10-28",
   sections: [
     {
       id: "what-you-give-up",
@@ -33,6 +34,7 @@ export const n8nAlternatives: BlogPost = {
         {
           type: "paragraph",
           text: "Pick Make. Coming from n8n, it's the hosted tool that feels most familiar, and nobody on your team will ever need to SSH into anything again.",
+          link: { text: "See n8n, Zapier and Make scored side by side.", href: "/blog/n8n-vs-zapier-vs-make" },
         },
         { type: "subheading", text: "Make" },
         {
@@ -146,7 +148,7 @@ export const n8nAlternatives: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `That doesn't mean writing a workflow engine. It means a TypeScript backend with Postgres, Trigger.dev or Inngest for background work, and direct API calls to the services your nodes used to reach. Leave the low stakes automations in whatever tool your team likes. That's the stack we usually build on at Scryptic; a build like this starts from ${mvp.price}, and the quote grows with the number of workflows it replaces.`,
+          text: `That doesn't mean writing a workflow engine. It means a TypeScript backend with Postgres, Trigger.dev or Inngest for background work, and direct API calls to the services your nodes used to reach. Leave the low stakes automations in whatever tool your team likes. That's the stack we usually build on at Scryptic, in fixed-price sprints from ${mvp.price} + VAT; how many workflows it replaces decides which sprint fits.`,
         },
       ],
     },

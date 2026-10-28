@@ -1,6 +1,6 @@
 import outsystemsLogo from "@/assets/blog/logos/outsystems.svg"
 import type { BlogPost } from "@/lib/blog/types"
-import { mvp } from "@/lib/services"
+import { extendedMvp, mvp } from "@/lib/services"
 
 export const outsystems: BlogPost = {
   slug: "migrate-from-outsystems",
@@ -14,6 +14,7 @@ export const outsystems: BlogPost = {
   summary:
     "Leaving OutSystems is a programme, not a project: you rebuild apps one at a time in a mainstream stack such as TypeScript, Next.js and Postgres, while OutSystems keeps running the rest until the last cutover. The case rests on the licence and the lock-in, and AI coding agents now make an owned codebase cheaper to build and change than it was a few years ago. A single app of modest size typically takes one to two months; a whole estate is measured in quarters.",
   datePublished: "2026-10-14",
+  dateModified: "2026-10-28",
   facts: [
     { label: "Code export", value: "O11 only, all apps at once" },
     { label: "Data export", value: "Database access on O11, APIs on ODC" },
@@ -311,7 +312,7 @@ export const outsystems: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `Set the rebuild cost against what each app costs to keep: its share of application objects and end users at the next renewal, plus the specialist time it needs. Then add what you take on: hosting, monitoring, security patching and the developers who maintain the code. For scale, we usually rebuild a single app or product in one to two months, from ${mvp.price} depending on complexity. Those figures are for one app, not an estate.`,
+          text: `Set the rebuild cost against what each app costs to keep: its share of application objects and end users at the next renewal, plus the specialist time it needs. Then add what you take on: hosting, monitoring, security patching and the developers who maintain the code. For scale, a fixed-price sprint with us runs two weeks at ${mvp.price} + VAT or three at ${extendedMvp.price} + VAT. That is enough for a small first app in a phased exit, if its scope fits, but never for an estate.`,
         },
       ],
     },

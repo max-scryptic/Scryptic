@@ -1,4 +1,3 @@
-import firstReleaseWorkflow from "@/assets/blog/images/first-release-workflow.webp"
 import type { BlogPost } from "@/lib/blog/types"
 import { extendedMvp, mvp } from "@/lib/services"
 
@@ -12,6 +11,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
   summary:
     "To get a web application built, you can hire developers, commission an agency or studio, or use a builder tool, and the work runs through scope, build, testing and launch whichever you pick. For a first release, start with one useful workflow rather than the whole roadmap, and choose a supplier who can tell you what will ship, what it costs and who owns everything afterwards.",
   datePublished: "2026-10-21",
+  dateModified: "2026-10-28",
   sections: [
     {
       id: "what-it-involves",
@@ -27,54 +27,25 @@ export const webApplicationDevelopmentServices: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "For many first releases, software that runs in the browser is enough. If you are not sure whether you need an app people install from a store, our guide to web apps versus mobile apps shows which one your product needs first.",
+          text: "For many first releases, software that runs in the browser is enough. If you are not sure whether you need an app people install from a store, settle that before you ask anyone for a quote.",
+          link: { text: "Web app or mobile app first? Find your situation.", href: "/blog/web-app-or-mobile-app-first" },
         },
       ],
     },
     {
       id: "first-release",
-      heading: "What should your first web app include?",
+      heading: "What should a quote for your first web app cover?",
       blocks: [
         {
           type: "paragraph",
-          text: "Your first web app should let one specific kind of user complete one valuable task, reliably enough to use outside a demo.",
-        },
-        {
-          type: "image",
-          image: firstReleaseWorkflow,
-          alt: "A complete booking workflow of availability, request and confirmation, with payroll, resources and referrals set aside for later.",
+          text: "One complete workflow for one kind of user, working well enough to use outside a demo, plus the basics that keep it safe. Map that workflow before you ask for prices, because a quote for a list of screens can't tell you whether the task works from start to finish.",
+          link: { text: "How to define the one task your first web app does.", href: "/blog/how-to-build-a-web-app" },
         },
         {
           type: "paragraph",
-          text: "Take a booking product. A useful first release might let a provider publish their availability, a customer request a slot and the provider confirm it, with both sides able to see where each request stands. Payroll, resource libraries and a referral scheme can all wait until people are using that core flow.",
+          text: "Custom web application development makes sense when your workflow is distinctive enough that existing software can't handle it sensibly. That doesn't mean every supporting feature needs custom code: sign-in, payments and email are better bought than built.",
         },
-        { type: "subheading", text: "Define the complete workflow" },
-        {
-          type: "paragraph",
-          text: "Write down the journey before you list any screens. A booking form is not a booking system if nobody can see the request or respond to it.",
-        },
-        {
-          type: "list",
-          ordered: true,
-          items: [
-            { term: "Name the user and the task", text: "Who is using this, and what do they need to finish?" },
-            { term: "Map the path", text: "What do they enter, what does the app save, and what happens next?" },
-            {
-              term: "Set acceptance checks",
-              text: "How will you know the workflow works, including when something goes wrong?",
-            },
-          ],
-        },
-        { type: "subheading", text: "Separate the essentials from the extras" },
-        {
-          type: "paragraph",
-          text: "Custom web application development makes sense when your workflow is distinctive enough that existing software can't handle it sensibly. That doesn't mean every supporting feature needs custom code.",
-        },
-        {
-          type: "paragraph",
-          text: "In the booking example, a clear status on each request matters more than a sophisticated dashboard. Start with whatever stops a user finishing the task, and question anything that only makes the roadmap look more impressive.",
-        },
-        { type: "subheading", text: "Keep the production basics in scope" },
+        { type: "subheading", text: "Check the production basics are priced in" },
         {
           type: "paragraph",
           text: "A small release still needs sensible access controls, input validation, error handling and a workable way to recover data. Ask how each of these will be handled rather than assuming an MVP includes them.",
@@ -95,32 +66,11 @@ export const webApplicationDevelopmentServices: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Ask who will actually build the product and who makes the technical decisions. If you are comparing several web app development companies, give each one the same short description of your workflow. What each quote leaves out often tells you more than the difference in the headline price.",
-        },
-        {
-          type: "list",
-          items: [
-            {
-              term: "Ask for a demonstration plan",
-              text: "When will you see working software, rather than progress reports?",
-            },
-            {
-              term: "Clarify how changes work",
-              text: "How are new requests weighed against the agreed scope?",
-            },
-            {
-              term: "Check ownership",
-              text: "Whose repository and accounts will the product live in?",
-            },
-            {
-              term: "Discuss launch",
-              text: "What gets checked, what gets handed over and what support follows?",
-            },
-          ],
-        },
-        {
-          type: "paragraph",
-          text: "Our buyer's checklist for choosing an app development company goes further: which questions to ask, how a good answer sounds and which red flags mean you should walk away.",
+          text: "Give every agency on your list the same short description of your workflow. What each quote leaves out often tells you more than the difference in the headline price, and so does how soon you'll see working software rather than progress reports.",
+          link: {
+            text: "Use our buyer's checklist for the questions to ask and the red flags.",
+            href: "/blog/how-to-choose-an-app-development-company-uk",
+          },
         },
         {
           type: "paragraph",

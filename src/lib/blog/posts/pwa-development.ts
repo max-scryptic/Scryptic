@@ -62,7 +62,8 @@ export const pwaDevelopment: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "If you haven't settled on a web app or a native one yet, start with our comparison of web and mobile apps. Decide that before you pay for features your platform can't reliably support.",
+          text: "If you haven't settled on a web app or a native one yet, decide that before you pay for features your platform can't reliably support.",
+          link: { text: "Compare web and mobile apps for your first release.", href: "/blog/web-app-or-mobile-app-first" },
         },
       ],
     },
@@ -89,12 +90,12 @@ export const pwaDevelopment: BlogPost = {
         {
           type: "list",
           items: [
-            { term: "The obstacle.", text: "What stops the user finishing their task today?" },
+            { term: "The obstacle", text: "What stops the user finishing their task today?" },
             {
-              term: "The behaviour you need.",
+              term: "The behaviour you need",
               text: "What should happen when the connection drops, a permission is refused or the user never installs the app?",
             },
-            { term: "What can wait.", text: "Which parts can sit until the user is back online?" },
+            { term: "What can wait", text: "Which parts can sit until the user is back online?" },
           ],
         },
         {
@@ -174,7 +175,11 @@ export const pwaDevelopment: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Testing all this takes more than a demo on the developer's laptop. Our guide to choosing a progressive web app development company lists the checks to ask for, from dropped connections to app updates, so you can sign off the build yourself.",
+          text: "Testing all this takes more than a demo on the developer's laptop. Ask for checks you can watch yourself, from dropped connections to app updates, before you sign off the build.",
+          link: {
+            text: "The checks to ask a PWA development company for.",
+            href: "/blog/progressive-web-app-development-company",
+          },
         },
       ],
     },

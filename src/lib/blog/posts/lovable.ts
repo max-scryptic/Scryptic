@@ -33,6 +33,7 @@ export const lovable: BlogPost = {
         {
           type: "paragraph",
           text: "Lovable is one of the easiest builders to graduate from. It writes a standard React and TypeScript project built with Vite, styled with Tailwind CSS and shadcn/ui components, and its backend is Supabase: Postgres, authentication, file storage and edge functions. There is no proprietary runtime to escape. The work is ownership and quality, not translation.",
+          link: { text: "See the seven checks every AI-built app needs before launch.", href: "/blog/vibe-coding-to-production" },
         },
         {
           type: "paragraph",
@@ -279,7 +280,7 @@ export const lovable: BlogPost = {
   ],
   faqs: [
     {
-      question: "Can I export my code from Lovable?",
+      question: "Does Lovable give me the full source code?",
       answer:
         "Yes. Lovable syncs the full source of your app to a GitHub repository you connect. It is a standard React, TypeScript and Vite project that you can run, host and change without Lovable, with Supabase as the backend.",
     },
@@ -289,7 +290,7 @@ export const lovable: BlogPost = {
         "Not by default. Because the browser talks to Supabase directly, every table needs row level security switched on, with policies that are reviewed and tested as ordinary users and as someone signed out. Secret keys must live in edge functions or a server, never in the frontend.",
     },
     {
-      question: "How long does it take to move a Lovable app to production?",
+      question: "What decides how long a Lovable app takes to harden?",
       answer:
         "Typically three to eight weeks. The range depends on how many tables and user roles the app has, whether the backend needs moving out of Lovable Cloud, and whether public pages need moving to server rendering for search.",
     },

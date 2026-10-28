@@ -1,5 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
-import { mvp } from "@/lib/services"
+import { extendedMvp, mvp } from "@/lib/services"
 
 export const chooseAppDevelopmentCompany: BlogPost = {
   slug: "how-to-choose-an-app-development-company-uk",
@@ -11,6 +11,7 @@ export const chooseAppDevelopmentCompany: BlogPost = {
   summary:
     "Choose an app development company by what you can check, not by the size of the quote: live apps you can use, a named person writing your code, and a contract that assigns the code and every account to you. Ask the questions below, listen for the answers, and walk away if several red flags turn up together.",
   datePublished: "2026-10-14",
+  dateModified: "2026-10-28",
   sections: [
     {
       id: "before-you-start",
@@ -58,6 +59,27 @@ export const chooseAppDevelopmentCompany: BlogPost = {
         {
           type: "paragraph",
           text: "A quick test: list the jobs that aren't coding, such as writing the scope, designing screens, testing on real phones, setting up hosting and submitting to the app stores. If you're happy to do those, a good freelancer is excellent value. If you'd rather spend that time with customers, pay a team that covers them.",
+        },
+        {
+          type: "paragraph",
+          text: "Some kinds of build add questions of their own. A progressive web app needs a supplier who can show offline saves working on your users' phones, not just an install icon.",
+          link: {
+            text: "What to ask a PWA development company to prove.",
+            href: "/blog/progressive-web-app-development-company",
+          },
+        },
+        {
+          type: "paragraph",
+          text: "A company that sells itself on React may only be offering the interface, so ask who builds the server and the database and who runs the hosting.",
+          link: {
+            text: "Six mistakes founders make hiring a ReactJS company.",
+            href: "/blog/reactjs-web-development-company-hiring-mistakes",
+          },
+        },
+        {
+          type: "paragraph",
+          text: "For a SaaS product, we've set six UK studios side by side on published price, timeline and what happens after launch.",
+          link: { text: "Compare UK SaaS development companies.", href: "/blog/best-saas-development-company" },
         },
       ],
     },
@@ -141,11 +163,15 @@ export const chooseAppDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "For a focused first version, expect to be quoted roughly £5,000 to £25,000 by a freelancer, £10,000 to £60,000 by a small studio, and anything from £40,000 to £150,000 or beyond by an agency. Freelance day rates usually sit around £300 to £700. A mid-level to senior in-house developer typically costs £50,000 to £90,000 a year in salary, more in London, before National Insurance, pension and recruitment fees. Scope moves these numbers more than the type of supplier does; our guide to the cost of building an app in the UK goes into what pushes them up or down.",
+          text: "For a focused first version, expect to be quoted roughly £5,000 to £25,000 by a freelancer, £10,000 to £60,000 by a small studio, and anything from £40,000 to £150,000 or beyond by an agency. Freelance day rates usually sit around £300 to £700. A mid-level to senior in-house developer typically costs £50,000 to £90,000 a year in salary, more in London, before National Insurance, pension and recruitment fees. Scope moves these numbers more than the type of supplier does.",
+          link: {
+            text: "What pushes the cost of building an app in the UK up or down.",
+            href: "/blog/how-much-does-it-cost-to-build-an-app-uk",
+          },
         },
         {
           type: "paragraph",
-          text: `For reference, Scryptic is a founder-led studio in Brighton. Full app to market builds start from ${mvp.price}, the client owns the code and every account, and there's a catch-up every Friday.`,
+          text: `For reference, Scryptic is a founder-led studio in Brighton working with founders across the UK. Builds are priced per sprint (${mvp.price} + VAT buys two weeks, ${extendedMvp.price} + VAT buys three), the client owns the code and every account, and there's a catch-up every Friday.`,
         },
       ],
     },

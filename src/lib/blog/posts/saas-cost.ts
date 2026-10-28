@@ -156,7 +156,7 @@ export const saasCost: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "The hosting, database and payment accounts are registered to you and handed over at launch, so the running bills arrive in your name from the first day, and you choose who works on the code in your repository. For a yearly upkeep figure, our UK app cost guide gives a rule of thumb as a share of the build, next to typical monthly running costs.",
+          text: "Because the hosting, database and payment accounts move to you at launch, the running bills arrive in your name from the first day, and you choose who works on the code in your repository. For a yearly upkeep figure, our UK app cost guide gives a rule of thumb as a share of the build, next to typical monthly running costs.",
           link: {
             text: "See what an app costs to build and run in the UK.",
             href: "/blog/how-much-does-it-cost-to-build-an-app-uk",
@@ -189,7 +189,7 @@ export const saasCost: BlogPost = {
     {
       question: "Does an AI-built prototype make the build cheaper?",
       answer:
-        "It can, if the code is worth keeping, and that takes a review of the code rather than a look at the screens. We review existing code and infrastructure during discovery and build on the parts worth keeping. Moving an AI-built or no-code app into production can still mean repairs or a rebuild, with your data and users moved across.",
+        "It can, if the code is worth keeping, and that takes a review of the code rather than a look at the screens. On a discovery call we look through the code and hosting you already have and say which parts are sound enough to keep. Moving an AI-built or no-code app into production can still mean repairs or a rebuild, with your data and users moved across.",
     },
     {
       question: "How do I estimate usage before I have customers?",

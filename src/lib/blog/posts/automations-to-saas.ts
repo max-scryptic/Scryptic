@@ -1,5 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
-import { mvp } from "@/lib/services"
+import { extendedMvp, mvp } from "@/lib/services"
 
 export const automationsToSaas: BlogPost = {
   slug: "turn-automations-into-a-saas-product",
@@ -11,6 +11,7 @@ export const automationsToSaas: BlogPost = {
   summary:
     "Your automations should become a SaaS product when you keep rebuilding the same workflow for each client and they pay you mostly to keep it running. Tick the ten signals below: six or more means it's time to build, three to five means start preparing, and fewer means the no-code tool is still the right home.",
   datePublished: "2026-10-14",
+  dateModified: "2026-10-28",
   sections: [
     {
       id: "the-signals",
@@ -112,7 +113,7 @@ export const automationsToSaas: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `Keep the old automations running for existing clients until the product can serve them, then move them across one at a time. When we build this kind of first version, it usually takes weeks to a couple of months and costs from ${mvp.price}, more for complex workflows, and the code and every account are yours.`,
+          text: `Keep the old automations running for existing clients until the product can serve them, then move them across one at a time. When we build this kind of first version, it's a fixed price per sprint: two weeks at ${mvp.price} + VAT, or three at ${extendedMvp.price} + VAT. If your workflows need more than that, we'll say so before quoting.`,
         },
       ],
     },

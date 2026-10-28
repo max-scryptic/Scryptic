@@ -11,6 +11,7 @@ export const n8nVsZapierVsMake: BlogPost = {
   summary:
     "If you have anyone technical on the team, n8n is usually the best long-term pick: it charges per workflow run, handles real code and is the only one of the three you can host yourself. Zapier is the easiest to start with and connects to the most apps, and Make sits in between, cheaper than Zapier and friendlier than n8n.",
   datePublished: "2026-10-14",
+  dateModified: "2026-10-28",
   facts: [
     { label: "Easiest to start", value: "Zapier" },
     { label: "Most integrations", value: "Zapier, in the thousands" },
@@ -138,6 +139,7 @@ export const n8nVsZapierVsMake: BlogPost = {
         {
           type: "paragraph",
           text: "Self-hosting isn't free, just differently priced: someone has to patch it, back it up and notice when it stops. Plenty of teams end up running two tools, keeping Zapier for quick team automations and moving the high-volume, business-critical ones to n8n, where they're cheaper and easier to version.",
+          link: { text: "What running n8n on your own server involves.", href: "/blog/self-hosting-n8n" },
         },
       ],
     },
@@ -164,7 +166,11 @@ export const n8nVsZapierVsMake: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `Our guide on when to turn your automations into a SaaS product covers that call in more depth. If you make the jump, our builds that turn proven automations into a production app start from ${mvp.price}.`,
+          text: `If you make the jump, our fixed-price builds that turn proven automations into a production app start at ${mvp.price} + VAT.`,
+          link: {
+            text: "Check whether your automations are ready to become a SaaS product.",
+            href: "/blog/turn-automations-into-a-saas-product",
+          },
         },
       ],
     },

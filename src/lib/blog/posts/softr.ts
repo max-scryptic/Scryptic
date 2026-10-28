@@ -158,7 +158,7 @@ export const softr: BlogPost = {
         "Yes, for a while. A new app can read and write the same Airtable base, which lets you launch without moving data first. Plan to move to Postgres soon after, because Airtable's API rate limits and record limits are not built for a busy app.",
     },
     {
-      question: "How long does it take to replace a Softr app?",
+      question: "How long is a typical Softr replacement?",
       answer:
         "Three to six weeks gets most Softr apps to a production first release. Pages and user groups set the size of the job; complex permission rules and data that needs cleaning stretch it.",
     },

@@ -190,7 +190,7 @@ export const mvpSoftwareDevelopmentExample: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `We build first releases at a fixed price: ${mvp.price} + VAT for the two week MVP sprint, or ${extendedMvp.price} + VAT for the three week Extended MVP. Each sprint finishes with a week of iteration on your feedback, and a handover week follows once the app is live. Bring the table you wrote to a free 30 minute discovery call and we'll go through it column by column before quoting.`,
+          text: `Our MVP package is a fixed-price, two week sprint at ${mvp.price} + VAT; the Extended MVP adds a week of development for ${extendedMvp.price} + VAT. Each sprint finishes with a week of iteration on your feedback, and a handover week follows once the app is live. Bring the table you wrote to a free 30 minute discovery call and we'll go through it column by column before quoting.`,
           link: { text: "Book a discovery call.", href: "/book-a-call" },
         },
       ],

@@ -226,7 +226,7 @@ export const replit: BlogPost = {
   ],
   faqs: [
     {
-      question: "Can I export my code from Replit?",
+      question: "Can I take my Replit project's code with me?",
       answer:
         "Yes. You can push the project to a GitHub repository from the Git pane or download it as a ZIP file. Secrets are not included in either, so copy them from Replit's Secrets pane into your new environment separately.",
     },

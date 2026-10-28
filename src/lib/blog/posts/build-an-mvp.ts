@@ -1,5 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
-import { mvp } from "@/lib/services"
+import { extendedMvp, mvp } from "@/lib/services"
 
 export const buildAnMvp: BlogPost = {
   slug: "how-to-build-an-mvp",
@@ -11,6 +11,7 @@ export const buildAnMvp: BlogPost = {
   summary:
     "To build an MVP, spend the first week cutting scope to one job for one kind of user, the second designing that flow, the next four building it and the last two hardening and launching. A focused MVP like this usually takes one to two months, and the month after launch matters as much as the build.",
   datePublished: "2026-10-14",
+  dateModified: "2026-10-28",
   sections: [
     {
       id: "the-timeline",
@@ -109,7 +110,7 @@ export const buildAnMvp: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `Cost is driven by scope far more than technology. Each extra type of user, each integration with a poorly documented API, payments beyond a simple checkout, and AI features all add time. Our own builds start from ${mvp.price} and rise with complexity; most go live in one to two months, and the estimate is agreed in this first week, before any build starts. If one quote is far below the others for the same scope, ask what's been left out; testing, payment edge cases and handover are the usual gaps.`,
+          text: `Cost is driven by scope far more than technology. Each extra type of user, each integration with a poorly documented API, payments beyond a simple checkout, and AI features all add time. Once the scope is down to one job, we build it in a fixed-price sprint, two weeks for ${mvp.price} + VAT or three for ${extendedMvp.price} + VAT, with the scope agreed in this first week. If one quote is far below the others for the same scope, ask what's been left out; testing, payment edge cases and handover are the usual gaps.`,
         },
         {
           type: "checklist",

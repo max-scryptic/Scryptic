@@ -92,10 +92,15 @@ export const buildAWebApp: BlogPost = {
         {
           type: "paragraph",
           text: "With a builder, check permissions and data export, and make sure your essential rules are possible, before you commit. When you hire someone, ask who will own the code repository and the service accounts. If you are writing it yourself, choose tools you understand well enough to fix on a bad day over whatever is newest.",
+          link: {
+            text: "Our buyer's checklist for hiring an app developer.",
+            href: "/blog/how-to-choose-an-app-development-company-uk",
+          },
         },
         {
           type: "paragraph",
-          text: "A responsive web app runs in the browser on phones, tablets and desktops. If your idea relies on phone features a browser can't reach, or you need to be in the app stores, find your situation in our web app vs mobile app comparison before you commit to either.",
+          text: "A responsive web app runs in the browser on phones, tablets and desktops. If your idea relies on phone features a browser can't reach, or you need to be in the app stores, settle that before you commit to either.",
+          link: { text: "Find your situation in our web app vs mobile app comparison.", href: "/blog/web-app-or-mobile-app-first" },
         },
       ],
     },

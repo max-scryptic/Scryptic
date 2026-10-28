@@ -1,5 +1,5 @@
 import type { BlogPost } from "@/lib/blog/types"
-import { mvp } from "@/lib/services"
+import { extendedMvp, mvp } from "@/lib/services"
 
 export const appCostUk: BlogPost = {
   slug: "how-much-does-it-cost-to-build-an-app-uk",
@@ -11,6 +11,7 @@ export const appCostUk: BlogPost = {
   summary:
     "Building an app in the UK typically costs a few hundred pounds if you do it yourself with no-code or AI tools, roughly £5,000 to £25,000 with a freelancer, £10,000 to £60,000 with a small studio and £40,000 to £150,000 or more with an agency. Scope moves the price far more than who builds it. Once it's live, budget around 15 to 20% of the build cost a year to keep it running and up to date.",
   datePublished: "2026-10-14",
+  dateModified: "2026-10-28",
   facts: [
     { label: "DIY with builders", value: "Hundreds of pounds plus your time" },
     { label: "Freelancer MVP", value: "Roughly £5,000 to £25,000" },
@@ -51,7 +52,7 @@ export const appCostUk: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "What the app does matters more than who builds it. The table below gives rough ranges for a focused first version from a small studio. They're our own planning estimates for typical scopes, not quotes, and your app can land outside them in either direction.",
+          text: "What the app does matters more than who builds it. The table below gives rough ranges for a focused first version from a small studio. They're planning ranges for typical scopes, not quotes, and your app can land outside them in either direction.",
         },
         {
           type: "table",
@@ -105,7 +106,7 @@ export const appCostUk: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "A focused MVP usually takes 6 to 12 weeks, a fuller product 3 to 6 months, and a platform with several apps and lots of integrations 6 months or more. Time and money move together, since nearly all of the cost is people's time. If someone quotes three weeks for a marketplace with payments, ask what they've left out.",
+          text: "A focused MVP usually takes 6 to 12 weeks, a fuller product 3 to 6 months, and a platform with several apps and lots of integrations 6 months or more. Time and money move together, since nearly all of the cost is people's time. Builds of two or three weeks happen when the first release is cut to a single journey, which is how our own sprints work. If a short quote claims to cover a whole marketplace with payouts, ask what it leaves out.",
         },
         {
           type: "paragraph",
@@ -202,7 +203,11 @@ export const appCostUk: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `Our own quotes start from ${mvp.price} for a full app to market build and rise with complexity. Most launch 1 to 2 months after kickoff, and the written estimate comes before any work starts. Whoever you go with, our guide on choosing an app development company in the UK covers what else to check before you sign.`,
+          text: `We price our own builds per sprint rather than per day: two weeks costs ${mvp.price} + VAT and three weeks ${extendedMvp.price} + VAT, and the scope is written down and agreed before any work starts. Whoever you go with, check the contract and who owns the accounts before you sign.`,
+          link: {
+            text: "Use our buyer's checklist for choosing an app development company.",
+            href: "/blog/how-to-choose-an-app-development-company-uk",
+          },
         },
       ],
     },
@@ -222,11 +227,6 @@ export const appCostUk: BlogPost = {
       question: "How much do app developers charge per day in the UK?",
       answer:
         "UK freelance app developers typically charge around £300 to £700 a day, depending on experience and the technology. Studios and agencies often quote a fixed price for a defined scope instead, which builds in design, testing and project management.",
-    },
-    {
-      question: "Is a web app cheaper to build than a mobile app?",
-      answer:
-        "Usually, yes. One responsive web app runs on every device, skips app store review and avoids store commission on digital sales. Native apps earn their extra cost when you need offline use, background location or deep access to the phone's hardware.",
     },
     {
       question: "How much does app maintenance cost per year?",

@@ -104,12 +104,12 @@ export const weweb: BlogPost = {
   ],
   faqs: [
     {
-      question: "Can I export my code from WeWeb?",
+      question: "What does WeWeb's code export actually give you?",
       answer:
-        "Yes, on a paid plan. WeWeb exports a built Vue.js app that you can host on your own servers. It's compiled output for deploying, not a source codebase meant for developers to maintain by hand, so changes still happen in the WeWeb editor.",
+        "On a paid plan, a built Vue.js app that you can host on your own servers. It's compiled output for deploying, not a source codebase meant for developers to maintain by hand, so changes still happen in the WeWeb editor.",
     },
     {
-      question: "How long does it take to move a WeWeb app to custom code?",
+      question: "How many weeks does a WeWeb rebuild usually take?",
       answer:
         "Usually four to eight weeks. Screens, workflows and user roles set the size of the job, and it runs longer when the backend is changing as well as the frontend.",
     },
