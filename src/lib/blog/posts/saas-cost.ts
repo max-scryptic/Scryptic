@@ -7,6 +7,7 @@ export const saasCost: BlogPost = {
   title: "SaaS cost before and after launch",
   series: "launch",
   topic: "SaaS cost",
+  icon: "coins",
   description:
     "SaaS cost is a one-off build plus running costs that grow with every customer. A worked example shows what sets each bill, before launch and after it.",
   summary:

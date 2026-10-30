@@ -6,6 +6,7 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
   title: "Choosing a progressive web app development company",
   series: "launch",
   topic: "PWA development",
+  icon: "download",
   description:
     "Choose a PWA development company by testing offline saves, browser support and code ownership, not the PWA label. Compare five routes and what to ask.",
   summary:

@@ -7,6 +7,7 @@ export const buildAWebApp: BlogPost = {
   title: "Build a web app that does one useful job well",
   series: "launch",
   topic: "Web apps",
+  icon: "globe",
   description:
     "Build a web app by defining one useful task, choosing a build route, connecting the core parts and testing before launch. A practical guide for founders.",
   summary:

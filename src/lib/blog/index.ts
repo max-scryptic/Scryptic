@@ -43,6 +43,7 @@ export type {
   BlogPost,
   PostBlock,
   PostCategory,
+  PostIcon,
   PostSection,
   PostSeriesId,
 } from "@/lib/blog/types"

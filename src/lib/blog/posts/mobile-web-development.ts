@@ -8,6 +8,7 @@ export const mobileWebDevelopment: BlogPost = {
   title: "Mobile web development decisions to make before you build",
   series: "launch",
   topic: "Mobile web",
+  icon: "smartphone",
   description:
     "Mobile web development decisions to settle before you brief a developer: which screens go phone first, where unsent forms live, sign-in and what to test.",
   summary:

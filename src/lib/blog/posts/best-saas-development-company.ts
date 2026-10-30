@@ -7,6 +7,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
   title: "Best SaaS development company for your first release",
   series: "launch",
   topic: "SaaS agencies",
+  icon: "building",
   description:
     "Compare UK SaaS development companies on price, timeline and ownership, from Bubble studios to fixed-price MVP sprints, and what to check before you sign.",
   summary:

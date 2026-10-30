@@ -6,6 +6,7 @@ export const webAppVsMobileApp: BlogPost = {
   title: "Web app or mobile app first?",
   series: "stack",
   topic: "Web vs mobile",
+  icon: "monitor-smartphone",
   description:
     "Build the web app first unless the phone is the product. A one-table decision guide to web, PWA, React Native or native for your first release.",
   summary:

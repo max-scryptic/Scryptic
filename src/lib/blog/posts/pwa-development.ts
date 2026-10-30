@@ -7,6 +7,7 @@ export const pwaDevelopment: BlogPost = {
   title: "PWA development without the unnecessary extras",
   series: "launch",
   topic: "PWAs",
+  icon: "app-window",
   description:
     "PWA development adds installing, offline use and notifications to a web app. What each feature involves, which screens to cache and what it adds to a build.",
   summary:

@@ -5,6 +5,7 @@ export const reactNativeVsFlutter: BlogPost = {
   title: "React Native vs Flutter for a startup app",
   series: "stack",
   topic: "Mobile",
+  icon: "tablet-smartphone",
   description:
     "React Native vs Flutter scored for a startup: language, UI, performance, UK hiring, web support and code sharing, with a clear rule for which one to pick.",
   summary:

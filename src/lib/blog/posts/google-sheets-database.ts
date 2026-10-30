@@ -5,6 +5,7 @@ export const googleSheetsDatabase: BlogPost = {
   title: "Google Sheets as a database and the signs you've outgrown it",
   series: "automation",
   topic: "Google Sheets",
+  icon: "sheet",
   description:
     "Using Google Sheets as a database works until it doesn't. The warning signs in the order they appear, what to move to, and how to switch over gradually.",
   summary:

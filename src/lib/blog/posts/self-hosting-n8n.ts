@@ -5,6 +5,7 @@ export const selfHostingN8n: BlogPost = {
   title: "The self-hosted n8n production runbook",
   series: "automation",
   topic: "n8n",
+  icon: "server",
   description:
     "A runbook for self-hosted n8n: set up Docker Compose with Postgres and HTTPS, harden the editor and webhooks, run backups and alerts, and upgrade safely.",
   summary:

@@ -7,6 +7,7 @@ export const mvpSoftwareDevelopmentExample: BlogPost = {
   title: "An MVP software development example worth studying",
   series: "launch",
   topic: "MVP examples",
+  icon: "flask",
   description:
     "An MVP software development example, worked through: a gift voucher app's first release, what it leaves out and what it can prove, plus three more.",
   summary:

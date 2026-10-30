@@ -47,6 +47,7 @@ src/
     author-bio.tsx      "About the author" at the end of each blog post
     social-links.tsx    The founder's profile icon links (LinkedIn, X, Instagram)
     tool-logo.tsx       The migrated-from tool's logo: a watermark on post cards, a tile in post headers
+    post-icon.tsx       The subject icon a post without a logo shows as its card's watermark
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
     free-tools/         The free tools: the shared page frame (tool-page.tsx), cards, question and
                         result widgets, and one component per tool
@@ -60,7 +61,8 @@ src/
     stack.ts            The "Our stack" tiles on /, each with its logo from src/assets/stack/
     blog/               Blog posts as data: types.ts (the shape), posts/<tool>.ts (one per post),
                         index.ts (the list, categories and helpers). A post is a file plus a line in index.ts;
-                        its optional tool logo is an SVG in src/assets/blog/logos/ imported as the post's `logo`,
+                        its optional tool logo is an SVG in src/assets/blog/logos/ imported as the post's `logo`
+                        (a post without one names an `icon` from components/post-icon.tsx instead),
                         and in-post images are WebPs in src/assets/blog/images/ used by an `image` block
     free-tools/         The free tools as data: index.ts (the list, which drives /tools, the cards and each
                         tool's registry entry), then one module per tool with its questions and logic.

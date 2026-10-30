@@ -6,6 +6,7 @@ export const n8nAlternatives: BlogPost = {
   title: "n8n alternatives, and when to build your own instead",
   series: "automation",
   topic: "n8n",
+  icon: "workflow",
   description:
     "The best n8n alternatives grouped by what you need: hosted tools, open source, developer platforms, Microsoft 365 and AI agents, and when custom code wins.",
   summary:

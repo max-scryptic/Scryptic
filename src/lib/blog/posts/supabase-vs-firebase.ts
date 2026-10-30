@@ -5,6 +5,7 @@ export const supabaseVsFirebase: BlogPost = {
   title: "Supabase vs Firebase for a startup",
   series: "stack",
   topic: "Supabase",
+  icon: "database",
   description:
     "Supabase vs Firebase side by side: database, pricing as you grow, lock-in, auth, realtime and offline, then a simple rule for which one a startup should pick.",
   summary:
