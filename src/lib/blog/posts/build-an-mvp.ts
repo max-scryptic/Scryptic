@@ -6,6 +6,7 @@ export const buildAnMvp: BlogPost = {
   title: "How to build an MVP, week by week",
   series: "launch",
   topic: "MVP",
+  icon: "rocket",
   description:
     "How to build an MVP in one to two months, week by week: scoping, design, build sprints, launch week and the first month with real users, with checklists.",
   summary:

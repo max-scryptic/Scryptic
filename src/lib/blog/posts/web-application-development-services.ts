@@ -6,6 +6,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
   title: "How to choose web application and development services",
   series: "launch",
   topic: "Web apps",
+  icon: "code",
   description:
     `Compare web application development options, decide what your MVP needs, and see Scryptic's fixed-price packages for UK founders, from ${mvp.price} plus VAT.`,
   summary:

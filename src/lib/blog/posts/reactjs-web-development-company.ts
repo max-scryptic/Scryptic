@@ -8,6 +8,7 @@ export const reactjsWebDevelopmentCompany: BlogPost = {
   title: "ReactJS web development company hiring mistakes",
   series: "launch",
   topic: "React",
+  icon: "atom",
   description:
     "Six mistakes founders make hiring a ReactJS web development company, from paying for screens with no backend to public pages AI search can't read.",
   summary:

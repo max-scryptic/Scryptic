@@ -6,6 +6,7 @@ export const chooseAppDevelopmentCompany: BlogPost = {
   title: "A buyer's checklist for choosing an app development company in the UK",
   series: "launch",
   topic: "Hiring",
+  icon: "users",
   description:
     "Choosing an app development company in the UK: the questions to ask, what good answers sound like, the red flags, and freelancer vs studio vs agency.",
   summary:

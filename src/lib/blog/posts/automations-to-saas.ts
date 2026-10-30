@@ -6,6 +6,7 @@ export const automationsToSaas: BlogPost = {
   title: "Ten signs your automations should become a SaaS product",
   series: "automation",
   topic: "Automation",
+  icon: "zap",
   description:
     "A ten point self-assessment for Zapier, Make and n8n workflows: tick the signals, read your score, and see what the first version of the SaaS should include.",
   summary:

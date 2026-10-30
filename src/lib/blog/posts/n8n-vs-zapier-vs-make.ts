@@ -6,6 +6,7 @@ export const n8nVsZapierVsMake: BlogPost = {
   title: "n8n vs Zapier vs Make, scored for a growing business",
   series: "automation",
   topic: "n8n",
+  icon: "scale",
   description:
     "n8n vs Zapier vs Make scored side by side on pricing, ease of use, integrations, AI agents, self-hosting and GDPR, with a clear pick for each kind of team.",
   summary:

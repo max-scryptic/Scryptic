@@ -6,6 +6,7 @@ export const appCostUk: BlogPost = {
   title: "How much does it cost to build an app in the UK?",
   series: "launch",
   topic: "App cost",
+  icon: "receipt",
   description:
     "UK app development costs broken down: prices by route and by type of app, what moves a quote, monthly running costs and the hidden costs founders miss.",
   summary:

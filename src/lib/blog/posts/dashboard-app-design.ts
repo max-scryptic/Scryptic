@@ -7,6 +7,7 @@ export const dashboardAppDesign: BlogPost = {
   title: "Six dashboard app design mistakes to fix on paper",
   series: "launch",
   topic: "Dashboards",
+  icon: "dashboard",
   description:
     "Six dashboard app design mistakes that cost far more once built, from screens with no question behind them to numbers nobody defined and phone layouts.",
   summary:

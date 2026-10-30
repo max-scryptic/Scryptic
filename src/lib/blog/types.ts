@@ -81,6 +81,31 @@ export type PostSection = {
 /** The series a post belongs to, each listed as its own section on /blog. */
 export type PostSeriesId = "launch" | "automation" | "stack" | "migration"
 
+/** The line icons a post without a logo can carry on its card. */
+export type PostIcon =
+  | "app-window"
+  | "atom"
+  | "building"
+  | "code"
+  | "coins"
+  | "dashboard"
+  | "database"
+  | "download"
+  | "flask"
+  | "globe"
+  | "monitor-smartphone"
+  | "receipt"
+  | "rocket"
+  | "scale"
+  | "server"
+  | "sheet"
+  | "smartphone"
+  | "sparkles"
+  | "tablet-smartphone"
+  | "users"
+  | "workflow"
+  | "zap"
+
 /** Groups the migration guides within their series on /blog. */
 export type PostCategory =
   | "AI app builders"
@@ -106,6 +131,12 @@ export type BlogPost = {
    * card and a tile in the post header. Leave it out to show neither.
    */
   logo?: StaticImageData
+  /**
+   * For a post without a logo: a line icon for its subject, shown as the
+   * card's watermark in the logo's place. One of the icons in
+   * src/components/post-icon.tsx.
+   */
+  icon?: PostIcon
   /** Migration guides only: the group the guide sits in on /blog. */
   category?: PostCategory
   /** 120 to 160 characters, for the meta description and llms.txt. */

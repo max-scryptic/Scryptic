@@ -6,6 +6,7 @@ export const vibeCoding: BlogPost = {
   title: "A production audit for your vibe-coded app",
   series: "launch",
   topic: "Vibe coding",
+  icon: "sparkles",
   description:
     "Seven checks a founder can run on a vibe-coded app before real users arrive: data access, secrets, auth, payments, deploys, tests and cost, with fixes.",
   summary:
