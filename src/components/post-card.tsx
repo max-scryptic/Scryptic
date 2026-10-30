@@ -8,26 +8,19 @@ import { readingMinutes, type BlogPost } from "@/lib/blog"
  * tool's logo, when it has one, as a watermark behind them. The whole card is one link, named
  * after the post so the link text says where it goes.
  */
-export function PostCard({
-  post,
-  headingLevel: Heading = "h3",
-}: {
-  post: BlogPost
-  /** h4 under a category heading on /blog, h3 in a post's related list. */
-  headingLevel?: "h3" | "h4"
-}) {
+export function PostCard({ post }: { post: BlogPost }) {
   return (
     <article className="group relative isolate flex flex-col gap-3 rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/50">
       <ToolLogoWatermark post={post} />
       <p className="font-mono text-xs tracking-widest text-primary uppercase">{post.topic}</p>
-      <Heading className="text-xl tracking-tight text-balance">
+      <h3 className="text-xl tracking-tight text-balance">
         <Link
           href={`/blog/${post.slug}`}
           className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none after:focus-visible:ring-3 after:focus-visible:ring-ring/50"
         >
           {post.title}
         </Link>
-      </Heading>
+      </h3>
       <p className="text-sm text-pretty text-muted-foreground">{post.description}</p>
       <p className="mt-auto pt-2 font-mono text-xs text-muted-foreground">
         {readingMinutes(post)} min read
