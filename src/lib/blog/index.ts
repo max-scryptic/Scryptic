@@ -9,11 +9,13 @@ import { bubble } from "@/lib/blog/posts/bubble"
 import { buildAWebApp } from "@/lib/blog/posts/build-a-web-app"
 import { buildAnMvp } from "@/lib/blog/posts/build-an-mvp"
 import { chooseAppDevelopmentCompany } from "@/lib/blog/posts/choose-app-development-company"
+import { dashboardAppDesign } from "@/lib/blog/posts/dashboard-app-design"
 import { flutterflow } from "@/lib/blog/posts/flutterflow"
 import { framer } from "@/lib/blog/posts/framer"
 import { glide } from "@/lib/blog/posts/glide"
 import { googleSheetsDatabase } from "@/lib/blog/posts/google-sheets-database"
 import { lovable } from "@/lib/blog/posts/lovable"
+import { mobileWebDevelopment } from "@/lib/blog/posts/mobile-web-development"
 import { mvpSoftwareDevelopmentExample } from "@/lib/blog/posts/mvp-software-development-example"
 import { n8nAlternatives } from "@/lib/blog/posts/n8n-alternatives"
 import { n8nVsZapierVsMake } from "@/lib/blog/posts/n8n-vs-zapier-vs-make"
@@ -55,6 +57,8 @@ export const posts: BlogPost[] = [
   saasCost,
   buildAnMvp,
   mvpSoftwareDevelopmentExample,
+  dashboardAppDesign,
+  mobileWebDevelopment,
   chooseAppDevelopmentCompany,
   reactjsWebDevelopmentCompany,
   webApplicationDevelopmentServices,
@@ -186,6 +190,15 @@ export function postsInSeries(id: PostSeriesId) {
 
 export function postsInCategory(category: PostCategory) {
   return posts.filter((post) => post.category === category)
+}
+
+/** The newest posts by publication date; posts published the same day keep their order in `posts`. */
+export function latestPosts(count: number) {
+  return posts
+    .map((post, index) => ({ post, index }))
+    .sort((a, b) => b.post.datePublished.localeCompare(a.post.datePublished) || a.index - b.index)
+    .slice(0, count)
+    .map(({ post }) => post)
 }
 
 /**

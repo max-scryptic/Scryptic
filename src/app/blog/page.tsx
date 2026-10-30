@@ -2,15 +2,17 @@ import Link from "next/link"
 
 import { PageJsonLd } from "@/components/json-ld"
 import { PostCard } from "@/components/post-card"
+import { PostCarousel } from "@/components/post-carousel"
 import { Button } from "@/components/ui/button"
-import { postCategories, postSeries, postsInCategory, postsInSeries } from "@/lib/blog"
+import { latestPosts, postCategories, postSeries, postsInCategory, postsInSeries } from "@/lib/blog"
 import { blogPostPages, createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
 
 export const metadata = createMetadata(pages.blog)
 
-const categoryId = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+/** How many of the newest posts the gallery at the top shows. */
+const LATEST_COUNT = 6
 
 export default function BlogPage() {
   return (
@@ -28,7 +30,7 @@ export default function BlogPage() {
           </p>
           <nav aria-label="Blog series">
             <ul className="flex flex-wrap gap-2 font-mono text-xs">
-              {postSeries.map((series) => (
+              {[{ id: "latest", name: "Latest" }, ...postSeries].map((series) => (
                 <li key={series.id}>
                   <Link
                     href={`#${series.id}`}
@@ -42,8 +44,27 @@ export default function BlogPage() {
           </nav>
         </div>
 
+        <section aria-labelledby="latest-heading" id="latest" className="flex scroll-mt-28 flex-col gap-10">
+          <h2 id="latest-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
+            Latest posts
+          </h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {latestPosts(LATEST_COUNT).map((post, index) => (
+              // Phones show the first three, so the gallery doesn't become a long column.
+              <div key={post.slug} className={index < 3 ? "grid" : "hidden md:grid"}>
+                <PostCard post={post} />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Each series is one sideways-scrolling row, so the page stays the same length as posts are added. */}
         {postSeries.map((series) => {
-          const seriesPosts = postsInSeries(series.id)
+          // The migration guides are many, so their row can be narrowed to one kind of tool.
+          const seriesPosts =
+            series.id === "migration"
+              ? postCategories.flatMap((category) => postsInCategory(category.name))
+              : postsInSeries(series.id)
           if (seriesPosts.length === 0) return null
 
           return (
@@ -51,7 +72,7 @@ export default function BlogPage() {
               key={series.id}
               id={series.id}
               aria-labelledby={`${series.id}-heading`}
-              className="flex scroll-mt-28 flex-col gap-10"
+              className="flex scroll-mt-28 flex-col gap-8 border-t border-border pt-12"
             >
               <div className="flex max-w-2xl flex-col gap-3">
                 <p className="font-mono text-xs tracking-widest text-primary uppercase">Series</p>
@@ -64,43 +85,19 @@ export default function BlogPage() {
                 <p className="text-lg text-pretty text-muted-foreground">{series.intro}</p>
               </div>
 
-              {series.id === "migration" ? (
-                // The migration guides are many, so they sit in one group per kind of tool.
-                postCategories.map((category) => {
-                  const id = categoryId(category.name)
-                  const categoryPosts = postsInCategory(category.name)
-                  if (categoryPosts.length === 0) return null
-
-                  return (
-                    <section
-                      key={category.name}
-                      id={id}
-                      aria-labelledby={`${id}-heading`}
-                      className="flex scroll-mt-28 flex-col gap-6 border-t border-border pt-10"
-                    >
-                      <div className="flex flex-col gap-2">
-                        <h3 id={`${id}-heading`} className="text-2xl tracking-tight">
-                          {category.name}
-                        </h3>
-                        <p className="max-w-2xl text-pretty text-muted-foreground">
-                          {category.text}
-                        </p>
-                      </div>
-                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {categoryPosts.map((post) => (
-                          <PostCard key={post.slug} post={post} headingLevel="h4" />
-                        ))}
-                      </div>
-                    </section>
-                  )
-                })
-              ) : (
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {seriesPosts.map((post) => (
-                    <PostCard key={post.slug} post={post} />
-                  ))}
-                </div>
-              )}
+              <PostCarousel
+                label={`${series.name} posts`}
+                items={seriesPosts.map((post) => ({
+                  id: post.slug,
+                  group: post.category,
+                  card: <PostCard post={post} />,
+                }))}
+                groups={
+                  series.id === "migration"
+                    ? postCategories.filter((category) => postsInCategory(category.name).length > 0)
+                    : undefined
+                }
+              />
             </section>
           )
         })}
