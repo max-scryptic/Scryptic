@@ -546,11 +546,11 @@ export default function Home() {
       </section>
 
       {/* Stack: a full-width band of the same Lapis as the hero, in both themes, with each
-          logo on a white tile. Like the hero it redraws the rails, tinted to read on the blue. */}
+          logo on a white tile. Its background covers the page rails, so the band is clean. */}
       <section
         aria-labelledby="stack-heading"
         id="stack"
-        className="ruled scroll-mt-4 bg-[#2b3fd6] px-4 py-20 text-white [--guide:color-mix(in_oklab,#ffffff_20%,#2b3fd6)] sm:px-6 sm:py-24"
+        className="relative scroll-mt-4 bg-[#2b3fd6] px-4 py-20 text-white sm:px-6 sm:py-24"
       >
         <div className={cn("mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16", inset)}>
           <div data-reveal="children" className="flex flex-col gap-5">
