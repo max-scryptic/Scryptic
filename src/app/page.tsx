@@ -196,12 +196,17 @@ const terminalLines = [
   { prompt: false, text: "launched in a 2 week sprint" },
 ]
 
+// Copy and buttons outside a card sit this far in from the vertical guides, the
+// same as the text inside the cards, so only the cards' edges run on the guides.
+const inset = "px-6 sm:px-8"
+
 function SectionHeading({
   eyebrow,
   title,
   children,
   id,
   aside,
+  className,
 }: {
   eyebrow: string
   title: string
@@ -209,6 +214,7 @@ function SectionHeading({
   id: string
   /** Shown right after the title on wide screens, and after the intro on narrower ones. */
   aside?: React.ReactNode
+  className?: string
 }) {
   return (
     <div
@@ -216,6 +222,7 @@ function SectionHeading({
       className={cn(
         "grid content-start gap-4",
         aside ? "xl:grid-cols-[auto_auto] xl:justify-start xl:gap-x-6" : "max-w-2xl",
+        className,
       )}
     >
       <p className="font-mono text-xs tracking-widest text-primary uppercase xl:col-start-1">{eyebrow}</p>
@@ -307,7 +314,7 @@ export default function Home() {
           className="hero-parallax absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
         />
         <div className="hero-recede mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
-          <div className="hero-rise flex flex-col items-start gap-7">
+          <div className={cn("hero-rise flex flex-col items-start gap-7", inset)}>
             <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">
               From idea to{" "}
               <span className="text-[#c3caff]">MVP</span>
@@ -375,6 +382,7 @@ export default function Home() {
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading
+            className={inset}
             eyebrow="Pricing"
             title="A fully built MVP, ready to take to market"
             id="pricing-heading"
@@ -470,7 +478,7 @@ export default function Home() {
         className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading eyebrow="Process" title="From first call to launch" id="process-heading">
+          <SectionHeading className={inset} eyebrow="Process" title="From first call to launch" id="process-heading">
             Two calls, a {calendarPackage.sprint}, then handover and a week of support, with a demo
             every Friday.
           </SectionHeading>
@@ -596,7 +604,7 @@ export default function Home() {
         className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
             <SectionHeading eyebrow="Our work" title="Products we have built and launched" id="work-heading">
               Every app below went through the same process a client build does, from first sketch
               to live domain. Each case study covers the problem, the product and the engineering.
@@ -626,7 +634,7 @@ export default function Home() {
         className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
             <SectionHeading
               eyebrow="Why Scryptic"
               title="Hire in-house. Brief an agency. Chance a freelancer. Or skip the trade-offs."
@@ -710,7 +718,7 @@ export default function Home() {
         className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-16">
-          <div className="flex flex-col gap-6">
+          <div className={cn("flex flex-col gap-6", inset)}>
             <SectionHeading eyebrow="About us" title="About Scryptic" id="about-heading">
               {siteConfig.name} is a Brighton-based development studio for founders who need a
               working product, not a team to manage.
@@ -762,7 +770,7 @@ export default function Home() {
         id="faq"
         className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
-        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]">
+        <div className={cn("mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]", inset)}>
           <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading">
             Straight answers on pricing, timelines, process and what to expect. Anything else, ask on the
             discovery call.
