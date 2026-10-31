@@ -545,10 +545,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stack: the same Lapis as the hero, in both themes, with each logo on a white tile.
-          Its corner brackets are in the text colour, so they read against the blue. */}
-      <section aria-labelledby="stack-heading" id="stack" className="scroll-mt-28 px-4 pb-24 sm:px-6">
-        <div className="corners guides mx-auto grid max-w-6xl items-center gap-12 bg-[#2b3fd6] [--corner:var(--foreground)] px-6 py-12 text-white sm:px-10 sm:py-16 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-14">
+      {/* Stack: a full-width band of the same Lapis as the hero, in both themes, with each
+          logo on a white tile. Like the hero it redraws the rails, tinted to read on the blue. */}
+      <section
+        aria-labelledby="stack-heading"
+        id="stack"
+        className="ruled scroll-mt-4 bg-[#2b3fd6] px-4 py-20 text-white [--guide:color-mix(in_oklab,#ffffff_20%,#2b3fd6)] sm:px-6 sm:py-24"
+      >
+        <div className={cn("mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16", inset)}>
           <div data-reveal="children" className="flex flex-col gap-5">
             <p className="font-mono text-xs tracking-widest text-[#c3caff] uppercase">Our stack</p>
             <h2 id="stack-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
