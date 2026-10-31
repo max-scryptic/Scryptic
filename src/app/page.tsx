@@ -305,7 +305,9 @@ export default function Home() {
       <ScrollReveal />
 
       {/* Hero: a full-width, square-edged Lapis band, the same Lapis in both themes. It
-          draws the guide lines again, over its own background, in a lighter blue. */}
+          draws the guide lines again, over its own background, in a lighter blue. The
+          terminal card keeps off the guides by the same inset as the copy, so the
+          two sit symmetrically in the column. */}
       <section className="ruled relative isolate overflow-hidden bg-[#2b3fd6] px-4 pt-36 pb-24 text-white [--guide:color-mix(in_oklab,#ffffff_20%,#2b3fd6)] sm:px-6 sm:pt-44 sm:pb-32">
         <VoxelField
           faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
@@ -345,7 +347,7 @@ export default function Home() {
 
           <div
             aria-hidden="true"
-            className="hero-card corners w-full border border-border bg-card text-card-foreground shadow-2xl shadow-black/25 [--corner:var(--foreground)]"
+            className="hero-card corners mx-6 border sm:mx-8 lg:ml-0 border-border bg-card text-card-foreground shadow-2xl shadow-black/25 [--corner:var(--foreground)]"
           >
             <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
               <span className="size-2 bg-foreground/15" />
