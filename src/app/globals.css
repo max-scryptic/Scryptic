@@ -165,8 +165,8 @@
  * them.
  * - .ruled draws two vertical guides down a full-width box, on the edges of
  *   the max-w-6xl content column (and the floating header bar). The root
- *   layout draws them for every page; a section with its own background (the
- *   home hero) adds .ruled again to draw them over it. Set --rail to recolour.
+ *   layout draws them for every page; a section with its own background hides
+ *   them, unless it adds .ruled again to draw them over it. Set --rail to recolour.
  * - .ruled-bottom puts a small square on each guide at the box's bottom edge,
  *   where the guides meet the footer's top rule.
  * - .guides runs a box's top and bottom edges out across the page, behind

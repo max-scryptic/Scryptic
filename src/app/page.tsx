@@ -304,11 +304,10 @@ export default function Home() {
       />
       <ScrollReveal />
 
-      {/* Hero: a full-width, square-edged Lapis band, the same Lapis in both themes. It
-          draws the guide lines again, over its own background, in a lighter blue. The
-          terminal card keeps off the guides by the same inset as the copy, so the
-          two sit symmetrically in the column. */}
-      <section className="ruled relative isolate overflow-hidden bg-[#2b3fd6] px-4 pt-36 pb-24 text-white [--guide:color-mix(in_oklab,#ffffff_20%,#2b3fd6)] sm:px-6 sm:pt-44 sm:pb-32">
+      {/* Hero: a full-width, square-edged Lapis band, the same Lapis in both themes. Its
+          background covers the page's guide lines, so none run through it. The terminal
+          card keeps the same inset as the copy, so the two sit symmetrically in the column. */}
+      <section className="relative isolate overflow-hidden bg-[#2b3fd6] px-4 pt-36 pb-24 text-white sm:px-6 sm:pt-44 sm:pb-32">
         <VoxelField
           faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
           className="hero-parallax absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
@@ -548,11 +547,11 @@ export default function Home() {
       </section>
 
       {/* Stack: a full-width band of the same Lapis as the hero, in both themes, with each
-          logo on a white tile. Like the hero it redraws the rails, tinted to read on the blue. */}
+          logo on a white tile. Like the hero, its background covers the page's guide lines. */}
       <section
         aria-labelledby="stack-heading"
         id="stack"
-        className="ruled scroll-mt-4 bg-[#2b3fd6] px-4 py-20 text-white [--guide:color-mix(in_oklab,#ffffff_20%,#2b3fd6)] sm:px-6 sm:py-24"
+        className="scroll-mt-4 bg-[#2b3fd6] px-4 py-20 text-white sm:px-6 sm:py-24"
       >
         <div className={cn("mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16", inset)}>
           <div data-reveal="children" className="flex flex-col gap-5">
