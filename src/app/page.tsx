@@ -290,7 +290,7 @@ function ComparisonMark({ value, highlight = false }: { value: boolean; highligh
 
 export default function Home() {
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col overflow-x-clip">
       <PageJsonLd
         page={pages.home}
         nodes={[
@@ -301,7 +301,7 @@ export default function Home() {
       <ScrollReveal />
 
       {/* Hero: a full-width, square-edged Lapis band, the same Lapis in both themes. */}
-      <section className="ruled relative isolate overflow-hidden bg-[#2b3fd6] px-6 pt-36 pb-24 text-white sm:px-10 sm:pt-44 sm:pb-32">
+      <section className="ruled relative isolate overflow-hidden bg-[#2b3fd6] px-4 pt-36 pb-24 text-white [--guide:color-mix(in_oklab,#ffffff_20%,#2b3fd6)] sm:px-6 sm:pt-44 sm:pb-32">
         <VoxelField
           faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
           className="hero-parallax absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
@@ -340,7 +340,7 @@ export default function Home() {
 
           <div
             aria-hidden="true"
-            className="hero-card corners w-full border border-border bg-card text-card-foreground shadow-2xl shadow-black/25 [--corner-inset:7px] [--corner:#ffffff]"
+            className="hero-card corners w-full border border-border bg-card text-card-foreground shadow-2xl shadow-black/25 [--corner:var(--foreground)]"
           >
             <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
               <span className="size-2 bg-foreground/15" />
@@ -371,7 +371,7 @@ export default function Home() {
       <section
         aria-labelledby="pricing-heading"
         id="pricing"
-        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
+        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading
@@ -396,7 +396,8 @@ export default function Home() {
 
           {/* One card per package: name and sprint, the price, what is included, then the call.
               The preferred package gets a Lapis border and a tag sitting on its top edge.
-              Every card is square-edged with accent brackets on its corners. */}
+              Every card is square-edged, with accent brackets on its corners and its top and
+              bottom edges run out across the page. */}
           <div data-reveal="children" className="grid gap-6 pt-4 md:grid-cols-2">
             {services.map((service) => (
               <article
@@ -404,9 +405,9 @@ export default function Home() {
                 id={service.id}
                 aria-labelledby={`${service.id}-name`}
                 className={cn(
-                  "corners flex scroll-mt-28 flex-col gap-8 bg-card p-6 sm:p-8 lg:p-10",
+                  "corners guides flex scroll-mt-28 flex-col gap-8 bg-card p-6 sm:p-8 lg:p-10",
                   service.preferred
-                    ? "border-2 border-primary shadow-xl shadow-primary/15 [--corner-inset:2px] [--corner:var(--foreground)]"
+                    ? "border-2 border-primary shadow-xl shadow-primary/15 [--corner-inset:2px] [--corner:var(--foreground)] [--edge:2px]"
                     : "border border-border shadow-xl shadow-black/5",
                 )}
               >
@@ -466,7 +467,7 @@ export default function Home() {
       <section
         aria-labelledby="process-heading"
         id="process"
-        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
+        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Process" title="From first call to launch" id="process-heading">
@@ -475,7 +476,7 @@ export default function Home() {
           </SectionHeading>
           {/* One row per week on a Monday to Friday grid, Friday shaded as demo day. Phones drop
               the day columns and list each week's events with their days. */}
-          <div className="corners border border-border bg-card">
+          <div className="corners guides border border-border bg-card">
             <div
               aria-hidden="true"
               className="hidden grid-cols-[7.5rem_repeat(5,minmax(0,1fr))] border-b border-border font-mono text-xs text-muted-foreground uppercase sm:grid"
@@ -539,9 +540,9 @@ export default function Home() {
       </section>
 
       {/* Stack: the same Lapis as the hero, in both themes, with each logo on a white tile.
-          The panel's corner brackets sit just outside it, where they read on the page. */}
-      <section aria-labelledby="stack-heading" id="stack" className="ruled scroll-mt-28 px-6 pb-24 sm:px-10">
-        <div className="corners mx-auto grid max-w-6xl items-center gap-12 bg-[#2b3fd6] [--corner-inset:7px] px-6 py-12 text-white sm:px-10 sm:py-16 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-14">
+          Its corner brackets are in the text colour, so they read against the blue. */}
+      <section aria-labelledby="stack-heading" id="stack" className="ruled scroll-mt-28 px-4 pb-24 sm:px-6">
+        <div className="corners guides mx-auto grid max-w-6xl items-center gap-12 bg-[#2b3fd6] [--corner:var(--foreground)] px-6 py-12 text-white sm:px-10 sm:py-16 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-14">
           <div data-reveal="children" className="flex flex-col gap-5">
             <p className="font-mono text-xs tracking-widest text-[#c3caff] uppercase">Our stack</p>
             <h2 id="stack-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
@@ -592,7 +593,7 @@ export default function Home() {
       <section
         aria-labelledby="work-heading"
         id="work"
-        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
+        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -612,7 +613,7 @@ export default function Home() {
           </div>
           <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
             {featuredCaseStudies.map((study) => (
-              <CaseStudyCard key={study.slug} study={study} headingLevel="h3" />
+              <CaseStudyCard key={study.slug} study={study} headingLevel="h3" className="guides" />
             ))}
           </div>
         </div>
@@ -622,7 +623,7 @@ export default function Home() {
       <section
         aria-labelledby="compare-heading"
         id="compare"
-        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
+        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -644,9 +645,9 @@ export default function Home() {
             </Button>
           </div>
 
-          {/* The brackets sit on an outer box, as the scroll area would clip them. Relative so
-              the visually hidden labels stay inside the scroll area on phones. */}
-          <div className="corners border border-border bg-card">
+          {/* The brackets and guides sit on an outer box, as the scroll area would clip them.
+              Relative so the visually hidden labels stay inside the scroll area on phones. */}
+          <div className="corners guides border border-border bg-card">
             <div className="relative overflow-x-auto">
               <table className="w-full min-w-[600px] border-collapse text-left sm:min-w-[720px]">
                 <caption className="sr-only">
@@ -706,7 +707,7 @@ export default function Home() {
       <section
         aria-labelledby="about-heading"
         id="about"
-        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
+        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-16">
           <div className="flex flex-col gap-6">
@@ -724,7 +725,7 @@ export default function Home() {
           <article
             aria-labelledby="founder-name"
             data-reveal
-            className="corners grid border border-border bg-card sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+            className="corners guides grid border border-border bg-card sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
           >
             <div className="relative aspect-square bg-portrait">
               <Image
@@ -759,7 +760,7 @@ export default function Home() {
       <section
         aria-labelledby="faq-heading"
         id="faq"
-        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
+        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]">
           <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading">
@@ -786,10 +787,10 @@ export default function Home() {
       </section>
 
       {/* Call to action */}
-      <section aria-labelledby="contact-heading" id="contact" className="ruled ruled-bottom scroll-mt-28 px-6 pb-24 sm:px-10">
+      <section aria-labelledby="contact-heading" id="contact" className="ruled ruled-bottom scroll-mt-28 px-4 pb-24 sm:px-6">
         <div
           data-reveal="zoom"
-          className="corners mx-auto flex max-w-6xl flex-col items-center gap-6 border border-border bg-card px-6 py-16 text-center sm:py-20"
+          className="corners guides mx-auto flex max-w-6xl flex-col items-center gap-6 border border-border bg-card px-6 py-16 text-center sm:py-20"
         >
           <h2 id="contact-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
             Start with a discovery call

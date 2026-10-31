@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { cn } from "cn"
 
 import { type CaseStudy } from "@/lib/work"
 
@@ -11,13 +12,20 @@ import { type CaseStudy } from "@/lib/work"
 export function CaseStudyCard({
   study,
   headingLevel: Heading = "h2",
+  className,
 }: {
   study: CaseStudy
   /** h2 on /work, h3 inside a home page section. */
   headingLevel?: "h2" | "h3"
+  className?: string
 }) {
   return (
-    <article className="group corners corners-grow flex flex-col border border-border bg-card transition-colors hover:border-primary/50">
+    <article
+      className={cn(
+        "group corners corners-grow flex flex-col border border-border bg-card transition-colors hover:border-primary/50",
+        className,
+      )}
+    >
       <div className="overflow-hidden border-b border-border bg-muted">
         <Image
           src={study.cover.src}
