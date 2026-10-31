@@ -74,7 +74,7 @@ export function SiteChecker({ kind }: { kind: SiteCheckKind }) {
       <form
         onSubmit={run}
         aria-label={kind === "agent" ? "Check a site for AI agents" : "Check a page for SEO"}
-        className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 shadow-xl shadow-black/5 sm:p-8"
+        className="corners guides flex flex-col gap-3 border border-border bg-card p-5 shadow-xl shadow-black/5 sm:p-8"
       >
         <label htmlFor={`${kind}-url`} className="font-medium">
           {kind === "agent" ? "Website address" : "Page address"}
@@ -92,7 +92,7 @@ export function SiteChecker({ kind }: { kind: SiteCheckKind }) {
             aria-invalid={state.phase === "error" || undefined}
             className="h-12 flex-1 bg-background text-base md:text-base"
           />
-          <Button type="submit" size="lg" disabled={checking} className="h-12 rounded-full px-6 text-base">
+          <Button type="submit" size="lg" disabled={checking} className="h-12 px-6 text-base">
             {checking ? "Checking..." : kind === "agent" ? "Check my site" : "Run the audit"}
           </Button>
         </div>
@@ -105,8 +105,8 @@ export function SiteChecker({ kind }: { kind: SiteCheckKind }) {
 
       <div aria-live="polite" aria-busy={checking}>
         {checking && (
-          <div className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 text-muted-foreground sm:p-8">
-            <span className="size-4 animate-spin rounded-full border-2 border-primary border-t-transparent motion-reduce:animate-none" />
+          <div className="corners guides flex items-center gap-3 border border-border bg-card p-5 text-muted-foreground sm:p-8">
+            <span className="size-4 animate-spin border-2 border-primary border-t-transparent motion-reduce:animate-none" />
             Fetching {state.url} and reading it like {kind === "agent" ? "an AI crawler" : "a search engine"}...
           </div>
         )}
@@ -127,7 +127,7 @@ function Report({ report }: { report: SiteReport }) {
   return (
     <section
       aria-label={`Results for ${host}`}
-      className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card"
+      className="corners guides flex flex-col border border-border bg-card"
     >
       <div className="grid gap-6 border-b border-border p-5 sm:grid-cols-[auto_1fr] sm:items-center sm:p-8">
         <ScoreRing score={report.score} />
@@ -168,7 +168,7 @@ function Report({ report }: { report: SiteReport }) {
               )}
             />
           }
-          className="h-11 rounded-full px-6 text-base"
+          className="h-11 px-6 text-base"
         >
           Book a call about this report
         </Button>
@@ -182,7 +182,7 @@ function CheckRow({ check }: { check: CheckResult }) {
   return (
     <li className="flex gap-4 p-5 sm:px-8">
       <span
-        className={cn("mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full", style.className)}
+        className={cn("mt-0.5 flex size-7 shrink-0 items-center justify-center", style.className)}
       >
         <svg
           viewBox="0 0 24 24"

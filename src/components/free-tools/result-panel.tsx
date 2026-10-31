@@ -20,7 +20,7 @@ export function ResultPanel({
     <section
       id={id}
       aria-label={label}
-      className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl shadow-black/5 lg:sticky lg:top-28"
+      className="corners flex scroll-mt-28 flex-col border border-border bg-card shadow-xl shadow-black/5 lg:sticky lg:top-28"
     >
       <div className="flex flex-col gap-3 border-b border-border px-5 py-4 sm:px-8">
         <div className="flex items-baseline justify-between gap-4 font-mono text-xs">
@@ -32,9 +32,9 @@ export function ResultPanel({
           )}
         </div>
         {progress && (
-          <div className="h-1 overflow-hidden rounded-full bg-muted" aria-hidden="true">
+          <div className="h-1 overflow-hidden bg-muted" aria-hidden="true">
             <div
-              className="h-full rounded-full bg-primary transition-[width] duration-300"
+              className="h-full bg-primary transition-[width] duration-300"
               style={{ width: `${(progress.done / progress.total) * 100}%` }}
             />
           </div>

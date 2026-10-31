@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { cn } from "cn"
 import { notFound } from "next/navigation"
 
 import { BrowserFrame } from "@/components/browser-frame"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
+import { inset } from "@/lib/frame"
 import { caseStudyPage, createMetadata, pages } from "@/lib/seo"
 import { caseStudyJsonLd } from "@/lib/structured-data"
 import { caseStudies, displayDomain, getCaseStudy } from "@/lib/work"
@@ -54,7 +56,7 @@ function Section({
   return (
     <section
       aria-labelledby={id}
-      className="grid gap-8 border-t border-border pt-12 lg:grid-cols-[1fr_2fr] lg:gap-14"
+      className={cn("grid gap-8 pt-12 lg:grid-cols-[1fr_2fr] lg:gap-14", inset)}
     >
       <div className="flex flex-col gap-3">
         <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
@@ -83,7 +85,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
       <article className="mx-auto flex w-full max-w-6xl flex-col gap-16">
         <header className="flex flex-col gap-10">
-          <nav aria-label="Breadcrumb" className="font-mono text-xs text-muted-foreground">
+          <nav aria-label="Breadcrumb" className={cn("font-mono text-xs text-muted-foreground", inset)}>
             <ol className="flex items-center gap-2">
               <li>
                 <Link href={pages.work.path} className="hover:text-foreground">
@@ -98,7 +100,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           </nav>
 
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-14">
-            <div className="flex flex-col items-start gap-6">
+            <div className={cn("flex flex-col items-start gap-6", inset)}>
               <p className="font-mono text-xs tracking-widest text-primary uppercase">
                 {study.category}
               </p>
@@ -110,14 +112,15 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 size="lg"
                 nativeButton={false}
                 render={<a href={study.url} target="_blank" rel="noopener" />}
-                className="h-11 rounded-full px-5 text-base"
+                className="h-11 px-5 text-base"
               >
                 Visit {domain}
                 <ExternalIcon />
               </Button>
             </div>
 
-            <dl className="grid gap-5 rounded-2xl border border-border bg-card p-6 text-sm sm:grid-cols-2 lg:grid-cols-1">
+            {/* Brackets but no guides: beside the intro, its edge lines would cut through the copy. */}
+            <dl className="corners grid gap-5 border border-border bg-card p-6 text-sm sm:grid-cols-2 lg:grid-cols-1">
               <div className="flex flex-col gap-1">
                 <dt className="font-mono text-xs text-muted-foreground">Built for</dt>
                 <dd>{study.audience}</dd>
@@ -139,6 +142,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             domain={domain}
             sizes="(min-width: 1152px) 1152px, 100vw"
             priority
+            className="guides"
           />
         </header>
 
@@ -156,7 +160,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               {paragraph}
             </p>
           ))}
-          <ul className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
+          <ul className="corners grid gap-px border border-border bg-border sm:grid-cols-2">
             {study.features.map((feature) => (
               <li key={feature.name} className="flex flex-col gap-2 bg-card p-6">
                 <h3>{feature.name}</h3>
@@ -167,8 +171,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         </Section>
 
         {study.gallery.length > 0 ? (
-          <section aria-labelledby="screens-heading" className="flex flex-col gap-8 border-t border-border pt-12">
-            <div className="flex flex-col gap-3">
+          <section aria-labelledby="screens-heading" className="flex flex-col gap-8 pt-12">
+            <div className={cn("flex flex-col gap-3", inset)}>
               <p className="font-mono text-xs tracking-widest text-primary uppercase">Screens</p>
               <h2 id="screens-heading" className="text-2xl tracking-tight sm:text-3xl">
                 A closer look
@@ -182,6 +186,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                   alt={shot.alt}
                   domain={domain}
                   sizes="(min-width: 1152px) 1152px, 100vw"
+                  className="guides"
                 />
               ))}
             </div>
@@ -199,17 +204,17 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           </ul>
           <ul aria-label="Built with" className="flex flex-wrap gap-2 font-mono text-xs">
             {study.stack.map((tech) => (
-              <li key={tech} className="rounded-full bg-primary/10 px-3 py-1 text-primary">
+              <li key={tech} className="bg-primary/10 px-3 py-1 text-primary">
                 {tech}
               </li>
             ))}
           </ul>
         </Section>
 
-        <footer className="grid gap-6 border-t border-border pt-12 md:grid-cols-2">
+        <footer className="grid gap-6 pt-12 md:grid-cols-2">
           <Link
             href={`/work/${next.slug}`}
-            className="group flex flex-col gap-2 rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/50 sm:p-8"
+            className="group corners corners-grow guides flex flex-col gap-2 border border-border bg-card p-6 transition-colors hover:border-primary/50 sm:p-8"
           >
             <span className="font-mono text-xs text-muted-foreground">Next case study</span>
             <span className="text-2xl tracking-tight">
@@ -217,7 +222,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             </span>
             <span className="text-sm text-pretty text-muted-foreground">{next.category}</span>
           </Link>
-          <div className="flex flex-col items-start gap-4 rounded-2xl border border-primary/50 bg-card p-6 sm:p-8">
+          <div className="corners guides flex flex-col items-start gap-4 border border-primary/50 bg-card p-6 sm:p-8">
             <p className="text-2xl tracking-tight text-balance">Building something like {study.name}?</p>
             <p className="text-sm text-pretty text-muted-foreground">
               Start with a free discovery call. You leave with a scoped first release and a written
@@ -227,7 +232,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               size="lg"
               nativeButton={false}
               render={<Link href={pages.bookCall.path} />}
-              className="mt-auto h-11 rounded-full px-5 text-base"
+              className="mt-auto h-11 px-5 text-base"
             >
               Book a discovery call
             </Button>

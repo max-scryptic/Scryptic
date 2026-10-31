@@ -78,6 +78,7 @@ src/
 - **Feature code imports from `@/components/ui/*`**, never from `@base-ui/react` directly, so a widget can be restyled or swapped in one place.
 - **Style with theme tokens** (`bg-background`, `text-muted-foreground`, `border-border`, ...) from `globals.css` rather than raw colours, so light and dark mode keep working.
 - **One class helper:** `import { cn } from "cn"`.
+- **Blueprint frame, no rounded corners.** Every radius token is 0, so don't add `rounded-*`. The root layout draws guide lines down the edges of the `max-w-6xl` content column. Cards sit on them with `corners` (accent brackets) and, when full width, `guides` (their top and bottom edges run out across the page). Copy and buttons outside a card take `inset` from `src/lib/frame.ts` so they never run along a guide. The classes are documented in `src/app/globals.css`.
 - **Composition uses `render`, not `asChild`:** `<Button nativeButton={false} render={<Link href="/#services" />}>Services</Button>`.
 
 ## Adding widgets

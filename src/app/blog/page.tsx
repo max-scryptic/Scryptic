@@ -1,10 +1,12 @@
 import Link from "next/link"
+import { cn } from "cn"
 
 import { PageJsonLd } from "@/components/json-ld"
 import { PostCard } from "@/components/post-card"
 import { PostCarousel } from "@/components/post-carousel"
 import { Button } from "@/components/ui/button"
 import { latestPosts, postCategories, postSeries, postsInCategory, postsInSeries } from "@/lib/blog"
+import { inset } from "@/lib/frame"
 import { blogPostPages, createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
@@ -20,7 +22,7 @@ export default function BlogPage() {
       <PageJsonLd page={pages.blog} nodes={[itemListJsonLd(pages.blog, blogPostPages)]} />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
-        <div className="flex flex-col items-start gap-6">
+        <div className={cn("flex flex-col items-start gap-6", inset)}>
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
             The {siteConfig.name} <span className="text-primary">blog</span>
           </h1>
@@ -34,7 +36,7 @@ export default function BlogPage() {
                 <li key={series.id}>
                   <Link
                     href={`#${series.id}`}
-                    className="block rounded-full bg-primary/10 px-3 py-1 text-primary transition-colors hover:bg-primary/20"
+                    className="block bg-primary/10 px-3 py-1 text-primary transition-colors hover:bg-primary/20"
                   >
                     {series.name}
                   </Link>
@@ -45,13 +47,15 @@ export default function BlogPage() {
         </div>
 
         <section aria-labelledby="latest-heading" id="latest" className="flex scroll-mt-28 flex-col gap-10">
-          <h2 id="latest-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
+          <h2 id="latest-heading" className={cn("text-3xl tracking-tight text-balance sm:text-4xl", inset)}>
             Latest posts
           </h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {latestPosts(LATEST_COUNT).map((post, index) => (
-              // Phones show the first three, so the gallery doesn't become a long column.
-              <div key={post.slug} className={index < 3 ? "grid" : "hidden md:grid"}>
+              // Phones show the first three, so the gallery doesn't become a long column. The
+              // guides go on this wrapper, outside the card's own stacking context, so they
+              // run behind the cards.
+              <div key={post.slug} className={cn("guides", index < 3 ? "grid" : "hidden md:grid")}>
                 <PostCard post={post} />
               </div>
             ))}
@@ -72,9 +76,9 @@ export default function BlogPage() {
               key={series.id}
               id={series.id}
               aria-labelledby={`${series.id}-heading`}
-              className="flex scroll-mt-28 flex-col gap-8 border-t border-border pt-12"
+              className="flex scroll-mt-28 flex-col gap-8 pt-12"
             >
-              <div className="flex max-w-2xl flex-col gap-3">
+              <div className={cn("flex max-w-2xl flex-col gap-3", inset)}>
                 <p className="font-mono text-xs tracking-widest text-primary uppercase">Series</p>
                 <h2
                   id={`${series.id}-heading`}
@@ -104,7 +108,7 @@ export default function BlogPage() {
 
         <section
           aria-labelledby="blog-cta-heading"
-          className="flex flex-col items-start gap-4 rounded-2xl border border-border bg-card p-6 sm:p-10"
+          className="corners guides flex flex-col items-start gap-4 border border-border bg-card p-6 sm:p-10"
         >
           <h2 id="blog-cta-heading" className="text-2xl tracking-tight text-balance">
             Planning an app, or stuck with one?
@@ -118,7 +122,7 @@ export default function BlogPage() {
             size="lg"
             nativeButton={false}
             render={<Link href={pages.bookCall.path} />}
-            className="h-11 rounded-full px-6 text-base"
+            className="h-11 px-6 text-base"
           >
             Book a discovery call
           </Button>

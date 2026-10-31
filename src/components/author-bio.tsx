@@ -9,9 +9,9 @@ export function AuthorBio() {
   return (
     <section
       aria-labelledby="author-heading"
-      className="grid gap-6 rounded-2xl border border-border bg-card p-6 sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-10"
+      className="corners grid gap-6 border border-border bg-card p-6 sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-10"
     >
-      <div className="relative size-24 shrink-0 overflow-hidden rounded-full bg-portrait sm:size-28">
+      <div className="relative size-24 shrink-0 overflow-hidden bg-portrait sm:size-28">
         <Image
           src={founder.image}
           alt={`Portrait of ${founder.fullName}`}

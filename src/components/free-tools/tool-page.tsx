@@ -1,8 +1,10 @@
 import Link from "next/link"
+import { cn } from "cn"
 
 import { ToolList } from "@/components/free-tools/tool-list"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
+import { inset } from "@/lib/frame"
 import { freeTools, type FreeTool, type ToolFaq } from "@/lib/free-tools"
 import { pages, toolPage } from "@/lib/seo"
 import { faqJsonLd, toolJsonLd } from "@/lib/structured-data"
@@ -42,7 +44,7 @@ export function ToolPage({
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-20">
         <div className="flex flex-col gap-10">
-          <div className="flex flex-col items-start gap-6">
+          <div className={cn("flex flex-col items-start gap-6", inset)}>
             <Link
               href={pages.tools.path}
               className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-primary uppercase hover:underline"
@@ -59,7 +61,7 @@ export function ToolPage({
 
         <section
           aria-labelledby="tool-faq-heading"
-          className="grid gap-12 border-t border-border pt-20 lg:grid-cols-[1fr_1.4fr]"
+          className={cn("grid gap-12 lg:grid-cols-[1fr_1.4fr]", inset)}
         >
           <div className="flex flex-col items-start gap-4">
             <p className="font-mono text-xs tracking-widest text-primary uppercase">FAQ</p>
@@ -96,7 +98,7 @@ export function ToolPage({
 
         <section
           aria-labelledby="tool-cta-heading"
-          className="flex flex-col items-start gap-4 rounded-2xl border border-border bg-card p-6 sm:p-10"
+          className="corners guides flex flex-col items-start gap-4 border border-border bg-card p-6 sm:p-10"
         >
           <h2 id="tool-cta-heading" className="text-2xl tracking-tight text-balance">
             Rather talk it through with a developer?
@@ -109,14 +111,14 @@ export function ToolPage({
             size="lg"
             nativeButton={false}
             render={<Link href={pages.bookCall.path} />}
-            className="h-11 rounded-full px-6 text-base"
+            className="h-11 px-6 text-base"
           >
             Book a discovery call
           </Button>
         </section>
 
         <section aria-labelledby="more-tools-heading" className="flex flex-col gap-8">
-          <div className="flex flex-wrap items-baseline justify-between gap-4">
+          <div className={cn("flex flex-wrap items-baseline justify-between gap-4", inset)}>
             <h2 id="more-tools-heading" className="text-3xl tracking-tight">
               More free tools
             </h2>

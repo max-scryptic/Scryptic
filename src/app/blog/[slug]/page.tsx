@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { cn } from "cn"
 import { notFound } from "next/navigation"
 
 import { AuthorBio } from "@/components/author-bio"
@@ -17,6 +18,7 @@ import {
   relatedPosts,
   type PostBlock,
 } from "@/lib/blog"
+import { inset } from "@/lib/frame"
 import { blogPostPage, createMetadata, pages } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site"
 import { articleJsonLd, faqJsonLd } from "@/lib/structured-data"
@@ -56,7 +58,7 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "callout") {
     return (
-      <aside className="flex flex-col gap-2 rounded-2xl border border-primary/50 bg-card p-6">
+      <aside className="corners flex flex-col gap-2 border border-primary/50 bg-card p-6">
         <p className="font-mono text-xs tracking-widest text-primary uppercase">{block.title}</p>
         <p className="text-pretty">{block.text}</p>
       </aside>
@@ -71,7 +73,7 @@ function Block({ block }: { block: PostBlock }) {
     return (
       // White in both themes: the diagrams are drawn on white.
       <figure className="flex flex-col gap-3">
-        <div className="overflow-hidden rounded-2xl border border-border bg-white">
+        <div className="corners border border-border bg-white">
           <Image
             src={block.image}
             alt={block.alt}
@@ -91,7 +93,7 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "caseStudy") {
     return (
-      <figure className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-6">
+      <figure className="corners flex flex-col gap-3 border border-border bg-card p-6">
         <p className="font-mono text-xs tracking-widest text-primary uppercase">
           Case study &middot; {block.company}
         </p>
@@ -114,12 +116,12 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "checklist") {
     return (
-      <ul className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-6">
+      <ul className="corners flex flex-col gap-3 border border-border bg-card p-6">
         {block.items.map((item) => (
           <li key={item} className="flex gap-4">
             <span
               aria-hidden="true"
-              className="mt-1 size-4 shrink-0 rounded-xs border border-primary/60"
+              className="mt-1 size-4 shrink-0 border border-primary/60"
             />
             <p className="text-pretty text-muted-foreground">{item}</p>
           </li>
@@ -130,40 +132,43 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "table") {
     return (
-      <div className="overflow-x-auto rounded-2xl border border-border">
-        <table className="w-full min-w-xl text-left text-sm">
-          <caption className="sr-only">{block.caption}</caption>
-          <thead className="bg-card">
-            <tr>
-              {block.columns.map((column) => (
-                <th
-                  key={column}
-                  scope="col"
-                  className="p-4 font-mono text-xs font-normal text-muted-foreground"
-                >
-                  {column}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border border-t border-border">
-            {block.rows.map((row) => (
-              <tr key={row[0]}>
-                {row.map((cell, index) =>
-                  index === 0 ? (
-                    <th key={index} scope="row" className="p-4 align-top font-medium">
-                      {cell}
-                    </th>
-                  ) : (
-                    <td key={index} className="p-4 align-top text-pretty text-muted-foreground">
-                      {cell}
-                    </td>
-                  ),
-                )}
+      // The brackets sit on an outer box, as the scroll area would clip them.
+      <div className="corners border border-border">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-xl text-left text-sm">
+            <caption className="sr-only">{block.caption}</caption>
+            <thead className="bg-card">
+              <tr>
+                {block.columns.map((column) => (
+                  <th
+                    key={column}
+                    scope="col"
+                    className="p-4 font-mono text-xs font-normal text-muted-foreground"
+                  >
+                    {column}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-border border-t border-border">
+              {block.rows.map((row) => (
+                <tr key={row[0]}>
+                  {row.map((cell, index) =>
+                    index === 0 ? (
+                      <th key={index} scope="row" className="p-4 align-top font-medium">
+                        {cell}
+                      </th>
+                    ) : (
+                      <td key={index} className="p-4 align-top text-pretty text-muted-foreground">
+                        {cell}
+                      </td>
+                    ),
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
@@ -182,7 +187,7 @@ function Block({ block }: { block: PostBlock }) {
               className={
                 block.ordered
                   ? "w-6 shrink-0 pt-1 font-mono text-sm text-primary"
-                  : "mt-2.5 size-1.5 shrink-0 rounded-full bg-primary"
+                  : "mt-2.5 size-1.5 shrink-0 bg-primary"
               }
             >
               {block.ordered ? String(index + 1).padStart(2, "0") : null}
@@ -238,7 +243,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
 
       <article className="mx-auto flex w-full max-w-6xl flex-col gap-16">
         <header className="flex flex-col gap-10">
-          <nav aria-label="Breadcrumb" className="font-mono text-xs text-muted-foreground">
+          <nav aria-label="Breadcrumb" className={cn("font-mono text-xs text-muted-foreground", inset)}>
             <ol className="flex flex-wrap items-center gap-2">
               <li>
                 <Link href={pages.blog.path} className="hover:text-foreground">
@@ -259,7 +264,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
                 : "grid gap-10"
             }
           >
-            <div className="flex flex-col items-start gap-6">
+            <div className={cn("flex flex-col items-start gap-6", inset)}>
               <div className="flex items-center gap-4">
                 <ToolLogo post={post} />
                 <p className="font-mono text-xs tracking-widest text-primary uppercase">
@@ -288,7 +293,8 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             </div>
 
             {post.facts ? (
-              <dl className="grid gap-5 rounded-2xl border border-border bg-card p-6 text-sm sm:grid-cols-2">
+              // Brackets but no guides: beside the intro, its edge lines would cut through the copy.
+              <dl className="corners grid gap-5 border border-border bg-card p-6 text-sm sm:grid-cols-2">
                 {post.facts.map((fact) => (
                   <div key={fact.label} className="flex flex-col gap-1">
                     <dt className="font-mono text-xs text-muted-foreground">{fact.label}</dt>
@@ -301,11 +307,11 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
         </header>
 
         <div
-          className={
-            showContents
-              ? "grid gap-12 border-t border-border pt-12 lg:grid-cols-[14rem_1fr] lg:gap-16"
-              : "grid gap-12 border-t border-border pt-12"
-          }
+          className={cn(
+            "grid gap-12",
+            showContents && "lg:grid-cols-[14rem_1fr] lg:gap-16",
+            inset,
+          )}
         >
           {showContents ? (
             <nav aria-label="On this page" className="lg:sticky lg:top-32 lg:self-start">
@@ -382,12 +388,12 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
 
         <footer className="flex flex-col gap-12 pt-12">
           <div className="grid gap-6 lg:grid-cols-3">
-            <div className="grid lg:col-span-2">
+            <div className="guides grid lg:col-span-2">
               <AuthorBio />
             </div>
 
             {/* Same Lapis band as the home hero, in both themes. */}
-            <div className="flex flex-col items-start gap-4 rounded-2xl bg-[#2b3fd6] p-6 text-white sm:p-10 lg:p-8">
+            <div className="corners guides flex flex-col items-start gap-4 bg-[#2b3fd6] p-6 text-white [--corner:var(--foreground)] sm:p-10 lg:p-8">
               <p className="text-2xl tracking-tight text-balance">
                 {series.cta.heading(post)}
               </p>
@@ -396,7 +402,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
                 size="lg"
                 nativeButton={false}
                 render={<Link href={pages.bookCall.path} />}
-                className="h-11 rounded-full bg-white px-6 text-base text-[#2b3fd6] hover:bg-white/90 lg:mt-auto"
+                className="h-11 bg-white px-6 text-base text-[#2b3fd6] hover:bg-white/90 lg:mt-auto"
               >
                 Book a discovery call
               </Button>
@@ -404,7 +410,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           </div>
 
           <section aria-labelledby="related-heading" className="flex flex-col gap-6">
-            <div className="flex flex-wrap items-baseline justify-between gap-4">
+            <div className={cn("flex flex-wrap items-baseline justify-between gap-4", inset)}>
               <h2 id="related-heading" className="text-2xl tracking-tight">
                 Keep reading
               </h2>
@@ -413,8 +419,11 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               </Link>
             </div>
             <div className="grid gap-6 md:grid-cols-3">
+              {/* The guides go on a wrapper, outside the card's own stacking context, so they run behind the cards. */}
               {relatedPosts(post).map((related) => (
-                <PostCard key={related.slug} post={related} />
+                <div key={related.slug} className="guides grid">
+                  <PostCard post={related} />
+                </div>
               ))}
             </div>
           </section>

@@ -43,7 +43,7 @@ export function NoCodeQuiz() {
       <form
         aria-label="About your idea"
         onSubmit={(event) => event.preventDefault()}
-        className="flex flex-col gap-10 rounded-2xl border border-border bg-card p-5 sm:p-8"
+        className="corners flex flex-col gap-10 border border-border bg-card p-5 sm:p-8"
       >
         {quizQuestions.map((question, index) => (
           <ChoiceGroup
@@ -121,7 +121,7 @@ export function NoCodeQuiz() {
                     )}
                   />
                 }
-                className="mt-2 h-11 rounded-full px-6 text-base"
+                className="mt-2 h-11 px-6 text-base"
               >
                 Talk it through on a call
               </Button>

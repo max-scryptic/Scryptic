@@ -11,7 +11,8 @@
  * siteConfig.colors in src/lib/site.ts, which the generated images use.
  */
 :root {
-  --radius: 0.375rem;
+  /* Square corners throughout: every radius token resolves to this. */
+  --radius: 0rem;
   --background: #eef1f5; /* Mist */
   --foreground: #14131b; /* Obsidian */
   --card: #ffffff;
@@ -93,12 +94,14 @@
   --font-logo: var(--font-syne);
   --font-mono: var(--font-ibm-plex-mono);
 
-  --radius-sm: calc(var(--radius) - 2px);
-  --radius-md: calc(var(--radius) - 1px);
+  --radius-xs: var(--radius);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 2px);
-  --radius-2xl: calc(var(--radius) + 2px);
-  --radius-3xl: calc(var(--radius) * 2);
+  --radius-xl: var(--radius);
+  --radius-2xl: var(--radius);
+  --radius-3xl: var(--radius);
+  --radius-4xl: var(--radius);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -152,6 +155,126 @@
   }
   ::selection {
     @apply bg-primary text-primary-foreground;
+  }
+}
+
+/*
+ * Blueprint frame, on every page. Square edges and hairline guide lines that
+ * the cards sit on, with small accents where they meet. Copy and buttons
+ * outside a card sit in from the guides (by the cards' own padding), never on
+ * them.
+ * - .ruled draws two vertical guides down a full-width box, on the edges of
+ *   the max-w-6xl content column (and the floating header bar). The root
+ *   layout draws them for every page; a section with its own background (the
+ *   home hero) adds .ruled again to draw them over it. Set --rail to recolour.
+ * - .ruled-bottom puts a small square on each guide at the box's bottom edge,
+ *   where the guides meet the footer's top rule.
+ * - .guides runs a box's top and bottom edges out across the page, behind
+ *   the box and everything else, so they show only outside it. Set --edge to
+ *   the box's border width when it is not 1px.
+ * - .corners puts short L-shaped brackets on the four corners of a box,
+ *   over its 1px border (--corner-inset for thicker borders, --corner for the
+ *   colour). .corners-grow lengthens them on hover.
+ * Guides are opaque (--guide), so where two boxes' lines overlap they do not
+ * darken. A parent can retint them by setting --guide and --rail.
+ */
+@property --corner-len {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 12px;
+}
+
+:root {
+  --guide: color-mix(in oklab, var(--foreground) 12%, var(--background));
+}
+
+/* In the components layer, so utilities such as `fixed` or `absolute` win. */
+@layer components {
+  .ruled {
+    --rail-x: max(1rem, calc(50% - var(--container-6xl) / 2));
+    --rail: var(--guide);
+    position: relative;
+    background-image: linear-gradient(var(--rail) 0 0), linear-gradient(var(--rail) 0 0);
+    background-size: 1px 100%;
+    background-position: left var(--rail-x) top 0, right var(--rail-x) top 0;
+    background-repeat: no-repeat;
+  }
+  @media (width >= 40rem) {
+    .ruled {
+      --rail-x: max(1.5rem, calc(50% - var(--container-6xl) / 2));
+    }
+  }
+
+  .ruled-bottom::before,
+  .ruled-bottom::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: -4px;
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--mark, var(--primary));
+    background: var(--background);
+    pointer-events: none;
+  }
+  .ruled-bottom::before {
+    left: calc(var(--rail-x) - 3px);
+  }
+  .ruled-bottom::after {
+    right: calc(var(--rail-x) - 3px);
+  }
+
+  .guides {
+    position: relative;
+  }
+  .guides::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: calc(-1 * var(--edge, 1px));
+    bottom: calc(-1 * var(--edge, 1px));
+    left: -100vw;
+    right: -100vw;
+    border-block: 1px solid var(--guide);
+    pointer-events: none;
+  }
+
+  .corners {
+    position: relative;
+  }
+  .corners::after {
+    --c: var(--corner, var(--primary));
+    --w: 2px;
+    --l: var(--corner-len);
+    content: "";
+    position: absolute;
+    /* Above sticky table cells and other raised children inside the box. */
+    z-index: 20;
+    inset: calc(-1 * var(--corner-inset, 1px));
+    pointer-events: none;
+    background:
+      linear-gradient(var(--c) 0 0) top left / var(--l) var(--w),
+      linear-gradient(var(--c) 0 0) top left / var(--w) var(--l),
+      linear-gradient(var(--c) 0 0) top right / var(--l) var(--w),
+      linear-gradient(var(--c) 0 0) top right / var(--w) var(--l),
+      linear-gradient(var(--c) 0 0) bottom left / var(--l) var(--w),
+      linear-gradient(var(--c) 0 0) bottom left / var(--w) var(--l),
+      linear-gradient(var(--c) 0 0) bottom right / var(--l) var(--w),
+      linear-gradient(var(--c) 0 0) bottom right / var(--w) var(--l);
+    background-repeat: no-repeat;
+  }
+  /* On the brackets, so it does not fight the box's own transition utilities. */
+  .corners-grow::after {
+    transition: --corner-len 0.3s var(--ease-out);
+  }
+  .corners-grow:hover,
+  .corners-grow:focus-within {
+    --corner-len: 24px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .corners-grow::after {
+      transition: none;
+    }
   }
 }
 
@@ -265,10 +388,10 @@
 
 @keyframes wipe {
   from {
-    clip-path: inset(0 100% 0 0 round var(--radius-lg));
+    clip-path: inset(0 100% 0 0);
   }
   to {
-    clip-path: inset(0 0 0 0 round var(--radius-lg));
+    clip-path: inset(0 0 0 0);
   }
 }
 

@@ -191,7 +191,7 @@ export function BookCallForm() {
   return (
     <div
       ref={cardRef}
-      className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl shadow-black/5 sm:scroll-mt-32"
+      className="corners flex scroll-mt-28 flex-col border border-border bg-card shadow-xl shadow-black/5 sm:scroll-mt-32"
     >
       <ol className="grid grid-cols-2 border-b border-border font-mono text-xs">
         {steps.map((label, index) => (
@@ -206,7 +206,7 @@ export function BookCallForm() {
           >
             <span
               className={cn(
-                "flex size-6 shrink-0 items-center justify-center rounded-full border",
+                "flex size-6 shrink-0 items-center justify-center border",
                 index <= step
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border",
@@ -233,7 +233,7 @@ export function BookCallForm() {
             size="lg"
             nativeButton={false}
             render={<a href={destination} />}
-            className="h-11 rounded-full px-5 text-base"
+            className="h-11 px-5 text-base"
           >
             {sendsEmail ? "Open the email again" : "Go to the calendar"}
           </Button>
@@ -253,9 +253,9 @@ export function BookCallForm() {
               </p>
               {current === 0 && <p>Takes about a minute</p>}
             </div>
-            <div className="h-1 overflow-hidden rounded-full bg-muted" aria-hidden="true">
+            <div className="h-1 overflow-hidden bg-muted" aria-hidden="true">
               <div
-                className="h-full rounded-full bg-primary transition-[width] duration-300"
+                className="h-full bg-primary transition-[width] duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -357,7 +357,7 @@ export function BookCallForm() {
                   variant="ghost"
                   size="lg"
                   onClick={() => goTo(current - 1)}
-                  className="h-11 rounded-full px-4 text-base"
+                  className="h-11 px-4 text-base"
                 >
                   <span aria-hidden="true">&larr;</span>
                   Back
@@ -365,7 +365,7 @@ export function BookCallForm() {
               ) : (
                 <span />
               )}
-              <Button type="submit" size="lg" className="h-11 rounded-full px-5 text-base">
+              <Button type="submit" size="lg" className="h-11 px-5 text-base">
                 {current === lastSlide ? "Continue to booking" : "Next"}
                 <span aria-hidden="true">&rarr;</span>
               </Button>
@@ -403,7 +403,7 @@ function QuestionSlide({
             key={option}
             onPointerDown={onPointerPick}
             className={cn(
-              "flex min-h-12 cursor-pointer items-center rounded-xl border bg-background px-4 text-base transition-colors select-none hover:border-foreground/30",
+              "flex min-h-12 cursor-pointer items-center border bg-background px-4 text-base transition-colors select-none hover:border-foreground/30",
               "has-checked:border-primary has-checked:bg-primary has-checked:text-primary-foreground",
               "has-focus-visible:ring-3 has-focus-visible:ring-ring/50",
               error ? "border-destructive" : "border-border",

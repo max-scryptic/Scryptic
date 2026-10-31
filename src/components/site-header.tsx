@@ -26,7 +26,7 @@ export function SiteHeader() {
       brand={
         <Link
           href="/"
-          className="flex min-h-10 items-center gap-2 rounded-lg px-1 font-logo text-lg font-extrabold tracking-tight lowercase sm:pr-2"
+          className="flex min-h-10 items-center gap-2 px-1 font-logo text-lg font-extrabold tracking-tight lowercase sm:pr-2"
         >
           <BrandLogo className="size-7" />
           <span className="hidden sm:inline">{siteConfig.name}</span>

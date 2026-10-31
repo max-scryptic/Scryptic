@@ -31,7 +31,7 @@ export function CostCalculator() {
       <form
         aria-label="About your app"
         onSubmit={(event) => event.preventDefault()}
-        className="flex flex-col gap-10 rounded-2xl border border-border bg-card p-5 sm:p-8"
+        className="corners flex flex-col gap-10 border border-border bg-card p-5 sm:p-8"
       >
         {costQuestions.map((question, index) => (
           <ChoiceGroup
@@ -50,7 +50,7 @@ export function CostCalculator() {
         {estimate.answered > 0 && (
           <a
             href="#estimate"
-            className="sticky bottom-4 -mx-1 flex items-center justify-between gap-4 rounded-xl bg-primary px-4 py-3 text-primary-foreground shadow-xl shadow-black/20 lg:hidden"
+            className="sticky bottom-4 -mx-1 flex items-center justify-between gap-4 bg-primary px-4 py-3 text-primary-foreground shadow-xl shadow-black/20 lg:hidden"
           >
             <span className="font-medium">{formatRange(estimate.price, estimate.maxPrice)} + VAT</span>
             <span className="text-sm">
@@ -110,7 +110,7 @@ export function CostCalculator() {
               ))}
             </ul>
             {estimate.saving && (
-              <p className="rounded-xl bg-primary/10 p-4 text-sm text-pretty">
+              <p className="bg-primary/10 p-4 text-sm text-pretty">
                 Leave <strong className="font-medium">{estimate.saving.label.toLowerCase()}</strong>{" "}
                 for a later phase and the first release comes to about{" "}
                 <strong className="font-medium">{formatPrice(estimate.saving.price)}</strong>.
@@ -124,7 +124,7 @@ export function CostCalculator() {
             size="lg"
             nativeButton={false}
             render={<Link href={bookCallWith(summarizeEstimate(answers, estimate))} />}
-            className="h-11 rounded-full px-6 text-base"
+            className="h-11 px-6 text-base"
           >
             Book a call about this estimate
           </Button>

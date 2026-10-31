@@ -1,7 +1,9 @@
 import Image from "next/image"
+import { cn } from "cn"
 
 import { BookCallForm } from "@/components/book-call-form"
 import { PageJsonLd } from "@/components/json-ld"
+import { inset } from "@/lib/frame"
 import { createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
@@ -29,7 +31,7 @@ export default function BookCallPage() {
       <PageJsonLd page={pages.bookCall} />
 
       <div className="mx-auto grid w-full max-w-6xl items-start gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
-        <div className="flex flex-col gap-10 lg:sticky lg:top-32">
+        <div className={cn("flex flex-col gap-10 lg:sticky lg:top-32", inset)}>
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
             Book a free <span className="text-primary">30 minute</span> discovery call
           </h1>
@@ -54,7 +56,7 @@ export default function BookCallPage() {
           </section>
 
           <div className="flex items-center gap-4 border-t border-border pt-8">
-            <div className="relative size-14 shrink-0 overflow-hidden rounded-full bg-portrait">
+            <div className="relative size-14 shrink-0 overflow-hidden bg-portrait">
               <Image
                 src={founder.image}
                 alt={`Portrait of ${founder.name}, ${founder.role.toLowerCase()} of ${siteConfig.name}`}
