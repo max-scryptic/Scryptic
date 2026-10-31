@@ -15,6 +15,7 @@ import { framer } from "@/lib/blog/posts/framer"
 import { glide } from "@/lib/blog/posts/glide"
 import { googleSheetsDatabase } from "@/lib/blog/posts/google-sheets-database"
 import { lovable } from "@/lib/blog/posts/lovable"
+import { mobileAppDevelopment } from "@/lib/blog/posts/mobile-app-development"
 import { mobileWebDevelopment } from "@/lib/blog/posts/mobile-web-development"
 import { mvpSoftwareDevelopmentExample } from "@/lib/blog/posts/mvp-software-development-example"
 import { n8nAlternatives } from "@/lib/blog/posts/n8n-alternatives"
@@ -60,6 +61,7 @@ export const posts: BlogPost[] = [
   mvpSoftwareDevelopmentExample,
   dashboardAppDesign,
   mobileWebDevelopment,
+  mobileAppDevelopment,
   chooseAppDevelopmentCompany,
   reactjsWebDevelopmentCompany,
   webApplicationDevelopmentServices,
