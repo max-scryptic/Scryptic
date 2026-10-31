@@ -371,6 +371,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <div aria-hidden="true" className="rail-joint" />
 
       {/* Services. Sections with py-24 take scroll-mt-4, not scroll-mt-28: with the
           6rem top padding their heading still lands 7rem down, just under the fixed header. */}
@@ -547,7 +548,9 @@ export default function Home() {
       </section>
 
       {/* Stack: a full-width band of the same Lapis as the hero, in both themes, with each
-          logo on a white tile. Like the hero, its background covers the page's guide lines. */}
+          logo on a white tile. Like the hero, its background covers the page's guide lines,
+          with a square on each where they stop and start again. */}
+      <div aria-hidden="true" className="rail-joint" />
       <section
         aria-labelledby="stack-heading"
         id="stack"
@@ -599,6 +602,7 @@ export default function Home() {
           </ul>
         </div>
       </section>
+      <div aria-hidden="true" className="rail-joint" />
 
       {/* Work */}
       <section
