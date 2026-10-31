@@ -256,7 +256,7 @@ function ComparisonMark({ value, highlight = false }: { value: boolean; highligh
       {highlight ? (
         <span
           aria-hidden="true"
-          className="reveal-pop mx-auto flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground"
+          className="reveal-pop mx-auto flex size-8 items-center justify-center bg-primary text-primary-foreground"
         >
           <svg
             viewBox="0 0 24 24"
@@ -300,8 +300,9 @@ export default function Home() {
       />
       <ScrollReveal />
 
-      {/* Hero: a full-width Lapis band, rounded at the bottom, the same Lapis in both themes. */}
-      <section className="relative isolate overflow-hidden rounded-b-3xl bg-[#2b3fd6] px-4 pt-36 pb-24 text-white sm:rounded-b-[1.25rem] sm:px-6 sm:pt-44 sm:pb-32">
+      {/* Hero: a full-width, square-edged Lapis band, the same Lapis in both themes. Its
+          rails are drawn in white so they carry on through the blue. */}
+      <section className="ruled relative isolate overflow-hidden bg-[#2b3fd6] px-6 pt-36 pb-24 text-white [--rail:rgb(255_255_255/0.18)] sm:px-10 sm:pt-44 sm:pb-32">
         <VoxelField
           faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
           className="hero-parallax absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
@@ -322,7 +323,7 @@ export default function Home() {
                 size="lg"
                 nativeButton={false}
                 render={<Link href={pages.bookCall.path} />}
-                className="h-11 rounded-full bg-white px-5 text-base text-[#2b3fd6] hover:bg-white/90"
+                className="h-11 rounded-none bg-white px-5 text-base text-[#2b3fd6] hover:bg-white/90"
               >
                 Book a discovery call
               </Button>
@@ -331,7 +332,7 @@ export default function Home() {
                 variant="outline"
                 nativeButton={false}
                 render={<Link href="/#pricing" />}
-                className="h-11 rounded-full border-white/40 bg-transparent px-5 text-base text-white hover:bg-white/10 hover:text-white dark:border-white/40 dark:bg-transparent dark:hover:bg-white/10"
+                className="h-11 rounded-none border-white/40 bg-transparent px-5 text-base text-white hover:bg-white/10 hover:text-white dark:border-white/40 dark:bg-transparent dark:hover:bg-white/10"
               >
                 See pricing
               </Button>
@@ -340,12 +341,12 @@ export default function Home() {
 
           <div
             aria-hidden="true"
-            className="hero-card w-full overflow-hidden rounded-2xl border border-border bg-card text-card-foreground shadow-2xl shadow-black/25"
+            className="hero-card corners w-full border border-border bg-card text-card-foreground shadow-2xl shadow-black/25 [--corner-inset:7px] [--corner:#ffffff]"
           >
             <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
-              <span className="size-2.5 rounded-full bg-foreground/15" />
-              <span className="size-2.5 rounded-full bg-foreground/15" />
-              <span className="size-2.5 rounded-full bg-foreground/15" />
+              <span className="size-2 bg-foreground/15" />
+              <span className="size-2 bg-foreground/15" />
+              <span className="size-2 bg-foreground/15" />
             </div>
             <div className="hero-terminal flex flex-col gap-2 p-5 font-mono text-sm leading-relaxed">
               {terminalLines.map((line) => (
@@ -371,7 +372,7 @@ export default function Home() {
       <section
         aria-labelledby="pricing-heading"
         id="pricing"
-        className="scroll-mt-4 px-4 py-24 sm:px-6"
+        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading
@@ -380,7 +381,7 @@ export default function Home() {
             id="pricing-heading"
             aside={
               launchOffer && (
-                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-primary/30 bg-primary/5 px-4 py-2">
+                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 border border-primary/30 bg-primary/5 px-4 py-2">
                   <span className="font-mono text-xs tracking-widest text-primary uppercase">
                     Limited offer
                   </span>
@@ -395,7 +396,8 @@ export default function Home() {
           </SectionHeading>
 
           {/* One card per package: name and sprint, the price, what is included, then the call.
-              The preferred package gets a Lapis border and a tag sitting on its top edge. */}
+              The preferred package gets a Lapis border and a tag sitting on its top edge.
+              Every card is square-edged with accent brackets on its corners. */}
           <div data-reveal="children" className="grid gap-6 pt-4 md:grid-cols-2">
             {services.map((service) => (
               <article
@@ -403,14 +405,14 @@ export default function Home() {
                 id={service.id}
                 aria-labelledby={`${service.id}-name`}
                 className={cn(
-                  "relative flex scroll-mt-28 flex-col gap-8 rounded-2xl bg-card p-6 sm:p-8 lg:p-10",
+                  "corners flex scroll-mt-28 flex-col gap-8 bg-card p-6 sm:p-8 lg:p-10",
                   service.preferred
-                    ? "border-2 border-primary shadow-xl shadow-primary/15"
+                    ? "border-2 border-primary shadow-xl shadow-primary/15 [--corner-inset:2px] [--corner:var(--foreground)]"
                     : "border border-border shadow-xl shadow-black/5",
                 )}
               >
                 {service.preferred && (
-                  <p className="absolute -top-3.5 right-6 rounded-full bg-primary px-4 py-1 font-mono text-xs tracking-widest text-primary-foreground uppercase sm:right-10">
+                  <p className="absolute -top-3.5 right-6 z-10 bg-primary px-4 py-1 font-mono text-xs tracking-widest text-primary-foreground uppercase sm:right-10">
                     Preferred
                   </p>
                 )}
@@ -425,7 +427,7 @@ export default function Home() {
                     <p className="flex items-center gap-3 text-lg text-muted-foreground">
                       <span className="sr-only">Usually</span>
                       <s>{service.price}</s>
-                      <span className="rounded-full bg-primary/10 px-2.5 py-0.5 font-mono text-xs tracking-widest text-primary uppercase dark:bg-primary/30 dark:text-foreground">
+                      <span className="bg-primary/10 px-2.5 py-0.5 font-mono text-xs tracking-widest text-primary uppercase dark:bg-primary/30 dark:text-foreground">
                         {launchOffer.percentOff}% off
                       </span>
                     </p>
@@ -451,7 +453,7 @@ export default function Home() {
                   size="lg"
                   nativeButton={false}
                   render={<Link href={pages.bookCall.path} />}
-                  className="mt-auto h-12 w-full rounded-full text-base"
+                  className="mt-auto h-12 w-full rounded-none text-base"
                 >
                   Book a discovery call
                 </Button>
@@ -465,7 +467,7 @@ export default function Home() {
       <section
         aria-labelledby="process-heading"
         id="process"
-        className="scroll-mt-4 border-t border-border px-4 py-24 sm:px-6"
+        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading eyebrow="Process" title="From first call to launch" id="process-heading">
@@ -474,7 +476,7 @@ export default function Home() {
           </SectionHeading>
           {/* One row per week on a Monday to Friday grid, Friday shaded as demo day. Phones drop
               the day columns and list each week's events with their days. */}
-          <div className="overflow-hidden rounded-2xl border border-border bg-card">
+          <div className="corners border border-border bg-card">
             <div
               aria-hidden="true"
               className="hidden grid-cols-[7.5rem_repeat(5,minmax(0,1fr))] border-b border-border font-mono text-xs text-muted-foreground uppercase sm:grid"
@@ -515,7 +517,7 @@ export default function Home() {
                     <p
                       key={event.label}
                       className={cn(
-                        "reveal-wipe flex items-center gap-2 self-center rounded-lg px-3 py-2 text-sm sm:mx-1.5 sm:[grid-area:var(--area)]",
+                        "reveal-wipe flex items-center gap-2 self-center px-3 py-2 text-sm sm:mx-1.5 sm:[grid-area:var(--area)]",
                         calendarTones[event.tone],
                       )}
                       style={{ "--area": `1 / ${event.day + 1} / 2 / span ${event.span}` } as React.CSSProperties}
@@ -537,9 +539,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stack: the same Lapis as the hero, in both themes, with each logo on a white tile. */}
-      <section aria-labelledby="stack-heading" id="stack" className="scroll-mt-28 px-4 pb-24 sm:px-6">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 rounded-3xl bg-[#2b3fd6] px-6 py-12 text-white sm:px-10 sm:py-16 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-14">
+      {/* Stack: the same Lapis as the hero, in both themes, with each logo on a white tile.
+          The panel's corner brackets sit just outside it, where they read on the page. */}
+      <section aria-labelledby="stack-heading" id="stack" className="ruled scroll-mt-28 px-6 pb-24 sm:px-10">
+        <div className="corners mx-auto grid max-w-6xl items-center gap-12 bg-[#2b3fd6] [--corner-inset:7px] px-6 py-12 text-white sm:px-10 sm:py-16 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-14">
           <div data-reveal="children" className="flex flex-col gap-5">
             <p className="font-mono text-xs tracking-widest text-[#c3caff] uppercase">Our stack</p>
             <h2 id="stack-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
@@ -558,7 +561,7 @@ export default function Home() {
             {stack.map((tool) => (
               <li
                 key={tool.name}
-                className="flex flex-col items-center justify-center gap-4 rounded-2xl bg-white px-4 py-6 text-[#14131b] sm:py-8"
+                className="flex flex-col items-center justify-center gap-4 bg-white px-4 py-6 text-[#14131b] sm:py-8"
               >
                 {/* Wordmarks get the same area rather than the same height, so a long
                     one does not shrink to a sliver and a tall one does not dwarf the rest. */}
@@ -590,7 +593,7 @@ export default function Home() {
       <section
         aria-labelledby="work-heading"
         id="work"
-        className="scroll-mt-4 border-t border-border px-4 py-24 sm:px-6"
+        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -603,7 +606,7 @@ export default function Home() {
               variant="outline"
               nativeButton={false}
               render={<Link href={pages.work.path} />}
-              className="h-11 shrink-0 rounded-full px-5 text-base"
+              className="h-11 shrink-0 rounded-none px-5 text-base"
             >
               See all case studies
             </Button>
@@ -620,7 +623,7 @@ export default function Home() {
       <section
         aria-labelledby="compare-heading"
         id="compare"
-        className="scroll-mt-4 border-t border-border px-4 py-24 sm:px-6"
+        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -636,63 +639,66 @@ export default function Home() {
               size="lg"
               nativeButton={false}
               render={<Link href={pages.bookCall.path} />}
-              className="h-11 w-fit shrink-0 rounded-full px-6 text-base"
+              className="h-11 w-fit shrink-0 rounded-none px-6 text-base"
             >
               Book a discovery call
             </Button>
           </div>
 
-          {/* Relative so the visually hidden labels stay inside the scroll area on phones. */}
-          <div className="relative overflow-x-auto rounded-2xl border border-border bg-card">
-            <table className="w-full min-w-[600px] border-collapse text-left sm:min-w-[720px]">
-              <caption className="sr-only">
-                How {siteConfig.name} compares with an in-house hire, an agency, a freelancer and
-                AI-only tools
-              </caption>
-              <thead>
-                <tr className="border-b border-border">
-                  <td className="sticky left-0 z-10 w-[24%] bg-card" />
-                  <th
-                    scope="col"
-                    className="w-[16%] bg-primary/10 px-4 py-6 text-center font-logo text-xl font-extrabold tracking-tight lowercase"
-                  >
-                    {siteConfig.name}
-                  </th>
-                  {alternatives.map((alternative) => (
+          {/* The brackets sit on an outer box, as the scroll area would clip them. Relative so
+              the visually hidden labels stay inside the scroll area on phones. */}
+          <div className="corners border border-border bg-card">
+            <div className="relative overflow-x-auto">
+              <table className="w-full min-w-[600px] border-collapse text-left sm:min-w-[720px]">
+                <caption className="sr-only">
+                  How {siteConfig.name} compares with an in-house hire, an agency, a freelancer and
+                  AI-only tools
+                </caption>
+                <thead>
+                  <tr className="border-b border-border">
+                    <td className="sticky left-0 z-10 w-[24%] bg-card" />
                     <th
-                      key={alternative}
                       scope="col"
-                      className="w-[15%] px-4 py-6 text-center text-sm font-medium"
+                      className="w-[16%] bg-primary/10 px-4 py-6 text-center font-logo text-xl font-extrabold tracking-tight lowercase"
                     >
-                      {alternative}
+                      {siteConfig.name}
                     </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody data-reveal="children" className="divide-y divide-border">
-                {comparison.map((row) => (
-                  <tr key={row.name}>
-                    <th
-                      scope="row"
-                      className="sticky left-0 z-10 bg-card px-4 py-5 font-normal sm:px-8"
-                    >
-                      <span className="block font-medium">{row.name}</span>
-                      <span className="hidden text-sm text-pretty text-muted-foreground sm:block">
-                        {row.text}
-                      </span>
-                    </th>
-                    <td className="bg-primary/10 px-4 py-5">
-                      <ComparisonMark value highlight />
-                    </td>
                     {alternatives.map((alternative) => (
-                      <td key={alternative} className="px-4 py-5">
-                        <ComparisonMark value={row.values[alternative]} />
-                      </td>
+                      <th
+                        key={alternative}
+                        scope="col"
+                        className="w-[15%] px-4 py-6 text-center text-sm font-medium"
+                      >
+                        {alternative}
+                      </th>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody data-reveal="children" className="divide-y divide-border">
+                  {comparison.map((row) => (
+                    <tr key={row.name}>
+                      <th
+                        scope="row"
+                        className="sticky left-0 z-10 bg-card px-4 py-5 font-normal sm:px-8"
+                      >
+                        <span className="block font-medium">{row.name}</span>
+                        <span className="hidden text-sm text-pretty text-muted-foreground sm:block">
+                          {row.text}
+                        </span>
+                      </th>
+                      <td className="bg-primary/10 px-4 py-5">
+                        <ComparisonMark value highlight />
+                      </td>
+                      {alternatives.map((alternative) => (
+                        <td key={alternative} className="px-4 py-5">
+                          <ComparisonMark value={row.values[alternative]} />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -701,7 +707,7 @@ export default function Home() {
       <section
         aria-labelledby="about-heading"
         id="about"
-        className="scroll-mt-4 border-t border-border px-4 py-24 sm:px-6"
+        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-16">
           <div className="flex flex-col gap-6">
@@ -719,7 +725,7 @@ export default function Home() {
           <article
             aria-labelledby="founder-name"
             data-reveal
-            className="grid overflow-hidden rounded-2xl border border-border bg-card sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+            className="corners grid border border-border bg-card sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
           >
             <div className="relative aspect-square bg-portrait">
               <Image
@@ -754,7 +760,7 @@ export default function Home() {
       <section
         aria-labelledby="faq-heading"
         id="faq"
-        className="scroll-mt-4 border-t border-border px-4 py-24 sm:px-6"
+        className="ruled ruled-top scroll-mt-4 px-6 py-24 sm:px-10"
       >
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]">
           <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading">
@@ -781,10 +787,10 @@ export default function Home() {
       </section>
 
       {/* Call to action */}
-      <section aria-labelledby="contact-heading" id="contact" className="scroll-mt-28 px-4 pb-24 sm:px-6">
+      <section aria-labelledby="contact-heading" id="contact" className="ruled ruled-bottom scroll-mt-28 px-6 pb-24 sm:px-10">
         <div
           data-reveal="zoom"
-          className="mx-auto flex max-w-6xl flex-col items-center gap-6 rounded-3xl border border-border bg-card px-6 py-16 text-center sm:py-20"
+          className="corners mx-auto flex max-w-6xl flex-col items-center gap-6 border border-border bg-card px-6 py-16 text-center sm:py-20"
         >
           <h2 id="contact-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
             Start with a discovery call
@@ -797,7 +803,7 @@ export default function Home() {
             size="lg"
             nativeButton={false}
             render={<Link href={pages.bookCall.path} />}
-            className="h-11 rounded-full px-6 text-base"
+            className="h-11 rounded-none px-6 text-base"
           >
             Book a discovery call
           </Button>

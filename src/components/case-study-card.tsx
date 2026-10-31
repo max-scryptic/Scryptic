@@ -17,7 +17,7 @@ export function CaseStudyCard({
   headingLevel?: "h2" | "h3"
 }) {
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-primary/50">
+    <article className="group corners corners-grow flex flex-col border border-border bg-card transition-colors hover:border-primary/50">
       <div className="overflow-hidden border-b border-border bg-muted">
         <Image
           src={study.cover.src}
@@ -32,7 +32,7 @@ export function CaseStudyCard({
         <Heading className="text-2xl tracking-tight">
           <Link
             href={`/work/${study.slug}`}
-            className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none after:focus-visible:ring-3 after:focus-visible:ring-ring/50"
+            className="after:absolute after:inset-0 focus-visible:outline-none after:focus-visible:ring-3 after:focus-visible:ring-ring/50"
           >
             {study.name}
             <span className="sr-only"> case study</span>
@@ -41,7 +41,7 @@ export function CaseStudyCard({
         <p className="text-pretty text-muted-foreground">{study.summary}</p>
         <ul aria-label="Built with" className="mt-auto flex flex-wrap gap-2 pt-3 font-mono text-xs">
           {study.stack.slice(0, 4).map((tech) => (
-            <li key={tech} className="rounded-full bg-primary/10 px-3 py-1 text-primary">
+            <li key={tech} className="bg-primary/10 px-3 py-1 text-primary">
               {tech}
             </li>
           ))}

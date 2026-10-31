@@ -37,7 +37,7 @@ export function SocialLinks({ name, profiles }: { name: string; profiles: Social
             rel="noopener noreferrer me"
             aria-label={`${name} on ${profile.label}`}
             title={profile.label}
-            className="flex size-10 items-center justify-center rounded-full text-primary transition-colors hover:bg-primary/10 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+            className="flex size-10 items-center justify-center text-primary transition-colors hover:bg-primary/10 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           >
             <svg
               aria-hidden="true"

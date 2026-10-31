@@ -155,6 +155,114 @@
   }
 }
 
+/*
+ * Blueprint frame (home page). Square edges and hairline rules with small
+ * accents where they meet:
+ * - .ruled draws two vertical rails down a full-width section, lined up with
+ *   the edges of the floating header bar. Set --rail to recolour them.
+ * - .ruled-top adds a rule along the section's top edge and a small square
+ *   where it crosses each rail. Set --mark to recolour the squares.
+ *   .ruled-bottom puts the same squares on the bottom edge, for the last
+ *   section, where the rails meet the footer's top rule.
+ * - .corners puts short L-shaped brackets on the four corners of a box,
+ *   over its 1px border (--corner-inset for thicker borders, --corner for the
+ *   colour). .corners-grow lengthens them on hover.
+ */
+@property --corner-len {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 12px;
+}
+
+/* In the components layer, so utilities such as `fixed` or `absolute` win. */
+@layer components {
+  .ruled {
+    --rail-x: max(1rem, calc(50% - (var(--container-6xl) + 2.625rem) / 2));
+    --rail: var(--border);
+    position: relative;
+    background-image: linear-gradient(var(--rail) 0 0), linear-gradient(var(--rail) 0 0);
+    background-size: 1px 100%;
+    background-position: left var(--rail-x) top 0, right var(--rail-x) top 0;
+    background-repeat: no-repeat;
+  }
+  @media (width >= 40rem) {
+    .ruled {
+      --rail-x: max(1.5rem, calc(50% - (var(--container-6xl) + 2.625rem) / 2));
+    }
+  }
+
+  .ruled-top {
+    border-top: 1px solid var(--border);
+  }
+  .ruled-top::before,
+  .ruled-top::after,
+  .ruled-bottom::before,
+  .ruled-bottom::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--mark, var(--primary));
+    background: var(--background);
+    pointer-events: none;
+  }
+  .ruled-top::before,
+  .ruled-top::after {
+    top: -4px;
+  }
+  .ruled-bottom::before,
+  .ruled-bottom::after {
+    bottom: -4px;
+  }
+  .ruled-top::before,
+  .ruled-bottom::before {
+    left: calc(var(--rail-x) - 3px);
+  }
+  .ruled-top::after,
+  .ruled-bottom::after {
+    right: calc(var(--rail-x) - 3px);
+  }
+
+  .corners {
+    position: relative;
+  }
+  .corners::after {
+    --c: var(--corner, var(--primary));
+    --w: 2px;
+    --l: var(--corner-len);
+    content: "";
+    position: absolute;
+    /* Above sticky table cells and other raised children inside the box. */
+    z-index: 20;
+    inset: calc(-1 * var(--corner-inset, 1px));
+    pointer-events: none;
+    background:
+      linear-gradient(var(--c) 0 0) top left / var(--l) var(--w),
+      linear-gradient(var(--c) 0 0) top left / var(--w) var(--l),
+      linear-gradient(var(--c) 0 0) top right / var(--l) var(--w),
+      linear-gradient(var(--c) 0 0) top right / var(--w) var(--l),
+      linear-gradient(var(--c) 0 0) bottom left / var(--l) var(--w),
+      linear-gradient(var(--c) 0 0) bottom left / var(--w) var(--l),
+      linear-gradient(var(--c) 0 0) bottom right / var(--l) var(--w),
+      linear-gradient(var(--c) 0 0) bottom right / var(--w) var(--l);
+    background-repeat: no-repeat;
+  }
+  /* On the brackets, so it does not fight the box's own transition utilities. */
+  .corners-grow::after {
+    transition: --corner-len 0.3s var(--ease-out);
+  }
+  .corners-grow:hover,
+  .corners-grow:focus-within {
+    --corner-len: 24px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .corners-grow::after {
+      transition: none;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -265,10 +373,10 @@
 
 @keyframes wipe {
   from {
-    clip-path: inset(0 100% 0 0 round var(--radius-lg));
+    clip-path: inset(0 100% 0 0);
   }
   to {
-    clip-path: inset(0 0 0 0 round var(--radius-lg));
+    clip-path: inset(0 0 0 0);
   }
 }
 
