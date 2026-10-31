@@ -165,10 +165,11 @@
  * them.
  * - .ruled draws two vertical guides down a full-width box, on the edges of
  *   the max-w-6xl content column (and the floating header bar). The root
- *   layout draws them for every page; a section with its own background (the
- *   home hero) adds .ruled again to draw them over it. Set --rail to recolour.
+ *   layout draws them for every page; a section with its own background hides
+ *   them, unless it adds .ruled again to draw them over it. Set --rail to recolour.
  * - .ruled-bottom puts a small square on each guide at the box's bottom edge,
- *   where the guides meet the footer's top rule.
+ *   where the guides meet the footer's top rule. A .rail-joint element between
+ *   two sections does the same where a full-bleed band starts or ends.
  * - .guides runs a box's top and bottom edges out across the page, behind
  *   the box and everything else, so they show only outside it. Set --edge to
  *   the box's border width when it is not 1px.
@@ -206,7 +207,9 @@
   }
 
   .ruled-bottom::before,
-  .ruled-bottom::after {
+  .ruled-bottom::after,
+  .rail-joint::before,
+  .rail-joint::after {
     content: "";
     position: absolute;
     z-index: 1;
@@ -217,11 +220,22 @@
     background: var(--background);
     pointer-events: none;
   }
-  .ruled-bottom::before {
+  .ruled-bottom::before,
+  .rail-joint::before {
     left: calc(var(--rail-x) - 3px);
   }
-  .ruled-bottom::after {
+  .ruled-bottom::after,
+  .rail-joint::after {
     right: calc(var(--rail-x) - 3px);
+  }
+
+  /* A zero-height element between two sections, inside a .ruled box, that puts
+     the same squares on the guides where a full-bleed band (which hides them)
+     starts or ends. A separate element, as the band may clip its own overflow. */
+  .rail-joint {
+    position: relative;
+    z-index: 1;
+    height: 0;
   }
 
   .guides {
