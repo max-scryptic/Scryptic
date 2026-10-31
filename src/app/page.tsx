@@ -300,9 +300,8 @@ export default function Home() {
       />
       <ScrollReveal />
 
-      {/* Hero: a full-width, square-edged Lapis band, the same Lapis in both themes. Its
-          rails are drawn in white so they carry on through the blue. */}
-      <section className="ruled relative isolate overflow-hidden bg-[#2b3fd6] px-6 pt-36 pb-24 text-white [--rail:rgb(255_255_255/0.18)] sm:px-10 sm:pt-44 sm:pb-32">
+      {/* Hero: a full-width, square-edged Lapis band, the same Lapis in both themes. */}
+      <section className="ruled relative isolate overflow-hidden bg-[#2b3fd6] px-6 pt-36 pb-24 text-white sm:px-10 sm:pt-44 sm:pb-32">
         <VoxelField
           faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
           className="hero-parallax absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"

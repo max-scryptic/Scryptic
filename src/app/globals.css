@@ -158,12 +158,12 @@
 /*
  * Blueprint frame (home page). Square edges and hairline rules with small
  * accents where they meet:
- * - .ruled draws two vertical rails down a full-width section, lined up with
- *   the edges of the floating header bar. Set --rail to recolour them.
+ * - .ruled sets --rail-x, the inset of the floating header bar's edges, on a
+ *   full-width section, for the markers below to line up with.
  * - .ruled-top adds a rule along the section's top edge and a small square
- *   where it crosses each rail. Set --mark to recolour the squares.
+ *   on it at each --rail-x. Set --mark to recolour the squares.
  *   .ruled-bottom puts the same squares on the bottom edge, for the last
- *   section, where the rails meet the footer's top rule.
+ *   section, so they sit on the footer's top rule.
  * - .corners puts short L-shaped brackets on the four corners of a box,
  *   over its 1px border (--corner-inset for thicker borders, --corner for the
  *   colour). .corners-grow lengthens them on hover.
@@ -178,12 +178,7 @@
 @layer components {
   .ruled {
     --rail-x: max(1rem, calc(50% - (var(--container-6xl) + 2.625rem) / 2));
-    --rail: var(--border);
     position: relative;
-    background-image: linear-gradient(var(--rail) 0 0), linear-gradient(var(--rail) 0 0);
-    background-size: 1px 100%;
-    background-position: left var(--rail-x) top 0, right var(--rail-x) top 0;
-    background-repeat: no-repeat;
   }
   @media (width >= 40rem) {
     .ruled {
