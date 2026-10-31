@@ -19,7 +19,7 @@ import {
 import { formatPrice, services } from "@/lib/services"
 
 const segment =
-  "flex min-h-9 cursor-pointer items-center justify-center rounded-lg px-3 text-sm transition-colors select-none hover:text-foreground has-checked:bg-card has-checked:text-foreground has-checked:shadow-sm has-focus-visible:ring-3 has-focus-visible:ring-ring/50"
+  "flex min-h-9 cursor-pointer items-center justify-center px-3 text-sm transition-colors select-none hover:text-foreground has-checked:bg-card has-checked:text-foreground has-checked:shadow-sm has-focus-visible:ring-3 has-focus-visible:ring-ring/50"
 
 /*
  * The MVP Scope Planner: an editable feature list on one side, and on the
@@ -52,7 +52,7 @@ export function ScopePlanner() {
 
   return (
     <div className="grid items-start gap-10 lg:grid-cols-[1.3fr_1fr]">
-      <div className="flex flex-col gap-8 rounded-2xl border border-border bg-card p-5 sm:p-8">
+      <div className="corners flex flex-col gap-8 border border-border bg-card p-5 sm:p-8">
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-medium tracking-tight">Your features</h2>
           <p className="text-sm text-muted-foreground">
@@ -67,7 +67,7 @@ export function ScopePlanner() {
               key={feature.id}
               data-row={feature.id}
               className={cn(
-                "flex flex-col gap-3 rounded-xl border border-border p-3 transition-colors",
+                "flex flex-col gap-3 border border-border p-3 transition-colors",
                 feature.launch ? "bg-background" : "bg-muted/60",
               )}
             >
@@ -93,7 +93,7 @@ export function ScopePlanner() {
                 </Button>
               </div>
               <div className="flex flex-wrap items-center gap-2">
-                <fieldset className="flex rounded-lg bg-muted p-1 text-muted-foreground">
+                <fieldset className="flex bg-muted p-1 text-muted-foreground">
                   <legend className="sr-only">Size of {feature.name.trim() || `feature ${index + 1}`}</legend>
                   {featureSizes.map((size) => (
                     <label key={size.value} title={size.hint} className={segment}>
@@ -108,7 +108,7 @@ export function ScopePlanner() {
                     </label>
                   ))}
                 </fieldset>
-                <fieldset className="flex rounded-lg bg-muted p-1 text-muted-foreground">
+                <fieldset className="flex bg-muted p-1 text-muted-foreground">
                   <legend className="sr-only">When to build {feature.name.trim() || `feature ${index + 1}`}</legend>
                   {[
                     { launch: true, label: "First release" },
@@ -142,7 +142,7 @@ export function ScopePlanner() {
               document.querySelector<HTMLInputElement>(`[data-row="${id}"] input`)?.focus(),
             )
           }}
-          className="h-11 self-start rounded-full px-5 text-base"
+          className="h-11 self-start px-5 text-base"
         >
           <span aria-hidden="true">+</span> Add a feature
         </Button>
@@ -157,7 +157,7 @@ export function ScopePlanner() {
                   <button
                     type="button"
                     onClick={() => add(common.name, common.size)}
-                    className="rounded-full border border-border bg-background px-3 py-1.5 text-sm transition-colors hover:border-primary hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+                    className="border border-border bg-background px-3 py-1.5 text-sm transition-colors hover:border-primary hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
                   >
                     <span aria-hidden="true">+ </span>
                     {common.name}
@@ -186,10 +186,10 @@ export function ScopePlanner() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <div className="relative h-3 overflow-hidden rounded-full bg-muted">
+              <div className="relative h-3 overflow-hidden bg-muted">
                 <div
                   className={cn(
-                    "h-full rounded-full transition-[width] duration-300",
+                    "h-full transition-[width] duration-300",
                     plan.service ? "bg-primary" : "bg-chart-2",
                   )}
                   style={{ width: `${Math.min(100, (plan.launchWeeks / scale) * 100)}%` }}
@@ -229,7 +229,7 @@ export function ScopePlanner() {
                 </p>
                 <ul className="flex flex-col gap-2">
                   {plan.toMove.map((feature) => (
-                    <li key={feature.id} className="flex items-center justify-between gap-3 rounded-xl bg-chart-2/15 px-4 py-2 text-sm">
+                    <li key={feature.id} className="flex items-center justify-between gap-3 bg-chart-2/15 px-4 py-2 text-sm">
                       <span>{feature.name}</span>
                       <button
                         type="button"
@@ -251,7 +251,7 @@ export function ScopePlanner() {
                 </h3>
                 <ul className="flex flex-wrap gap-2 text-sm">
                   {plan.later.map((feature) => (
-                    <li key={feature.id} className="rounded-full bg-muted px-3 py-1">
+                    <li key={feature.id} className="bg-muted px-3 py-1">
                       {feature.name}
                     </li>
                   ))}
@@ -264,7 +264,7 @@ export function ScopePlanner() {
                 size="lg"
                 nativeButton={false}
                 render={<Link href={bookCallWith(summarizeScope(plan))} />}
-                className="h-11 rounded-full px-6 text-base"
+                className="h-11 px-6 text-base"
               >
                 Book a call about this scope
               </Button>

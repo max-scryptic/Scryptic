@@ -11,7 +11,7 @@ import { toolGroups, type FreeTool } from "@/lib/free-tools"
  */
 export function ToolList({ tools, grouped = false }: { tools: FreeTool[]; grouped?: boolean }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card">
+    <div className="corners guides border border-border bg-card">
       {grouped ? (
         toolGroups.map((group) => (
           <section
@@ -43,7 +43,7 @@ function ToolRows({ tools }: { tools: FreeTool[] }) {
           key={tool.slug}
           className="group relative grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 border-t border-border px-4 py-5 transition-colors hover:bg-primary/5 sm:gap-5 sm:px-6"
         >
-          <span className="flex size-11 items-center justify-center rounded-xl bg-muted text-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary dark:bg-secondary">
+          <span className="flex size-11 items-center justify-center bg-muted text-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary dark:bg-secondary">
             <ToolIcon icon={tool.icon} className="size-5" />
           </span>
           <div className="flex min-w-0 flex-col gap-1">

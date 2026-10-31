@@ -11,14 +11,14 @@ import { readingMinutes, type BlogPost } from "@/lib/blog"
  */
 export function PostCard({ post }: { post: BlogPost }) {
   return (
-    <article className="group relative isolate flex flex-col gap-3 rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/50">
+    <article className="group corners corners-grow isolate flex flex-col gap-3 border border-border bg-card p-6 transition-colors hover:border-primary/50">
       <ToolLogoWatermark post={post} />
       <PostIconWatermark post={post} />
       <p className="font-mono text-xs tracking-widest text-primary uppercase">{post.topic}</p>
       <h3 className="text-xl tracking-tight text-balance">
         <Link
           href={`/blog/${post.slug}`}
-          className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none after:focus-visible:ring-3 after:focus-visible:ring-ring/50"
+          className="after:absolute after:inset-0 focus-visible:outline-none after:focus-visible:ring-3 after:focus-visible:ring-ring/50"
         >
           {post.title}
         </Link>

@@ -52,7 +52,7 @@ export function ChoiceGroup({
           <label
             key={choice.value}
             className={cn(
-              "group flex min-h-12 cursor-pointer flex-col justify-center gap-0.5 rounded-xl border border-border bg-background px-4 py-2.5 text-base transition-colors select-none hover:border-foreground/30",
+              "group flex min-h-12 cursor-pointer flex-col justify-center gap-0.5 border border-border bg-background px-4 py-2.5 text-base transition-colors select-none hover:border-foreground/30",
               "has-checked:border-primary has-checked:bg-primary has-checked:text-primary-foreground",
               "has-focus-visible:ring-3 has-focus-visible:ring-ring/50",
             )}

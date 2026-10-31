@@ -50,7 +50,7 @@ export function LaunchChecklist() {
       <form
         aria-label="About your launch"
         onSubmit={(event) => event.preventDefault()}
-        className="flex flex-col gap-8 rounded-2xl border border-border bg-card p-5 sm:p-8 lg:sticky lg:top-28"
+        className="corners flex flex-col gap-8 border border-border bg-card p-5 sm:p-8 lg:sticky lg:top-28"
       >
         {checklistQuestions.map((question, index) => (
           <ChoiceGroup
@@ -67,7 +67,7 @@ export function LaunchChecklist() {
 
       <section
         aria-labelledby="checklist-heading"
-        className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl shadow-black/5"
+        className="corners flex flex-col border border-border bg-card shadow-xl shadow-black/5"
       >
         <div className="flex flex-col gap-3 border-b border-border px-5 py-4 sm:px-8">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -78,14 +78,14 @@ export function LaunchChecklist() {
               <p aria-live="polite" className="font-mono text-xs text-muted-foreground">
                 {doneCount} of {items.length} done
               </p>
-              <Button type="button" variant="outline" size="sm" onClick={copy} className="rounded-full px-3">
+              <Button type="button" variant="outline" size="sm" onClick={copy} className="px-3">
                 {copied ? "Copied" : "Copy as Markdown"}
               </Button>
             </div>
           </div>
-          <div className="h-1 overflow-hidden rounded-full bg-muted" aria-hidden="true">
+          <div className="h-1 overflow-hidden bg-muted" aria-hidden="true">
             <div
-              className="h-full rounded-full bg-primary transition-[width] duration-300"
+              className="h-full bg-primary transition-[width] duration-300"
               style={{ width: `${items.length ? (doneCount / items.length) * 100 : 0}%` }}
             />
           </div>
@@ -95,7 +95,7 @@ export function LaunchChecklist() {
           {groups.map((group) => (
             <div key={group.name} className="flex flex-col gap-3">
               <h3 className="text-lg font-medium tracking-tight">{group.name}</h3>
-              <ul className="flex flex-col divide-y divide-border rounded-xl border border-border">
+              <ul className="flex flex-col divide-y divide-border border border-border">
                 {group.items.map((item) => (
                   <li key={item.id} className="flex gap-3 p-4">
                     <input

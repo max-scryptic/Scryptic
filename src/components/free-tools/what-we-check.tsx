@@ -1,7 +1,11 @@
+import { cn } from "cn"
+
+import { inset } from "@/lib/frame"
+
 /** The list of what a site check looks at, under the checker on its page. */
 export function WhatWeCheck({ items }: { items: { name: string; text: string }[] }) {
   return (
-    <section aria-labelledby="checked-heading" className="flex flex-col gap-6 pt-6">
+    <section aria-labelledby="checked-heading" className={cn("flex flex-col gap-6 pt-6", inset)}>
       <h2 id="checked-heading" className="text-2xl tracking-tight">
         What the check looks at
       </h2>

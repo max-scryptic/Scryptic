@@ -1,8 +1,10 @@
 import Link from "next/link"
+import { cn } from "cn"
 
 import { CaseStudyCard } from "@/components/case-study-card"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
+import { inset } from "@/lib/frame"
 import { caseStudyPages, createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
@@ -16,7 +18,7 @@ export default function WorkPage() {
       <PageJsonLd page={pages.work} nodes={[itemListJsonLd(pages.work, caseStudyPages)]} />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
-        <div className="flex flex-col items-start gap-6">
+        <div className={cn("flex flex-col items-start gap-6", inset)}>
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
             Products we designed, built and <span className="text-primary">launched</span>
           </h1>
@@ -29,13 +31,13 @@ export default function WorkPage() {
 
         <section aria-label="Case studies" className="grid gap-6 md:grid-cols-2">
           {caseStudies.map((study) => (
-            <CaseStudyCard key={study.slug} study={study} />
+            <CaseStudyCard key={study.slug} study={study} className="guides" />
           ))}
         </section>
 
         <section
           aria-labelledby="work-cta-heading"
-          className="flex flex-col items-start gap-4 rounded-2xl border border-border bg-card p-6 sm:p-10"
+          className="corners guides flex flex-col items-start gap-4 border border-border bg-card p-6 sm:p-10"
         >
           <h2 id="work-cta-heading" className="text-2xl tracking-tight text-balance">
             Want yours on this page?
@@ -48,7 +50,7 @@ export default function WorkPage() {
             size="lg"
             nativeButton={false}
             render={<Link href={pages.bookCall.path} />}
-            className="h-11 rounded-full px-6 text-base"
+            className="h-11 px-6 text-base"
           >
             Book a discovery call
           </Button>

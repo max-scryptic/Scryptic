@@ -108,7 +108,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <JsonLd data={graph(organizationJsonLd(), websiteJsonLd())} />
         <EmDashGuard />
         <SiteHeader />
-        <div className="isolate flex min-h-dvh flex-col">{children}</div>
+        {/* The guide lines down both sides of every page, ending in a small square on
+            the footer's top rule. Clipped sideways, as cards run their edges out to
+            the viewport edges. */}
+        <div className="ruled ruled-bottom isolate flex min-h-dvh flex-col overflow-x-clip">
+          {children}
+        </div>
         <SiteFooter />
       </body>
     </html>

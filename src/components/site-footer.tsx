@@ -1,8 +1,10 @@
 import Link from "next/link"
+import { cn } from "cn"
 
 import { BrandLogo, BrandWordmark } from "@/components/brand-logo"
 import { VoxelHills } from "@/components/voxel-hills"
 import { postSeries } from "@/lib/blog"
+import { inset } from "@/lib/frame"
 import { freeTools } from "@/lib/free-tools"
 import { pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
@@ -66,29 +68,32 @@ function FooterColumn({
 export function SiteFooter() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-10 px-4 py-12 sm:grid-cols-4 sm:px-6 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr]">
-        <div className="col-span-2 flex flex-col gap-3 sm:col-span-4 lg:col-span-1">
-          <Link href="/" className="flex items-center gap-2 font-logo text-lg font-extrabold tracking-tight lowercase">
-            <BrandLogo className="size-6" />
-            {siteConfig.name}
-          </Link>
-          <p className="max-w-xs text-sm text-muted-foreground">
-            {siteConfig.tagline}. From first call to launched app.
-          </p>
-          <a
-            href={`mailto:${siteConfig.organization.email}`}
-            className="text-sm text-primary hover:underline"
-          >
-            {siteConfig.organization.email}
-          </a>
+      {/* The page's guide lines end on this rule; the columns sit in from them like the copy above. */}
+      <div className="px-4 sm:px-6">
+        <div className={cn("mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-10 py-12 sm:grid-cols-4 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr]", inset)}>
+          <div className="col-span-2 flex flex-col gap-3 sm:col-span-4 lg:col-span-1">
+            <Link href="/" className="flex items-center gap-2 font-logo text-lg font-extrabold tracking-tight lowercase">
+              <BrandLogo className="size-6" />
+              {siteConfig.name}
+            </Link>
+            <p className="max-w-xs text-sm text-muted-foreground">
+              {siteConfig.tagline}. From first call to launched app.
+            </p>
+            <a
+              href={`mailto:${siteConfig.organization.email}`}
+              className="text-sm text-primary hover:underline"
+            >
+              {siteConfig.organization.email}
+            </a>
+          </div>
+          <FooterColumn title={siteConfig.name} links={homeLinks} />
+          <FooterColumn title="Case studies" links={workLinks} />
+          <FooterColumn title="Free tools" links={toolLinks} />
+          <FooterColumn title="Blog" links={blogLinks} />
         </div>
-        <FooterColumn title={siteConfig.name} links={homeLinks} />
-        <FooterColumn title="Case studies" links={workLinks} />
-        <FooterColumn title="Free tools" links={toolLinks} />
-        <FooterColumn title="Blog" links={blogLinks} />
-      </div>
-      <div className="mx-auto max-w-6xl px-4 pb-10 font-mono text-xs text-muted-foreground sm:px-6">
-        &copy; {new Date().getFullYear()} {siteConfig.organization.legalName}
+        <div className={cn("mx-auto max-w-6xl pb-10 font-mono text-xs text-muted-foreground", inset)}>
+          &copy; {new Date().getFullYear()} {siteConfig.organization.legalName}
+        </div>
       </div>
       {/* Its own band between the text and the wordmark, so it never sits behind either. */}
       <VoxelHills className="min-h-36 sm:min-h-48" />

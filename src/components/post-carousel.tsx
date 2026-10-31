@@ -4,6 +4,7 @@ import { cn } from "cn"
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react"
 
 import { Button } from "@/components/ui/button"
+import { inset } from "@/lib/frame"
 
 export type CarouselItem = {
   id: string
@@ -68,7 +69,7 @@ export function PostCarousel({
 
   return (
     <div role="region" aria-roledescription="carousel" aria-label={label} className="flex flex-col gap-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
+      <div className={cn("flex flex-wrap items-end justify-between gap-4", inset)}>
         {groups ? (
           <div className="flex flex-col gap-3">
             <ul className="flex flex-wrap gap-2 font-mono text-xs" aria-label="Filter by kind of tool">
@@ -80,7 +81,7 @@ export function PostCarousel({
                       aria-pressed={group === chip.name}
                       onClick={() => setGroup(chip.name)}
                       className={cn(
-                        "rounded-full border px-3 py-1 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
+                        "border px-3 py-1 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
                         group === chip.name
                           ? "border-primary bg-primary text-primary-foreground"
                           : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
@@ -106,7 +107,6 @@ export function PostCarousel({
           <Button
             variant="outline"
             size="icon-lg"
-            className="rounded-full"
             aria-controls={listId}
             aria-label="Previous posts"
             disabled={!canScroll.prev}
@@ -117,7 +117,6 @@ export function PostCarousel({
           <Button
             variant="outline"
             size="icon-lg"
-            className="rounded-full"
             aria-controls={listId}
             aria-label="Next posts"
             disabled={!canScroll.next}
@@ -132,7 +131,7 @@ export function PostCarousel({
         id={listId}
         ref={listRef}
         onScroll={update}
-        className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-6 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 [&::-webkit-scrollbar]:hidden"
+        className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-6 overflow-x-auto px-4 pt-px pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 [&::-webkit-scrollbar]:hidden"
       >
         {shown.map((item) => (
           <li

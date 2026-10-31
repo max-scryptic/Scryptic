@@ -8,6 +8,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { SocialLinks } from "@/components/social-links"
 import { Button } from "@/components/ui/button"
 import { VoxelField } from "@/components/voxel-field"
+import { inset } from "@/lib/frame"
 import { createMetadata, pages } from "@/lib/seo"
 import { launchOffer, offerPrice, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
@@ -196,10 +197,6 @@ const terminalLines = [
   { prompt: false, text: "launched in a 2 week sprint" },
 ]
 
-// Copy and buttons outside a card sit this far in from the vertical guides, the
-// same as the text inside the cards, so only the cards' edges run on the guides.
-const inset = "px-6 sm:px-8"
-
 function SectionHeading({
   eyebrow,
   title,
@@ -297,7 +294,7 @@ function ComparisonMark({ value, highlight = false }: { value: boolean; highligh
 
 export default function Home() {
   return (
-    <main className="flex flex-col overflow-x-clip">
+    <main className="flex flex-col">
       <PageJsonLd
         page={pages.home}
         nodes={[
@@ -307,7 +304,8 @@ export default function Home() {
       />
       <ScrollReveal />
 
-      {/* Hero: a full-width, square-edged Lapis band, the same Lapis in both themes. */}
+      {/* Hero: a full-width, square-edged Lapis band, the same Lapis in both themes. It
+          draws the guide lines again, over its own background, in a lighter blue. */}
       <section className="ruled relative isolate overflow-hidden bg-[#2b3fd6] px-4 pt-36 pb-24 text-white [--guide:color-mix(in_oklab,#ffffff_20%,#2b3fd6)] sm:px-6 sm:pt-44 sm:pb-32">
         <VoxelField
           faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
@@ -329,7 +327,7 @@ export default function Home() {
                 size="lg"
                 nativeButton={false}
                 render={<Link href={pages.bookCall.path} />}
-                className="h-11 rounded-none bg-white px-5 text-base text-[#2b3fd6] hover:bg-white/90"
+                className="h-11 bg-white px-5 text-base text-[#2b3fd6] hover:bg-white/90"
               >
                 Book a discovery call
               </Button>
@@ -338,7 +336,7 @@ export default function Home() {
                 variant="outline"
                 nativeButton={false}
                 render={<Link href="/#pricing" />}
-                className="h-11 rounded-none border-white/40 bg-transparent px-5 text-base text-white hover:bg-white/10 hover:text-white dark:border-white/40 dark:bg-transparent dark:hover:bg-white/10"
+                className="h-11 border-white/40 bg-transparent px-5 text-base text-white hover:bg-white/10 hover:text-white dark:border-white/40 dark:bg-transparent dark:hover:bg-white/10"
               >
                 See pricing
               </Button>
@@ -378,7 +376,7 @@ export default function Home() {
       <section
         aria-labelledby="pricing-heading"
         id="pricing"
-        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
+        className="scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading
@@ -461,7 +459,7 @@ export default function Home() {
                   size="lg"
                   nativeButton={false}
                   render={<Link href={pages.bookCall.path} />}
-                  className="mt-auto h-12 w-full rounded-none text-base"
+                  className="mt-auto h-12 w-full text-base"
                 >
                   Book a discovery call
                 </Button>
@@ -475,7 +473,7 @@ export default function Home() {
       <section
         aria-labelledby="process-heading"
         id="process"
-        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
+        className="scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <SectionHeading className={inset} eyebrow="Process" title="From first call to launch" id="process-heading">
@@ -549,7 +547,7 @@ export default function Home() {
 
       {/* Stack: the same Lapis as the hero, in both themes, with each logo on a white tile.
           Its corner brackets are in the text colour, so they read against the blue. */}
-      <section aria-labelledby="stack-heading" id="stack" className="ruled scroll-mt-28 px-4 pb-24 sm:px-6">
+      <section aria-labelledby="stack-heading" id="stack" className="scroll-mt-28 px-4 pb-24 sm:px-6">
         <div className="corners guides mx-auto grid max-w-6xl items-center gap-12 bg-[#2b3fd6] [--corner:var(--foreground)] px-6 py-12 text-white sm:px-10 sm:py-16 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-14">
           <div data-reveal="children" className="flex flex-col gap-5">
             <p className="font-mono text-xs tracking-widest text-[#c3caff] uppercase">Our stack</p>
@@ -601,7 +599,7 @@ export default function Home() {
       <section
         aria-labelledby="work-heading"
         id="work"
-        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
+        className="scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
@@ -614,7 +612,7 @@ export default function Home() {
               variant="outline"
               nativeButton={false}
               render={<Link href={pages.work.path} />}
-              className="h-11 shrink-0 rounded-none px-5 text-base"
+              className="h-11 shrink-0 px-5 text-base"
             >
               See all case studies
             </Button>
@@ -631,7 +629,7 @@ export default function Home() {
       <section
         aria-labelledby="compare-heading"
         id="compare"
-        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
+        className="scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-12">
           <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
@@ -647,7 +645,7 @@ export default function Home() {
               size="lg"
               nativeButton={false}
               render={<Link href={pages.bookCall.path} />}
-              className="h-11 w-fit shrink-0 rounded-none px-6 text-base"
+              className="h-11 w-fit shrink-0 px-6 text-base"
             >
               Book a discovery call
             </Button>
@@ -715,7 +713,7 @@ export default function Home() {
       <section
         aria-labelledby="about-heading"
         id="about"
-        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
+        className="scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-16">
           <div className={cn("flex flex-col gap-6", inset)}>
@@ -768,7 +766,7 @@ export default function Home() {
       <section
         aria-labelledby="faq-heading"
         id="faq"
-        className="ruled scroll-mt-4 px-4 py-24 sm:px-6"
+        className="scroll-mt-4 px-4 py-24 sm:px-6"
       >
         <div className={cn("mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]", inset)}>
           <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading">
@@ -795,7 +793,7 @@ export default function Home() {
       </section>
 
       {/* Call to action */}
-      <section aria-labelledby="contact-heading" id="contact" className="ruled ruled-bottom scroll-mt-28 px-4 pb-24 sm:px-6">
+      <section aria-labelledby="contact-heading" id="contact" className="scroll-mt-28 px-4 pb-24 sm:px-6">
         <div
           data-reveal="zoom"
           className="corners guides mx-auto flex max-w-6xl flex-col items-center gap-6 border border-border bg-card px-6 py-16 text-center sm:py-20"
@@ -811,7 +809,7 @@ export default function Home() {
             size="lg"
             nativeButton={false}
             render={<Link href={pages.bookCall.path} />}
-            className="h-11 rounded-none px-6 text-base"
+            className="h-11 px-6 text-base"
           >
             Book a discovery call
           </Button>
