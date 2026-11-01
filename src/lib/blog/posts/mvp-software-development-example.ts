@@ -13,6 +13,7 @@ export const mvpSoftwareDevelopmentExample: BlogPost = {
   summary:
     "A useful MVP software development example follows one task from the first click to the finished result, and it's as clear about what it leaves out as about what it includes. Our worked example is a gift voucher app for independent shops, followed by three shorter examples with different first tasks. All four are illustrations, not client projects.",
   datePublished: "2026-10-28",
+  dateModified: "2026-11-01",
   facts: [
     { label: "First release", value: "Buy a voucher online, spend it in the shop" },
     { label: "Left for later", value: "Printed cards, till connections, shop sign-up" },
@@ -32,6 +33,11 @@ export const mvpSoftwareDevelopmentExample: BlogPost = {
           type: "paragraph",
           text: "That's what separates an MVP from an early version of everything. An MVP is the smallest release real people can rely on for one job: it supports fewer situations than the finished product will, and handles each of those properly. The process around it, from finding your first users to the month after launch, has a guide of its own.",
           link: { text: "How to build an MVP, week by week.", href: "/blog/how-to-build-an-mvp" },
+        },
+        {
+          type: "paragraph",
+          text: "A landing page, a prototype or a proof of concept can each come before an MVP, but none of them is one: each answers an earlier, narrower question than whether people will use the product.",
+          link: { text: "How an MVP differs from a prototype, a proof of concept and a landing page.", href: "/blog/what-is-mvp-software" },
         },
       ],
     },
@@ -197,16 +203,5 @@ export const mvpSoftwareDevelopmentExample: BlogPost = {
       ],
     },
   ],
-  faqs: [
-    {
-      question: "Is a landing page or a waitlist an MVP?",
-      answer:
-        "No, though it's a sensible step before one. A landing page shows whether people are interested enough to leave an email address, but with no software behind it, it can't show whether the product does the job. The people who sign up are useful later, as the first users you build for and test with.",
-    },
-    {
-      question: "Is a proof of concept the same as an MVP?",
-      answer:
-        "No. A proof of concept checks whether something can be built at all, such as whether an AI model gives usable answers on your data. It's usually rough and never put in front of customers. An MVP assumes the technology works and tests whether people use the product. If one part of your idea is technically uncertain, prove that part before building the rest.",
-    },
-  ],
+  faqs: [],
 }
