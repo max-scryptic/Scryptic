@@ -85,6 +85,7 @@ export type PostSeriesId = "launch" | "automation" | "stack" | "migration"
 export type PostIcon =
   | "app-window"
   | "atom"
+  | "book-open"
   | "building"
   | "code"
   | "coins"
