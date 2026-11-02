@@ -1,17 +1,15 @@
-import Link from "next/link"
 import { cn } from "cn"
 
 import { FitCheck } from "@/components/landing/fit-check"
 import { Icon, type IconName } from "@/components/landing/icons"
 import { LaunchKitHub, type HubItem } from "@/components/landing/launch-kit-hub"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
-import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 
 /*
  * Sections only the service pages use. Each has its own shape, so a page is
- * not a run of identical boxes: a hub, a numbered grid of signs, a from-to
- * map and a split fit panel. Keep the copy in them short: a label and a few words.
+ * not a run of identical boxes: a hub, a from-to map and a split fit panel.
+ * Keep the copy in them short: a label and a few words.
  */
 
 /**
@@ -43,82 +41,6 @@ export function HubSection({
         {intro}
       </SectionHeading>
       <LaunchKitHub items={items} />
-    </LandingSection>
-  )
-}
-
-/**
- * Warning signs as a numbered grid: each cell an icon, a short sign and a line
- * on what it looks like in practice. Closed by a bar that points to the next
- * step. Built for six signs (three columns of two rows on wide screens).
- */
-export function SignsSection({
-  id,
-  eyebrow,
-  title,
-  intro,
-  items,
-  footer,
-}: {
-  id: string
-  eyebrow: string
-  title: string
-  intro: React.ReactNode
-  items: { icon: IconName; title: string; text: string }[]
-  footer?: { title: string; text: string; link: { label: string; href: string } }
-}) {
-  return (
-    <LandingSection id={id} labelledBy={`${id}-heading`}>
-      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`}>
-        {intro}
-      </SectionHeading>
-      <div className="corners guides border border-border bg-card">
-        {/* Cells sit on a border-coloured ground with a 1px gap, so every inner edge is a single rule. */}
-        <ol data-reveal="children" className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item, index) => (
-            <li
-              key={item.title}
-              className="group flex gap-4 bg-card p-6 transition-colors hover:bg-primary/[0.04] sm:flex-col sm:gap-6 sm:p-8"
-            >
-              {/* On phones the icon sits beside the text and the number is dropped, to keep the stack short. */}
-              <div className="flex shrink-0 items-start justify-between sm:items-center">
-                <span
-                  aria-hidden="true"
-                  className="flex size-10 items-center justify-center border border-primary/20 bg-primary/10 text-primary transition-colors group-hover:border-primary/50 dark:bg-primary/25 dark:text-foreground"
-                >
-                  <Icon name={item.icon} className="size-5" />
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="hidden font-mono text-xs tracking-widest text-muted-foreground transition-colors group-hover:text-primary sm:inline"
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <div className="flex flex-col gap-1.5 sm:gap-2">
-                <h3 className="text-lg tracking-tight text-balance sm:text-xl">{item.title}</h3>
-                <p className="text-pretty text-muted-foreground">{item.text}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-        {footer && (
-          <div className="flex flex-col items-start gap-5 border-t border-border bg-primary/[0.03] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-            <div className="flex flex-col gap-1">
-              <p className="text-xl tracking-tight">{footer.title}</p>
-              <p className="text-pretty text-muted-foreground">{footer.text}</p>
-            </div>
-            <Button
-              size="lg"
-              nativeButton={false}
-              render={<Link href={footer.link.href} />}
-              className="h-11 shrink-0 px-6 text-base"
-            >
-              {footer.link.label}
-            </Button>
-          </div>
-        )}
-      </div>
     </LandingSection>
   )
 }
