@@ -119,10 +119,11 @@ export default function MvpDevelopmentPage() {
       <ScrollReveal />
 
       <LandingHero
-        eyebrow={{ label: "Services", href: pages.services.path }}
+        eyebrow={{ label: "Services", href: pages.services.path, current: "MVP development" }}
+        tone="light"
         title={
           <>
-            <span className="text-[#c3caff]">MVP development</span>, launched in a 2 week sprint.
+            <span className="text-primary">MVP development</span>, launched in a 2 week sprint.
           </>
         }
         intro="Fixed-price MVP development for UK founders: production code, a demo every Friday and payments live at launch."
