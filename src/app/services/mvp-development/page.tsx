@@ -24,13 +24,14 @@ const page = pages.mvpDevelopment
 export const metadata = createMetadata(page)
 
 // What ships in every build, whichever package. Only claims the build delivers.
+// Short text first and last: those rows get the narrowest bars.
 const launchKit = [
   { icon: "lock", name: "Sign-in", text: "Accounts and password resets", tag: "Auth" },
   { icon: "card", name: "Payments", text: "Checkout and subscriptions", tag: "Stripe" },
   { icon: "chart", name: "Analytics", text: "Sign-ups to drop-offs, from day one", tag: "Events" },
   { icon: "database", name: "Database", text: "Backed up, built to grow", tag: "Postgres" },
-  { icon: "globe", name: "Hosting", text: "Your domain, your account", tag: "Vercel" },
   { icon: "code", name: "Code", text: "In your repository, readable by any dev", tag: "TypeScript" },
+  { icon: "globe", name: "Hosting", text: "Your domain, your account", tag: "Vercel" },
 ] satisfies { icon: IconName; name: string; text: string; tag: string }[]
 
 const fit = {

@@ -12,25 +12,29 @@ import { inset } from "@/lib/frame"
  */
 
 /*
- * The jumbled stack in IconRowsSection: each bar's width, as a share of the
- * column, and where it sits in the space left over (0 hard left, 1 hard
- * right). Both run in a deliberately uneven order so the stack reads as a
- * loose pile rather than a list or a staircase. Fixed rather than random, so
- * server and client agree. Rows past the end start the pattern again.
+ * The stack in IconRowsSection: each bar's width, as a share of the column,
+ * and where it sits in the space left over (0 hard left, 0.5 centred, 1 hard
+ * right). The first and last bars are centred and narrower, and the ones in
+ * between step out to alternate sides, so the stack reads as a loose pile
+ * with a steady top and bottom. Built for six rows; more repeat the middle.
  */
-const rowLayout = [
-  { width: "74%", shift: 1 },
-  { width: "88%", shift: 0.15 },
-  { width: "94%", shift: 0.6 },
-  { width: "68%", shift: 0.2 },
-  { width: "82%", shift: 0.9 },
-  { width: "90%", shift: 0 },
+const edgeRow = { width: "74%", shift: 0.5 }
+const middleRows = [
+  { width: "88%", shift: 0 },
+  { width: "92%", shift: 1 },
+  { width: "80%", shift: 0.12 },
+  { width: "86%", shift: 0.88 },
 ]
 
+function rowLayout(index: number, count: number) {
+  if (index === 0 || index === count - 1) return edgeRow
+  return middleRows[(index - 1) % middleRows.length]
+}
+
 /**
- * Heading beside a jumbled stack of separate bars, uneven in width and
- * offset (see rowLayout), each an icon, a name, a few words and a mono tag.
- * Order items so the longest text lands on a wide bar. Below sm the bars are
+ * Heading beside a stack of separate bars, uneven in width and offset (see
+ * rowLayout), each an icon, a name, a few words and a mono tag. Put short
+ * text first and last, where the bars are narrowest. Below sm the bars are
  * 90 to 98% wide, so the text still fits. The corner brackets stay hidden
  * until a bar is hovered, so six bars do not crowd.
  */
@@ -58,8 +62,8 @@ export function IconRowsSection({
             key={item.name}
             style={
               {
-                "--bar": rowLayout[index % rowLayout.length].width,
-                "--shift": rowLayout[index % rowLayout.length].shift,
+                "--bar": rowLayout(index, items.length).width,
+                "--shift": rowLayout(index, items.length).shift,
               } as React.CSSProperties
             }
             className="corners corners-grow ml-[calc((100%-var(--w))*var(--shift))] grid w-(--w) grid-cols-[auto_1fr_auto] [--w:calc(70%+var(--bar)*0.3)] sm:[--w:var(--bar)] items-center gap-4 border border-border bg-card px-4 py-3.5 shadow-lg shadow-black/5 transition-colors [--corner-len:0px] focus-within:[--corner-len:24px] hover:border-primary/50 hover:[--corner-len:24px] sm:px-5"
