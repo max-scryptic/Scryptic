@@ -1,14 +1,14 @@
 import { cn } from "cn"
 
+import { AppLayers, type AppLayer } from "@/components/landing/app-layers"
 import { FitCheck, type FitVerdicts } from "@/components/landing/fit-check"
-import { Icon, type IconName } from "@/components/landing/icons"
 import { LaunchKitHub, type HubItem } from "@/components/landing/launch-kit-hub"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { inset } from "@/lib/frame"
 
 /*
  * Sections only the service pages use. Each has its own shape, so a page is
- * not a run of identical boxes: a hub, a from-to map and a scored
+ * not a run of identical boxes: a hub, an exploded drawing and a scored
  * self-check. Keep the copy in them short: a label and a few words.
  */
 
@@ -45,61 +45,35 @@ export function HubSection({
   )
 }
 
-/** Where each part of a thing goes: one row per part, from the left column to the right. */
-export function MappingSection({
+/**
+ * What an app is made of, as an exploded drawing: each layer labelled with
+ * where it goes, lit in turn (see AppLayers). For a move where the screens
+ * are only the visible part of what comes across.
+ */
+export function LayersSection({
   id,
   eyebrow,
   title,
   intro,
-  from,
-  to,
-  rows,
+  layers,
+  note,
 }: {
   id: string
   eyebrow: string
   title: string
   intro: React.ReactNode
-  /** Column headings, e.g. "In your builder" and "In your code". */
-  from: string
-  to: string
-  rows: { icon: IconName; from: string; to: string }[]
+  layers: AppLayer[]
+  /** A short line under the drawing. */
+  note?: React.ReactNode
 }) {
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
       <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`}>
         {intro}
       </SectionHeading>
-      <div className="corners guides border border-border bg-card">
-        <div className="grid grid-cols-[1fr_2.5rem_1fr] gap-3 border-b border-border px-4 py-4 font-mono text-xs tracking-widest text-muted-foreground uppercase sm:grid-cols-[1fr_8rem_1fr] sm:gap-6 sm:px-8">
-          <span>{from}</span>
-          <span aria-hidden="true" />
-          <span>{to}</span>
-        </div>
-        <ul data-reveal="children" className="divide-y divide-border">
-          {rows.map((row) => (
-            <li
-              key={row.from}
-              className="grid grid-cols-[1fr_2.5rem_1fr] items-center gap-3 px-4 py-4 sm:grid-cols-[1fr_8rem_1fr] sm:gap-6 sm:px-8 sm:py-5"
-            >
-              <span className="flex items-center gap-3">
-                <span className="hidden size-9 shrink-0 items-center justify-center rounded-full bg-foreground/5 text-muted-foreground sm:flex">
-                  <Icon name={row.icon} className="size-4" />
-                </span>
-                <span className="text-sm sm:text-base">{row.from}</span>
-              </span>
-              <span aria-hidden="true" className="flex items-center text-primary dark:text-[#c3caff]">
-                <span className="reveal-wipe h-px flex-1 border-t border-dashed border-current" />
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="-ml-1 size-4">
-                  <path d="m9 6 6 6-6 6" />
-                </svg>
-              </span>
-              <span className="sr-only">moves to</span>
-              <span className="justify-self-start rounded-[0.875rem] bg-primary/10 px-3 py-1 text-sm sm:rounded-full text-primary sm:text-base dark:bg-primary/25 dark:text-foreground">
-                {row.to}
-              </span>
-            </li>
-          ))}
-        </ul>
+      <div className={cn(inset, "flex flex-col gap-6 border-t border-border pt-10")}>
+        <AppLayers layers={layers} />
+        {note && <p className="text-sm text-pretty text-muted-foreground">{note}</p>}
       </div>
     </LandingSection>
   )

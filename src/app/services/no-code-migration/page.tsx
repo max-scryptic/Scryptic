@@ -1,17 +1,17 @@
 import Link from "next/link"
 
 import { PageJsonLd } from "@/components/json-ld"
+import type { AppLayer } from "@/components/landing/app-layers"
 import { ComparisonSection, type ComparisonRow } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
 import { GuidesSection } from "@/components/landing/guides-section"
 import { LandingHero } from "@/components/landing/hero"
 import { MigrationVisual } from "@/components/landing/hero-visuals"
-import type { IconName } from "@/components/landing/icons"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/components/landing/process-section"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
-import { FitCheckSection, MappingSection } from "@/components/landing/service-sections"
+import { FitCheckSection, LayersSection } from "@/components/landing/service-sections"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -27,15 +27,16 @@ const page = pages.noCodeMigration
 
 export const metadata = createMetadata(page)
 
-// Where each part of the app ends up. Payments only stay put when they already run through Stripe.
-const movesAcross = [
-  { icon: "database", from: "Data tables", to: "Postgres, fully checked" },
-  { icon: "users", from: "Users and roles", to: "Accounts, with a reset link" },
-  { icon: "file", from: "Files and uploads", to: "Storage in your name" },
-  { icon: "flow", from: "Workflows", to: "Tested code" },
-  { icon: "card", from: "Stripe customers", to: "The same Stripe account" },
-  { icon: "link", from: "Page URLs", to: "Permanent redirects" },
-] satisfies { icon: IconName; from: string; to: string }[]
+// The app as layers, top to bottom, and where each ends up. Payments only stay put when they already run through Stripe.
+const layers: AppLayer[] = [
+  { icon: "link", from: "Page URLs", to: "Permanent redirects", check: "Every URL mapped" },
+  { icon: "screen", from: "Screens", to: "Rebuilt to match", check: "Familiar to your users", ghost: true },
+  { icon: "flow", from: "Workflows", to: "Tested code", check: "Tests pass" },
+  { icon: "users", from: "Users and roles", to: "The same accounts", check: "Every role tested" },
+  { icon: "card", from: "Stripe customers", to: "The same Stripe account", check: "Every customer linked" },
+  { icon: "file", from: "Files and uploads", to: "Storage in your name", check: "Every file accounted for" },
+  { icon: "database", from: "Data tables", to: "A Postgres database", check: "Row counts match" },
+]
 
 // The same sprint as an MVP build, with an audit before it and the cutover at the end.
 const migrationCalendar: ProcessCalendar = [
@@ -273,14 +274,13 @@ export default function NoCodeMigrationPage() {
 
       <ToolsSection />
 
-      <MappingSection
+      <LayersSection
         id="moves"
         eyebrow="What moves"
         title="Everything comes with you"
         intro="The whole app moves, not just its screens, and is checked before the old one is switched off."
-        from="In your builder"
-        to="In your code"
-        rows={movesAcross}
+        layers={layers}
+        note="The screens are the part everyone sees, and only one layer of seven. Everything under them moves too."
       />
 
       <PricingSection
