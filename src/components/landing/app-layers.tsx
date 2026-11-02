@@ -27,7 +27,10 @@ export type AppLayer = {
  *
  * The slabs are one SVG per breakpoint (phones get more room between layers
  * so two lines of label fit beside each); the labels are HTML placed at the
- * same heights, as percentages of the drawing.
+ * same heights, as percentages of the drawing. On wider screens the drawing
+ * sits in the middle and the labels alternate sides; on phones they all sit
+ * to its right. Each label is kept to a name and what it becomes, plus the
+ * check while it is lit.
  */
 
 const W = 390 // drawing width, with room for the active layer to slide right
@@ -171,43 +174,49 @@ export function AppLayers({ layers }: { layers: AppLayer[] }) {
   // Without motion every label is lit; with it, only the active one.
   const lit = (i: number) => !motion || active === i
 
+  // Phones: the drawing on the left, every label to its right. Wider screens:
+  // the drawing in the middle, labels alternating left and right, top one left.
   return (
-    <div ref={ref} className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-      <div aria-hidden="true">
+    <div
+      ref={ref}
+      className="relative grid grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)_minmax(0,1fr)] md:gap-8"
+    >
+      <div aria-hidden="true" className="md:col-start-2">
         <Slabs layers={layers} geo={m} spread={spread} active={active} className="md:hidden" />
         <Slabs layers={layers} geo={d} spread={spread} active={active} className="hidden md:block" />
       </div>
-      <ol className="relative">
-        {layers.map((layer, i) => (
-          <li
-            key={layer.from}
-            style={
-              {
-                "--tm": `${(m.centres[i] / m.height) * 100}%`,
-                "--td": `${(d.centres[i] / d.height) * 100}%`,
-              } as React.CSSProperties
-            }
-            className={cn(
-              "absolute top-(--tm) left-0 flex -translate-y-1/2 flex-col pl-3 transition-[opacity,translate] duration-500 sm:pl-5 md:top-(--td) md:grid md:w-full md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-baseline md:gap-x-6",
-              spread ? "opacity-100" : "translate-x-2 opacity-0",
-            )}
-          >
-            <span
+      <ol className="pointer-events-none absolute inset-0">
+        {layers.map((layer, i) => {
+          const left = i % 2 === 0
+          return (
+            <li
+              key={layer.from}
+              style={
+                {
+                  "--tm": `${(m.centres[i] / m.height) * 100}%`,
+                  "--td": `${(d.centres[i] / d.height) * 100}%`,
+                } as React.CSSProperties
+              }
               className={cn(
-                "text-sm transition-colors duration-500 sm:text-lg",
-                lit(i) ? "text-foreground" : "text-muted-foreground",
+                "absolute top-(--tm) left-[46%] flex -translate-y-1/2 flex-col gap-1 pl-3 transition-[opacity,translate] duration-500 sm:pl-5 md:top-(--td) md:w-[calc((100%-4rem)/3.15)] md:pl-0",
+                left ? "md:right-auto md:left-0 md:items-end md:text-right" : "md:right-0 md:left-auto md:items-start",
+                spread ? "opacity-100" : cn("opacity-0", left ? "md:-translate-x-2" : "translate-x-2"),
               )}
             >
-              {layer.from}
-            </span>
-            <span className="flex flex-col">
               <span
                 className={cn(
-                  "text-sm transition-colors duration-500 sm:text-lg",
-                  lit(i) ? "text-primary dark:text-[#c3caff]" : "text-muted-foreground/70",
+                  "font-mono text-[0.6875rem] tracking-widest uppercase transition-colors duration-500 sm:text-xs",
+                  lit(i) ? "text-foreground" : "text-muted-foreground",
                 )}
               >
-                <span aria-hidden="true">→ </span>
+                {layer.from}
+              </span>
+              <span
+                className={cn(
+                  "text-sm tracking-tight text-balance transition-colors duration-500 sm:text-lg md:text-xl",
+                  lit(i) ? "text-primary dark:text-[#c3caff]" : "text-muted-foreground",
+                )}
+              >
                 <span className="sr-only">becomes </span>
                 {layer.to}
               </span>
@@ -220,9 +229,9 @@ export function AppLayers({ layers }: { layers: AppLayer[] }) {
                 <span aria-hidden="true">✓ </span>
                 {layer.check}
               </span>
-            </span>
-          </li>
-        ))}
+            </li>
+          )
+        })}
       </ol>
     </div>
   )
