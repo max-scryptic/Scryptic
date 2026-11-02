@@ -1,21 +1,21 @@
-import Image from "next/image"
 import Link from "next/link"
-import { cn } from "cn"
 
-import { CaseStudyCard } from "@/components/case-study-card"
 import { PageJsonLd } from "@/components/json-ld"
+import { AboutSection } from "@/components/landing/about-section"
+import { ComparisonSection } from "@/components/landing/comparison-section"
+import { ContactSection } from "@/components/landing/contact-section"
+import { FaqSection } from "@/components/landing/faq-section"
+import { LandingHero } from "@/components/landing/hero"
+import { PricingSection } from "@/components/landing/pricing-section"
+import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
+import { StackSection } from "@/components/landing/stack-section"
+import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
-import { SocialLinks } from "@/components/social-links"
-import { Button } from "@/components/ui/button"
-import { VoxelField } from "@/components/voxel-field"
-import { inset } from "@/lib/frame"
 import { createMetadata, pages } from "@/lib/seo"
 import { launchOffer, offerPrice, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
-import { stack } from "@/lib/stack"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
-import { featuredCaseStudies } from "@/lib/work"
 
 // The search title leads with the brand, then says what we do. pageTitle()
 // drops the repeated app name it would append, so this renders as written. The
@@ -24,102 +24,6 @@ export const metadata = createMetadata({
   ...pages.home,
   title: `${siteConfig.name} | MVP and app development studio`,
 })
-
-// The process calendar: an example schedule for the preferred package, one row
-// per week, from the two calls through the sprint to the week of support.
-// `day` (1 is Monday) and `span` place each event on the Monday to Friday grid.
-const calendarPackage = services.find((s) => s.preferred) ?? services[0]
-const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"]
-
-const calendarTones = {
-  call: "border border-border bg-background text-foreground",
-  build: "bg-primary text-primary-foreground",
-  iterate: "bg-primary/15 text-primary dark:bg-primary/30 dark:text-foreground",
-  demo: "border border-primary bg-card text-primary dark:text-foreground",
-  handover: "bg-chart-2 text-[#14131b]",
-  support: "bg-chart-2/15 text-foreground",
-}
-
-const calendar: {
-  week: string
-  note: string
-  events: { label: string; day: number; span: number; tone: keyof typeof calendarTones }[]
-}[] = [
-  {
-    week: "Before",
-    note: "Booked around you",
-    events: [
-      { label: "Initial call", day: 1, span: 1, tone: "call" },
-      { label: "Discovery call", day: 3, span: 1, tone: "call" },
-      { label: "Scope and price agreed", day: 4, span: 2, tone: "call" },
-    ],
-  },
-  {
-    week: "Week 1",
-    note: "Development",
-    events: [
-      { label: "Development begins", day: 1, span: 4, tone: "build" },
-      { label: "Demo", day: 5, span: 1, tone: "demo" },
-    ],
-  },
-  {
-    week: "Week 2",
-    note: "Iteration",
-    events: [
-      { label: "Iteration and refinement", day: 1, span: 4, tone: "iterate" },
-      { label: "Demo + launch", day: 5, span: 1, tone: "demo" },
-    ],
-  },
-  {
-    week: "Week 3",
-    note: "Live",
-    events: [
-      { label: "Full handover", day: 1, span: 1, tone: "handover" },
-      { label: "1 week of support", day: 2, span: 4, tone: "support" },
-    ],
-  },
-]
-
-// "Mon" or "Mon to Thu", shown on phones where the day columns are dropped.
-function dayRange(day: number, span: number) {
-  return span > 1 ? `${weekdays[day - 1]} to ${weekdays[day + span - 2]}` : weekdays[day - 1]
-}
-
-// The comparison table. `scryptic` is always true, so it is drawn from the
-// column rather than stored per row.
-const alternatives = ["In-house hire", "Agency", "Freelancer", "AI-only tools"] as const
-
-const comparison: {
-  name: string
-  text: string
-  values: Record<(typeof alternatives)[number], boolean>
-}[] = [
-  {
-    name: "Speed",
-    text: "Launched after a 2 or 3 week sprint, not a hiring round",
-    values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
-  },
-  {
-    name: "Quality",
-    text: "Production code that holds up with real users",
-    values: { "In-house hire": true, Agency: true, Freelancer: false, "AI-only tools": false },
-  },
-  {
-    name: "Flexibility",
-    text: "Priorities revisited every week as you learn",
-    values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": false },
-  },
-  {
-    name: "Yours to own",
-    text: "Code and accounts handed over to you",
-    values: { "In-house hire": true, Agency: false, Freelancer: true, "AI-only tools": true },
-  },
-  {
-    name: "Cost vs value",
-    text: "A fixed price for a launched product",
-    values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
-  },
-]
 
 // Rendered in the FAQ section and emitted as FAQPage JSON-LD; keep them identical.
 const faqs = [
@@ -197,101 +101,6 @@ const terminalLines = [
   { prompt: false, text: "launched in a 2 week sprint" },
 ]
 
-function SectionHeading({
-  eyebrow,
-  title,
-  children,
-  id,
-  aside,
-  className,
-}: {
-  eyebrow: string
-  title: string
-  children: React.ReactNode
-  id: string
-  /** Shown right after the title on wide screens, and after the intro on narrower ones. */
-  aside?: React.ReactNode
-  className?: string
-}) {
-  return (
-    <div
-      data-reveal="children"
-      className={cn(
-        "grid content-start gap-4",
-        aside ? "xl:grid-cols-[auto_auto] xl:justify-start xl:gap-x-6" : "max-w-2xl",
-        className,
-      )}
-    >
-      <p className="font-mono text-xs tracking-widest text-primary uppercase xl:col-start-1">{eyebrow}</p>
-      <h2 id={id} className="max-w-2xl text-3xl tracking-tight text-balance sm:text-4xl xl:col-start-1 xl:self-center">
-        {title}
-      </h2>
-      <p className="max-w-2xl text-lg text-pretty text-muted-foreground xl:col-start-1">{children}</p>
-      {aside && (
-        <div className="mt-2 justify-self-start xl:col-start-2 xl:row-start-2 xl:mt-0 xl:self-center">
-          {aside}
-        </div>
-      )}
-    </div>
-  )
-}
-
-function CheckIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="mt-1 size-4 shrink-0 text-primary"
-      aria-hidden="true"
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
-  )
-}
-
-function ComparisonMark({ value, highlight = false }: { value: boolean; highlight?: boolean }) {
-  return (
-    <>
-      <span className="sr-only">{value ? "Yes" : "No"}</span>
-      {highlight ? (
-        <span
-          aria-hidden="true"
-          className="reveal-pop mx-auto flex size-8 items-center justify-center bg-primary text-primary-foreground"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="size-4"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
-        </span>
-      ) : (
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={value ? 2.5 : 2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-          className={cn("mx-auto size-5", value ? "text-foreground" : "text-muted-foreground/60")}
-        >
-          {value ? <path d="M20 6 9 17l-5-5" /> : <path d="M18 6 6 18M6 6l12 12" />}
-        </svg>
-      )}
-    </>
-  )
-}
-
 export default function Home() {
   return (
     <main className="flex flex-col">
@@ -304,532 +113,48 @@ export default function Home() {
       />
       <ScrollReveal />
 
-      {/* Hero: a full-width, square-edged Lapis band, the same Lapis in both themes. Its
-          background covers the page's guide lines, so none run through it. The terminal
-          card keeps the same inset as the copy, so the two sit symmetrically in the column. */}
-      <section className="relative isolate overflow-hidden bg-[#2b3fd6] px-4 pt-36 pb-24 text-white sm:px-6 sm:pt-44 sm:pb-32">
-        <VoxelField
-          faces={["fill-white/25", "fill-white/12", "fill-white/5"]}
-          className="hero-parallax absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
-        />
-        <div className="hero-recede mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
-          <div className={cn("hero-rise flex flex-col items-start gap-7", inset)}>
-            <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">
-              From idea to{" "}
-              <span className="text-[#c3caff]">MVP</span>
-              , without hiring a dev team.
-            </h1>
-            <p className="max-w-xl text-lg text-pretty text-white/80">
-              {siteConfig.name} is an MVP and app development studio in Brighton, building web apps
-              and SaaS products for UK founders.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button
-                size="lg"
-                nativeButton={false}
-                render={<Link href={pages.bookCall.path} />}
-                className="h-11 bg-white px-5 text-base text-[#2b3fd6] hover:bg-white/90"
-              >
-                Book a discovery call
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                nativeButton={false}
-                render={<Link href="/#pricing" />}
-                className="h-11 border-white/40 bg-transparent px-5 text-base text-white hover:bg-white/10 hover:text-white dark:border-white/40 dark:bg-transparent dark:hover:bg-white/10"
-              >
-                See pricing
-              </Button>
-            </div>
-          </div>
-
-          <div
-            aria-hidden="true"
-            className="hero-card corners mx-6 border sm:mx-8 lg:ml-0 border-border bg-card text-card-foreground shadow-2xl shadow-black/25 [--corner:var(--foreground)]"
-          >
-            <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
-              <span className="size-2 bg-foreground/15" />
-              <span className="size-2 bg-foreground/15" />
-              <span className="size-2 bg-foreground/15" />
-            </div>
-            <div className="hero-terminal flex flex-col gap-2 p-5 font-mono text-sm leading-relaxed">
-              {terminalLines.map((line) => (
-                <p
-                  key={line.text}
-                  className={cn(
-                    "flex gap-3",
-                    line.prompt ? "text-foreground [&:not(:first-child)]:mt-3" : "text-muted-foreground",
-                  )}
-                >
-                  <span className="text-primary">{line.prompt ? "$" : "✓"}</span>
-                  {line.text}
-                </p>
-              ))}
-              <span className="mt-1 h-4 w-2 animate-pulse bg-primary motion-reduce:animate-none" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <LandingHero
+        title={
+          <>
+            From idea to <span className="text-[#c3caff]">MVP</span>, without hiring a dev team.
+          </>
+        }
+        intro={`${siteConfig.name} is an MVP and app development studio in Brighton, building web apps and SaaS products for UK founders.`}
+        secondary={{ label: "See pricing", href: "/#pricing" }}
+        terminal={terminalLines}
+      />
       <div aria-hidden="true" className="rail-joint" />
 
-      {/* Services. Sections with py-24 take scroll-mt-4, not scroll-mt-28: with the
-          6rem top padding their heading still lands 7rem down, just under the fixed header. */}
-      <section
-        aria-labelledby="pricing-heading"
-        id="pricing"
-        className="scroll-mt-4 px-4 py-24 sm:px-6"
-      >
-        <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading
-            className={inset}
-            eyebrow="Pricing"
-            title="A fully built MVP, ready to take to market"
-            id="pricing-heading"
-            aside={
-              launchOffer && (
-                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 border border-primary/30 bg-primary/5 px-4 py-2">
-                  <span className="font-mono text-xs tracking-widest text-primary uppercase">
-                    Limited offer
-                  </span>
-                  <span>
-                    {launchOffer.percentOff}% off {launchOffer.appliesTo}
-                  </span>
-                </p>
-              )
-            }
-          >
-            Two fixed-price sprints, agreed before the build starts.
-          </SectionHeading>
+      <PricingSection>
+        Moving an app off Bubble, Lovable or another builder? Migrations are priced the same
+        way.{" "}
+        <Link href={pages.noCodeMigration.path} className="text-primary hover:underline">
+          See how no-code app migration works
+        </Link>
+        .
+      </PricingSection>
 
-          {/* One card per package: name and sprint, the price, what is included, then the call.
-              The preferred package gets a Lapis border and a tag sitting on its top edge.
-              Every card is square-edged, with accent brackets on its corners and its top and
-              bottom edges run out across the page. */}
-          <div data-reveal="children" className="grid gap-6 pt-4 md:grid-cols-2">
-            {services.map((service) => (
-              <article
-                key={service.id}
-                id={service.id}
-                aria-labelledby={`${service.id}-name`}
-                className={cn(
-                  "corners guides flex scroll-mt-28 flex-col gap-8 bg-card p-6 sm:p-8 lg:p-10",
-                  service.preferred
-                    ? "border-2 border-primary shadow-xl shadow-primary/15 [--corner-inset:2px] [--corner:var(--foreground)] [--edge:2px]"
-                    : "border border-border shadow-xl shadow-black/5",
-                )}
-              >
-                {service.preferred && (
-                  <p className="absolute -top-3.5 right-6 z-10 bg-primary px-4 py-1 font-mono text-xs tracking-widest text-primary-foreground uppercase sm:right-10">
-                    Preferred
-                  </p>
-                )}
-                <div className="flex flex-col gap-1">
-                  <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
-                    {service.name}
-                  </h3>
-                  <p className="text-muted-foreground">{service.sprint}</p>
-                </div>
-                <div className="flex flex-col gap-2">
-                  {launchOffer && (
-                    <p className="flex items-center gap-3 text-lg text-muted-foreground">
-                      <span className="sr-only">Usually</span>
-                      <s>{service.price}</s>
-                      <span className="bg-primary/10 px-2.5 py-0.5 font-mono text-xs tracking-widest text-primary uppercase dark:bg-primary/30 dark:text-foreground">
-                        {launchOffer.percentOff}% off
-                      </span>
-                    </p>
-                  )}
-                  <p className="flex items-baseline gap-2">
-                    {launchOffer && <span className="sr-only">Now</span>}
-                    <span className="text-5xl font-semibold tracking-tight">{offerPrice(service)}</span>
-                    <span className="text-lg text-muted-foreground">+ VAT</span>
-                  </p>
-                </div>
-                <div className="flex flex-col gap-4">
-                  <h4 className="font-medium">What is included</h4>
-                  <ul className="flex flex-col gap-3 text-pretty">
-                    {service.includes.map((item) => (
-                      <li key={item} className="flex gap-3">
-                        <CheckIcon />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <Button
-                  size="lg"
-                  nativeButton={false}
-                  render={<Link href={pages.bookCall.path} />}
-                  className="mt-auto h-12 w-full text-base"
-                >
-                  Book a discovery call
-                </Button>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProcessSection
+        intro={`Two calls, a ${calendarPackage.sprint}, then handover and a week of support, with a demo every Friday.`}
+      />
 
-      {/* Process */}
-      <section
-        aria-labelledby="process-heading"
-        id="process"
-        className="scroll-mt-4 px-4 py-24 sm:px-6"
-      >
-        <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <SectionHeading className={inset} eyebrow="Process" title="From first call to launch" id="process-heading">
-            Two calls, a {calendarPackage.sprint}, then handover and a week of support, with a demo
-            every Friday.
-          </SectionHeading>
-          {/* One row per week on a Monday to Friday grid, Friday shaded as demo day. Phones drop
-              the day columns and list each week's events with their days. */}
-          <div className="corners guides border border-border bg-card">
-            <div
-              aria-hidden="true"
-              className="hidden grid-cols-[7.5rem_repeat(5,minmax(0,1fr))] border-b border-border font-mono text-xs text-muted-foreground uppercase sm:grid"
-            >
-              <span className="px-5 py-4">Week</span>
-              {weekdays.map((day) => (
-                <span
-                  key={day}
-                  className={cn(
-                    "flex items-center justify-center gap-2 border-l border-border py-4",
-                    day === "Fri" && "bg-primary/5 text-primary dark:text-foreground",
-                  )}
-                >
-                  {day === "Fri" && <span className="size-1.5 rotate-45 bg-primary" />}
-                  {day}
-                </span>
-              ))}
-            </div>
-            <ol data-reveal="children">
-              {calendar.map((week) => (
-                <li
-                  key={week.week}
-                  className="grid gap-2 border-b border-border p-4 last:border-b-0 sm:grid-cols-[7.5rem_repeat(5,minmax(0,1fr))] sm:gap-0 sm:p-0"
-                >
-                  <div className="flex items-baseline gap-3 sm:flex-col sm:gap-0.5 sm:px-5 sm:py-5 sm:[grid-area:1/1]">
-                    <h3 className="text-base">{week.week}</h3>
-                    <p className="font-mono text-xs text-muted-foreground">{week.note}</p>
-                  </div>
-                  {weekdays.map((day, index) => (
-                    <span
-                      key={day}
-                      aria-hidden="true"
-                      className={cn("hidden border-l border-border sm:block", day === "Fri" && "bg-primary/5")}
-                      style={{ gridArea: `1 / ${index + 2}` }}
-                    />
-                  ))}
-                  {week.events.map((event) => (
-                    <p
-                      key={event.label}
-                      className={cn(
-                        "reveal-wipe flex items-center gap-2 self-center px-3 py-2 text-sm sm:mx-1.5 sm:[grid-area:var(--area)]",
-                        calendarTones[event.tone],
-                      )}
-                      style={{ "--area": `1 / ${event.day + 1} / 2 / span ${event.span}` } as React.CSSProperties}
-                    >
-                      <span className="font-mono text-xs opacity-70 sm:sr-only">
-                        {dayRange(event.day, event.span)}
-                      </span>
-                      <span className="truncate">{event.label}</span>
-                    </p>
-                  ))}
-                </li>
-              ))}
-            </ol>
-            <p className="border-t border-border px-5 py-4 font-mono text-xs text-muted-foreground">
-              An example schedule for the {calendarPackage.name}. The Extended MVP adds a second
-              week of development.
-            </p>
-          </div>
-        </div>
-      </section>
+      <StackSection />
 
-      {/* Stack: a full-width band of the same Lapis as the hero, in both themes, with each
-          logo on a white tile. Like the hero, its background covers the page's guide lines,
-          with a square on each where they stop and start again. */}
-      <div aria-hidden="true" className="rail-joint" />
-      <section
-        aria-labelledby="stack-heading"
-        id="stack"
-        className="scroll-mt-4 bg-[#2b3fd6] px-4 py-20 text-white sm:px-6 sm:py-24"
-      >
-        <div className={cn("mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16", inset)}>
-          <div data-reveal="children" className="flex flex-col gap-5">
-            <p className="font-mono text-xs tracking-widest text-[#c3caff] uppercase">Our stack</p>
-            <h2 id="stack-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
-              A stack built for a fast, scalable launch
-            </h2>
-            <p className="text-lg text-pretty text-white/80">
-              Every app we ship runs on a modern, production-grade stack.
-            </p>
-            <p className="text-pretty text-white/80">
-              These are the tools today&apos;s leading web products are built on, so your app is
-              fast for users from day one and scales as you grow without a rebuild. Every account
-              sits in your name, so any developer can pick the app up later.
-            </p>
-          </div>
-          <ul data-reveal="children" className="grid grid-cols-2 gap-3 sm:gap-4">
-            {stack.map((tool) => (
-              <li
-                key={tool.name}
-                className="flex flex-col items-center justify-center gap-4 bg-white px-4 py-6 text-[#14131b] sm:py-8"
-              >
-                {/* Wordmarks get the same area rather than the same height, so a long
-                    one does not shrink to a sliver and a tall one does not dwarf the rest. */}
-                <span className="flex h-14 items-center gap-3">
-                  <Image
-                    src={tool.logo}
-                    alt={tool.wordmark ? tool.name : ""}
-                    className="w-auto max-w-full object-contain"
-                    style={{
-                      height: tool.wordmark
-                        ? `${Math.sqrt(20 / (tool.logo.width / tool.logo.height))}rem`
-                        : "2.5rem",
-                    }}
-                  />
-                  {!tool.wordmark && (
-                    <span className="text-2xl font-semibold tracking-tight">{tool.name}</span>
-                  )}
-                </span>
-                <span className="font-mono text-xs tracking-widest text-[#14131b]/60 uppercase">
-                  {tool.role}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-      <div aria-hidden="true" className="rail-joint" />
+      <WorkSection />
 
-      {/* Work */}
-      <section
-        aria-labelledby="work-heading"
-        id="work"
-        className="scroll-mt-4 px-4 py-24 sm:px-6"
-      >
-        <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-            <SectionHeading eyebrow="Our work" title="Products we have built and launched" id="work-heading">
-              Every app below went through the same process a client build does, from first sketch
-              to live domain. Each case study covers the problem, the product and the engineering.
-            </SectionHeading>
-            <Button
-              size="lg"
-              variant="outline"
-              nativeButton={false}
-              render={<Link href={pages.work.path} />}
-              className="h-11 shrink-0 px-5 text-base"
-            >
-              See all case studies
-            </Button>
-          </div>
-          <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
-            {featuredCaseStudies.map((study) => (
-              <CaseStudyCard key={study.slug} study={study} headingLevel="h3" className="guides" />
-            ))}
-          </div>
-        </div>
-      </section>
+      <ComparisonSection
+        title="Hire in-house. Brief an agency. Chance a freelancer. Or skip the trade-offs."
+        intro={`${siteConfig.name} gives you agency-quality software at freelancer speed, with code you own outright. Here is how it compares with the usual ways to get an app built.`}
+      />
 
-      {/* Comparison */}
-      <section
-        aria-labelledby="compare-heading"
-        id="compare"
-        className="scroll-mt-4 px-4 py-24 sm:px-6"
-      >
-        <div className="mx-auto flex max-w-6xl flex-col gap-12">
-          <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-            <SectionHeading
-              eyebrow="Why Scryptic"
-              title="Hire in-house. Brief an agency. Chance a freelancer. Or skip the trade-offs."
-              id="compare-heading"
-            >
-              {siteConfig.name} gives you agency-quality software at freelancer speed, with code you
-              own outright. Here is how it compares with the usual ways to get an app built.
-            </SectionHeading>
-            <Button
-              size="lg"
-              nativeButton={false}
-              render={<Link href={pages.bookCall.path} />}
-              className="h-11 w-fit shrink-0 px-6 text-base"
-            >
-              Book a discovery call
-            </Button>
-          </div>
+      <AboutSection />
 
-          {/* The brackets and guides sit on an outer box, as the scroll area would clip them.
-              Relative so the visually hidden labels stay inside the scroll area on phones. */}
-          <div className="corners guides border border-border bg-card">
-            <div className="relative overflow-x-auto">
-              <table className="w-full min-w-[600px] border-collapse text-left sm:min-w-[720px]">
-                <caption className="sr-only">
-                  How {siteConfig.name} compares with an in-house hire, an agency, a freelancer and
-                  AI-only tools
-                </caption>
-                <thead>
-                  <tr className="border-b border-border">
-                    <td className="sticky left-0 z-10 w-[24%] bg-card" />
-                    <th
-                      scope="col"
-                      className="w-[16%] bg-primary/10 px-4 py-6 text-center font-logo text-xl font-extrabold tracking-tight lowercase"
-                    >
-                      {siteConfig.name}
-                    </th>
-                    {alternatives.map((alternative) => (
-                      <th
-                        key={alternative}
-                        scope="col"
-                        className="w-[15%] px-4 py-6 text-center text-sm font-medium"
-                      >
-                        {alternative}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody data-reveal="children" className="divide-y divide-border">
-                  {comparison.map((row) => (
-                    <tr key={row.name}>
-                      <th
-                        scope="row"
-                        className="sticky left-0 z-10 bg-card px-4 py-5 font-normal sm:px-8"
-                      >
-                        <span className="block font-medium">{row.name}</span>
-                        <span className="hidden text-sm text-pretty text-muted-foreground sm:block">
-                          {row.text}
-                        </span>
-                      </th>
-                      <td className="bg-primary/10 px-4 py-5">
-                        <ComparisonMark value highlight />
-                      </td>
-                      {alternatives.map((alternative) => (
-                        <td key={alternative} className="px-4 py-5">
-                          <ComparisonMark value={row.values[alternative]} />
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FaqSection
+        faqs={faqs}
+        intro="Straight answers on pricing, timelines, process and what to expect. Anything else, ask on the discovery call."
+      />
 
-      {/* About */}
-      <section
-        aria-labelledby="about-heading"
-        id="about"
-        className="scroll-mt-4 px-4 py-24 sm:px-6"
-      >
-        <div className="mx-auto flex max-w-6xl flex-col gap-16">
-          <div className={cn("flex flex-col gap-6", inset)}>
-            <SectionHeading eyebrow="About us" title="About Scryptic" id="about-heading">
-              {siteConfig.name} is a Brighton-based development studio for founders who need a
-              working product, not a team to manage.
-            </SectionHeading>
-            <p data-reveal className="max-w-2xl text-pretty text-muted-foreground">
-              Keeping the studio small is deliberate: a few projects at a time, each with full
-              attention and a catch-up every Friday. Scope, price and timeline are agreed before the
-              build starts, so you always know what you are paying for, what you will get and when.
-            </p>
-          </div>
-
-          <article
-            aria-labelledby="founder-name"
-            data-reveal
-            className="corners guides grid border border-border bg-card sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
-          >
-            <div className="relative aspect-square bg-portrait">
-              <Image
-                src={founder.image}
-                alt={`Portrait of ${founder.name}, ${founder.role.toLowerCase()} of ${siteConfig.name}`}
-                fill
-                sizes="(min-width: 1152px) 460px, (min-width: 640px) 40vw, 100vw"
-                className="object-cover object-bottom"
-              />
-            </div>
-            <div className="flex flex-col justify-center gap-5 p-6 sm:p-10">
-              <div className="flex flex-col gap-1">
-                <p className="font-mono text-xs tracking-widest text-primary uppercase">
-                  {founder.role}
-                </p>
-                <h3 id="founder-name" className="text-2xl tracking-tight sm:text-3xl">
-                  {founder.name}
-                </h3>
-              </div>
-              {founder.bio.map((paragraph) => (
-                <p key={paragraph} className="max-w-xl text-pretty text-muted-foreground">
-                  {paragraph}
-                </p>
-              ))}
-              <SocialLinks name={founder.fullName} profiles={founder.socials} />
-            </div>
-          </article>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section
-        aria-labelledby="faq-heading"
-        id="faq"
-        className="scroll-mt-4 px-4 py-24 sm:px-6"
-      >
-        <div className={cn("mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]", inset)}>
-          <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading">
-            Straight answers on pricing, timelines, process and what to expect. Anything else, ask on the
-            discovery call.
-          </SectionHeading>
-          <div data-reveal="children" className="flex flex-col divide-y divide-border border-y border-border">
-            {faqs.map((faq) => (
-              <details key={faq.question} className="group py-2">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-medium [&::-webkit-details-marker]:hidden">
-                  <h3>{faq.question}</h3>
-                  <span
-                    aria-hidden="true"
-                    className="font-mono text-lg text-primary transition-transform group-open:rotate-45"
-                  >
-                    +
-                  </span>
-                </summary>
-                <p className="pb-4 text-pretty text-muted-foreground">{faq.answer}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Call to action */}
-      <section aria-labelledby="contact-heading" id="contact" className="scroll-mt-28 px-4 pb-24 sm:px-6">
-        <div
-          data-reveal="zoom"
-          className="corners guides mx-auto flex max-w-6xl flex-col items-center gap-6 border border-border bg-card px-6 py-16 text-center sm:py-20"
-        >
-          <h2 id="contact-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
-            Start with a discovery call
-          </h2>
-          <p className="max-w-xl text-lg text-pretty text-muted-foreground">
-            Tell us what you are building and where it is stuck. You will leave the call knowing
-            the next step, whether or not it involves us.
-          </p>
-          <Button
-            size="lg"
-            nativeButton={false}
-            render={<Link href={pages.bookCall.path} />}
-            className="h-11 px-6 text-base"
-          >
-            Book a discovery call
-          </Button>
-          <p className="font-mono text-xs text-muted-foreground">
-            or email{" "}
-            <a href={`mailto:${siteConfig.organization.email}`} className="text-primary hover:underline">
-              {siteConfig.organization.email}
-            </a>
-          </p>
-        </div>
-      </section>
+      <ContactSection />
     </main>
   )
 }

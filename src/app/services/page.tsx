@@ -1,0 +1,101 @@
+import Link from "next/link"
+
+import { PageJsonLd } from "@/components/json-ld"
+import { ContactSection } from "@/components/landing/contact-section"
+import { LandingHero } from "@/components/landing/hero"
+import { CheckIcon, LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { Button } from "@/components/ui/button"
+import { ScrollReveal } from "@/components/scroll-reveal"
+import { inset } from "@/lib/frame"
+import { createMetadata, pages } from "@/lib/seo"
+import { servicePages } from "@/lib/service-pages"
+import { offerPrice, services } from "@/lib/services"
+import { siteConfig } from "@/lib/site"
+import { itemListJsonLd } from "@/lib/structured-data"
+
+const page = pages.services
+
+export const metadata = createMetadata(page)
+
+const terminalLines = [
+  { prompt: true, text: "scryptic services" },
+  { prompt: false, text: "mvp development" },
+  { prompt: false, text: "no-code app migration" },
+  { prompt: true, text: "scryptic price" },
+  { prompt: false, text: "fixed, agreed before the build" },
+  { prompt: false, text: "code and accounts in your name" },
+]
+
+// The cheaper package, quoted as the "from" price on each card.
+const entryPackage = [...services].sort((a, b) => a.amount - b.amount)[0]
+
+export default function ServicesPage() {
+  return (
+    <main className="flex flex-col">
+      <PageJsonLd page={page} nodes={[itemListJsonLd(page, servicePages.map((s) => s.page))]} />
+      <ScrollReveal />
+
+      <LandingHero
+        title={
+          <>
+            App development <span className="text-[#c3caff]">services</span> for UK founders.
+          </>
+        }
+        intro={`${siteConfig.name} builds new products and moves existing ones onto code you own. Both are fixed-price 2 or 3 week sprints, with a demo every Friday.`}
+        secondary={{ label: "Compare services", href: "#services" }}
+        terminal={terminalLines}
+      />
+      <div aria-hidden="true" className="rail-joint" />
+
+      <LandingSection id="services" labelledBy="services-heading">
+        <SectionHeading className={inset} eyebrow="What we do" title="Two services, one way of working" id="services-heading">
+          Whether you are starting from an idea or from an app on a no-code builder, you get the same
+          fixed price, the same weekly demos and code you own at the end.
+        </SectionHeading>
+        <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
+          {servicePages.map((service, index) => (
+            <article
+              key={service.page.path}
+              aria-labelledby={`${service.id}-name`}
+              className="corners guides flex flex-col gap-6 border border-border bg-card p-6 sm:p-8 lg:p-10"
+            >
+              <span className="font-mono text-xs text-primary">{String(index + 1).padStart(2, "0")}</span>
+              <div className="flex flex-col gap-3">
+                <h3 id={`${service.id}-name`} className="text-3xl tracking-tight">
+                  {service.name}
+                </h3>
+                <p className="text-lg text-pretty text-muted-foreground">{service.summary}</p>
+              </div>
+              <ul className="flex flex-col gap-3 text-pretty">
+                {service.points.map((point) => (
+                  <li key={point} className="flex gap-3">
+                    <CheckIcon />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <p className="flex items-baseline gap-2">
+                <span className="text-muted-foreground">From</span>
+                <span className="text-3xl font-semibold tracking-tight">{offerPrice(entryPackage)}</span>
+                <span className="text-muted-foreground">+ VAT</span>
+              </p>
+              <Button
+                size="lg"
+                nativeButton={false}
+                render={<Link href={service.page.path} />}
+                className="mt-auto h-12 w-full text-base"
+              >
+                {service.linkText}
+              </Button>
+            </article>
+          ))}
+        </div>
+      </LandingSection>
+
+      <ContactSection
+        title="Not sure which you need?"
+        text="Tell us where your product is today. On a free call we will say whether it needs building, moving or leaving alone, and what the next step costs."
+      />
+    </main>
+  )
+}

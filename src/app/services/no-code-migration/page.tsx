@@ -1,0 +1,407 @@
+import Link from "next/link"
+
+import { PageJsonLd } from "@/components/json-ld"
+import { ComparisonSection, type ComparisonRow } from "@/components/landing/comparison-section"
+import { ContactSection } from "@/components/landing/contact-section"
+import { FaqSection, type Faq } from "@/components/landing/faq-section"
+import { FeatureGridSection, FitSection } from "@/components/landing/feature-grid-section"
+import { GuidesSection } from "@/components/landing/guides-section"
+import { LandingHero } from "@/components/landing/hero"
+import { PricingSection } from "@/components/landing/pricing-section"
+import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/components/landing/process-section"
+import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { StackSection } from "@/components/landing/stack-section"
+import { WorkSection } from "@/components/landing/work-section"
+import { ScrollReveal } from "@/components/scroll-reveal"
+import { postCategories, postsBySlug, postsInSeries } from "@/lib/blog"
+import { inset } from "@/lib/frame"
+import { freeTool } from "@/lib/free-tools"
+import { createMetadata, pages } from "@/lib/seo"
+import { launchOffer, offerPrice, services } from "@/lib/services"
+import { siteConfig } from "@/lib/site"
+import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
+
+const page = pages.noCodeMigration
+
+export const metadata = createMetadata(page)
+
+const terminalLines = [
+  { prompt: true, text: "scryptic audit --from bubble" },
+  { prompt: false, text: "data, users and workflows mapped" },
+  { prompt: false, text: "keep, rebuild or drop agreed" },
+  { prompt: true, text: "scryptic migrate --rehearse" },
+  { prompt: false, text: "data imported and checked" },
+  { prompt: false, text: "redirects in place" },
+  { prompt: true, text: "scryptic cutover" },
+  { prompt: false, text: "users invited to the new app" },
+]
+
+const signs = [
+  {
+    name: "Platform bills that grow with you",
+    text: "Pricing by workload units, records or seats means every new customer costs more to serve, on a price list you do not control.",
+  },
+  {
+    name: "An app that slows as data grows",
+    text: "Pages and workflows that were instant with a hundred records lag with thousands, and the platform's limits decide what you can do about it.",
+  },
+  {
+    name: "A feature the builder cannot do",
+    text: "The roadmap needs an integration, a background job or an interface the tool does not support, and the workarounds are piling up.",
+  },
+  {
+    name: "Questions about who owns it",
+    text: "Investors, buyers or enterprise customers ask about intellectual property, security or lock-in, and the honest answer is the platform.",
+  },
+  {
+    name: "Developers who will not touch it",
+    text: "Hiring for a niche builder is hard. Experienced developers want a codebase they can version, test and review.",
+  },
+  {
+    name: "An AI-built app that is not ready",
+    text: "A Lovable, Bolt.new or Replit app that worked as a demo needs security, tests and reliable deploys before real customers arrive.",
+  },
+]
+
+const movesAcross = [
+  {
+    name: "Your data",
+    text: "Every table mapped to a Postgres schema, imported in rehearsals before the real move, then checked with counts and spot checks.",
+  },
+  {
+    name: "Users and accounts",
+    text: "Accounts, profiles and permissions come across. Most builders cannot export passwords, so users get a reset or one-time sign-in link at launch.",
+  },
+  {
+    name: "Files and uploads",
+    text: "Images, documents and other uploads copied to storage in your name, with links in the data updated to match.",
+  },
+  {
+    name: "Workflows and logic",
+    text: "Visual workflows, formulas and automations rebuilt as tested code, so behaviour your users rely on carries on working.",
+  },
+  {
+    name: "Payments",
+    text: "If you take payments through Stripe, customers and subscriptions stay in your Stripe account and connect to the new app.",
+  },
+  {
+    name: "URLs and search rankings",
+    text: "Every old URL keeps its address or permanently redirects to its closest new page, so search traffic follows the move.",
+  },
+]
+
+// The same sprint as an MVP build, with an audit before it and the cutover at the end.
+const migrationCalendar: ProcessCalendar = [
+  {
+    week: "Before",
+    note: "Booked around you",
+    events: [
+      { label: "Initial call", day: 1, span: 1, tone: "call" },
+      { label: "App and data audit", day: 3, span: 1, tone: "call" },
+      { label: "Scope and price agreed", day: 4, span: 2, tone: "call" },
+    ],
+  },
+  {
+    week: "Week 1",
+    note: "Rebuild",
+    events: [
+      { label: "Rebuild begins", day: 1, span: 4, tone: "build" },
+      { label: "Demo", day: 5, span: 1, tone: "demo" },
+    ],
+  },
+  {
+    week: "Week 2",
+    note: "Rehearse",
+    events: [
+      { label: "Data rehearsals and iteration", day: 1, span: 4, tone: "iterate" },
+      { label: "Demo + cutover", day: 5, span: 1, tone: "demo" },
+    ],
+  },
+  {
+    week: "Week 3",
+    note: "Live",
+    events: [
+      { label: "Full handover", day: 1, span: 1, tone: "handover" },
+      { label: "1 week of support", day: 2, span: 4, tone: "support" },
+    ],
+  },
+]
+
+const fit = {
+  good: {
+    title: "Migrate if",
+    items: [
+      "Platform fees are rising faster than revenue",
+      "Your roadmap is blocked by what the builder can do",
+      "Investors or customers need you to own the code",
+      "Users notice the app slowing down",
+      "You are about to hire developers",
+    ],
+  },
+  bad: {
+    title: "Stay put if",
+    items: [
+      "The app does its job and the costs are fine",
+      "Nothing on your roadmap is blocked",
+      "You are still changing the product every few days to find fit",
+      "It is an internal tool used by a handful of people",
+    ],
+  },
+}
+
+const comparison: ComparisonRow[] = [
+  {
+    name: "Speed",
+    text: "Moved after a 2 or 3 week sprint, not a long rebuild",
+    values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
+  },
+  {
+    name: "Data and users",
+    text: "Moved across with a rehearsed, checked plan",
+    values: { "In-house hire": true, Agency: true, Freelancer: false, "AI-only tools": false },
+  },
+  {
+    name: "Production ready",
+    text: "Security and backups set up from the start",
+    values: { "In-house hire": true, Agency: true, Freelancer: false, "AI-only tools": false },
+  },
+  {
+    name: "Yours to own",
+    text: "Code and accounts handed over to you",
+    values: { "In-house hire": true, Agency: false, Freelancer: true, "AI-only tools": true },
+  },
+  {
+    name: "Cost vs value",
+    text: "A fixed price for the whole move",
+    values: { "In-house hire": false, Agency: false, Freelancer: true, "AI-only tools": true },
+  },
+]
+
+const migrationGuides = postsInSeries("migration")
+
+const guides = postsBySlug([
+  "vibe-coding-to-production",
+  "google-sheets-as-a-database",
+  "turn-automations-into-a-saas-product",
+])
+
+// Rendered in the FAQ section and emitted as FAQPage JSON-LD; keep them identical.
+const faqs: Faq[] = [
+  {
+    question: "How much does it cost to migrate a no-code app?",
+    answer: `Migrations are priced like our MVPs: a fixed price, plus VAT. ${services.map((s) => `The ${s.name} is ${s.price} for a ${s.sprint}`).join(", and ")}.${launchOffer ? ` For a limited time there is ${launchOffer.percentOff}% off ${launchOffer.appliesTo}, bringing them to ${services.map(offerPrice).join(" and ")}.` : ""} Which one fits depends on the screens, workflows and integrations your app has, which the audit works out before a price is agreed.`,
+  },
+  {
+    question: "How long does a migration take?",
+    answer:
+      "Two or three weeks of build once the scope is agreed, then a week of handover and support. Your current app keeps running throughout and is only switched off once the new one is live and checked.",
+  },
+  {
+    question: "Will my users have to sign up again?",
+    answer:
+      "No. Accounts and their data move across. Most builders do not export password hashes, so at launch users get an email with a password reset or a one-time sign-in link, with a heads-up a few days before.",
+  },
+  {
+    question: "Could we lose data in the move?",
+    answer:
+      "Not with a rehearsed migration. The data is exported, mapped to the new database and imported several times before the real move, with counts and spot checks each time. The final export runs at cutover, so nothing written in the meantime is missed.",
+  },
+  {
+    question: "Can I just export the code from my no-code tool?",
+    answer:
+      "It depends on the tool. AI app builders such as Lovable, Bolt.new, v0 and Replit write real code, so the work is hardening and owning it. Bubble, Adalo and Glide keep the app on their platform, so it is rebuilt and the data moved. Tools with a code export, such as FlutterFlow and WeWeb, give a starting point that usually needs work before production.",
+  },
+  {
+    question: "What will my app be rebuilt with?",
+    answer:
+      "TypeScript, Next.js and Postgres, hosted on infrastructure in your name, with Stripe for payments. It is a mainstream stack, so any web developer you hire later can work on it.",
+  },
+  {
+    question: "Will my search rankings survive the move?",
+    answer:
+      "Yes, as long as every old URL keeps its address or permanently redirects to its closest new page. We map the URLs before the move and set the redirects at launch. Often a marketing site on Webflow or Framer can stay where it is, with the app built next to it.",
+  },
+  {
+    question: "Should I migrate at all?",
+    answer:
+      "Not always. If the app does its job, the costs are fine and nothing on the roadmap is blocked, staying put is cheaper. Moving makes sense when fees climb with usage, the platform blocks features, or investors and customers ask who owns the code. The audit gives a straight answer either way.",
+  },
+  {
+    question: "Can you improve the app while migrating it?",
+    answer:
+      "Yes, within the sprint's scope. A rebuild is a good moment to drop features nobody uses and fix the workflows users complain about, but keeping the first release close to the old app means users recognise it. The agreed scope says which changes are in.",
+  },
+  {
+    question: "Who owns the app after the migration?",
+    answer:
+      "You do. The code lives in your repository, and the hosting, database, storage and payment accounts are in your name and handed over at launch. Nothing is locked to us or to a platform.",
+  },
+]
+
+/**
+ * Every tool with a migration guide, grouped by kind of tool. Each tile links
+ * to that tool's guide, so the page doubles as the index of the series.
+ */
+function ToolsSection() {
+  return (
+    <LandingSection id="tools" labelledBy="tools-heading">
+      <SectionHeading className={inset} eyebrow="Where from" title="Apps we migrate" id="tools-heading">
+        We move apps off {migrationGuides.length} builders and platforms. Each one has a free, step by
+        step migration guide covering what you can export and what has to be rebuilt.
+      </SectionHeading>
+      <div className="corners guides border border-border bg-card">
+        {postCategories.map((category) => {
+          const categoryPosts = migrationGuides.filter((post) => post.category === category.name)
+          if (categoryPosts.length === 0) return null
+
+          return (
+            <div
+              key={category.name}
+              className="grid gap-6 border-t border-border p-6 first:border-t-0 sm:p-8 lg:grid-cols-[1fr_2fr] lg:gap-10"
+            >
+              <div className="flex flex-col gap-2">
+                <h3 className="text-xl tracking-tight">{category.name}</h3>
+                <p className="text-sm text-pretty text-muted-foreground">{category.text}</p>
+              </div>
+              <ul data-reveal="children" className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {categoryPosts.map((post) => (
+                  <li key={post.slug}>
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="group flex h-full items-center gap-2.5 border border-border bg-background p-2.5 transition-colors hover:border-primary/50 sm:gap-3 sm:p-3"
+                    >
+                      {post.logo && (
+                        <span
+                          aria-hidden="true"
+                          className="flex size-8 shrink-0 items-center justify-center border border-primary/20 bg-primary/10 p-1.5 sm:size-10 sm:p-2"
+                        >
+                          <span
+                            className="size-full bg-primary mask-contain mask-center mask-no-repeat"
+                            style={{ maskImage: `url(${post.logo.src})` }}
+                          />
+                        </span>
+                      )}
+                      <span className="flex min-w-0 flex-col">
+                        <span className="text-sm font-medium break-words sm:text-base">{post.topic}</span>
+                        <span className="font-mono text-xs text-muted-foreground transition-colors group-hover:text-primary">
+                          <span className="sm:hidden">Guide</span>
+                          <span className="hidden sm:inline">Migration guide</span>
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        })}
+      </div>
+    </LandingSection>
+  )
+}
+
+export default function NoCodeMigrationPage() {
+  return (
+    <main className="flex flex-col">
+      <PageJsonLd
+        page={page}
+        nodes={[
+          // The same packages as an MVP build, sold here as a migration.
+          ...services.map((service) =>
+            serviceJsonLd(page, { ...service, serviceType: "No-code app migration" }),
+          ),
+          faqJsonLd(page, faqs),
+        ]}
+      />
+      <ScrollReveal />
+
+      <LandingHero
+        eyebrow={{ label: "Services", href: pages.services.path }}
+        title={
+          <>
+            From <span className="text-[#c3caff]">no-code</span> to code you own, without losing a
+            user.
+          </>
+        }
+        intro={`${siteConfig.name} migrates apps built with Bubble, Lovable, Adalo, Glide, Airtable and other builders to a production stack you own, with your data and users brought across.`}
+        secondary={{ label: "See pricing", href: "#pricing" }}
+        terminal={terminalLines}
+      />
+      <div aria-hidden="true" className="rail-joint" />
+
+      <FeatureGridSection
+        id="signs"
+        eyebrow="When to move"
+        title="Signs your app has outgrown its builder"
+        intro="No-code and AI app builders are a fast way to a first version. These are the signs it is time to move that version onto code you own."
+        items={signs}
+      />
+
+      <ToolsSection />
+
+      <FeatureGridSection
+        id="moves"
+        eyebrow="What moves"
+        title="Everything comes with you"
+        intro="A migration moves the whole app, not just its screens. These are the parts we plan, move and check before the old app is switched off."
+        items={movesAcross}
+      />
+
+      <PricingSection
+        title="Migrations are priced like an MVP"
+        intro="The same two fixed-price sprints as an MVP build. The audit settles which one fits your app, and the price is agreed before any work starts."
+      />
+
+      <ProcessSection
+        title="From audit to cutover"
+        intro={`An audit of your app and data, a ${calendarPackage.sprint} with a demo every Friday, then the cutover, handover and a week of support.`}
+        calendar={migrationCalendar}
+        note={`An example schedule for a migration on the ${calendarPackage.name} package. Larger apps take the Extended MVP, which adds a second week of development.`}
+      />
+
+      <FitSection
+        id="fit"
+        eyebrow="Migrate or stay"
+        title="Should you migrate at all?"
+        intro="Not every app should move. The audit gives a straight answer, and sometimes that answer is to stay where you are."
+        good={fit.good}
+        bad={fit.bad}
+      />
+
+      <StackSection
+        title="Where your app moves to"
+        lead="A mainstream production stack, with every account in your name."
+        text="TypeScript, Next.js and Postgres, with storage and hosting you control. No builder fees per user or per workflow run, and any web developer can pick the code up after us."
+      />
+
+      <WorkSection
+        title="Production apps we have built"
+        intro="Your migrated app is built the same way as the products below, on the same stack. Each case study covers the problem, the product and the engineering."
+      />
+
+      <ComparisonSection
+        title="Who should move your app?"
+        intro={`You could hire a developer, brief an agency, find a freelancer or try an AI tool. ${siteConfig.name} moves your app at a fixed price, with a plan for your data and users.`}
+        rows={comparison}
+      />
+
+      <GuidesSection
+        title="More on moving to code"
+        intro="Guides for apps that started somewhere other than a builder, and a quiz for deciding whether to move at all."
+        posts={guides}
+        tools={[freeTool("build-or-no-code")]}
+        more={{ label: "All migration guides", href: `${pages.blog.path}#migration` }}
+      />
+
+      <FaqSection
+        faqs={faqs}
+        intro="What founders ask most before moving an app off a no-code or AI builder."
+      />
+
+      <ContactSection
+        title="Talk through your migration"
+        text="Walk us through what you have built. We will look at the app, its data and its accounts, and tell you whether moving is worth it."
+      />
+    </main>
+  )
+}
