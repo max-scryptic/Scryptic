@@ -5,7 +5,7 @@ import { cn } from "cn"
 
 import { Icon, type IconName } from "@/components/landing/icons"
 
-type Item = { icon: IconName; name: string; text: string; tag: string }
+export type HubItem = { icon: IconName; name: string; text: string; tag: string }
 
 /*
  * Six parts wired into the product in the middle: three on each side on wide
@@ -121,7 +121,7 @@ function Connectors({ side, active }: { side: 0 | 1; active: number | null }) {
   )
 }
 
-function Core({ items, active }: { items: Item[]; active: number | null }) {
+function Core({ items, active }: { items: HubItem[]; active: number | null }) {
   const item = active === null ? null : items[active]
   return (
     <div
@@ -167,7 +167,7 @@ function Core({ items, active }: { items: Item[]; active: number | null }) {
   )
 }
 
-export function LaunchKitHub({ items, mode = "highlight" }: { items: Item[]; mode?: "highlight" | "trace" }) {
+export function LaunchKitHub({ items, mode = "trace" }: { items: HubItem[]; mode?: "highlight" | "trace" }) {
   const { ref, active, previous, hover } = useCycle(items.length)
   const sides = [items.slice(0, 3), items.slice(3, 6)]
 

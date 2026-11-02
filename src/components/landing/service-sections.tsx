@@ -2,43 +2,22 @@ import Link from "next/link"
 import { cn } from "cn"
 
 import { Icon, type IconName } from "@/components/landing/icons"
+import { LaunchKitHub, type HubItem } from "@/components/landing/launch-kit-hub"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { inset } from "@/lib/frame"
 
 /*
  * Sections only the service pages use. Each has its own shape, so a page is
- * not a run of identical boxes: icon rows, pill tags, a from-to map and a
+ * not a run of identical boxes: a hub, pill tags, a from-to map and a
  * split fit panel. Keep the copy in them short: a label and a few words.
  */
 
-/*
- * The stack in IconRowsSection: each bar's width, as a share of the column,
- * and where it sits in the space left over (0 hard left, 0.5 centred, 1 hard
- * right). The first and last bars are centred and narrower, and the ones in
- * between step out to alternate sides, so the stack reads as a loose pile
- * with a steady top and bottom. Built for six rows; more repeat the middle.
- */
-const edgeRow = { width: "74%", shift: 0.5 }
-const middleRows = [
-  { width: "88%", shift: 0 },
-  { width: "92%", shift: 1 },
-  { width: "80%", shift: 0.12 },
-  { width: "86%", shift: 0.6 },
-]
-
-function rowLayout(index: number, count: number) {
-  if (index === 0 || index === count - 1) return edgeRow
-  return middleRows[(index - 1) % middleRows.length]
-}
-
 /**
- * Heading beside a stack of separate bars, uneven in width and offset (see
- * rowLayout), each an icon, a name, a few words and a mono tag. Put short
- * text first and last, where the bars are narrowest. Below sm the bars are
- * 90 to 98% wide, so the text still fits. The corner brackets stay hidden
- * until a bar is hovered, so six bars do not crowd.
+ * Centred heading over a hub: the parts of a product wired into it, three a
+ * side (see LaunchKitHub). Built for six parts, each an icon, a name, a few
+ * words and a mono tag.
  */
-export function IconRowsSection({
+export function HubSection({
   id,
   eyebrow,
   title,
@@ -49,38 +28,19 @@ export function IconRowsSection({
   eyebrow: string
   title: string
   intro: React.ReactNode
-  items: { icon: IconName; name: string; text: string; tag: string }[]
+  items: HubItem[]
 }) {
   return (
-    <LandingSection id={id} labelledBy={`${id}-heading`} className="lg:grid lg:grid-cols-[1fr_1.25fr] lg:items-center">
-      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`}>
+    <LandingSection id={id} labelledBy={`${id}-heading`}>
+      <SectionHeading
+        className={cn(inset, "mx-auto text-center *:mx-auto")}
+        eyebrow={eyebrow}
+        title={title}
+        id={`${id}-heading`}
+      >
         {intro}
       </SectionHeading>
-      <ul data-reveal="children" className="flex flex-col gap-2.5">
-        {items.map((item, index) => (
-          <li
-            key={item.name}
-            style={
-              {
-                "--bar": rowLayout(index, items.length).width,
-                "--shift": rowLayout(index, items.length).shift,
-              } as React.CSSProperties
-            }
-            className="corners corners-grow ml-[calc((100%-var(--w))*var(--shift))] grid w-(--w) grid-cols-[auto_1fr_auto] [--w:calc(70%+var(--bar)*0.3)] sm:[--w:var(--bar)] items-center gap-4 border border-border bg-card px-4 py-3.5 shadow-lg shadow-black/5 transition-colors [--corner-len:0px] focus-within:[--corner-len:24px] hover:border-primary/50 hover:[--corner-len:24px] sm:px-5"
-          >
-            <span className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/25 dark:text-foreground">
-              <Icon name={item.icon} />
-            </span>
-            <span className="flex min-w-0 flex-col">
-              <span className="font-medium">{item.name}</span>
-              <span className="text-sm text-pretty text-muted-foreground">{item.text}</span>
-            </span>
-            <span className="rounded-full border border-border px-2.5 py-0.5 font-mono text-xs text-muted-foreground">
-              {item.tag}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <LaunchKitHub items={items} />
     </LandingSection>
   )
 }
