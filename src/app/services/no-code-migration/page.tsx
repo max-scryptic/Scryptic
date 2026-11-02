@@ -13,7 +13,6 @@ import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/compone
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { FitCheckSection, MappingSection } from "@/components/landing/service-sections"
 import { StackSection } from "@/components/landing/stack-section"
-import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postCategories, postsBySlug, postsInSeries } from "@/lib/blog"
 import { inset } from "@/lib/frame"
@@ -310,11 +309,6 @@ export default function NoCodeMigrationPage() {
         title="Where your app moves to"
         lead="A mainstream production stack, with every account in your name."
         text="TypeScript, Next.js and Postgres, with storage and hosting you control. No builder fees per user or per workflow run, and any web developer can pick the code up after us."
-      />
-
-      <WorkSection
-        title="Production apps we have built"
-        intro="Your migrated app is built the same way, on the same stack, as these."
       />
 
       <ComparisonSection
