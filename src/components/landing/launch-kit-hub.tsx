@@ -11,10 +11,9 @@ export type HubItem = { icon: IconName; name: string; text: string; tag: string 
  * Six parts wired into the product in the middle: three on each side on wide
  * screens, one spine under the product card below lg. Rows on both sides are
  * the same height (auto-rows-fr), so their centres sit at 1/6, 1/2 and 5/6 of
- * the column and the SVG connectors can be drawn in percentages. Hovering a
- * part lights its connector and shows it in the product card. On its own the
- * hub goes round the parts in turn (clockwise on wide screens) once it is on
- * screen, unless the visitor prefers reduced motion. "highlight" lights the
+ * the column and the SVG connectors can be drawn in percentages. The hub goes
+ * round the parts in turn (clockwise on wide screens) once it is on screen,
+ * unless the visitor prefers reduced motion. Hover does not affect it. "highlight" lights the
  * active card; "trace" leaves the cards as outlines and draws a line round
  * the active one, which follows itself off as the next one draws. The
  * connectors and the product card are decorative: the list says the same thing.
@@ -22,12 +21,11 @@ export type HubItem = { icon: IconName; name: string; text: string; tag: string 
 const clockwise = [0, 3, 4, 5, 2, 1]
 const step = 2600
 
-/** The active part, stepped round on a timer while in view; hover takes over. */
+/** The active part, stepped round on a timer while in view. Pointer input never changes it. */
 function useCycle(count: number) {
   const ref = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState<number | null>(null)
   const [previous, setPrevious] = useState<number | null>(null)
-  const [hovering, setHovering] = useState(false)
   const [inView, setInView] = useState(false)
 
   useEffect(() => {
@@ -39,7 +37,7 @@ function useCycle(count: number) {
   }, [])
 
   useEffect(() => {
-    if (!inView || hovering) return
+    if (!inView) return
     const advance = () => {
       const order = window.matchMedia("(min-width: 64rem)").matches ? clockwise : [...Array(count).keys()]
       setActive((current) => {
@@ -53,17 +51,9 @@ function useCycle(count: number) {
       window.clearTimeout(first)
       window.clearInterval(timer)
     }
-  }, [inView, hovering, count])
+  }, [inView, count])
 
-  const hover = (index: number | null) => {
-    setHovering(index !== null)
-    if (index !== null && index !== active) {
-      setPrevious(active)
-      setActive(index)
-    }
-  }
-
-  return { ref, active, previous, hover }
+  return { ref, active, previous }
 }
 
 /** The line drawn round a card in "trace" mode, starting at the corner nearest the product. */
@@ -168,7 +158,7 @@ function Core({ items, active }: { items: HubItem[]; active: number | null }) {
 }
 
 export function LaunchKitHub({ items, mode = "trace" }: { items: HubItem[]; mode?: "highlight" | "trace" }) {
-  const { ref, active, previous, hover } = useCycle(items.length)
+  const { ref, active, previous } = useCycle(items.length)
   const sides = [items.slice(0, 3), items.slice(3, 6)]
 
   return (
@@ -191,8 +181,6 @@ export function LaunchKitHub({ items, mode = "trace" }: { items: HubItem[]; mode
               return (
                 <li
                   key={item.name}
-                  onMouseEnter={() => hover(index)}
-                  onMouseLeave={() => hover(null)}
                   className="relative flex py-1.5 lg:py-2"
                 >
                   <span

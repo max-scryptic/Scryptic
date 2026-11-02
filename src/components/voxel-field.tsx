@@ -63,16 +63,22 @@ export const voxelShapes = {
     height: (u, _v, random) => 1 + Math.floor(smoothstep(0.5, 1, u) * 3.4 * (0.6 + 0.4 * random())),
     clump: true,
   },
-  /** No-code migration: loose single cubes along the top, settled into one solid block under the card. */
+  /**
+   * No-code migration: a thin stream of single cubes along the top that bends
+   * down the right edge, gathering into taller stacks as it settles at the
+   * bottom right, like data being carried across and landing.
+   */
   migrate: {
     seed: 33,
     density: (u, v) => {
-      const loose = Math.max(blob(u, v, 0.7, 0.05, 0.2, 0.12), blob(u, v, 0.97, 0.3, 0.06, 0.2)) * 0.3
-      const block = u > 0.58 && u < 0.86 && v > 0.64 && v < 0.78 ? 0.95 : 0
-      return Math.max(loose, block)
+      // The stream's centre line: flat along the top, then curving down past the card.
+      const path = 0.13 + 0.75 * smoothstep(0.8, 1.02, u)
+      const stream = smoothstep(0.46, 0.78, u) * Math.exp(-(((v - path) / 0.09) ** 2)) * 0.7
+      const pile = blob(u, v, 0.97, 0.76, 0.1, 0.24)
+      return Math.max(stream, pile)
     },
-    height: (_u, v) => (v > 0.62 ? 2 : 1),
-    clump: false,
+    height: (u, v, random) => 1 + Math.floor(smoothstep(0.85, 1, u) * smoothstep(0.35, 0.85, v) * 3.2 * (0.6 + 0.4 * random())),
+    clump: true,
   },
   /** The services hub: two islands, one per service. */
   services: {
