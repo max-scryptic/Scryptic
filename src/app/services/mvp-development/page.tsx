@@ -1,5 +1,4 @@
 import { PageJsonLd } from "@/components/json-ld"
-import { AboutSection } from "@/components/landing/about-section"
 import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
@@ -211,8 +210,6 @@ export default function MvpDevelopmentPage() {
         title="How an MVP studio compares with other MVP development options"
         intro={`Most founders weigh up an in-house hire, an agency, a freelancer or AI tools. ${siteConfig.name} combines agency-quality code with freelancer speed, at a fixed price.`}
       />
-
-      <AboutSection />
 
       <GuidesSection
         title="Plan your MVP before the call"
