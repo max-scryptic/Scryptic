@@ -5,12 +5,13 @@ import { FitCheck } from "@/components/landing/fit-check"
 import { Icon, type IconName } from "@/components/landing/icons"
 import { LaunchKitHub, type HubItem } from "@/components/landing/launch-kit-hub"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 
 /*
  * Sections only the service pages use. Each has its own shape, so a page is
- * not a run of identical boxes: a hub, pill tags, a from-to map and a
- * split fit panel. Keep the copy in them short: a label and a few words.
+ * not a run of identical boxes: a hub, a numbered grid of signs, a from-to
+ * map and a split fit panel. Keep the copy in them short: a label and a few words.
  */
 
 /**
@@ -46,8 +47,12 @@ export function HubSection({
   )
 }
 
-/** Short statements as rounded tags with icons, closed by a line that points to the next step. */
-export function PillsSection({
+/**
+ * Warning signs as a numbered grid: each cell an icon, a short sign and a line
+ * on what it looks like in practice. Closed by a bar that points to the next
+ * step. Built for six signs (three columns of two rows on wide screens).
+ */
+export function SignsSection({
   id,
   eyebrow,
   title,
@@ -59,35 +64,59 @@ export function PillsSection({
   eyebrow: string
   title: string
   intro: React.ReactNode
-  items: { icon: IconName; text: string }[]
-  footer?: { text: string; link: { label: string; href: string } }
+  items: { icon: IconName; title: string; text: string }[]
+  footer?: { title: string; text: string; link: { label: string; href: string } }
 }) {
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
       <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`}>
         {intro}
       </SectionHeading>
-      <div className="corners guides flex flex-col gap-8 border border-border bg-card p-6 sm:p-10">
-        <ul data-reveal="children" className="flex flex-wrap gap-3">
-          {items.map((item) => (
+      <div className="corners guides border border-border bg-card">
+        {/* Cells sit on a border-coloured ground with a 1px gap, so every inner edge is a single rule. */}
+        <ol data-reveal="children" className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item, index) => (
             <li
-              key={item.text}
-              className="flex items-center gap-2.5 rounded-full border border-border bg-background py-2 pr-4 pl-2 sm:text-lg"
+              key={item.title}
+              className="group flex gap-4 bg-card p-6 transition-colors hover:bg-primary/[0.04] sm:flex-col sm:gap-6 sm:p-8"
             >
-              <span className="flex size-8 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/25 dark:text-foreground">
-                <Icon name={item.icon} className="size-4" />
-              </span>
-              {item.text}
+              {/* On phones the icon sits beside the text and the number is dropped, to keep the stack short. */}
+              <div className="flex shrink-0 items-start justify-between sm:items-center">
+                <span
+                  aria-hidden="true"
+                  className="flex size-10 items-center justify-center border border-primary/20 bg-primary/10 text-primary transition-colors group-hover:border-primary/50 dark:bg-primary/25 dark:text-foreground"
+                >
+                  <Icon name={item.icon} className="size-5" />
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="hidden font-mono text-xs tracking-widest text-muted-foreground transition-colors group-hover:text-primary sm:inline"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <div className="flex flex-col gap-1.5 sm:gap-2">
+                <h3 className="text-lg tracking-tight text-balance sm:text-xl">{item.title}</h3>
+                <p className="text-pretty text-muted-foreground">{item.text}</p>
+              </div>
             </li>
           ))}
-        </ul>
+        </ol>
         {footer && (
-          <p className="border-t border-border pt-6 text-pretty text-muted-foreground">
-            {footer.text}{" "}
-            <Link href={footer.link.href} className="text-primary hover:underline">
+          <div className="flex flex-col items-start gap-5 border-t border-border bg-primary/[0.03] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div className="flex flex-col gap-1">
+              <p className="text-xl tracking-tight">{footer.title}</p>
+              <p className="text-pretty text-muted-foreground">{footer.text}</p>
+            </div>
+            <Button
+              size="lg"
+              nativeButton={false}
+              render={<Link href={footer.link.href} />}
+              className="h-11 shrink-0 px-6 text-base"
+            >
               {footer.link.label}
-            </Link>
-          </p>
+            </Button>
+          </div>
         )}
       </div>
     </LandingSection>

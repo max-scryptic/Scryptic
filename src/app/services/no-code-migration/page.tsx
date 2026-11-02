@@ -11,7 +11,7 @@ import type { IconName } from "@/components/landing/icons"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/components/landing/process-section"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
-import { FitSection, MappingSection, PillsSection } from "@/components/landing/service-sections"
+import { FitSection, MappingSection, SignsSection } from "@/components/landing/service-sections"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -28,13 +28,37 @@ const page = pages.noCodeMigration
 export const metadata = createMetadata(page)
 
 const signs = [
-  { icon: "pound", text: "Bills climb with every user" },
-  { icon: "slow", text: "Pages slow as data grows" },
-  { icon: "block", text: "A feature the builder cannot do" },
-  { icon: "key", text: "Investors ask who owns the code" },
-  { icon: "person", text: "Developers will not touch it" },
-  { icon: "spark", text: "An AI-built app that is not production ready" },
-] satisfies { icon: IconName; text: string }[]
+  {
+    icon: "pound",
+    title: "Bills climb with every user",
+    text: "Per-user and usage fees grow faster than the revenue they bring in.",
+  },
+  {
+    icon: "slow",
+    title: "Pages slow as data grows",
+    text: "Lists, searches and dashboards lag once tables reach a few thousand rows.",
+  },
+  {
+    icon: "block",
+    title: "A feature the builder cannot do",
+    text: "The roadmap waits on plugins, workarounds or the vendor's own plans.",
+  },
+  {
+    icon: "key",
+    title: "Investors ask who owns the code",
+    text: "Due diligence wants a repository in your name, not a platform login.",
+  },
+  {
+    icon: "person",
+    title: "Developers will not touch it",
+    text: "Hiring stalls because nobody wants to learn one builder's quirks.",
+  },
+  {
+    icon: "spark",
+    title: "AI-built, but not production ready",
+    text: "It demos well, but security, backups and tests were never set up.",
+  },
+] satisfies { icon: IconName; title: string; text: string }[]
 
 // Where each part of the app ends up. Payments only stay put when they already run through Stripe.
 const movesAcross = [
@@ -284,14 +308,15 @@ export default function NoCodeMigrationPage() {
       />
       <div aria-hidden="true" className="rail-joint" />
 
-      <PillsSection
+      <SignsSection
         id="signs"
         eyebrow="When to move"
         title="Signs your app has outgrown its builder"
         intro="Builders are a fast way to a first version. These are the signs it is time to move on."
         items={signs}
         footer={{
-          text: "Two or more sound familiar?",
+          title: "Two or more sound familiar?",
+          text: "A free audit looks at your app, data and accounts, and says whether moving is worth it.",
           link: { label: "Book a free app audit call", href: pages.bookCall.path },
         }}
       />
