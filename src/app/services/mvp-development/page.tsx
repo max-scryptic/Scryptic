@@ -7,7 +7,7 @@ import { LandingHero } from "@/components/landing/hero"
 import type { IconName } from "@/components/landing/icons"
 import { SprintVisual } from "@/components/landing/hero-visuals"
 import { PricingSection } from "@/components/landing/pricing-section"
-import { FitCheckSection, IconRowsSection } from "@/components/landing/service-sections"
+import { FitCheckSection, HubSection } from "@/components/landing/service-sections"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
@@ -24,7 +24,7 @@ const page = pages.mvpDevelopment
 export const metadata = createMetadata(page)
 
 // What ships in every build, whichever package. Only claims the build delivers.
-// Short text first and last: those rows get the narrowest bars.
+// The first three sit left of the product in the hub, the last three right.
 const launchKit = [
   { icon: "lock", name: "Sign-in", text: "Accounts and password resets", tag: "Auth" },
   { icon: "card", name: "Payments", text: "Checkout and subscriptions", tag: "Stripe" },
@@ -132,7 +132,7 @@ export default function MvpDevelopmentPage() {
       />
       <div aria-hidden="true" className="rail-joint" />
 
-      <IconRowsSection
+      <HubSection
         id="included"
         eyebrow="What you get"
         title="What every MVP launches with"
