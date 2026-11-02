@@ -11,7 +11,7 @@ import type { IconName } from "@/components/landing/icons"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/components/landing/process-section"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
-import { FitSection, MappingSection, PillsSection } from "@/components/landing/service-sections"
+import { FitSection, MappingSection, PillsSection, type MappingItem } from "@/components/landing/service-sections"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -37,14 +37,50 @@ const signs = [
 ] satisfies { icon: IconName; text: string }[]
 
 // Where each part of the app ends up. Payments only stay put when they already run through Stripe.
-const movesAcross = [
-  { icon: "database", from: "Data tables", to: "Postgres, fully checked" },
-  { icon: "users", from: "Users and roles", to: "Accounts, with a reset link" },
-  { icon: "file", from: "Files and uploads", to: "Storage in your name" },
-  { icon: "flow", from: "Workflows", to: "Tested code" },
-  { icon: "card", from: "Stripe customers", to: "The same Stripe account" },
-  { icon: "link", from: "Page URLs", to: "Permanent redirects" },
-] satisfies { icon: IconName; from: string; to: string }[]
+const movesAcross: MappingItem[] = [
+  {
+    icon: "database",
+    from: "Data tables",
+    to: "A Postgres database",
+    text: "Every table mapped and imported in rehearsals before the real move.",
+    check: "Row counts match",
+  },
+  {
+    icon: "users",
+    from: "Users and roles",
+    to: "The same accounts",
+    text: "Nobody signs up again. A reset link replaces the old password at launch.",
+    check: "Every role tested",
+  },
+  {
+    icon: "file",
+    from: "Files and uploads",
+    to: "Storage in your name",
+    text: "Images and documents copied across, with every link to them updated.",
+    check: "Every file accounted for",
+  },
+  {
+    icon: "flow",
+    from: "Workflows",
+    to: "Tested code",
+    text: "Builder logic rewritten as plain code that runs the same way every time.",
+    check: "Tests pass",
+  },
+  {
+    icon: "card",
+    from: "Stripe customers",
+    to: "The same Stripe account",
+    text: "Customers and subscriptions stay put, so nobody enters a card again.",
+    check: "Every customer linked",
+  },
+  {
+    icon: "link",
+    from: "Page URLs",
+    to: "Permanent redirects",
+    text: "Each old address points to its new page, so links and rankings carry over.",
+    check: "Every URL mapped",
+  },
+]
 
 // The same sprint as an MVP build, with an audit before it and the cutover at the end.
 const migrationCalendar: ProcessCalendar = [
@@ -305,7 +341,7 @@ export default function NoCodeMigrationPage() {
         intro="The whole app moves, not just its screens, and is checked before the old one is switched off."
         from="In your builder"
         to="In your code"
-        rows={movesAcross}
+        items={movesAcross}
       />
 
       <PricingSection

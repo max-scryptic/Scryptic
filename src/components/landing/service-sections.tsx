@@ -94,7 +94,30 @@ export function PillsSection({
   )
 }
 
-/** Where each part of a thing goes: one row per part, from the left column to the right. */
+export type MappingItem = {
+  icon: IconName
+  /** What it is called where it lives now, e.g. "Data tables". */
+  from: string
+  /** What it becomes, e.g. "Postgres". */
+  to: string
+  /** One short line on how it gets there. */
+  text: string
+  /** The check that proves it arrived, a few words. */
+  check: string
+}
+
+const arrow = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5">
+    <path d="M5 12h14m-6-6 6 6-6 6" />
+  </svg>
+)
+
+/**
+ * Where each part of a thing goes, as a grid of tiles: the old name small and
+ * faded at the top, what it becomes as the tile's heading, a line on how, and
+ * the check that proves it arrived. A legend bar over the grid names the two
+ * sides. Built for six parts (three by two on wide screens).
+ */
 export function MappingSection({
   id,
   eyebrow,
@@ -102,16 +125,16 @@ export function MappingSection({
   intro,
   from,
   to,
-  rows,
+  items,
 }: {
   id: string
   eyebrow: string
   title: string
   intro: React.ReactNode
-  /** Column headings, e.g. "In your builder" and "In your code". */
+  /** Names for the two sides, e.g. "In your builder" and "In your code". */
   from: string
   to: string
-  rows: { icon: IconName; from: string; to: string }[]
+  items: MappingItem[]
 }) {
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
@@ -119,33 +142,42 @@ export function MappingSection({
         {intro}
       </SectionHeading>
       <div className="corners guides border border-border bg-card">
-        <div className="grid grid-cols-[1fr_2.5rem_1fr] gap-3 border-b border-border px-4 py-4 font-mono text-xs tracking-widest text-muted-foreground uppercase sm:grid-cols-[1fr_8rem_1fr] sm:gap-6 sm:px-8">
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-border px-6 py-4 font-mono text-xs tracking-widest text-muted-foreground uppercase sm:px-8">
           <span>{from}</span>
-          <span aria-hidden="true" />
-          <span>{to}</span>
-        </div>
-        <ul data-reveal="children" className="divide-y divide-border">
-          {rows.map((row) => (
-            <li
-              key={row.from}
-              className="grid grid-cols-[1fr_2.5rem_1fr] items-center gap-3 px-4 py-4 sm:grid-cols-[1fr_8rem_1fr] sm:gap-6 sm:px-8 sm:py-5"
-            >
-              <span className="flex items-center gap-3">
-                <span className="hidden size-9 shrink-0 items-center justify-center rounded-full bg-foreground/5 text-muted-foreground sm:flex">
-                  <Icon name={row.icon} className="size-4" />
+          <span aria-hidden="true" className="text-primary dark:text-[#c3caff]">
+            {arrow}
+          </span>
+          <span className="sr-only">to</span>
+          <span className="text-foreground">{to}</span>
+        </p>
+        <ul data-reveal="children" className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item) => (
+            <li key={item.from} className="group flex flex-col gap-5 bg-card p-6 sm:p-8">
+              <p className="flex items-center gap-2.5 text-sm text-muted-foreground">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-foreground/5">
+                  <Icon name={item.icon} className="size-4" />
                 </span>
-                <span className="text-sm sm:text-base">{row.from}</span>
-              </span>
-              <span aria-hidden="true" className="flex items-center text-primary dark:text-[#c3caff]">
-                <span className="reveal-wipe h-px flex-1 border-t border-dashed border-current" />
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="-ml-1 size-4">
-                  <path d="m9 6 6 6-6 6" />
-                </svg>
-              </span>
-              <span className="sr-only">moves to</span>
-              <span className="justify-self-start rounded-[0.875rem] bg-primary/10 px-3 py-1 text-sm sm:rounded-full text-primary sm:text-base dark:bg-primary/25 dark:text-foreground">
-                {row.to}
-              </span>
+                {item.from}
+                <span aria-hidden="true" className="ml-auto text-primary/60 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-[#c3caff]/60">
+                  {arrow}
+                </span>
+              </p>
+              <div className="flex flex-col gap-2">
+                <h3 className="text-xl tracking-tight text-pretty">
+                  <span className="sr-only">Becomes </span>
+                  {item.to}
+                </h3>
+                <p className="text-sm text-pretty text-muted-foreground">{item.text}</p>
+              </div>
+              <p className="mt-auto flex items-center gap-2 border-t border-dashed border-border pt-4 font-mono text-xs text-primary dark:text-[#c3caff]">
+                <span aria-hidden="true" className="reveal-pop flex size-4 items-center justify-center rounded-full bg-primary/15 dark:bg-primary/30">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="size-2.5">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                </span>
+                <span className="sr-only">Checked: </span>
+                {item.check}
+              </p>
             </li>
           ))}
         </ul>
