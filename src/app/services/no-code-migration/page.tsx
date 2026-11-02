@@ -11,7 +11,7 @@ import type { IconName } from "@/components/landing/icons"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/components/landing/process-section"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
-import { FitSection, MappingSection, PillsSection } from "@/components/landing/service-sections"
+import { FitCheckSection, MappingSection, PillsSection } from "@/components/landing/service-sections"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -83,26 +83,22 @@ const migrationCalendar: ProcessCalendar = [
   },
 ]
 
-const fit = {
-  good: {
-    title: "Migrate if",
-    items: [
-      "Fees rise faster than revenue",
-      "The builder blocks your roadmap",
-      "Investors need you to own the code",
-      "Users notice it slowing down",
-      "You are about to hire developers",
-    ],
-  },
-  bad: {
-    title: "Stay put if",
-    items: [
-      "It works and the costs are fine",
-      "Nothing on the roadmap is blocked",
-      "You still change it every few days",
-      "It is an internal tool for a few people",
-    ],
-  },
+// The self-check in the fit section. The ones in fitInitial start ticked. A low
+// score is its own answer, so the verdicts say when to stay put.
+const fitChecks = [
+  "Fees rise faster than revenue",
+  "The builder blocks your roadmap",
+  "Investors need you to own the code",
+  "Users notice it slowing down",
+  "You are about to hire developers",
+]
+const fitInitial = [0, 1, 3]
+const fitVerdicts = {
+  none: "Tick the ones that are true.",
+  all: "Time to move. Book the audit.",
+  strong: "Worth moving. Book the audit.",
+  half: "Close. The audit will settle it.",
+  few: "Probably stay put for now.",
 }
 
 const comparison: ComparisonRow[] = [
@@ -320,13 +316,15 @@ export default function NoCodeMigrationPage() {
         note={`An example schedule for a migration on the ${calendarPackage.name} package. Larger apps take the Extended MVP, which adds a second week of development.`}
       />
 
-      <FitSection
+      <FitCheckSection
         id="fit"
         eyebrow="Migrate or stay"
         title="Should you migrate at all?"
-        intro="Not every app should move. Sometimes the answer is to stay where you are."
-        good={fit.good}
-        bad={fit.bad}
+        intro="Not every app should move. If it works, the costs are fine and nothing is blocked, stay where you are."
+        items={fitChecks}
+        initial={fitInitial}
+        cta={{ label: "Book a free app audit call", href: "#contact" }}
+        verdicts={fitVerdicts}
       />
 
       <StackSection

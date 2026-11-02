@@ -6,13 +6,35 @@ import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
 
+/** The line under the score at each band of ticks. */
+export type FitVerdicts = {
+  /** Nothing ticked. */
+  none: string
+  /** Every statement ticked. */
+  all: string
+  /** All but one ticked. */
+  strong: string
+  /** At least half ticked. */
+  half: string
+  /** Fewer than half ticked. */
+  few: string
+}
+
+export const defaultVerdicts: FitVerdicts = {
+  none: "Tick the ones that are true.",
+  all: "A strong fit. Book the call.",
+  strong: "A strong fit. Worth a call.",
+  half: "Close. The call will settle the rest.",
+  few: "A couple to talk through on the call.",
+}
+
 /** The line under the score, from the share of statements ticked. */
-function verdict(count: number, total: number) {
-  if (count === 0) return "Tick the ones that are true."
-  if (count === total) return "A strong fit. Book the call."
-  if (count >= total - 1) return "A strong fit. Worth a call."
-  if (count * 2 >= total) return "Close. The call will settle the rest."
-  return "A couple to talk through on the call."
+function verdict(count: number, total: number, verdicts: FitVerdicts) {
+  if (count === 0) return verdicts.none
+  if (count === total) return verdicts.all
+  if (count >= total - 1) return verdicts.strong
+  if (count * 2 >= total) return verdicts.half
+  return verdicts.few
 }
 
 /**
@@ -25,11 +47,13 @@ export function FitCheck({
   items,
   initial,
   cta,
+  verdicts = defaultVerdicts,
 }: {
   items: string[]
   /** Which statements start ticked, by index. */
   initial: number[]
   cta: { label: string; href: string }
+  verdicts?: FitVerdicts
 }) {
   const [checked, setChecked] = useState(() => items.map((_, i) => initial.includes(i)))
   const count = checked.filter(Boolean).length
@@ -86,7 +110,7 @@ export function FitCheck({
         </div>
         <div className="flex flex-col items-start gap-5">
           <p aria-live="polite" className="text-2xl tracking-tight text-pretty">
-            {verdict(count, total)}
+            {verdict(count, total, verdicts)}
           </p>
           <div
             inert={!strong}
