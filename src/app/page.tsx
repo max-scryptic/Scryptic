@@ -5,7 +5,7 @@ import { AboutSection } from "@/components/landing/about-section"
 import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection } from "@/components/landing/faq-section"
-import { LandingHero } from "@/components/landing/hero"
+import { LandingHero, TerminalCard } from "@/components/landing/hero"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
@@ -121,7 +121,7 @@ export default function Home() {
         }
         intro={`${siteConfig.name} is an MVP and app development studio in Brighton, building web apps and SaaS products for UK founders.`}
         secondary={{ label: "See pricing", href: "/#pricing" }}
-        terminal={terminalLines}
+        visual={<TerminalCard lines={terminalLines} />}
       />
       <div aria-hidden="true" className="rail-joint" />
 

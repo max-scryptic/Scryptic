@@ -4,12 +4,14 @@ import { PageJsonLd } from "@/components/json-ld"
 import { ComparisonSection, type ComparisonRow } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
-import { FeatureGridSection, FitSection } from "@/components/landing/feature-grid-section"
 import { GuidesSection } from "@/components/landing/guides-section"
 import { LandingHero } from "@/components/landing/hero"
+import { MigrationVisual } from "@/components/landing/hero-visuals"
+import type { IconName } from "@/components/landing/icons"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/components/landing/process-section"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { FitSection, MappingSection, PillsSection } from "@/components/landing/service-sections"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -25,70 +27,24 @@ const page = pages.noCodeMigration
 
 export const metadata = createMetadata(page)
 
-const terminalLines = [
-  { prompt: true, text: "scryptic audit --from bubble" },
-  { prompt: false, text: "data, users and workflows mapped" },
-  { prompt: false, text: "keep, rebuild or drop agreed" },
-  { prompt: true, text: "scryptic migrate --rehearse" },
-  { prompt: false, text: "data imported and checked" },
-  { prompt: false, text: "redirects in place" },
-  { prompt: true, text: "scryptic cutover" },
-  { prompt: false, text: "users invited to the new app" },
-]
-
 const signs = [
-  {
-    name: "Platform bills that grow with you",
-    text: "Pricing by workload units, records or seats means every new customer costs more to serve, on a price list you do not control.",
-  },
-  {
-    name: "An app that slows as data grows",
-    text: "Pages and workflows that were instant with a hundred records lag with thousands, and the platform's limits decide what you can do about it.",
-  },
-  {
-    name: "A feature the builder cannot do",
-    text: "The roadmap needs an integration, a background job or an interface the tool does not support, and the workarounds are piling up.",
-  },
-  {
-    name: "Questions about who owns it",
-    text: "Investors, buyers or enterprise customers ask about intellectual property, security or lock-in, and the honest answer is the platform.",
-  },
-  {
-    name: "Developers who will not touch it",
-    text: "Hiring for a niche builder is hard. Experienced developers want a codebase they can version, test and review.",
-  },
-  {
-    name: "An AI-built app that is not ready",
-    text: "A Lovable, Bolt.new or Replit app that worked as a demo needs security, tests and reliable deploys before real customers arrive.",
-  },
-]
+  { icon: "pound", text: "Bills climb with every user" },
+  { icon: "slow", text: "Pages slow as data grows" },
+  { icon: "block", text: "A feature the builder cannot do" },
+  { icon: "key", text: "Investors ask who owns the code" },
+  { icon: "person", text: "Developers will not touch it" },
+  { icon: "spark", text: "An AI-built app that is not production ready" },
+] satisfies { icon: IconName; text: string }[]
 
+// Where each part of the app ends up. Payments only stay put when they already run through Stripe.
 const movesAcross = [
-  {
-    name: "Your data",
-    text: "Every table mapped to a Postgres schema, imported in rehearsals before the real move, then checked with counts and spot checks.",
-  },
-  {
-    name: "Users and accounts",
-    text: "Accounts, profiles and permissions come across. Most builders cannot export passwords, so users get a reset or one-time sign-in link at launch.",
-  },
-  {
-    name: "Files and uploads",
-    text: "Images, documents and other uploads copied to storage in your name, with links in the data updated to match.",
-  },
-  {
-    name: "Workflows and logic",
-    text: "Visual workflows, formulas and automations rebuilt as tested code, so behaviour your users rely on carries on working.",
-  },
-  {
-    name: "Payments",
-    text: "If you take payments through Stripe, customers and subscriptions stay in your Stripe account and connect to the new app.",
-  },
-  {
-    name: "URLs and search rankings",
-    text: "Every old URL keeps its address or permanently redirects to its closest new page, so search traffic follows the move.",
-  },
-]
+  { icon: "database", from: "Data tables", to: "Postgres, fully checked" },
+  { icon: "users", from: "Users and roles", to: "Accounts, with a reset link" },
+  { icon: "file", from: "Files and uploads", to: "Storage in your name" },
+  { icon: "flow", from: "Workflows", to: "Tested code" },
+  { icon: "card", from: "Stripe customers", to: "The same Stripe account" },
+  { icon: "link", from: "Page URLs", to: "Permanent redirects" },
+] satisfies { icon: IconName; from: string; to: string }[]
 
 // The same sprint as an MVP build, with an audit before it and the cutover at the end.
 const migrationCalendar: ProcessCalendar = [
@@ -131,20 +87,20 @@ const fit = {
   good: {
     title: "Migrate if",
     items: [
-      "Platform fees are rising faster than revenue",
-      "Your roadmap is blocked by what the builder can do",
-      "Investors or customers need you to own the code",
-      "Users notice the app slowing down",
+      "Fees rise faster than revenue",
+      "The builder blocks your roadmap",
+      "Investors need you to own the code",
+      "Users notice it slowing down",
       "You are about to hire developers",
     ],
   },
   bad: {
     title: "Stay put if",
     items: [
-      "The app does its job and the costs are fine",
-      "Nothing on your roadmap is blocked",
-      "You are still changing the product every few days to find fit",
-      "It is an internal tool used by a handful of people",
+      "It works and the costs are fine",
+      "Nothing on the roadmap is blocked",
+      "You still change it every few days",
+      "It is an internal tool for a few people",
     ],
   },
 }
@@ -246,8 +202,7 @@ function ToolsSection() {
   return (
     <LandingSection id="tools" labelledBy="tools-heading">
       <SectionHeading className={inset} eyebrow="Where from" title="Apps we migrate" id="tools-heading">
-        We move apps off {migrationGuides.length} builders and platforms. Each one has a free, step by
-        step migration guide covering what you can export and what has to be rebuilt.
+        {migrationGuides.length} builders and platforms, each with a free step by step migration guide.
       </SectionHeading>
       <div className="corners guides border border-border bg-card">
         {postCategories.map((category) => {
@@ -319,42 +274,48 @@ export default function NoCodeMigrationPage() {
         eyebrow={{ label: "Services", href: pages.services.path }}
         title={
           <>
-            From <span className="text-[#c3caff]">no-code</span> to code you own, without losing a
-            user.
+            <span className="text-[#c3caff]">No-code app migration</span>, without losing a user.
           </>
         }
-        intro={`${siteConfig.name} migrates apps built with Bubble, Lovable, Adalo, Glide, Airtable and other builders to a production stack you own, with your data and users brought across.`}
+        intro={`${siteConfig.name} moves Bubble, Lovable, Glide and Airtable apps to code you own, with your users and data brought across.`}
         secondary={{ label: "See pricing", href: "#pricing" }}
-        terminal={terminalLines}
+        visual={<MigrationVisual />}
+        shape="migrate"
       />
       <div aria-hidden="true" className="rail-joint" />
 
-      <FeatureGridSection
+      <PillsSection
         id="signs"
         eyebrow="When to move"
         title="Signs your app has outgrown its builder"
-        intro="No-code and AI app builders are a fast way to a first version. These are the signs it is time to move that version onto code you own."
+        intro="Builders are a fast way to a first version. These are the signs it is time to move on."
         items={signs}
+        footer={{
+          text: "Two or more sound familiar?",
+          link: { label: "Book a free app audit call", href: pages.bookCall.path },
+        }}
       />
 
       <ToolsSection />
 
-      <FeatureGridSection
+      <MappingSection
         id="moves"
         eyebrow="What moves"
         title="Everything comes with you"
-        intro="A migration moves the whole app, not just its screens. These are the parts we plan, move and check before the old app is switched off."
-        items={movesAcross}
+        intro="The whole app moves, not just its screens, and is checked before the old one is switched off."
+        from="In your builder"
+        to="In your code"
+        rows={movesAcross}
       />
 
       <PricingSection
         title="Migrations are priced like an MVP"
-        intro="The same two fixed-price sprints as an MVP build. The audit settles which one fits your app, and the price is agreed before any work starts."
+        intro="The same two fixed-price sprints. The audit settles which one fits."
       />
 
       <ProcessSection
         title="From audit to cutover"
-        intro={`An audit of your app and data, a ${calendarPackage.sprint} with a demo every Friday, then the cutover, handover and a week of support.`}
+        intro={`An audit, a ${calendarPackage.sprint} with Friday demos, then cutover and a week of support.`}
         calendar={migrationCalendar}
         note={`An example schedule for a migration on the ${calendarPackage.name} package. Larger apps take the Extended MVP, which adds a second week of development.`}
       />
@@ -363,7 +324,7 @@ export default function NoCodeMigrationPage() {
         id="fit"
         eyebrow="Migrate or stay"
         title="Should you migrate at all?"
-        intro="Not every app should move. The audit gives a straight answer, and sometimes that answer is to stay where you are."
+        intro="Not every app should move. Sometimes the answer is to stay where you are."
         good={fit.good}
         bad={fit.bad}
       />
@@ -376,18 +337,18 @@ export default function NoCodeMigrationPage() {
 
       <WorkSection
         title="Production apps we have built"
-        intro="Your migrated app is built the same way as the products below, on the same stack. Each case study covers the problem, the product and the engineering."
+        intro="Your migrated app is built the same way, on the same stack, as these."
       />
 
       <ComparisonSection
         title="Who should move your app?"
-        intro={`You could hire a developer, brief an agency, find a freelancer or try an AI tool. ${siteConfig.name} moves your app at a fixed price, with a plan for your data and users.`}
+        intro="A fixed price, with a tested plan for your data and users."
         rows={comparison}
       />
 
       <GuidesSection
         title="More on moving to code"
-        intro="Guides for apps that started somewhere other than a builder, and a quiz for deciding whether to move at all."
+        intro="For apps that started outside a builder, plus a quiz on whether to move."
         posts={guides}
         tools={[freeTool("build-or-no-code")]}
         more={{ label: "All migration guides", href: `${pages.blog.path}#migration` }}
@@ -395,7 +356,7 @@ export default function NoCodeMigrationPage() {
 
       <FaqSection
         faqs={faqs}
-        intro="What founders ask most before moving an app off a no-code or AI builder."
+        intro="What founders ask before moving off a no-code or AI builder."
       />
 
       <ContactSection

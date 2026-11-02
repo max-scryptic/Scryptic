@@ -315,9 +315,19 @@
   .hero-card {
     animation: rise 0.9s var(--ease-out) 350ms backwards;
   }
-  .hero-terminal > p {
+  .hero-terminal > * {
     animation: type-in 0.4s var(--ease-out) backwards;
     animation-delay: calc(800ms + var(--i, 0) * 180ms);
+  }
+  /* Service hero cards (components/landing/hero-visuals.tsx): bars and
+     connectors fill in once the card has landed, and the migration card's
+     source tile cycles through builders, each shown for a quarter of the loop
+     (negative delays start each one at its turn). */
+  .hero-wipe {
+    animation: wipe 1.1s var(--ease-out) 1.4s backwards;
+  }
+  .hero-cycle {
+    animation: cycle 8s ease-in-out infinite;
   }
 
   /* Scroll reveals (components/scroll-reveal.tsx). data-reveal fades the
@@ -390,6 +400,20 @@
   from {
     opacity: 0;
     transform: translateY(24px) scale(0.96);
+  }
+}
+
+@keyframes cycle {
+  0%,
+  22% {
+    opacity: 1;
+  }
+  25%,
+  97% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
