@@ -23,7 +23,7 @@ const middleRows = [
   { width: "88%", shift: 0 },
   { width: "92%", shift: 1 },
   { width: "80%", shift: 0.12 },
-  { width: "86%", shift: 0.88 },
+  { width: "86%", shift: 0.6 },
 ]
 
 function rowLayout(index: number, count: number) {
