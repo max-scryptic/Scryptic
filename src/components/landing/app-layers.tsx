@@ -30,7 +30,7 @@ export type AppLayer = {
  * same heights, as percentages of the drawing.
  */
 
-const W = 420 // drawing width; leader lines run to the right edge
+const W = 390 // drawing width, with room for the active layer to slide right
 const CX = 200
 const HALF_W = 165
 const HALF_H = 60
@@ -157,29 +157,6 @@ function Slabs({
                 )}
               />
             </g>
-            {/* Leader to the label. */}
-            <line
-              x1={CX + HALF_W + 8}
-              y1={cy}
-              x2={W}
-              y2={cy}
-              strokeDasharray={on ? undefined : "3 4"}
-              className={cn(
-                "transition-[stroke,opacity] duration-500",
-                on ? "stroke-[#c3caff]" : "stroke-border",
-                spread ? "opacity-100" : "opacity-0",
-              )}
-            />
-            <circle
-              cx={CX + HALF_W + 4}
-              cy={cy}
-              r={on ? 4 : 3}
-              className={cn(
-                "transition-[opacity,r] duration-500",
-                layer.ghost ? "fill-muted-foreground" : "fill-[#c3caff]",
-                spread ? "opacity-100" : "opacity-0",
-              )}
-            />
           </g>
         )
       })}
