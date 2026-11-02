@@ -47,18 +47,24 @@ export function LandingHero({
       />
       <div className="hero-recede mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
         <div className={cn("hero-rise flex flex-col items-start gap-7", inset)}>
-          {eyebrow &&
-            (eyebrow.href ? (
-              <Link
-                href={eyebrow.href}
-                className="-mb-2 font-mono text-xs tracking-widest text-[#c3caff] uppercase hover:text-white"
-              >
-                {eyebrow.label}
-              </Link>
-            ) : (
-              <p className="-mb-2 font-mono text-xs tracking-widest text-[#c3caff] uppercase">{eyebrow.label}</p>
-            ))}
-          <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">{title}</h1>
+          {/* The eyebrow hangs in the band's top padding, out of the flow, so a
+              hero with one is exactly as tall as the home page's without. */}
+          <div className="relative">
+            {eyebrow &&
+              (eyebrow.href ? (
+                <Link
+                  href={eyebrow.href}
+                  className="absolute bottom-full left-0 mb-5 font-mono text-xs tracking-widest text-[#c3caff] uppercase hover:text-white"
+                >
+                  {eyebrow.label}
+                </Link>
+              ) : (
+                <p className="absolute bottom-full left-0 mb-5 font-mono text-xs tracking-widest text-[#c3caff] uppercase">
+                  {eyebrow.label}
+                </p>
+              ))}
+            <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">{title}</h1>
+          </div>
           <p className="max-w-xl text-lg text-pretty text-white/80">{intro}</p>
           <div className="flex flex-wrap gap-3">
             <Button
