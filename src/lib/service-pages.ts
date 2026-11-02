@@ -54,7 +54,7 @@ export const servicePages: ServicePage[] = [
     id: "no-code-migration",
     page: pages.noCodeMigration,
     name: "No-code app migration",
-    tagline: "From Bubble or Lovable to code you own",
+    tagline: "Off any app builder, onto code you own",
     summary:
       "Your Bubble, Lovable, Adalo, Glide or Airtable app moved to a production stack you own, with your data and users brought across.",
     points: [
