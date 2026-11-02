@@ -20,6 +20,7 @@ import {
 } from "@/lib/blog"
 import { inset } from "@/lib/frame"
 import { blogPostPage, createMetadata, pages } from "@/lib/seo"
+import { serviceForSeries } from "@/lib/service-pages"
 import { absoluteUrl } from "@/lib/site"
 import { articleJsonLd, faqJsonLd } from "@/lib/structured-data"
 import { founder } from "@/lib/team"
@@ -216,6 +217,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
 
   const page = blogPostPage(post)
   const series = getSeries(post.series)
+  const service = serviceForSeries(post.series)
   const published = formatPostDate(post.datePublished)
   const faqHeadingId = "faq-heading"
   const faqHeading = post.faqHeading ?? "Frequently asked questions"
@@ -406,6 +408,11 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               >
                 Book a discovery call
               </Button>
+              {service && (
+                <Link href={service.page.path} className="text-sm text-white/80 underline-offset-4 hover:text-white hover:underline">
+                  {service.learnMore}
+                </Link>
+              )}
             </div>
           </div>
 

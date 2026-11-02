@@ -7,6 +7,7 @@ import { postSeries } from "@/lib/blog"
 import { inset } from "@/lib/frame"
 import { freeTools } from "@/lib/free-tools"
 import { pages } from "@/lib/seo"
+import { servicePages } from "@/lib/service-pages"
 import { siteConfig } from "@/lib/site"
 import { caseStudies } from "@/lib/work"
 
@@ -18,6 +19,11 @@ const homeLinks = [
   { name: `Why ${siteConfig.name}`, href: "/#compare" },
   { name: "About", href: "/#about" },
   { name: "FAQ", href: "/#faq" },
+]
+
+const serviceLinks = [
+  ...servicePages.map((service) => ({ name: service.name, href: service.page.path })),
+  { name: "All services", href: pages.services.path },
 ]
 
 const workLinks = [
@@ -70,8 +76,8 @@ export function SiteFooter() {
     <footer className="border-t border-border">
       {/* The page's guide lines end on this rule; the columns sit in from them like the copy above. */}
       <div className="px-4 sm:px-6">
-        <div className={cn("mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-10 py-12 sm:grid-cols-4 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr]", inset)}>
-          <div className="col-span-2 flex flex-col gap-3 sm:col-span-4 lg:col-span-1">
+        <div className={cn("mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-10 py-12 sm:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr_1fr]", inset)}>
+          <div className="col-span-2 flex flex-col gap-3 sm:col-span-3 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 font-logo text-lg font-extrabold tracking-tight lowercase">
               <BrandLogo className="size-6" />
               {siteConfig.name}
@@ -87,6 +93,7 @@ export function SiteFooter() {
             </a>
           </div>
           <FooterColumn title={siteConfig.name} links={homeLinks} />
+          <FooterColumn title="Services" links={serviceLinks} />
           <FooterColumn title="Case studies" links={workLinks} />
           <FooterColumn title="Free tools" links={toolLinks} />
           <FooterColumn title="Blog" links={blogLinks} />

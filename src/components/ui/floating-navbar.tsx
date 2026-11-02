@@ -24,6 +24,12 @@ export type FloatingNavItem = {
    * widest phones, and the rest are Tailwind's.
    */
   hideBelow?: "xs" | "sm" | "md" | "lg"
+  /**
+   * Pages under this one, shown in a menu that opens on hover or keyboard
+   * focus on wide screens. The item itself stays a link to an index of the
+   * same pages, which is all narrow screens and touch get.
+   */
+  children?: { name: string; link: string; description?: string }[]
 }
 
 // Literal class names, so Tailwind can see them.
@@ -57,14 +63,70 @@ export function FloatingNav({
       <nav aria-label="Main" className="flex items-center">
         <ul className="flex items-center md:gap-1">
           {navItems.map((item) => (
-            <li key={item.link} className={cn(item.hideBelow && hideBelowClass[item.hideBelow])}>
-              <FloatingNavLink href={item.link}>{item.name}</FloatingNavLink>
+            <li
+              key={item.link}
+              className={cn(item.hideBelow && hideBelowClass[item.hideBelow], item.children && "group/menu relative")}
+            >
+              <FloatingNavLink href={item.link}>
+                {item.name}
+                {item.children && <ChevronIcon />}
+              </FloatingNavLink>
+              {item.children && <NavMenu items={item.children} label={item.name} />}
             </li>
           ))}
         </ul>
       </nav>
       <div className="flex items-center gap-0.5 justify-self-end min-[360px]:gap-1 sm:gap-2">{action}</div>
     </header>
+  )
+}
+
+function ChevronIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className="ml-1 hidden size-3.5 transition-transform group-hover/menu:rotate-180 group-focus-within/menu:rotate-180 md:block"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  )
+}
+
+/*
+ * The dropdown under a nav item with children. Pure CSS: it shows while the
+ * pointer is over the item or focus is inside it, so tabbing onto the item
+ * opens it and tabbing on walks through its links. Below md it is never
+ * shown, and the item's own link leads to the index page instead. The top
+ * padding is a hover bridge between the item and the panel.
+ */
+function NavMenu({ items, label }: { items: NonNullable<FloatingNavItem["children"]>; label: string }) {
+  return (
+    <div className="invisible absolute top-full left-1/2 z-50 hidden w-80 -translate-x-1/2 pt-5 opacity-0 transition-opacity duration-150 group-focus-within/menu:visible group-focus-within/menu:opacity-100 group-hover/menu:visible group-hover/menu:opacity-100 md:block">
+      <ul
+        aria-label={label}
+        className="corners flex flex-col border border-border bg-card p-2 shadow-[0_16px_40px_-16px_rgb(0_0_0/0.3)] [--corner:var(--foreground)]"
+      >
+        {items.map((child) => (
+          <li key={child.link}>
+            <Link
+              href={child.link}
+              className="flex flex-col gap-0.5 px-3 py-2.5 transition-colors hover:bg-foreground/5 focus-visible:bg-foreground/5"
+            >
+              <span className="font-medium text-foreground">{child.name}</span>
+              {child.description && (
+                <span className="text-sm text-pretty text-muted-foreground">{child.description}</span>
+              )}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 

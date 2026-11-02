@@ -185,6 +185,15 @@ export function getPost(slug: string) {
   return posts.find((post) => post.slug === slug)
 }
 
+/** Posts by slug, in the order given. A slug with no post throws, so a typo fails the build. */
+export function postsBySlug(slugs: string[]) {
+  return slugs.map((slug) => {
+    const post = getPost(slug)
+    if (!post) throw new Error(`No blog post with the slug "${slug}"`)
+    return post
+  })
+}
+
 export function getSeries(id: PostSeriesId) {
   return postSeries.find((series) => series.id === id)!
 }

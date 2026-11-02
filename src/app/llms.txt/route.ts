@@ -1,5 +1,6 @@
 import { postSeries, postsInSeries } from "@/lib/blog"
 import { blogPostPage, blogPostPages, publicPages, toolPages, type PageEntry } from "@/lib/seo"
+import { servicePages } from "@/lib/service-pages"
 import { absoluteUrl, siteConfig } from "@/lib/site"
 
 /*
@@ -17,7 +18,10 @@ const link = (page: PageEntry) =>
 export function GET() {
   const guides = blogPostPages.filter((page) => !page.noIndex)
   const tools = toolPages.filter((page) => !page.noIndex)
-  const otherPages = publicPages.filter((page) => !guides.includes(page) && !tools.includes(page))
+  const services = servicePages.map((service) => service.page).filter((page) => !page.noIndex)
+  const otherPages = publicPages.filter(
+    (page) => !guides.includes(page) && !tools.includes(page) && !services.includes(page),
+  )
 
   const lines = [
     `# ${siteConfig.name}`,
@@ -28,6 +32,12 @@ export function GET() {
     "## Pages",
     "",
     ...otherPages.map(link),
+    "",
+    "## Services",
+    "",
+    "Both services are sold as the same fixed-price 2 or 3 week sprints.",
+    "",
+    ...services.map(link),
     "",
     "## Free tools",
     "",

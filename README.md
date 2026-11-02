@@ -26,8 +26,8 @@ Open [http://localhost:3000](http://localhost:3000).
 src/
   app/                  Routes: / (landing page), /book-a-call (qualifying questions, then the booking link),
                         /work and /work/[slug] (case studies), /blog and /blog/[slug] (migration guides),
-                        /tools and /tools/<slug> (free tools), /api/site-check (the server side of the SEO
-                        and Agent Readiness checks)
+                        /tools and /tools/<slug> (free tools), /services and /services/<slug> (one landing page
+                        per service), /api/site-check (the server side of the SEO and Agent Readiness checks)
     globals.css         Theme tokens (light) and Tailwind setup
     robots.ts           robots.txt, sitemap.xml, manifest, llms.txt, icons and the
     sitemap.ts            Open Graph image are all generated from src/lib (see
@@ -37,7 +37,11 @@ src/
     not-found.tsx       Branded 404 (replaces Next's default and its "404: ..." title)
   components/
     ui/                 Generic widgets built on @base-ui/react (Button, Card, Field, Input, Label, Separator),
-                        plus floating-navbar.tsx, a port of Aceternity UI's Floating Navbar (uses motion)
+                        plus floating-navbar.tsx, a port of Aceternity UI's Floating Navbar (uses motion), with
+                        an optional hover and focus menu per item
+    landing/            The landing page sections (hero, pricing, process, stack, work, comparison, about,
+                        FAQ, contact, feature grid, fit, guides). The home page and every service page are
+                        built from these, so they look the same; each page passes its own copy
     site-header.tsx     Nav items and call to action for the floating navbar
     site-footer.tsx
     book-call-form.tsx  The qualifying form on /book-a-call
@@ -54,6 +58,8 @@ src/
     em-dash-guard.tsx   Dev guard against em dashes in rendered text
   lib/
     site.ts             Brand facts, contact email and booking link, site URL, indexability
+    service-pages.ts    The services with a page under /services: the nav menu, footer, hub cards and
+                        which blog series point to each
     services.ts         The service offer: card, price and Service JSON-LD, and the weekly rate the
                         MVP Cost Calculator and Scope Planner price with
     booking.ts          /book-a-call questions, and how answers reach the booking link or email
