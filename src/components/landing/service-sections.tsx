@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { cn } from "cn"
 
+import { FitCheck } from "@/components/landing/fit-check"
 import { Icon, type IconName } from "@/components/landing/icons"
 import { LaunchKitHub, type HubItem } from "@/components/landing/launch-kit-hub"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
@@ -149,6 +150,40 @@ export function MappingSection({
           ))}
         </ul>
       </div>
+    </LandingSection>
+  )
+}
+
+/**
+ * A self-check: statements a visitor ticks beside a panel that scores them,
+ * with a button to the contact section once most are ticked (see FitCheck).
+ * For a fit that is mostly yes. When the "no" side matters as much, as in
+ * whether to migrate at all, use FitSection instead.
+ */
+export function FitCheckSection({
+  id,
+  eyebrow,
+  title,
+  intro,
+  items,
+  initial = [],
+  cta = { label: "Book a discovery call", href: "#contact" },
+}: {
+  id: string
+  eyebrow: string
+  title: string
+  intro: React.ReactNode
+  items: string[]
+  /** Which statements start ticked, by index. */
+  initial?: number[]
+  cta?: { label: string; href: string }
+}) {
+  return (
+    <LandingSection id={id} labelledBy={`${id}-heading`}>
+      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`}>
+        {intro}
+      </SectionHeading>
+      <FitCheck items={items} initial={initial} cta={cta} />
     </LandingSection>
   )
 }
