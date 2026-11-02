@@ -11,7 +11,7 @@ import type { IconName } from "@/components/landing/icons"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/components/landing/process-section"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
-import { FitCheckSection, MappingSection, PillsSection } from "@/components/landing/service-sections"
+import { FitCheckSection, MappingSection } from "@/components/landing/service-sections"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -26,15 +26,6 @@ import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 const page = pages.noCodeMigration
 
 export const metadata = createMetadata(page)
-
-const signs = [
-  { icon: "pound", text: "Bills climb with every user" },
-  { icon: "slow", text: "Pages slow as data grows" },
-  { icon: "block", text: "A feature the builder cannot do" },
-  { icon: "key", text: "Investors ask who owns the code" },
-  { icon: "person", text: "Developers will not touch it" },
-  { icon: "spark", text: "An AI-built app that is not production ready" },
-] satisfies { icon: IconName; text: string }[]
 
 // Where each part of the app ends up. Payments only stay put when they already run through Stripe.
 const movesAcross = [
@@ -279,18 +270,6 @@ export default function NoCodeMigrationPage() {
         shape="migrate"
       />
       <div aria-hidden="true" className="rail-joint" />
-
-      <PillsSection
-        id="signs"
-        eyebrow="When to move"
-        title="Signs your app has outgrown its builder"
-        intro="Builders are a fast way to a first version. These are the signs it is time to move on."
-        items={signs}
-        footer={{
-          text: "Two or more sound familiar?",
-          link: { label: "Book a free app audit call", href: pages.bookCall.path },
-        }}
-      />
 
       <ToolsSection />
 

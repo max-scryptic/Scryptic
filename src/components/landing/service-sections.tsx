@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { cn } from "cn"
 
 import { FitCheck, type FitVerdicts } from "@/components/landing/fit-check"
@@ -9,8 +8,8 @@ import { inset } from "@/lib/frame"
 
 /*
  * Sections only the service pages use. Each has its own shape, so a page is
- * not a run of identical boxes: a hub, pill tags, a from-to map and a
- * scored self-check. Keep the copy in them short: a label and a few words.
+ * not a run of identical boxes: a hub, a from-to map and a scored
+ * self-check. Keep the copy in them short: a label and a few words.
  */
 
 /**
@@ -42,54 +41,6 @@ export function HubSection({
         {intro}
       </SectionHeading>
       <LaunchKitHub items={items} />
-    </LandingSection>
-  )
-}
-
-/** Short statements as rounded tags with icons, closed by a line that points to the next step. */
-export function PillsSection({
-  id,
-  eyebrow,
-  title,
-  intro,
-  items,
-  footer,
-}: {
-  id: string
-  eyebrow: string
-  title: string
-  intro: React.ReactNode
-  items: { icon: IconName; text: string }[]
-  footer?: { text: string; link: { label: string; href: string } }
-}) {
-  return (
-    <LandingSection id={id} labelledBy={`${id}-heading`}>
-      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`}>
-        {intro}
-      </SectionHeading>
-      <div className="corners guides flex flex-col gap-8 border border-border bg-card p-6 sm:p-10">
-        <ul data-reveal="children" className="flex flex-wrap gap-3">
-          {items.map((item) => (
-            <li
-              key={item.text}
-              className="flex items-center gap-2.5 rounded-full border border-border bg-background py-2 pr-4 pl-2 sm:text-lg"
-            >
-              <span className="flex size-8 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/25 dark:text-foreground">
-                <Icon name={item.icon} className="size-4" />
-              </span>
-              {item.text}
-            </li>
-          ))}
-        </ul>
-        {footer && (
-          <p className="border-t border-border pt-6 text-pretty text-muted-foreground">
-            {footer.text}{" "}
-            <Link href={footer.link.href} className="text-primary hover:underline">
-              {footer.link.label}
-            </Link>
-          </p>
-        )}
-      </div>
     </LandingSection>
   )
 }
