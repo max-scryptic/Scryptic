@@ -80,10 +80,20 @@ const paths = {
       <path d="M4 21c.8-4 4-6.5 8-6.5s7.2 2.5 8 6.5" />
     </>
   ),
+  screen: <path d="M3 4h18v12H3zM8 20h8M12 16v4" />,
   spark: <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6" />,
 } as const
 
 export type IconName = keyof typeof paths
+
+/** An icon's strokes on their own, for drawing inside another SVG on a 24 by 24 grid. */
+export function IconStrokes({ name, className }: { name: IconName; className?: string }) {
+  return (
+    <g fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      {paths[name]}
+    </g>
+  )
+}
 
 export function Icon({ name, className }: { name: IconName; className?: string }) {
   return (

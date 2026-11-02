@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { PageJsonLd } from "@/components/json-ld"
+import type { AppLayer } from "@/components/landing/app-layers"
 import { ComparisonSection, type ComparisonRow } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
@@ -11,7 +12,7 @@ import type { IconName } from "@/components/landing/icons"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/components/landing/process-section"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
-import { FitSection, MappingSection, PillsSection, type MappingItem } from "@/components/landing/service-sections"
+import { FitSection, LayersSection, PillsSection } from "@/components/landing/service-sections"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -36,50 +37,15 @@ const signs = [
   { icon: "spark", text: "An AI-built app that is not production ready" },
 ] satisfies { icon: IconName; text: string }[]
 
-// Where each part of the app ends up. Payments only stay put when they already run through Stripe.
-const movesAcross: MappingItem[] = [
-  {
-    icon: "database",
-    from: "Data tables",
-    to: "A Postgres database",
-    text: "Every table mapped and imported in rehearsals before the real move.",
-    check: "Row counts match",
-  },
-  {
-    icon: "users",
-    from: "Users and roles",
-    to: "The same accounts",
-    text: "Nobody signs up again. A reset link replaces the old password at launch.",
-    check: "Every role tested",
-  },
-  {
-    icon: "file",
-    from: "Files and uploads",
-    to: "Storage in your name",
-    text: "Images and documents copied across, with every link to them updated.",
-    check: "Every file accounted for",
-  },
-  {
-    icon: "flow",
-    from: "Workflows",
-    to: "Tested code",
-    text: "Builder logic rewritten as plain code that runs the same way every time.",
-    check: "Tests pass",
-  },
-  {
-    icon: "card",
-    from: "Stripe customers",
-    to: "The same Stripe account",
-    text: "Customers and subscriptions stay put, so nobody enters a card again.",
-    check: "Every customer linked",
-  },
-  {
-    icon: "link",
-    from: "Page URLs",
-    to: "Permanent redirects",
-    text: "Each old address points to its new page, so links and rankings carry over.",
-    check: "Every URL mapped",
-  },
+// The app as layers, top to bottom, and where each ends up. Payments only stay put when they already run through Stripe.
+const layers: AppLayer[] = [
+  { icon: "link", from: "Page URLs", to: "Permanent redirects", check: "Every URL mapped" },
+  { icon: "screen", from: "Screens", to: "Rebuilt to match", check: "Familiar to your users", ghost: true },
+  { icon: "flow", from: "Workflows", to: "Tested code", check: "Tests pass" },
+  { icon: "users", from: "Users and roles", to: "The same accounts", check: "Every role tested" },
+  { icon: "card", from: "Stripe customers", to: "The same Stripe account", check: "Every customer linked" },
+  { icon: "file", from: "Files and uploads", to: "Storage in your name", check: "Every file accounted for" },
+  { icon: "database", from: "Data tables", to: "A Postgres database", check: "Row counts match" },
 ]
 
 // The same sprint as an MVP build, with an audit before it and the cutover at the end.
@@ -334,14 +300,13 @@ export default function NoCodeMigrationPage() {
 
       <ToolsSection />
 
-      <MappingSection
+      <LayersSection
         id="moves"
         eyebrow="What moves"
         title="Everything comes with you"
         intro="The whole app moves, not just its screens, and is checked before the old one is switched off."
-        from="In your builder"
-        to="In your code"
-        items={movesAcross}
+        layers={layers}
+        note="The screens are the part everyone sees, and only one layer of seven. Everything under them moves too."
       />
 
       <PricingSection
