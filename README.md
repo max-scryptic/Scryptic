@@ -40,7 +40,8 @@ src/
                         plus floating-navbar.tsx, a port of Aceternity UI's Floating Navbar (uses motion), with
                         an optional hover and focus menu per item
     landing/            The landing page sections (hero, pricing, process, stack, work, comparison, about,
-                        FAQ, contact, feature grid, fit, guides). The home page and every service page are
+                        FAQ, contact, guides), service-sections.tsx (icon rows, pills, from-to map, fit panel)
+                        and hero-visuals.tsx (each service hero's card). The home page and every service page are
                         built from these, so they look the same; each page passes its own copy
     site-header.tsx     Nav items and call to action for the floating navbar
     site-footer.tsx

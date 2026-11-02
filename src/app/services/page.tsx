@@ -3,6 +3,7 @@ import Link from "next/link"
 import { PageJsonLd } from "@/components/json-ld"
 import { ContactSection } from "@/components/landing/contact-section"
 import { LandingHero } from "@/components/landing/hero"
+import { ServicesVisual } from "@/components/landing/hero-visuals"
 import { CheckIcon, LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { Button } from "@/components/ui/button"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -16,15 +17,6 @@ import { itemListJsonLd } from "@/lib/structured-data"
 const page = pages.services
 
 export const metadata = createMetadata(page)
-
-const terminalLines = [
-  { prompt: true, text: "scryptic services" },
-  { prompt: false, text: "mvp development" },
-  { prompt: false, text: "no-code app migration" },
-  { prompt: true, text: "scryptic price" },
-  { prompt: false, text: "fixed, agreed before the build" },
-  { prompt: false, text: "code and accounts in your name" },
-]
 
 // The cheaper package, quoted as the "from" price on each card.
 const entryPackage = [...services].sort((a, b) => a.amount - b.amount)[0]
@@ -41,9 +33,11 @@ export default function ServicesPage() {
             App development <span className="text-[#c3caff]">services</span> for UK founders.
           </>
         }
-        intro={`${siteConfig.name} builds new products and moves existing ones onto code you own. Both are fixed-price 2 or 3 week sprints, with a demo every Friday.`}
+        eyebrow={{ label: siteConfig.name }}
+        intro="MVP development and no-code app migration, each a fixed-price 2 or 3 week sprint with a demo every Friday."
         secondary={{ label: "Compare services", href: "#services" }}
-        terminal={terminalLines}
+        visual={<ServicesVisual />}
+        shape="services"
       />
       <div aria-hidden="true" className="rail-joint" />
 
