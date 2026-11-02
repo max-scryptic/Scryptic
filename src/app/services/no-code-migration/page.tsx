@@ -279,7 +279,6 @@ export default function NoCodeMigrationPage() {
         title="Everything comes with you"
         intro="The whole app moves, not just its screens, and is checked before the old one is switched off."
         layers={layers}
-        note="The screens are the part everyone sees, and only one layer of seven. Everything under them moves too."
       />
 
       <PricingSection

@@ -48,7 +48,8 @@ export function HubSection({
 /**
  * What an app is made of, as an exploded drawing: each layer labelled with
  * where it goes, lit in turn (see AppLayers). For a move where the screens
- * are only the visible part of what comes across.
+ * are only the visible part of what comes across. A rule runs edge to edge
+ * under it, with joints where it crosses the guides, like the footer's.
  */
 export function LayersSection({
   id,
@@ -56,26 +57,25 @@ export function LayersSection({
   title,
   intro,
   layers,
-  note,
 }: {
   id: string
   eyebrow: string
   title: string
   intro: React.ReactNode
   layers: AppLayer[]
-  /** A short line under the drawing. */
-  note?: React.ReactNode
 }) {
   return (
-    <LandingSection id={id} labelledBy={`${id}-heading`}>
-      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`}>
-        {intro}
-      </SectionHeading>
-      <div className={cn(inset, "flex flex-col gap-6 border-t border-border pt-10")}>
-        <AppLayers layers={layers} />
-        {note && <p className="text-sm text-pretty text-muted-foreground">{note}</p>}
-      </div>
-    </LandingSection>
+    <>
+      <LandingSection id={id} labelledBy={`${id}-heading`}>
+        <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`}>
+          {intro}
+        </SectionHeading>
+        <div className={cn(inset, "border-t border-border pt-10")}>
+          <AppLayers layers={layers} />
+        </div>
+      </LandingSection>
+      <div aria-hidden="true" className="rail-joint border-t border-border" />
+    </>
   )
 }
 

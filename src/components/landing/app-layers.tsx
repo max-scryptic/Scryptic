@@ -222,7 +222,7 @@ export function AppLayers({ layers }: { layers: AppLayer[] }) {
               </span>
               <span
                 className={cn(
-                  "hidden font-mono text-xs text-primary transition-opacity duration-500 sm:block dark:text-[#c3caff]",
+                  "hidden font-mono text-xs text-primary transition-opacity duration-500 sm:block",
                   lit(i) ? "opacity-100" : "opacity-0",
                 )}
               >
