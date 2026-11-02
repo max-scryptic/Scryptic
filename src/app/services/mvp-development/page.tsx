@@ -7,7 +7,7 @@ import { LandingHero } from "@/components/landing/hero"
 import type { IconName } from "@/components/landing/icons"
 import { SprintVisual } from "@/components/landing/hero-visuals"
 import { PricingSection } from "@/components/landing/pricing-section"
-import { FitSection, IconRowsSection } from "@/components/landing/service-sections"
+import { FitCheckSection, IconRowsSection } from "@/components/landing/service-sections"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
@@ -34,27 +34,15 @@ const launchKit = [
   { icon: "globe", name: "Hosting", text: "Your domain, your account", tag: "Vercel" },
 ] satisfies { icon: IconName; name: string; text: string; tag: string }[]
 
-const fit = {
-  good: {
-    title: "A good fit",
-    items: [
-      "You know your customer",
-      "You want paying users, not a demo",
-      "You would rather not hire a team yet",
-      "You can join a call every Friday",
-      "It is a web app or SaaS",
-    ],
-  },
-  bad: {
-    title: "Not a fit",
-    items: [
-      "The idea is still untested",
-      "You need iOS and Android on day one",
-      "The scope cannot be cut to one journey",
-      "You want a retainer before launch",
-    ],
-  },
-}
+// The self-check in the fit section. The ones in fitInitial start ticked.
+const fitChecks = [
+  "You know your customer",
+  "You want paying users, not a demo",
+  "You would rather not hire a team yet",
+  "You can join a call every Friday",
+  "It is a web app or SaaS",
+]
+const fitInitial = [0, 1, 3]
 
 const guides = postsBySlug([
   "how-to-build-an-mvp",
@@ -162,13 +150,13 @@ export default function MvpDevelopmentPage() {
         intro={`Two calls, a ${calendarPackage.sprint} with Friday demos, then a week of support.`}
       />
 
-      <FitSection
+      <FitCheckSection
         id="fit"
         eyebrow="Who it is for"
         title="Is an MVP sprint right for you?"
         intro="If it is the wrong tool for you, we will say so on the call."
-        good={fit.good}
-        bad={fit.bad}
+        items={fitChecks}
+        initial={fitInitial}
       />
 
       <StackSection
