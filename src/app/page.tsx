@@ -135,14 +135,14 @@ export default function Home() {
 
       <ComparisonSection
         title="Hire in-house. Brief an agency. Chance a freelancer. Or skip the trade-offs."
-        intro={`${siteConfig.name} gives you agency-quality software at freelancer speed, with code you own outright. Here is how it compares with the usual ways to get an app built.`}
+        intro={`${siteConfig.name} gives you agency-quality software at freelancer speed, with code you own outright.`}
       />
 
       <AboutSection />
 
       <FaqSection
         faqs={faqs}
-        intro="Straight answers on pricing, timelines, process and what to expect. Anything else, ask on the discovery call."
+        intro="Straight answers on pricing, timelines and process. Anything else, ask on the call."
       />
 
       <ContactSection />
