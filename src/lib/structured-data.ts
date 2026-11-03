@@ -121,16 +121,17 @@ export function webPageJsonLd(page: PageEntry): WebPage {
  */
 export function faqJsonLd(
   page: PageEntry,
-  items: { question: string; answer: string }[],
+  items: { question: string; answer: string; link?: { text: string } }[],
 ): FAQPage {
   return {
     "@type": "FAQPage",
     "@id": `${absoluteUrl(page.path)}#faq`,
     isPartOf: { "@id": ids.webPage(page.path) },
-    mainEntity: items.map(({ question, answer }) => ({
+    mainEntity: items.map(({ question, answer, link }) => ({
       "@type": "Question",
       name: question,
-      acceptedAnswer: { "@type": "Answer", text: answer },
+      // A link shown after the answer is part of what the page shows, so its text is too.
+      acceptedAnswer: { "@type": "Answer", text: link ? `${answer} ${link.text}` : answer },
     })),
   }
 }

@@ -1,9 +1,15 @@
 import { cn } from "cn"
+import Link from "next/link"
 
 import { SectionHeading } from "@/components/landing/section-heading"
 import { inset } from "@/lib/frame"
 
-export type Faq = { question: string; answer: string }
+export type Faq = {
+  question: string
+  answer: string
+  /** A link shown after the answer, like a blog paragraph's. Its text should make sense out of context. */
+  link?: { text: string; href: string }
+}
 
 /**
  * Questions as disclosure rows. Emit faqJsonLd() with exactly the same items:
@@ -28,7 +34,17 @@ export function FaqSection({ faqs, intro }: { faqs: Faq[]; intro: React.ReactNod
                   +
                 </span>
               </summary>
-              <p className="pb-4 text-pretty text-muted-foreground">{faq.answer}</p>
+              <p className="pb-4 text-pretty text-muted-foreground">
+                {faq.answer}
+                {faq.link ? (
+                  <>
+                    {" "}
+                    <Link href={faq.link.href} className="text-primary hover:underline">
+                      {faq.link.text}
+                    </Link>
+                  </>
+                ) : null}
+              </p>
             </details>
           ))}
         </div>

@@ -9,11 +9,11 @@ export const bestSaasDevelopmentCompany: BlogPost = {
   topic: "SaaS agencies",
   icon: "building",
   description:
-    "Compare UK SaaS development companies on price, timeline and ownership, from Bubble studios to fixed-price MVP sprints, and what to check before you sign.",
+    "Compare UK SaaS and MVP development companies on price, timeline and ownership, from Bubble studios to fixed-price sprints, and what to check before you sign.",
   summary:
-    "The best SaaS development company is the one that can ship your next usable release for an agreed price and leave you owning the code and the accounts. Below we compare six UK options, including Goodspeed, Augustova, Neptune Digital and ourselves, on what they build, how they charge and how long an MVP takes, then give you seven checks to run before you sign.",
+    "The best SaaS development company is the one that can ship your next usable release for an agreed price and leave you owning the code and the accounts. Below we compare six UK SaaS and MVP development companies, including Goodspeed, Augustova, Neptune Digital and ourselves, on what they build, how they charge and how long an MVP takes, then give you seven checks to run before you sign.",
   datePublished: "2026-10-22",
-  dateModified: "2026-10-28",
+  dateModified: "2026-11-03",
   facts: [
     { label: "Companies compared", value: "6" },
     { label: "Published MVP prices", value: "From about £8,000 to $50,000+" },
@@ -56,7 +56,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
     },
     {
       id: "uk-companies-compared",
-      heading: "How do UK SaaS development companies compare?",
+      heading: "How do UK SaaS and MVP development companies compare?",
       blocks: [
         {
           type: "paragraph",

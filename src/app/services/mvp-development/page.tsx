@@ -50,7 +50,7 @@ const guides = postsBySlug([
   "mvp-software-development-example",
   "how-much-does-it-cost-to-build-an-app-uk",
   "saas-cost-before-and-after-launch",
-  "web-app-or-mobile-app-first",
+  "best-saas-development-company",
 ])
 
 const tools = [freeTool("mvp-cost-calculator"), freeTool("mvp-scope-planner")]
@@ -83,6 +83,11 @@ const faqs: Faq[] = [
       "No. A prototype shows how a product might work and is usually thrown away. An MVP is a working product that real users sign up to and pay for. It is smaller than the full vision, but built properly enough to grow into it.",
   },
   {
+    question: "How do MVP development companies differ?",
+    answer:
+      "The biggest differences are whether they write code or build on a platform such as Bubble, whether they fix the price or bill for time, and what support they sell after launch. Published UK MVP timelines run from two weeks to about twelve, mostly because of how much the first release includes and how many people build it. Our guide to choosing a SaaS development company compares six UK studios side by side.",
+  },
+  {
     question: "Do you build web apps or mobile apps?",
     answer:
       "Web apps. One web app runs on every phone, tablet and laptop, can be found in search and shared as a link, and a fix is live the moment it ships rather than after app store review. The MVP is built so a native app can be added once the product has proved itself.",
@@ -96,6 +101,10 @@ const faqs: Faq[] = [
     question: "Can you build an MVP with AI features?",
     answer:
       "Yes. Several of our launches have AI at their core: ReelEstate turns listing photos into property videos and Viewlio gives YouTube creators AI analytics on their channels. The same sprint covers the AI pipeline, its costs and checks on its output.",
+    link: {
+      text: "How AI software development works, from coding agents to checking a model's output.",
+      href: "/blog/ai-software-development",
+    },
   },
   {
     question: "What happens after the MVP launches?",
@@ -126,7 +135,7 @@ export default function MvpDevelopmentPage() {
             <span className="text-primary">MVP development</span>, launched in a 2 week sprint.
           </>
         }
-        intro="Fixed-price MVP development for UK founders: production code, a demo every Friday and payments live at launch."
+        intro="Fixed-price MVP development services for UK startups: production code, a demo every Friday and payments live at launch."
         secondary={{ label: "See pricing", href: "#pricing" }}
         visual={<SprintVisual />}
         shape="growth"
