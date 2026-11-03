@@ -12,15 +12,10 @@ export function AboutSection() {
   return (
     <LandingSection id="about" labelledBy="about-heading" className="gap-16">
       <div className={cn("flex flex-col gap-6", inset)}>
-        <SectionHeading eyebrow="About us" title="About Scryptic" id="about-heading">
-          {siteConfig.name} is a Brighton-based development studio for founders who need a working
-          product, not a team to manage.
+        <SectionHeading eyebrow="About us" title="A small studio, on purpose" id="about-heading">
+          {siteConfig.name} takes on a few projects at a time, so you work directly with the
+          developer building your product.
         </SectionHeading>
-        <p data-reveal className="max-w-2xl text-pretty text-muted-foreground">
-          Keeping the studio small is deliberate: a few projects at a time, each with full attention
-          and a catch-up every Friday. Scope, price and timeline are agreed before the build starts,
-          so you always know what you are paying for, what you will get and when.
-        </p>
       </div>
 
       <article
@@ -44,11 +39,20 @@ export function AboutSection() {
               {founder.name}
             </h3>
           </div>
-          {founder.bio.map((paragraph) => (
-            <p key={paragraph} className="max-w-xl text-pretty text-muted-foreground">
-              {paragraph}
-            </p>
-          ))}
+          <p className="max-w-xl text-pretty text-muted-foreground">{founder.bio}</p>
+          {/* Dots only from sm up: on a phone the row wraps and a dot would lead the next line. */}
+          <ul className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs tracking-wide text-muted-foreground uppercase sm:gap-x-3">
+            {founder.facts.map((fact, index) => (
+              <li key={fact} className="flex items-center gap-3">
+                {index > 0 && (
+                  <span aria-hidden="true" className="hidden text-primary sm:inline">
+                    ·
+                  </span>
+                )}
+                {fact}
+              </li>
+            ))}
+          </ul>
           <SocialLinks name={founder.fullName} profiles={founder.socials} />
         </div>
       </article>
