@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 import { PageJsonLd } from "@/components/json-ld"
 import { AboutSection } from "@/components/landing/about-section"
 import { ComparisonSection } from "@/components/landing/comparison-section"
@@ -125,14 +123,7 @@ export default function Home() {
       />
       <div aria-hidden="true" className="rail-joint" />
 
-      <PricingSection>
-        Moving an app off Bubble, Lovable or another builder? Migrations are priced the same
-        way.{" "}
-        <Link href={pages.noCodeMigration.path} className="text-primary hover:underline">
-          See how no-code app migration works
-        </Link>
-        .
-      </PricingSection>
+      <PricingSection />
 
       <ProcessSection
         intro={`Two calls, a ${calendarPackage.sprint}, then handover and a week of support, with a demo every Friday.`}
