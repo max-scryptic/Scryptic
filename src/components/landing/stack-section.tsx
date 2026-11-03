@@ -11,12 +11,10 @@ import { stack } from "@/lib/stack"
  */
 export function StackSection({
   title = "A stack built for a fast, scalable launch",
-  lead = "Every app we ship runs on a modern, production-grade stack.",
-  text = "These are the tools today's leading web products are built on, so your app is fast for users from day one and scales as you grow without a rebuild. Every account sits in your name, so any developer can pick the app up later.",
+  lead = "Production-grade tools that scale without a rebuild, with every account in your name.",
 }: {
   title?: string
   lead?: string
-  text?: string
 }) {
   return (
     <>
@@ -33,7 +31,6 @@ export function StackSection({
               {title}
             </h2>
             <p className="text-lg text-pretty text-white/80">{lead}</p>
-            <p className="text-pretty text-white/80">{text}</p>
           </div>
           <ul data-reveal="children" className="grid grid-cols-2 gap-3 sm:gap-4">
             {stack.map((tool) => (

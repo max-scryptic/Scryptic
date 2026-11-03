@@ -171,8 +171,7 @@ export default function MvpDevelopmentPage() {
 
       <StackSection
         title="Built on the stack you would hire for later"
-        lead="Your MVP runs on the same production stack as established web products."
-        text="TypeScript, Next.js and Postgres, hosted on infrastructure in your name. When the MVP works and you hire developers, they inherit a codebase they already know rather than a rebuild."
+        lead="The production stack established products run on, so developers you hire later inherit code they know."
       />
 
       <WorkSection

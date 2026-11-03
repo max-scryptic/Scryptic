@@ -307,8 +307,7 @@ export default function NoCodeMigrationPage() {
 
       <StackSection
         title="Where your app moves to"
-        lead="A mainstream production stack, with every account in your name."
-        text="TypeScript, Next.js and Postgres, with storage and hosting you control. No builder fees per user or per workflow run, and any web developer can pick the code up after us."
+        lead="A mainstream production stack in your name, with no builder fees and code any developer can pick up."
       />
 
       <ComparisonSection
