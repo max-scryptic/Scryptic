@@ -101,6 +101,10 @@ const faqs: Faq[] = [
     question: "Can you build an MVP with AI features?",
     answer:
       "Yes. Several of our launches have AI at their core: ReelEstate turns listing photos into property videos and Viewlio gives YouTube creators AI analytics on their channels. The same sprint covers the AI pipeline, its costs and checks on its output.",
+    link: {
+      text: "How AI software development works, from coding agents to checking a model's output.",
+      href: "/blog/ai-software-development",
+    },
   },
   {
     question: "What happens after the MVP launches?",
