@@ -68,7 +68,7 @@ export default function AgentReadinessCheckPage() {
           Can <span className="text-primary">AI agents</span> find, read and cite your site?
         </>
       }
-      intro="Enter your website to see it the way ChatGPT, Claude and Perplexity do. The check scores 13 signals, from robots.txt and llms.txt to structured data, and says how to fix each one."
+      intro="See your site the way ChatGPT, Claude and Perplexity do, with a fix for each of 13 signals."
       faqs={faqs}
     >
       <SiteChecker kind="agent" />

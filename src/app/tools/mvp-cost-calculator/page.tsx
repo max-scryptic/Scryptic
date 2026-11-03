@@ -43,7 +43,7 @@ export default function MvpCostCalculatorPage() {
           How much will your <span className="text-primary">MVP</span> cost?
         </>
       }
-      intro={`Answer eight questions about your app and get a ballpark price and timeline. It is priced the way we price real builds: ${formatPrice(weeklyRate)} per week of development, with iteration and handover included.`}
+      intro={`Answer eight questions and get a ballpark price and timeline, at ${formatPrice(weeklyRate)} per week of development.`}
       faqs={faqs}
       related={{
         href: "/blog/how-much-does-it-cost-to-build-an-app-uk",

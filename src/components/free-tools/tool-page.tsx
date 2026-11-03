@@ -104,8 +104,7 @@ export function ToolPage({
             Rather talk it through with a developer?
           </h2>
           <p className="max-w-2xl text-pretty text-muted-foreground">
-            Book a free 30 minute discovery call. You get straight advice on scope, stack and cost,
-            and a written estimate before any build starts.
+            Book a free 30 minute discovery call for straight advice on scope, stack and cost.
           </p>
           <Button
             size="lg"

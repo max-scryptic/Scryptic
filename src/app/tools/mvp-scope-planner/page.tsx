@@ -44,7 +44,7 @@ export default function MvpScopePlannerPage() {
           Cut your idea down to a <span className="text-primary">first release</span>
         </>
       }
-      intro="List the features you want, size each one and choose what launches first. The planner shows how many weeks the first release takes, which package it fits and what to move to later to launch sooner."
+      intro="List the features you want, size each one and see what fits a first release and what can wait."
       faqs={faqs}
       related={{ href: "/blog/how-to-build-an-mvp", title: "How to build an MVP, week by week" }}
     >

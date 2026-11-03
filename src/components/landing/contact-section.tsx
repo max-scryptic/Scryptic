@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site"
 /** The closing call to action: one card with the booking button and the studio's email. */
 export function ContactSection({
   title = "Start with a discovery call",
-  text = "Tell us what you are building and where it is stuck. You will leave the call knowing the next step, whether or not it involves us.",
+  text = "Tell us what you are building and where it is stuck. You will leave knowing the next step.",
 }: {
   title?: string
   text?: string

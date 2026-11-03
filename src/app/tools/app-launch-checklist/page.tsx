@@ -44,7 +44,7 @@ export default function AppLaunchChecklistPage() {
           Your app <span className="text-primary">launch checklist</span>
         </>
       }
-      intro="Answer five questions about your app and get the checklist for its launch: product, legal and privacy, payments, search and analytics, app stores and launch day. Tick items off as you go and copy it into your own tracker."
+      intro="Answer five questions and get a launch checklist for your app to tick off as you go."
       faqs={faqs}
       related={{ href: "/blog/web-app-or-mobile-app-first", title: "Web app or mobile app first?" }}
     >

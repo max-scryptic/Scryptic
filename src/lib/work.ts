@@ -61,7 +61,7 @@ const reelEstate: CaseStudy = {
   url: "https://reelestate.cc",
   category: "AI video for estate agents",
   summary:
-    "ReelEstate turns the listing photos estate agents already have into branded property videos, reels and carousels for every social platform. No filming, no editing.",
+    "ReelEstate turns estate agents' listing photos into branded property videos and reels. No filming, no editing.",
   description:
     "How Scryptic built ReelEstate, an AI app that turns estate agents' listing photos into branded property videos, reels and social carousels in minutes.",
   audience: "Estate agents, property photographers and property marketing agencies, starting in the UK.",
@@ -159,7 +159,7 @@ const untilThen: CaseStudy = {
   url: "https://until-then.cc",
   category: "Scheduled messages",
   summary:
-    "Until Then lets you write a letter or record a voice or video message today and have it emailed to the people you choose on a date you set, even years from now.",
+    "Until Then lets you write a letter or record a message today and have it delivered on a date you set, even years from now.",
   description:
     "How Scryptic built Until Then, an app that schedules letters, voice notes and videos for future delivery by email, with in-browser video compression.",
   audience:
@@ -257,7 +257,7 @@ const viewlio: CaseStudy = {
   url: "https://viewlio.cc",
   category: "AI analytics for YouTube creators",
   summary:
-    "Viewlio reads a YouTube video's audience retention curve against the video itself, frame by frame, and explains why viewers left and what to change in the next upload.",
+    "Viewlio reads a YouTube video's retention curve against the video itself and explains why viewers left.",
   description:
     "How Scryptic built Viewlio, an AI tool that matches YouTube retention data to the video's frames, audio and script to explain drop-offs and suggest fixes.",
   audience: "YouTube creators and small creator teams reviewing how each upload performed.",
@@ -355,7 +355,7 @@ const prettyMetrics: CaseStudy = {
   url: "https://prettymetrics.cc",
   category: "Shareable revenue charts",
   summary:
-    "Pretty Metrics reads a founder's revenue from Stripe and six other payment providers and turns it into polished share cards and looping videos for X, LinkedIn and investor updates.",
+    "Pretty Metrics turns a founder's revenue from Stripe and six other providers into polished share cards and videos.",
   description:
     "How Scryptic built Pretty Metrics, which turns revenue from Stripe, Paddle and more into MRR charts and looping videos founders can share in a few clicks.",
   audience: "Indie founders and subscription businesses who share their revenue and milestones in public.",

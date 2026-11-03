@@ -118,10 +118,10 @@ export const postSeries: PostSeries[] = [
     name: "From idea to launch",
     label: "Guide",
     intro:
-      "What it costs, how long it takes and how to get an app built well: plain answers for founders planning their first product or their next one.",
+      "What it costs, how long it takes and how to get an app built well.",
     cta: {
       heading: () => "Planning an app?",
-      text: "Tell us what you want to build on a free call. You get straight advice on scope, stack, cost and timeline, then a written estimate before any work starts.",
+      text: "Tell us what you want to build on a free call, then get a written estimate.",
     },
   },
   {
@@ -129,10 +129,10 @@ export const postSeries: PostSeries[] = [
     name: "Automation to product",
     label: "Automation guide",
     intro:
-      "Zapier, Make, n8n and spreadsheets run a lot of businesses. These guides compare the tools, and explain when a set of automations is ready to become software of its own.",
+      "When Zapier, Make, n8n or a spreadsheet is ready to become software of its own.",
     cta: {
       heading: () => "Outgrowing your automations?",
-      text: "Walk us through your workflows on a free call. We look at what runs where and what it costs, then send a plan and a written estimate for an app you own.",
+      text: "Walk us through your workflows on a free call, then get a plan for an app you own.",
     },
   },
   {
@@ -140,10 +140,10 @@ export const postSeries: PostSeries[] = [
     name: "Choosing your stack",
     label: "Comparison",
     intro:
-      "Head to head comparisons of the platforms and frameworks founders weigh up most, written by developers who ship production apps on them.",
+      "Head to head comparisons of the platforms and frameworks founders weigh up most.",
     cta: {
       heading: () => "Not sure which stack fits?",
-      text: "Tell us what you are building on a free call. We recommend a stack for your product, not ours, then send a written estimate and a timeline.",
+      text: "Tell us what you are building on a free call. We will recommend the stack that fits.",
     },
   },
   {
@@ -151,10 +151,10 @@ export const postSeries: PostSeries[] = [
     name: "Low-code migration guides",
     label: "Migration guide",
     intro:
-      "One guide per tool on moving an app built with a low-code, no-code or AI app builder to a production stack you own: what you can export, what is missing, and a step by step plan.",
+      "Moving an app off a low-code, no-code or AI builder to a stack you own, one guide per tool.",
     cta: {
       heading: (post) => `Ready to move your ${post.topic} app to production?`,
-      text: "Walk us through what you have built on a free call. We review the app, its data and its accounts, then send a plan and a written estimate.",
+      text: "Walk us through your app on a free call, then get a migration plan and estimate.",
     },
   },
 ]
@@ -179,7 +179,7 @@ export const postCategories: { name: PostCategory; text: string }[] = [
   },
   {
     name: "Enterprise low-code",
-    text: "Platforms that run core business systems, where the move is about licence cost, lock-in and keeping the business running while you rebuild.",
+    text: "Platforms running core business systems, where licence cost and lock-in drive the move.",
   },
 ]
 

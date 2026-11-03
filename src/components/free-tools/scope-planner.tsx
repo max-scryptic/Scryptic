@@ -56,8 +56,7 @@ export function ScopePlanner() {
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-medium tracking-tight">Your features</h2>
           <p className="text-sm text-muted-foreground">
-            Name each thing a user can do, size it and choose whether it is in the first release.
-            Sign up, log in, email and analytics come with every build, so leave them out.
+            Add what users can do, size it and pick what launches first. Sign up, log in, email and analytics are included.
           </p>
         </div>
 

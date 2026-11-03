@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 import { freeTools } from "@/lib/free-tools"
 import { createMetadata, pages, toolPages } from "@/lib/seo"
-import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
 
 export const metadata = createMetadata(pages.tools)
@@ -23,9 +22,7 @@ export default function ToolsPage() {
             Free tools for founders <span className="text-primary">building an app</span>
           </h1>
           <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
-            Price your MVP, cut it down to a first release, decide between no-code and real code,
-            plan the launch and check your site is ready for search and AI agents. Free, with no
-            sign up, from the team at {siteConfig.name}.
+            Price your MVP, scope a first release, plan the launch and check your site. Free, with no sign up.
           </p>
         </div>
 
@@ -39,9 +36,7 @@ export default function ToolsPage() {
             Want a second opinion on your plan?
           </h2>
           <p className="text-pretty text-muted-foreground">
-            The tools give you a starting point. Book a free discovery call and we will go through
-            your scope, stack, cost and timeline with you, then send a written estimate before any
-            work starts.
+            Book a free discovery call and we will go through your scope, cost and timeline with you.
           </p>
           <Button
             size="lg"
