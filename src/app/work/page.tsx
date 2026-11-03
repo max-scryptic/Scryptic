@@ -23,9 +23,7 @@ export default function WorkPage() {
             Products we designed, built and <span className="text-primary">launched</span>
           </h1>
           <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
-            A few of the products {siteConfig.name} has taken from idea to launch, each live on
-            its own domain with accounts and payments built in. Each one ran through the same process a client build
-            does: scope, design, build, deploy and launch.
+            Products {siteConfig.name} has taken from idea to launch, each live on its own domain with accounts and payments.
           </p>
         </div>
 
@@ -43,8 +41,7 @@ export default function WorkPage() {
             Want yours on this page?
           </h2>
           <p className="text-pretty text-muted-foreground">
-            Book a free discovery call and talk through your idea. You get a scoped first release
-            and a written estimate before any build starts.
+            Book a free discovery call and get a scoped first release with a written estimate.
           </p>
           <Button
             size="lg"

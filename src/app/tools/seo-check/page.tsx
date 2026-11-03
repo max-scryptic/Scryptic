@@ -71,7 +71,7 @@ export default function SeoCheckPage() {
           Free <span className="text-primary">SEO check</span> for any page
         </>
       }
-      intro="Enter a page address to audit the basics that decide whether it can rank: titles, descriptions, headings, indexing, sitemap, structured data, alt text and share previews, with a fix for each problem."
+      intro="Audit the basics that decide whether a page can rank, with a fix for each problem."
       faqs={faqs}
     >
       <SiteChecker kind="seo" />

@@ -44,7 +44,7 @@ export default function BuildOrNoCodePage() {
           Should you use <span className="text-primary">no-code</span> or build it in code?
         </>
       }
-      intro="Answer seven questions about your idea, your users and your budget. You get a straight answer on whether a no-code tool is enough, and why, even when the answer is that you do not need us yet."
+      intro="Answer seven questions for a straight answer on whether a no-code tool is enough, and why."
       faqs={faqs}
       related={{ href: "/blog/vibe-coding-to-production", title: "A production audit for your vibe-coded app" }}
     >

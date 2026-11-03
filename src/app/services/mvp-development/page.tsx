@@ -135,7 +135,7 @@ export default function MvpDevelopmentPage() {
             <span className="text-primary">MVP development</span>, launched in a 2 week sprint.
           </>
         }
-        intro="Fixed-price MVP development services for UK startups: production code, a demo every Friday and payments live at launch."
+        intro="Fixed-price MVP development services for UK startups, with payments live at launch."
         secondary={{ label: "See pricing", href: "#pricing" }}
         visual={<SprintVisual />}
         shape="growth"
@@ -198,7 +198,7 @@ export default function MvpDevelopmentPage() {
 
       <ContactSection
         title="Talk through your MVP"
-        text="Tell us what you want to build and who it is for. You will leave the call knowing what to build first and what it would cost, whether or not you build it with us."
+        text="Tell us what you want to build. You will leave knowing what to build first and what it costs."
       />
     </main>
   )

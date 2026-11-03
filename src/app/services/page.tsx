@@ -43,8 +43,7 @@ export default function ServicesPage() {
 
       <LandingSection id="services" labelledBy="services-heading">
         <SectionHeading className={inset} eyebrow="What we do" title="Two services, one way of working" id="services-heading">
-          Whether you are starting from an idea or from an app on a no-code builder, you get the same
-          fixed price, the same weekly demos and code you own at the end.
+          From an idea or a no-code app, you get a fixed price, weekly demos and code you own.
         </SectionHeading>
         <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
           {servicePages.map((service, index) => (
@@ -88,7 +87,7 @@ export default function ServicesPage() {
 
       <ContactSection
         title="Not sure which you need?"
-        text="Tell us where your product is today. On a free call we will say whether it needs building, moving or leaving alone, and what the next step costs."
+        text="Tell us where your product is. We will say whether it needs building, moving or leaving alone."
       />
     </main>
   )

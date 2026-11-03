@@ -10,7 +10,7 @@ import { featuredCaseStudies, type CaseStudy } from "@/lib/work"
 
 export function WorkSection({
   title = "Products we have built and launched",
-  intro = "Every app below went through the same process a client build does, from first sketch to live domain. Each case study covers the problem, the product and the engineering.",
+  intro = "Every app below went through the same process as a client build, from first sketch to live domain.",
   studies = featuredCaseStudies,
 }: {
   title?: string

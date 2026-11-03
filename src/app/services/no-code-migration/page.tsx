@@ -331,7 +331,7 @@ export default function NoCodeMigrationPage() {
 
       <ContactSection
         title="Talk through your migration"
-        text="Walk us through what you have built. We will look at the app, its data and its accounts, and tell you whether moving is worth it."
+        text="Walk us through your app. We will look at its data and accounts and say whether moving is worth it."
       />
     </main>
   )

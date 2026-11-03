@@ -114,9 +114,7 @@ export default function BlogPage() {
             Planning an app, or stuck with one?
           </h2>
           <p className="text-pretty text-muted-foreground">
-            Book a free discovery call and tell us what you are building or show us what you have.
-            You get straight advice on scope, stack, cost and timeline, then a written estimate
-            before any work starts.
+            Book a free discovery call for straight advice on scope, stack, cost and timeline.
           </p>
           <Button
             size="lg"
