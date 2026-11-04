@@ -44,7 +44,8 @@ const SPREAD = 1000
 const STEP = 2400
 
 // Solid layers, deepest at the top and brightest at the foundation.
-const shades = ["#2b3070", "#000", "#343a8a", "#3c43a3", "#454dbb", "#4f57d2", "#5a62e6"]
+// One per position, so a ghost can sit at any depth and the solid layers still step evenly.
+const shades = ["#2b3070", "#30357d", "#343a8a", "#3c43a3", "#454dbb", "#4f57d2", "#5a62e6"]
 
 const geometry = (count: number, gap: number) => {
   const height = TOP + (count - 1) * gap + HALF_H + THICK + 24

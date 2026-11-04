@@ -7,6 +7,11 @@ import { Icon, type IconName } from "@/components/landing/icons"
 
 export type HubItem = { icon: IconName; name: string; text: string; tag: string }
 
+/** What the product card in the middle says before the hub starts going round. */
+export type HubCore = { name: string; tag: string }
+
+const defaultCore: HubCore = { name: "Your MVP", tag: "Launch day" }
+
 /*
  * Six parts wired into the product in the middle: three on each side on wide
  * screens, one spine under the product card below lg. Rows on both sides are
@@ -111,7 +116,7 @@ function Connectors({ side, active }: { side: 0 | 1; active: number | null }) {
   )
 }
 
-function Core({ items, active }: { items: HubItem[]; active: number | null }) {
+function Core({ items, active, core }: { items: HubItem[]; active: number | null; core: HubCore }) {
   const item = active === null ? null : items[active]
   return (
     <div
@@ -133,10 +138,10 @@ function Core({ items, active }: { items: HubItem[]; active: number | null }) {
         </span>
         <span className="flex flex-col gap-1 lg:items-center">
           <span key={item?.name ?? "core"} className="hub-swap text-lg font-medium">
-            {item?.name ?? "Your MVP"}
+            {item?.name ?? core.name}
           </span>
           <span key={item?.tag ?? "tag"} className="hub-swap font-mono text-xs tracking-widest text-muted-foreground uppercase">
-            {item ? item.tag : "Launch day"}
+            {item ? item.tag : core.tag}
           </span>
         </span>
         <span className="ml-auto flex gap-1 lg:mt-2 lg:ml-0">
@@ -157,13 +162,21 @@ function Core({ items, active }: { items: HubItem[]; active: number | null }) {
   )
 }
 
-export function LaunchKitHub({ items, mode = "trace" }: { items: HubItem[]; mode?: "highlight" | "trace" }) {
+export function LaunchKitHub({
+  items,
+  mode = "trace",
+  core = defaultCore,
+}: {
+  items: HubItem[]
+  mode?: "highlight" | "trace"
+  core?: HubCore
+}) {
   const { ref, active, previous } = useCycle(items.length)
   const sides = [items.slice(0, 3), items.slice(3, 6)]
 
   return (
     <div ref={ref} className="grid lg:grid-cols-[1fr_2.5rem_auto_2.5rem_1fr] xl:grid-cols-[1fr_3.5rem_auto_3.5rem_1fr]">
-      <Core items={items} active={active} />
+      <Core items={items} active={active} core={core} />
       <Connectors side={0} active={active} />
       <Connectors side={1} active={active} />
       {/* Below lg: one spine down the left, from the product card to the last part. */}

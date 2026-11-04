@@ -12,7 +12,7 @@ export const buildAnMvp: BlogPost = {
   summary:
     "To build an MVP, spend the first week cutting scope to one job for one kind of user, the second designing that flow, the next four building it and the last two hardening and launching. A focused MVP like this usually takes one to two months, and the month after launch matters as much as the build.",
   datePublished: "2026-10-14",
-  dateModified: "2026-10-28",
+  dateModified: "2026-11-04",
   sections: [
     {
       id: "the-timeline",
@@ -29,6 +29,24 @@ export const buildAnMvp: BlogPost = {
         {
           type: "paragraph",
           text: "And it isn't a fifth of every feature on your roadmap. A product that does ten things badly teaches you nothing, because nobody can tell which part failed. An MVP does one thing properly and leaves the rest out.",
+        },
+        {
+          type: "paragraph",
+          text: "Each stage ends with something you can point to and a check you can run yourself. If the check fails, the stage isn't finished, whatever the calendar says.",
+        },
+        {
+          type: "table",
+          caption: "What you should have at the end of each stage of an eight week MVP, and the check that shows it is done",
+          columns: ["Stage", "What you have at the end", "How you know it is done"],
+          rows: [
+            ["Before week 1", "Ten named people with the problem", "You could message each of them today"],
+            ["Week 1, scope", "The core job in one sentence, a cut feature list, a price and a date", "Every feature left serves that sentence"],
+            ["Week 2, design", "Clickable screens for the core flow and a simple data model", "Five people finished the job in the prototype"],
+            ["Weeks 3 and 4", "Sign-up and the core job working end to end", "A test user completes the job once, without help"],
+            ["Weeks 5 and 6", "Payments, the key emails, analytics and error tracking", "A test payment goes through and shows up in analytics"],
+            ["Week 7, harden", "Automated tests, a restored backup and a separate staging copy", "Two test users cannot see each other's data"],
+            ["Week 8, launch", "The MVP live with your first users", "Each early user has finished the core job once"],
+          ],
         },
       ],
     },
@@ -290,6 +308,42 @@ export const buildAnMvp: BlogPost = {
         },
       ],
     },
+    {
+      id: "saas-mvp",
+      heading: "What changes when the MVP is a SaaS product?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "A SaaS MVP adds three decisions to week one: whether accounts belong to people or to customer organisations, how subscriptions work, and which workflow the paying customer actually values. All three shape the data model, so they are cheap to settle on paper and expensive to change after launch.",
+        },
+        { type: "subheading", text: "Decide whether your customers are people or teams" },
+        {
+          type: "paragraph",
+          text: "If businesses buy your product, the data belongs to a customer organisation, often called a workspace, rather than to whoever signed up. Every table that holds customer data gets a workspace column, and every query filters by it. This is what tenancy means, and adding it after launch touches every table. Set it up now even if each workspace has one user at first; invites and roles can wait.",
+        },
+        { type: "subheading", text: "Keep billing to one plan, and write down the awkward cases" },
+        {
+          type: "paragraph",
+          text: "Start with one plan, billed monthly, through Stripe's hosted checkout and customer portal. Then decide what a failed renewal does (a few days' grace, then read-only, say) and what a cancellation does (access until the end of the paid period). Update a customer's status from Stripe's webhooks rather than from the page they land on after paying, because people close tabs.",
+        },
+        { type: "subheading", text: "Scope the first workflow for whoever pays" },
+        {
+          type: "paragraph",
+          text: "In business software, the person who pays is often not the person who uses it every day. A manager pays for the report; their team fills in the data that feeds it. Make sure the first workflow ends in the thing the buyer is paying for, or the trial ends without a reason to renew.",
+          link: { text: "What a SaaS costs to build, and to run after launch.", href: "/blog/saas-cost-before-and-after-launch" },
+        },
+        {
+          type: "checklist",
+          items: [
+            "Every table with customer data has a workspace column, and every query filters by it",
+            "One plan in Stripe, with the trial and cancellation rules written down",
+            "A failed payment and a cancellation tested end to end",
+            "Subscription status updated from Stripe's webhooks",
+            "The first workflow ends in something the buyer would pay for",
+          ],
+        },
+      ],
+    },
   ],
   faqs: [
     {
@@ -310,7 +364,7 @@ export const buildAnMvp: BlogPost = {
     {
       question: "What should a SaaS MVP include?",
       answer:
-        "Sign-up and sign-in, the one core workflow, subscription payments if you're testing pricing, analytics and data security you've tested. Team accounts, user roles, integrations and admin panels can almost always wait until users ask for them.",
+        "Sign-up and sign-in, data kept separate for each customer account, the one core workflow, a single subscription plan if you're testing pricing, analytics and data security you've tested. Team invites, user roles, integrations and admin panels can almost always wait until users ask for them.",
     },
   ],
 }

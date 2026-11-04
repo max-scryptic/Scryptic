@@ -80,6 +80,17 @@ export const voxelShapes = {
     height: (u, v, random) => 1 + Math.floor(smoothstep(0.85, 1, u) * smoothstep(0.35, 0.85, v) * 3.2 * (0.6 + 0.4 * random())),
     clump: true,
   },
+  /** Web app development: flat panels in the top right, laid out like the cards of a dashboard. */
+  panels: {
+    seed: 64,
+    density: (u, v) => {
+      const panel = (u0: number, u1: number, v0: number, v1: number) =>
+        smoothstep(u0, u0 + 0.03, u) * smoothstep(u1, u1 - 0.03, u) * smoothstep(v0, v0 + 0.03, v) * smoothstep(v1, v1 - 0.03, v)
+      return Math.max(panel(0.56, 0.76, 0.03, 0.28), panel(0.8, 1.02, 0.03, 0.28), panel(0.8, 1.02, 0.34, 0.6)) * 0.85
+    },
+    height: (_u, _v, random) => 1 + Math.floor(random() * 1.7),
+    clump: false,
+  },
   /** The services hub: two islands, one per service. */
   services: {
     seed: 48,

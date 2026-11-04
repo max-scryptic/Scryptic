@@ -13,6 +13,7 @@ export const aiSoftwareDevelopment: BlogPost = {
   summary:
     "AI software development covers two jobs that often happen in the same project. Developers use coding agents such as Claude Code, Codex, Cursor and GitHub Copilot to write the code, and products call a model every time a customer uses an AI feature. The first speeds up the typing but leaves a person answerable for every change. The second puts a cost on each request and needs code that checks the answer before anyone sees it.",
   datePublished: "2026-11-03",
+  dateModified: "2026-11-04",
   facts: [
     { label: "Coding agents compared", value: "4" },
     { label: "Our AI launches drawn on", value: "ReelEstate and Viewlio" },
@@ -196,15 +197,51 @@ export const aiSoftwareDevelopment: BlogPost = {
           type: "paragraph",
           text: "Keep every model call behind one function in your own code. Providers differ by the kind of model you need (Viewlio's analysis runs on OpenAI, while ReelEstate's video models run on fal.ai), and a better or cheaper option will turn up after launch. With one function, trying it is an edit in one place rather than a search through the app.",
         },
+      ],
+    },
+    {
+      id: "choosing-a-company",
+      heading: "How do you choose an AI development company?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Choose one that has launched an AI product to paying users and can show you the code around the model: how it checks each answer, what each request costs and what happens when the model gets it wrong. Polished demos are easy to make with AI; a product that copes with a bad answer is not.",
+        },
+        {
+          type: "paragraph",
+          text: "We build AI products ourselves. ReelEstate and Viewlio went from first sketch to launch through the same fixed-price sprint a client MVP does, and every check, metering rule and fallback described above comes from them.",
+          link: { text: "See the AI products we have built.", href: "/work" },
+        },
+        { type: "subheading", text: "Questions to ask any AI development company" },
+        {
+          type: "checklist",
+          items: [
+            "Which AI product have you launched, and what does it do when the model gets an answer wrong?",
+            "How will you test models on our own examples before choosing one?",
+            "What will each use of the feature cost us, and how will it be metered?",
+            "Can we change model provider later without rewriting the app?",
+            "Whose name will the model provider account and API keys be in?",
+            "How are prompt changes versioned, and how is a bad one rolled back?",
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Be wary of a pitch that opens with training a custom model. For most products the work is in the pipeline, the checks and the billing around a model someone else has trained, and starting with training is usually the slowest and most expensive route to finding out whether customers want the feature.",
+        },
         {
           type: "paragraph",
           text: "If you are planning a product with a model at its core, our fixed-price MVP sprints cover the whole of it: the AI pipeline, the checks on its output and the billing around it.",
-          link: { text: "See what a fixed-price MVP sprint includes.", href: "/#pricing" },
+          link: { text: "How our MVP development sprints work, AI products included.", href: "/services/mvp-development" },
         },
       ],
     },
   ],
   faqs: [
+    {
+      question: "Does Scryptic build AI products?",
+      answer:
+        "Yes. ReelEstate turns listing photos into property videos, and Viewlio explains why viewers stop watching YouTube videos. Both were built through the same fixed-price sprint as a client MVP, including the model pipeline, the checks on its output and the metered billing.",
+    },
     {
       question: "Is AI software development the same as machine learning?",
       answer:
