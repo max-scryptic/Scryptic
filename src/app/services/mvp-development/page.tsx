@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { PageJsonLd } from "@/components/json-ld"
 import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
@@ -7,7 +9,7 @@ import { LandingHero } from "@/components/landing/hero"
 import type { IconName } from "@/components/landing/icons"
 import { SprintVisual } from "@/components/landing/hero-visuals"
 import { PricingSection } from "@/components/landing/pricing-section"
-import { FitCheckSection, HubSection } from "@/components/landing/service-sections"
+import { FitCheckSection, HubSection, OptionsSection, type OptionRow } from "@/components/landing/service-sections"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
@@ -15,7 +17,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { launchOffer, offerPrice, services } from "@/lib/services"
+import { extendedMvp, launchOffer, mvp, offerPrice, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
@@ -43,6 +45,57 @@ const fitChecks = [
   "It is a web app or SaaS",
 ]
 const fitInitial = [0, 1, 3]
+
+// The usual routes to a first release, in words. Figures for agencies are the
+// ones UK studios publish, as compared in the best-saas-development-company post.
+const optionColumns = ["What you get", "Price", "Time to launch", "Who owns the code"]
+const options: OptionRow[] = [
+  {
+    name: `${siteConfig.name} MVP sprint`,
+    cells: [
+      "One core journey as production code, with sign-in, payments and analytics live",
+      `${mvp.price} or ${extendedMvp.price} + VAT, fixed before the build`,
+      "2 or 3 weeks, then a week of support",
+      "You, from launch day",
+    ],
+  },
+  {
+    name: "MVP development agency",
+    cells: [
+      "A larger first release from a team, often with a project manager and a retainer after launch",
+      "Published UK MVP prices run from about £8,000 to $50,000+; some bill for time",
+      "Usually 5 to 12 weeks in the offers we compared",
+      "Check the contract; on a Bubble build the app stays on the platform",
+    ],
+  },
+  {
+    name: "Freelance developer",
+    cells: [
+      "Whatever you can specify, test and manage yourself",
+      "A day rate, billed for the time it takes",
+      "Depends on their availability and your spec",
+      "You, if the contract assigns it",
+    ],
+  },
+  {
+    name: "No-code or AI builder",
+    cells: [
+      "A working version you build and maintain yourself",
+      "Monthly subscriptions, plus your own time",
+      "Days to weeks",
+      "No-code platforms keep the app; AI builders give you code to harden",
+    ],
+  },
+  {
+    name: "In-house hire",
+    cells: [
+      "A developer who stays on the product after launch",
+      "A salary, plus recruitment time and cost",
+      "Months, once hiring is counted",
+      "You",
+    ],
+  },
+]
 
 const guides = postsBySlug([
   "how-to-build-an-mvp",
@@ -179,8 +232,27 @@ export default function MvpDevelopmentPage() {
         intro="Each went from first sketch to live domain through the same sprint a client MVP does."
       />
 
+      <OptionsSection
+        id="options"
+        eyebrow="Your options"
+        title="MVP development options compared"
+        intro="Scope, price, timeline and code ownership for the five usual ways to get a first release built."
+        caption="Five ways to get an MVP built, compared on what you get, price, time to launch and who owns the code"
+        columns={optionColumns}
+        rows={options}
+        footnote={
+          <>
+            Agency figures come from what UK MVP studios publish on their own sites.{" "}
+            <Link href="/blog/best-saas-development-company" className="text-foreground underline underline-offset-4 hover:text-primary">
+              See six UK SaaS and MVP development companies compared by name
+            </Link>
+            .
+          </>
+        }
+      />
+
       <ComparisonSection
-        title="How an MVP studio compares with other MVP development options"
+        title="How a studio sprint compares, at a glance"
         intro="Agency-quality code at freelancer speed, for a fixed price."
       />
 

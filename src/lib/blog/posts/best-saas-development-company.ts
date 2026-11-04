@@ -13,7 +13,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
   summary:
     "The best SaaS development company is the one that can ship your next usable release for an agreed price and leave you owning the code and the accounts. Below we compare six UK SaaS and MVP development companies, including Goodspeed, Augustova, Neptune Digital and ourselves, on what they build, how they charge and how long an MVP takes, then give you seven checks to run before you sign.",
   datePublished: "2026-10-22",
-  dateModified: "2026-11-03",
+  dateModified: "2026-11-04",
   facts: [
     { label: "Companies compared", value: "6" },
     { label: "Published MVP prices", value: "From about £8,000 to $50,000+" },
@@ -51,6 +51,37 @@ export const bestSaasDevelopmentCompany: BlogPost = {
             text: "Ten signs your automations should become a SaaS product.",
             href: "/blog/turn-automations-into-a-saas-product",
           },
+        },
+      ],
+    },
+    {
+      id: "first-release-or-ongoing",
+      heading: "Do you need a first release or ongoing SaaS development?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Decide this first, because SaaS development services are really two different products. A first-release build delivers a defined version of the product for an agreed price and ends at launch. Ongoing development, usually a retainer or a dedicated team, keeps engineers on a live product month after month.",
+        },
+        {
+          type: "table",
+          caption: "A first-release SaaS build compared with ongoing SaaS development on what you buy, pricing, when it ends, who it suits and the main risk",
+          columns: ["Compared on", "First-release build", "Ongoing development"],
+          rows: [
+            ["What you buy", "A defined first version, from sign-up to payment", "A team's time each month on a live product"],
+            ["How it is priced", "A fixed price, or a fixed price per phase", "A monthly retainer, or per person per week"],
+            ["When it ends", "At launch, after a short handover", "When you stop paying for it"],
+            ["Who it suits", "A founder testing whether customers will pay", "A business whose customers already rely on the product"],
+            ["The risk to watch", "Scope creeping past what the price covers", "Paying for capacity you are not using"],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Most products need both, in that order. If the first build leaves the code and the accounts in your name, you can choose who does the ongoing work later, whether a retainer studio, a freelancer or your first hire, without starting again.",
+        },
+        {
+          type: "paragraph",
+          text: "We only sell the first kind: a fixed-price sprint that ends with a launched SaaS MVP and a week of handover, after which the product is yours to take anywhere.",
+          link: { text: "How our MVP development sprints work.", href: "/services/mvp-development" },
         },
       ],
     },
@@ -312,6 +343,11 @@ export const bestSaasDevelopmentCompany: BlogPost = {
     },
   ],
   faqs: [
+    {
+      question: "What is the difference between a SaaS MVP build and ongoing SaaS development?",
+      answer:
+        "An MVP build delivers a defined first version for an agreed price and ends at launch. Ongoing development is engineering time bought monthly, through a retainer or a dedicated team, to keep improving a live product. Most products need the first before the second.",
+    },
     {
       question: "How much does a SaaS development company charge in the UK?",
       answer:

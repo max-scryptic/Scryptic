@@ -51,6 +51,22 @@ export const servicePages: ServicePage[] = [
     series: ["launch", "automation"],
   },
   {
+    id: "web-app-development",
+    page: pages.webAppDevelopment,
+    name: "Web app development",
+    tagline: "A custom web app for one workflow",
+    summary:
+      "A custom web application for your customers or your team, such as a portal, a booking system or an internal tool, built as production code you own.",
+    points: [
+      "One complete workflow, start to finish",
+      "Accounts, roles and backups in place",
+      "Code and hosting in your name",
+    ],
+    linkText: "Explore web app development",
+    learnMore: "How our web app development works",
+    series: ["stack"],
+  },
+  {
     id: "no-code-migration",
     page: pages.noCodeMigration,
     name: "No-code app migration",

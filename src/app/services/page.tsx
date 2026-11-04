@@ -34,7 +34,7 @@ export default function ServicesPage() {
           </>
         }
         eyebrow={{ label: siteConfig.name }}
-        intro="MVP development and no-code app migration, each a fixed-price 2 or 3 week sprint with a demo every Friday."
+        intro="MVP, web app development and no-code migration, each a fixed-price 2 or 3 week sprint with a demo every Friday."
         secondary={{ label: "Compare services", href: "#services" }}
         visual={<ServicesVisual />}
         shape="services"
@@ -42,10 +42,10 @@ export default function ServicesPage() {
       <div aria-hidden="true" className="rail-joint" />
 
       <LandingSection id="services" labelledBy="services-heading">
-        <SectionHeading className={inset} eyebrow="What we do" title="Two services, one way of working" id="services-heading">
-          From an idea or a no-code app, you get a fixed price, weekly demos and code you own.
+        <SectionHeading className={inset} eyebrow="What we do" title="Three services, one way of working" id="services-heading">
+          From an idea, a workflow or a no-code app, you get a fixed price, weekly demos and code you own.
         </SectionHeading>
-        <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
+        <div data-reveal="children" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {servicePages.map((service, index) => (
             <article
               key={service.page.path}
