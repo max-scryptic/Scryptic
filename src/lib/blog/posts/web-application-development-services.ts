@@ -184,11 +184,6 @@ export const webApplicationDevelopmentServices: BlogPost = {
         "A website mainly presents information, while a web app lets people get something done in their browser, such as managing bookings or approving expenses. Many products need both, a public marketing site and a signed-in service, and they are best scoped as separate pieces of work.",
     },
     {
-      question: "What are the stages of web application development?",
-      answer:
-        "Scope, design, build, test, launch, then run and improve. The first five can fit in a few weeks for a first release covering one workflow. The last one lasts as long as the app does, so agree who does it before launch.",
-    },
-    {
       question: "How much does Scryptic charge to build a web app?",
       answer:
         `The MVP package is ${mvp.price} plus VAT for a two week sprint, and the Extended MVP is ${extendedMvp.price} plus VAT for a three week sprint. Both are fixed prices, with the scope and price agreed on a free discovery call before the build starts.`,

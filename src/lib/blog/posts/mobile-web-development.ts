@@ -10,7 +10,7 @@ export const mobileWebDevelopment: BlogPost = {
   topic: "Mobile web",
   icon: "smartphone",
   description:
-    "Mobile web development decisions to settle before you brief a developer: which screens go phone first, where unsent forms live, sign-in and what to test.",
+    "The mobile web development decisions to settle before you brief a developer: which screens go phone first, where unsent forms are kept, sign-in and testing.",
   summary:
     "Mobile web development is building a website or web app that people can finish their task on in a phone's browser, not just one that fits the screen. Before you brief a developer, settle five decisions: which screens are designed for the phone first, where a half-filled form survives, how people sign in, what each form field asks of the keyboard and which phones and browsers you test. Each one changes the build, and each is cheap to settle now.",
   datePublished: "2026-10-30",

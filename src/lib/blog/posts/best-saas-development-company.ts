@@ -16,7 +16,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
   dateModified: "2026-11-04",
   facts: [
     { label: "Companies compared", value: "6" },
-    { label: "Published MVP prices", value: "From about £8,000 to $50,000+" },
+    { label: "Published MVP prices", value: "From about £8,000 to over $50,000 (one firm prices in dollars)" },
     { label: "Published MVP timelines", value: "2 to 12 weeks" },
   ],
   sections: [
@@ -351,7 +351,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
     {
       question: "How much does a SaaS development company charge in the UK?",
       answer:
-        `Among the UK companies we compared, published MVP prices run from about £8,000 at the low end to $50,000 or more, and larger consultancies such as thoughtbot and Studio Graphene do not publish rates. Ours are fixed: ${mvp.price} plus VAT for the two week MVP sprint, or ${extendedMvp.price} plus VAT for the three week Extended MVP.`,
+        `Among the UK companies we compared, published MVP prices run from about £8,000 at the low end to $50,000 or more (one company prices in US dollars), and larger consultancies such as thoughtbot and Studio Graphene do not publish rates. Ours are fixed: ${mvp.price} plus VAT for the two week MVP sprint, or ${extendedMvp.price} plus VAT for the three week Extended MVP.`,
     },
     {
       question: "How long does it take to build a SaaS MVP?",

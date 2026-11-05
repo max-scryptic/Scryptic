@@ -4,14 +4,14 @@ import { extendedMvp, mvp } from "@/lib/services"
 
 export const mvpSoftwareDevelopmentExample: BlogPost = {
   slug: "mvp-software-development-example",
-  title: "An MVP software development example worth studying",
+  title: "A worked example of MVP software development",
   series: "launch",
   topic: "MVP examples",
   icon: "flask",
   description:
-    "An MVP software development example, worked through: a gift voucher app's first release, what it leaves out and what it can prove, plus three more.",
+    "A worked example of MVP software development: a gift voucher app's first release, what it leaves out and what it can prove, plus three shorter examples.",
   summary:
-    "A useful MVP software development example follows one task from the first click to the finished result, and it's as clear about what it leaves out as about what it includes. Our worked example is a gift voucher app for independent shops, followed by three shorter examples with different first tasks. All four are illustrations, not client projects.",
+    "A useful example of MVP software development follows one task from the first click to the finished result, and it's as clear about what it leaves out as about what it includes. Our worked example is a gift voucher app for independent shops, followed by three shorter examples with different first tasks. All four are illustrations, not client projects.",
   datePublished: "2026-10-28",
   dateModified: "2026-11-01",
   facts: [
@@ -43,7 +43,7 @@ export const mvpSoftwareDevelopmentExample: BlogPost = {
     },
     {
       id: "voucher-app",
-      heading: "An MVP software development example for independent shops",
+      heading: "A gift voucher app for independent shops",
       blocks: [
         {
           type: "paragraph",

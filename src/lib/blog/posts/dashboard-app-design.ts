@@ -11,7 +11,7 @@ export const dashboardAppDesign: BlogPost = {
   description:
     "Six dashboard app design mistakes that cost far more once built, from screens with no question behind them to numbers nobody defined and phone layouts.",
   summary:
-    "The costliest dashboard app design mistake is arranging the data you have before deciding which question the screen answers, and for whom. The other five grow from it: numbers nobody defined, mock-ups that only show a good day, meaning hidden in colour and hover, a desktop layout squeezed onto a phone, and sign-off on pictures instead of behaviour. A sketch and a page of notes catch all six before anyone writes code.",
+    "The costliest mistake in dashboard app design is arranging the data you have before deciding which question the screen answers, and for whom. The other five grow from it: numbers nobody defined, mock-ups that only show a good day, meaning hidden in colour and hover, a desktop layout squeezed onto a phone, and sign-off on pictures instead of behaviour. A sketch and a page of notes catch all six before anyone writes code.",
   datePublished: "2026-10-30",
   facts: [
     { label: "Written for", value: "Founders commissioning a dashboard" },
@@ -21,7 +21,7 @@ export const dashboardAppDesign: BlogPost = {
   sections: [
     {
       id: "starts-from-the-data",
-      heading: "The dashboard app design starts from the data you have",
+      heading: "The design starts from the data you have",
       blocks: [
         {
           type: "paragraph",
