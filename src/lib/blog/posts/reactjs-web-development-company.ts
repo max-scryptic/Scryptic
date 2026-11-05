@@ -5,7 +5,7 @@ import { extendedMvp, mvp } from "@/lib/services"
 
 export const reactjsWebDevelopmentCompany: BlogPost = {
   slug: "reactjs-web-development-company-hiring-mistakes",
-  title: "Mistakes to avoid when hiring a ReactJS web development company",
+  title: "Hiring a ReactJS web development company? Six mistakes to avoid",
   series: "launch",
   topic: "React",
   icon: "atom",
