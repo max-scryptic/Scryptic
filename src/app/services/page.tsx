@@ -34,7 +34,7 @@ export default function ServicesPage() {
           </>
         }
         eyebrow={{ label: siteConfig.name }}
-        intro="MVP, web app development and no-code migration, each a fixed-price 2 or 3 week sprint with a demo every Friday."
+        intro="MVP development, web app development and no-code migration, each built in a fixed-price 2 or 3 week sprint with a demo every Friday."
         secondary={{ label: "Compare services", href: "#services" }}
         visual={<ServicesVisual />}
         shape="services"

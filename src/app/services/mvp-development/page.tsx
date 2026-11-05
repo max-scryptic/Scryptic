@@ -63,7 +63,7 @@ const options: OptionRow[] = [
     name: "MVP development agency",
     cells: [
       "A larger first release from a team, often with a project manager and a retainer after launch",
-      "Published UK MVP prices run from about £8,000 to $50,000+; some bill for time",
+      "Published prices run from about £8,000 to over $50,000 (one firm prices in dollars); some bill for time",
       "Usually 5 to 12 weeks in the offers we compared",
       "Check the contract; on a Bubble build the app stays on the platform",
     ],

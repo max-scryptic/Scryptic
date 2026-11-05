@@ -177,6 +177,7 @@ export const buildAnMvp: BlogPost = {
         {
           type: "paragraph",
           text: "Build the core job end to end before anything else, then add what's needed to run it as a business. Two two-week sprints, with a demo at the end of each week, keep everyone looking at working software rather than status updates.",
+          link: { text: "How an MVP fits into agile development and its sprints.", href: "/blog/mvp-agile" },
         },
         {
           type: "subheading",

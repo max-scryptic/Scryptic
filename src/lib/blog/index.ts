@@ -18,6 +18,7 @@ import { googleSheetsDatabase } from "@/lib/blog/posts/google-sheets-database"
 import { lovable } from "@/lib/blog/posts/lovable"
 import { mobileAppDevelopment } from "@/lib/blog/posts/mobile-app-development"
 import { mobileWebDevelopment } from "@/lib/blog/posts/mobile-web-development"
+import { mvpAgile } from "@/lib/blog/posts/mvp-agile"
 import { mvpSoftware } from "@/lib/blog/posts/mvp-software"
 import { mvpSoftwareDevelopmentExample } from "@/lib/blog/posts/mvp-software-development-example"
 import { n8nAlternatives } from "@/lib/blog/posts/n8n-alternatives"
@@ -61,6 +62,7 @@ export const posts: BlogPost[] = [
   saasCost,
   mvpSoftware,
   buildAnMvp,
+  mvpAgile,
   mvpSoftwareDevelopmentExample,
   aiSoftwareDevelopment,
   dashboardAppDesign,

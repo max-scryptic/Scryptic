@@ -14,6 +14,7 @@ export const mvpSoftware: BlogPost = {
   summary:
     "MVP software is the first version of a product that real people can use to finish one job on their own, while you measure whether they do. It's minimum in what it covers and viable in how well it covers it, and that's what separates it from a prototype, a proof of concept or a landing page. Five checks tell you whether what you've built is one.",
   datePublished: "2026-11-01",
+  dateModified: "2026-11-05",
   facts: [
     { label: "MVP stands for", value: "Minimum viable product" },
     { label: "Made popular by", value: "Eric Ries, The Lean Startup (2011)" },
@@ -86,6 +87,36 @@ export const mvpSoftware: BlogPost = {
           type: "paragraph",
           text: "The first three are optional steps, in any order. Take the one that answers the riskiest question you still have, and skip the rest. Our gift voucher example follows the MVP stage itself through one first release, including what it leaves out on purpose.",
           link: { text: "Read the gift voucher MVP example.", href: "/blog/mvp-software-development-example" },
+        },
+      ],
+    },
+    {
+      id: "prototype-or-mvp-first",
+      heading: "Should you build a prototype or an MVP first?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Build a prototype first only when you're unsure people will understand how to use the product. If the steps are ones they already know, such as booking, ordering or filling in a form, go straight to the MVP: a prototype would confirm what you already know and delay the question that matters, which is whether they'll use it for real.",
+        },
+        {
+          type: "table",
+          caption: "Situations that point to building a prototype first, and situations that point to going straight to an MVP",
+          columns: ["If this is true", "Build first", "Why"],
+          rows: [
+            ["The flow is new to users, such as a new way to plan a rota", "Prototype", "Confusion is cheaper to find in a mock-up than in code"],
+            ["Users already know the steps from other products", "MVP", "The open question is whether they'll use it, which a prototype can't answer"],
+            ["You need something to show investors or partners next week", "Prototype", "It shows the idea in days, without a backend"],
+            ["You already have people waiting to use it", "MVP", "They can give you real use, so give them something real"],
+            ["One step might not be technically possible", "Proof of concept, then MVP", "Neither a prototype nor an MVP answers that question"],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "The cost difference is large. A clickable prototype is usually days of design work with nothing behind the screens; MVP software is weeks of building, with accounts, a database and the job running end to end. So a prototype that answers a real question is good value, and one built out of habit is a week that could have gone on the MVP.",
+        },
+        {
+          type: "paragraph",
+          text: "The dental cover service sits on the MVP side. Posting a shift is a short form practice managers have filled in many times on agency sites, so an afternoon testing paper sketches with two managers covers the design risk. What nobody can tell from a sketch is whether a practice trusts the service with tomorrow's patients, and only the MVP can show that.",
         },
       ],
     },

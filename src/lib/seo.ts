@@ -58,7 +58,7 @@ const latestPostDate = posts
 const services = {
   path: "/services",
   title: "Services",
-  description: `${siteConfig.name} services for UK founders: MVP, web app development and no-code migration, each built as production code in a fixed-price 2 or 3 week sprint.`,
+  description: `${siteConfig.name} services for UK founders: MVP development, web app development and no-code migration, each built as production code in a fixed-price sprint.`,
   changeFrequency: "monthly",
   priority: 0.9,
 } satisfies PageEntry

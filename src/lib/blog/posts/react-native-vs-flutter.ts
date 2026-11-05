@@ -117,7 +117,7 @@ export const reactNativeVsFlutter: BlogPost = {
     },
     {
       id: "decision-rule",
-      heading: "Pick React Native if, pick Flutter if",
+      heading: "When to pick React Native, and when to pick Flutter",
       blocks: [
         {
           type: "paragraph",
