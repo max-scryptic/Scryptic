@@ -1,16 +1,18 @@
+import incrementsAddUpToMvp from "@/assets/blog/images/increments-add-up-to-mvp.webp"
+import mvpLineOnStoryMap from "@/assets/blog/images/mvp-line-on-story-map.webp"
 import type { BlogPost } from "@/lib/blog/types"
 import { extendedMvp, mvp } from "@/lib/services"
 
 export const mvpAgile: BlogPost = {
   slug: "mvp-agile",
-  title: "How an MVP fits into agile development",
+  title: "Planning an MVP in agile, from story map to release",
   series: "launch",
   topic: "MVP and agile",
   icon: "workflow",
   description:
-    "How a minimum viable product fits into agile development: how it differs from a sprint increment, how to draw the MVP line on a backlog, and what to do after.",
+    "An MVP in agile is the first release that lets users finish one whole job. How it differs from a sprint increment, where to draw the MVP line and what follows.",
   summary:
-    "In agile development, the MVP is the first release you put in front of real users to test whether the product is worth building further. Agile is how you get there: short sprints, each ending in working software. Several sprint increments usually add up to one MVP, and what you learn once it is live decides the order of the backlog that follows.",
+    "Sprints in agile development produce working software every week or two. An MVP in agile is the point where that software is first worth handing to real users, because it covers one whole job they can finish without you. It usually takes several sprints to get there, and once it's live, what users do sets the order of everything left on the backlog.",
   datePublished: "2026-11-05",
   facts: [
     { label: "MVP is", value: "A product decision: what to release" },
@@ -25,16 +27,11 @@ export const mvpAgile: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "It is the point where the increments you have built add up to one complete job that real users can do without you, released so you can see whether they keep doing it. The MVP answers a question about the product. The sprints are how the team works towards that answer in small, checkable steps.",
+          text: "It's the first release in a run of sprints that people outside the team rely on. Up to that point the work is judged by the team and whoever watches the demos. From then on it's judged by whether users come back.",
         },
         {
           type: "paragraph",
-          text: "The two ideas grew up separately. The Agile Manifesto, written in 2001, never uses the term minimum viable product; it came from lean startup thinking and was made popular by Eric Ries. They fit together because they share a principle the manifesto puts plainly: working software is the primary measure of progress. Agile keeps every step small and working. The MVP says which steps are worth taking before anyone outside the team sees the product.",
-        },
-        {
-          type: "paragraph",
-          text: "If the MVP itself is the part you are unsure about, start with what counts as one and how it differs from a prototype.",
-          link: { text: "What MVP software is, and the five checks for one.", href: "/blog/what-is-mvp-software" },
+          text: "The two ideas come from different places. The Agile Manifesto, written in 2001, never mentions a minimum viable product; Eric Ries and the lean startup movement made the term popular later. They sit together easily because of one of the manifesto's principles, that working software is the primary measure of progress. An MVP applies that principle to the whole product, and raises the bar: the measure becomes whether strangers use it.",
         },
       ],
     },
@@ -44,14 +41,14 @@ export const mvpAgile: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "An increment is what a sprint produces, a release is when you put software in front of users, and the MVP is the first release built to test whether the product deserves more work. Teams that blur the three end up either releasing half a job to users or never releasing at all.",
+          text: "Increments and releases describe how software moves from the team to users. The MVP is a judgement about what's in it: the first release that covers a whole job.",
         },
         {
           type: "table",
           caption: "Five agile and product terms compared by what each one is, who decides it and how often it happens",
           columns: ["Term", "What it is", "Who decides", "How often"],
           rows: [
-            ["Sprint", "A fixed block of time, usually one or two weeks, with one goal", "The team, with the product owner", "Back to back, all through the build"],
+            ["Sprint", "A fixed block of time, often one or two weeks, with one goal", "The team, with the product owner", "Back to back, all through the build"],
             ["Increment", "Working, tested software added during a sprint", "The team, against its definition of done", "At least once a sprint"],
             ["Release", "Increments made available to users", "The product owner", "Whenever the increments are worth using"],
             ["MVP", "The first release that lets real users finish the core job alone", "The founder or product owner", "Once, at the start"],
@@ -60,7 +57,7 @@ export const mvpAgile: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "The Scrum Guide, the most widely used description of how agile teams run sprints, doesn't define an MVP either. That is why teams fill the gap differently, and why it pays to agree what your MVP is before the first sprint starts.",
+          text: "The Scrum Guide, the most widely used description of how agile teams run sprints, doesn't define an MVP, so every team fills the gap its own way. Write down what yours is, in one sentence, before the first sprint starts.",
         },
       ],
     },
@@ -70,33 +67,40 @@ export const mvpAgile: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "No, and treating it as one is the most common mix-up. A sprint increment should be finished to the standard you would release at, but on its own it rarely covers a whole job. Sign-in that works, with nothing to do after signing in, is a good increment and a useless release.",
+          text: "No. Each increment should be finished to the standard you'd release at, but one increment rarely covers a whole job. Sign-in that works, with nothing to do after signing in, is a good increment and a useless release.",
+        },
+        {
+          type: "image",
+          image: incrementsAddUpToMvp,
+          alt: "Three sprint increments, offer sent, reply or lapse and list imported, join into one MVP release.",
         },
         {
           type: "paragraph",
-          text: "The opposite mistake is just as common: calling the MVP phase one of a long plan, then building it in sprints that nobody outside the team sees until month six. That is a fixed plan delivered in fortnightly chunks, and it gives up the reason for building an MVP, which is to learn from real use early.",
+          text: "The opposite mistake is calling the MVP phase one of a long plan and building it in sprints nobody outside the team sees until month six. That's a fixed plan delivered in fortnightly chunks. It throws away the reason to build an MVP at all, which is to learn from real use early.",
         },
         {
-          type: "list",
-          items: [
-            { term: "Too early to release", text: "The increments cover some steps of the job, but a user would get stuck or need you to finish it." },
-            { term: "Ready to release", text: "One kind of user can finish the job start to finish, their data is kept and private, and you can measure whether they came back." },
-            { term: "Released too late", text: "The job was finishable weeks ago, and the sprints since went on extras nobody has asked for yet." },
-          ],
+          type: "paragraph",
+          text: "The increments add up to an MVP once one kind of user can get from the start of the job to the end on their own, with their data kept and private. Our explainer on MVP software turns that moment into five checks you can run.",
+          link: { text: "Run the five checks for MVP software.", href: "/blog/what-is-mvp-software" },
         },
       ],
     },
     {
-      id: "backlog",
-      heading: "How do you plan an MVP with an agile backlog?",
+      id: "mvp-line",
+      heading: "Where do you draw the MVP line on a backlog?",
       blocks: [
         {
           type: "paragraph",
-          text: "Write the job as a row of steps, put the stories for each step underneath, and draw a line across: everything above the line is the MVP, everything below waits for what users tell you. This is user story mapping, a technique popularised by Jeff Patton, and it stops the backlog turning into a flat list where every item looks equally urgent.",
+          text: "Lay the job out as a row of steps, put the stories for each step underneath, and draw a line across. Everything above the line is the MVP. Everything below waits until users have told you something. This is user story mapping, popularised by Jeff Patton, and it stops a backlog from becoming a flat list where every item looks equally urgent.",
+        },
+        {
+          type: "image",
+          image: mvpLineOnStoryMap,
+          alt: "A story map with five job steps, one story under each above a green MVP line and later stories below it.",
         },
         {
           type: "paragraph",
-          text: "The example here is an allotment society with a waiting list of eighty people and plots that come free a few times a year. Today the secretary works through a spreadsheet, emails whoever is next and chases them for an answer. The one job is getting a vacant plot taken up by the next person in line.",
+          text: "Take an allotment society with eighty people on its waiting list and plots that come free a few times a year. Today the secretary works through a spreadsheet, emails whoever is next and chases them for an answer. The one job is getting a vacant plot taken up by the next person in line.",
         },
         {
           type: "list",
@@ -104,9 +108,9 @@ export const mvpAgile: BlogPost = {
           items: [
             { term: "Write the bet", text: "If offers go out automatically and lapse after a week, vacant plots are taken up faster and the secretary stops chasing. The measure is days from vacant to accepted." },
             { term: "Map the steps", text: "Join the list, plot falls vacant, offer sent, offer answered, plot handed over." },
-            { term: "Draw the line", text: "Keep the stories that let one person move through every step. Move the rest below the line." },
+            { term: "Draw the line", text: "Keep the stories that let one person move through every step, and move the rest below." },
             { term: "Mark the manual steps", text: "Anything a person can keep doing by hand for the first few months, such as collecting rent, stays manual." },
-            { term: "Set the definition of done", text: "Include what viable needs, not just what works in a demo: data kept, each member sees only their own place on the list, and errors reported." },
+            { term: "Set the definition of done", text: "Write viable into it, so done means each member sees only their own place on the list and errors reach someone who'll read them." },
           ],
         },
         {
@@ -127,7 +131,7 @@ export const mvpAgile: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Five stories above the line is a small MVP, and that is the point. If your own list won't fit, our free MVP Scope Planner lets you size each feature and see what fits a first release.",
+          text: "Five stories is a small MVP, which is the point. If your own list won't shrink that far, the free MVP Scope Planner sizes each feature you add and shows which ones fit a first release, which can wait and which package they match.",
           link: { text: "Draw your own line with the MVP Scope Planner.", href: "/tools/mvp-scope-planner" },
         },
       ],
@@ -138,7 +142,7 @@ export const mvpAgile: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "For a focused MVP, usually between one and four sprints of one or two weeks each. Give each sprint a goal that is a step through the job, not a list of features, and end it with a demo of working software to someone who has the problem.",
+          text: "For a focused MVP, between one and four sprints of one or two weeks each. Give each sprint a goal that moves a user one step further through the job, and judge the sprint by whether that step works.",
         },
         {
           type: "table",
@@ -152,7 +156,7 @@ export const mvpAgile: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Each sprint leaves the product working end to end for the steps it covers, so you could stop after any of them and still have something to show. Our week by week MVP guide covers the scoping, design and launch weeks around the build sprints in more depth.",
+          text: "Stop after any of these sprints and you'd still have working software for the steps covered so far, which is what makes the plan safe to change halfway. Our week by week guide puts the scoping, design and launch weeks around the build.",
           link: { text: "How to build an MVP, week by week.", href: "/blog/how-to-build-an-mvp" },
         },
       ],
@@ -163,26 +167,26 @@ export const mvpAgile: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "The habits that keep feedback short help; the ones built for large teams on long-running products mostly slow a first release down. Keep the first group and scale the second to a team of two or three.",
+          text: "Keep the habits that shorten feedback. Scale the rest down to fit a team of two or three, because most agile practice was written for bigger teams working on products that already exist.",
         },
-        { type: "subheading", text: "Habits worth keeping" },
+        { type: "subheading", text: "Worth keeping" },
         {
           type: "list",
           items: [
-            { term: "One person who can say no", text: "The product owner, often the founder, decides what goes above the line and turns away anything that doesn't serve the job." },
-            { term: "Demos to people with the problem", text: "Show each sprint's work to the secretary, not just to the team. They notice the missing step a developer won't." },
-            { term: "A definition of done that includes viable", text: "Privacy, kept data and error reporting are part of done from the first sprint, not a hardening sprint at the end." },
-            { term: "Short retrospectives", text: "Fifteen minutes on what slowed the sprint down is enough for a small team." },
+            "A product owner, often the founder, who decides what goes above the line and can turn down anything that doesn't serve the job.",
+            "A demo at the end of each sprint for someone who has the problem. The allotment secretary will spot a missing step that a developer reading the stories won't.",
+            "Privacy, kept data and error reporting in the definition of done from the first sprint, so there's nothing to bolt on at the end.",
+            "A fifteen minute retrospective. For a small team that's long enough to find what slowed the sprint down.",
           ],
         },
-        { type: "subheading", text: "Habits that slow an MVP down" },
+        { type: "subheading", text: "Worth scaling down" },
         {
           type: "list",
           items: [
-            { term: "Velocity as the goal", text: "Points completed say nothing about whether users want the product. Measure the bet instead." },
-            { term: "Estimating the whole backlog", text: "Most stories below the line will change or disappear once users arrive. Estimate them when they move up." },
-            { term: "Full ceremony for a tiny team", text: "Separate planning, refinement and review meetings each week cost a small team a day it doesn't have." },
-            { term: "Fixing it next sprint", text: "Fine for a rough screen; not for data that leaks between users, which has to be right before release." },
+            "Velocity targets. Points completed say nothing about whether users want the product; the bet you wrote down does.",
+            "Estimating the whole backlog. Most stories below the line will change or vanish once users arrive, so estimate each one when it moves up.",
+            "Separate planning, refinement and review meetings every week, which can cost a team of two a day it doesn't have.",
+            "Putting off fixes that touch data until next sprint. A rough screen can wait; members seeing each other's details can't.",
           ],
         },
       ],
@@ -193,34 +197,44 @@ export const mvpAgile: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "It gets reordered by what real users did, not by the plan you made before they arrived. The sprints carry on at the same rhythm; what changes is that each one starts from evidence. Ries calls this the build, measure, learn loop, and the decision at each turn is whether to carry on in the same direction or change it.",
+          text: "The stories below the line get reordered against what users actually did, and some get deleted. The sprint rhythm carries on as before. Where each sprint's goal comes from is what changes: before launch it came from the story map, and after launch it comes from the measure you chose.",
         },
         {
           type: "paragraph",
-          text: "For the allotment society, the measure is days from a plot falling vacant to an offer being accepted. If offers are accepted within two days, the bet held, and the next sprint can go on the rent invoices the treasurer has been asking for. If most offers lapse unanswered, the problem is reaching people, and text message reminders jump from below the line to the top.",
+          text: "For the allotment society, the measure is days from a plot falling vacant to an offer being accepted. If offers are accepted within two days, the bet held, and the next sprint can go on the rent invoices the treasurer keeps asking for. If most offers lapse unanswered, the problem is reaching people, and text message reminders jump from below the line to the top.",
         },
         {
           type: "checklist",
           items: [
-            "The measure you chose before launch is being recorded from day one.",
-            "Someone reads it, and what users say, before each sprint is planned.",
-            "Stories below the line are reordered against that evidence, not their original order.",
-            "Anything users have worked around by hand is a candidate for the next sprint.",
+            "The measure you chose is recorded from the first day.",
+            "Someone reads it, along with what users say, before each sprint is planned.",
+            "Every story below the line is reordered against that evidence.",
+            "Anything users are working around by hand is a candidate for the next sprint.",
           ],
+        },
+        {
+          type: "paragraph",
+          text: "The first item only works if the measure is wired up before launch, as part of the same list as legal pages and payments. The free App Launch Checklist builds that list for your app from five questions.",
+          link: { text: "Build your list with the App Launch Checklist.", href: "/tools/app-launch-checklist" },
         },
       ],
     },
     {
-      id: "working-with-us",
+      id: "fixed-price",
       heading: "Can an MVP be built in a fixed-price sprint?",
       blocks: [
         {
           type: "paragraph",
-          text: "Yes, if the scope is fixed first. Agile usually holds time and cost steady and lets scope move; a fixed price works when the line on the story map is drawn before the sprint starts and the stories below it are left for later.",
+          text: "Yes, once the scope is fixed. Agile normally holds time and cost steady and lets scope move. A fixed price works when the MVP line is drawn before the sprint starts and nothing from below it creeps in.",
         },
         {
           type: "paragraph",
-          text: `That is how we work: the scope agreed up front, then a fixed-price sprint of ${mvp.price} + VAT for two weeks or ${extendedMvp.price} + VAT for three, each with a week of changes from your feedback and a handover week after launch, and the code in your name.`,
+          text: "For a rough idea of what the stories above your line add up to, the free MVP Cost Calculator asks eight questions about your app and gives an estimate in development weeks and pounds, along with what drives the price.",
+          link: { text: "Estimate your build with the MVP Cost Calculator.", href: "/tools/mvp-cost-calculator" },
+        },
+        {
+          type: "paragraph",
+          text: `We work this way: the scope agreed up front, then a fixed-price sprint of ${mvp.price} + VAT for two weeks or ${extendedMvp.price} + VAT for three, each with a week of changes from your feedback and a handover week after launch, and the code in your name.`,
           link: { text: "See what each MVP package includes.", href: "/#pricing" },
         },
       ],
@@ -228,19 +242,14 @@ export const mvpAgile: BlogPost = {
   ],
   faqs: [
     {
-      question: "Is MVP a Scrum term?",
+      question: "Should you use Scrum or Kanban for an MVP?",
       answer:
-        "No. The Scrum Guide talks about sprints, increments and a product goal, but not minimum viable products. The MVP comes from lean startup thinking. Many Scrum teams use both, with the MVP as the product goal for their first few sprints.",
-    },
-    {
-      question: "Can you build an MVP without agile?",
-      answer:
-        "Yes. An MVP is defined by its scope, not by the method used to build it. A small, well-defined MVP can be built to a fixed plan. Agile helps most when you expect to learn things during the build that change what goes in, which is common for first products.",
+        "Either works. Scrum's fixed sprints give a small team a regular deadline and a demo to aim at, which suits a build with a launch date. Kanban drops sprints and pulls the next card whenever one is finished, which suits a single developer, or the months after launch when work arrives as user feedback in a steady trickle.",
     },
     {
       question: "What is the difference between an MVP and a minimum marketable feature?",
       answer:
-        "An MVP is a whole first product released to test whether people want it. A minimum marketable feature is the smallest piece of new functionality worth releasing to customers who already use a product. MVPs come first; minimum marketable features are how many teams plan the releases after it.",
+        "An MVP is a whole first product released to test whether people want it. A minimum marketable feature is the smallest piece of new functionality worth releasing to customers who already use a product. The MVP comes first; minimum marketable features are how many teams plan the releases after it.",
     },
   ],
 }
