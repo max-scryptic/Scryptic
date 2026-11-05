@@ -14,6 +14,7 @@ export const mobileWebDevelopment: BlogPost = {
   summary:
     "Mobile web development is building a website or web app that people can finish their task on in a phone's browser, not just one that fits the screen. Before you brief a developer, settle five decisions: which screens are designed for the phone first, where a half-filled form survives, how people sign in, what each form field asks of the keyboard and which phones and browsers you test. Each one changes the build, and each is cheap to settle now.",
   datePublished: "2026-10-30",
+  dateModified: "2026-11-05",
   facts: [
     { label: "Worked example", value: "Season sign-ups for a junior football club" },
     { label: "Most missed test", value: "A link opened inside a social app" },
@@ -174,6 +175,74 @@ export const mobileWebDevelopment: BlogPost = {
         {
           type: "paragraph",
           text: "No. Mobile web application development is web work: you need a web developer who designs for the phone and tests on real ones. Mobile app developers specialise in iOS and Android apps, app stores and device features; a mobile web app needs none of those, and paying for them buys skills the product won't use.",
+        },
+      ],
+    },
+    {
+      id: "deliverables",
+      heading: "What should a mobile web developer hand over?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Working journeys on real phones, and the evidence that they were checked there. Put these in the brief as deliverables, so the quote prices them and the final invoice depends on them:",
+        },
+        {
+          type: "list",
+          items: [
+            { term: "Phone-first designs", text: "For every journey your table marks phone first, signed off by you before the build starts on that screen." },
+            { term: "A device and browser record", text: "Which phones, browsers and in-app browsers each journey was tested on, with the date and any gaps written down." },
+            { term: "A slow connection result", text: "How long the main journey takes to become usable on a throttled mobile connection, measured rather than described." },
+            { term: "The interrupted payment test", text: "Proof that a parent who leaves for their banking app and never comes back is still recorded correctly as paid or unpaid." },
+            { term: "The form checklist, ticked", text: "Each item from the keyboard checklist above, checked on an iPhone and an Android phone." },
+            { term: "The code and accounts in your name", text: "The repository, hosting, domain and payment accounts owned by you, with the developer added as a user." },
+          ],
+        },
+      ],
+    },
+    {
+      id: "supplier-checks",
+      heading: "How do you check a mobile web development supplier?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Open their past work on your own phone, the way your users will, and ask questions only someone who tests on phones can answer well. A portfolio of laptop screenshots tells you very little about either.",
+        },
+        {
+          type: "table",
+          caption: "Questions to ask a mobile web development supplier, and what a good answer and a warning sign sound like",
+          columns: ["Ask", "A good answer", "A warning sign"],
+          rows: [
+            [
+              "Can I open a live web app you built from a link in WhatsApp?",
+              "A link, sent now, that works inside the chat app",
+              "Only screenshots, or a site that needs a laptop to look right",
+            ],
+            [
+              "Which phones do you test on before launch?",
+              "Named devices, including an older Android phone",
+              "The browser's mobile view on a laptop",
+            ],
+            [
+              "What happens if someone signs in from a link opened in Instagram?",
+              "They describe the in-app browser problem and how they'd avoid it",
+              "They haven't come across it",
+            ],
+            [
+              "How do you know a payment went through if the customer never comes back?",
+              "The payment provider tells the server directly",
+              "The confirmation page records it",
+            ],
+            [
+              "Do we need an app store app as well?",
+              "Probably not yet, with the reasons it might later",
+              "Yes, quoted as a second build without asking what users do",
+            ],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Most of these checks apply to any supplier you hire to build an app. Our UK buyer's checklist covers the rest, from contract terms to day rates.",
+          link: { text: "Read the checklist for choosing an app development company.", href: "/blog/how-to-choose-an-app-development-company-uk" },
         },
         {
           type: "paragraph",
