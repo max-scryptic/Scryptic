@@ -13,6 +13,7 @@ export const pwaDevelopment: BlogPost = {
   summary:
     "PWA development adds browser features such as installing to the home screen, working offline and sending notifications to a web app. Making an app installable is a small job; letting people edit offline is a big one. Build only what your users need, because a PWA is still a website underneath and can't do everything a native app can.",
   datePublished: "2026-10-25",
+  dateModified: "2026-11-05",
   facts: [
     { label: "Built from", value: "Manifest, service worker, HTTPS" },
     { label: "Smallest job", value: "Making it installable" },
@@ -185,6 +186,31 @@ export const pwaDevelopment: BlogPost = {
       ],
     },
     {
+      id: "website-to-app",
+      heading: "How do you turn a website into an app?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "If the site already lets people do something, such as book, order or log in, you can make it installable in a few days and add offline support after that. A brochure site gains very little from the change, because nobody adds a page they read once to their home screen.",
+        },
+        {
+          type: "list",
+          ordered: true,
+          items: [
+            "Check the main task works well in a phone browser, with nothing hidden behind hover menus or wide tables. Installing won't fix a layout that's awkward on a small screen.",
+            "Serve every page over HTTPS, then add the manifest and the icons described above.",
+            "Register a service worker that saves the app's own files and shows an offline page when there is no signal.",
+            "Choose a caching rule for each kind of content, using the table above, and leave payment and account pages out of the cache.",
+            "Install it on an Android phone and an iPhone, turn on flight mode, and check what opens. Then ship a small change and confirm both phones pick it up.",
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "A store listing is a separate step. Google Play accepts a PWA packaged as a Trusted Web Activity, with tools such as Bubblewrap doing most of the work. Apple's review expects an app to offer more than the website does, so for the App Store you'd wrap the site with something like Capacitor and add a real phone feature, such as notifications or the camera.",
+        },
+      ],
+    },
+    {
       id: "feature-effort",
       heading: "How much does each PWA feature add to the build?",
       blocks: [
@@ -226,7 +252,7 @@ export const pwaDevelopment: BlogPost = {
     {
       question: "Does a PWA need to be in the App Store or Google Play?",
       answer:
-        "No. People open it from a link and can add it to their home screen, so there is no store listing or review to get through. If you need a store listing, a PWA can be packaged for Google Play, but Apple tends to reject apps that are little more than a website in a wrapper.",
+        "No. People open it from a link and can add it to their home screen, so there is no store listing or review to get through. Listing it is optional, and easier on Google Play than on the App Store.",
     },
     {
       question: "Is a PWA cheaper than a native app?",

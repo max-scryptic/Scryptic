@@ -14,6 +14,7 @@ export const reactjsWebDevelopmentCompany: BlogPost = {
   summary:
     "The costliest mistake when hiring a ReactJS web development company is assuming React covers the whole product. React builds the screens people use in the browser; sign-in, the database, the rules about who can see what and the hosting are separate work, and each needs a named owner in the proposal. The other five mistakes below grow from the same blind spot.",
   datePublished: "2026-10-26",
+  dateModified: "2026-11-05",
   facts: [
     { label: "Mistakes covered", value: "6" },
     { label: "What React builds", value: "The interface" },
@@ -183,6 +184,29 @@ export const reactjsWebDevelopmentCompany: BlogPost = {
             text: "What to check in the contract before you sign.",
             href: "/blog/how-to-choose-an-app-development-company-uk",
           },
+        },
+      ],
+    },
+    {
+      id: "compare-suppliers",
+      heading: "How do you compare ReactJS companies side by side?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Put the same brief in front of each one and score their answers on the same few points. Most of the gaps between quotes turn up in the backend, the ownership terms and how the price was worked out.",
+        },
+        {
+          type: "table",
+          caption: "Points to compare ReactJS web development companies on, with the answer to look for on each",
+          columns: ["Compare", "The answer to look for"],
+          rows: [
+            ["Backend", "Who builds the server, database and sign-in, named in the quote"],
+            ["Search", "Which pages are rendered on the server so search engines can read them"],
+            ["Existing code", "A review of what you already have, before any talk of a rewrite"],
+            ["Pricing", "A price worked out from the workflow and its awkward cases"],
+            ["Ownership", "The repository and hosting in your name from the first week"],
+            ["After launch", "Who applies React and library updates, and at what cost"],
+          ],
         },
       ],
     },

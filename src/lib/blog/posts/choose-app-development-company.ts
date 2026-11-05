@@ -12,7 +12,7 @@ export const chooseAppDevelopmentCompany: BlogPost = {
   summary:
     "Choose an app development company by what you can check, not by the size of the quote: live apps you can use, a named person writing your code, and a contract that assigns the code and every account to you. Ask the questions below, listen for the answers, and walk away if several red flags turn up together.",
   datePublished: "2026-10-14",
-  dateModified: "2026-10-28",
+  dateModified: "2026-11-05",
   sections: [
     {
       id: "before-you-start",
@@ -113,6 +113,36 @@ export const chooseAppDevelopmentCompany: BlogPost = {
         {
           type: "paragraph",
           text: "Then do the one check that beats every question: download their live apps, sign up, and use them for ten minutes. Screenshots prove someone can design. A live product with real users proves someone can ship. Ask for a reference from a past client with a similar project too.",
+        },
+      ],
+    },
+    {
+      id: "mobile-checks",
+      heading: "What else should you ask a mobile app development company?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Ask for proof that they've shipped apps through the stores and kept them updated, because store review and old versions are where mobile projects slip. A supplier who only builds for the web will rarely bring these up unprompted.",
+        },
+        {
+          type: "checklist",
+          items: [
+            "App Store and Google Play links to apps they built, with recent updates in the version history.",
+            "A reason for native iOS and Android code or one cross-platform codebase, tied to your app's features and to who can maintain it later.",
+            "A named person who submits builds, runs TestFlight and the Play testing tracks, and answers the reviewers.",
+            "A plan for a rejected submission, and how many days the launch date allows for it.",
+            "A minimum supported version, and a way to ask people on older versions to update.",
+            "A list of the real phones they'll test on, including an older Android and an older iPhone.",
+            "Crash reporting set up before launch, in an account you own.",
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "For iOS work, also ask who has built with Apple's own tools recently. A supplier who mostly writes React Native should still be able to explain what changes when a feature needs native Swift code.",
+          link: {
+            text: "The mobile app development checks a web build skips.",
+            href: "/blog/mobile-app-development",
+          },
         },
       ],
     },

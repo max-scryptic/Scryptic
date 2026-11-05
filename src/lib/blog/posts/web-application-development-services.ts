@@ -12,7 +12,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
   summary:
     "Web application development is building software people use in a browser: the screens, the business rules behind them, the database and the hosting it runs on. A first release goes through scope, design, build, testing and launch, whoever builds it. Keep it to one useful workflow rather than the whole roadmap, and choose a builder who can say what will ship, what it costs and who owns it afterwards.",
   datePublished: "2026-10-21",
-  dateModified: "2026-11-04",
+  dateModified: "2026-11-05",
   facts: [
     { label: "Parts of a web app", value: "Screens, rules, data, services, hosting" },
     { label: "Delivery stages", value: "6" },
@@ -158,6 +158,11 @@ export const webApplicationDevelopmentServices: BlogPost = {
         {
           type: "paragraph",
           text: "Ask each one to walk you through how they would handle the awkward cases in your workflow, like the double booking and the failed deposit above. An agency that has built this kind of app before will answer without reaching for a specification.",
+        },
+        { type: "subheading", text: "If you hire a design agency first" },
+        {
+          type: "paragraph",
+          text: "Check that its designs can be built and tested before you pay for the build. Ask for a clickable prototype of the whole workflow, including the error and empty screens, and for notes from at least a few sessions watching real users try it. Agree what the developers receive at handover: the design files, the components the screens are made from, and the rules behind each state, such as what a patient sees when their slot has just gone.",
         },
       ],
     },

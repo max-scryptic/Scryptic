@@ -13,7 +13,7 @@ export const aiSoftwareDevelopment: BlogPost = {
   summary:
     "AI software development covers two jobs that often happen in the same project. Developers use coding agents such as Claude Code, Codex, Cursor and GitHub Copilot to write the code, and products call a model every time a customer uses an AI feature. The first speeds up the typing but leaves a person answerable for every change. The second puts a cost on each request and needs code that checks the answer before anyone sees it.",
   datePublished: "2026-11-03",
-  dateModified: "2026-11-04",
+  dateModified: "2026-11-05",
   facts: [
     { label: "Coding agents compared", value: "4" },
     { label: "Our AI launches drawn on", value: "ReelEstate and Viewlio" },
@@ -44,6 +44,10 @@ export const aiSoftwareDevelopment: BlogPost = {
       id: "harness-and-model",
       heading: "How do Claude Code, Codex, Cursor and Copilot differ?",
       blocks: [
+        {
+          type: "paragraph",
+          text: "An AI agent is software that uses a model to work towards a goal in steps, choosing and using tools as it goes, where a chatbot only replies to a message. A coding agent is one whose tools are your code: it reads the files, runs the tests and proposes the edits.",
+        },
         {
           type: "paragraph",
           text: "Every coding agent pairs a model, which does the reasoning, with a harness, the program that lets the model read your files, run commands and propose edits. Claude Code and Codex are harnesses made by the companies that make the models they run. Cursor and GitHub Copilot let you pick models from several providers.",

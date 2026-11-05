@@ -13,6 +13,7 @@ export const buildAWebApp: BlogPost = {
   summary:
     "To build a web app, decide the one task it has to complete, pick a way of building it you can keep running, connect the screens to your rules and data, then test the awkward cases before a small launch. This guide works through each step with a single example, for founders with or without a technical background.",
   datePublished: "2026-10-23",
+  dateModified: "2026-11-05",
   facts: [
     { label: "Written for", value: "Founders, technical or not" },
     { label: "Build routes compared", value: "3" },
@@ -97,6 +98,28 @@ export const buildAWebApp: BlogPost = {
             text: "Our buyer's checklist for hiring an app developer.",
             href: "/blog/how-to-choose-an-app-development-company-uk",
           },
+        },
+        { type: "subheading", text: "Which builder fits your app?" },
+        {
+          type: "paragraph",
+          text: "Pick the kind of builder that matches what you're making, then check how you'd leave it. Web app development software falls into five broad groups.",
+        },
+        {
+          type: "table",
+          caption: "Five kinds of web app builder, with examples, what each suits and where each tends to stop",
+          columns: ["Kind of builder", "Examples", "Suits", "Where it tends to stop"],
+          rows: [
+            ["AI app builders", "Lovable, Bolt, v0, Replit", "A working first version from a description", "Security and data rules nobody has reviewed"],
+            ["Visual no-code", "Bubble, WeWeb", "Custom workflows without writing code", "Leaving usually means rebuilding the logic elsewhere"],
+            ["Spreadsheet apps", "Glide, Softr", "Simple tools on top of existing data", "Complex permissions and large amounts of data"],
+            ["Internal tool builders", "Retool", "Screens for your own team", "Apps your customers sign in to"],
+            ["No-code mobile builders", "Adalo, FlutterFlow", "Getting into the app stores without code", "Phone features and offline use beyond what the builder offers"],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Building a mobile app without code works for a simple first release, but the stores still review it like any other app, and you're limited to the features the builder supports. If a builder has already taken you as far as it can, our migration guides cover what moves across from each one.",
+          link: { text: "Read the migration guide for your builder.", href: "/blog#migration" },
         },
         {
           type: "paragraph",
