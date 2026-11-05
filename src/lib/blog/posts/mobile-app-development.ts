@@ -13,12 +13,40 @@ export const mobileAppDevelopment: BlogPost = {
   summary:
     "Mobile app development has all the work of a web build, plus the work that comes from software living on someone's phone and reaching it through a store. Every release waits for review, old versions keep running after you ship a new one, permission prompts rarely get a second chance, saves have to survive a dead signal, and whoever holds the accounts and keys controls every update. This checklist covers only those parts, so you can put them in the brief before anyone quotes.",
   datePublished: "2026-10-31",
+  dateModified: "2026-11-05",
   facts: [
     { label: "Written for", value: "Founders who've chosen an installed app" },
     { label: "Worked example", value: "A dog walking company's app" },
-    { label: "Not covered here", value: "Web or app, and which framework" },
+    { label: "Covered elsewhere", value: "Web or app, and which framework" },
   ],
   sections: [
+    {
+      id: "what-it-is",
+      heading: "What is mobile app development?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Mobile app development is building software that people install on their phone from the App Store or Google Play. It covers the app on the phone, the server and database it talks to, and the work of getting each version through store review and onto people's phones.",
+        },
+        {
+          type: "list",
+          ordered: true,
+          items: [
+            "Decide the one job the app does, and whether it needs to be installed at all.",
+            "Choose how to build it: natively for iOS and Android separately, or once for both with a cross-platform framework.",
+            "Design the screens and the moments the app asks for permissions.",
+            "Build the app and the server behind it together, testing on real phones from the first week.",
+            "Submit to the stores, answer the reviewers and release.",
+            "Keep supporting older versions while you ship updates.",
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "The second step is usually a choice between React Native and Flutter for a startup, and hiring tends to settle it.",
+          link: { text: "Compare React Native and Flutter for a startup app.", href: "/blog/react-native-vs-flutter" },
+        },
+      ],
+    },
     {
       id: "what-it-adds",
       heading: "What mobile app development adds to a web build",
@@ -191,6 +219,11 @@ export const mobileAppDevelopment: BlogPost = {
       question: "Do I need both an iOS and an Android app at launch?",
       answer:
         "Not if your first users mostly carry one kind of phone. Ask them, or check which phones visit your website. React Native and Flutter build both apps from one codebase, but each platform still has its own testing, store listing and review, so launching on one and adding the other later is a reasonable plan.",
+    },
+    {
+      question: "What's different about building for Android?",
+      answer:
+        "Mostly the range of phones and the Play Store's rules. Android runs on thousands of models from many makers, so test on a cheap, older phone as well as a new one. A new personal developer account on Google Play must run a closed test with at least 12 testers for 14 days before it can publish, so open the account early. An organisation account in your company's name avoids that test but needs a D-U-N-S number, which can take weeks to come through.",
     },
     {
       question: "Can I turn my website into a mobile app?",

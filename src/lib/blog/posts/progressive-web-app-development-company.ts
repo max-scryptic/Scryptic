@@ -53,7 +53,7 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
         {
           type: "paragraph",
           text: "A PWA earns its place in between: people come back to it often, a home screen icon helps, and some of the work has to survive a weak signal. Pick the platform for the task, not for the appeal of an app icon.",
-          link: { text: "What each PWA feature involves and adds to a build.", href: "/blog/pwa-development" },
+          link: { text: "PWA development, feature by feature, and what each adds to a build.", href: "/blog/pwa-development" },
         },
       ],
     },
