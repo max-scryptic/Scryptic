@@ -5,14 +5,14 @@ import { extendedMvp, mvp } from "@/lib/services"
 
 export const mvpAgile: BlogPost = {
   slug: "mvp-agile",
-  title: "Planning an MVP in agile, from story map to release",
+  title: "How an MVP fits into agile development",
   series: "launch",
   topic: "MVP and agile",
   icon: "workflow",
   description:
-    "An MVP in agile is the first release that lets users finish one whole job. How it differs from a sprint increment, where to draw the MVP line and what follows.",
+    "In agile development, the MVP is the first release that lets users finish one whole job. How it differs from a sprint increment, and where to draw the line.",
   summary:
-    "Sprints in agile development produce working software every week or two. An MVP in agile is the point where that software is first worth handing to real users, because it covers one whole job they can finish without you. It usually takes several sprints to get there, and once it's live, what users do sets the order of everything left on the backlog.",
+    "Sprints in agile development produce working software every week or two. The MVP is the point where that software is first worth handing to real users, because it covers one whole job they can finish without you. It usually takes several sprints to get there, and once it's live, what users do sets the order of everything left on the backlog.",
   datePublished: "2026-11-05",
   facts: [
     { label: "MVP is", value: "A product decision: what to release" },
@@ -27,7 +27,7 @@ export const mvpAgile: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "It's the first release in a run of sprints that people outside the team rely on. Up to that point the work is judged by the team and whoever watches the demos. From then on it's judged by whether users come back.",
+          text: "It's the first release that people outside the team can rely on, after a run of sprints that only the team has used. Until then, the work is judged by the team and whoever watches the demos. From then on, it's judged by whether users come back.",
         },
         {
           type: "paragraph",
@@ -67,20 +67,20 @@ export const mvpAgile: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "No. Each increment should be finished to the standard you'd release at, but one increment rarely covers a whole job. Sign-in that works, with nothing to do after signing in, is a good increment and a useless release.",
+          text: "No. Each increment should be finished to a standard you could release, but one increment rarely covers a whole job. Sign-in that works, with nothing to do after signing in, is a good increment and a useless release.",
         },
         {
           type: "image",
           image: incrementsAddUpToMvp,
-          alt: "Three sprint increments, offer sent, reply or lapse and list imported, join into one MVP release.",
+          alt: "Three sprint increments (offer sent, reply or lapse, list imported) joining into one MVP release.",
         },
         {
           type: "paragraph",
-          text: "The opposite mistake is calling the MVP phase one of a long plan and building it in sprints nobody outside the team sees until month six. That's a fixed plan delivered in fortnightly chunks. It throws away the reason to build an MVP at all, which is to learn from real use early.",
+          text: "The opposite mistake is treating the MVP as phase one of a long plan, and building it in sprints that nobody outside the team sees until month six. That's a fixed plan delivered in fortnightly chunks. It throws away the reason to build an MVP at all, which is to learn from real use early.",
         },
         {
           type: "paragraph",
-          text: "The increments add up to an MVP once one kind of user can get from the start of the job to the end on their own, with their data kept and private. Our explainer on MVP software turns that moment into five checks you can run.",
+          text: "The increments add up to an MVP once one kind of user can get from the start of the job to the end on their own, with their data saved and kept private. Our explainer on MVP software turns that moment into five checks you can run.",
           link: { text: "Run the five checks for MVP software.", href: "/blog/what-is-mvp-software" },
         },
       ],
@@ -96,7 +96,7 @@ export const mvpAgile: BlogPost = {
         {
           type: "image",
           image: mvpLineOnStoryMap,
-          alt: "A story map with five job steps, one story under each above a green MVP line and later stories below it.",
+          alt: "A story map of five steps, with one story under each step above a green MVP line and later stories below it.",
         },
         {
           type: "paragraph",
@@ -106,11 +106,11 @@ export const mvpAgile: BlogPost = {
           type: "list",
           ordered: true,
           items: [
-            { term: "Write the bet", text: "If offers go out automatically and lapse after a week, vacant plots are taken up faster and the secretary stops chasing. The measure is days from vacant to accepted." },
-            { term: "Map the steps", text: "Join the list, plot falls vacant, offer sent, offer answered, plot handed over." },
+            { term: "Write the bet", text: "If offers go out automatically and lapse after a week, vacant plots are taken up faster and the secretary stops chasing. The measure is how many days a plot stays vacant before someone accepts it." },
+            { term: "Map the steps", text: "Someone joins the list, a plot falls vacant, an offer goes out, the offer is answered and the plot is handed over." },
             { term: "Draw the line", text: "Keep the stories that let one person move through every step, and move the rest below." },
             { term: "Mark the manual steps", text: "Anything a person can keep doing by hand for the first few months, such as collecting rent, stays manual." },
-            { term: "Set the definition of done", text: "Write viable into it, so done means each member sees only their own place on the list and errors reach someone who'll read them." },
+            { term: "Set the definition of done", text: "Make it cover what viable means here: each member sees only their own place on the list, and errors reach someone who will act on them." },
           ],
         },
         {
@@ -131,7 +131,7 @@ export const mvpAgile: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Five stories is a small MVP, which is the point. If your own list won't shrink that far, the free MVP Scope Planner sizes each feature you add and shows which ones fit a first release, which can wait and which package they match.",
+          text: "Five stories is a small MVP, which is the point. If your own list won't shrink that far, the free MVP Scope Planner lets you size each feature and shows which ones fit a first release, which can wait and which package they match.",
           link: { text: "Draw your own line with the MVP Scope Planner.", href: "/tools/mvp-scope-planner" },
         },
       ],
@@ -142,11 +142,11 @@ export const mvpAgile: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "For a focused MVP, between one and four sprints of one or two weeks each. Give each sprint a goal that moves a user one step further through the job, and judge the sprint by whether that step works.",
+          text: "A focused MVP usually takes between one and four sprints of one or two weeks each. Give each sprint a goal that moves a user one step further through the job, and judge the sprint by whether that step works.",
         },
         {
           type: "table",
-          caption: "The allotment society MVP as three one week sprints, with each sprint's goal and what is shown at the end",
+          caption: "The allotment society MVP as three one-week sprints, with each sprint's goal and what is shown at the end",
           columns: ["Sprint", "Sprint goal", "Shown at the end"],
           rows: [
             ["One", "A plot can go from vacant to offered", "The secretary marks a test plot vacant and the next person gets the email"],
@@ -156,7 +156,7 @@ export const mvpAgile: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Stop after any of these sprints and you'd still have working software for the steps covered so far, which is what makes the plan safe to change halfway. Our week by week guide puts the scoping, design and launch weeks around the build.",
+          text: "Stop after any of these sprints and you'd still have working software for the steps covered so far, which is what makes the plan safe to change halfway. Our week by week guide covers the scoping, design and launch weeks either side of the build.",
           link: { text: "How to build an MVP, week by week.", href: "/blog/how-to-build-an-mvp" },
         },
       ],
@@ -175,8 +175,8 @@ export const mvpAgile: BlogPost = {
           items: [
             "A product owner, often the founder, who decides what goes above the line and can turn down anything that doesn't serve the job.",
             "A demo at the end of each sprint for someone who has the problem. The allotment secretary will spot a missing step that a developer reading the stories won't.",
-            "Privacy, kept data and error reporting in the definition of done from the first sprint, so there's nothing to bolt on at the end.",
-            "A fifteen minute retrospective. For a small team that's long enough to find what slowed the sprint down.",
+            "Private, safely saved data and reported errors written into the definition of done from the first sprint, so there's nothing to bolt on at the end.",
+            "A fifteen-minute retrospective. For a small team that's long enough to find what slowed the sprint down.",
           ],
         },
         { type: "subheading", text: "Worth scaling down" },
@@ -186,7 +186,7 @@ export const mvpAgile: BlogPost = {
             "Velocity targets. Points completed say nothing about whether users want the product; the bet you wrote down does.",
             "Estimating the whole backlog. Most stories below the line will change or vanish once users arrive, so estimate each one when it moves up.",
             "Separate planning, refinement and review meetings every week, which can cost a team of two a day it doesn't have.",
-            "Putting off fixes that touch data until next sprint. A rough screen can wait; members seeing each other's details can't.",
+            "Putting off fixes that touch data until the next sprint. A rough screen can wait; members seeing each other's details can't.",
           ],
         },
       ],
@@ -197,7 +197,7 @@ export const mvpAgile: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "The stories below the line get reordered against what users actually did, and some get deleted. The sprint rhythm carries on as before. Where each sprint's goal comes from is what changes: before launch it came from the story map, and after launch it comes from the measure you chose.",
+          text: "The stories below the line get reordered against what users actually did, and some get deleted. The sprint rhythm carries on as before. What changes is where each sprint's goal comes from: before launch it came from the story map, and after launch it comes from the measure you chose.",
         },
         {
           type: "paragraph",
@@ -214,7 +214,7 @@ export const mvpAgile: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "The first item only works if the measure is wired up before launch, as part of the same list as legal pages and payments. The free App Launch Checklist builds that list for your app from five questions.",
+          text: "The first item only works if the measure is wired up before launch, on the same launch list as the legal pages and payments. The free App Launch Checklist builds that list for your app from five questions.",
           link: { text: "Build your list with the App Launch Checklist.", href: "/tools/app-launch-checklist" },
         },
       ],
@@ -234,7 +234,7 @@ export const mvpAgile: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `We work this way: the scope agreed up front, then a fixed-price sprint of ${mvp.price} + VAT for two weeks or ${extendedMvp.price} + VAT for three, each with a week of changes from your feedback and a handover week after launch, and the code in your name.`,
+          text: `That's how we work: we agree the scope up front, then build it in a fixed-price sprint of ${mvp.price} + VAT for two weeks or ${extendedMvp.price} + VAT for three. Each includes a week of changes from your feedback and a handover week after launch, and the code is in your name.`,
           link: { text: "See what each MVP package includes.", href: "/#pricing" },
         },
       ],
@@ -244,7 +244,7 @@ export const mvpAgile: BlogPost = {
     {
       question: "Should you use Scrum or Kanban for an MVP?",
       answer:
-        "Either works. Scrum's fixed sprints give a small team a regular deadline and a demo to aim at, which suits a build with a launch date. Kanban drops sprints and pulls the next card whenever one is finished, which suits a single developer, or the months after launch when work arrives as user feedback in a steady trickle.",
+        "Either works. Scrum's fixed sprints give a small team a regular deadline and a demo to aim at, which suits a build with a launch date. Kanban has no sprints: the team picks up the next card whenever one is finished, which suits a single developer, or the months after launch, when work arrives as a steady trickle of user feedback.",
     },
     {
       question: "What is the difference between an MVP and a minimum marketable feature?",
