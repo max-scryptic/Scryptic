@@ -28,6 +28,7 @@ export const airtable: BlogPost = {
         {
           type: "paragraph",
           text: "Exported as CSV, a base looks like a set of spreadsheets. Read through the Airtable metadata API, it's a list of field types and options, and that list tells you exactly how much work the move to Postgres will be.",
+          link: { text: "Running on Google Sheets instead? The signs you've outgrown it.", href: "/blog/google-sheets-as-a-database" },
         },
         {
           type: "paragraph",

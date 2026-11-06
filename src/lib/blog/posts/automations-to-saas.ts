@@ -111,6 +111,7 @@ export const automationsToSaas: BlogPost = {
         {
           type: "paragraph",
           text: "Underneath, the mapping is straightforward. Workflows become jobs on a queue such as Trigger.dev, Inngest or a Postgres-backed queue. The spreadsheet becomes Postgres tables with real types and foreign keys. Incoming webhooks become your own endpoints that check signatures and hand work to a job. The logic barely changes; it just moves somewhere you can test it and see when it fails.",
+          link: { text: "The signs you've outgrown Google Sheets as a database.", href: "/blog/google-sheets-as-a-database" },
         },
         {
           type: "paragraph",

@@ -31,6 +31,7 @@ export const vibeCoding: BlogPost = {
         {
           type: "paragraph",
           text: "Vibe coding, the term Andrej Karpathy coined in early 2025, means describing what you want to an AI and accepting the code without reading it. Lovable, Bolt, v0 and Replit made it possible for founders without a coding background to ship a working product in a week. The catch is that the AI tested what you saw in the preview: the happy path, with one user, on a good day. Production is everyone else.",
+          link: { text: "Getting a Replit Agent app ready for production, week by week.", href: "/blog/migrate-from-replit" },
         },
         {
           type: "paragraph",
@@ -45,6 +46,7 @@ export const vibeCoding: BlogPost = {
         {
           type: "paragraph",
           text: "This is the most serious flaw we see in vibe-coded apps, so check it first. Lovable and several other builders have the browser talk straight to Supabase, using a public key that sits in your frontend by design. Row level security (RLS) is then the only thing stopping one user reading every other user's rows.",
+          link: { text: "How to take a Lovable app to production without rebuilding it.", href: "/blog/migrate-from-lovable" },
         },
         { type: "subheading", text: "How to check" },
         {
