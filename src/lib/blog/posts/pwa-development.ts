@@ -207,6 +207,7 @@ export const pwaDevelopment: BlogPost = {
         {
           type: "paragraph",
           text: "A store listing is a separate step. Google Play accepts a PWA packaged as a Trusted Web Activity, with tools such as Bubblewrap doing most of the work. Apple's review expects an app to offer more than the website does, so for the App Store you'd wrap the site with something like Capacitor and add a real phone feature, such as notifications or the camera.",
+          link: { text: "What a hybrid app is, and when wrapping a web app is enough.", href: "/blog/hybrid-apps" },
         },
       ],
     },

@@ -3,7 +3,7 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const glide: BlogPost = {
   slug: "migrate-from-glide",
-  title: "Leaving Glide? Five questions to answer before you rebuild",
+  title: "Migrating from Glide? Five questions to answer first",
   series: "migration",
   topic: "Glide",
   logo: glideLogo,

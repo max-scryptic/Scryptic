@@ -14,6 +14,7 @@ import { dashboardAppDesign } from "@/lib/blog/posts/dashboard-app-design"
 import { flutterflow } from "@/lib/blog/posts/flutterflow"
 import { framer } from "@/lib/blog/posts/framer"
 import { glide } from "@/lib/blog/posts/glide"
+import { hybridApps } from "@/lib/blog/posts/hybrid-apps"
 import { googleSheetsDatabase } from "@/lib/blog/posts/google-sheets-database"
 import { lovable } from "@/lib/blog/posts/lovable"
 import { mobileAppDevelopment } from "@/lib/blog/posts/mobile-app-development"
@@ -84,6 +85,7 @@ export const posts: BlogPost[] = [
   webAppVsMobileApp,
   supabaseVsFirebase,
   reactNativeVsFlutter,
+  hybridApps,
   lovable,
   bolt,
   v0,

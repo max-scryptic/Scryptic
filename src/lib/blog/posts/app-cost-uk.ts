@@ -12,7 +12,7 @@ export const appCostUk: BlogPost = {
   summary:
     "Building an app in the UK typically costs a few hundred pounds if you do it yourself with no-code or AI tools, roughly £5,000 to £25,000 with a freelancer, £10,000 to £60,000 with a small studio and £40,000 to £150,000 or more with an agency. Scope moves the price far more than who builds it. Once it's live, budget around 15 to 20% of the build cost a year to keep it running and up to date.",
   datePublished: "2026-10-14",
-  dateModified: "2026-10-28",
+  dateModified: "2026-11-06",
   facts: [
     { label: "DIY with builders", value: "Hundreds of pounds plus your time" },
     { label: "Freelancer MVP", value: "Roughly £5,000 to £25,000" },
@@ -71,6 +71,11 @@ export const appCostUk: BlogPost = {
         {
           type: "paragraph",
           text: "The same label can hide very different projects. An app built for one business and a platform that many businesses sign up to, each with their own users and settings, can share a name and almost nothing else on the invoice.",
+        },
+        {
+          type: "paragraph",
+          text: "To narrow the range for your own idea, the free MVP Cost Calculator asks eight questions about your app and gives a ballpark in development weeks and pounds, with the features that push the price up.",
+          link: { text: "Estimate your build with the MVP Cost Calculator.", href: "/tools/mvp-cost-calculator" },
         },
       ],
     },
@@ -140,6 +145,7 @@ export const appCostUk: BlogPost = {
         {
           type: "paragraph",
           text: "To work out your own figure, take 15 to 20% of the build cost, divide it by twelve, and add your hosting and service bills. A native mobile app sits higher than a web app, because the operating system changes under it every year.",
+          link: { text: "What a SaaS costs to run in its first year.", href: "/blog/saas-cost-before-and-after-launch" },
         },
       ],
     },
@@ -161,6 +167,11 @@ export const appCostUk: BlogPost = {
             "Paying twice. A cheap prototype that can't carry real users gets rebuilt, and the second build is the expensive one.",
           ],
         },
+        {
+          type: "paragraph",
+          text: "The legal pages, payments set-up and store listings are easier to price once they're written down. The free App Launch Checklist asks five questions about your app and lists the launch steps it needs, so you can check each one against a quote.",
+          link: { text: "Build your list with the App Launch Checklist.", href: "/tools/app-launch-checklist" },
+        },
       ],
     },
     {
@@ -174,6 +185,7 @@ export const appCostUk: BlogPost = {
         {
           type: "paragraph",
           text: "Start on the web unless the product genuinely needs a native app. A responsive web app works on every phone and laptop, ships without app store review and avoids store commission; offline use in the field or background location tracking are the usual reasons to go native first. Buy the boring parts too. Authentication, payments, email and search are solved problems. And if you already have a prototype from Lovable, Bolt or a no-code tool, bring it: it's a working specification, and sometimes a codebase worth keeping.",
+          link: { text: "How to take a Lovable app to production without rebuilding it.", href: "/blog/migrate-from-lovable" },
         },
         {
           type: "callout",
