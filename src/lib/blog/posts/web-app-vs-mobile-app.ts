@@ -64,6 +64,7 @@ export const webAppVsMobileApp: BlogPost = {
         {
           type: "paragraph",
           text: "When the table does point to mobile, we'd usually pick cross-platform, React Native or Flutter, for one codebase across iOS and Android with full device access. Separate Swift and Kotlin apps only make sense when you need the very best of one platform and can afford two teams.",
+          link: { text: "How hybrid apps differ from cross-platform and native ones.", href: "/blog/hybrid-apps" },
         },
         {
           type: "paragraph",
