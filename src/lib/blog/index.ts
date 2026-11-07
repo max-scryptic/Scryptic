@@ -1,6 +1,7 @@
 import { adalo } from "@/lib/blog/posts/adalo"
 import { aiSoftwareDevelopment } from "@/lib/blog/posts/ai-software-development"
 import { airtable } from "@/lib/blog/posts/airtable"
+import { appsheet } from "@/lib/blog/posts/appsheet"
 import { appCostUk } from "@/lib/blog/posts/app-cost-uk"
 import { automationsToSaas } from "@/lib/blog/posts/automations-to-saas"
 import { base44 } from "@/lib/blog/posts/base44"
@@ -11,6 +12,7 @@ import { buildAWebApp } from "@/lib/blog/posts/build-a-web-app"
 import { buildAnMvp } from "@/lib/blog/posts/build-an-mvp"
 import { chooseAppDevelopmentCompany } from "@/lib/blog/posts/choose-app-development-company"
 import { dashboardAppDesign } from "@/lib/blog/posts/dashboard-app-design"
+import { filemaker } from "@/lib/blog/posts/filemaker"
 import { flutterflow } from "@/lib/blog/posts/flutterflow"
 import { framer } from "@/lib/blog/posts/framer"
 import { glide } from "@/lib/blog/posts/glide"
@@ -25,6 +27,7 @@ import { mvpSoftwareDevelopmentExample } from "@/lib/blog/posts/mvp-software-dev
 import { n8nAlternatives } from "@/lib/blog/posts/n8n-alternatives"
 import { n8nVsZapierVsMake } from "@/lib/blog/posts/n8n-vs-zapier-vs-make"
 import { outsystems } from "@/lib/blog/posts/outsystems"
+import { powerApps } from "@/lib/blog/posts/power-apps"
 import { progressiveWebAppDevelopmentCompany } from "@/lib/blog/posts/progressive-web-app-development-company"
 import { pwaDevelopment } from "@/lib/blog/posts/pwa-development"
 import { reactjsWebDevelopmentCompany } from "@/lib/blog/posts/reactjs-web-development-company"
@@ -102,7 +105,10 @@ export const posts: BlogPost[] = [
   wix,
   retool,
   airtable,
+  appsheet,
+  filemaker,
   outsystems,
+  powerApps,
 ]
 
 export type PostSeries = {

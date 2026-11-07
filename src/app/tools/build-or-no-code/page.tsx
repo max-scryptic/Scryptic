@@ -21,7 +21,7 @@ const faqs = [
   {
     question: "Can I move from Bubble or another no-code tool to code later?",
     answer:
-      "Yes, and many products do. Because no-code tools keep the app on their platform, the move is a planned rebuild that brings your data and users across. Our migration guides cover seventeen tools step by step.",
+      "Yes, and many products do. Because no-code tools keep the app on their platform, the move is a planned rebuild that brings your data and users across. Our migration guides cover twenty tools step by step.",
   },
   {
     question: "What about AI app builders like Lovable or Bolt?",
