@@ -157,6 +157,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
         {
           type: "paragraph",
           text: "FileMaker is mostly licensed per user and built around internal business systems. That suits a CRM for your own staff well. For a SaaS product sold to the public, check how the licensing scales before you commit.",
+          link: { text: "What moving a FileMaker system to a web app involves", href: "/blog/migrate-from-filemaker" },
         },
         { type: "subheading", text: "Fixed price or paying for time" },
         {
