@@ -16,7 +16,7 @@ export const powerApps: BlogPost = {
     "A Power Apps migration pays off when an app's users are customers or partners, or when premium licences for a growing user base cost more than owning the code would. The apps themselves can't leave, because canvas and model-driven apps only run on Power Platform, so each one is rebuilt. Your data in Dataverse, SharePoint or SQL Server comes with you, and staff keep signing in with their Microsoft work accounts.",
   datePublished: "2026-11-07",
   facts: [
-    { label: "Code export", value: "Source files to read, not an app to run" },
+    { label: "Code export", value: "Source files you can read but not run" },
     { label: "Data export", value: "Dataverse Web API, Fabric or Synapse Link" },
     { label: "Staff sign-in", value: "Keep Microsoft Entra ID" },
     { label: "Typical timeline", value: "4 to 8 weeks per canvas app" },
@@ -28,33 +28,28 @@ export const powerApps: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Move the apps that now serve people Power Apps was never priced for: anyone outside your Microsoft 365 tenant, or hundreds of occasional users. An app used by colleagues, working well, with licences already covered by a wider Microsoft agreement, is usually best left alone.",
+          text: "The ones that now serve people Power Apps was never priced for: anyone outside your Microsoft 365 tenant, or hundreds of occasional users. An app your colleagues use every day, with licences already covered by a wider Microsoft agreement, is usually best left where it is.",
+        },
+        {
+          type: "paragraph",
+          text: "The example in this guide is a property maintenance firm. Its office staff approve jobs in one canvas app, its engineers file reports from site in another, and both run on Dataverse. Then the landlords it works for ask to see their own jobs, and the question of moving comes up.",
         },
         {
           type: "list",
           items: [
-            {
-              term: "Customers or partners need access",
-              text: "Canvas apps sign people in through Microsoft Entra ID, so an outsider joins your tenant as a guest and still needs a licence. Power Pages is Microsoft's product for external users, but it runs in the browser only, has its own capacity pricing, and a canvas app embedded in a page still has to be licensed.",
-            },
-            {
-              term: "The licence bill follows headcount",
-              text: "An app that uses Dataverse or a premium connector, such as SQL Server or a custom API, needs each user on a premium licence or a monthly pay-as-you-go charge for every active user of every app. Twenty staff on that model is easy to justify. Four hundred people who open the app twice a month is harder.",
-            },
-            {
-              term: "The data has grown past delegation",
-              text: "A canvas app hands filtering and sorting to the data source only when both the function and the source support delegation. Anything else runs on the first 500 rows by default, and never more than 2,000, so screens quietly show partial results as tables grow.",
-            },
+            "Landlords are outsiders. Canvas apps sign people in through Microsoft Entra ID, so each landlord would join the firm's tenant as a guest and still need a licence. Power Pages is Microsoft's product for external users, but it runs in the browser only and has its own capacity pricing, and a canvas app embedded in a page still has to be licensed.",
+            "The licence bill follows headcount. An app that uses Dataverse or a premium connector, such as SQL Server or a custom API, needs each user on a premium licence or a monthly pay-as-you-go charge for every active user of every app. Twenty office staff on that model is easy to justify. Three hundred landlords who check in twice a month is harder.",
+            "The data has grown past delegation. A canvas app hands filtering and sorting to the data source only when both the function and the source support it. Anything else runs on the first 500 rows by default, and never more than 2,000, so the jobs list quietly drops older records as the table grows.",
           ],
         },
         {
           type: "paragraph",
-          text: "There is a fourth reason that rarely makes it into a business case. Plenty of Power Apps were built by one capable person in operations, with the logic spread across hundreds of control properties, and nobody else will touch them. That is a continuity risk whatever the licence costs.",
+          text: "There's one more reason that rarely makes it into a business case. Plenty of Power Apps were built by one capable person in operations, with the logic spread across hundreds of control properties, and nobody else will touch them. That's a continuity risk whatever the licences cost.",
         },
         {
           type: "callout",
           title: "Check what you already pay for",
-          text: "Many Microsoft 365 plans include Power Apps for apps that only use standard connectors such as SharePoint and Excel. If your app stays inside that boundary the licence saving is small, so the case for moving has to rest on who uses the app, its limits or who can maintain it.",
+          text: "Many Microsoft 365 plans include Power Apps for apps that only use standard connectors such as SharePoint and Excel. If your app stays inside that boundary the licence saving is small, so the case for moving has to rest on who uses the app and who can maintain it.",
         },
       ],
     },
@@ -64,7 +59,7 @@ export const powerApps: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Your data comes out ready to import. The apps and flows come out as a detailed description of themselves, which is the specification for the rebuild and nothing more.",
+          text: "Your data comes out ready to import. The apps and flows come out as a detailed description of themselves, which makes a good specification for the rebuild and nothing more.",
         },
         {
           type: "image",
@@ -75,7 +70,7 @@ export const powerApps: BlogPost = {
           type: "list",
           items: [
             "Canvas apps can be saved as .pa.yaml source files through Git integration, now generally available. Every screen, control and Power Fx formula is there in readable text, but Microsoft treats the files as generated output and they only run inside Power Apps.",
-            "Model-driven apps export inside a solution, a zip of files describing the tables, forms, views, business rules and security roles. Nothing outside Dataverse can run them, though they list every rule you have to rebuild.",
+            "Model-driven apps export inside a solution, a zip of files describing the tables, forms, views, business rules and security roles. Nothing outside Dataverse can run them, though they list every rule you'll have to rebuild.",
             "Dataverse data can be read table by table through the Dataverse Web API, which speaks OData. For large volumes, link the environment to Microsoft Fabric or Azure Synapse Link and copy tables in bulk; both need change tracking turned on for each table.",
             "SharePoint lists and SQL Server databases are already yours. The new app can use them directly while you decide where the data should live long term.",
             "Power Automate flows export with a solution as JSON definitions that show every trigger, condition and action the rebuild has to cover.",
@@ -83,7 +78,7 @@ export const powerApps: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Microsoft also offers code apps: React and TypeScript apps written in your own repository but hosted on Power Platform, using its connectors and sign-in. They give you the interface code without changing the licensing, since every user still needs a premium licence. If ownership of the code is the only problem, they are an option to price before a full move.",
+          text: "Microsoft also offers code apps: React and TypeScript apps written in your own repository but hosted on Power Platform, using its connectors and sign-in. They give you the interface code and leave the licensing as it is, since every user still needs a premium licence. If ownership of the code is your only worry, price them before a full move.",
         },
       ],
     },
@@ -93,7 +88,7 @@ export const powerApps: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Every Power Platform building block has an ordinary equivalent in a web stack. Expect the time to go on the parts Microsoft ran for you without anyone noticing, such as security roles, connectors and environments.",
+          text: "Every Power Platform building block has an ordinary equivalent in a web stack. Expect the time to go on the parts Microsoft ran for you without anyone noticing, such as security roles and connectors.",
         },
         {
           type: "table",
@@ -116,7 +111,7 @@ export const powerApps: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Choice columns catch out most first imports. Dataverse stores the number behind each option, so a status column arrives as 100000001 where people expect to read Approved. Pull the option labels from the table metadata and map them before loading a single row.",
+          text: "Choice columns catch out most first imports. Dataverse stores the number behind each option, so the firm's job status column arrives as 100000001 where the office expects to read Approved. Pull the option labels from the table metadata and map them before loading a single row.",
         },
       ],
     },
@@ -134,19 +129,24 @@ export const powerApps: BlogPost = {
           items: [
             "Export the schema first: tables, columns, relationships and choice labels from the metadata, so the Postgres design is deliberate rather than guessed from a spreadsheet.",
             "Keep each row's Dataverse GUID in a column on the new table. Lookups between tables point at those GUIDs, and you need them to rebuild relationships and to rerun the import safely.",
-            "Copy file and image columns, and any SharePoint attachments, into your own object storage, recording which record each file belongs to.",
+            "Copy file and image columns, and any SharePoint attachments, into your own object storage, recording which record each file belongs to. For the maintenance firm, that's every engineer's site photo.",
             "Rehearse the full copy, compare row counts and a few key totals per table, then book the final copy for a quiet window.",
           ],
         },
         {
           type: "paragraph",
-          text: "Staff should barely notice the sign-in change. Register the new app in Microsoft Entra ID and use it as the identity provider, and people sign in with the same work account under the same multi-factor rules. Customers and partners get a sign-up of their own, with email and password or magic links, kept apart from your tenant.",
-          link: { text: "How we build customer-facing web apps", href: "/services/web-app-development" },
+          text: "Staff should barely notice the sign-in change. Register the new app in Microsoft Entra ID and use it as the identity provider, and people sign in with the same work account under the same multi-factor rules. Landlords get a sign-up of their own, with email and password or magic links, kept apart from the firm's tenant.",
+          link: { text: "How we build customer-facing web apps.", href: "/services/web-app-development" },
         },
         {
           type: "paragraph",
           text: "When customers have become the main users of what started as an internal tool, the rebuild also picks up product work such as tenancy and billing.",
-          link: { text: "What changes when an internal tool becomes the product", href: "/blog/migrate-from-retool" },
+          link: { text: "What changes when an internal tool becomes the product.", href: "/blog/migrate-from-retool" },
+        },
+        {
+          type: "paragraph",
+          text: "Opening an app to the public for the first time also brings launch admin: a privacy policy, cookie consent and someone watching for errors. Our free App Launch Checklist asks five questions about your app and builds a launch checklist covering legal, payments, SEO, analytics and the app stores.",
+          link: { text: "Build your launch list with the App Launch Checklist.", href: "/tools/app-launch-checklist" },
         },
       ],
     },
@@ -156,7 +156,7 @@ export const powerApps: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Start with the app that hurts most, usually the one with external users or the steepest licence bill, while the others stay on Power Platform until their turn.",
+          text: "Start with the app that hurts most, usually the one with external users or the steepest licence bill, while the others stay on Power Platform until their turn. For the maintenance firm that's the landlord portal, then the engineers' reports, with office approvals last.",
         },
         {
           type: "image",
@@ -169,8 +169,8 @@ export const powerApps: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Long-lived apps collect screens nobody opens. Sorting them into rebuild now, later or never is the same job as scoping a first release, and our free MVP Scope Planner lets you list features, size them and see what fits.",
-          link: { text: "Sort the screens with the MVP Scope Planner", href: "/tools/mvp-scope-planner" },
+          text: "Long-lived apps collect screens nobody opens. Sorting them into rebuild now, later or never is the same job as scoping a first release, and our free MVP Scope Planner lets you list features, size them and see what fits and what can wait.",
+          link: { text: "Sort the screens with the MVP Scope Planner.", href: "/tools/mvp-scope-planner" },
         },
         { type: "subheading", text: "Before you switch an app off" },
         {
@@ -186,7 +186,7 @@ export const powerApps: BlogPost = {
         {
           type: "paragraph",
           text: "Moving a whole estate follows the same pattern at a larger scale, with shared modules and renewal dates setting the order.",
-          link: { text: "How a phased exit runs across a larger low-code estate", href: "/blog/migrate-from-outsystems" },
+          link: { text: "How a phased exit runs across a larger low-code estate.", href: "/blog/migrate-from-outsystems" },
         },
       ],
     },
@@ -200,8 +200,8 @@ export const powerApps: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Weigh that against what the app costs to keep each year, in premium licences, external access and hours lost to delegation and connector limits. Then add what you take on: hosting, monitoring and someone to maintain the code. If every user is on staff and the totals come out close, keep the app. A focused first app often fits one of our fixed-price sprints.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          text: "Weigh that against what the app costs to keep each year in premium licences and external access, plus the hours lost working around delegation. Then add what you take on, which is hosting and someone to maintain the code. If every user is on staff and the totals come out close, keep the app. A focused first app often fits one of our fixed-price sprints.",
+          link: { text: "See what each package includes.", href: "/#pricing" },
         },
       ],
     },
@@ -215,7 +215,7 @@ export const powerApps: BlogPost = {
     {
       question: "Can an AI coding agent turn .pa.yaml files into a React app?",
       answer:
-        "It can draft one. Agents read Power Fx formulas and control trees well and will scaffold matching screens and functions, which saves a lot of typing. A developer still designs the data model and checks each rule, because Power Fx behaviour, such as how blanks and delegation work, does not translate line for line.",
+        "It can draft one. Agents read Power Fx formulas and control trees well and will scaffold matching screens and functions, which saves a lot of typing. A developer still designs the data model and checks each rule, because Power Fx behaviour, such as how blanks and delegation work, doesn't translate line for line.",
     },
     {
       question: "Will our Microsoft 365 subscription change?",
