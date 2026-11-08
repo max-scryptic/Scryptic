@@ -10,9 +10,9 @@ export const aiAppBuildersCompared: BlogPost = {
   icon: "scale",
   category: "AI app builders",
   description:
-    "Lovable vs Bolt vs Replit vs Base44 vs v0 for a production app: what each one exports, where your data lives and the work left before real users sign in.",
+    "Lovable, Bolt and Replit hand over an app and database you can own. v0 and Base44 hand over screens. What each exports and the work left before launch.",
   summary:
-    "Lovable, Bolt and Replit Agent hand over a whole app with a database you can move into your own accounts, so the work after the prototype is hardening it. v0 gives you polished Next.js screens with little behind them, and Base44 exports only the interface while its database, sign-in and functions stay on Base44. For a production app, Lovable vs Bolt and every other pairing here comes down to what you can own at launch.",
+    "Lovable vs Bolt is the closest contest of the five: both hand over a full app whose data sits in Supabase, and Replit Agent hands over a full app on its own Postgres. v0 and Base44 give you screens. v0 leaves most of the backend unbuilt, and Base44 keeps its backend on its own servers when you leave. For a production app, that split decides the budget more than any demo does.",
   datePublished: "2026-11-08",
   facts: [
     { label: "Whole app to keep", value: "Lovable, Bolt and Replit Agent" },
@@ -27,11 +27,11 @@ export const aiAppBuildersCompared: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Lovable, Bolt or Replit Agent, because each one hands over the whole app: the interface, the logic behind it and a database you can move into accounts your business owns. Most comparisons score the prompt box and how good the first screens look, which is fair for a weekend prototype. Once the app holds customer data, what matters is what happens to the backend when you stop prompting.",
+          text: "Lovable, Bolt or Replit Agent. Each one hands over screens and backend together, with a database you can move into accounts your business owns. A demo only shows you the prompt box and the first screens. Once the app holds customer data, what matters is what happens to the backend when you stop prompting.",
         },
         {
           type: "paragraph",
-          text: "The table shows what each builder lets you take away and what still stands between that export and a launch. The durations are for a typical first release.",
+          text: "The table shows what each builder lets you take away and how much work stands between that export and a launch.",
         },
         {
           type: "table",
@@ -47,7 +47,7 @@ export const aiAppBuildersCompared: BlogPost = {
             ],
             [
               "Bolt",
-              "The full project in the framework you chose, often React with Vite",
+              "The full project, in whichever framework you picked, most often React with Vite",
               "Bolt Database, built on Supabase, until you claim it",
               "Supabase Auth",
               "Hardening, 3 to 8 weeks",
@@ -83,7 +83,7 @@ export const aiAppBuildersCompared: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "That split sets your budget more than anything else in the table. When the builder hands over a backend you can claim, a developer spends the first weeks checking and tightening it. When it hands over screens, those weeks go on designing a database and an API for the screens to call.",
+          text: "That split sets your budget. When the builder hands over a backend you can claim, a developer spends the first weeks checking and tightening it. When it hands over screens, those weeks go on designing a database and the API the screens will call.",
         },
         {
           type: "image",
@@ -92,7 +92,12 @@ export const aiAppBuildersCompared: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "The screens are where the five are most alike. Most of what they write is React, and Lovable, v0 and Base44 all style it with Tailwind CSS, so a developer who has worked on one export can find their way around another. That makes the look of the first screens a weak reason to choose, since it's the part that's cheapest to change later.",
+          text: "On screen, the five are closer than they look. Most of what they write is React, and Lovable, v0 and Base44 style it with Tailwind CSS, so a developer who knows one export can find their way around another. Choosing on looks puts the weight on the part a developer can restyle after launch, while a backend that can't leave the builder has to be built again.",
+        },
+        {
+          type: "paragraph",
+          text: "If you're weighing a rebuild, the free MVP Cost Calculator turns eight answers about your app into a rough estimate in development weeks and pounds, priced on the fixed-price sprints we run.",
+          link: { text: "Estimate a rebuild with the MVP Cost Calculator.", href: "/tools/mvp-cost-calculator" },
         },
       ],
     },
@@ -102,21 +107,21 @@ export const aiAppBuildersCompared: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "These two are the closest pair. Both give you a standard frontend that runs without the builder, and both keep data in Supabase, where the browser talks to the database directly. That puts the same job at the top of both lists: a row level security policy on every table, tested by signing in as one user and asking for another user's rows.",
+          text: "These two are the closest pair. Both hand over a standard frontend that runs without the builder, and in both the browser talks straight to a Supabase database. So both start with the same job: switch on row level security for every table, then test it by signing in as one user and asking for another user's rows.",
           link: { text: "Seven things to fix before a Bolt.new app goes live.", href: "/blog/migrate-from-bolt" },
         },
         {
           type: "list",
           items: [
-            "Lovable writes the same stack every time: React and TypeScript with Vite, Tailwind CSS and shadcn/ui. Bolt lets you pick the framework, which helps if your developer prefers something else and means two Bolt apps can be built quite differently underneath.",
-            "Bolt runs your project in a WebContainer inside the browser tab, so the first test of a Bolt app is a clean install and production build on another machine. Lovable syncs its code to your GitHub repository both ways, which is handy until a developer and a prompt change the same file.",
-            "The database moves differently. If you connected your own Supabase project to Lovable at the start, it's already yours; if you used Lovable Cloud, plan a move out before launch. With Bolt you claim Bolt Database into your own Supabase organisation, and connecting a fresh project instead can lose data.",
+            "Lovable writes one stack every time: React and TypeScript, built with Vite and styled with Tailwind CSS and shadcn/ui. Bolt lets you pick the framework, which helps if your developer prefers something else, and means two Bolt apps can differ a lot underneath.",
+            "Bolt runs your project in a WebContainer inside the browser tab, so the first test of a Bolt app is a clean install and production build on another machine. Lovable syncs code with your GitHub repository in both directions, which is handy until a developer and a prompt edit the same file.",
+            "The database moves in different ways. A Lovable app connected to your own Supabase project from the start is already yours, while one on Lovable Cloud needs moving out before launch. A Bolt app's database is claimed into your Supabase organisation, and connecting a fresh project instead can lose data.",
           ],
         },
         {
           type: "paragraph",
-          text: "For a new product, start in Lovable with your own Supabase project connected from day one, unless you already know you want a framework other than React with Vite. If you do, use Bolt and claim the database before the first real user signs up.",
-          link: { text: "How to take a Lovable app to production without rebuilding it.", href: "/blog/migrate-from-lovable" },
+          text: "For a new product, start in Lovable with your own Supabase project connected on day one, unless you already know you want something other than React with Vite. If you do, start in Bolt and claim the database before the first real user signs up.",
+          link: { text: "The phased runbook for taking a Lovable app live.", href: "/blog/migrate-from-lovable" },
         },
       ],
     },
@@ -126,7 +131,7 @@ export const aiAppBuildersCompared: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Replit Agent puts a server between the browser and the database, which moves the security work rather than removing it. In a Lovable app, the policy on each table decides who sees what. In a Replit app it's the code in each server route, and a route that only checks someone is signed in will return any record to any user who changes the ID in the request.",
+          text: "Replit Agent puts a server between the browser and the database, so the security work moves to a different place. In a Lovable app, the policy on each table decides who sees what. In a Replit app it's the code in each server route, and a route that only checks someone is signed in will return any record to any user who changes the ID in the request.",
         },
         {
           type: "image",
@@ -135,12 +140,16 @@ export const aiAppBuildersCompared: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Table policies all sit in the Supabase dashboard, and its security advisor flags any table with row level security switched off. Route checks have no such list, so someone has to read every route that takes an ID. The bigger differences for a founder are in sign-in and hosting.",
+          text: "Table policies all sit in the Supabase dashboard, and its security advisor flags any table with row level security switched off. Server routes have no equivalent list, so someone has to read every route that takes an ID.",
         },
         {
           type: "paragraph",
-          text: "Replit Auth signs people in with a Replit account. That suits a product for developers, who may already have one, and adds a hurdle for everyone else, so a customer-facing Replit app usually needs a hosted sign-in provider and a plan for moving existing users across. Hosting goes the other way: Replit Deployments can run a production app, scheduled jobs included, so leaving Replit is optional. A Lovable app usually moves to a host such as Vercel or Netlify once its code lives in your repository.",
-          link: { text: "Getting a Replit Agent app ready for production, week by week.", href: "/blog/migrate-from-replit" },
+          text: "Sign-in differs too. Replit Auth signs people in with a Replit account, which suits a product for developers who may already have one. For a customer-facing app, plan to swap it for a hosted sign-in provider, along with a way to move existing users across.",
+        },
+        {
+          type: "paragraph",
+          text: "Hosting is where Replit asks less of you. Replit Deployments can run a production app, scheduled jobs included, so leaving Replit is optional. A Lovable app usually moves to a host such as Vercel or Netlify once its code lives in your repository.",
+          link: { text: "The week by week plan for a Replit Agent app.", href: "/blog/migrate-from-replit" },
         },
       ],
     },
@@ -150,11 +159,11 @@ export const aiAppBuildersCompared: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "v0, from Vercel, puts nearly all of its effort into what users see. Its output is a Next.js project that any web developer can pick up, but many v0 screens show sample data, and some buttons look as if they save without saving anywhere. v0 can attach a database through Vercel's integrations, such as Neon or Supabase, and attaching one still leaves the tables, permissions and server checks to design.",
+          text: "v0, from Vercel, is built around the screens and does far less behind them. Its output is a Next.js project any web developer can pick up, but many v0 screens show sample data, and some buttons look as if they save without storing anything. v0 can hook up Neon or Supabase through Vercel, but the schema and the server checks are still yours to design.",
         },
         {
           type: "paragraph",
-          text: "Next to Bolt, that makes v0 the better pick in one situation: the interface is what's hard about the product, and a developer will build the backend anyway, ideally on Vercel. If you want a whole working app from your prompts, with a database behind it, Bolt gets you further.",
+          text: "Next to Bolt, v0 wins in one situation: the interface is what's hard about the product, and a developer will build the backend anyway. If you want a working app with a database behind it straight from your prompts, Bolt gets you further.",
           link: { text: "Find out which v0 screens still run on sample data.", href: "/blog/migrate-from-v0" },
         },
       ],
@@ -165,7 +174,7 @@ export const aiAppBuildersCompared: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Base44 asks the least of you on day one. The database, sign-in, file storage and backend functions are built in, with nothing to connect, which is why it works well for internal tools and early tests of an idea. You pay for that convenience when you leave:",
+          text: "Base44 needs the least set-up on day one. Its database, sign-in, file storage and backend functions are built in, with nothing to connect, which suits internal tools and early tests of an idea. Leaving costs more:",
         },
         {
           type: "list",
@@ -173,11 +182,12 @@ export const aiAppBuildersCompared: BlogPost = {
             "Only the React frontend exports, and it still calls Base44 through the Base44 SDK, so most screens stop working if you cancel the plan.",
             "Backend functions are written for Deno against that SDK, so each one is rewritten for your own server.",
             "The data export includes user records but not password hashes, so every user sets a new password or gets a sign-in link at launch.",
+            "Uploaded files are stored on Base44 and have to be downloaded and copied to your own storage separately.",
           ],
         },
         {
           type: "paragraph",
-          text: "Put Base44 vs Lovable side by side and the backend is the whole difference. Lovable's is a Supabase project you can own outright, while Base44's has to be built again behind the screens you keep.",
+          text: "Against Lovable, the whole difference sits in the backend. Lovable's is a Supabase project you can own outright, while Base44's has to be built again behind the screens you keep.",
           link: { text: "What moving a Base44 app to your own backend involves.", href: "/blog/migrate-from-base44" },
         },
       ],
@@ -188,22 +198,22 @@ export const aiAppBuildersCompared: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Pick the builder that matches where the app has to end up, because that decides how much of the prototype survives the move to production.",
+          text: "Choose by where the app has to end up, because that decides how much of the prototype survives.",
         },
         {
           type: "list",
           items: [
-            "If customers will store personal data in it, use Lovable with your own Supabase project connected before the first prompt, rather than Lovable Cloud.",
+            "If customers will store personal data in it, use Lovable with your own Supabase project connected before the first prompt, not Lovable Cloud.",
             "If you or your developer want a framework other than React with Vite, use Bolt and claim the database early.",
-            "If your users are developers, or you want hosting, the database and scheduled jobs in one place, Replit Agent fits.",
+            "If your users are developers, or you want the app and its scheduled jobs hosted where they were built, Replit Agent fits.",
             "If the design is what sells the product and someone will build the backend, v0 is the one made for that.",
-            "If it's an internal tool, or a test you may well throw away, Base44 is the quickest way to something that works.",
+            "If it's an internal tool, or a test you may well throw away, Base44 has the least to set up.",
           ],
         },
         {
           type: "paragraph",
-          text: "Scope matters more than the builder, though. A first release that does one job completely is far cheaper to harden than one that does six jobs halfway. The free MVP Scope Planner lets you list your features, size each one and see what fits a first release and what can wait.",
-          link: { text: "Plan your first release with the MVP Scope Planner.", href: "/tools/mvp-scope-planner" },
+          text: "Scope matters as much as the builder. A first release that does one job completely has less to harden than one that does six jobs halfway. In the free MVP Scope Planner you list the features you want and size each one, and it sorts them into a first release and a later list.",
+          link: { text: "Size your feature list in the MVP Scope Planner.", href: "/tools/mvp-scope-planner" },
         },
       ],
     },
@@ -213,18 +223,12 @@ export const aiAppBuildersCompared: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "The same gaps turn up in apps from all five, because they come from building by prompt rather than from any one tool. Access rules haven't been tested as a second user, secret keys sit in the browser, the accounts are in one founder's personal login, there's no staging copy of the database and nothing tests the paths that take money. You can check all of these yourself in an afternoon.",
+          text: "The same gaps turn up whichever of the five built the app, because they come from building by prompt. Nobody has tried the access rules as a second user, and secret keys sit in the browser. The accounts are often in one founder's personal login. There's usually no staging copy of the database, and nothing tests the paths that take money. You can find all of them yourself in an afternoon.",
           link: { text: "Run the seven-point production audit for vibe-coded apps.", href: "/blog/vibe-coding-to-production" },
         },
         {
-          type: "callout",
-          title: "Pick a date to stop prompting",
-          text: "Once a developer works in the repository, changes made in the builder at the same time create two versions of the app that drift apart within days. Keep the builder for sketching new features, and build them properly in the repository.",
-        },
-        {
           type: "paragraph",
-          text: "We harden apps from all five builders and rebuild the backend where it has to move, in fixed-price sprints with the code in your name.",
-          link: { text: "See what each package includes.", href: "/#pricing" },
+          text: "Then set the day prompting stops. From that day changes go through the repository, and the builder becomes a sketchpad for trying a new screen before a developer builds it properly.",
         },
       ],
     },
@@ -233,7 +237,7 @@ export const aiAppBuildersCompared: BlogPost = {
     {
       question: "Is it worth moving an app from one AI builder to another?",
       answer:
-        "Rarely. What stops an app reaching production, such as untested access rules, exposed keys and no staging or tests, lives in the app's code and settings, so it moves with the app. Moving the code into your own repository and having a developer harden it does more than switching builders.",
+        "Rarely. What stops an app reaching production, such as untested access rules or exposed keys, lives in the app's code and settings, so it moves with the app. Moving the code into your own repository and having a developer harden it does more than switching builders.",
     },
     {
       question: "Which AI app builder is best for SEO?",
