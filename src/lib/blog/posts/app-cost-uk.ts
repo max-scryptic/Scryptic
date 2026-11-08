@@ -8,11 +8,11 @@ export const appCostUk: BlogPost = {
   topic: "App cost",
   icon: "receipt",
   description:
-    "UK app development costs broken down: prices by route and by type of app, what moves a quote, monthly running costs and the hidden costs founders miss.",
+    "UK app development costs for web and mobile apps: prices by route and type of app, what moves a quote, running costs and the hidden costs founders miss.",
   summary:
     "Building an app in the UK typically costs a few hundred pounds if you do it yourself with no-code or AI tools, roughly £5,000 to £25,000 with a freelancer, £10,000 to £60,000 with a small studio and £40,000 to £150,000 or more with an agency. Scope moves the price far more than who builds it. Once it's live, budget around 15 to 20% of the build cost a year to keep it running and up to date.",
   datePublished: "2026-10-14",
-  dateModified: "2026-11-06",
+  dateModified: "2026-11-08",
   facts: [
     { label: "DIY with builders", value: "Hundreds of pounds plus your time" },
     { label: "Freelancer MVP", value: "Roughly £5,000 to £25,000" },
@@ -49,8 +49,13 @@ export const appCostUk: BlogPost = {
     },
     {
       id: "cost-by-app-type",
-      heading: "Cost by type of app",
+      heading: "Cost by type of app, web and mobile",
       blocks: [
+        {
+          type: "paragraph",
+          text: "A custom web app typically costs £10,000 to £40,000 for a first version from a small UK studio, or more for a two-sided marketplace. A native iOS and Android app usually starts around £25,000. Most of the products founders bring us are web apps: internal tools, booking systems, SaaS products and marketplaces that run in the browser on any phone or laptop.",
+          link: { text: "See how we build custom web apps in fixed-price sprints.", href: "/services/web-app-development" },
+        },
         {
           type: "paragraph",
           text: "What the app does matters more than who builds it. The table below gives rough ranges for a focused first version from a small studio. They're planning ranges for typical scopes, not quotes, and your app can land outside them in either direction.",
@@ -74,6 +79,11 @@ export const appCostUk: BlogPost = {
         },
         {
           type: "paragraph",
+          text: "A mobile app costs more than a web app with the same features because there is more to build and release. A native app needs a backend just as a web app does, plus two store submissions, testing on real iPhones and Android phones, permission prompts, and support for older versions of the app that users haven't updated. Unless the phone is the product, a responsive web app first, with the native app once people are using it, is usually the cheaper order.",
+          link: { text: "Mobile app development checks a web build skips.", href: "/blog/mobile-app-development" },
+        },
+        {
+          type: "paragraph",
           text: "To narrow the range for your own idea, the free MVP Cost Calculator asks eight questions about your app and gives a ballpark in development weeks and pounds, with the features that push the price up.",
           link: { text: "Estimate your build with the MVP Cost Calculator.", href: "/tools/mvp-cost-calculator" },
         },
@@ -81,7 +91,7 @@ export const appCostUk: BlogPost = {
     },
     {
       id: "what-drives-cost",
-      heading: "What moves a quote up or down",
+      heading: "What moves app development cost up or down",
       blocks: [
         {
           type: "paragraph",
@@ -230,6 +240,16 @@ export const appCostUk: BlogPost = {
       question: "What is the average cost of app development in the UK?",
       answer:
         "There isn't a useful single average, because a booking app and a two-sided marketplace are different projects. As a rough guide, a focused first version typically costs £10,000 to £60,000 with a small studio and more with a larger agency. A written scope is the only way to get a number you can rely on for your app.",
+    },
+    {
+      question: "How much does a custom web app cost in the UK?",
+      answer:
+        "A custom web app typically costs £10,000 to £40,000 for a first version from a small UK studio, and more for a two-sided marketplace. An internal tool or dashboard sits around £10,000 to £20,000, and a SaaS product with accounts, teams and subscriptions around £15,000 to £40,000. Hosting usually starts at tens of pounds a month, plus maintenance of roughly 15 to 20% of the build a year.",
+    },
+    {
+      question: "How much does it cost to build a mobile app in the UK?",
+      answer:
+        "A native iOS and Android app from a shared codebase typically costs £25,000 to £60,000 or more from a small UK studio, and takes around 10 to 16 weeks. On top of the build, Apple charges US$99 a year to publish on the App Store and Google Play a one-off US$25, and upkeep is higher than for a web app because each new iOS and Android release needs testing.",
     },
     {
       question: "Can I build an app for under £5,000?",
