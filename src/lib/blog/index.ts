@@ -1,4 +1,5 @@
 import { adalo } from "@/lib/blog/posts/adalo"
+import { aiAppBuildersCompared } from "@/lib/blog/posts/ai-app-builders-compared"
 import { aiSoftwareDevelopment } from "@/lib/blog/posts/ai-software-development"
 import { airtable } from "@/lib/blog/posts/airtable"
 import { appsheet } from "@/lib/blog/posts/appsheet"
@@ -89,6 +90,7 @@ export const posts: BlogPost[] = [
   supabaseVsFirebase,
   reactNativeVsFlutter,
   hybridApps,
+  aiAppBuildersCompared,
   lovable,
   bolt,
   v0,
