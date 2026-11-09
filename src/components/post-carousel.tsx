@@ -34,18 +34,51 @@ export function PostCarousel({
   const listRef = useRef<HTMLUListElement>(null)
   const [group, setGroup] = useState<string | null>(null)
   const [canScroll, setCanScroll] = useState({ prev: false, next: false })
+  const [pages, setPages] = useState({ count: 1, current: 0 })
+  // The page an arrow or dot last asked for, while its smooth scroll runs, so a
+  // second click moves on from there rather than from wherever the row has got to.
+  const target = useRef<{ page: number; timer?: number } | null>(null)
 
   const shown = group ? items.filter((item) => item.group === group) : items
   const activeGroup = groups?.find((g) => g.name === group)
 
+  /**
+   * Where each page starts, measured from the cards themselves. A page is as many
+   * whole cards as fit; scrolling by the row's width instead overshoots by the
+   * row's side padding, which leaves the cards off the guides wherever the browser
+   * does not snap them back.
+   */
+  const layout = useCallback(() => {
+    const list = listRef.current
+    const cards = list ? (Array.from(list.children) as HTMLElement[]) : []
+    if (!list || cards.length === 0) return null
+    const style = getComputedStyle(list)
+    const gap = parseFloat(style.columnGap) || 0
+    const step = cards[0].getBoundingClientRect().width + gap
+    const view = list.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight)
+    // The extra pixel absorbs rounding in the cards' calc() widths.
+    const perPage = Math.max(1, Math.floor((view + gap + 1) / step))
+    const pageWidth = perPage * step
+    const max = list.scrollWidth - list.clientWidth
+    return {
+      count: Math.ceil(cards.length / perPage),
+      max,
+      pageWidth,
+      offset: (page: number) => Math.min(max, page * pageWidth),
+    }
+  }, [])
+
   const update = useCallback(() => {
     const list = listRef.current
-    if (!list) return
-    setCanScroll({
-      prev: list.scrollLeft > 4,
-      next: list.scrollLeft + list.clientWidth < list.scrollWidth - 4,
-    })
-  }, [])
+    const l = layout()
+    if (!list || !l) return
+    const atEnd = list.scrollLeft >= l.max - 4
+    const current =
+      target.current?.page ??
+      (atEnd ? l.count - 1 : Math.min(l.count - 1, Math.round(list.scrollLeft / l.pageWidth)))
+    setCanScroll({ prev: list.scrollLeft > 4, next: !atEnd })
+    setPages((p) => (p.count === l.count && p.current === current ? p : { count: l.count, current }))
+  }, [layout])
 
   useEffect(() => {
     const list = listRef.current
@@ -61,10 +94,24 @@ export function PostCarousel({
     update()
   }, [group, update])
 
-  function scrollByPage(direction: 1 | -1) {
+  function settle() {
+    if (target.current) window.clearTimeout(target.current.timer)
+    target.current = null
+    update()
+  }
+
+  function goToPage(page: number) {
     const list = listRef.current
-    if (!list) return
-    list.scrollBy({ left: direction * list.clientWidth, behavior: "smooth" })
+    const l = layout()
+    if (!list || !l) return
+    const next = Math.max(0, Math.min(l.count - 1, page))
+    if (target.current) window.clearTimeout(target.current.timer)
+    // Cleared on scrollend, or after a while where that event is missing or the
+    // scroll is cut short (a swipe part way through, say).
+    target.current = { page: next, timer: window.setTimeout(settle, 1000) }
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    list.scrollTo({ left: l.offset(next), behavior: reduceMotion ? "auto" : "smooth" })
+    update()
   }
 
   return (
@@ -110,7 +157,7 @@ export function PostCarousel({
             aria-controls={listId}
             aria-label="Previous posts"
             disabled={!canScroll.prev}
-            onClick={() => scrollByPage(-1)}
+            onClick={() => goToPage(pages.current - 1)}
           >
             <Chevron direction="left" />
           </Button>
@@ -120,28 +167,58 @@ export function PostCarousel({
             aria-controls={listId}
             aria-label="Next posts"
             disabled={!canScroll.next}
-            onClick={() => scrollByPage(1)}
+            onClick={() => goToPage(pages.current + 1)}
           >
             <Chevron direction="right" />
           </Button>
         </div>
       </div>
 
-      <ul
-        id={listId}
-        ref={listRef}
-        onScroll={update}
-        className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-6 overflow-x-auto px-4 pt-px pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 [&::-webkit-scrollbar]:hidden"
-      >
-        {shown.map((item) => (
-          <li
-            key={item.id}
-            className="grid w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
-          >
-            {item.card}
-          </li>
-        ))}
-      </ul>
+      <div className="flex flex-col gap-4">
+        <ul
+          id={listId}
+          ref={listRef}
+          onScroll={update}
+          onScrollEnd={settle}
+          className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-6 overflow-x-auto px-4 pt-px pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 [&::-webkit-scrollbar]:hidden"
+        >
+          {shown.map((item) => (
+            <li
+              key={item.id}
+              className="grid w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+            >
+              {item.card}
+            </li>
+          ))}
+        </ul>
+        {/* Page dots. Their row is kept while the count is measured, so it does not shift the page. */}
+        {shown.length > 1 && (
+          <ul className={cn("flex min-h-6 flex-wrap justify-center gap-1", inset)} aria-label="Pages">
+            {pages.count > 1 &&
+              Array.from({ length: pages.count }, (_, page) => (
+                <li key={page}>
+                  <button
+                    type="button"
+                    aria-controls={listId}
+                    aria-label={`Page ${page + 1} of ${pages.count}`}
+                    aria-current={page === pages.current ? "true" : undefined}
+                    onClick={() => goToPage(page)}
+                    className="group/dot flex h-6 items-center px-1 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+                  >
+                    <span
+                      className={cn(
+                        "block h-1.5 transition-all duration-300 motion-reduce:transition-none",
+                        page === pages.current
+                          ? "w-5 bg-primary"
+                          : "w-1.5 bg-muted-foreground/40 group-hover/dot:bg-muted-foreground"
+                      )}
+                    />
+                  </button>
+                </li>
+              ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 }
