@@ -247,6 +247,7 @@ export const lovable: BlogPost = {
         {
           type: "paragraph",
           text: "Launch by pointing the domain at the new hosting, then keep the Lovable project frozen and read-only for a few weeks as a fallback. If you moved out of Lovable Cloud, run the final data copy in a short, announced window and compare row counts before you switch.",
+          link: { text: "How to make a Lovable app backup you can restore.", href: "/blog/lovable-app-backup" },
         },
         {
           type: "checklist",

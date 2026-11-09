@@ -20,6 +20,7 @@ import { glide } from "@/lib/blog/posts/glide"
 import { hybridApps } from "@/lib/blog/posts/hybrid-apps"
 import { googleSheetsDatabase } from "@/lib/blog/posts/google-sheets-database"
 import { lovable } from "@/lib/blog/posts/lovable"
+import { lovableAppBackup } from "@/lib/blog/posts/lovable-app-backup"
 import { mobileAppDevelopment } from "@/lib/blog/posts/mobile-app-development"
 import { mobileWebDevelopment } from "@/lib/blog/posts/mobile-web-development"
 import { mvpAgile } from "@/lib/blog/posts/mvp-agile"
@@ -92,6 +93,7 @@ export const posts: BlogPost[] = [
   hybridApps,
   aiAppBuildersCompared,
   lovable,
+  lovableAppBackup,
   bolt,
   v0,
   replit,
