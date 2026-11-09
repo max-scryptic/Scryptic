@@ -37,11 +37,11 @@ export const lovableAppBackup: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Each of those covers half the app, and they don't move together. Restoring a code version leaves the database where it is, and restoring a database backup leaves the code alone, so lining the two up at the same moment is your job. A database restore is also all or nothing: it throws away everything customers did after that backup was taken, not just the bad change you wanted to undo.",
+          text: "Each of those covers half the app, and they don't move together. Restoring a code version leaves the database where it is, and restoring a database backup leaves the code alone, so lining the two up at the same moment is your job. A database restore is also all or nothing, so it throws away everything customers did after that backup was taken along with the change you wanted to undo.",
         },
         {
           type: "paragraph",
-          text: "Both copies also live inside Lovable. That's fine for undoing a bad prompt from this morning, and no help at all if a founder's login is lost or the workspace is closed. A backup in the sense your customers would mean is a copy of the whole app that you hold yourself and have restored at least once. Our audit for AI-built apps asks exactly that, when you last restored a backup and whether it worked, next to who can read whose data and where the secret keys sit.",
+          text: "Both copies also live inside Lovable. That's fine for undoing a bad prompt from this morning, and no help at all if a founder's login is lost or the workspace is closed. A backup in the sense your customers would mean is a copy of the whole app that you hold yourself and have already tested by restoring it. Our audit for AI-built apps puts that same test to every app, next to checks on data access and secret keys.",
           link: { text: "Run the seven-area audit on your app.", href: "/blog/vibe-coding-to-production" },
         },
       ],
@@ -81,7 +81,7 @@ export const lovableAppBackup: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "An afternoon of prompting can leave fifty commits, and none of their messages will tell you which one worked. Tag the commit whenever the app is in a state you would happily go back to, with a name like before-payments, so a restore starts from a known good point rather than a guess.",
+          text: "A busy day of prompting leaves a long run of commits, and none of their messages say which one worked. Tag the commit whenever the app is in a state you would happily go back to, with a name like before-payments, so a restore starts from a known good point rather than a guess.",
         },
       ],
     },
@@ -92,7 +92,6 @@ export const lovableAppBackup: BlogPost = {
         {
           type: "paragraph",
           text: "How you export depends on where the database runs. If the Cloud tab shows Lovable's own database settings, you're on Lovable Cloud. If the project connects to a Supabase project in your own Supabase account, you have direct access and more options.",
-          link: { text: "How Lovable Cloud compares with your own Supabase project in production.", href: "/blog/migrate-from-lovable" },
         },
         { type: "subheading", text: "On Lovable Cloud" },
         {
@@ -128,18 +127,21 @@ export const lovableAppBackup: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Secrets are the part you can't download later, since many dashboards show a key once and hide it after. Write each one into a password manager when you add it, along with the settings that would take an hour to rebuild from memory:",
+          text: "Secrets are the part you can't download later, since many dashboards show a key once and hide it after. Write the value into a password manager the day you add it, along with the settings a restore needs that nobody could rebuild from memory:",
         },
         {
           type: "checklist",
           items: [
-            "Every secret the app's edge functions read, with the service that issued it",
-            "Sign-in providers switched on, and the OAuth client IDs for Google or GitHub sign-in",
-            "Allowed redirect URLs and the site URL in the auth settings",
-            "Each edge function's name, and any scheduled jobs that call them",
-            "Webhook endpoints registered with Stripe or other services",
-            "The domain's DNS records, and who holds the registrar login",
+            "The value of every secret the edge functions read, not just its name",
+            "Sign-in providers, password rules and email templates from the auth settings",
+            "Each scheduled job, when it runs and which function it calls",
+            "The Supabase project's region, so a restore keeps customer data in the same place",
           ],
+        },
+        {
+          type: "paragraph",
+          text: "Who should hold each of the accounts behind those secrets is a separate job from backing them up, and it belongs in the company's name before launch.",
+          link: { text: "The ownership checklist in our Lovable runbook.", href: "/blog/migrate-from-lovable" },
         },
       ],
     },
@@ -149,45 +151,40 @@ export const lovableAppBackup: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Something the Lovable editor supplied without you noticing is missing outside it. The code is a standard React and TypeScript project built with Vite, so once you know which piece is absent the fix is usually a few minutes.",
+          text: "Because the Lovable editor supplied the settings and the backend, and a fresh copy has neither. The code is a standard React and TypeScript project built with Vite, so the fixes are short once you know which piece is missing.",
         },
         {
           type: "table",
-          caption: "Common reasons exported Lovable code won't run, and the fix for each",
+          caption: "Why exported Lovable code fails on a fresh machine or a restored backend, and the fix for each",
           columns: ["What you see", "Why", "The fix"],
           rows: [
             [
               "A blank screen or a Supabase error on load",
-              "No environment variables. Vite only passes variables starting with VITE_ to the browser, and only if they are set before the build",
-              "Open the Supabase client file, note the variable names it reads, and put the project URL and public key in a .env file under those names",
+              "The editor filled in the Supabase address and public key, and your copy has no .env file",
+              "Open the Supabase client file, note the variable names it reads, and add a .env file with the project URL and public key under those names",
             ],
             [
-              "npm install fails",
-              "Usually an old Node.js version, or two lockfiles fighting, such as one for npm and one for Bun",
-              "Switch to a current long-term support release of Node, pick one package manager and delete the other lockfile",
-            ],
-            [
-              "Pages work until you refresh them",
-              "The app routes in the browser, so a static host returns a 404 for any address but the home page",
-              "Add a rewrite that sends every path to index.html, which most hosts support, Vercel and Netlify included",
-            ],
-            [
-              "Sign-in sends you back to the Lovable preview",
-              "The auth settings only allow the old addresses",
-              "Add localhost and the new domain to the allowed redirect URLs, and update the site URL",
+              "npm install stops with a lockfile conflict",
+              "The repository holds lockfiles for two package managers, such as npm and Bun",
+              "Pick one package manager and delete the other lockfile",
             ],
             [
               "Buttons that call a function do nothing",
-              "Edge functions and migrations sit in the repository's supabase folder but aren't running in the new project",
+              "Edge functions and migrations sit in the repository's supabase folder, but nothing has deployed them to the restored project",
               "Deploy them with the Supabase CLI and set their secrets",
             ],
           ],
+        },
+        {
+          type: "paragraph",
+          text: "Once it runs locally, putting it online meets the same gaps as any Vite app leaving a builder: inner pages that return a 404 when refreshed, and sign-in emails that link to the old address. Our Bolt guide covers both fixes, and they apply to a Lovable export unchanged.",
+          link: { text: "The deploy and sign-in fixes for a Vite app leaving a builder.", href: "/blog/migrate-from-bolt" },
         },
       ],
     },
     {
       id: "restore-drill",
-      heading: "Prove the backup with a restore",
+      heading: "Test the backup by restoring it",
       blocks: [
         {
           type: "paragraph",
@@ -207,7 +204,7 @@ export const lovableAppBackup: BlogPost = {
             "Secrets set and edge functions deployed",
             "App running locally against the restored project, from a tagged commit",
             "Signed in as an existing test user, with no password reset",
-            "Row counts for the main tables match production",
+            "Totals on the main screens, such as this month's orders, match production",
             "A few uploaded files open from inside the app",
           ],
         },
