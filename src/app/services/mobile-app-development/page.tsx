@@ -22,7 +22,6 @@ import {
   OptionsSection,
   type OptionRow,
 } from "@/components/landing/service-sections"
-import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { inset } from "@/lib/frame"
@@ -389,11 +388,6 @@ export default function MobileAppDevelopmentPage() {
             .
           </>
         }
-      />
-
-      <WorkSection
-        title="Products we have built and launched"
-        intro="Our launched products so far are web apps, each taken through the same discovery, sprint and handover a mobile build follows."
       />
 
       <ComparisonSection
