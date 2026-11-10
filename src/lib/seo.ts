@@ -58,7 +58,7 @@ const latestPostDate = posts
 const services = {
   path: "/services",
   title: "Services",
-  description: `${siteConfig.name} services for UK founders: MVP development, web app development and no-code migration, each built as production code in a fixed-price sprint.`,
+  description: `${siteConfig.name} services for UK founders: MVP, web app and mobile app development and no-code migration, each built as production code in a fixed-price sprint.`,
   changeFrequency: "monthly",
   priority: 0.9,
 } satisfies PageEntry
@@ -84,6 +84,16 @@ const servicePageEntries = {
       "Custom web app development for UK businesses and founders: one workflow built as production code in a fixed-price 2 or 3 week sprint, the code in your name.",
     parents: [services],
     lastModified: "2026-11-04",
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
+  mobileAppDevelopment: {
+    path: "/services/mobile-app-development",
+    title: "Mobile app development services",
+    description:
+      "Native iOS and Android app development for UK founders: built in Swift and Kotlin in a fixed-price sprint, then published from your own store accounts.",
+    parents: [services],
+    lastModified: "2026-11-10",
     changeFrequency: "monthly",
     priority: 0.9,
   },
