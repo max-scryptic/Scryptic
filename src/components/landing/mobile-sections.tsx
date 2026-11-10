@@ -1,5 +1,4 @@
 import Image from "next/image"
-import type { ReactNode } from "react"
 import { cn } from "cn"
 
 import { Icon } from "@/components/landing/icons"
@@ -57,7 +56,6 @@ export function PlatformSection({
   store,
   tools,
   reverse = false,
-  footnote,
 }: {
   id: string
   eyebrow: string
@@ -68,8 +66,6 @@ export function PlatformSection({
   tools: MobileTool[]
   /** Put the listing on the right on wide screens, to alternate with the section before. */
   reverse?: boolean
-  /** A note under both columns, such as who owns the logos shown. */
-  footnote?: ReactNode
 }) {
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
@@ -98,9 +94,6 @@ export function PlatformSection({
           </div>
         </div>
       </div>
-      {footnote && (
-        <p className={cn("mt-12 max-w-3xl text-sm text-pretty text-muted-foreground", inset)}>{footnote}</p>
-      )}
     </LandingSection>
   )
 }

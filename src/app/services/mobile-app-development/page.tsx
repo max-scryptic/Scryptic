@@ -288,7 +288,6 @@ export default function MobileAppDevelopmentPage() {
         store="google-play"
         tools={mobileTools.android}
         reverse
-        footnote={`Logos and product names belong to their owners and are shown only to name the tools we build with. Apple, Google and the other owners do not endorse ${siteConfig.name}.`}
       />
 
       <ReleaseSection
