@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { cn } from "cn"
 
 import { PageJsonLd } from "@/components/json-ld"
 import type { AppLayer } from "@/components/landing/app-layers"
@@ -9,9 +10,10 @@ import { GuidesSection } from "@/components/landing/guides-section"
 import { LandingHero } from "@/components/landing/hero"
 import { MobileAppVisual } from "@/components/landing/hero-visuals"
 import type { IconName } from "@/components/landing/icons"
+import { PlatformSection, ToolTiles } from "@/components/landing/mobile-sections"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
-import { CheckIcon, LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import {
   FitCheckSection,
   HubSection,
@@ -20,7 +22,6 @@ import {
   type OptionRow,
 } from "@/components/landing/service-sections"
 import { WorkSection } from "@/components/landing/work-section"
-import { StoreListing, type Store } from "@/components/landing/store-listing"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { inset } from "@/lib/frame"
@@ -28,6 +29,7 @@ import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
 import { extendedMvp, launchOffer, mvp, offerPrice, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
+import { mobileTools } from "@/lib/stack"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
@@ -46,13 +48,10 @@ const kinds = [
   { icon: "spark", name: "AI features", text: "The camera or voice feeding a model, its output checked", tag: "AI" },
 ] satisfies { icon: IconName; name: string; text: string; tag: string }[]
 
-// The two platforms, each a native app of its own, with a drawn listing of
-// the client's app in that platform's store. Only claims every build delivers.
-const platforms: { id: string; store: Store; name: string; summary: string; points: string[] }[] = [
-  {
-    id: "ios",
-    store: "app-store",
-    name: "iOS app development",
+// The two platforms, each a native app of its own with a section of its own.
+// Only claims every build delivers.
+const platforms = {
+  ios: {
     summary:
       "iPhone apps written in Swift, Apple's own language, using Apple's frameworks for the camera, location, notifications and payments.",
     points: [
@@ -61,10 +60,7 @@ const platforms: { id: string; store: Store; name: string; summary: string; poin
       "In-app purchase wherever Apple's rules require it",
     ],
   },
-  {
-    id: "android",
-    store: "google-play",
-    name: "Android app development",
+  android: {
     summary:
       "Android apps written in Kotlin, the language Google recommends for Android, using Google's own libraries for the same device features.",
     points: [
@@ -72,6 +68,22 @@ const platforms: { id: string; store: Store; name: string; summary: string; poin
       "Submitted to Google Play from your Play Console account",
       "Google Play Billing wherever Google's rules require it",
     ],
+  },
+}
+
+// The two ways a mobile app takes money, set by what it sells.
+const paymentRoutes = [
+  {
+    id: "store-billing",
+    name: "Digital content and subscriptions",
+    text: "Premium features, content and subscriptions unlocked in the app go through each store's own billing: In-App Purchase on iPhone and Google Play Billing on Android. RevenueCat sits over both, so one record says who has paid, whichever phone they use.",
+    tools: mobileTools.storePayments,
+  },
+  {
+    id: "card-payments",
+    name: "Physical goods and services",
+    text: "Deliveries, bookings and services used outside the app are paid by card through Stripe, as they would be on the web. The stores take no share of these payments and don't allow their own billing for them.",
+    tools: mobileTools.directPayments,
   },
 ]
 
@@ -246,35 +258,51 @@ export default function MobileAppDevelopmentPage() {
         core={{ name: "Your app", tag: "iOS + Android" }}
       />
 
-      <LandingSection id="platforms" labelledBy="platforms-heading">
-        <SectionHeading className={inset} eyebrow="Platforms" title="iOS and Android app development" id="platforms-heading">
-          Each platform gets its own native app, written in the language Apple or Google builds its own tools around.
+      <PlatformSection
+        id="ios"
+        eyebrow="iPhone"
+        title="iOS app development"
+        summary={platforms.ios.summary}
+        points={platforms.ios.points}
+        store="app-store"
+        tools={mobileTools.ios}
+      />
+
+      <PlatformSection
+        id="android"
+        eyebrow="Android"
+        title="Android app development"
+        summary={platforms.android.summary}
+        points={platforms.android.points}
+        store="google-play"
+        tools={mobileTools.android}
+        reverse
+      />
+
+      <LandingSection id="payments" labelledBy="payments-heading">
+        <SectionHeading className={inset} eyebrow="Payments" title="Taking payments in a mobile app" id="payments-heading">
+          What the app sells decides how it takes money. Apple and Google set the rules, and the build follows them from
+          the first sprint.
         </SectionHeading>
         <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
-          {platforms.map((platform) => (
+          {paymentRoutes.map((route) => (
             <article
-              key={platform.id}
-              aria-labelledby={`${platform.id}-name`}
-              className="corners guides flex flex-col gap-6 border border-border bg-card p-6 sm:p-8 lg:p-10"
+              key={route.id}
+              aria-labelledby={`${route.id}-name`}
+              className="corners guides flex flex-col gap-5 border border-border bg-card p-6 sm:p-8"
             >
-              <StoreListing store={platform.store} />
-              <div className="flex flex-col gap-3">
-                <h3 id={`${platform.id}-name`} className="text-3xl tracking-tight">
-                  {platform.name}
-                </h3>
-                <p className="text-lg text-pretty text-muted-foreground">{platform.summary}</p>
-              </div>
-              <ul className="flex flex-col gap-3 text-pretty">
-                {platform.points.map((point) => (
-                  <li key={point} className="flex gap-3">
-                    <CheckIcon />
-                    {point}
-                  </li>
-                ))}
-              </ul>
+              <h3 id={`${route.id}-name`} className="text-2xl tracking-tight">
+                {route.name}
+              </h3>
+              <p className="text-pretty text-muted-foreground">{route.text}</p>
+              <ToolTiles tools={route.tools} />
             </article>
           ))}
         </div>
+        <p className={cn("mt-8 max-w-3xl text-sm text-pretty text-muted-foreground", inset)}>
+          Logos and product names belong to their owners and are shown only to name the tools we build with. Apple,
+          Google and the other owners do not endorse {siteConfig.name}.
+        </p>
       </LandingSection>
 
       <LayersSection
