@@ -459,6 +459,17 @@
   }
 }
 
+/* The release timeline's connector (components/landing/release-phone.tsx),
+   filling downwards while its step plays. Applied inline, only with motion. */
+@keyframes fill-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 @keyframes hub-flow {
   to {
     stroke-dashoffset: -8;
