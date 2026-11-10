@@ -3,6 +3,7 @@
 import { cn } from "cn"
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react"
 
+import { useScrollSparks } from "@/components/scroll-sparks"
 import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 
@@ -32,6 +33,7 @@ export function PostCarousel({
 }) {
   const listId = useId()
   const listRef = useRef<HTMLUListElement>(null)
+  const sparkRef = useRef<HTMLDivElement>(null)
   const [group, setGroup] = useState<string | null>(null)
   const [canScroll, setCanScroll] = useState({ prev: false, next: false })
   const [pages, setPages] = useState({ count: 1, current: 0 })
@@ -67,6 +69,8 @@ export function PostCarousel({
       offset: (page: number) => Math.min(max, page * pageWidth),
     }
   }, [])
+
+  const sparks = useScrollSparks(listRef, sparkRef)
 
   const update = useCallback(() => {
     const list = listRef.current
@@ -175,22 +179,31 @@ export function PostCarousel({
       </div>
 
       <div className="flex flex-col gap-4">
-        <ul
-          id={listId}
-          ref={listRef}
-          onScroll={update}
-          onScrollEnd={settle}
-          className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-6 overflow-x-auto px-4 pt-px pb-2 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 [&::-webkit-scrollbar]:hidden"
-        >
-          {shown.map((item) => (
-            <li
-              key={item.id}
-              className="grid w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
-            >
-              {item.card}
-            </li>
-          ))}
-        </ul>
+        {/* The row reaches a gutter past each guide, where its cards pass while it
+            scrolls: they dissolve into pixels there (.dissolve-x) and throw off
+            sparks, drawn in the layer over the row. */}
+        <div className="relative">
+          <ul
+            id={listId}
+            ref={listRef}
+            onScroll={() => {
+              update()
+              sparks()
+            }}
+            onScrollEnd={settle}
+            className="dissolve-x -mx-(--gutter) flex snap-x snap-mandatory scroll-px-(--gutter) gap-6 overflow-x-auto px-(--gutter) pt-px pb-2 [--gutter:--spacing(4)] [scrollbar-width:none] sm:[--gutter:--spacing(6)] [&::-webkit-scrollbar]:hidden"
+          >
+            {shown.map((item) => (
+              <li
+                key={item.id}
+                className="grid w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+              >
+                {item.card}
+              </li>
+            ))}
+          </ul>
+          <div ref={sparkRef} aria-hidden="true" className="pointer-events-none absolute inset-0" />
+        </div>
         {/* Page dots. Their row is kept while the count is measured, so it does not shift the page. */}
         {shown.length > 1 && (
           <ul className={cn("flex min-h-6 flex-wrap justify-center gap-1", inset)} aria-label="Pages">
