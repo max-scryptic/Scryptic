@@ -1,4 +1,5 @@
 import Image from "next/image"
+import type { ReactNode } from "react"
 import { cn } from "cn"
 
 import { Icon } from "@/components/landing/icons"
@@ -17,32 +18,31 @@ import type { MobileTool } from "@/lib/stack"
 
 export function ToolTiles({ tools, className }: { tools: MobileTool[]; className?: string }) {
   return (
-    <ul className={cn("grid grid-cols-3 gap-2 sm:gap-3", className)}>
-      {tools.map((tool) => {
-        // A wordmark such as Stripe's gets a wider slot than a square mark.
-        const wide = tool.logo && tool.logo.width / tool.logo.height > 1.5
-        return (
-          <li key={tool.name} className="flex flex-col items-start gap-3 border border-border bg-card p-3 sm:p-4">
-            <span
-              className={cn(
-                "flex h-11 shrink-0 items-center justify-center",
-                wide ? "w-16 sm:w-20" : "w-11",
-                tool.logo ? "bg-white p-2" : "bg-primary/10 text-primary dark:bg-primary/25 dark:text-foreground",
-              )}
-            >
-              {tool.logo ? (
-                <Image src={tool.logo} alt="" className="size-full object-contain" />
-              ) : (
-                <Icon name={tool.icon ?? "code"} className="size-5" />
-              )}
-            </span>
-            <span className="flex flex-col gap-0.5">
-              <span className="font-medium text-pretty">{tool.name}</span>
-              <span className="font-mono text-xs text-pretty text-muted-foreground">{tool.role}</span>
-            </span>
-          </li>
-        )
-      })}
+    <ul className={cn("grid grid-cols-2 gap-2 sm:gap-3", className)}>
+      {tools.map((tool) => (
+        // Logo above the name on phones, beside it once a tile has the width.
+        <li
+          key={tool.name}
+          className="flex flex-col items-start gap-3 border border-border bg-card p-3 sm:flex-row sm:items-center sm:gap-4 sm:p-4"
+        >
+          <span
+            className={cn(
+              "flex size-11 shrink-0 items-center justify-center",
+              tool.logo ? "bg-white p-2" : "bg-primary/10 text-primary dark:bg-primary/25 dark:text-foreground",
+            )}
+          >
+            {tool.logo ? (
+              <Image src={tool.logo} alt="" className="size-full object-contain" />
+            ) : (
+              <Icon name={tool.icon ?? "code"} className="size-5" />
+            )}
+          </span>
+          <span className="flex min-w-0 flex-col gap-0.5">
+            <span className="font-medium text-pretty">{tool.name}</span>
+            <span className="font-mono text-xs text-pretty text-muted-foreground">{tool.role}</span>
+          </span>
+        </li>
+      ))}
     </ul>
   )
 }
@@ -57,6 +57,7 @@ export function PlatformSection({
   store,
   tools,
   reverse = false,
+  footnote,
 }: {
   id: string
   eyebrow: string
@@ -67,12 +68,15 @@ export function PlatformSection({
   tools: MobileTool[]
   /** Put the listing on the right on wide screens, to alternate with the section before. */
   reverse?: boolean
+  /** A note under both columns, such as who owns the logos shown. */
+  footnote?: ReactNode
 }) {
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
-      <div className={cn("grid items-center gap-12 lg:grid-cols-2 lg:gap-16", inset)}>
-        <div data-reveal className={cn("mx-auto w-full max-w-lg", reverse && "lg:order-last")}>
-          <StoreListing store={store} />
+      {/* On wide screens both columns stretch to the taller one, and the listing grows to match the copy. */}
+      <div className={cn("grid gap-12 lg:grid-cols-2 lg:gap-16", inset)}>
+        <div data-reveal className={cn("mx-auto flex w-full max-w-lg", reverse && "lg:order-last")}>
+          <StoreListing store={store} className="w-full" />
         </div>
         <div data-reveal="children" className="flex flex-col gap-5">
           <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
@@ -94,6 +98,9 @@ export function PlatformSection({
           </div>
         </div>
       </div>
+      {footnote && (
+        <p className={cn("mt-12 max-w-3xl text-sm text-pretty text-muted-foreground", inset)}>{footnote}</p>
+      )}
     </LandingSection>
   )
 }
