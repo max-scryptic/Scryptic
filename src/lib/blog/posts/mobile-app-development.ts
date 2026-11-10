@@ -13,7 +13,7 @@ export const mobileAppDevelopment: BlogPost = {
   summary:
     "Mobile app development has all the work of a web build, plus the work that comes from software living on someone's phone and reaching it through a store. Every release waits for review, old versions keep running after you ship a new one, permission prompts rarely get a second chance, saves have to survive a dead signal, and whoever holds the accounts and keys controls every update. This checklist covers only those parts, so you can put them in the brief before anyone quotes.",
   datePublished: "2026-10-31",
-  dateModified: "2026-11-05",
+  dateModified: "2026-11-10",
   facts: [
     { label: "Written for", value: "Founders who've chosen an installed app" },
     { label: "Worked example", value: "A dog walking company's app" },
@@ -209,7 +209,7 @@ export const mobileAppDevelopment: BlogPost = {
         {
           type: "paragraph",
           text: `Our own builds are fixed price: ${mvp.price} + VAT for a two week sprint or ${extendedMvp.price} + VAT for three, each ending with a week of changes from your feedback and followed by a handover week after launch, with the code and accounts in your name. Bring this checklist with your answers filled in to a free 30 minute discovery call, and we'll tell you plainly whether your first release fits a sprint and which route it should take.`,
-          link: { text: "Book a discovery call.", href: "/book-a-call" },
+          link: { text: "How we build native iOS and Android apps.", href: "/services/mobile-app-development" },
         },
       ],
     },
