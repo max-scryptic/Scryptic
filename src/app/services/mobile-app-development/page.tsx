@@ -1,5 +1,4 @@
 import { PageJsonLd } from "@/components/json-ld"
-import type { AppLayer } from "@/components/landing/app-layers"
 import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
@@ -11,7 +10,7 @@ import { PlatformSection } from "@/components/landing/mobile-sections"
 import { ReleaseSection, type ReleaseStep } from "@/components/landing/release-phone"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
-import { FitCheckSection, HubSection, LayersSection } from "@/components/landing/service-sections"
+import { FitCheckSection, HubSection } from "@/components/landing/service-sections"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
@@ -87,17 +86,6 @@ const releaseSteps: ReleaseStep[] = [
     name: "Live in the stores",
     text: "Your app, under your company's name, ready for customers to install.",
   },
-]
-
-// A mobile app as layers, top to bottom, and what each one is built with.
-const layers: AppLayer[] = [
-  { icon: "screen", from: "Screens", to: "Swift on iOS, Kotlin on Android", check: "Native on each", ghost: true },
-  { icon: "flow", from: "Business rules", to: "Tested code on your server", check: "Tests pass" },
-  { icon: "users", from: "Users and roles", to: "Sign-in and permissions", check: "Every role tested" },
-  { icon: "card", from: "Payments", to: "In-app purchase or Stripe", check: "Store rules met" },
-  { icon: "database", from: "Data", to: "Postgres, backed up", check: "A backup restored" },
-  { icon: "lock", from: "Signing keys", to: "Kept where you control them", check: "Yours to update" },
-  { icon: "globe", from: "Release", to: "App Store and Google Play", check: "From your accounts" },
 ]
 
 // The self-check in the fit section. The ones in fitInitial start ticked.
@@ -245,14 +233,6 @@ export default function MobileAppDevelopmentPage() {
         title="How your app gets into the App Store and Google Play"
         intro="Five steps from the first build to a listing customers can install, each one run from accounts in your name."
         steps={releaseSteps}
-      />
-
-      <LayersSection
-        id="layers"
-        eyebrow="How it is built"
-        title="What goes into a mobile app"
-        intro="An app is more than the screens on the phone. Every layer is built, tested and handed over in your name."
-        layers={layers}
       />
 
       <PricingSection
