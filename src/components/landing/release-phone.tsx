@@ -356,7 +356,7 @@ export function ReleaseSection({
       </SectionHeading>
       <div
         ref={ref}
-        className={cn("mt-12 grid items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-20", inset)}
+        className={cn("mt-12 grid items-center gap-12 lg:grid-cols-2", inset)}
       >
         <ol className="flex flex-col">
           {steps.map((step, index) => {
@@ -402,7 +402,8 @@ export function ReleaseSection({
           })}
         </ol>
         <div className="relative order-first pb-16 lg:order-last">
-          <VoxelStage className="absolute bottom-0 left-1/2 w-[380px] max-w-[100vw] -translate-x-1/2" />
+          {/* Kept no wider than its column, so the cubes never cross the frame's guide lines. */}
+          <VoxelStage className="absolute bottom-0 left-1/2 w-[380px] max-w-full -translate-x-1/2" />
           <div className="relative">
             <Phone steps={steps} active={active} />
           </div>
