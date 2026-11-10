@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 import { PageJsonLd } from "@/components/json-ld"
 import type { AppLayer } from "@/components/landing/app-layers"
 import { ComparisonSection } from "@/components/landing/comparison-section"
@@ -13,18 +11,12 @@ import { PlatformSection } from "@/components/landing/mobile-sections"
 import { ReleaseSection, type ReleaseStep } from "@/components/landing/release-phone"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
-import {
-  FitCheckSection,
-  HubSection,
-  LayersSection,
-  OptionsSection,
-  type OptionRow,
-} from "@/components/landing/service-sections"
+import { FitCheckSection, HubSection, LayersSection } from "@/components/landing/service-sections"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { extendedMvp, launchOffer, mvp, offerPrice, services } from "@/lib/services"
+import { launchOffer, offerPrice, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { mobileTools } from "@/lib/stack"
 import { founder } from "@/lib/team"
@@ -117,47 +109,6 @@ const fitChecks = [
   "You can join a call every Friday",
 ]
 const fitInitial = [0, 2, 4]
-
-// Price ranges for the other routes are the ones quoted in the app cost guide.
-const optionColumns = ["What you get", "Price", "Time to first release", "Who owns it"]
-const options: OptionRow[] = [
-  {
-    name: `${siteConfig.name} native sprint`,
-    cells: [
-      "Native Swift and Kotlin code, submitted to the stores from your accounts",
-      `${mvp.price} or ${extendedMvp.price} + VAT, fixed before the build`,
-      "2 or 3 weeks, then a week of support, plus store review",
-      "You, from launch day",
-    ],
-  },
-  {
-    name: "Small UK app studio",
-    cells: [
-      "Usually one shared codebase for both platforms, with design and project management",
-      "Roughly £25,000 to £60,000 or more",
-      "Around 10 to 16 weeks",
-      "Usually you, but check the contract",
-    ],
-  },
-  {
-    name: "Freelance developer",
-    cells: [
-      "One developer's time, with the scope and testing set by you",
-      "Roughly £5,000 to £25,000",
-      "Depends on their other clients",
-      "Check the contract",
-    ],
-  },
-  {
-    name: "No-code app builder",
-    cells: [
-      "An app built and published through the builder's platform",
-      "Hundreds of pounds plus your time",
-      "Days to weeks of your own time",
-      "The platform, so leaving often means a rebuild",
-    ],
-  },
-]
 
 const guides = postsBySlug([
   "mobile-app-development",
@@ -321,28 +272,6 @@ export default function MobileAppDevelopmentPage() {
         intro="It suits a clearly scoped first release. If a web app would serve you better, we will say so on the call."
         items={fitChecks}
         initial={fitInitial}
-      />
-
-      <OptionsSection
-        id="options"
-        eyebrow="Your options"
-        title="Ways to get a mobile app built"
-        intro="What you get, price, time to a first release and who owns the result, for the four usual routes."
-        caption="Four ways to get a mobile app built, compared on what you get, price, time to a first release and ownership"
-        columns={optionColumns}
-        rows={options}
-        footnote={
-          <>
-            Studio, freelancer and builder figures are the ranges UK founders are quoted.{" "}
-            <Link
-              href="/blog/how-much-does-it-cost-to-build-an-app-uk"
-              className="text-foreground underline underline-offset-4 hover:text-primary"
-            >
-              See how UK app development costs break down
-            </Link>
-            .
-          </>
-        }
       />
 
       <ComparisonSection
