@@ -131,6 +131,48 @@ export function WebAppVisual() {
   )
 }
 
+/** Mobile app development: one release, a native build per platform, each on its way through store review. */
+export function MobileAppVisual() {
+  const builds = [
+    { platform: "iPhone", code: "Swift", store: "App Store" },
+    { platform: "Android", code: "Kotlin", store: "Google Play" },
+  ]
+
+  return (
+    <HeroWindow label="release.v1" status="Week 2 of 2">
+      <div className="flex flex-col gap-5 p-5">
+        <div className="flex items-center justify-between gap-3 border border-border bg-background px-3 py-2 font-mono text-xs">
+          <span className="text-foreground">Your app 1.0</span>
+          <span className="shrink-0 bg-primary px-2 py-0.5 text-primary-foreground">Native</span>
+        </div>
+
+        <ul className="hero-terminal grid gap-3 sm:grid-cols-2">
+          {builds.map((build) => (
+            <li key={build.platform} className="flex flex-col gap-3 border border-border bg-background p-3">
+              <span className="flex items-baseline justify-between gap-2">
+                <span className="text-sm font-medium">{build.platform}</span>
+                <span className="font-mono text-xs text-muted-foreground">{build.code}</span>
+              </span>
+              <span className="flex items-center gap-1.5 self-start bg-primary/15 px-2 py-0.5 font-mono text-xs text-primary dark:bg-primary/30 dark:text-foreground">
+                <Check />
+                Build ready
+              </span>
+              <span className="flex items-center gap-1.5 self-start border border-dashed border-border px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                {build.store} review
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <ul className="flex flex-wrap justify-between gap-x-4 gap-y-1 font-mono text-xs text-muted-foreground">
+          <li>Your store accounts</li>
+          <li>Your code</li>
+        </ul>
+      </div>
+    </HeroWindow>
+  )
+}
+
 // The builders the migration card cycles through, with their logos from the guides.
 const cycledTools = postsBySlug([
   "migrate-from-bubble",
@@ -205,11 +247,12 @@ export function ServicesVisual() {
   const tracks = [
     { name: "MVP development", steps: ["Idea", "Sprint", "Launched"] },
     { name: "Web app development", steps: ["Workflow", "Sprint", "Live app"] },
+    { name: "Mobile app development", steps: ["Idea", "Native build", "In the stores"] },
     { name: "No-code migration", steps: ["Bubble app", "Rebuild", "Code you own"] },
   ]
 
   return (
-    <HeroWindow label="services" status="3 ways in">
+    <HeroWindow label="services" status="4 ways in">
       <div className="flex flex-col gap-6 p-5">
         <div className="hero-terminal flex flex-col gap-6">
           {tracks.map((track, index) => (

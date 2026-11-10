@@ -67,6 +67,22 @@ export const servicePages: ServicePage[] = [
     series: ["stack"],
   },
   {
+    id: "mobile-app-development",
+    page: pages.mobileAppDevelopment,
+    name: "Mobile app development",
+    tagline: "Native apps for iPhone and Android",
+    summary:
+      "A native iOS and Android app, written in Swift and Kotlin, built as production code you own and submitted to the App Store and Google Play from your accounts.",
+    points: [
+      "Native code for each platform",
+      "Store submission and review handled",
+      "Code and store accounts in your name",
+    ],
+    linkText: "Explore mobile app development",
+    learnMore: "How our mobile app development works",
+    series: [],
+  },
+  {
     id: "no-code-migration",
     page: pages.noCodeMigration,
     name: "No-code app migration",
