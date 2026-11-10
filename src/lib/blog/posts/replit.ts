@@ -13,7 +13,7 @@ export const replit: BlogPost = {
   summary:
     "A Replit Agent app is ordinary code on a Postgres database, so you can usually keep it and harden it rather than rebuild it. This plan sets out what to do in each of roughly six weeks, from the first git push to launch day, and where the Replit specific decisions come up along the way.",
   datePublished: "2026-10-13",
-  dateModified: "2026-10-14",
+  dateModified: "2026-11-10",
   sections: [
     {
       id: "starting-point",
@@ -176,7 +176,8 @@ export const replit: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "The usual reasons to move are hosting region, for UK or EU data residency, cost at higher traffic, or wanting every deploy to come from the repository. If you move, files in Replit's object storage go to an S3 compatible bucket, copied with a short script that also rewrites any URLs stored in the database.",
+          text: "The usual reasons to move are hosting region, cost at higher traffic, or wanting every deploy to come from the repository. On region, Replit now publishes to Europe on its paid plans, but not to the UK on its own, and the choice is permanent once an app is published. If you move, files in Replit's object storage go to an S3 compatible bucket, copied with a short script that also rewrites any URLs stored in the database.",
+          link: { text: "Where each AI builder keeps your data, and what UK GDPR asks.", href: "/blog/uk-data-residency-ai-built-apps" },
         },
       ],
     },
