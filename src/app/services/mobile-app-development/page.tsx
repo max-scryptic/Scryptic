@@ -11,6 +11,7 @@ import { LandingHero } from "@/components/landing/hero"
 import { MobileAppVisual } from "@/components/landing/hero-visuals"
 import type { IconName } from "@/components/landing/icons"
 import { PlatformSection, ToolTiles } from "@/components/landing/mobile-sections"
+import { ReleaseSection, type ReleaseStep } from "@/components/landing/release-phone"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
@@ -84,6 +85,35 @@ const paymentRoutes = [
     name: "Physical goods and services",
     text: "Deliveries, bookings and services used outside the app are paid by card through Stripe, as they would be on the web. The stores take no share of these payments and don't allow their own billing for them.",
     tools: mobileTools.directPayments,
+  },
+]
+
+// From the first build to the stores, as the phone in the release section shows it.
+const releaseSteps: ReleaseStep[] = [
+  {
+    id: "build",
+    name: "Built natively",
+    text: "Swift for iPhone and Kotlin for Android, in your repository, with a demo every Friday.",
+  },
+  {
+    id: "test",
+    name: "Tested on real phones",
+    text: "Test builds go out through TestFlight and Google Play's testing tracks, so you use the app on your own phone first.",
+  },
+  {
+    id: "submit",
+    name: "Submitted for review",
+    text: "From your Apple Developer and Play Console accounts, with the listing, screenshots and privacy details filled in.",
+  },
+  {
+    id: "review",
+    name: "Approved by Apple and Google",
+    text: "They set the review times, so the launch date allows for them, and we answer any questions the reviewers ask.",
+  },
+  {
+    id: "live",
+    name: "Live in the stores",
+    text: "Your app, under your company's name, ready for customers to install.",
   },
 ]
 
@@ -304,6 +334,13 @@ export default function MobileAppDevelopmentPage() {
           Google and the other owners do not endorse {siteConfig.name}.
         </p>
       </LandingSection>
+
+      <ReleaseSection
+        eyebrow="From code to the stores"
+        title="How your app gets into the App Store and Google Play"
+        intro="Five steps from the first build to a listing customers can install, each one run from accounts in your name."
+        steps={releaseSteps}
+      />
 
       <LayersSection
         id="layers"
