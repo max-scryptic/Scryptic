@@ -7,8 +7,9 @@ import cloudflareLogo from "@/assets/stack/cloudflare.svg"
 import jetpackComposeLogo from "@/assets/stack/jetpack-compose.svg"
 import kotlinLogo from "@/assets/stack/kotlin.svg"
 import revenuecatLogo from "@/assets/stack/revenuecat.svg"
-import stripeLogo from "@/assets/stack/stripe.svg"
 import swiftLogo from "@/assets/stack/swift.svg"
+import swiftuiLogo from "@/assets/stack/swiftui.png"
+import xcodeLogo from "@/assets/stack/xcode.png"
 import neonLogo from "@/assets/stack/neon.svg"
 import nodejsLogo from "@/assets/stack/nodejs.svg"
 import supabaseLogo from "@/assets/stack/supabase.svg"
@@ -37,9 +38,9 @@ export const stack: StackTool[] = [
 ]
 
 /**
- * A tool on the mobile app development page. Tools whose owners don't allow
- * their mark to be shown this way, such as Apple's In-App Purchase, have no
- * logo and show a line icon beside their name instead.
+ * A tool on the mobile app development page, with its owner's logo from
+ * src/assets/stack/. A tool whose owner doesn't allow its mark to be shown
+ * this way gets no logo and shows a line icon beside its name instead.
  */
 export type MobileTool = {
   name: string
@@ -50,22 +51,22 @@ export type MobileTool = {
   icon?: IconName
 }
 
-// The tools behind each native app, and the two ways a mobile app takes money.
+// RevenueCat sits over both stores' billing, so one record says who has paid.
+const revenuecat: MobileTool = { name: "RevenueCat", role: "In-app purchases", logo: revenuecatLogo }
+
+// The tools behind each native app, from the language to the store billing.
+// Tiles sit two to a row, so keep the count even.
 export const mobileTools = {
   ios: [
     { name: "Swift", role: "Language", logo: swiftLogo },
-    { name: "SwiftUI", role: "Screens", icon: "screen" },
-    { name: "Xcode", role: "Build and release", icon: "code" },
+    { name: "SwiftUI", role: "Screens", logo: swiftuiLogo },
+    { name: "Xcode", role: "Build and release", logo: xcodeLogo },
+    revenuecat,
   ],
   android: [
     { name: "Kotlin", role: "Language", logo: kotlinLogo },
     { name: "Jetpack Compose", role: "Screens", logo: jetpackComposeLogo },
     { name: "Android Studio", role: "Build and release", logo: androidStudioLogo },
+    revenuecat,
   ],
-  storePayments: [
-    { name: "RevenueCat", role: "Billing on both stores", logo: revenuecatLogo },
-    { name: "In-App Purchase", role: "Apple's billing", icon: "card" },
-    { name: "Google Play Billing", role: "Google's billing", icon: "card" },
-  ],
-  directPayments: [{ name: "Stripe", role: "Card payments", logo: stripeLogo }],
 } satisfies Record<string, MobileTool[]>

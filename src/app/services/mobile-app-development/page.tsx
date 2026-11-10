@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { cn } from "cn"
 
 import { PageJsonLd } from "@/components/json-ld"
 import type { AppLayer } from "@/components/landing/app-layers"
@@ -10,11 +9,10 @@ import { GuidesSection } from "@/components/landing/guides-section"
 import { LandingHero } from "@/components/landing/hero"
 import { MobileAppVisual } from "@/components/landing/hero-visuals"
 import type { IconName } from "@/components/landing/icons"
-import { PlatformSection, ToolTiles } from "@/components/landing/mobile-sections"
+import { PlatformSection } from "@/components/landing/mobile-sections"
 import { ReleaseSection, type ReleaseStep } from "@/components/landing/release-phone"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
-import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import {
   FitCheckSection,
   HubSection,
@@ -24,7 +22,6 @@ import {
 } from "@/components/landing/service-sections"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
-import { inset } from "@/lib/frame"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
 import { extendedMvp, launchOffer, mvp, offerPrice, services } from "@/lib/services"
@@ -70,22 +67,6 @@ const platforms = {
     ],
   },
 }
-
-// The two ways a mobile app takes money, set by what it sells.
-const paymentRoutes = [
-  {
-    id: "store-billing",
-    name: "Digital content and subscriptions",
-    text: "Premium features, content and subscriptions unlocked in the app go through each store's own billing: In-App Purchase on iPhone and Google Play Billing on Android. RevenueCat sits over both, so one record says who has paid, whichever phone they use.",
-    tools: mobileTools.storePayments,
-  },
-  {
-    id: "card-payments",
-    name: "Physical goods and services",
-    text: "Deliveries, bookings and services used outside the app are paid by card through Stripe, as they would be on the web. The stores take no share of these payments and don't allow their own billing for them.",
-    tools: mobileTools.directPayments,
-  },
-]
 
 // From the first build to the stores, as the phone in the release section shows it.
 const releaseSteps: ReleaseStep[] = [
@@ -307,32 +288,6 @@ export default function MobileAppDevelopmentPage() {
         tools={mobileTools.android}
         reverse
       />
-
-      <LandingSection id="payments" labelledBy="payments-heading">
-        <SectionHeading className={inset} eyebrow="Payments" title="Taking payments in a mobile app" id="payments-heading">
-          What the app sells decides how it takes money. Apple and Google set the rules, and the build follows them from
-          the first sprint.
-        </SectionHeading>
-        <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
-          {paymentRoutes.map((route) => (
-            <article
-              key={route.id}
-              aria-labelledby={`${route.id}-name`}
-              className="corners guides flex flex-col gap-5 border border-border bg-card p-6 sm:p-8"
-            >
-              <h3 id={`${route.id}-name`} className="text-2xl tracking-tight">
-                {route.name}
-              </h3>
-              <p className="text-pretty text-muted-foreground">{route.text}</p>
-              <ToolTiles tools={route.tools} />
-            </article>
-          ))}
-        </div>
-        <p className={cn("mt-8 max-w-3xl text-sm text-pretty text-muted-foreground", inset)}>
-          Logos and product names belong to their owners and are shown only to name the tools we build with. Apple,
-          Google and the other owners do not endorse {siteConfig.name}.
-        </p>
-      </LandingSection>
 
       <ReleaseSection
         eyebrow="From code to the stores"

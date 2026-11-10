@@ -38,10 +38,13 @@ function AppIcon({ store }: { store: Store }) {
   )
 }
 
-/** A rough screen of the app, as a store screenshot: a list, a chart or a form. */
+/**
+ * A rough screen of the app, as a store screenshot: a list, a chart or a form.
+ * 3:4 on narrow screens; on wide ones it fills the height the card is given.
+ */
 function Screenshot({ variant }: { variant: "list" | "chart" | "form" }) {
   return (
-    <span className="flex aspect-[3/4] flex-col gap-1.5 overflow-hidden rounded-lg border border-border bg-card p-2">
+    <span className="flex aspect-[3/4] flex-col lg:aspect-auto gap-1.5 overflow-hidden rounded-lg border border-border bg-card p-2">
       <span className="h-1.5 w-1/2 rounded-full bg-primary/50" />
       {variant === "list" &&
         [0, 1, 2, 3, 4].map((row) => (
@@ -74,12 +77,12 @@ function Screenshot({ variant }: { variant: "list" | "chart" | "form" }) {
   )
 }
 
-export function StoreListing({ store }: { store: Store }) {
+export function StoreListing({ store, className }: { store: Store; className?: string }) {
   const { label, button, footnote } = stores[store]
   const ios = store === "app-store"
 
   return (
-    <div aria-hidden="true" className="flex flex-col gap-4 border border-border bg-background p-4 sm:p-5">
+    <div aria-hidden="true" className={cn("flex flex-col gap-4 border border-border bg-background p-4 sm:p-5", className)}>
       <span className="flex items-center justify-between font-mono text-xs text-muted-foreground">
         <span className="tracking-widest uppercase">{label}</span>
         <span className="flex items-center gap-1.5">
@@ -129,7 +132,8 @@ export function StoreListing({ store }: { store: Store }) {
         </span>
       )}
 
-      <span className="grid grid-cols-3 gap-2">
+      {/* Takes up the card's spare height, so the card can match the copy beside it. */}
+      <span className="grid grid-cols-3 gap-2 lg:flex-1">
         <Screenshot variant="list" />
         <Screenshot variant="chart" />
         <Screenshot variant="form" />
