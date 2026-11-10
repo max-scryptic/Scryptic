@@ -15,11 +15,11 @@ import { inset } from "@/lib/frame"
  * is decorative and hidden from assistive tech; the list says the same thing.
  */
 
-const STEP_MS = 3000
+export const STEP_MS = 3000
 
 export type ReleaseStep = { id: ScreenId; name: string; text: string }
 
-type ScreenId = "build" | "test" | "submit" | "review" | "live"
+export type ScreenId = "build" | "test" | "submit" | "review" | "live"
 
 function useStepCycle(count: number) {
   const ref = useRef<HTMLDivElement>(null)
@@ -46,7 +46,7 @@ function useStepCycle(count: number) {
   return { ref, motion, inView, active }
 }
 
-function Check({ className }: { className?: string }) {
+export function Check({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -62,7 +62,7 @@ function Check({ className }: { className?: string }) {
   )
 }
 
-function AppMark({ className }: { className?: string }) {
+export function AppMark({ className }: { className?: string }) {
   return (
     <span className={cn("relative flex items-center justify-center rounded-[22%] bg-primary", className)}>
       <span className="size-1/2 rotate-45 rounded-[22%] border-[3px] border-primary-foreground" />
@@ -72,7 +72,7 @@ function AppMark({ className }: { className?: string }) {
 }
 
 /** Each step's screen, drawn at the phone's size. */
-function Screen({ id }: { id: ScreenId }) {
+export function Screen({ id }: { id: ScreenId }) {
   if (id === "build") {
     const code = [
       "import SwiftUI",
@@ -221,9 +221,9 @@ function Screen({ id }: { id: ScreenId }) {
 }
 
 // Isometric cubes, drawn like the hero's voxel field: a top face and two shaded sides.
-const ISO = 0.866
+export const ISO = 0.866
 
-function cubeFaces(x: number, y: number, side: number) {
+export function cubeFaces(x: number, y: number, side: number) {
   const hw = side * ISO
   const hh = side / 2
   const r = (n: number) => Math.round(n * 10) / 10
@@ -235,7 +235,7 @@ function cubeFaces(x: number, y: number, side: number) {
 }
 
 /** A step's marker: a small cube, solid once the phone has reached that step. */
-function StepCube({ filled }: { filled: boolean }) {
+export function StepCube({ filled }: { filled: boolean }) {
   const { top, left, right } = cubeFaces(13, 1, 13)
   return (
     <svg viewBox="0 0 26 29" aria-hidden="true" className="h-[29px] w-[26px] shrink-0 overflow-visible">
@@ -261,7 +261,7 @@ const STAGE_SIZE = 7
 const stacked: Record<string, number> = { "0,0": 2, "0,1": 1, "1,0": 1, "0,4": 1, "4,0": 2, "0,6": 1, "6,0": 1 }
 const missing = new Set(["6,6", "5,6", "6,5", "0,3", "3,0"])
 
-function VoxelStage({ className }: { className?: string }) {
+export function VoxelStage({ className }: { className?: string }) {
   const hw = STAGE_SIDE * ISO
   const hh = STAGE_SIDE / 2
   const ox = STAGE_SIZE * hw
@@ -293,11 +293,14 @@ function VoxelStage({ className }: { className?: string }) {
   )
 }
 
-function Phone({ steps, active }: { steps: ReleaseStep[]; active: number }) {
+export function Phone({ steps, active, className }: { steps: ReleaseStep[]; active: number; className?: string }) {
   return (
     <div
       aria-hidden="true"
-      className="relative mx-auto aspect-[9/19] w-[250px] rounded-[44px] bg-[#14131b] p-[10px] shadow-2xl shadow-primary/20 ring-1 ring-black/10 sm:w-[270px] dark:ring-white/15"
+      className={cn(
+        "relative mx-auto aspect-[9/19] rounded-[44px] bg-[#14131b] p-[10px] shadow-2xl shadow-primary/20 ring-1 ring-black/10 dark:ring-white/15",
+        className ?? "w-[250px] sm:w-[270px]",
+      )}
     >
       <div className="relative h-full overflow-hidden rounded-[34px] bg-background">
         {/* Status bar and the camera cut-out. */}

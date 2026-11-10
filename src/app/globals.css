@@ -492,6 +492,16 @@
   }
 }
 
+/* The release section's progress bars, growing left to right while a step plays. */
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @keyframes hub-flow {
   to {
     stroke-dashoffset: -8;
