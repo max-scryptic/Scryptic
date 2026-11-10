@@ -206,6 +206,10 @@ export default function MobileAppDevelopmentPage() {
         items={kinds}
         core={{ name: "Your app", tag: "iOS + Android" }}
       />
+      {/* The sections above the layers have no cards wide enough to carry the
+          page's horizontal guides, so a rule with joints separates each one,
+          like the one under the layers. */}
+      <div aria-hidden="true" className="rail-joint border-t border-border" />
 
       <PlatformSection
         id="ios"
@@ -216,6 +220,7 @@ export default function MobileAppDevelopmentPage() {
         store="app-store"
         tools={mobileTools.ios}
       />
+      <div aria-hidden="true" className="rail-joint border-t border-border" />
 
       <PlatformSection
         id="android"
@@ -227,6 +232,7 @@ export default function MobileAppDevelopmentPage() {
         tools={mobileTools.android}
         reverse
       />
+      <div aria-hidden="true" className="rail-joint border-t border-border" />
 
       <ReleaseSection
         eyebrow="From code to the stores"
@@ -234,6 +240,7 @@ export default function MobileAppDevelopmentPage() {
         intro="Five steps from the first build to a listing customers can install, each one run from accounts in your name."
         steps={releaseSteps}
       />
+      <div aria-hidden="true" className="rail-joint border-t border-border" />
 
       <PricingSection
         title="Fixed-price mobile app development"
