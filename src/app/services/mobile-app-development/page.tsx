@@ -7,7 +7,7 @@ import { LandingHero } from "@/components/landing/hero"
 import { MobileAppVisual } from "@/components/landing/hero-visuals"
 import type { IconName } from "@/components/landing/icons"
 import { PlatformSection } from "@/components/landing/mobile-sections"
-import { ReleaseSection, type ReleaseStep } from "@/components/landing/release-phone"
+import { ReleaseSection, type ReleaseStep } from "@/components/landing/release-section"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { FitCheckSection, HubSection } from "@/components/landing/service-sections"
@@ -59,7 +59,7 @@ const platforms = {
   },
 }
 
-// From the first build to the stores, as the phone in the release section shows it.
+// From the first build to the stores, each with its own graphic in the release section.
 const releaseSteps: ReleaseStep[] = [
   {
     id: "build",

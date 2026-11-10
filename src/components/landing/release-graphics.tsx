@@ -2,13 +2,39 @@
 
 import { cn } from "cn"
 
-import { AppMark, Check, type ScreenId } from "@/components/landing/release-phone"
-
 /*
- * One graphic per release step, drawn in the same style as the service heroes'
- * cards rather than as a phone screen. Decorative: the step's copy says the
- * same thing, so the caller hides these from assistive tech.
+ * One graphic per release step for the release section (release-section.tsx),
+ * drawn in the same style as the service heroes' cards. Decorative: the step's
+ * copy says the same thing, so the section hides these from assistive tech.
  */
+
+export type ReleaseStepId = "build" | "test" | "submit" | "review" | "live"
+
+function Check({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={cn("size-3 shrink-0", className)}
+    >
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  )
+}
+
+/** A stand-in for the client's app icon. */
+function AppMark({ className }: { className?: string }) {
+  return (
+    <span className={cn("relative flex items-center justify-center rounded-[22%] bg-primary", className)}>
+      <span className="size-1/2 rotate-45 rounded-[22%] border-[3px] border-primary-foreground" />
+      <span className="absolute size-[14%] rounded-full bg-primary-foreground" />
+    </span>
+  )
+}
 
 const chip = "flex items-center gap-1.5 px-2 py-0.5 font-mono text-[11px]"
 const chipDone = cn(chip, "bg-primary/15 text-primary dark:bg-primary/30 dark:text-foreground")
@@ -141,7 +167,7 @@ function SubmitGraphic() {
               </span>
             ))}
           </span>
-          <span className={cn(chipWaiting, "self-start whitespace-nowrap")}>
+          <span className={cn(chipWaiting, "max-w-full self-start sm:whitespace-nowrap")}>
             <span className="size-1.5 animate-pulse bg-primary motion-reduce:animate-none" />
             Waiting for review
           </span>
@@ -214,7 +240,7 @@ function LiveGraphic() {
   )
 }
 
-export function StepGraphic({ id }: { id: ScreenId }) {
+export function StepGraphic({ id }: { id: ReleaseStepId }) {
   if (id === "build") return <BuildGraphic />
   if (id === "test") return <TestGraphic />
   if (id === "submit") return <SubmitGraphic />
@@ -222,7 +248,7 @@ export function StepGraphic({ id }: { id: ScreenId }) {
   return <LiveGraphic />
 }
 
-/** The window the tabs layout shows its graphic in, like the heroes' cards. */
+/** The window the section shows the current step's graphic in, like the heroes' cards. */
 export function StepWindow({
   title,
   status,

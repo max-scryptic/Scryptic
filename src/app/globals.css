@@ -481,18 +481,8 @@
   }
 }
 
-/* The release timeline's connector (components/landing/release-phone.tsx),
-   filling downwards while its step plays. Applied inline, only with motion. */
-@keyframes fill-down {
-  from {
-    clip-path: inset(0 0 100% 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-/* The release section's progress bars, growing left to right while a step plays. */
+/* The release section's progress bar (components/landing/release-section.tsx),
+   growing along the current step while it plays. Applied inline, only with motion. */
 @keyframes grow-x {
   from {
     transform: scaleX(0);
