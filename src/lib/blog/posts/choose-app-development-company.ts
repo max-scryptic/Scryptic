@@ -12,7 +12,7 @@ export const chooseAppDevelopmentCompany: BlogPost = {
   summary:
     "Choose an app development company by what you can check, not by the size of the quote: live apps you can use, a named person writing your code, and a contract that assigns the code and every account to you. Ask the questions below, listen for the answers, and walk away if several red flags turn up together.",
   datePublished: "2026-10-14",
-  dateModified: "2026-11-05",
+  dateModified: "2026-11-10",
   sections: [
     {
       id: "before-you-start",
@@ -142,6 +142,14 @@ export const chooseAppDevelopmentCompany: BlogPost = {
           link: {
             text: "The mobile app development checks a web build skips.",
             href: "/blog/mobile-app-development",
+          },
+        },
+        {
+          type: "paragraph",
+          text: "We build native apps ourselves, in Swift for iPhone and Kotlin for Android, and submit them from the client's own developer accounts, so these are the questions we expect to answer too.",
+          link: {
+            text: "How we work as a mobile app development company.",
+            href: "/services/mobile-app-development",
           },
         },
       ],
