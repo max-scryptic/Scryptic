@@ -69,7 +69,7 @@ export function PlatformSection({
 }) {
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
-      {/* On wide screens both columns stretch to the taller one, and the listing grows to match the copy. */}
+      {/* On wide screens the copy sets the row's height and the listing stretches to match it. */}
       <div className={cn("grid gap-12 lg:grid-cols-2 lg:gap-16", inset)}>
         <div data-reveal className={cn("mx-auto flex w-full max-w-lg", reverse && "lg:order-last")}>
           <StoreListing store={store} className="w-full" />
