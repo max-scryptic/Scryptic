@@ -220,7 +220,6 @@ export default function MobileAppDevelopmentPage() {
         store="app-store"
         tools={mobileTools.ios}
       />
-      <div aria-hidden="true" className="rail-joint border-t border-border" />
 
       <PlatformSection
         id="android"
