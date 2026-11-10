@@ -20,6 +20,7 @@ import {
   type OptionRow,
 } from "@/components/landing/service-sections"
 import { WorkSection } from "@/components/landing/work-section"
+import { StoreListing, type Store } from "@/components/landing/store-listing"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { inset } from "@/lib/frame"
@@ -45,10 +46,12 @@ const kinds = [
   { icon: "spark", name: "AI features", text: "The camera or voice feeding a model, its output checked", tag: "AI" },
 ] satisfies { icon: IconName; name: string; text: string; tag: string }[]
 
-// The two platforms, each a native app of its own. Only claims every build delivers.
-const platforms = [
+// The two platforms, each a native app of its own, with a drawn listing of
+// the client's app in that platform's store. Only claims every build delivers.
+const platforms: { id: string; store: Store; name: string; summary: string; points: string[] }[] = [
   {
     id: "ios",
+    store: "app-store",
     name: "iOS app development",
     summary:
       "iPhone apps written in Swift, Apple's own language, using Apple's frameworks for the camera, location, notifications and payments.",
@@ -60,6 +63,7 @@ const platforms = [
   },
   {
     id: "android",
+    store: "google-play",
     name: "Android app development",
     summary:
       "Android apps written in Kotlin, the language Google recommends for Android, using Google's own libraries for the same device features.",
@@ -253,6 +257,7 @@ export default function MobileAppDevelopmentPage() {
               aria-labelledby={`${platform.id}-name`}
               className="corners guides flex flex-col gap-6 border border-border bg-card p-6 sm:p-8 lg:p-10"
             >
+              <StoreListing store={platform.store} />
               <div className="flex flex-col gap-3">
                 <h3 id={`${platform.id}-name`} className="text-3xl tracking-tight">
                   {platform.name}
