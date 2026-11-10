@@ -12,7 +12,7 @@ export const vibeCoding: BlogPost = {
   summary:
     "A vibe-coded app is rarely ready for production as it stands, but you can find out how far off it is yourself in an afternoon. Run the seven checks below, one area at a time, and compare what you find with what good looks like. Most apps need hardening, not a rewrite.",
   datePublished: "2026-10-14",
-  dateModified: "2026-10-28",
+  dateModified: "2026-11-10",
   facts: [
     { label: "Term coined", value: "Andrej Karpathy, early 2025" },
     { label: "Areas to audit", value: "Seven" },
@@ -205,7 +205,8 @@ export const vibeCoding: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Anything broken in areas 1, 2 or 4 is a launch blocker. Fix those before you take payments or store personal data, because a flaw there can become a data breach you have to report under UK GDPR. Areas 5 to 7 can be improved while the app is live.",
+          text: "Anything broken in areas 1, 2 or 4 is a launch blocker. Fix those before you take payments or store personal data, because a flaw there can become a data breach you have to report under UK GDPR. Areas 5 to 7 can be improved while the app is live. Once access is fixed, check where the data is stored too, since larger customers will ask.",
+          link: { text: "Where your AI-built app stores its data, and how to move it.", href: "/blog/uk-data-residency-ai-built-apps" },
         },
         {
           type: "paragraph",
