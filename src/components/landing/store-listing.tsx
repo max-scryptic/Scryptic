@@ -576,12 +576,18 @@ export function StoreListing({ store, className }: { store: Store; className?: s
         </span>
       </span>
 
-      {/* A soft glow behind the phone; the phone is drawn at full size and zoomed to fit the column. */}
-      <div className="relative flex flex-1 items-center justify-center">
+      {/*
+       * A soft glow behind the phone; the phone is drawn at full size and
+       * zoomed to fit the column. On narrow screens the whole phone shows. On
+       * wide ones it takes no height of its own, so the card is exactly as tall
+       * as the copy beside it, and the phone runs off the card's lower edge.
+       */}
+      <div className="relative flex flex-1 items-center justify-center lg:overflow-hidden">
         <span className="absolute top-1/2 left-1/2 size-[70%] -translate-1/2 rounded-full bg-primary/20 blur-3xl" />
-        <div className="relative [zoom:0.5] min-[360px]:[zoom:0.56] min-[400px]:[zoom:0.64] sm:[zoom:0.8] lg:[zoom:0.7] xl:[zoom:0.76]">
+        <div className="relative [zoom:0.5] min-[360px]:[zoom:0.56] min-[400px]:[zoom:0.64] sm:[zoom:0.8] lg:absolute lg:top-0 lg:left-1/2 lg:-translate-x-1/2 lg:[zoom:0.74] xl:[zoom:0.8]">
           <Phone store={store} />
         </div>
+        <span className="absolute inset-x-0 bottom-0 hidden h-12 bg-linear-to-t from-background to-transparent lg:block" />
       </div>
 
       <span className="border-t border-border pt-3 font-mono text-xs text-muted-foreground">{footnote}</span>
