@@ -148,9 +148,9 @@ const tools = [freeTool("app-launch-checklist"), freeTool("mvp-cost-calculator")
 // Worded for this page rather than copied from the other service pages.
 const faqs: Faq[] = [
   {
-    question: "What is mobile app development?",
+    question: "What does a mobile app development company do?",
     answer:
-      "Mobile app development is designing, building and releasing software people install on their phones: the screens, the business rules and the server and database behind them, plus every release through Apple's and Google's review. Compared with a web app, it adds store review, older versions that stay in use and permission prompts that rarely get a second chance.",
+      "It designs, builds and releases the app, and the server and database behind it, then gets each version through Apple's and Google's review. A good one also leaves you holding the code, the store accounts and the signing keys, because whoever holds those controls every future update.",
     link: {
       text: "The checks mobile app development adds to a web build.",
       href: "/blog/mobile-app-development",
