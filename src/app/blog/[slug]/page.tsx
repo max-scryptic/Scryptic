@@ -115,6 +115,20 @@ function Block({ block }: { block: PostBlock }) {
     )
   }
 
+  if (block.type === "code") {
+    return (
+      // The brackets sit on an outer box, as the scroll area would clip them.
+      <figure className="corners border border-border bg-card">
+        <figcaption className="border-b border-border px-4 py-2 font-mono text-xs text-muted-foreground">
+          {block.label}
+        </figcaption>
+        <pre className="overflow-x-auto p-4 text-sm leading-relaxed">
+          <code className="font-mono">{block.code}</code>
+        </pre>
+      </figure>
+    )
+  }
+
   if (block.type === "checklist") {
     return (
       <ul className="corners flex flex-col gap-3 border border-border bg-card p-6">

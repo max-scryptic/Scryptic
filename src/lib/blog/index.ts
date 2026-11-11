@@ -44,6 +44,7 @@ import { supabaseVsFirebase } from "@/lib/blog/posts/supabase-vs-firebase"
 import { v0 } from "@/lib/blog/posts/v0"
 import { vibeCoding } from "@/lib/blog/posts/vibe-coding"
 import { webAppVsMobileApp } from "@/lib/blog/posts/web-app-vs-mobile-app"
+import { webAppWithPython } from "@/lib/blog/posts/web-app-with-python"
 import { webApplicationDevelopmentServices } from "@/lib/blog/posts/web-application-development-services"
 import { webflow } from "@/lib/blog/posts/webflow"
 import { weweb } from "@/lib/blog/posts/weweb"
@@ -90,6 +91,7 @@ export const posts: BlogPost[] = [
   googleSheetsDatabase,
   webAppVsMobileApp,
   supabaseVsFirebase,
+  webAppWithPython,
   reactNativeVsFlutter,
   hybridApps,
   aiAppBuildersCompared,
@@ -254,6 +256,8 @@ function blockText(block: PostBlock) {
   if (block.type === "image") return block.caption ?? ""
   if (block.type === "caseStudy") return `${block.company} ${block.text}`
   if (block.type === "checklist") return block.items.join(" ")
+  // Code is scanned rather than read, so only its label counts towards reading time.
+  if (block.type === "code") return block.label
   if (block.type === "table") return [...block.columns, ...block.rows.flat()].join(" ")
   return block.items
     .map((item) => (typeof item === "string" ? item : `${item.term} ${item.text}`))
