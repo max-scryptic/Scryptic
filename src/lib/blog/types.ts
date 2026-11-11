@@ -44,6 +44,16 @@ export type PostBlock =
     }
   /** Things to tick off, shown with boxes rather than bullets. */
   | { type: "checklist"; items: string[] }
+  /**
+   * Code or terminal commands, shown as written in a monospaced box. Only
+   * code that has been run and works: readers copy it.
+   */
+  | {
+      type: "code"
+      /** Shown above the code: a file name such as "app.py", or "Terminal". */
+      label: string
+      code: string
+    }
   /** An <h3> that splits a long section. */
   | { type: "subheading"; text: string }
   /**

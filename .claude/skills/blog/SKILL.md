@@ -71,9 +71,16 @@ If the post has no images, add one (two if it's 1,500 words or more), in the sec
 
 For a new image:
 
-- Style: match the images on the site's other posts. If they have none, use this house style: A flat vector graphic for a business blog article: simple geometric shapes, icons and abstract forms on a plain background, crisp edges, solid fills with at most subtle gradients, a restrained palette, generous empty space, one clear focal point. Not a photograph and not photorealistic or 3D-rendered. No people, faces, hands or body parts, and no laptops, phones, monitors or other devices. Text only where the description quotes it, as a few short, large, clearly spelled words in a clean sans-serif; no other text, numbers, logos, watermarks or brand marks anywhere in the image.
+- Format: pick the kind of picture that suits the idea, not the one the last post used. Look at the images in the five most recent posts first and don't repeat their format. A post with two images uses two different formats, and has at most one diagram made of boxes joined by arrows. Choose from:
+  - A screenshot of the real thing: an app or a tool's page actually running, a dashboard setting, a terminal or an error message, with anything private blanked out. Take it with the pre-installed Playwright and Chromium.
+  - An illustration of the idea as a scene or object: a padlocked folder for access rules, a moving box for a migration, a hand-drawn-style map for a journey.
+  - A chart drawn from numbers the post already gives, such as a cost breakdown or a timeline.
+  - A before and after, or a side by side of the same thing done two ways.
+  - A timeline, a decision tree, a layered stack or a cutaway that opens one thing up.
+  - A flow diagram of boxes and arrows, only when the order of steps is the whole point.
+- Style: use the brand in `src/lib/site.ts` and `brand/` (Lapis #2b3fd6, Obsidian, Mist, Night, Slate, and Glint for one highlight; Hanken Grotesk, with IBM Plex Mono for labels) so the images belong together, and vary the rest: background colour, scale, perspective, density and how much space the subject fills. Not a photograph and not photorealistic. No people, faces, hands or body parts, and no logos or watermarks other than a product shown in a real screenshot. Text only as a few short, large, clearly spelled words, apart from what a screenshot really shows.
 - Size: 1536 by 1024 pixels, landscape.
-- Making it: use an image generation tool if you have one, with the style above at the start of the prompt. Otherwise draw it as an SVG in that style. If you can do neither, leave a placeholder where it goes and put the prompt you would have used in your report.
+- Making it: use an image generation tool if you have one, with the format and style above at the start of the prompt. Otherwise build it as HTML or SVG and render it with Playwright, or take the screenshot. If you can do none of these, leave a placeholder where it goes and put the prompt you would have used in your report.
 - Placement: after the first paragraph of its section, never in a questions section.
 - Alt text: one sentence under 125 characters saying what it shows, not starting "Image of".
 - File name: what it shows, following the site's naming.
