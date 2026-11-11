@@ -109,7 +109,7 @@ export const webAppWithPython: BlogPost = {
   description:
     "Build a web app with Python: a working Flask waitlist in under 100 lines, how to choose Flask, Django or FastAPI, and how to go live without losing data.",
   summary:
-    "To build a web app with Python, pick Flask for a small app, Django when it needs accounts and an admin, or FastAPI when it mostly serves an API. Start with SQLite, run it with Gunicorn rather than the development server, and keep the database on a disk that survives a deploy. Below is a complete waitlist app in one Flask file, tested, that you can copy and run.",
+    "Flask is the simplest way to build a small web app with Python, Django suits one that needs accounts and an admin, and FastAPI fits one that mostly serves an API. Start with SQLite, run it with Gunicorn rather than the development server, and keep the database on a disk that survives a deploy. Below is a complete waitlist app in one Flask file, tested, that you can copy and run.",
   datePublished: "2026-11-11",
   facts: [
     { label: "Worked example", value: "A launch waitlist" },
@@ -285,7 +285,12 @@ export const webAppWithPython: BlogPost = {
           type: "paragraph",
           text: "Gunicorn doesn't run on Windows, which only matters on your own machine, since the host runs Linux. PythonAnywhere works differently: you point its own server at the app object in a WSGI file and skip Gunicorn. Wherever it runs, set ADMIN_PASSWORD in the host's dashboard as a secret, and keep it out of the code and the repository.",
         },
-        { type: "subheading", text: "Keep the database file somewhere a deploy can't wipe" },
+      ],
+    },
+    {
+      id: "keep-the-database",
+      heading: "Keep the database where a deploy can't wipe it",
+      blocks: [
         {
           type: "paragraph",
           text: "On Render, Railway and Fly.io, files written to the server's own disk are lost when you deploy again or the server restarts. That includes waitlist.db, and everyone on it. PythonAnywhere keeps your files, which is one reason it suits a small app like this.",
@@ -302,7 +307,7 @@ export const webAppWithPython: BlogPost = {
         {
           type: "paragraph",
           text: "The move to Postgres touches only a few lines here: the psycopg driver takes the place of sqlite3, the placeholders become %s and INSERT OR IGNORE becomes INSERT ... ON CONFLICT DO NOTHING. Supabase and Neon both host Postgres for you, and our comparison of Supabase with Firebase covers what else Supabase brings.",
-          link: { text: "Supabase vs Firebase for a startup.", href: "/blog/supabase-vs-firebase" },
+          link: { text: "How Supabase compares with Firebase as a hosted backend.", href: "/blog/supabase-vs-firebase" },
         },
       ],
     },
@@ -320,12 +325,11 @@ export const webAppWithPython: BlogPost = {
           items: [
             "Bots fill in public forms. A hidden field that real visitors never fill in catches the simple ones, and Flask-Limiter caps how many sign-ups one address can send in a minute.",
             "Back up the database on a schedule with sqlite3 waitlist.db \".backup backup.db\", which makes a safe copy while the app is running, and keep the copy off the server.",
-            "Find out when it breaks. Hosts keep Gunicorn's logs, and an error tracking service will email you the first time a page fails, rather than you hearing it from a friend.",
           ],
         },
         {
           type: "paragraph",
-          text: "For anything bigger than a waitlist, our production audit covers the rest: data access, secrets, sign-in edge cases, payments, deploys, tests and cost. It was written for apps made with AI builders, and every check applies just as much to code you wrote yourself.",
+          text: "For anything bigger than a waitlist, our production audit covers the rest, from data access and secrets to tests, error tracking and cost. It was written for apps made with AI builders, and every check applies just as much to code you wrote yourself.",
           link: { text: "Work through the seven-area production audit.", href: "/blog/vibe-coding-to-production" },
         },
       ],
@@ -348,6 +352,11 @@ export const webAppWithPython: BlogPost = {
           text: "We build production web apps in TypeScript, Next.js and Postgres rather than Python. If you've proved an idea with a Python prototype and want it rebuilt for real customers, the prototype is the best brief you can give anyone: it shows exactly what the app has to do.",
           link: { text: "How we build custom web apps.", href: "/services/web-app-development" },
         },
+        {
+          type: "paragraph",
+          text: "A prototype that already does one job is a good starting point for a fixed-price build.",
+          link: { text: "Our fixed-price packages and what they cover.", href: "/#pricing" },
+        },
       ],
     },
   ],
@@ -358,9 +367,9 @@ export const webAppWithPython: BlogPost = {
         "Not for an app like this one, where the server builds each page and the browser shows it. You need JavaScript once part of a page should change without a reload, such as a live search. The htmx library adds much of that through HTML attributes. A full React front end calling a FastAPI back end is the step after that.",
     },
     {
-      question: "Is Flask or Django better for a beginner?",
+      question: "Can Python run in the browser instead of JavaScript?",
       answer:
-        "Flask has less to learn before your first page works, so you see how requests, templates and the database fit together. Django asks more of you up front, but its official tutorial covers the admin, models and migrations that a Flask beginner would otherwise piece together from extensions. If you know the app will need accounts, start with Django.",
+        "Yes, through Pyodide or PyScript, which run Python compiled to WebAssembly inside the page. They suit teaching, notebooks and data tools that work in the browser. The page has to download a Python runtime before it can do anything, so for an ordinary web app keep Python on the server and leave the browser to HTML and JavaScript.",
     },
     {
       question: "What's the best way to learn web development with Python?",
