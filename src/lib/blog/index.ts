@@ -1,3 +1,4 @@
+import { access } from "@/lib/blog/posts/access"
 import { adalo } from "@/lib/blog/posts/adalo"
 import { aiAppBuildersCompared } from "@/lib/blog/posts/ai-app-builders-compared"
 import { aiSoftwareDevelopment } from "@/lib/blog/posts/ai-software-development"
@@ -19,6 +20,7 @@ import { framer } from "@/lib/blog/posts/framer"
 import { glide } from "@/lib/blog/posts/glide"
 import { hybridApps } from "@/lib/blog/posts/hybrid-apps"
 import { googleSheetsDatabase } from "@/lib/blog/posts/google-sheets-database"
+import { knack } from "@/lib/blog/posts/knack"
 import { lovable } from "@/lib/blog/posts/lovable"
 import { lovableAppBackup } from "@/lib/blog/posts/lovable-app-backup"
 import { ukDataResidency } from "@/lib/blog/posts/uk-data-residency"
@@ -108,6 +110,7 @@ export const posts: BlogPost[] = [
   adalo,
   glide,
   softr,
+  knack,
   webflow,
   framer,
   wix,
@@ -115,6 +118,7 @@ export const posts: BlogPost[] = [
   airtable,
   appsheet,
   filemaker,
+  access,
   outsystems,
   powerApps,
 ]
