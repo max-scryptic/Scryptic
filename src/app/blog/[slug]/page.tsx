@@ -358,33 +358,16 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           </section>
 
           {showContents ? (
-            <nav
-              aria-label="On this page"
-              className="corners guides flex flex-col border border-border bg-card"
-            >
-              <div className="flex items-baseline justify-between gap-4 border-b border-border px-6 py-4 sm:px-8">
-                <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                  On this page
-                </p>
-                <p className="font-mono text-xs text-muted-foreground">
-                  {contents.length} sections
-                </p>
-              </div>
-              {/* Columns read top to bottom, so the order runs down each one like a book's contents. */}
-              <ol className="gap-x-10 p-6 sm:columns-2 sm:p-8 lg:columns-3">
-                {contents.map((entry, index) => (
-                  <li key={entry.id} className="break-inside-avoid">
+            <nav aria-label="On this page" className={cn("flex flex-col gap-3 pt-4", inset)}>
+              <p className="font-medium">On this page</p>
+              <ol className="flex list-outside list-decimal flex-col gap-1.5 pl-5 text-muted-foreground marker:text-muted-foreground">
+                {contents.map((entry) => (
+                  <li key={entry.id}>
                     <Link
                       href={`#${entry.id}`}
-                      className="group flex gap-4 py-2 text-pretty text-muted-foreground transition-colors hover:text-foreground"
+                      className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
                     >
-                      <span
-                        aria-hidden="true"
-                        className="w-6 shrink-0 pt-0.5 font-mono text-xs text-primary"
-                      >
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span className="underline-offset-4 group-hover:underline">{entry.heading}</span>
+                      {entry.heading}
                     </Link>
                   </li>
                 ))}
