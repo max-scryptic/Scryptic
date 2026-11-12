@@ -40,6 +40,15 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
   return createMetadata(blogPostPage(post))
 }
 
+// Every fact on one row at desktop width; written out in full so Tailwind sees each class.
+const factColumns: Record<number, string> = {
+  2: "lg:grid-cols-2",
+  3: "lg:grid-cols-3",
+  4: "lg:grid-cols-4",
+  5: "lg:grid-cols-5",
+  6: "lg:grid-cols-3",
+}
+
 function Block({ block }: { block: PostBlock }) {
   if (block.type === "paragraph") {
     return (
@@ -78,7 +87,7 @@ function Block({ block }: { block: PostBlock }) {
           <Image
             src={block.image}
             alt={block.alt}
-            sizes="(min-width: 768px) 768px, 100vw"
+            sizes="(min-width: 1152px) 1088px, 100vw"
             placeholder="blur"
             className="block h-auto w-full"
           />
@@ -236,8 +245,12 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
   const faqHeadingId = "faq-heading"
   const faqHeading = post.faqHeading ?? "Frequently asked questions"
   const hasFaqs = post.faqs.length > 0
-  // A short post reads better without a contents list beside it.
-  const showContents = post.sections.length + (hasFaqs ? 1 : 0) >= 4
+  const contents = [
+    ...post.sections.map((section) => ({ id: section.id, heading: section.heading })),
+    ...(hasFaqs ? [{ id: "faq", heading: faqHeading }] : []),
+  ]
+  // A short post reads better without a contents list above it.
+  const showContents = contents.length >= 4
 
   return (
     <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
@@ -273,133 +286,136 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             </ol>
           </nav>
 
-          <div
-            className={
-              post.facts
-                ? "grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-14"
-                : "grid gap-10"
-            }
+          <div className={cn("flex flex-col items-start gap-6", inset)}>
+            <div className="flex items-center gap-4">
+              <ToolLogo post={post} />
+              <p className="font-mono text-xs tracking-widest text-primary uppercase">
+                {series.label}
+                {post.category ? <> &middot; {post.category}</> : null}
+              </p>
+            </div>
+            <h1 className="max-w-4xl text-4xl tracking-tight text-balance sm:text-5xl">
+              {post.title}
+            </h1>
+            <p className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-muted-foreground">
+              <span>By {founder.fullName}</span>
+              <span aria-hidden="true">/</span>
+              <time dateTime={post.datePublished}>{published}</time>
+              {post.dateModified ? (
+                <>
+                  <span aria-hidden="true">/</span>
+                  <span>
+                    Updated{" "}
+                    <time dateTime={post.dateModified}>{formatPostDate(post.dateModified)}</time>
+                  </span>
+                </>
+              ) : null}
+              <span aria-hidden="true">/</span>
+              <span>{readingMinutes(post)} min read</span>
+            </p>
+          </div>
+        </header>
+
+        <div className="flex flex-col gap-6">
+          {/* The post's answer up front, with its quick facts underneath, across the full column. */}
+          <section
+            aria-labelledby="in-short-heading"
+            className="corners guides flex flex-col border border-border bg-card"
           >
-            <div className={cn("flex flex-col items-start gap-6", inset)}>
-              <div className="flex items-center gap-4">
-                <ToolLogo post={post} />
-                <p className="font-mono text-xs tracking-widest text-primary uppercase">
-                  {series.label}
-                  {post.category ? <> &middot; {post.category}</> : null}
-                </p>
-              </div>
-              <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">{post.title}</h1>
-              <p className="max-w-2xl text-lg text-pretty text-muted-foreground">{post.summary}</p>
-              <p className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-muted-foreground">
-                <span>By {founder.fullName}</span>
-                <span aria-hidden="true">/</span>
-                <time dateTime={post.datePublished}>{published}</time>
-                {post.dateModified ? (
-                  <>
-                    <span aria-hidden="true">/</span>
-                    <span>
-                      Updated{" "}
-                      <time dateTime={post.dateModified}>{formatPostDate(post.dateModified)}</time>
-                    </span>
-                  </>
-                ) : null}
-                <span aria-hidden="true">/</span>
-                <span>{readingMinutes(post)} min read</span>
+            <div className="relative flex flex-col gap-5 px-6 py-8 sm:px-8 lg:py-10">
+              {/* Drawn over the border, so the summary keeps the facts' left edge. */}
+              <span aria-hidden="true" className="absolute -inset-y-px -left-px w-1 bg-primary" />
+              <h2
+                id="in-short-heading"
+                className="flex items-center gap-3 font-mono text-xs tracking-widest text-primary uppercase"
+              >
+                <span aria-hidden="true" className="size-2 bg-primary" />
+                In short
+              </h2>
+              <p className="text-xl leading-relaxed text-pretty sm:text-2xl sm:leading-relaxed">
+                {post.summary}
               </p>
             </div>
 
             {post.facts ? (
-              // Brackets but no guides: beside the intro, its edge lines would cut through the copy.
-              <dl className="corners grid gap-5 border border-border bg-card p-6 text-sm sm:grid-cols-2">
+              <dl
+                className={cn(
+                  "grid gap-px border-t border-border bg-border sm:grid-cols-2",
+                  factColumns[post.facts.length],
+                )}
+              >
                 {post.facts.map((fact) => (
-                  <div key={fact.label} className="flex flex-col gap-1">
+                  <div
+                    key={fact.label}
+                    className="flex flex-col gap-1 bg-card px-6 py-5 sm:px-8 sm:odd:last:col-span-2 lg:odd:last:col-span-1"
+                  >
                     <dt className="font-mono text-xs text-muted-foreground">{fact.label}</dt>
-                    <dd>{fact.value}</dd>
+                    <dd className="text-pretty">{fact.value}</dd>
                   </div>
                 ))}
               </dl>
             ) : null}
-          </div>
-        </header>
+          </section>
 
-        <div
-          className={cn(
-            "grid gap-12",
-            showContents && "lg:grid-cols-[14rem_1fr] lg:gap-16",
-            inset,
-          )}
-        >
           {showContents ? (
-            <nav aria-label="On this page" className="lg:sticky lg:top-32 lg:self-start">
-              <p className="mb-4 font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                On this page
-              </p>
-              <ol className="flex flex-col gap-3 text-sm">
-                {post.sections.map((section) => (
-                  <li key={section.id}>
+            <nav aria-label="On this page" className={cn("flex flex-col gap-3 pt-4", inset)}>
+              <p className="font-medium">On this page</p>
+              <ol className="flex list-outside list-decimal flex-col gap-1.5 pl-5 text-muted-foreground marker:text-muted-foreground">
+                {contents.map((entry) => (
+                  <li key={entry.id}>
                     <Link
-                      href={`#${section.id}`}
-                      className="text-pretty text-muted-foreground transition-colors hover:text-foreground"
+                      href={`#${entry.id}`}
+                      className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
                     >
-                      {section.heading}
+                      {entry.heading}
                     </Link>
                   </li>
                 ))}
-                {hasFaqs ? (
-                  <li>
-                    <Link
-                      href="#faq"
-                      className="text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {faqHeading}
-                    </Link>
-                  </li>
-                ) : null}
               </ol>
             </nav>
           ) : null}
+        </div>
 
-          {/* min-w-0 lets a wide table scroll in its own box instead of widening the page. */}
-          <div className="flex min-w-0 max-w-3xl flex-col gap-14">
-            {post.sections.map((section) => (
-              <section
-                key={section.id}
-                id={section.id}
-                aria-labelledby={`${section.id}-heading`}
-                className="flex scroll-mt-28 flex-col gap-6"
+        {/* min-w-0 lets a wide table scroll in its own box instead of widening the page. */}
+        <div className={cn("flex min-w-0 flex-col gap-14", inset)}>
+          {post.sections.map((section) => (
+            <section
+              key={section.id}
+              id={section.id}
+              aria-labelledby={`${section.id}-heading`}
+              className="flex scroll-mt-28 flex-col gap-6"
+            >
+              <h2
+                id={`${section.id}-heading`}
+                className="text-2xl tracking-tight text-balance sm:text-3xl"
               >
-                <h2
-                  id={`${section.id}-heading`}
-                  className="text-2xl tracking-tight text-balance sm:text-3xl"
-                >
-                  {section.heading}
-                </h2>
-                {section.blocks.map((block, index) => (
-                  <Block key={index} block={block} />
+                {section.heading}
+              </h2>
+              {section.blocks.map((block, index) => (
+                <Block key={index} block={block} />
+              ))}
+            </section>
+          ))}
+
+          {hasFaqs ? (
+            <section
+              id="faq"
+              aria-labelledby={faqHeadingId}
+              className="flex scroll-mt-28 flex-col gap-6"
+            >
+              <h2 id={faqHeadingId} className="text-2xl tracking-tight text-balance sm:text-3xl">
+                {faqHeading}
+              </h2>
+              <dl className="flex flex-col divide-y divide-border border-y border-border">
+                {post.faqs.map((faq) => (
+                  <div key={faq.question} className="flex flex-col gap-2 py-6">
+                    <dt className="text-lg">{faq.question}</dt>
+                    <dd className="text-pretty text-muted-foreground">{faq.answer}</dd>
+                  </div>
                 ))}
-              </section>
-            ))}
-
-            {hasFaqs ? (
-              <section
-                id="faq"
-                aria-labelledby={faqHeadingId}
-                className="flex scroll-mt-28 flex-col gap-6"
-              >
-                <h2 id={faqHeadingId} className="text-2xl tracking-tight text-balance sm:text-3xl">
-                  {faqHeading}
-                </h2>
-                <dl className="flex flex-col divide-y divide-border border-y border-border">
-                  {post.faqs.map((faq) => (
-                    <div key={faq.question} className="flex flex-col gap-2 py-6">
-                      <dt className="text-lg">{faq.question}</dt>
-                      <dd className="text-pretty text-muted-foreground">{faq.answer}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </section>
-            ) : null}
-          </div>
+              </dl>
+            </section>
+          ) : null}
         </div>
 
         <footer className="flex flex-col gap-12 pt-12">

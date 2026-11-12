@@ -58,8 +58,8 @@ export type PostBlock =
   | { type: "subheading"; text: string }
   /**
    * A diagram or screenshot, a WebP from src/assets/blog/images/ cropped to
-   * its content. It shows at the text column's width (768px), so export it
-   * about 1536px wide for sharp high-density screens.
+   * its content. It spans the full text column (up to 1088px), so export it
+   * about 2176px wide for sharp high-density screens.
    */
   | {
       type: "image"
@@ -158,8 +158,9 @@ export type BlogPost = {
   datePublished: string
   dateModified?: string
   /**
-   * Quick facts shown beside the summary, e.g. "Code export". Leave it out
-   * when a post has no useful at-a-glance facts; the summary then runs full width.
+   * Quick facts shown in a row under the summary in the "In short" box, e.g.
+   * "Code export". Two to five read best. Leave it out when a post has no
+   * useful at-a-glance facts; the box then holds the summary alone.
    */
   facts?: { label: string; value: string }[]
   sections: PostSection[]
