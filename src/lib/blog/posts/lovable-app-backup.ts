@@ -33,7 +33,7 @@ export const lovableAppBackup: BlogPost = {
         {
           type: "image",
           image: lovableBackupWhatEachCopyCovers,
-          alt: "Diagram: version history covers code, daily backups cover the database, and only your own backup covers everything.",
+          alt: "Three umbrellas: version history shelters only code, daily backups only the database, your own backup all four.",
         },
         {
           type: "paragraph",
@@ -193,7 +193,7 @@ export const lovableAppBackup: BlogPost = {
         {
           type: "image",
           image: lovableBackupRestoreDrill,
-          alt: "Four restore steps: new Supabase project, schema and data, files and secrets, then sign in and compare.",
+          alt: "A stopwatch split into four restore steps: new project, schema and data, files and secrets, sign in and compare.",
         },
         {
           type: "checklist",

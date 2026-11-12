@@ -57,7 +57,7 @@ export const filemaker: BlogPost = {
         {
           type: "image",
           image: filemakerOccurrencesToBaseTables,
-          alt: "Five table occurrences on a FileMaker relationship graph that resolve to just two base tables, Contacts and Invoices.",
+          alt: "Five FileMaker table occurrences stacked as cards over just two base tables, Contacts and Invoices.",
         },
         {
           type: "callout",
@@ -141,7 +141,7 @@ export const filemaker: BlogPost = {
         {
           type: "image",
           image: filemakerContainerFilesToStorage,
-          alt: "Photos, signed forms and drawings leave FileMaker through a script or the Data API into object storage and a files table.",
+          alt: "Photos, signed forms and drawings leave a FileMaker record as named files in object storage, checked against a manifest.",
         },
         {
           type: "paragraph",

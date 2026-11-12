@@ -72,7 +72,7 @@ export const mvpAgile: BlogPost = {
         {
           type: "image",
           image: incrementsAddUpToMvp,
-          alt: "Three sprint increments (offer sent, reply or lapse, list imported) joining into one MVP release.",
+          alt: "A bridge of three sprint spans, offer sent, reply or lapse and list imported, that only reaches the MVP release together.",
         },
         {
           type: "paragraph",
@@ -96,7 +96,7 @@ export const mvpAgile: BlogPost = {
         {
           type: "image",
           image: mvpLineOnStoryMap,
-          alt: "A story map of five steps, with one story under each step above a green MVP line and later stories below it.",
+          alt: "A story map of sticky notes: five steps along the top, one story under each above a strip of MVP tape, the rest below.",
         },
         {
           type: "paragraph",
