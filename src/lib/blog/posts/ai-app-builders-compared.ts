@@ -84,7 +84,7 @@ export const aiAppBuildersCompared: BlogPost = {
         {
           type: "image",
           image: aiBuildersWhatYouTake,
-          alt: "Lovable, Bolt and Replit Agent let you take code and a database with you; v0 and Base44 leave you with screens.",
+          alt: "Five open boxes: Lovable, Bolt and Replit Agent pack code and a database; v0 and Base44 pack only screens.",
         },
         {
           type: "paragraph",
@@ -133,7 +133,7 @@ export const aiAppBuildersCompared: BlogPost = {
         {
           type: "image",
           image: aiBuildersWhereAccessIsChecked,
-          alt: "In Lovable and Bolt a policy on each table guards the data; in Replit Agent a check in each server route does.",
+          alt: "Lovable and Bolt lock each database table; Replit Agent puts a lock on each server route in front of an open database.",
         },
         {
           type: "paragraph",

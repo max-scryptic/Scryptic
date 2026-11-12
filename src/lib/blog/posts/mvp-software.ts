@@ -55,7 +55,7 @@ export const mvpSoftware: BlogPost = {
         {
           type: "image",
           image: onlyMvpReachesRealUse,
-          alt: "A prototype, a proof of concept and a landing page all stop short of real use; only the MVP reaches it.",
+          alt: "Arrows for a prototype, a proof of concept and a landing page land short; only the MVP's arrow hits the target, real use.",
         },
         {
           type: "table",
@@ -131,7 +131,7 @@ export const mvpSoftware: BlogPost = {
         {
           type: "image",
           image: manualStepBehindScreen,
-          alt: "On screen a posted shift turns to Filled, while behind the screen the step in between is done by hand.",
+          alt: "On screen a shift goes from Posted to Filled; behind the screen, the step between is done by hand with a phone and a list.",
         },
         {
           type: "list",

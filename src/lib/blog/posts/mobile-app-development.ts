@@ -100,7 +100,7 @@ export const mobileAppDevelopment: BlogPost = {
         {
           type: "image",
           image: oldAppVersions,
-          alt: "Versions 3 and 2 of an app send requests to one server, while version 1 is sent to a Please update screen.",
+          alt: "One server answering phones on versions 3 and 2, while an old phone on version 1 shows a Please update screen.",
         },
         {
           type: "paragraph",

@@ -94,7 +94,7 @@ export const mvpSoftwareDevelopmentExample: BlogPost = {
         {
           type: "image",
           image: voucherSpentOnce,
-          alt: "One gift voucher, two attempts to spend it: the first is accepted and the second is refused as already spent.",
+          alt: "One voucher code entered at two tills at the same moment: the first is accepted, the second told it's already spent.",
         },
         {
           type: "list",

@@ -69,7 +69,7 @@ export const powerApps: BlogPost = {
         {
           type: "image",
           image: powerAppsWhatComesOut,
-          alt: "Canvas apps and flows leave Power Platform as a specification to rebuild from, while Dataverse tables leave as data.",
+          alt: "Canvas apps and flows come out as a blueprint to rebuild from; Dataverse tables come out as a crate of data to import.",
         },
         {
           type: "list",
@@ -161,7 +161,7 @@ export const powerApps: BlogPost = {
         {
           type: "image",
           image: powerAppsOneAppAtATime,
-          alt: "Three stages of a Power Apps migration, with one app moving to your own stack at each stage while the rest keep running.",
+          alt: "A map of two islands: Customer portal has moved to your own stack, Field reports is crossing and Approvals stays behind.",
         },
         {
           type: "paragraph",

@@ -78,7 +78,7 @@ export const mobileWebDevelopment: BlogPost = {
         {
           type: "image",
           image: interruptedSubmitRecovery,
-          alt: "A task path from start to confirmation includes a recovery route for an interrupted submission.",
+          alt: "Two phones after a switch to a banking app: one form reloaded empty, the other restored with a Draft restored banner.",
         },
         {
           type: "paragraph",
@@ -111,7 +111,7 @@ export const mobileWebDevelopment: BlogPost = {
         {
           type: "image",
           image: inAppBrowserSignIn,
-          alt: "A sign-in email sent from a form in an in-app browser opens in the default browser, so the form stays signed out.",
+          alt: "A sign-in email leaves a form in an in-app browser and opens in Safari or Chrome, so only that browser is signed in.",
         },
         {
           type: "list",

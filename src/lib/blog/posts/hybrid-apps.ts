@@ -32,7 +32,7 @@ export const hybridApps: BlogPost = {
         {
           type: "image",
           image: hybridAppShellBridge,
-          alt: "A native shell holding a WebView that runs your web app, linked by a bridge to the camera, push and files.",
+          alt: "A phone opened up: a native shell holds a WebView running your web app, bridged to the camera, push and files.",
         },
         {
           type: "paragraph",
@@ -81,7 +81,7 @@ export const hybridApps: BlogPost = {
         {
           type: "image",
           image: oneWebAppThreePlaces,
-          alt: "One web app running in three places: the browser, an iPhone app and an Android app.",
+          alt: "The same bookings screen in a browser, on an iPhone and on an Android phone.",
           caption: "A hybrid app ships the same web code to the browser and to both app stores.",
         },
         {

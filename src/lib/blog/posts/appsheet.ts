@@ -122,7 +122,7 @@ export const appsheet: BlogPost = {
         {
           type: "image",
           image: appsheetSecurityFilterVsServerCheck,
-          alt: "AppSheet filters rows before syncing them to the phone, while a web app checks every request on the server.",
+          alt: "AppSheet filters a sheet's rows onto the phone; a web app's server checks each request and returns only that user's rows.",
         },
         {
           type: "paragraph",
@@ -146,7 +146,7 @@ export const appsheet: BlogPost = {
         {
           type: "image",
           image: appsheetDataStaysPut,
-          alt: "The AppSheet app and the new web app both use Google Sheets until cutover, when the new app moves to Postgres.",
+          alt: "A timeline: the AppSheet app and the new web app share Google Sheets until cutover, when the new app moves to Postgres.",
         },
         {
           type: "list",

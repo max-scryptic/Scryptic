@@ -33,7 +33,7 @@ export const ukDataResidency: BlogPost = {
         {
           type: "image",
           image: ukGdprRulesByStorageCountry,
-          alt: "UK storage needs no transfer rules, EU or EEA storage counts as adequate, US storage needs the data bridge or an IDTA.",
+          alt: "Paperwork stacks by storage country: none for the UK, a little for the EU or EEA, a tall pile for the US.",
         },
         {
           type: "paragraph",
@@ -121,7 +121,7 @@ export const ukDataResidency: BlogPost = {
         {
           type: "image",
           image: functionRegionRequestPath,
-          alt: "With default settings a UK request runs through a function in Washington; set to London, it stays in London.",
+          alt: "A map: by default a UK request crosses to a function in Washington and back; set to London, it stays in the UK.",
         },
         {
           type: "list",
