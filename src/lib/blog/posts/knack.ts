@@ -1,5 +1,6 @@
 import knackApiCallsPerDay from "@/assets/blog/images/knack-api-calls-per-day.webp"
 import knackRoleTablesKeyring from "@/assets/blog/images/knack-role-tables-keyring.webp"
+import knackLogo from "@/assets/blog/logos/knack.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const knack: BlogPost = {
@@ -7,7 +8,7 @@ export const knack: BlogPost = {
   title: "Knack migration without losing records, roles or files",
   series: "migration",
   topic: "Knack",
-  icon: "database",
+  logo: knackLogo,
   category: "No-code app builders",
   description:
     "A Knack migration rebuilds the app and keeps every record. How to export through the API, map connections and role tables to Postgres, and move users and files.",
