@@ -6,6 +6,7 @@ export const buildAWebApp: BlogPost = {
   slug: "how-to-build-a-web-app",
   title: "Build a web app that does one useful job well",
   series: "launch",
+  service: "web-app-development",
   topic: "Web apps",
   icon: "globe",
   description:

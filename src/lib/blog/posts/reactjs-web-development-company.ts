@@ -7,6 +7,7 @@ export const reactjsWebDevelopmentCompany: BlogPost = {
   slug: "reactjs-web-development-company-hiring-mistakes",
   title: "Hiring a ReactJS web development company? Six mistakes to avoid",
   series: "launch",
+  service: "web-app-development",
   topic: "React",
   icon: "atom",
   description:

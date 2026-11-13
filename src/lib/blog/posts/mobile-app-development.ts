@@ -6,6 +6,7 @@ export const mobileAppDevelopment: BlogPost = {
   slug: "mobile-app-development",
   title: "Mobile app development checks a web build skips",
   series: "launch",
+  service: "mobile-app-development",
   topic: "Mobile apps",
   icon: "tablet-smartphone",
   description:

@@ -6,6 +6,7 @@ export const pwaDevelopment: BlogPost = {
   slug: "pwa-development",
   title: "PWA development without the unnecessary extras",
   series: "launch",
+  service: "web-app-development",
   topic: "PWAs",
   icon: "app-window",
   description:

@@ -7,6 +7,7 @@ export const mobileWebDevelopment: BlogPost = {
   slug: "mobile-web-development",
   title: "Mobile web development decisions to make before you build",
   series: "launch",
+  service: "web-app-development",
   topic: "Mobile web",
   icon: "smartphone",
   description:

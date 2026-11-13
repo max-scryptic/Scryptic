@@ -1,4 +1,4 @@
-import type { PostSeriesId } from "@/lib/blog"
+import type { BlogPost, PostSeriesId, ServicePageId } from "@/lib/blog"
 import { pages, type PageEntry } from "@/lib/seo"
 
 /*
@@ -9,8 +9,8 @@ import { pages, type PageEntry } from "@/lib/seo"
  */
 
 export type ServicePage = {
-  /** Anchor and element ids. */
-  id: string
+  /** Anchor and element ids, and how a blog post names its service. */
+  id: ServicePageId
   page: PageEntry
   /** Shown in the menu, the footer and on the hub's card. */
   name: string
@@ -24,13 +24,17 @@ export type ServicePage = {
   linkText: string
   /** A text link to the page from elsewhere, such as a blog post's call to action. */
   learnMore: string
-  /** Blog series whose posts point to this service in their closing call to action. */
+  /**
+   * Blog series whose posts point to this service in their closing call to
+   * action, unless a post names its own `service`.
+   */
   series: PostSeriesId[]
 }
 
-/** The service a post's series leads to, if any. */
-export function serviceForSeries(series: PostSeriesId) {
-  return servicePages.find((service) => service.series.includes(series))
+/** The service a post's closing call to action links to: its own, else its series'. */
+export function serviceForPost(post: BlogPost) {
+  if (post.service) return servicePages.find((service) => service.id === post.service)
+  return servicePages.find((service) => service.series.includes(post.series))
 }
 
 export const servicePages: ServicePage[] = [

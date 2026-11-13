@@ -91,6 +91,13 @@ export type PostSection = {
 /** The series a post belongs to, each listed as its own section on /blog. */
 export type PostSeriesId = "launch" | "automation" | "stack" | "migration"
 
+/** The service pages under /services, by their id in @/lib/service-pages. */
+export type ServicePageId =
+  | "mvp-development"
+  | "web-app-development"
+  | "mobile-app-development"
+  | "no-code-migration"
+
 /** The line icons a post without a logo can carry on its card. */
 export type PostIcon =
   | "app-window"
@@ -150,6 +157,12 @@ export type BlogPost = {
   icon?: PostIcon
   /** Migration guides only: the group the guide sits in on /blog. */
   category?: PostCategory
+  /**
+   * The service page the closing call to action links to, when it is not the
+   * one the post's series leads to: a web app post in the launch series points
+   * to web app development rather than MVP development.
+   */
+  service?: ServicePageId
   /** 120 to 160 characters, for the meta description and llms.txt. */
   description: string
   /** Two or three sentences under the <h1> that answer the title outright. */

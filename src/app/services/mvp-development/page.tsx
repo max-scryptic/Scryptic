@@ -104,6 +104,9 @@ const guides = postsBySlug([
   "how-much-does-it-cost-to-build-an-app-uk",
   "saas-cost-before-and-after-launch",
   "best-saas-development-company",
+  "mvp-agile",
+  "vibe-coding-to-production",
+  "turn-automations-into-a-saas-product",
 ])
 
 const tools = [freeTool("mvp-cost-calculator"), freeTool("mvp-scope-planner")]
@@ -115,10 +118,18 @@ const faqs: Faq[] = [
     question: "What is MVP development?",
     answer:
       "MVP development means designing, building and launching the first version of a product with only the features needed to test it with paying customers. At Scryptic that first version is production code, so the next release extends it rather than replacing it.",
+    link: {
+      text: "How to build an MVP, step by step.",
+      href: "/blog/how-to-build-an-mvp",
+    },
   },
   {
     question: "How much does MVP development cost in the UK?",
     answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} is ${s.price} for a ${s.sprint}`).join(", and ")}.${launchOffer ? ` For a limited time there is ${launchOffer.percentOff}% off ${launchOffer.appliesTo}, bringing them to ${services.map(offerPrice).join(" and ")}.` : ""} The price is agreed after the discovery call, before any build starts, and does not change mid-sprint.`,
+    link: {
+      text: "What it costs to build an app in the UK, by route and type of app.",
+      href: "/blog/how-much-does-it-cost-to-build-an-app-uk",
+    },
   },
   {
     question: "How long does it take to build an MVP?",
@@ -129,26 +140,46 @@ const faqs: Faq[] = [
     question: "Which features should go into an MVP?",
     answer:
       "Only what your first customers need to do the core job and pay for it: one main user journey, sign-in, payments if you charge, and the admin you need to run it. Everything else waits for evidence from real users. The free MVP Scope Planner walks through the same cut.",
+    link: {
+      text: "Plan your first release with the free MVP Scope Planner.",
+      href: "/tools/mvp-scope-planner",
+    },
   },
   {
     question: "Is an MVP the same as a prototype?",
     answer:
       "No. A prototype shows how a product might work and is usually thrown away. An MVP is a working product that real users sign up to and pay for. It is smaller than the full vision, but built properly enough to grow into it.",
+    link: {
+      text: "What MVP software is, and how it differs from a prototype.",
+      href: "/blog/what-is-mvp-software",
+    },
   },
   {
     question: "How do MVP development companies differ?",
     answer:
       "The biggest differences are whether they write code or build on a platform such as Bubble, whether they fix the price or bill for time, and what support they sell after launch. Published UK MVP timelines run from two weeks to about twelve, mostly because of how much the first release includes and how many people build it. Our guide to choosing a SaaS development company compares six UK studios side by side.",
+    link: {
+      text: "Six UK SaaS and MVP development companies compared.",
+      href: "/blog/best-saas-development-company",
+    },
   },
   {
     question: "Do you build web apps or mobile apps?",
     answer:
       "Web apps. One web app runs on every phone, tablet and laptop, can be found in search and shared as a link, and a fix is live the moment it ships rather than after app store review. The MVP is built so a native app can be added once the product has proved itself.",
+    link: {
+      text: "How our mobile app development works.",
+      href: pages.mobileAppDevelopment.path,
+    },
   },
   {
     question: "What do I need before the sprint starts?",
     answer:
       "A clear idea of who the product is for and the problem it solves. You do not need designs, a written spec or a technical co-founder. Bring any sketches, competitor examples or existing code, and the discovery call turns them into an agreed scope.",
+    link: {
+      text: "Already built it in Lovable, Bubble or another builder? How our no-code app migration works.",
+      href: pages.noCodeMigration.path,
+    },
   },
   {
     question: "Can you build an MVP with AI features?",

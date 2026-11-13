@@ -6,6 +6,7 @@ export const hybridApps: BlogPost = {
   slug: "hybrid-apps",
   title: "Hybrid apps and when wrapping your web app is enough",
   series: "stack",
+  service: "mobile-app-development",
   topic: "Hybrid apps",
   icon: "smartphone",
   description:

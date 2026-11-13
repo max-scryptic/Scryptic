@@ -4,6 +4,7 @@ export const reactNativeVsFlutter: BlogPost = {
   slug: "react-native-vs-flutter",
   title: "React Native vs Flutter for a startup app",
   series: "stack",
+  service: "mobile-app-development",
   topic: "Mobile",
   icon: "tablet-smartphone",
   description:

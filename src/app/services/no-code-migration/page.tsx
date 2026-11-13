@@ -126,6 +126,9 @@ const guides = postsBySlug([
   "vibe-coding-to-production",
   "google-sheets-as-a-database",
   "turn-automations-into-a-saas-product",
+  "n8n-alternatives",
+  "supabase-vs-firebase",
+  "how-much-does-it-cost-to-build-an-app-uk",
 ])
 
 // Rendered in the FAQ section and emitted as FAQPage JSON-LD; keep them identical.
@@ -153,11 +156,19 @@ const faqs: Faq[] = [
     question: "Can I just export the code from my no-code tool?",
     answer:
       "It depends on the tool. AI app builders such as Lovable, Bolt.new, v0 and Replit write real code, so the work is hardening and owning it. Bubble, Adalo and Glide keep the app on their platform, so it is rebuilt and the data moved. Tools with a code export, such as FlutterFlow and WeWeb, give a starting point that usually needs work before production.",
+    link: {
+      text: "Lovable, Bolt, Replit, Base44 and v0 compared on code export and production.",
+      href: "/blog/lovable-vs-bolt-vs-replit-vs-base44-vs-v0",
+    },
   },
   {
     question: "What will my app be rebuilt with?",
     answer:
       "TypeScript, Next.js and Postgres, hosted on infrastructure in your name, with Stripe for payments. It is a mainstream stack, so any web developer you hire later can work on it.",
+    link: {
+      text: "How our web app development works.",
+      href: pages.webAppDevelopment.path,
+    },
   },
   {
     question: "Will my search rankings survive the move?",
@@ -168,6 +179,10 @@ const faqs: Faq[] = [
     question: "Should I migrate at all?",
     answer:
       "Not always. If the app does its job, the costs are fine and nothing on the roadmap is blocked, staying put is cheaper. Moving makes sense when fees climb with usage, the platform blocks features, or investors and customers ask who owns the code. The audit gives a straight answer either way.",
+    link: {
+      text: "Take the free build or no-code quiz.",
+      href: "/tools/build-or-no-code",
+    },
   },
   {
     question: "Can you improve the app while migrating it?",
@@ -318,7 +333,7 @@ export default function NoCodeMigrationPage() {
 
       <GuidesSection
         title="More on moving to code"
-        intro="For apps that started outside a builder, plus a quiz on whether to move."
+        intro="For apps that started in a spreadsheet or an automation tool, where the data lands and what a build costs, plus a quiz on whether to move."
         posts={guides}
         tools={[freeTool("build-or-no-code")]}
         more={{ label: "All migration guides", href: `${pages.blog.path}#migration` }}
