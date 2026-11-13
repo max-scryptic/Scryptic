@@ -5,6 +5,7 @@ export const progressiveWebAppDevelopmentCompany: BlogPost = {
   slug: "progressive-web-app-development-company",
   title: "Choosing a progressive web app development company",
   series: "launch",
+  service: "web-app-development",
   topic: "PWA development",
   icon: "download",
   description:

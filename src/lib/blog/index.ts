@@ -60,6 +60,7 @@ export type {
   PostIcon,
   PostSection,
   PostSeriesId,
+  ServicePageId,
 } from "@/lib/blog/types"
 
 /*

@@ -105,6 +105,9 @@ const guides = postsBySlug([
   "hybrid-apps",
   "how-much-does-it-cost-to-build-an-app-uk",
   "how-to-choose-an-app-development-company-uk",
+  "pwa-development",
+  "mobile-web-development",
+  "supabase-vs-firebase",
 ])
 
 const tools = [freeTool("app-launch-checklist"), freeTool("mvp-cost-calculator")]
@@ -133,6 +136,10 @@ const faqs: Faq[] = [
     question: "Do you build for iPhone and Android?",
     answer:
       "Yes, as two native apps: Swift for iPhone and Kotlin for Android, each written with the platform's own tools. Which platforms the first release covers is part of the scope we agree and price on the discovery call.",
+    link: {
+      text: "What hybrid apps are, and when one codebase is enough.",
+      href: "/blog/hybrid-apps",
+    },
   },
   {
     question: "Why native rather than React Native or Flutter?",
@@ -147,6 +154,10 @@ const faqs: Faq[] = [
     question: "Who submits the app to the App Store and Google Play?",
     answer:
       "We do, from your accounts. You open the Apple Developer and Google Play Console accounts in your company's name and invite us as team members, then we submit each build and answer the reviewers' questions. Apple and Google set the review times, so the launch date allows for them.",
+    link: {
+      text: "Check what a store launch needs with the free App Launch Checklist.",
+      href: "/tools/app-launch-checklist",
+    },
   },
   {
     question: "Do I need a mobile app, or would a web app do?",
@@ -267,7 +278,7 @@ export default function MobileAppDevelopmentPage() {
 
       <GuidesSection
         title="Plan your app before the call"
-        intro="Guides on mobile builds, costs and choosing who builds it, plus two free tools."
+        intro="Guides on mobile builds and the web alternatives, costs and choosing who builds it, plus two free tools."
         posts={guides}
         tools={tools}
       />

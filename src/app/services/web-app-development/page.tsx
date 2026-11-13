@@ -64,6 +64,9 @@ const guides = postsBySlug([
   "web-app-or-mobile-app-first",
   "mobile-web-development",
   "progressive-web-app-development-company",
+  "dashboard-app-design",
+  "build-a-web-app-with-python",
+  "reactjs-web-development-company-hiring-mistakes",
 ])
 
 const tools = [freeTool("build-or-no-code"), freeTool("mvp-cost-calculator")]
@@ -83,6 +86,10 @@ const faqs: Faq[] = [
   {
     question: "How much does web app development cost in the UK?",
     answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} package is ${s.price} for a ${s.sprint}`).join(", and ")}.${launchOffer ? ` For a limited time there is ${launchOffer.percentOff}% off ${launchOffer.appliesTo}, bringing them to ${services.map(offerPrice).join(" and ")}.` : ""} The packages are named for a first release, and a web app is priced the same way: the scope and price are agreed after the discovery call, before any build starts.`,
+    link: {
+      text: "What it costs to build an app in the UK, by route and type of app.",
+      href: "/blog/how-much-does-it-cost-to-build-an-app-uk",
+    },
   },
   {
     question: "How long does it take to build a web app?",
@@ -93,6 +100,10 @@ const faqs: Faq[] = [
     question: "What kinds of web app do you build?",
     answer:
       "Apps that do one job well for your customers or your team: customer portals, booking and scheduling systems, internal tools that replace a shared spreadsheet, SaaS products with subscriptions, dashboards and reporting, and products with AI at their core. If it runs in a browser and has users who sign in, it is likely a fit.",
+    link: {
+      text: "How our MVP development works for a new SaaS product.",
+      href: pages.mvpDevelopment.path,
+    },
   },
   {
     question: "Do you build websites as well as web apps?",
@@ -210,7 +221,7 @@ export default function WebAppDevelopmentPage() {
 
       <GuidesSection
         title="Plan your web app before the call"
-        intro="Guides on scoping a web app and choosing who builds it, plus two free tools."
+        intro="Guides on scoping, designing and building a web app and choosing who builds it, plus two free tools."
         posts={guides}
         tools={tools}
       />

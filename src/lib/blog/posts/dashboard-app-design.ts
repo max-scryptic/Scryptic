@@ -6,6 +6,7 @@ export const dashboardAppDesign: BlogPost = {
   slug: "dashboard-app-design",
   title: "Six dashboard app design mistakes to fix on paper",
   series: "launch",
+  service: "web-app-development",
   topic: "Dashboards",
   icon: "dashboard",
   description:

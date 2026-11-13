@@ -4,6 +4,7 @@ export const googleSheetsDatabase: BlogPost = {
   slug: "google-sheets-as-a-database",
   title: "Google Sheets as a database and the signs you've outgrown it",
   series: "automation",
+  service: "web-app-development",
   topic: "Google Sheets",
   icon: "sheet",
   description:

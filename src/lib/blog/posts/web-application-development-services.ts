@@ -5,6 +5,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
   slug: "web-application-development-services",
   title: "Web application development, from architecture to launch",
   series: "launch",
+  service: "web-app-development",
   topic: "Web apps",
   icon: "code",
   description:
