@@ -14,7 +14,9 @@ import { buildAWebApp } from "@/lib/blog/posts/build-a-web-app"
 import { buildAnMvp } from "@/lib/blog/posts/build-an-mvp"
 import { chooseAppDevelopmentCompany } from "@/lib/blog/posts/choose-app-development-company"
 import { dashboardAppDesign } from "@/lib/blog/posts/dashboard-app-design"
+import { emergent } from "@/lib/blog/posts/emergent"
 import { filemaker } from "@/lib/blog/posts/filemaker"
+import { firebaseStudio } from "@/lib/blog/posts/firebase-studio"
 import { flutterflow } from "@/lib/blog/posts/flutterflow"
 import { framer } from "@/lib/blog/posts/framer"
 import { glide } from "@/lib/blog/posts/glide"
@@ -105,6 +107,8 @@ export const posts: BlogPost[] = [
   v0,
   replit,
   base44,
+  firebaseStudio,
+  emergent,
   bubble,
   flutterflow,
   weweb,
