@@ -8,29 +8,44 @@ import { type CaseStudy } from "@/lib/work"
  * A case study in a grid: cover screenshot, name, category and summary. The
  * whole card is one link, named after the study so the link text says where
  * it goes.
+ *
+ * A wide card, for a section showing a single study, puts the cover beside
+ * the text from md up rather than above it, so it does not fill the screen.
  */
 export function CaseStudyCard({
   study,
   headingLevel: Heading = "h2",
+  wide = false,
   className,
 }: {
   study: CaseStudy
   /** h2 on /work, h3 inside a home page section. */
   headingLevel?: "h2" | "h3"
+  wide?: boolean
   className?: string
 }) {
   return (
     <article
       className={cn(
         "group corners corners-grow flex flex-col border border-border bg-card transition-colors hover:border-primary/50",
+        wide && "md:grid md:grid-cols-[3fr_2fr]",
         className,
       )}
     >
-      <div className="overflow-hidden border-b border-border bg-muted">
+      <div
+        className={cn(
+          "overflow-hidden border-b border-border bg-muted",
+          wide && "md:border-r md:border-b-0",
+        )}
+      >
         <Image
           src={study.cover.src}
           alt={study.cover.alt}
-          sizes="(min-width: 1152px) 560px, (min-width: 768px) 50vw, 100vw"
+          sizes={
+            wide
+              ? "(min-width: 1152px) 690px, (min-width: 768px) 60vw, 100vw"
+              : "(min-width: 1152px) 560px, (min-width: 768px) 50vw, 100vw"
+          }
           placeholder="blur"
           className="block aspect-[16/10] h-auto w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         />

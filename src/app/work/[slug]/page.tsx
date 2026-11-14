@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { cn } from "cn"
 import { notFound } from "next/navigation"
@@ -76,6 +77,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
   const page = caseStudyPage(study)
   const domain = displayDomain(study)
+  const phoneScreens = study.phoneScreens ?? []
   const index = caseStudies.indexOf(study)
   const next = caseStudies[(index + 1) % caseStudies.length]
 
@@ -170,7 +172,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           </ul>
         </Section>
 
-        {study.gallery.length > 0 ? (
+        {study.gallery.length > 0 || phoneScreens.length > 0 ? (
           <section aria-labelledby="screens-heading" className="flex flex-col gap-8 pt-12">
             <div className={cn("flex flex-col gap-3", inset)}>
               <p className="font-mono text-xs tracking-widest text-primary uppercase">Screens</p>
@@ -178,18 +180,37 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 A closer look
               </h2>
             </div>
-            <div className="flex flex-col gap-6">
-              {study.gallery.map((shot) => (
-                <BrowserFrame
-                  key={shot.alt}
-                  src={shot.src}
-                  alt={shot.alt}
-                  domain={domain}
-                  sizes="(min-width: 1152px) 1152px, 100vw"
-                  className="guides"
-                />
-              ))}
-            </div>
+            {phoneScreens.length > 0 ? (
+              // Store screenshots: each already draws its own phone, so they sit
+              // on the page as plain portrait tiles.
+              <ul className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
+                {phoneScreens.map((shot) => (
+                  <li key={shot.alt} className="corners guides border border-border bg-card">
+                    <Image
+                      src={shot.src}
+                      alt={shot.alt}
+                      sizes="(min-width: 1152px) 370px, (min-width: 768px) 33vw, 50vw"
+                      placeholder="blur"
+                      className="block h-auto w-full"
+                    />
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            {study.gallery.length > 0 ? (
+              <div className="flex flex-col gap-6">
+                {study.gallery.map((shot) => (
+                  <BrowserFrame
+                    key={shot.alt}
+                    src={shot.src}
+                    alt={shot.alt}
+                    domain={domain}
+                    sizes="(min-width: 1152px) 1152px, 100vw"
+                    className="guides"
+                  />
+                ))}
+              </div>
+            ) : null}
           </section>
         ) : null}
 

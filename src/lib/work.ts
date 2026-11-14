@@ -1,5 +1,6 @@
 import type { StaticImageData } from "next/image"
 
+import getOutOfBedHero from "@/assets/work/getoutofbed/hero.webp"
 import prettyMetricsDetail1 from "@/assets/work/prettymetrics/detail-1.webp"
 import prettyMetricsDetail2 from "@/assets/work/prettymetrics/detail-2.webp"
 import prettyMetricsHero from "@/assets/work/prettymetrics/hero.webp"
@@ -19,8 +20,9 @@ import viewlioHero from "@/assets/work/viewlio/hero.webp"
  * metadata, sitemap row and llms.txt line) and its JSON-LD.
  *
  * Screenshots live in src/assets/work/<slug>/ and are imported statically, so
- * next/image knows their size and can show a blurred placeholder. They are
- * desktop captures at 2x.
+ * next/image knows their size and can show a blurred placeholder. Covers and
+ * the gallery are desktop captures at 2x, shown in a browser window; a mobile
+ * app's own screens go in phoneScreens, shown as a row of portrait phones.
  */
 
 export type Screenshot = {
@@ -51,8 +53,13 @@ export type CaseStudy = {
   /** "Under the hood": the engineering worth pointing at. */
   engineering: { name: string; text: string }[]
   stack: string[]
+  /** Where the product runs. Defaults to "web"; a native app names its platform. */
+  platform?: "web" | "android"
+  /** The product's website: its home page for a web app, its marketing site for a mobile one. */
   cover: Screenshot
   gallery: Screenshot[]
+  /** A mobile app's own screens, portrait store screenshots. */
+  phoneScreens?: Screenshot[]
 }
 
 const reelEstate: CaseStudy = {
@@ -446,7 +453,99 @@ const prettyMetrics: CaseStudy = {
   ],
 }
 
-export const caseStudies: CaseStudy[] = [viewlio, prettyMetrics, reelEstate, untilThen]
+const getOutOfBed: CaseStudy = {
+  slug: "getoutofbed",
+  name: "Get Out Of Bed",
+  url: "https://getoutofbed.app",
+  category: "Alarm clock app for Android",
+  summary:
+    "Get Out Of Bed is an Android alarm clock with no snooze button. It keeps ringing until you finish a mission: a sum, a shake, a typed phrase or a photo of another room.",
+  description:
+    "How Scryptic built Get Out Of Bed, a native Android alarm that rings until you finish a mission, with on-device photo matching and wake-up records.",
+  audience: "Heavy sleepers and serial snoozers who set several alarms and still are not up.",
+  scope: "Product, brand, design, native Android build and website",
+  problem: [
+    "Most people do not get up when the alarm goes. They bargain with it. In a 2023 study, 69% of people snoozed or set several alarms at least some of the time, and the snoozers spent 22 minutes a morning between alarms. Every morning, that is over 130 hours a year.",
+    "A normal alarm makes that easy: one tap and it stops, without you ever leaving the bed. The alarm had to ask for something you cannot do half asleep, and it had to ring every time, on phones whose battery savers are built to stop apps doing exactly that.",
+  ],
+  solution: [
+    "Get Out Of Bed has no snooze button. When it rings, it keeps ringing until you finish a mission: solve a sum, shake the sleepy sun awake, type out a phrase, or walk to another room and photograph a spot you picked when you set the alarm. Up to five can be chained in a row for the mornings you do not trust yourself, and the only way out without them is holding a button for 90 seconds.",
+    "Every wake-up is timed from the first ring to the last mission, so there are personal bests, streaks and records for each mission to beat. It is free to use, with Premium as a yearly subscription or a one-off lifetime purchase through Google Play. There are no accounts, no ads and no tracking: everything stays on the phone.",
+  ],
+  features: [
+    {
+      name: "Four kinds of mission",
+      text: "Sums at three levels, shaking the phone until the sun wakes up, typing a phrase with no autocorrect, and photo missions in another room.",
+    },
+    {
+      name: "Photo missions, checked on the phone",
+      text: "Snap a spot in the kitchen or the bathroom once. When the alarm rings, the photo has to match it, and it never leaves the phone.",
+    },
+    {
+      name: "Up to five in a row",
+      text: "Chain missions in any order, with no mission twice running, so one lucky sum is never enough to switch it off.",
+    },
+    {
+      name: "Waking up as a sport",
+      text: "Personal bests for each number of missions, a streak that resets if you give up, best and average times for every mission and a trophy on record mornings.",
+    },
+    {
+      name: "Alarm sounds that are awful on purpose",
+      text: "An air raid siren, a smoke detector, a dive klaxon, a dial-up modem and more, all generated in code, or any sound on the phone.",
+    },
+    {
+      name: "A sun to make your own",
+      text: "The app's mascot can be dressed up with faces, colours and shapes. There is a timer too, with a countdown that floats over other apps.",
+    },
+  ],
+  engineering: [
+    {
+      name: "An alarm that rings every time",
+      text: "Alarms are set the way the built-in clock app sets them, so they fire on time in Doze. While one rings, the app checks every minute that it is still making a sound and restarts it if Android stopped it. If Android refuses outright, a notification plays the phone's own alarm tone instead.",
+    },
+    {
+      name: "Ready before the phone is unlocked",
+      text: "Alarms and their sounds live in device-protected storage and are rescheduled on boot, so a phone that restarts overnight for an update still rings in the morning. A ringing alarm is saved as it starts, so a crash or power cut mid-alarm resumes it rather than giving up.",
+    },
+    {
+      name: "Photo matching on the device",
+      text: "A MobileNet image embedder from MediaPipe judges whether it is the same scene, and an edge comparison checks the outlines line up. Each frame has its levels stretched first, so a dim, lamp-lit morning shot still matches a bright daytime one, and two frames in a row must pass, so one lucky frame does not count.",
+    },
+    {
+      name: "Failures reported, not discovered",
+      text: "The app records when each alarm was due and when it actually rang. If one was missed or started late, because the phone was off or a maker's battery saver held it back, the user is told straight away rather than finding out by oversleeping again.",
+    },
+    {
+      name: "Premium that works offline",
+      text: "Purchases go through Google Play Billing via RevenueCat, and the result is kept on the phone, so an alarm knows what it may do with no signal. Losing Premium deletes nothing: photo missions are skipped until Premium is back, and the alarm still rings with its other missions.",
+    },
+  ],
+  stack: [
+    "Kotlin",
+    "Jetpack Compose",
+    "CameraX",
+    "MediaPipe",
+    "Material 3",
+    "MobileNet",
+    "AlarmManager",
+    "Google Play Billing",
+    "RevenueCat",
+    "Vercel",
+  ],
+  platform: "android",
+  cover: {
+    src: getOutOfBedHero,
+    alt: "The Get Out Of Bed home page: the headline GET OUT OF BED and the line No snoozing. Just missions., above a sleepy yellow sun peeking over a duvet",
+  },
+  gallery: [],
+}
+
+export const caseStudies: CaseStudy[] = [getOutOfBed, viewlio, prettyMetrics, reelEstate, untilThen]
+
+/** The mobile apps among the case studies, for the mobile app development page. */
+export const mobileCaseStudies: CaseStudy[] = caseStudies.filter(
+  (study) => study.platform && study.platform !== "web",
+)
 
 /** The case studies shown on the home page; /work lists them all. */
 export const featuredCaseStudies: CaseStudy[] = [viewlio, prettyMetrics]

@@ -4,6 +4,7 @@ import type {
   FAQPage,
   Graph,
   ItemList,
+  MobileApplication,
   Organization,
   Service,
   Thing,
@@ -217,18 +218,27 @@ export function itemListJsonLd(page: PageEntry, items: PageEntry[]): ItemList {
 }
 
 /** The live product a case study describes, made by the organization. */
-export function caseStudyJsonLd(page: PageEntry, study: CaseStudy): WebApplication {
-  return {
-    "@type": "WebApplication",
+export function caseStudyJsonLd(
+  page: PageEntry,
+  study: CaseStudy,
+): WebApplication | MobileApplication {
+  const common = {
     "@id": `${absoluteUrl(page.path)}#app`,
     name: study.name,
     url: study.url,
     description: study.summary,
     applicationCategory: study.category,
-    operatingSystem: "Web browser",
     image: absoluteUrl(study.cover.src.src),
     creator: { "@id": ids.organization },
     subjectOf: { "@id": ids.webPage(page.path) },
+  }
+  if (study.platform === "android") {
+    return { "@type": "MobileApplication", ...common, operatingSystem: "Android" }
+  }
+  return {
+    "@type": "WebApplication",
+    ...common,
+    operatingSystem: "Web browser",
   }
 }
 

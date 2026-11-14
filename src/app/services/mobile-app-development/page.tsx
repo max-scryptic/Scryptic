@@ -11,6 +11,7 @@ import { ReleaseSection, type ReleaseStep } from "@/components/landing/release-s
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { FitCheckSection, HubSection } from "@/components/landing/service-sections"
+import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
@@ -20,6 +21,7 @@ import { siteConfig } from "@/lib/site"
 import { mobileTools } from "@/lib/stack"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
+import { mobileCaseStudies } from "@/lib/work"
 
 const page = pages.mobileAppDevelopment
 
@@ -269,6 +271,12 @@ export default function MobileAppDevelopmentPage() {
         intro="It suits a clearly scoped first release. If a web app would serve you better, we will say so on the call."
         items={fitChecks}
         initial={fitInitial}
+      />
+
+      <WorkSection
+        title="A mobile app we have built"
+        intro="A native Android app built with the same tools a client app gets: Kotlin, Jetpack Compose and Google Play Billing."
+        studies={mobileCaseStudies}
       />
 
       <ComparisonSection

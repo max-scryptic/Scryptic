@@ -33,9 +33,15 @@ export function WorkSection({
           See all case studies
         </Button>
       </div>
-      <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
+      <div data-reveal="children" className={cn("grid gap-6", studies.length > 1 && "md:grid-cols-2")}>
         {studies.map((study) => (
-          <CaseStudyCard key={study.slug} study={study} headingLevel="h3" className="guides" />
+          <CaseStudyCard
+            key={study.slug}
+            study={study}
+            headingLevel="h3"
+            wide={studies.length === 1}
+            className="guides"
+          />
         ))}
       </div>
     </LandingSection>

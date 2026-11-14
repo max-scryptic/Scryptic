@@ -23,7 +23,7 @@ export default function WorkPage() {
             Products we designed, built and <span className="text-primary">launched</span>
           </h1>
           <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
-            Products {siteConfig.name} has taken from idea to launch, each live on its own domain with accounts and payments.
+            Web and mobile products {siteConfig.name} has taken from idea to launch, each live on its own domain.
           </p>
         </div>
 
