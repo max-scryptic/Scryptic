@@ -11,6 +11,7 @@ import { ReleaseSection, type ReleaseStep } from "@/components/landing/release-s
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { FitCheckSection, HubSection } from "@/components/landing/service-sections"
+import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
@@ -19,6 +20,7 @@ import { launchOffer, offerPrice, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { mobileTools } from "@/lib/stack"
 import { founder } from "@/lib/team"
+import { mobileCaseStudies } from "@/lib/work"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
 const page = pages.mobileAppDevelopment
@@ -269,6 +271,12 @@ export default function MobileAppDevelopmentPage() {
         intro="It suits a clearly scoped first release. If a web app would serve you better, we will say so on the call."
         items={fitChecks}
         initial={fitInitial}
+      />
+
+      <WorkSection
+        title="A native Android app we built"
+        intro="Get Out Of Bed is an alarm clock written in Kotlin with Jetpack Compose. It rings on time through Android's battery savers, matches photos on the phone and sells Premium through Google Play."
+        studies={mobileCaseStudies}
       />
 
       <ComparisonSection
