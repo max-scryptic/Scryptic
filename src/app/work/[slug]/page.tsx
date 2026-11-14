@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { cn } from "cn"
 import { notFound } from "next/navigation"
@@ -78,6 +79,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const domain = displayDomain(study)
   const index = caseStudies.indexOf(study)
   const next = caseStudies[(index + 1) % caseStudies.length]
+  const appScreens = study.appScreens ?? []
 
   return (
     <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
@@ -170,7 +172,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           </ul>
         </Section>
 
-        {study.gallery.length > 0 ? (
+        {study.gallery.length > 0 || appScreens.length > 0 ? (
           <section aria-labelledby="screens-heading" className="flex flex-col gap-8 pt-12">
             <div className={cn("flex flex-col gap-3", inset)}>
               <p className="font-mono text-xs tracking-widest text-primary uppercase">Screens</p>
@@ -178,6 +180,27 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 A closer look
               </h2>
             </div>
+            {appScreens.length > 0 ? (
+              <>
+                <h3 className={cn("text-lg", inset)}>In the app</h3>
+                <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+                  {appScreens.map((shot) => (
+                    <li key={shot.alt} className="corners border border-border bg-card">
+                      <Image
+                        src={shot.src}
+                        alt={shot.alt}
+                        sizes="(min-width: 1024px) 224px, (min-width: 640px) 33vw, 50vw"
+                        placeholder="blur"
+                        className="block h-auto w-full"
+                      />
+                    </li>
+                  ))}
+                </ul>
+                {study.gallery.length > 0 ? (
+                  <h3 className={cn("pt-4 text-lg", inset)}>On {domain}</h3>
+                ) : null}
+              </>
+            ) : null}
             <div className="flex flex-col gap-6">
               {study.gallery.map((shot) => (
                 <BrowserFrame
