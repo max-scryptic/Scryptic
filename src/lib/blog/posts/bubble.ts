@@ -3,13 +3,13 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const bubble: BlogPost = {
   slug: "migrate-from-bubble",
-  title: "The complete guide to rebuilding a Bubble app in code",
+  title: "Bubble migration, the complete guide to rebuilding your app in code",
   series: "migration",
   topic: "Bubble",
   logo: bubbleLogo,
   category: "No-code app builders",
   description:
-    "A reference for moving off Bubble: how each Bubble concept maps to code, exporting data and users, running both apps in parallel and planning the cutover.",
+    "A Bubble migration guide: how each Bubble concept maps to code, exporting data and users, running both apps in parallel and planning the cutover day.",
   summary:
     "You cannot export code from Bubble, so leaving means rebuilding the app on a stack such as TypeScript and Postgres while your data moves across by CSV or the Data API. Users come with you without their passwords, the Bubble app stays live until the new one has proved itself, and a typical rebuild takes four to eight weeks.",
   datePublished: "2026-10-13",

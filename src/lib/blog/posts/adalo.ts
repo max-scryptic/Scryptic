@@ -4,13 +4,13 @@ import { extendedMvp, mvp } from "@/lib/services"
 
 export const adalo: BlogPost = {
   slug: "migrate-from-adalo",
-  title: "What it really costs to rebuild an Adalo app in code",
+  title: "Adalo migration and what it really costs to rebuild in code",
   series: "migration",
   topic: "Adalo",
   logo: adaloLogo,
   category: "No-code app builders",
   description:
-    "The time, money and risk in rebuilding an Adalo app as code you own: a work breakdown with durations, running costs, data traps and keeping your store listing.",
+    "An Adalo migration, costed: a work breakdown with durations, running costs, the data traps in the export and how to keep your app store listing and reviews.",
   summary:
     "Rebuilding an Adalo app in code usually takes five to eight weeks, because Adalo exports your data but not your screens or logic. Most of the risk sits in a few predictable places: relationships missing from the CSV exports, users who never update, and automations that live outside Adalo. Ship the rebuild as an update to your existing store listing and users get it automatically, with your reviews intact.",
   datePublished: "2026-10-13",

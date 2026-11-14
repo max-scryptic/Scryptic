@@ -3,13 +3,13 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const v0: BlogPost = {
   slug: "migrate-from-v0",
-  title: "What v0 actually builds, explained for founders",
+  title: "Migrating from v0 to a production app, explained for founders",
   series: "migration",
   topic: "v0",
   logo: v0Logo,
   category: "AI app builders",
   description:
-    "A plain-English guide to what v0 produces, what the Next.js and shadcn/ui code means for you, and the backend work still needed before real customers use it.",
+    "Migrating from v0 to a production app: what v0 builds in Next.js and shadcn/ui, what the code means for you, and the backend still needed before launch.",
   summary:
     "v0 builds the part of an app you can see: polished screens in Next.js, React and shadcn/ui, as real code you own. What it often doesn't build is the part you can't see, such as a proper database, secure sign-in and the checks that keep one customer's data away from another's. That's the work between a v0 project and a launch.",
   datePublished: "2026-10-13",

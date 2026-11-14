@@ -4,13 +4,13 @@ import { extendedMvp, mvp } from "@/lib/services"
 
 export const outsystems: BlogPost = {
   slug: "migrate-from-outsystems",
-  title: "Leaving OutSystems in phases for a codebase you own",
+  title: "OutSystems migration in phases, to a codebase you own",
   series: "migration",
   topic: "OutSystems",
   logo: outsystemsLogo,
   category: "Enterprise low-code",
   description:
-    "A phased OutSystems exit: the licence and lock-in case, a strangler-pattern plan, governance and risk, and what each OutSystems concept becomes in owned code.",
+    "A phased OutSystems migration: the licence and lock-in case, a strangler-pattern plan, governance and risk, and what each OutSystems concept becomes in code.",
   summary:
     "Leaving OutSystems is a programme, not a project: you rebuild apps one at a time in a mainstream stack such as TypeScript, Next.js and Postgres, while OutSystems keeps running the rest until the last cutover. The case rests on the licence and the lock-in, and AI coding agents now make an owned codebase cheaper to build and change than it was a few years ago. A single app of modest size typically takes one to two months; a whole estate is measured in quarters.",
   datePublished: "2026-10-14",

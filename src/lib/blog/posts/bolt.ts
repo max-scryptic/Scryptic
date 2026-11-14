@@ -3,17 +3,17 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const bolt: BlogPost = {
   slug: "migrate-from-bolt",
-  title: "Seven things to fix before your Bolt.new app goes live",
+  title: "Taking a Bolt.new app to production, seven things to fix first",
   series: "migration",
   topic: "Bolt.new",
   logo: boltLogo,
   category: "AI app builders",
   description:
-    "Seven problems that break Bolt.new apps once real users arrive, from the WebContainer gap and leaked keys to Supabase auth and Netlify deploys, and the fixes.",
+    "Taking a Bolt.new app to production: the seven fixes from leaked keys to Supabase auth, and where to deploy the app with its backend and database.",
   summary:
     "A Bolt.new app that works in the preview usually has seven gaps before it is safe for real users: sandbox-only behaviour, exposed secrets, open database tables, a backend you don't fully own, half-configured auth, fragile deploys and no monitoring. All seven are fixable in the code Bolt wrote, so most apps need hardening rather than a rebuild.",
   datePublished: "2026-10-13",
-  dateModified: "2026-10-14",
+  dateModified: "2026-11-14",
   sections: [
     {
       id: "webcontainer-gap",
@@ -204,6 +204,37 @@ export const bolt: BlogPost = {
           type: "callout",
           title: "Stop prompting once developers start",
           text: "Pick a date after which changes happen in the repository, not in Bolt. Two copies edited in parallel drift apart within days. Bolt is still useful afterwards for sketching a feature before it's built properly.",
+        },
+      ],
+    },
+    {
+      id: "where-to-deploy",
+      heading: "Where should a Bolt.new app with a backend and database be deployed?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Keep the database in a Supabase project your company owns and deploy the frontend from GitHub to Netlify or Vercel in your own account. Most Bolt apps are a Vite and React frontend talking straight to Supabase, so there's no separate server to host, and the whole thing lives in two accounts with your name on them.",
+        },
+        {
+          type: "table",
+          caption: "Where each part of a typical Bolt.new app runs in production",
+          columns: ["Part of the app", "Where it runs", "What to check"],
+          rows: [
+            ["Frontend (Vite and React)", "Netlify or Vercel, built from GitHub", "The single page app rewrite and a variable set per environment"],
+            ["Database, sign-in and file storage", "Your own Supabase project", "Row level security on every table and a staging project beside it"],
+            ["Supabase edge functions", "Supabase, next to the database", "Secrets set in Supabase, never in the frontend's variables"],
+            ["A Node or Express server, if Bolt wrote one", "A host that runs a long-lived server, such as Render, Railway or Fly.io", "It starts from a clean install and reads its port from the environment"],
+            ["Domain and email", "Your registrar and your own email provider", "Supabase auth URLs and email links point at the real domain"],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Moving everything onto one platform rarely helps. Splitting the frontend and the database across two specialist hosts is the normal setup for this stack, and each one can be replaced later without touching the other. What matters is that both accounts belong to the company and that every deploy runs the same clean build from the repository.",
+        },
+        {
+          type: "paragraph",
+          text: "If the app needs work a browser shouldn't do, such as scheduled jobs, long-running imports or calls with a secret key, put it in an edge function or a small server rather than in the React code.",
+          link: { text: "See how we take AI-built apps to production", href: "/services/no-code-migration" },
         },
       ],
     },
