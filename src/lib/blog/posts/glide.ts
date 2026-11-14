@@ -3,17 +3,17 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const glide: BlogPost = {
   slug: "migrate-from-glide",
-  title: "Migrating from Glide? Five questions to answer first",
+  title: "Glide migration and five questions to answer before you leave",
   series: "migration",
   topic: "Glide",
   logo: glideLogo,
   category: "No-code app builders",
   description:
-    "Thinking of leaving Glide? Five questions to settle first: tool or product, Sheets or Glide Tables, row and update limits, emailed codes, and what you lose.",
+    "A Glide migration means a rebuild, but your data comes with you. Five questions to settle first, from Sheets or Glide Tables to row limits and sign-in codes.",
   summary:
     "Leave Glide when the app has become a customer-facing product or a critical system, not just because it feels limited. Glide does not export code, so leaving means a rebuild, but your data comes with you and your users will barely notice the sign-in change.",
   datePublished: "2026-10-13",
-  dateModified: "2026-10-14",
+  dateModified: "2026-11-14",
   facts: [
     { label: "Code export", value: "No, the app is rebuilt" },
     { label: "Data export", value: "CSV, the Glide API, or your own sheets" },
@@ -114,5 +114,26 @@ export const glide: BlogPost = {
       ],
     },
   ],
-  faqs: [],
+  faqs: [
+    {
+      question: "Can I export a Glide app as code?",
+      answer:
+        "No. Glide exports data but not the app itself, so the screens, actions, workflows and computed columns are rebuilt in code. Screenshots and a written list of every computed column make a good specification for the rebuild.",
+    },
+    {
+      question: "How do I export my data from Glide?",
+      answer:
+        "It depends where the data lives. Google Sheets, Airtable and Excel data is already in your own account. Glide Tables export to CSV from the Data Editor, and Big Tables export to a CSV sent by email or can be read through the Glide API. Include the row ID columns so linked records can be joined up again.",
+    },
+    {
+      question: "Will my users have to sign up again after a Glide migration?",
+      answer:
+        "No. Glide signs people in with an emailed one-time code, so there are no passwords to carry over. Import the users table with emails and roles, then sign people in with a magic link or code in the new app and they won't need a new account.",
+    },
+    {
+      question: "How long does a Glide migration take?",
+      answer:
+        "Usually three to six weeks for a first production release. The number of screens and user roles sets most of the timeline, along with how much the data needs cleaning before a database will accept it.",
+    },
+  ],
 }

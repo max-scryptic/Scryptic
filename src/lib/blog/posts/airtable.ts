@@ -3,15 +3,15 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const airtable: BlogPost = {
   slug: "migrate-from-airtable",
-  title: "How Airtable fields map to Postgres when you outgrow your base",
+  title: "Airtable to PostgreSQL migration, field by field",
   series: "migration",
   topic: "Airtable",
   logo: airtableLogo,
   category: "Internal tool builders",
   description:
-    "A field by field guide to moving Airtable into Postgres: linked records, lookups, rollups, formulas, attachments and selects, plus what replaces automations.",
+    "How to export Airtable to PostgreSQL field by field: linked records, lookups, rollups, formulas, attachments and selects, plus what replaces automations.",
   summary:
-    "Every Airtable field type has a Postgres equivalent, but only some become columns: linked records become foreign keys or join tables, lookups and rollups become queries, and attachments become files in your own storage. Automations turn into backend jobs and Interfaces into app screens, while Airtable can stay on as a back office.",
+    "Every Airtable field type has a PostgreSQL (Postgres) equivalent, but only some become columns: linked records become foreign keys or join tables, lookups and rollups become queries, and attachments become files in your own storage. Automations turn into backend jobs and Interfaces into app screens, while Airtable can stay on as a back office.",
   datePublished: "2026-10-13",
   dateModified: "2026-10-14",
   facts: [

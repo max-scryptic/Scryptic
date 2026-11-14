@@ -3,13 +3,13 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const retool: BlogPost = {
   slug: "migrate-from-retool",
-  title: "When your Retool tool becomes the product",
+  title: "Migrating from Retool when your internal tool becomes the product",
   series: "migration",
   topic: "Retool",
   logo: retoolLogo,
   category: "Internal tool builders",
   description:
-    "What changes when customers start logging in to an internal Retool app, from auth and row level permissions to tenancy, billing and design, and what to do.",
+    "How to migrate from Retool once customers log in: rebuild the customer side as a web app on the same database, keep internal admin in Retool, then cut over.",
   summary:
     "When customers rather than staff start logging in, a Retool app stops being the right home for that part of the business. The interface cannot be exported as code, so the customer side is rebuilt as a proper web app on the same database, while Retool stays for internal admin. The work is less about screens and more about trust, tenancy and billing.",
   datePublished: "2026-10-13",
