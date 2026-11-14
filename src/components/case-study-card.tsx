@@ -12,21 +12,30 @@ import { type CaseStudy } from "@/lib/work"
 export function CaseStudyCard({
   study,
   headingLevel: Heading = "h2",
+  wide = false,
   className,
 }: {
   study: CaseStudy
   /** h2 on /work, h3 inside a home page section. */
   headingLevel?: "h2" | "h3"
+  /** Full width, with the screenshot beside the text on wide screens: for a study shown on its own. */
+  wide?: boolean
   className?: string
 }) {
   return (
     <article
       className={cn(
         "group corners corners-grow flex flex-col border border-border bg-card transition-colors hover:border-primary/50",
+        wide && "lg:flex-row",
         className,
       )}
     >
-      <div className="overflow-hidden border-b border-border bg-muted">
+      <div
+        className={cn(
+          "overflow-hidden border-b border-border bg-muted",
+          wide && "lg:w-1/2 lg:shrink-0 lg:border-r lg:border-b-0",
+        )}
+      >
         <Image
           src={study.cover.src}
           alt={study.cover.alt}

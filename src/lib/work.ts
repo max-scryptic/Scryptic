@@ -1,5 +1,8 @@
 import type { StaticImageData } from "next/image"
 
+import getOutOfBedDetail1 from "@/assets/work/get-out-of-bed/detail-1.webp"
+import getOutOfBedDetail2 from "@/assets/work/get-out-of-bed/detail-2.webp"
+import getOutOfBedHero from "@/assets/work/get-out-of-bed/hero.webp"
 import prettyMetricsDetail1 from "@/assets/work/prettymetrics/detail-1.webp"
 import prettyMetricsDetail2 from "@/assets/work/prettymetrics/detail-2.webp"
 import prettyMetricsHero from "@/assets/work/prettymetrics/hero.webp"
@@ -34,6 +37,11 @@ export type CaseStudy = {
   name: string
   /** The live product. */
   url: string
+  /**
+   * The phone platforms a mobile app runs on, e.g. "Android". Web apps leave it
+   * out. It switches the JSON-LD from WebApplication to MobileApplication.
+   */
+  operatingSystem?: string
   /** Short label for the card and the page eyebrow, e.g. "AI video for estate agents". */
   category: string
   /** One or two sentences: what it is and who it is for. Leads the card and the page. */
@@ -446,7 +454,106 @@ const prettyMetrics: CaseStudy = {
   ],
 }
 
-export const caseStudies: CaseStudy[] = [viewlio, prettyMetrics, reelEstate, untilThen]
+const getOutOfBed: CaseStudy = {
+  slug: "get-out-of-bed",
+  name: "Get Out Of Bed",
+  url: "https://getoutofbed.app",
+  operatingSystem: "Android",
+  category: "Alarm clock app for Android",
+  summary:
+    "Get Out Of Bed is an alarm clock with no snooze button. It keeps ringing until you finish a mission: a sum, a shake, a typed phrase or a photo of another room.",
+  description:
+    "How Scryptic built Get Out Of Bed, a native Android alarm clock that rings until you finish a mission, with on-device photo matching and wake-up records.",
+  audience:
+    "Heavy sleepers and habitual snoozers who want to get up the first time. On Android now, with iPhone to follow.",
+  scope: "Product, brand, design, native Android build and website",
+  problem: [
+    "Most people do not get up when the alarm goes. They bargain with it. In a 2023 study, 69% of people snoozed or set several alarms at least some of the time, and the snoozers spent 22 minutes a morning on it.",
+    "A normal alarm is easy to beat half asleep: one tap and it goes quiet. The gap was an alarm that only stops once you are properly awake, and that rings on time every time, on phones whose battery savers are built to stop apps running in the background.",
+  ],
+  solution: [
+    "Get Out Of Bed has no snooze button. When it rings, the only way to stop it is to finish a mission: solve a sum, shake the sleepy sun awake, type a phrase out exactly, or walk to another room and photograph a spot chosen when the alarm was set. Premium chains up to five missions in a row, in a shuffled order.",
+    "Every wake-up is timed from the first ring to the last mission, so mornings turn into personal bests and streaks. The sun on screen can be dressed up with faces, colours and shapes, and there is a timer too, with a countdown that floats over other apps. The app is free, with a yearly or lifetime Premium sold through Google Play.",
+  ],
+  features: [
+    {
+      name: "Four missions",
+      text: "Sums at three levels, shaking the phone, typing a phrase with no autocorrect, and a photo of a spot in another room.",
+    },
+    {
+      name: "Up to five in a row",
+      text: "Premium chains missions in a random order, never the same one twice running, for the mornings you do not trust yourself.",
+    },
+    {
+      name: "Records and streaks",
+      text: "A personal best for each number of missions, a best and average for each mission, and a streak that grows every morning you get up properly.",
+    },
+    {
+      name: "No way round it",
+      text: "The volume buttons cannot turn it down. Besides the missions, the only way out is holding an emergency stop for 90 seconds, which resets the streak.",
+    },
+    {
+      name: "Sounds that are awful on purpose",
+      text: "Ten built-in sounds generated in code, from an air raid siren to a dial-up modem, or any sound file on the phone.",
+    },
+    {
+      name: "Private by design",
+      text: "No accounts, ads or tracking. Alarms, records and mission photos stay on the phone, and photos are compared there, never uploaded.",
+    },
+  ],
+  engineering: [
+    {
+      name: "Alarms that ring on time, even in Doze",
+      text: "Alarms are set with setAlarmClock, the call Android's own clock app uses, so they fire exactly on time in battery-saving Doze mode. Only the soonest alarm is ever scheduled and each ring schedules the next, so an edited or deleted alarm never leaves a stale one behind. Restarts, clock and time zone changes and app updates all reschedule, before the phone is even unlocked.",
+    },
+    {
+      name: "A ring that keeps going",
+      text: "The sound plays from a foreground service separate from the mission screen, so a crash or a closed screen does not silence it. Every minute it rings, a check confirms it is still making a sound and restarts it if Android killed it. If Android refuses to start the sound at all, a fallback notification plays the phone's own alarm tone on repeat until the missions are open.",
+    },
+    {
+      name: "Missed alarms reported, not discovered",
+      text: "Each scheduled time and each actual ring is recorded. If an alarm was due and never rang, because the phone was off or a manufacturer's battery saver stopped it, the app says so with a notification and a card. An alarm that rang over a minute late is reported too, so a silent failure is caught the first time, not by oversleeping again.",
+    },
+    {
+      name: "Photo matching on the phone",
+      text: "The photo mission compares the camera with the saved reference using a MobileNet image embedder through MediaPipe, plus a check that the outlines line up, from Sobel edge maps compared at small shifts. Each colour channel is stretched first, so a dim, lamp-lit shot of the right spot passes while a different spot in the same room fails. Two matching frames in a row are needed, and no photo leaves the phone.",
+    },
+    {
+      name: "Premium that never breaks an alarm",
+      text: "Purchases run through Google Play Billing and RevenueCat, linked to a random ID rather than an account. Premium status is kept on the phone, so an alarm knows what it may do offline or straight after a restart. Losing Premium deletes nothing: a photo mission falls back to another mission, or maths, so the alarm can always be stopped.",
+    },
+  ],
+  stack: [
+    "Kotlin",
+    "Jetpack Compose",
+    "MediaPipe",
+    "RevenueCat",
+    "Material 3",
+    "CameraX",
+    "Google Play Billing",
+    "JUnit",
+    "Vercel",
+  ],
+  cover: {
+    src: getOutOfBedHero,
+    alt: "The Get Out Of Bed home page: the headline GET OUT OF BED and the line No snoozing. Just missions., above a sleepy sun peeking over a duvet",
+  },
+  gallery: [
+    {
+      src: getOutOfBedDetail1,
+      alt: "Get Out Of Bed's four missions: a medium maths sum, a sleeping sun to shake awake, a wake-up phrase to type, and a photo of the kitchen marked It's a match",
+    },
+    {
+      src: getOutOfBedDetail2,
+      alt: "Get Out Of Bed's records: a Log screen with a personal best of 0:48 for two missions, a best streak of 14, mission records and this week's wake-ups",
+    },
+  ],
+}
+
+export const caseStudies: CaseStudy[] = [viewlio, prettyMetrics, reelEstate, untilThen, getOutOfBed]
+
+/** The phone apps, for the mobile app development page. */
+export const mobileCaseStudies: CaseStudy[] = caseStudies.filter((study) => study.operatingSystem)
 
 /** The case studies shown on the home page; /work lists them all. */
 export const featuredCaseStudies: CaseStudy[] = [viewlio, prettyMetrics]
