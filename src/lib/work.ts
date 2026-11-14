@@ -3,6 +3,11 @@ import type { StaticImageData } from "next/image"
 import getOutOfBedDetail1 from "@/assets/work/get-out-of-bed/detail-1.webp"
 import getOutOfBedDetail2 from "@/assets/work/get-out-of-bed/detail-2.webp"
 import getOutOfBedHero from "@/assets/work/get-out-of-bed/hero.webp"
+import getOutOfBedAppAlarms from "@/assets/work/get-out-of-bed/app-alarms.webp"
+import getOutOfBedAppMissions from "@/assets/work/get-out-of-bed/app-missions.webp"
+import getOutOfBedAppNoSnooze from "@/assets/work/get-out-of-bed/app-no-snooze.webp"
+import getOutOfBedAppRecords from "@/assets/work/get-out-of-bed/app-records.webp"
+import getOutOfBedAppSun from "@/assets/work/get-out-of-bed/app-sun.webp"
 import prettyMetricsDetail1 from "@/assets/work/prettymetrics/detail-1.webp"
 import prettyMetricsDetail2 from "@/assets/work/prettymetrics/detail-2.webp"
 import prettyMetricsHero from "@/assets/work/prettymetrics/hero.webp"
@@ -22,8 +27,9 @@ import viewlioHero from "@/assets/work/viewlio/hero.webp"
  * metadata, sitemap row and llms.txt line) and its JSON-LD.
  *
  * Screenshots live in src/assets/work/<slug>/ and are imported statically, so
- * next/image knows their size and can show a blurred placeholder. They are
- * desktop captures at 2x.
+ * next/image knows their size and can show a blurred placeholder. Cover and
+ * gallery shots are desktop captures at 2x; a phone app's store screenshots
+ * (1080 by 1920) go in appScreens.
  */
 
 export type Screenshot = {
@@ -61,6 +67,8 @@ export type CaseStudy = {
   stack: string[]
   cover: Screenshot
   gallery: Screenshot[]
+  /** A phone app's store screenshots, shown in a row above the gallery. */
+  appScreens?: Screenshot[]
 }
 
 const reelEstate: CaseStudy = {
@@ -546,6 +554,28 @@ const getOutOfBed: CaseStudy = {
     {
       src: getOutOfBedDetail2,
       alt: "Get Out Of Bed's records: a Log screen with a personal best of 0:48 for two missions, a best streak of 14, mission records and this week's wake-ups",
+    },
+  ],
+  appScreens: [
+    {
+      src: getOutOfBedAppNoSnooze,
+      alt: "Store screenshot headed No snoozing. Just missions.: the home screen's sun above the next alarm, 7:00 AM tomorrow, and a 19 day streak",
+    },
+    {
+      src: getOutOfBedAppMissions,
+      alt: "Store screenshot headed Prove you're awake: editing an alarm with an air raid siren, the light on first, maths, shake and typing missions at medium, three in a row",
+    },
+    {
+      src: getOutOfBedAppRecords,
+      alt: "Store screenshot headed Make waking up a sport: a personal best of 0:51 for three missions, a 1:21 average, 25 wake-ups, a best streak of 19 and mission records",
+    },
+    {
+      src: getOutOfBedAppSun,
+      alt: "Store screenshot headed Make the sun yours: picking the sun's face from nine, with Cool, in sunglasses, selected",
+    },
+    {
+      src: getOutOfBedAppAlarms,
+      alt: "Store screenshot headed Set it once: the alarm list with 7:00 AM from Monday to Saturday and 9:30 AM on Sundays, the next alarm in 8h 28m",
     },
   ],
 }
