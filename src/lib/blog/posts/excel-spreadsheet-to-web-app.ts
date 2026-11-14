@@ -1,16 +1,18 @@
+import excelFormulasChecked from "@/assets/blog/images/excel-formulas-checked-against-workbook.webp"
+import excelWorkbookDestinations from "@/assets/blog/images/excel-workbook-three-destinations.webp"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const excelSpreadsheetToWebApp: BlogPost = {
   slug: "excel-spreadsheet-to-web-app",
-  title: "Excel spreadsheet to web app, without losing what the formulas do",
+  title: "Excel spreadsheet to web app, keeping what the formulas do",
   series: "migration",
   topic: "Excel",
   icon: "sheet",
   category: "Internal tool builders",
   description:
-    "Turning an Excel spreadsheet into a web app: split the records, calculations and reports, move the data to Postgres and rebuild the formulas as tested code.",
+    "Excel spreadsheet to web app, step by step: split records, calculations and reports, move the data to Postgres and rebuild each formula as tested code.",
   summary:
-    "Turning an Excel spreadsheet into a web app means separating three things the workbook mixes together: the records people type in, the calculations the formulas run and the reports built on top. The records move into Postgres tables, the formulas become code that is tested against the workbook's own answers, and Excel can stay on as a reporting tool. A workbook with a few sheets of records and one core calculation usually takes three to six weeks.",
+    "An Excel spreadsheet to web app migration separates three things the workbook mixes together: the records people type in, the calculations the formulas run and the reports built on top. The records move into Postgres tables, the formulas become code that is tested against the workbook's own answers, and Excel can stay on as a reporting tool. A workbook with a few sheets of records and one core calculation usually takes three to six weeks.",
   datePublished: "2026-11-14",
   facts: [
     { label: "Code export", value: "None, formulas and macros are rebuilt" },
@@ -39,7 +41,8 @@ export const excelSpreadsheetToWebApp: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Keep the spreadsheet when it's a model one person uses to think with: a forecast, a pricing calculator or a one-off analysis. Excel is the right tool for that, and a web app would only slow it down.",
+          text: "Keep the spreadsheet when it's a model one person uses to think with: a forecast, a pricing calculator or a one-off analysis. Excel is the right tool for that, and a web app would only slow it down. For the cases in between, such as an internal tool with simple rules and no customers signing in, a no-code builder may be enough. The Build or No-Code Quiz asks seven questions to find out whether no-code will do or the job needs real code.",
+          link: { text: "Take the Build or No-Code Quiz", href: "/tools/build-or-no-code" },
         },
         {
           type: "paragraph",
@@ -55,6 +58,11 @@ export const excelSpreadsheetToWebApp: BlogPost = {
         {
           type: "paragraph",
           text: "Usually all three at once, and each part goes somewhere different. Sheets where every row is a customer, a job or an order are a database and become tables. Sheets full of formulas are a calculator and become code. Pivot tables and summary tabs are reports and become pages, downloads or a live connection back into Excel.",
+        },
+        {
+          type: "image",
+          image: excelWorkbookDestinations,
+          alt: "A workbook split three ways: rows of records go to database tables, formula cells to tested code, charts to reports.",
         },
         {
           type: "table",
@@ -74,7 +82,7 @@ export const excelSpreadsheetToWebApp: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Ask the people who use the workbook which tabs they open in a normal week. Old tabs that nobody reads, and columns kept just in case, can stay in the archived copy rather than being rebuilt.",
+          text: "Not every tab earns a rebuild. Workbooks pick up a 2019 tab, a scratch sheet and columns kept just in case, so check with the team which tabs still feed a decision or a customer, and leave the rest in the archived copy.",
         },
       ],
     },
@@ -85,6 +93,11 @@ export const excelSpreadsheetToWebApp: BlogPost = {
         {
           type: "paragraph",
           text: "You rewrite them as code and prove the code gives the same answers as the workbook. Formulas don't export to anything that runs outside Excel, but the workbook can still check its own replacement: take real rows, record what Excel calculates for them, and make those figures the app's tests.",
+        },
+        {
+          type: "image",
+          image: excelFormulasChecked,
+          alt: "The same rows run through the workbook and the web app: five answers match and one mismatch is flagged to fix.",
         },
         {
           type: "list",
@@ -104,7 +117,7 @@ export const excelSpreadsheetToWebApp: BlogPost = {
             },
             {
               term: "Build until every case matches",
-              text: "Run the cases against the app's code on every change. A difference is either a bug in the new code or a mistake the spreadsheet has been making for years, and both are worth knowing about.",
+              text: "Run the cases against the app's code on every change. A difference is either a bug in the new code or a mistake the spreadsheet has been making for years, and the second kind needs a decision from the business, not a developer's guess.",
             },
           ],
         },
@@ -163,7 +176,7 @@ for name, frame in sheets.items():
             "Excel keeps 15 significant digits, so long reference numbers and barcodes entered as numbers have already lost their last digits. Find the originals if they matter.",
             "Merged cells, a second header row and subtotal rows don't belong in a table. Unmerge, keep one header row, and drop the totals, which the app recalculates.",
             "One cell holding several values, such as \"Red, Blue\", becomes a child table with one row per value.",
-            "The same customer typed three ways becomes three customers. Match them up and agree one ID each before the import, not after.",
+            "Acme Ltd, ACME Limited and Acme Ltd. with a trailing space are one company to a person and three to a database. Merge near-duplicates and give each customer one ID before the import, not after.",
           ],
         },
         {
@@ -184,37 +197,22 @@ for name, frame in sheets.items():
           type: "list",
           ordered: true,
           items: [
-            {
-              term: "Launch the screens that replace data entry",
-              text: "Start with the sheet people type into most. From the first day, new records go into the app and its database, not the workbook.",
-            },
-            {
-              term: "Make that sheet read-only",
-              text: "Remove edit access on SharePoint or OneDrive, or replace the sheet with a note pointing at the app, so nobody keeps adding rows to the old copy.",
-            },
-            {
-              term: "Feed the reports from the database",
-              text: "Give the app an export to .xlsx or CSV, or connect Excel to a read-only database login through Get Data or an ODBC driver. Pivot tables and charts keep working, and nobody can type over the source.",
-            },
-            {
-              term: "Run the calculations in parallel for one cycle",
-              text: "For a month of quotes or invoices, work out the figures in both and compare. Switch the workbook's calculation sheets off only once the totals agree.",
-            },
-            {
-              term: "Archive the workbook",
-              text: "Keep a dated, read-only copy of the final version. It's the record of how the business worked before, and the first place to look when someone asks why a number changed.",
-            },
+            "Launch the screens that replace the sheet people type into most. From that day, new records go into the app's database and nowhere else.",
+            "Take away edit access to that sheet on SharePoint or OneDrive, or swap its contents for a note pointing at the app, so nobody carries on adding rows to the old copy.",
+            "Point the reports at the database. An .xlsx or CSV export from the app works, or Excel can read a read-only database login through Get Data or an ODBC driver, so pivot tables and charts keep working and nobody can type over the source.",
+            "Run the calculations in both for one full cycle, such as a month of quotes or invoices, and switch the workbook's calculation sheets off once the totals agree.",
+            "Keep a dated, read-only copy of the final workbook. When someone asks next year why a number changed, it's the first place to look.",
           ],
         },
         {
           type: "paragraph",
-          text: "Staff can sign in with the Microsoft work accounts they already use, so there are no new passwords for anyone to remember.",
-          link: { text: "How Microsoft sign-in carries over, from our Power Apps guide", href: "/blog/migrate-from-power-apps" },
+          text: "Staff don't need new passwords either. A web app can sign people in with the Microsoft 365 work accounts they already use for Excel.",
+          link: { text: "Keeping Microsoft work sign-in when you move off Power Apps", href: "/blog/migrate-from-power-apps" },
         },
         {
           type: "paragraph",
-          text: "If the workbook started life as an export from an Access database, or feeds one, move the two together.",
-          link: { text: "How an Access database moves to a web app", href: "/blog/migrate-from-access" },
+          text: "Some workbooks are half of a pair, filled from an Access database or feeding one. Move the two together, or the old database keeps writing to a workbook nobody reads.",
+          link: { text: "Moving an Access database to a web app", href: "/blog/migrate-from-access" },
         },
       ],
     },
@@ -224,22 +222,23 @@ for name, frame in sheets.items():
       blocks: [
         {
           type: "paragraph",
-          text: "Three to six weeks for a workbook with a few sheets of records, a handful of roles and one core calculation. The size of the file says little about the effort. The number of rules hidden in formulas and VBA says most, so count the calculation sheets and the lines of VBA before asking anyone for an estimate.",
-          link: { text: "How we build web apps", href: "/services/web-app-development" },
+          text: "Three to six weeks for a workbook with a few sheets of records, a handful of roles and one core calculation. File size says little about the effort; the rules hidden in formulas and VBA say most. Before asking anyone for an estimate, count the calculation sheets and the lines of VBA, and note which macros talk to Outlook or other files.",
+          link: { text: "What our web app development covers", href: "/services/web-app-development" },
         },
         {
           type: "paragraph",
-          text: "A workbook that ties together several others through links and macros is better split into stages, each with its own switch-over, starting with the one people type into most.",
+          text: "A workbook tied to several others through links and macros goes better in stages, each with its own switch-over. The MVP Scope Planner helps draw the first line: list the features, size them and see what fits a one week build and what can wait.",
+          link: { text: "Plan the first stage with the MVP Scope Planner", href: "/tools/mvp-scope-planner" },
         },
         {
           type: "paragraph",
-          text: "For a first figure, the free MVP Cost Calculator turns eight answers about your app into a rough estimate in development weeks and pounds.",
-          link: { text: "Estimate the rebuild with the MVP Cost Calculator", href: "/tools/mvp-cost-calculator" },
+          text: "Then put a number on that first stage. The MVP Cost Calculator gives a ballpark price and timeline from eight quick questions, and a first stage of data entry screens plus the main calculation often fits one of our fixed-price sprints.",
+          link: { text: "Get a ballpark price from the MVP Cost Calculator", href: "/tools/mvp-cost-calculator" },
         },
         {
           type: "paragraph",
-          text: "A focused first release, such as the data entry screens and the main calculation, often fits one of our fixed-price sprints.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          text: "Both sprints are priced before any build starts, so the first stage has a fixed cost even if the later ones wait.",
+          link: { text: "Compare the two fixed-price sprints", href: "/#pricing" },
         },
       ],
     },
@@ -251,14 +250,14 @@ for name, frame in sheets.items():
         "For a simple internal tool, often yes. Microsoft Lists and Power Apps suit teams already on Microsoft 365, and no-code builders such as AppSheet can use an Excel file in OneDrive as their data. They reach their limits when customers sign in, when different people need different rows, or when the calculations are the heart of the business.",
     },
     {
-      question: "Can a web app keep using my Excel formulas?",
+      question: "Can the web app still take spreadsheets from suppliers or customers?",
       answer:
-        "Not as formulas. They're rewritten as code, and the workbook becomes the test: real rows go in, and the app has to give the same answers Excel does. That usually turns up a few long-standing spreadsheet mistakes along the way.",
+        "Yes. The app can accept an .xlsx or CSV upload, check every row against the same rules as its forms, and show which rows failed and why before anything is saved. Price lists, timesheets and order sheets keep arriving as spreadsheets, but nobody has to retype them.",
     },
     {
-      question: "Can we still use Excel for reports after the move?",
+      question: "Will the web app work without an internet connection?",
       answer:
-        "Yes. The web app can export to .xlsx or CSV, or Excel can read the database directly through a read-only login, so pivot tables and charts keep working. The difference is that people analyse the data in Excel instead of typing it there.",
+        "Not by default. An Excel file opens on a train with no signal, while a web app needs a connection unless it's built as a progressive web app that saves entries on the device and sends them when the signal returns. Decide which screens need that before the build, because adding it later touches every form.",
     },
   ],
 }
