@@ -3,13 +3,13 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const wix: BlogPost = {
   slug: "migrate-from-wix",
-  title: "Where Wix and Velo hit their limits, and what to build instead",
+  title: "Wix migration and what to build when Velo hits its limits",
   series: "migration",
   topic: "Wix",
   logo: wixLogo,
   category: "Website builders",
   description:
-    "The walls founders hit building a product on Wix and Velo, from data collections to member areas and URLs, and what to build instead while keeping the site.",
+    "A Wix migration usually keeps the site and moves the product. Where Wix and Velo hit their limits, from data collections to member areas, and what to build.",
   summary:
     "Wix and Velo run out when a website starts doing the job of software: relational data, real permissions, long running backend work and an API for other apps. The usual answer is to keep the marketing site on Wix and build the product as a separate app on a subdomain, moving fully only when you need one codebase.",
   datePublished: "2026-10-13",

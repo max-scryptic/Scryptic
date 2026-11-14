@@ -3,13 +3,13 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const softr: BlogPost = {
   slug: "migrate-from-softr",
-  title: "The Softr to custom app migration checklist",
+  title: "The Softr to production migration checklist",
   series: "migration",
   topic: "Softr",
   logo: softrLogo,
   category: "No-code app builders",
   description:
-    "A checklist for replacing a Softr portal with a coded app: permissions to write down, data and users to move, a safe cutover and what to check after launch.",
+    "Moving a Softr app to production code, step by step: the permissions to write down, data and users to move, a safe cutover and what to check after launch.",
   summary:
     "Softr doesn't export code, so replacing it means rebuilding the app, but your data usually already sits in Airtable, Google Sheets or a database you control. That lets you build the new app against the same data, run both side by side, and only then move everything into Postgres. Most Softr rebuilds reach a first production release in three to six weeks.",
   datePublished: "2026-10-13",

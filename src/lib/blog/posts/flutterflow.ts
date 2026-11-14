@@ -3,13 +3,13 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const flutterflow: BlogPost = {
   slug: "migrate-from-flutterflow",
-  title: "What to keep, refactor or rewrite in a FlutterFlow code export",
+  title: "FlutterFlow migration, what to keep, refactor or rewrite",
   series: "migration",
   topic: "FlutterFlow",
   logo: flutterflowLogo,
   category: "No-code app builders",
   description:
-    "A part by part assessment of FlutterFlow's exported Flutter code: which widgets, state, custom code, backend wiring and routing to keep, refactor or rewrite.",
+    "A FlutterFlow migration starts from the code export. Which widgets, state, custom code, backend wiring and routing to keep, refactor or rewrite, part by part.",
   summary:
     "Most of a FlutterFlow export is worth keeping: it is standard Flutter, and the routing, backend wiring and custom code are usable as they are. The global app state, the generated API calls and any public Flutter web build are the parts that usually need refactoring or replacing, and the release pipeline has to be built from scratch.",
   datePublished: "2026-10-13",

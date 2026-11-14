@@ -15,6 +15,7 @@ import { buildAnMvp } from "@/lib/blog/posts/build-an-mvp"
 import { chooseAppDevelopmentCompany } from "@/lib/blog/posts/choose-app-development-company"
 import { dashboardAppDesign } from "@/lib/blog/posts/dashboard-app-design"
 import { emergent } from "@/lib/blog/posts/emergent"
+import { excelSpreadsheetToWebApp } from "@/lib/blog/posts/excel-spreadsheet-to-web-app"
 import { filemaker } from "@/lib/blog/posts/filemaker"
 import { firebaseStudio } from "@/lib/blog/posts/firebase-studio"
 import { flutterflow } from "@/lib/blog/posts/flutterflow"
@@ -124,6 +125,7 @@ export const posts: BlogPost[] = [
   appsheet,
   filemaker,
   access,
+  excelSpreadsheetToWebApp,
   outsystems,
   powerApps,
 ]

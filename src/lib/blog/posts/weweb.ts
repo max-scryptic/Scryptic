@@ -3,13 +3,13 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const weweb: BlogPost = {
   slug: "migrate-from-weweb",
-  title: "What founders get wrong about leaving WeWeb",
+  title: "WeWeb migration and what founders get wrong about leaving",
   series: "migration",
   topic: "WeWeb",
   logo: wewebLogo,
   category: "No-code app builders",
   description:
-    "Five common assumptions about leaving WeWeb, from owning the exported Vue code to rebuilding everything, and what actually happens when you move to code.",
+    "A WeWeb migration is smaller than most founders fear. Five assumptions about leaving, from owning the exported Vue code to rebuilding it all, and the reality.",
   summary:
     "Leaving WeWeb is usually smaller than founders fear and different from what they expect. The exported Vue build isn't source code you can maintain, but your Supabase or Xano backend and its data can stay put while the frontend is rebuilt against it, typically in four to eight weeks.",
   datePublished: "2026-10-13",
