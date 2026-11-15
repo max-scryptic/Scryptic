@@ -27,6 +27,7 @@ import { knack } from "@/lib/blog/posts/knack"
 import { lovable } from "@/lib/blog/posts/lovable"
 import { lovableAppBackup } from "@/lib/blog/posts/lovable-app-backup"
 import { ukDataResidency } from "@/lib/blog/posts/uk-data-residency"
+import { mendix } from "@/lib/blog/posts/mendix"
 import { mobileAppDevelopment } from "@/lib/blog/posts/mobile-app-development"
 import { mobileWebDevelopment } from "@/lib/blog/posts/mobile-web-development"
 import { mvpAgile } from "@/lib/blog/posts/mvp-agile"
@@ -128,6 +129,7 @@ export const posts: BlogPost[] = [
   excelSpreadsheetToWebApp,
   outsystems,
   powerApps,
+  mendix,
 ]
 
 export type PostSeries = {
