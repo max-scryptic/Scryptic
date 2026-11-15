@@ -1,3 +1,4 @@
+import emergentLogo from "@/assets/blog/logos/emergent.svg"
 import emergentDepartureBoard from "@/assets/blog/images/emergent-layers-departure-board.webp"
 import emergentEnvRedeploy from "@/assets/blog/images/emergent-env-after-redeploy.webp"
 import type { BlogPost } from "@/lib/blog/types"
@@ -7,7 +8,7 @@ export const emergent: BlogPost = {
   title: "Migrating off Emergent once the app has real users",
   series: "migration",
   topic: "Emergent",
-  icon: "sparkles",
+  logo: emergentLogo,
   category: "AI app builders",
   description:
     "Migrating off Emergent keeps your React, FastAPI and MongoDB code. How to get the production data out, replace the Universal Key and check the live secrets.",
