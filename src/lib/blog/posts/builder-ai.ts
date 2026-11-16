@@ -1,5 +1,6 @@
 import builderAiBuildcardCutDown from "@/assets/blog/images/builder-ai-buildcard-cut-down.webp"
 import builderAiLostPropertyTags from "@/assets/blog/images/builder-ai-lost-property-tags.webp"
+import builderAiLogo from "@/assets/blog/logos/builder-ai.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const builderAi: BlogPost = {
@@ -7,7 +8,7 @@ export const builderAi: BlogPost = {
   title: "Rescuing a Builder.ai app from what you still hold",
   series: "migration",
   topic: "Builder.ai",
-  icon: "building",
+  logo: builderAiLogo,
   category: "AI app builders",
   description:
     "Builder.ai went into insolvency in May 2025. How to rescue a Builder.ai app: find what you still hold, repair the code you have or rebuild from the Buildcard.",
