@@ -12,6 +12,7 @@ import { bolt } from "@/lib/blog/posts/bolt"
 import { bubble } from "@/lib/blog/posts/bubble"
 import { buildAWebApp } from "@/lib/blog/posts/build-a-web-app"
 import { buildAnMvp } from "@/lib/blog/posts/build-an-mvp"
+import { builderAi } from "@/lib/blog/posts/builder-ai"
 import { chooseAppDevelopmentCompany } from "@/lib/blog/posts/choose-app-development-company"
 import { dashboardAppDesign } from "@/lib/blog/posts/dashboard-app-design"
 import { emergent } from "@/lib/blog/posts/emergent"
@@ -111,6 +112,7 @@ export const posts: BlogPost[] = [
   base44,
   firebaseStudio,
   emergent,
+  builderAi,
   bubble,
   flutterflow,
   weweb,
