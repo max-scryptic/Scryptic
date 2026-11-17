@@ -44,6 +44,7 @@ import { reactjsWebDevelopmentCompany } from "@/lib/blog/posts/reactjs-web-devel
 import { reactNativeVsFlutter } from "@/lib/blog/posts/react-native-vs-flutter"
 import { replit } from "@/lib/blog/posts/replit"
 import { retool } from "@/lib/blog/posts/retool"
+import { rocket } from "@/lib/blog/posts/rocket"
 import { saasCost } from "@/lib/blog/posts/saas-cost"
 import { selfHostingN8n } from "@/lib/blog/posts/self-hosting-n8n"
 import { softr } from "@/lib/blog/posts/softr"
@@ -113,6 +114,7 @@ export const posts: BlogPost[] = [
   firebaseStudio,
   emergent,
   builderAi,
+  rocket,
   bubble,
   flutterflow,
   weweb,
