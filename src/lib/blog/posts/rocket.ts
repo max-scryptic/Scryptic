@@ -1,5 +1,6 @@
 import rocketFrameworkRoutes from "@/assets/blog/images/rocket-framework-routes.webp"
 import rocketUpdateBranch from "@/assets/blog/images/rocket-update-branch-graph.webp"
+import rocketLogo from "@/assets/blog/logos/rocket.svg"
 import type { BlogPost } from "@/lib/blog/types"
 
 export const rocket: BlogPost = {
@@ -7,7 +8,7 @@ export const rocket: BlogPost = {
   title: "Moving a Rocket.new app to your own hosting and repository",
   series: "migration",
   topic: "Rocket.new",
-  icon: "rocket",
+  logo: rocketLogo,
   category: "AI app builders",
   description:
     "Migrating a Rocket.new app: why the framework Rocket chose decides the route, how to work with its GitHub sync, and moving Supabase, secrets and hosting.",

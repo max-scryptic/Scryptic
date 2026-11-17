@@ -3,7 +3,6 @@ import { adalo } from "@/lib/blog/posts/adalo"
 import { aiAppBuildersCompared } from "@/lib/blog/posts/ai-app-builders-compared"
 import { aiSoftwareDevelopment } from "@/lib/blog/posts/ai-software-development"
 import { airtable } from "@/lib/blog/posts/airtable"
-import { anything } from "@/lib/blog/posts/anything"
 import { appsheet } from "@/lib/blog/posts/appsheet"
 import { appCostUk } from "@/lib/blog/posts/app-cost-uk"
 import { automationsToSaas } from "@/lib/blog/posts/automations-to-saas"
@@ -115,7 +114,6 @@ export const posts: BlogPost[] = [
   firebaseStudio,
   emergent,
   builderAi,
-  anything,
   rocket,
   bubble,
   flutterflow,
