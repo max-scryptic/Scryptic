@@ -3,6 +3,7 @@ import { adalo } from "@/lib/blog/posts/adalo"
 import { aiAppBuildersCompared } from "@/lib/blog/posts/ai-app-builders-compared"
 import { aiSoftwareDevelopment } from "@/lib/blog/posts/ai-software-development"
 import { airtable } from "@/lib/blog/posts/airtable"
+import { anything } from "@/lib/blog/posts/anything"
 import { appsheet } from "@/lib/blog/posts/appsheet"
 import { appCostUk } from "@/lib/blog/posts/app-cost-uk"
 import { automationsToSaas } from "@/lib/blog/posts/automations-to-saas"
@@ -44,6 +45,7 @@ import { reactjsWebDevelopmentCompany } from "@/lib/blog/posts/reactjs-web-devel
 import { reactNativeVsFlutter } from "@/lib/blog/posts/react-native-vs-flutter"
 import { replit } from "@/lib/blog/posts/replit"
 import { retool } from "@/lib/blog/posts/retool"
+import { rocket } from "@/lib/blog/posts/rocket"
 import { saasCost } from "@/lib/blog/posts/saas-cost"
 import { selfHostingN8n } from "@/lib/blog/posts/self-hosting-n8n"
 import { softr } from "@/lib/blog/posts/softr"
@@ -113,6 +115,8 @@ export const posts: BlogPost[] = [
   firebaseStudio,
   emergent,
   builderAi,
+  anything,
+  rocket,
   bubble,
   flutterflow,
   weweb,
