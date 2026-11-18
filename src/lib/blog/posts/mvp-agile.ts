@@ -235,7 +235,7 @@ export const mvpAgile: BlogPost = {
         {
           type: "paragraph",
           text: `That's how we work: we agree the scope up front, then build it in a fixed-price sprint of ${mvp.price} + VAT for two weeks or ${extendedMvp.price} + VAT for three. Each includes a week of changes from your feedback and a handover week after launch, and the code is in your name.`,
-          link: { text: "See what each MVP package includes.", href: "/#pricing" },
+          link: { text: "See our MVP development services and what each package includes.", href: "/services/mvp-development" },
         },
       ],
     },

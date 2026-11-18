@@ -214,8 +214,8 @@ export const buildAWebApp: BlogPost = {
         },
         {
           type: "paragraph",
-          text: `We build first releases like the tutor app at a fixed price, from ${mvp.price} plus VAT.`,
-          link: { text: "See what each package includes.", href: "/#pricing" },
+          text: `If you would rather hire web app developers than build it yourself, we build first releases like the tutor app at a fixed price, from ${mvp.price} plus VAT.`,
+          link: { text: "Hire web app developers for a fixed-price first release.", href: "/services/web-app-development" },
         },
       ],
     },

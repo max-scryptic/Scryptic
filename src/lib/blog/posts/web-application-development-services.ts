@@ -3,7 +3,7 @@ import { extendedMvp, mvp } from "@/lib/services"
 
 export const webApplicationDevelopmentServices: BlogPost = {
   slug: "web-application-development-services",
-  title: "Web application development, from architecture to launch",
+  title: "What web application development involves, from architecture to launch",
   series: "launch",
   service: "web-app-development",
   topic: "Web apps",
@@ -13,7 +13,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
   summary:
     "Web application development is building software people use in a browser: the screens, the business rules behind them, the database and the hosting it runs on. A first release goes through scope, design, build, testing and launch, whoever builds it. Keep it to one useful workflow rather than the whole roadmap, and choose a builder who can say what will ship, what it costs and who owns it afterwards.",
   datePublished: "2026-10-21",
-  dateModified: "2026-11-05",
+  dateModified: "2026-11-18",
   facts: [
     { label: "Parts of a web app", value: "Screens, rules, data, services, hosting" },
     { label: "Delivery stages", value: "6" },

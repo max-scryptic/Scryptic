@@ -13,7 +13,7 @@ export const wix: BlogPost = {
   summary:
     "Wix and Velo run out when a website starts doing the job of software: relational data, real permissions, long running backend work and an API for other apps. The usual answer is to keep the marketing site on Wix and build the product as a separate app on a subdomain, moving fully only when you need one codebase.",
   datePublished: "2026-10-13",
-  dateModified: "2026-10-14",
+  dateModified: "2026-11-18",
   facts: [
     { label: "Code export", value: "None for pages, Velo code can be copied" },
     { label: "Data export", value: "CMS collections and contacts as CSV" },
@@ -23,11 +23,15 @@ export const wix: BlogPost = {
   sections: [
     {
       id: "what-velo-is",
-      heading: "Velo turns a Wix site into an app platform, up to a point",
+      heading: "What is Wix Velo, and how far can it take a site?",
       blocks: [
         {
           type: "paragraph",
-          text: "Velo is Wix's developer layer: JavaScript on the page and on the server, a built-in data store called CMS collections, and hooks into Wix's own apps such as Members, Bookings and Stores. It is genuinely capable. Plenty of businesses run members areas, directories and booking flows on it.",
+          text: "Wix Velo is Wix's developer layer: JavaScript on the page and on the server, a built-in data store called CMS collections, and hooks into Wix's own apps such as Members, Bookings and Stores. It is genuinely capable. Plenty of businesses run members areas, directories and booking flows on it.",
+        },
+        {
+          type: "paragraph",
+          text: "Velo is also in transition. Wix's developer documentation now steers new work towards the Wix JavaScript SDK: the Velo APIs for page elements, $w and $widget, keep receiving updates, most of the other Velo APIs no longer do, and Wix describes retiring them as a later stage. Existing Velo code keeps running, but anything you build on it today is likely to need porting to the SDK at some point, which is a natural moment to ask whether the product belongs on Wix at all.",
         },
         {
           type: "paragraph",
@@ -118,6 +122,31 @@ export const wix: BlogPost = {
         },
       ],
     },
+    {
+      id: "wix-to-payload",
+      heading: "How do you move a Wix site to Payload CMS?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Export each CMS collection as CSV, recreate it as a Payload collection with matching fields, import the rows and media with a script, then rebuild the pages in Next.js and redirect every old URL. Payload is an open-source TypeScript CMS that installs inside a Next.js app, so the marketing site, its content and the product can share one codebase and one database.",
+        },
+        {
+          type: "list",
+          ordered: true,
+          items: [
+            { term: "Export the content", text: "In the Wix dashboard, export each CMS collection to CSV and download the media. Image fields come out as Wix URLs rather than files, and pages built in the editor don't export at all." },
+            { term: "Model it in Payload", text: "Create one Payload collection per Wix collection, turn reference fields into relationship fields, and add a media collection for images. Choose Postgres or MongoDB as the database adapter." },
+            { term: "Import with a script", text: "Read each CSV, download every image into Payload's media collection, and create the documents through Payload's Local API, so relationships point at the new records." },
+            { term: "Rebuild the pages", text: "Static pages become Next.js pages or Payload blocks that editors can rearrange. This is most of the work, because nothing from the Wix editor carries across." },
+            { term: "Redirect the old URLs", text: "Map Wix's fixed prefixes, such as /post/ and /product-page/, to the new paths with permanent 301 redirects before the domain moves." },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Payload suits sites where the content team still wants an editor but the business needs code it owns: a product app next to the marketing pages, custom data models or content that other systems read through an API. If the site is purely marketing and nobody minds Wix, keeping it there and building only the app is usually cheaper.",
+        },
+      ],
+    },
   ],
   faqs: [
     {
@@ -129,6 +158,11 @@ export const wix: BlogPost = {
       question: "How do I keep my Google rankings if I leave Wix?",
       answer:
         "The safest route is not to move the marketing site at all: keep it on Wix and move only the app. If the site has to go, crawl it first, map every URL to its new address, set up 301 redirects on the new host, keep each page's title and meta description, and submit the new sitemap in Google Search Console.",
+    },
+    {
+      question: "Is Wix Velo being discontinued?",
+      answer:
+        "Not outright. Wix is moving developers to the Wix JavaScript SDK: the $w and $widget page APIs keep getting updates, most other Velo APIs no longer do, and Wix's documentation describes deprecating them as a later stage. Existing Velo code still runs, but new work is better written against the SDK or outside Wix.",
     },
     {
       question: "Can I reuse my Wix Velo code in a new app?",
