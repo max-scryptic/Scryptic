@@ -130,6 +130,7 @@ export const buildAnMvp: BlogPost = {
         {
           type: "paragraph",
           text: `Cost is driven by scope far more than technology. Each extra type of user, each integration with a poorly documented API, payments beyond a simple checkout, and AI features all add time. Once the scope is down to one job, we build it in a fixed-price sprint, two weeks for ${mvp.price} + VAT or three for ${extendedMvp.price} + VAT, with the scope agreed in this first week. If one quote is far below the others for the same scope, ask what's been left out; testing, payment edge cases and handover are the usual gaps.`,
+          link: { text: "How our fixed-price MVP development services work.", href: "/services/mvp-development" },
         },
         {
           type: "checklist",

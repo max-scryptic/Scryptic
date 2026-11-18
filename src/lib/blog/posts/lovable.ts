@@ -13,7 +13,7 @@ export const lovable: BlogPost = {
   summary:
     "You harden a Lovable app rather than rebuild it, because the export is ordinary React, TypeScript and Supabase. The work runs in phases: take ownership of the code and backend, lock down the database, add environments and tests, decide how pages render, then cut over with a fallback.",
   datePublished: "2026-10-13",
-  dateModified: "2026-10-14",
+  dateModified: "2026-11-18",
   facts: [
     { label: "Code export", value: "Yes, full source through GitHub sync" },
     { label: "Backend", value: "Supabase, or Lovable Cloud built on it" },
@@ -104,6 +104,46 @@ export const lovable: BlogPost = {
         {
           type: "paragraph",
           text: "Before anyone changes code, make an inventory: every table, policy, edge function, storage bucket, environment variable, scheduled job and third-party integration, plus each user role and what it can see. Then click through the app as each role and note the behaviour users rely on, including the parts nobody planned, such as an email that only sends because a component happens to call a function on load. This list becomes the test plan for every later phase.",
+        },
+      ],
+    },
+    {
+      id: "transfer-ownership",
+      heading: "How do you transfer ownership of a Lovable project?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Within a workspace, open the project's settings and use Transfer ownership under Project actions; the new owner must be a workspace owner, admin or editor. To hand the project to a different workspace, such as a client's own, use Move workspace in the same settings, which keeps the project's history and settings. Either way the person receiving it has to be a full member of the workspace first.",
+        },
+        {
+          type: "list",
+          items: [
+            {
+              term: "To a colleague in your workspace",
+              text: "Transfer ownership keeps the project where it is and changes who owns it. Viewers, external collaborators and people whose invitation is still pending can't be chosen.",
+            },
+            {
+              term: "To a client or a new company",
+              text: "The client creates their own workspace and invites whoever built the app. The builder moves the project into it with Move workspace, the client makes themselves owner, then removes the builder's access.",
+            },
+            {
+              term: "Remixing is a copy, not a transfer",
+              text: "A remix makes an independent project with the code and the database structure, but not the database records, scheduled jobs, custom domain or publish state. The original keeps its users and its URL.",
+            },
+            {
+              term: "Data in Lovable Cloud",
+              text: "Lovable's documentation is not explicit about what a move does to Cloud data, so export the data before moving and check the tables and sign-in afterwards.",
+            },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Ownership in Lovable covers only the project. The GitHub repository, the Supabase project if you connected your own, the domain and every API key are separate accounts, each with its own transfer: GitHub and Supabase both let you move a repository or project to another organisation. Work through the account checklist above for each one, and rotate any key the previous owner could still see.",
+        },
+        {
+          type: "callout",
+          title: "When a freelancer or agency built it",
+          text: "Agree the handover before the final invoice: the Lovable project moved into your workspace, the repository in your GitHub organisation, the backend under your billing and the domain in your name. Getting all four is far harder once the relationship has ended.",
         },
       ],
     },

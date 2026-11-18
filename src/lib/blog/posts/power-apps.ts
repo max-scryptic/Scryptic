@@ -15,6 +15,7 @@ export const powerApps: BlogPost = {
   summary:
     "A Power Apps migration pays off when an app's users are customers or partners, or when premium licences for a growing user base cost more than owning the code would. The apps themselves can't leave, because canvas and model-driven apps only run on Power Platform, so each one is rebuilt. Your data in Dataverse, SharePoint or SQL Server comes with you, and staff keep signing in with their Microsoft work accounts.",
   datePublished: "2026-11-07",
+  dateModified: "2026-11-18",
   facts: [
     { label: "Code export", value: "Source files to read, not an app to run" },
     { label: "Data export", value: "Dataverse Web API, Fabric or Synapse Link" },
@@ -191,6 +192,37 @@ export const powerApps: BlogPost = {
       ],
     },
     {
+      id: "dynamics-365-to-power-apps",
+      heading: "Should you move from Dynamics 365 to Power Apps?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Only if you use little of what Dynamics 365 adds. Dynamics 365 Sales and Customer Service are themselves model-driven apps on Power Apps and Dataverse, so moving is mostly a licensing and scope decision rather than a data migration: if your team works in custom tables and a handful of standard ones, a model-driven app on Power Apps licences can cost less. If you rely on the sales pipeline, case handling, service level agreements or the Dynamics automation built around them, those come with the Dynamics licence and you would be rebuilding them.",
+        },
+        {
+          type: "list",
+          items: [
+            {
+              term: "The data can stay where it is",
+              text: "Both run on Dataverse, so a new model-driven app can sit in the same environment and use the same tables, forms and views. Custom tables and settings move between environments as solutions, without exporting a row.",
+            },
+            {
+              term: "Some tables need a Dynamics licence",
+              text: "Microsoft restricts writing to certain tables that ship with Dynamics 365 apps to users with a Dynamics licence, whichever app they open them from. Check Microsoft's list of restricted tables against what your users actually create and edit.",
+            },
+            {
+              term: "Licensing terms are the deciding detail",
+              text: "Which users a Power Apps licence covers when they work with Dynamics data has been the subject of debate around Microsoft's licensing guide. Get the plan checked against the current guide, or by your licensing partner, before cancelling anything.",
+            },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "There is a third route when the reason for leaving Dynamics is that the business has outgrown or underused a full CRM: a custom app on Postgres for the workflow you actually run, with staff still signing in through Microsoft Entra ID. The steps are the same as for a Power App, starting with the data in Dataverse.",
+        },
+      ],
+    },
+    {
       id: "how-long",
       heading: "How long does a Power Apps migration take?",
       blocks: [
@@ -207,6 +239,11 @@ export const powerApps: BlogPost = {
     },
   ],
   faqs: [
+    {
+      question: "Can I migrate from Dynamics 365 to Power Apps?",
+      answer:
+        "Yes, and usually without moving data, because Dynamics 365 apps already run on Power Apps and Dataverse. You build a model-driven app in the same environment on the tables your team uses and move users to Power Apps licences. It only saves money if they don't need the Dynamics features or the restricted tables that require a Dynamics licence.",
+    },
     {
       question: "Do Power BI reports on Dataverse stop working?",
       answer:

@@ -69,21 +69,21 @@ const servicePageEntries = {
   services,
   mvpDevelopment: {
     path: "/services/mvp-development",
-    title: "MVP development for startups",
+    title: "MVP development services for UK startups",
     description:
       "MVP development services for UK startups: built in a fixed-price 2 or 3 week sprint and launched with sign-in, payments and analytics live. You own the code.",
     parents: [services],
-    lastModified: "2026-11-04",
+    lastModified: "2026-11-18",
     changeFrequency: "monthly",
     priority: 0.9,
   },
   webAppDevelopment: {
     path: "/services/web-app-development",
-    title: "Web app development services",
+    title: "Web app development services from UK developers",
     description:
       "Custom web app development for UK businesses and founders: one workflow built as production code in a fixed-price 2 or 3 week sprint, the code in your name.",
     parents: [services],
-    lastModified: "2026-11-04",
+    lastModified: "2026-11-18",
     changeFrequency: "monthly",
     priority: 0.9,
   },

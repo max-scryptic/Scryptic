@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { PageJsonLd } from "@/components/json-ld"
 import type { AppLayer } from "@/components/landing/app-layers"
 import { ComparisonSection } from "@/components/landing/comparison-section"
@@ -9,13 +11,19 @@ import { WebAppVisual } from "@/components/landing/hero-visuals"
 import type { IconName } from "@/components/landing/icons"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
-import { FitCheckSection, HubSection, LayersSection } from "@/components/landing/service-sections"
+import {
+  FitCheckSection,
+  HubSection,
+  LayersSection,
+  OptionsSection,
+  type OptionRow,
+} from "@/components/landing/service-sections"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { launchOffer, offerPrice, services } from "@/lib/services"
+import { extendedMvp, launchOffer, mvp, offerPrice, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
@@ -56,6 +64,57 @@ const fitChecks = [
   "A spreadsheet or tool is creaking",
 ]
 const fitInitial = [0, 1, 3]
+
+// The usual ways to hire web app developers, in words. Price ranges match the
+// how-much-does-it-cost-to-build-an-app-uk post.
+const optionColumns = ["What you get", "Typical price", "Time to a first release", "Who owns the code"]
+const options: OptionRow[] = [
+  {
+    name: `${siteConfig.name} sprint`,
+    cells: [
+      "One workflow built as production code by the developer you meet on the first call",
+      `${mvp.price} or ${extendedMvp.price} + VAT, fixed before the build`,
+      "2 or 3 weeks, then a week of support",
+      "You, from launch day",
+    ],
+  },
+  {
+    name: "Web app development agency",
+    cells: [
+      "A team with project managers, designers and testers, and a formal discovery phase",
+      "Roughly £40,000 to £150,000 or more for a first version",
+      "Usually two to six months",
+      "Check the contract: some keep the code or hosting until the final invoice",
+    ],
+  },
+  {
+    name: "Freelance web app developer",
+    cells: [
+      "One developer building what you specify, test and manage yourself",
+      "Roughly £300 to £700 a day in the UK",
+      "Depends on their availability and your spec",
+      "You, if the contract assigns it",
+    ],
+  },
+  {
+    name: "In-house developer",
+    cells: [
+      "Someone who stays on the product after launch",
+      "A salary, plus recruitment time and cost",
+      "Months, once hiring is counted",
+      "You",
+    ],
+  },
+  {
+    name: "No-code or AI app builder",
+    cells: [
+      "A working app you build and maintain yourself",
+      "Monthly subscriptions, plus your own time",
+      "Days to weeks",
+      "No-code platforms keep the app; AI builders give you code to harden",
+    ],
+  },
+]
 
 const guides = postsBySlug([
   "web-application-development-services",
@@ -104,6 +163,25 @@ const faqs: Faq[] = [
       text: "How our MVP development works for a new SaaS product.",
       href: pages.mvpDevelopment.path,
     },
+  },
+  {
+    question: "How do I choose a custom web app development company?",
+    answer:
+      "Send every shortlisted company the same short written brief and compare what comes back. Look for someone who has built and launched a web app like yours, who you would work with day to day, how the price is fixed and how changes are priced, and whether the code, hosting and accounts are yours from day one. A low quote for the same scope usually means testing, the admin side or handover has been left out.",
+    link: {
+      text: "The buyer's checklist for choosing an app development company in the UK.",
+      href: "/blog/how-to-choose-an-app-development-company-uk",
+    },
+  },
+  {
+    question: "What should a web app development proposal include?",
+    answer:
+      "A written list of the screens, user roles and integrations being built, the price and what it excludes, the timeline with when you will see working software, how changes are priced, and what support follows launch. It should also say in plain words that the code repository, hosting, database, domain and payment accounts are in your name, and that you can hand the code to another developer.",
+  },
+  {
+    question: "Should I hire a freelance web app developer or a development company?",
+    answer:
+      "A freelancer suits a well specified job you can manage and test yourself. A company or studio suits a first release where you want design, testing and launch handled for you, at a price agreed up front. Either way, the developer who builds it matters more than the size of the firm, so ask who will write the code.",
   },
   {
     question: "Do you build websites as well as web apps?",
@@ -214,6 +292,28 @@ export default function WebAppDevelopmentPage() {
         intro="Dashboards, AI tools and team workspaces, each taken from first sketch to a live domain."
       />
 
+      <OptionsSection
+        id="options"
+        eyebrow="Your options"
+        title="Web app developers for hire, compared"
+        intro="What you get, what it costs, how long it takes and who owns the code, for the five usual ways to get a web app built."
+        caption="Five ways to hire web app developers, compared on what you get, price, time to a first release and who owns the code"
+        columns={optionColumns}
+        rows={options}
+        footnote={
+          <>
+            Agency and freelance figures are typical UK ranges, not quotes.{" "}
+            <Link
+              href="/blog/how-to-choose-an-app-development-company-uk"
+              className="text-foreground underline underline-offset-4 hover:text-primary"
+            >
+              The buyer&apos;s checklist for choosing a web app development company
+            </Link>
+            .
+          </>
+        }
+      />
+
       <ComparisonSection
         title="Who should build your web app?"
         intro="Agency-grade code at a freelancer's pace, with the price fixed before the build."
@@ -228,7 +328,7 @@ export default function WebAppDevelopmentPage() {
 
       <FaqSection
         faqs={faqs}
-        intro="Cost, timeline, phones, websites and who owns the result."
+        intro="Cost, choosing a developer, timeline, phones and who owns the result."
       />
 
       <ContactSection

@@ -3,18 +3,88 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const retool: BlogPost = {
   slug: "migrate-from-retool",
-  title: "Migrating from Retool when your internal tool becomes the product",
+  title: "How to migrate from Retool, for internal tools and customer apps",
   series: "migration",
   topic: "Retool",
   logo: retoolLogo,
   category: "Internal tool builders",
   description:
-    "How to migrate from Retool once customers log in: rebuild the customer side as a web app on the same database, keep internal admin in Retool, then cut over.",
+    "How to migrate from Retool: your options when switching, moving internal tools off it step by step, Databricks Apps vs Retool, and building a customer app.",
   summary:
-    "When customers rather than staff start logging in, a Retool app stops being the right home for that part of the business. The interface cannot be exported as code, so the customer side is rebuilt as a proper web app on the same database, while Retool stays for internal admin. The work is less about screens and more about trust, tenancy and billing.",
+    "To migrate from Retool, list every app, query and workflow, export each app as a backup, copy any Retool Database data out, then rebuild one app at a time on your chosen platform and run old and new side by side before switching staff over. Retool apps cannot be exported as code, so every route is a rebuild. When customers rather than staff start logging in, the usual answer is to keep internal admin in Retool and build the customer side as a proper web app on the same database.",
   datePublished: "2026-10-13",
-  dateModified: "2026-10-14",
+  dateModified: "2026-11-18",
   sections: [
+    {
+      id: "switching-options",
+      heading: "Switching from Retool: what are your options?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "There are four realistic routes: another internal tool builder, Databricks Apps if your data already lives in Databricks, a custom web app you own as code, or a split where staff stay on Retool and customers get their own app. Which one fits depends on why you're leaving: seat costs and hosting control point to the first two, customers logging in points to the last two.",
+        },
+        {
+          type: "table",
+          caption: "The usual routes off Retool, compared on who they suit, what carries across and what to watch",
+          columns: ["Route", "Suits", "What carries across", "Watch out for"],
+          rows: [
+            ["Another internal tool builder, such as Appsmith, ToolJet or Budibase", "Teams leaving over seat prices or wanting to self-host", "Your database and APIs; the screens are rebuilt in the new editor", "The same limits on customer-facing use, on a different bill"],
+            ["Databricks Apps", "Data teams whose tables and users already live in Databricks", "Your Databricks data and permissions; the app is rewritten in Python or Node.js", "Built for employees, so customers still need something else"],
+            ["A custom web app", "Tools that have become the product, or need branding, billing or public sign-up", "Your database, and the Retool apps as a specification", "More to build and maintain than a drag-and-drop tool"],
+            ["Keep Retool for staff, build the customer side", "Companies whose internal admin works and whose customers have started logging in", "Everything internal stays as it is", "Schema changes have to be checked against the Retool queries"],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Whichever route you pick, nothing in Retool exports as runnable code, so the screens are rebuilt every time. What you can carry is the database, the logic written in your queries and transformers, and the knowledge of how your team actually uses each screen.",
+        },
+      ],
+    },
+    {
+      id: "migrate-internal-tools",
+      heading: "How do you migrate internal tools off Retool?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Inventory first, then move one app at a time and run it next to the Retool version until your team trusts it. Rebuilding everything at once is how a migration loses the small fixes hidden in queries nobody remembers writing.",
+        },
+        {
+          type: "list",
+          ordered: true,
+          items: [
+            { term: "List what you have", text: "Every app, its resources, who uses it and how often. Apps nobody opened last month can usually be retired rather than moved." },
+            { term: "Export each app", text: "Retool exports apps as JSON or Toolscript files. They won't run anywhere else, but they are a backup and a precise record of every query and component." },
+            { term: "Write down the hidden logic", text: "SQL queries, JavaScript transformers, event handlers and Retool Workflows. Note every filter and every place a query quietly corrects data." },
+            { term: "Copy your data out", text: "Data in your own database stays where it is. Data in Retool Database is managed Postgres, so it can be copied with standard Postgres tools such as pg_dump, or exported as CSV." },
+            { term: "Rebuild the busiest app first", text: "It has the most users to test it and the biggest saving if Retool seats are the reason you're moving." },
+            { term: "Run both in parallel", text: "Give the team the new version for a week or two alongside Retool and compare results on real records before switching." },
+            { term: "Switch off cleanly", text: "Remove Retool's access to each database resource, rotate the credentials it used, then reduce seats or cancel." },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Scheduled Retool Workflows need special care. They become backend jobs with retries, logging and an alert when they fail, because a silent failure in a nightly job is noticed weeks later in the numbers.",
+        },
+      ],
+    },
+    {
+      id: "databricks-apps",
+      heading: "Databricks Apps vs Retool: which suits your internal tools?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Databricks Apps suits internal data apps whose data and users already live in Databricks; Retool suits teams that pull from many different sources and want a drag-and-drop editor. Neither is designed for customer-facing products.",
+        },
+        {
+          type: "paragraph",
+          text: "Databricks Apps hosts apps written in Python frameworks such as Streamlit, Dash and Flask, or in Node.js, inside your Databricks workspace. Users sign in with their workspace identity and access to data follows the Unity Catalog permissions you already have, so there is no separate hosting, login or credentials to manage. The catch is that someone writes the app as code, and it is aimed at employees with workspace access rather than outside users.",
+        },
+        {
+          type: "paragraph",
+          text: "Retool connects to Databricks as one resource among many, next to Postgres, REST APIs and SaaS tools, and builders assemble screens from a component library rather than writing them. That breadth is why many teams start there. It is billed per user, which is often what prompts the move once a tool spreads across the company. If almost every query in your Retool apps already points at Databricks, moving those apps to Databricks Apps removes a tool and a bill; if they mix sources, Retool or a custom app is usually the simpler home.",
+        },
+      ],
+    },
     {
       id: "internal-tool-to-product",
       heading: "Why an internal Retool app struggles once customers log in",
@@ -135,6 +205,11 @@ export const retool: BlogPost = {
     },
   ],
   faqs: [
+    {
+      question: "Can Databricks Apps replace Retool?",
+      answer:
+        "For internal data apps built on Databricks tables, often yes: Databricks Apps hosts Python or Node.js apps inside your workspace with Unity Catalog permissions, so there is no separate hosting or login. It suits teams comfortable writing code, and it is aimed at employees rather than customers. Apps that mix many data sources, or are built by people who don't code, usually stay simpler in Retool.",
+    },
     {
       question: "Can I export a Retool app as code?",
       answer:

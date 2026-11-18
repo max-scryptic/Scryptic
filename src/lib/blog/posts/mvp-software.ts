@@ -5,7 +5,7 @@ import { extendedMvp, mvp } from "@/lib/services"
 
 export const mvpSoftware: BlogPost = {
   slug: "what-is-mvp-software",
-  title: "What MVP software is, and how to tell you have one",
+  title: "What is MVP software? The minimum viable product, with an example",
   series: "launch",
   topic: "MVP meaning",
   icon: "book-open",
@@ -14,7 +14,7 @@ export const mvpSoftware: BlogPost = {
   summary:
     "MVP software is the first version of a product that real people can use to finish one job on their own, while you measure whether they do. It's minimum in what it covers and viable in how well it covers it, and that's what separates it from a prototype, a proof of concept or a landing page. Five checks tell you whether what you've built is one.",
   datePublished: "2026-11-01",
-  dateModified: "2026-11-05",
+  dateModified: "2026-11-18",
   facts: [
     { label: "MVP stands for", value: "Minimum viable product" },
     { label: "Made popular by", value: "Eric Ries, The Lean Startup (2011)" },
@@ -24,11 +24,15 @@ export const mvpSoftware: BlogPost = {
   sections: [
     {
       id: "meaning",
-      heading: "What does MVP mean in software?",
+      heading: "What is a minimum viable product (MVP)?",
       blocks: [
         {
           type: "paragraph",
-          text: "MVP stands for minimum viable product. In software, it's the first release that real users rely on for real work, put out to find out whether they'll keep relying on it. Eric Ries made the term common in The Lean Startup, where the idea was to learn as much as possible for the least effort. Since then it has been stretched to cover anything from a clickable mock-up to a polished version one, so it's worth pinning down.",
+          text: "A minimum viable product, or MVP, is the first release of a piece of software that does one job well enough for real users to rely on it without you. For example, the first version of a cover service for dental practices lets a practice manager post tomorrow's open shift and a nearby locum hygienist accept it, and nothing more: no rota planning, no invoicing, no app store app.",
+        },
+        {
+          type: "paragraph",
+          text: "In software, then, an MVP is a release put out to find out whether people will keep relying on it. Eric Ries made the term common in The Lean Startup, where the idea was to learn as much as possible for the least effort. Since then it has been stretched to cover anything from a clickable mock-up to a polished version one, so it's worth pinning down.",
         },
         {
           type: "paragraph",
@@ -226,7 +230,7 @@ export const mvpSoftware: BlogPost = {
         {
           type: "paragraph",
           text: `We build MVP software as production code at a fixed price: ${mvp.price} + VAT for a two week sprint or ${extendedMvp.price} + VAT for three, with a handover week after launch and the code and accounts in your name.`,
-          link: { text: "See what each MVP package includes.", href: "/#pricing" },
+          link: { text: "See our MVP development services and what each package includes.", href: "/services/mvp-development" },
         },
       ],
     },
