@@ -17,7 +17,7 @@ export type Faq = {
  */
 export function FaqSection({ faqs, intro }: { faqs: Faq[]; intro: React.ReactNode }) {
   return (
-    <section aria-labelledby="faq-heading" id="faq" className="scroll-mt-8 px-4 py-16 sm:px-6 sm:py-20">
+    <section aria-labelledby="faq-heading" id="faq" className="scroll-mt-4 px-4 py-24 sm:px-6">
       <div className={cn("mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]", inset)}>
         <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading">
           {intro}

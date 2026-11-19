@@ -7,8 +7,7 @@ import { stack } from "@/lib/stack"
 /**
  * A full-width band of the same Lapis as the hero, in both themes, with each
  * logo on a white tile. Like the hero, its background covers the page's guide
- * lines, with a square on each where they stop and start again. No eyebrow:
- * the logos say what the section is.
+ * lines, with a square on each where they stop and start again.
  */
 export function StackSection({
   title = "A stack built for a fast, scalable launch",
@@ -23,10 +22,11 @@ export function StackSection({
       <section
         aria-labelledby="stack-heading"
         id="stack"
-        className="scroll-mt-8 bg-[#2b3fd6] px-4 py-16 text-white sm:px-6 sm:py-20"
+        className="scroll-mt-4 bg-[#2b3fd6] px-4 py-20 text-white sm:px-6 sm:py-24"
       >
         <div className={cn("mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16", inset)}>
           <div data-reveal="children" className="flex flex-col gap-5">
+            <p className="font-mono text-xs tracking-widest text-[#c3caff] uppercase">Our stack</p>
             <h2 id="stack-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
               {title}
             </h2>
