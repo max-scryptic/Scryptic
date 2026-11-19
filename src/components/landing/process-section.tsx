@@ -1,6 +1,7 @@
 import { cn } from "cn"
 
-import { LandingSection } from "@/components/landing/section-heading"
+import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { inset } from "@/lib/frame"
 import { services } from "@/lib/services"
 
 const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"]
@@ -72,8 +73,7 @@ function dayRange(day: number, span: number) {
 /**
  * The process calendar: one row per week on a Monday to Friday grid, Friday
  * shaded as demo day. Phones drop the day columns and list each week's events
- * with their days. The calendar is the section: its heading and intro sit in
- * the card's title bar, like a chart's caption, rather than above it.
+ * with their days.
  */
 export function ProcessSection({
   title = "From first call to launch",
@@ -89,16 +89,10 @@ export function ProcessSection({
 }) {
   return (
     <LandingSection id="process" labelledBy="process-heading">
+      <SectionHeading className={inset} eyebrow="Process" title={title} id="process-heading">
+        {intro}
+      </SectionHeading>
       <div className="corners guides border border-border bg-card">
-        <div
-          data-reveal="children"
-          className="flex flex-col gap-3 border-b border-border px-5 py-6 sm:px-8 sm:py-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12"
-        >
-          <h2 id="process-heading" className="text-2xl tracking-tight text-balance sm:text-3xl">
-            {title}
-          </h2>
-          <p className="max-w-md text-pretty text-muted-foreground lg:text-right">{intro}</p>
-        </div>
         <div
           aria-hidden="true"
           className="hidden grid-cols-[7.5rem_repeat(5,minmax(0,1fr))] border-b border-border font-mono text-xs text-muted-foreground uppercase sm:grid"

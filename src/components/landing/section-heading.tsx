@@ -6,12 +6,7 @@ import { cn } from "cn"
  * same. A section's copy is passed in; its layout lives here.
  */
 
-/**
- * The eyebrow, h2 and intro at the top of a landing section. Use it sparingly:
- * when every section opens with the same three lines the page reads as a
- * template, so most home page sections open another way (the heading inside
- * the calendar card, a large statement, the founder's own words).
- */
+/** The eyebrow, h2 and intro at the top of a landing section. */
 export function SectionHeading({
   eyebrow,
   title,
@@ -20,9 +15,9 @@ export function SectionHeading({
   aside,
   className,
 }: {
-  eyebrow?: string
+  eyebrow: string
   title: string
-  children?: React.ReactNode
+  children: React.ReactNode
   id: string
   /** Shown right after the title on wide screens, and after the intro on narrower ones. */
   aside?: React.ReactNode
@@ -37,22 +32,13 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow && (
-        <p className="font-mono text-xs tracking-widest text-primary uppercase xl:col-start-1">{eyebrow}</p>
-      )}
+      <p className="font-mono text-xs tracking-widest text-primary uppercase xl:col-start-1">{eyebrow}</p>
       <h2 id={id} className="max-w-2xl text-3xl tracking-tight text-balance sm:text-4xl xl:col-start-1 xl:self-center">
         {title}
       </h2>
-      {children && (
-        <p className="max-w-2xl text-lg text-pretty text-muted-foreground xl:col-start-1">{children}</p>
-      )}
+      <p className="max-w-2xl text-lg text-pretty text-muted-foreground xl:col-start-1">{children}</p>
       {aside && (
-        <div
-          className={cn(
-            "mt-2 justify-self-start xl:col-start-2 xl:mt-0 xl:self-center",
-            eyebrow ? "xl:row-start-2" : "xl:row-start-1",
-          )}
-        >
+        <div className="mt-2 justify-self-start xl:col-start-2 xl:row-start-2 xl:mt-0 xl:self-center">
           {aside}
         </div>
       )}
@@ -96,9 +82,9 @@ export function CrossIcon({ className }: { className?: string }) {
 
 /**
  * A landing section's outer frame: full width with the page gutters, its
- * content in the max-w-6xl column. Sections with py-16 sm:py-20 take
- * scroll-mt-8, not scroll-mt-28: with the top padding their heading still
- * lands 6 to 7rem down, just under the fixed header.
+ * content in the max-w-6xl column. Sections with py-24 take scroll-mt-4, not
+ * scroll-mt-28: with the 6rem top padding their heading still lands 7rem down,
+ * just under the fixed header.
  */
 export function LandingSection({
   id,
@@ -112,7 +98,7 @@ export function LandingSection({
   children: React.ReactNode
 }) {
   return (
-    <section aria-labelledby={labelledBy} id={id} className="scroll-mt-8 px-4 py-16 sm:px-6 sm:py-20">
+    <section aria-labelledby={labelledBy} id={id} className="scroll-mt-4 px-4 py-24 sm:px-6">
       <div className={cn("mx-auto flex max-w-6xl flex-col gap-12", className)}>{children}</div>
     </section>
   )

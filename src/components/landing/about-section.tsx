@@ -1,18 +1,23 @@
 import Image from "next/image"
+import { cn } from "cn"
 
-import { LandingSection } from "@/components/landing/section-heading"
+import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { SocialLinks } from "@/components/social-links"
+import { inset } from "@/lib/frame"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 
-/**
- * The studio and its founder in one card. No eyebrow or heading block above
- * it: the portrait opens the section, and the studio heading and intro lead
- * the card's text, followed by the founder's name, bio and profiles.
- */
+/** The studio and its founder, with the founder's portrait, bio and profiles. */
 export function AboutSection() {
   return (
-    <LandingSection id="about" labelledBy="about-heading">
+    <LandingSection id="about" labelledBy="about-heading" className="gap-16">
+      <div className={cn("flex flex-col gap-6", inset)}>
+        <SectionHeading eyebrow="About us" title="A small studio, on purpose" id="about-heading">
+          {siteConfig.name} takes on a few projects at a time, so you work directly with the
+          developer building your product.
+        </SectionHeading>
+      </div>
+
       <article
         aria-labelledby="founder-name"
         data-reveal
@@ -28,18 +33,11 @@ export function AboutSection() {
           />
         </div>
         <div className="flex flex-col justify-center gap-5 p-6 sm:p-10">
-          <h2 id="about-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
-            A small studio, on purpose
-          </h2>
-          <p className="max-w-xl text-lg text-pretty">
-            {siteConfig.name} takes on a few projects at a time, so you work directly with the
-            developer building your product.
-          </p>
-          <div className="flex flex-col gap-1 border-t border-border pt-5">
-            <h3 id="founder-name" className="text-2xl tracking-tight">
+          <div className="flex flex-col gap-1">
+            <p className="font-mono text-xs tracking-widest text-primary uppercase">{founder.role}</p>
+            <h3 id="founder-name" className="text-2xl tracking-tight sm:text-3xl">
               {founder.name}
             </h3>
-            <p className="text-sm text-muted-foreground">{founder.role}</p>
           </div>
           <p className="max-w-xl text-pretty text-muted-foreground">{founder.bio}</p>
           {/* Dots only from sm up: on a phone the row wraps and a dot would lead the next line. */}
