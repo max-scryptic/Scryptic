@@ -13,6 +13,7 @@ import { launchOffer, offerPrice, services } from "@/lib/services"
  * gets a Lapis border and a tag sitting on its top edge. Every card is
  * square-edged, with accent brackets on its corners and its top and bottom
  * edges run out across the page. Pair with serviceJsonLd() for each package.
+ * No eyebrow: the prices say what the section is.
  */
 export function PricingSection({
   title = "A fully built MVP, ready to take to market",
@@ -28,7 +29,6 @@ export function PricingSection({
     <LandingSection id="pricing" labelledBy="pricing-heading">
       <SectionHeading
         className={inset}
-        eyebrow="Pricing"
         title={title}
         id="pricing-heading"
         aside={
