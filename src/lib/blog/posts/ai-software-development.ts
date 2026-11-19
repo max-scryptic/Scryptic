@@ -231,6 +231,7 @@ export const aiSoftwareDevelopment: BlogPost = {
         {
           type: "paragraph",
           text: "Be wary of a pitch that opens with training a custom model. For most products the work is in the pipeline, the checks and the billing around a model someone else has trained, and starting with training is usually the slowest and most expensive route to finding out whether customers want the feature.",
+          link: { text: "Building your own AI on a model you don't have to train.", href: "/blog/build-your-own-ai" },
         },
         {
           type: "paragraph",
