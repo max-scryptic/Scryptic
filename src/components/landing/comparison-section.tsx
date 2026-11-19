@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { cn } from "cn"
 
-import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { LandingSection } from "@/components/landing/section-heading"
 import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 import { pages } from "@/lib/seo"
@@ -98,18 +98,25 @@ export function ComparisonSection({
 }) {
   return (
     <LandingSection id="compare" labelledBy="compare-heading">
-      <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-        <SectionHeading eyebrow={`Why ${siteConfig.name}`} title={title} id="compare-heading">
-          {intro}
-        </SectionHeading>
-        <Button
-          size="lg"
-          nativeButton={false}
-          render={<Link href={pages.bookCall.path} />}
-          className="h-11 w-fit shrink-0 px-6 text-base"
+      {/* No eyebrow: the title is a statement set large, with the intro and call under it. */}
+      <div data-reveal="children" className={cn("flex flex-col gap-8", inset)}>
+        <h2
+          id="compare-heading"
+          className="max-w-4xl text-4xl tracking-tight text-balance sm:text-5xl lg:text-6xl"
         >
-          Book a discovery call
-        </Button>
+          {title}
+        </h2>
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <p className="max-w-2xl text-lg text-pretty text-muted-foreground">{intro}</p>
+          <Button
+            size="lg"
+            nativeButton={false}
+            render={<Link href={pages.bookCall.path} />}
+            className="h-11 w-fit shrink-0 px-6 text-base"
+          >
+            Book a discovery call
+          </Button>
+        </div>
       </div>
 
       {/* The brackets and guides sit on an outer box, as the scroll area would clip them.
