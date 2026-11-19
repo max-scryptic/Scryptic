@@ -125,6 +125,8 @@ export default function Home() {
 
       <PricingSection />
 
+      <AboutSection />
+
       <ProcessSection
         intro={`Two calls, a ${calendarPackage.sprint}, then handover and a week of support, with a demo every Friday.`}
       />
@@ -137,8 +139,6 @@ export default function Home() {
         title="Hire in-house. Brief an agency. Chance a freelancer. Or skip the trade-offs."
         intro={`${siteConfig.name} gives you agency-quality software at freelancer speed, with code you own outright.`}
       />
-
-      <AboutSection />
 
       <FaqSection
         faqs={faqs}
