@@ -8,15 +8,15 @@ export const webAppVsMobileApp: BlogPost = {
   topic: "Web vs mobile",
   icon: "monitor-smartphone",
   description:
-    "Build the web app first unless the phone is the product. A one-table decision guide to web, PWA, React Native or native for your first release.",
+    "Build the web app first unless the phone is the product. A decision table for web, PWA or native, plus whether a website or the app comes first.",
   summary:
     "Build a web app first unless your product can't work without a phone. Go mobile first only when the camera, sensors, offline use, reliable push notifications or a several-times-a-day consumer habit sit at the heart of the product. Everything else starts on the web, built so a mobile app can be added later.",
   datePublished: "2026-10-14",
-  dateModified: "2026-10-28",
+  dateModified: "2026-11-20",
   sections: [
     {
       id: "verdict",
-      heading: "The verdict",
+      heading: "Should you build a web app or a mobile app first?",
       blocks: [
         {
           type: "paragraph",
@@ -38,7 +38,7 @@ export const webAppVsMobileApp: BlogPost = {
     },
     {
       id: "decision-table",
-      heading: "Find your row",
+      heading: "Which to build first, by what your product needs",
       blocks: [
         {
           type: "paragraph",
@@ -69,6 +69,49 @@ export const webAppVsMobileApp: BlogPost = {
         {
           type: "paragraph",
           text: `When it points to the web, build so mobile can follow. Keep pricing, permissions and anything touching money on the server, where a future app can call the same endpoints. Use TypeScript throughout so React Native can share types and validation later. Choose sign-in that supports tokens as well as browser cookies. Do those three things and a mobile app becomes a new frontend rather than a rebuild. It's why our builds, from ${mvp.price} + VAT, start most founders on TypeScript, Next.js and Postgres.`,
+        },
+      ],
+    },
+    {
+      id: "website-or-app-first",
+      heading: "Should you build a website or an app first?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Build a simple website first and the app second. A one-page site that says what the product does and who it is for, with a form to join a waitlist, takes days rather than weeks, tests whether anyone wants the product, and gives the app somewhere to be found when it launches.",
+        },
+        {
+          type: "paragraph",
+          text: "Keep the two separate once the app arrives. The marketing site can stay on a builder such as Framer or Webflow, where anyone on the team can edit a page, and the app can live on a subdomain such as app.yourdomain.com. Then a new landing page never waits for a developer, and an app release never risks the pages that bring visitors in.",
+          link: { text: "Keep your website on a builder and put the app on a subdomain.", href: "/blog/migrate-from-webflow#subdomain-or-subpath" },
+        },
+        {
+          type: "paragraph",
+          text: "Skip the separate website only when the app's own public pages are what people search for, such as the listings in a directory or a marketplace. There the app is the website, and it has to render those pages so search engines can read them.",
+        },
+      ],
+    },
+    {
+      id: "web-and-mobile",
+      heading: "Can one build cover web and mobile?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Yes, for most first releases. A responsive web app is one codebase that works in the browser on phones, tablets and laptops, and the same code can go further when it needs to, so web and mobile rarely means two builds on day one.",
+        },
+        {
+          type: "list",
+          items: [
+            { term: "Responsive web app", text: "One build for every screen, reached through a link. Covers web and mobile users for most B2B tools and SaaS products." },
+            { term: "Progressive web app", text: "The same web app made installable, with a home screen icon and some offline use. Strongest on Android." },
+            { term: "Wrapped web app", text: "The same code inside a native shell, such as Capacitor, so it can be listed in the App Store and Google Play and reach push and the camera." },
+            { term: "Cross-platform app", text: "A separate React Native or Flutter app for iOS and Android, sharing the backend and, with React Native, types and validation with the web app." },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Each step costs more than the one before it, so move down the list only when your users give you a reason.",
+          link: { text: "When wrapping your web app is enough.", href: "/blog/hybrid-apps" },
         },
       ],
     },

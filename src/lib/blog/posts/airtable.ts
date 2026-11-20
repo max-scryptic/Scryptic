@@ -9,11 +9,11 @@ export const airtable: BlogPost = {
   logo: airtableLogo,
   category: "Internal tool builders",
   description:
-    "How to export Airtable to PostgreSQL field by field: linked records, lookups, rollups, formulas, attachments and selects, plus what replaces automations.",
+    "Move Airtable to PostgreSQL field by field: links, lookups, formulas and attachments, what replaces automations, and how to connect the two without migrating.",
   summary:
-    "Every Airtable field type has a PostgreSQL (Postgres) equivalent, but only some become columns: linked records become foreign keys or join tables, lookups and rollups become queries, and attachments become files in your own storage. Automations turn into backend jobs and Interfaces into app screens, while Airtable can stay on as a back office.",
+    "Every Airtable field type has a PostgreSQL (Postgres) equivalent, but only some become columns: linked records become foreign keys or join tables, lookups and rollups become queries, and attachments become files in your own storage. Automations turn into backend jobs and Interfaces into app screens, while Airtable can stay on as a back office. If you only need the two connected, a one-way sync does that without migrating.",
   datePublished: "2026-10-13",
-  dateModified: "2026-10-14",
+  dateModified: "2026-11-20",
   facts: [
     { label: "Code export", value: "None, Interfaces stay in Airtable" },
     { label: "Data export", value: "CSV per view, or the Web API" },
@@ -170,6 +170,47 @@ export const airtable: BlogPost = {
       ],
     },
     {
+      id: "connect-without-migrating",
+      heading: "Connecting Airtable to PostgreSQL without migrating",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "You can connect Airtable to PostgreSQL and keep working in Airtable by syncing one way, on a schedule or whenever records change. Choose the direction first: Airtable into Postgres when reports or an app need to read the data, or Postgres into Airtable when the app owns the data and staff still work in a base.",
+        },
+        {
+          type: "table",
+          caption: "Four ways to connect Airtable and PostgreSQL, how each works and what it suits",
+          columns: ["Approach", "How it works", "Suits"],
+          rows: [
+            [
+              "A scheduled script",
+              "Every few minutes, a job asks the Web API for records changed since its last run, using a last modified time field, and upserts them by Airtable record ID.",
+              "Reporting and read-only apps, with full control over the mapping",
+            ],
+            [
+              "Airtable webhooks",
+              "Airtable notifies your endpoint that a base changed, and your code fetches the changes and writes them to Postgres.",
+              "Near real-time copies without polling",
+            ],
+            [
+              "A data pipeline service",
+              "Tools such as Airbyte or Fivetran copy Airtable tables into Postgres on a schedule.",
+              "Analytics, when nobody wants to maintain a script",
+            ],
+            [
+              "Postgres into Airtable",
+              "A job writes selected rows into a base through the API, up to ten records per request and within five requests per second.",
+              "A back office for staff once the app owns the data",
+            ],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Whichever PostgreSQL Airtable integration you choose, keep it to one direction, key every row by its Airtable record ID and alert someone when a run fails. Two-way sync sounds convenient and usually ends in conflicting edits that nobody can untangle. A one-way copy into Postgres is also a sensible first step towards migrating, because it tests your field mapping on live data before anything is switched off.",
+        },
+      ],
+    },
+    {
       id: "running-the-import",
       heading: "Running the import",
       blocks: [
@@ -207,6 +248,11 @@ export const airtable: BlogPost = {
       question: "Can I keep using Airtable alongside a Postgres database?",
       answer:
         "Yes. Many teams keep Airtable as a back office and sync selected data into it one way from Postgres. Only one system should accept edits for any given table, otherwise you end up reconciling two versions of the truth.",
+    },
+    {
+      question: "How do I connect Airtable to PostgreSQL?",
+      answer:
+        "Sync one way. A scheduled script or Airtable webhooks can copy changed records into Postgres through the Web API, keyed by Airtable record ID, and pipeline services such as Airbyte or Fivetran do the same without code. For the reverse, a job writes rows from Postgres into the base.",
     },
     {
       question: "Does the Airtable API have rate limits for exporting data?",

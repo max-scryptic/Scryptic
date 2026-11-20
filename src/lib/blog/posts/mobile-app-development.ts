@@ -4,17 +4,17 @@ import { extendedMvp, mvp } from "@/lib/services"
 
 export const mobileAppDevelopment: BlogPost = {
   slug: "mobile-app-development",
-  title: "Mobile app development checks a web build skips",
+  title: "Mobile app development, and the checks a web build skips",
   series: "launch",
   service: "mobile-app-development",
   topic: "Mobile apps",
   icon: "tablet-smartphone",
   description:
-    "Mobile app development brings work a web build skips: store review, old app versions, permission prompts, saving with no signal and the keys to updates.",
+    "Mobile app development explained: the stages, native or cross-platform, and the work a web build skips, from store review to permissions and offline saves.",
   summary:
-    "Mobile app development has all the work of a web build, plus the work that comes from software living on someone's phone and reaching it through a store. Every release waits for review, old versions keep running after you ship a new one, permission prompts rarely get a second chance, saves have to survive a dead signal, and whoever holds the accounts and keys controls every update. This checklist covers only those parts, so you can put them in the brief before anyone quotes.",
+    "Mobile app development is building an app people install from the App Store or Google Play, and for most startups that means one cross-platform codebase for iOS and Android. It has all the work of a web build, plus the work that comes from software living on someone's phone and reaching it through a store. Every release waits for review, old versions keep running after you ship a new one, permission prompts rarely get a second chance, saves have to survive a dead signal, and whoever holds the accounts and keys controls every update. This checklist covers only those parts, so you can put them in the brief before anyone quotes.",
   datePublished: "2026-10-31",
-  dateModified: "2026-11-10",
+  dateModified: "2026-11-20",
   facts: [
     { label: "Written for", value: "Founders who've chosen an installed app" },
     { label: "Worked example", value: "A dog walking company's app" },
@@ -29,6 +29,7 @@ export const mobileAppDevelopment: BlogPost = {
           type: "paragraph",
           text: "Mobile app development is building software that people install on their phone from the App Store or Google Play. It covers the app on the phone, the server and database it talks to, and the work of getting each version through store review and onto people's phones.",
         },
+        { type: "subheading", text: "The stages of mobile app development" },
         {
           type: "list",
           ordered: true,
@@ -41,10 +42,36 @@ export const mobileAppDevelopment: BlogPost = {
             "Keep supporting older versions while you ship updates.",
           ],
         },
+      ],
+    },
+    {
+      id: "native-or-cross-platform",
+      heading: "Native or cross-platform, which way should you build it?",
+      blocks: [
         {
           type: "paragraph",
-          text: "The second step is usually a choice between React Native and Flutter for a startup, and hiring tends to settle it.",
+          text: "Most startups should build cross-platform, with React Native or Flutter: one codebase for iOS and Android with full access to the phone. Build two native apps only when the product depends on the newest platform features or the last bit of performance, and wrap an existing web app when a store listing is most of what you need.",
+        },
+        {
+          type: "table",
+          caption: "Four ways to build a mobile app, what each is, what it suits and what it costs relative to the others",
+          columns: ["Route", "What it is", "Suits", "Relative cost"],
+          rows: [
+            ["Native", "Two separate apps, in Swift for iOS and Kotlin for Android", "Apps built on the newest platform features, or where performance is the product", "Highest, with two codebases and often two developers"],
+            ["Cross-platform", "One React Native or Flutter codebase released to both stores", "Most startup apps, including the dog walking example below", "About one build, plus polish for each platform"],
+            ["Hybrid", "Your web app's code inside a native shell such as Capacitor", "A working web app that needs a store listing, push or the camera", "Lowest, if the web app already exists"],
+            ["Progressive web app", "A web app people install from the browser, with no store", "Simple tools where most users are on Android", "Close to the web build itself"],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Between the two cross-platform frameworks, hiring tends to decide it: pick the one the developers you can hire and keep already know.",
           link: { text: "Compare React Native and Flutter for a startup app.", href: "/blog/react-native-vs-flutter" },
+        },
+        {
+          type: "paragraph",
+          text: "The hybrid route has limits worth knowing before you choose it, from Apple's review rules to what a web view can reach.",
+          link: { text: "When wrapping your web app is enough.", href: "/blog/hybrid-apps" },
         },
       ],
     },

@@ -106,7 +106,7 @@ export const appCostUk: BlogPost = {
         {
           type: "paragraph",
           text: "A mobile app costs more than a web app with the same features because there is more to build and release. A native app needs a backend just as a web app does, plus two store submissions, testing on real iPhones and Android phones, permission prompts, and support for older versions of the app that users haven't updated. Unless the phone is the product, a responsive web app first, with the native app once people are using it, is usually the cheaper order.",
-          link: { text: "Mobile app development checks a web build skips.", href: "/blog/mobile-app-development" },
+          link: { text: "Mobile app development, and the checks a web build skips.", href: "/blog/mobile-app-development" },
         },
       ],
     },

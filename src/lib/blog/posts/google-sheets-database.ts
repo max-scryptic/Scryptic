@@ -2,20 +2,69 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const googleSheetsDatabase: BlogPost = {
   slug: "google-sheets-as-a-database",
-  title: "Google Sheets as a database and the signs you've outgrown it",
+  title: "How to use Google Sheets as a database, and when to stop",
   series: "automation",
   service: "web-app-development",
   topic: "Google Sheets",
   icon: "sheet",
   description:
-    "Using Google Sheets as a database works until it doesn't. The warning signs in the order they appear, what to move to, and how to switch over gradually.",
+    "How to use Google Sheets as a database with one tab per table, fixed IDs, validation and protected ranges, then the signs you've outgrown it and where to move.",
   summary:
-    "Google Sheets is a perfectly good database for a small team with simple data, and most businesses outgrow it in a predictable order: editing rules first, then lookups between tabs, broken automations, slow formulas and finally permissions. Once three or more of those signs show up, move the data to Postgres and keep the sheet as a read-only view while you switch over one piece at a time.",
+    "To use Google Sheets as a database, give each kind of record its own tab, give every row an ID that never changes, validate every column and protect the headers, and add rows through a form. Set up that way it serves a small team well, and most businesses outgrow it in a predictable order: editing rules first, then lookups between tabs, broken automations, slow formulas and finally permissions. Once three or more of those signs show up, move the data to Postgres and keep the sheet as a read-only view.",
   datePublished: "2026-10-14",
+  dateModified: "2026-11-20",
   sections: [
     {
+      id: "how-to-use",
+      heading: "How do you use Google Sheets as a database?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Treat each tab as a table with one row per record, give every row a permanent ID, link tabs by that ID, and make the sheet reject bad values instead of trusting people to type them correctly. Those habits are what separate a sheet that works as a database from one that only looks like it.",
+        },
+        {
+          type: "list",
+          ordered: true,
+          items: [
+            {
+              term: "One tab per kind of thing",
+              text: "Customers, Jobs and Invoices each get their own tab, with a single header row and one record per row. Keep totals, notes, merged cells and charts out of these tabs and put them on separate report tabs that only read from the data.",
+            },
+            {
+              term: "An ID on every row that never changes",
+              text: "Give each record a short ID such as C-0042 and never reuse it. Type it in, or have a form or script write it once. Don't rely on the row number or a formula like ROW(), because both change the moment someone sorts or deletes a row.",
+            },
+            {
+              term: "Link tabs by ID, not by name",
+              text: "A job row holds the customer's ID in a customer_id column and pulls the name across with XLOOKUP. Names get misspelled and change; an ID stays put, so the lookup keeps working.",
+            },
+            {
+              term: "Validate every column",
+              text: "Use data validation set to reject input: a dropdown for status, a date rule for dates, a checkbox for yes or no fields. Format phone numbers and postcodes as plain text so leading zeros survive. Converting a range to a table (Format, then Convert to table) gives each column a type and does part of this for you.",
+            },
+            {
+              term: "Protect the structure",
+              text: "Freeze the header row, then protect it and the ID column under Data, Protect sheets and ranges, so only the owner can rename or move columns. Most broken lookups and automations start with a renamed header.",
+            },
+            {
+              term: "Add records through a form",
+              text: "A Google Form writes each response as a clean new row in its own tab. Editing the grid directly is where most damage happens, so keep it for corrections.",
+            },
+            {
+              term: "Let other tools read columns by header",
+              text: "Scripts and integrations should find a column by its header name, not by its letter, and should go through the Sheets API rather than scraping a published copy. Then inserting a column doesn't silently feed the wrong field to your website or your Zapier steps.",
+            },
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "Set up like this, a sheet comfortably runs a few thousand records for a handful of people. The rest of this guide is about the point where good habits stop being enough.",
+        },
+      ],
+    },
+    {
       id: "what-sheets-does-well",
-      heading: "What does Google Sheets do well as a database, and when does it stop?",
+      heading: "When does Google Sheets stop working as a database?",
       blocks: [
         {
           type: "paragraph",

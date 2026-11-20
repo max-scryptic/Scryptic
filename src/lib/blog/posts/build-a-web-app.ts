@@ -4,17 +4,17 @@ import { mvp } from "@/lib/services"
 
 export const buildAWebApp: BlogPost = {
   slug: "how-to-build-a-web-app",
-  title: "Build a web app that does one useful job well",
+  title: "How to build a web app that does one useful job well",
   series: "launch",
   service: "web-app-development",
   topic: "Web apps",
   icon: "globe",
   description:
-    "Build a web app by defining one useful task, choosing a build route, connecting the core parts and testing before launch. A practical guide for founders.",
+    "How to build a web app: pick one useful task, choose a build route, set up the data, rules and screens, deploy it and test it, with a worked example.",
   summary:
-    "To build a web app, decide the one task it has to complete, pick a way of building it you can keep running, connect the screens to your rules and data, then test the awkward cases before a small launch. This guide works through each step with a single example, for founders with or without a technical background.",
+    "To build a web app, decide the one task it has to complete and pick a way of building it you can keep running. Then build that one journey end to end, data first, then the server rules, then the screens, and put it on a test address early. Test the awkward cases before a small launch. This guide works through each step with a single example, for founders with or without a technical background.",
   datePublished: "2026-10-23",
-  dateModified: "2026-11-05",
+  dateModified: "2026-11-20",
   facts: [
     { label: "Written for", value: "Founders, technical or not" },
     { label: "Build routes compared", value: "3" },
@@ -164,6 +164,56 @@ export const buildAWebApp: BlogPost = {
         {
           type: "paragraph",
           text: "You also need hosting to put the app online and, depending on the task, sign-in, email or payments. Keep secret keys out of any code that runs in the browser, and take payments through an established provider instead of handling card details yourself.",
+        },
+      ],
+    },
+    {
+      id: "step-by-step",
+      heading: "How do you build a web app, step by step?",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "Build the one journey from end to end in thin layers: the data first, then the server step that changes it, then the screens, and put it on a test address before it looks finished. Here is the tutor app built in that order.",
+        },
+        {
+          type: "list",
+          ordered: true,
+          items: [
+            {
+              term: "Write down the tables and their rules",
+              text: "Three tables carry the whole journey: tutors, their free slots and the bookings made against them. Each rule from your brief becomes a rule in the database where it can, so the data stays right even if a screen has a bug.",
+            },
+            {
+              term: "Write the booking step on the server",
+              text: "One server action takes a slot and a parent's details, checks the slot is free and in the future, saves the booking and sends the confirmation email. If the database refuses because someone booked the slot a moment earlier, the action says that slot has just gone instead of showing an error page.",
+            },
+            {
+              term: "Build the screens around it",
+              text: "A list of tutors, a slot picker, a details form with a confirmation page, and a signed-in page where each tutor sees their own bookings. Each screen only calls the server; none of them decide on their own whether a booking is allowed.",
+            },
+            {
+              term: "Deploy to a test address on day one",
+              text: "Connect the code repository to a host with a managed Postgres database, so every change gets its own preview link. Secret keys live in the host's settings, not in the code. Showing a parent a real link in week one finds problems a mock-up hides.",
+            },
+            {
+              term: "Go live on your own domain",
+              text: "Point your domain at the app, send email from that domain so confirmations don't land in spam, and switch on error alerts and daily database backups. Then invite the first few parents and watch what they do.",
+            },
+          ],
+        },
+        {
+          type: "table",
+          caption: "The tutor booking app's three tables, what each holds and the rule that protects it",
+          columns: ["Table", "What it holds", "The rule that protects it"],
+          rows: [
+            ["Tutors", "Name, subjects, hourly rate, sign-in", "Only the tutor and an admin can change a profile"],
+            ["Slots", "Which tutor, start time, end time", "A slot can't end before it starts or overlap the same tutor's other slots"],
+            ["Bookings", "Which slot, the parent's name and email, when it was made", "One booking per slot, refused by the database itself"],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "The last rule is the one that stops two parents clicking at the same moment from both getting the slot. Checking in the code that a slot looks free isn't enough on its own, because both requests can pass that check before either one saves.",
         },
       ],
     },
