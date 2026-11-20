@@ -73,7 +73,7 @@ export const webAppDevelopmentCompaniesUk: BlogPost = {
               "Brighton, founder-led, one developer",
               "Coded web apps and MVPs in Next.js, TypeScript and Postgres",
               "A fixed price per sprint",
-              `${mvp.price} + VAT for a two week sprint, or ${extendedMvp.price} + VAT for three weeks`,
+              `${mvp.price} for a two week sprint, or ${extendedMvp.price} for three weeks`,
             ],
             [
               "Magora",
