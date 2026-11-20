@@ -54,6 +54,7 @@ import { v0 } from "@/lib/blog/posts/v0"
 import { vibeCoding } from "@/lib/blog/posts/vibe-coding"
 import { webAppVsMobileApp } from "@/lib/blog/posts/web-app-vs-mobile-app"
 import { webAppWithPython } from "@/lib/blog/posts/web-app-with-python"
+import { webAppDevelopmentCompaniesUk } from "@/lib/blog/posts/web-app-development-companies-uk"
 import { webApplicationDevelopmentServices } from "@/lib/blog/posts/web-application-development-services"
 import { webflow } from "@/lib/blog/posts/webflow"
 import { weweb } from "@/lib/blog/posts/weweb"
@@ -91,6 +92,7 @@ export const posts: BlogPost[] = [
   reactjsWebDevelopmentCompany,
   webApplicationDevelopmentServices,
   bestSaasDevelopmentCompany,
+  webAppDevelopmentCompaniesUk,
   pwaDevelopment,
   progressiveWebAppDevelopmentCompany,
   buildAWebApp,

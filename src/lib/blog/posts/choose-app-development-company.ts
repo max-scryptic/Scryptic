@@ -82,6 +82,11 @@ export const chooseAppDevelopmentCompany: BlogPost = {
           text: "For a SaaS product, we've set six UK studios side by side on published price, timeline and what happens after launch.",
           link: { text: "Compare UK SaaS development companies.", href: "/blog/best-saas-development-company" },
         },
+        {
+          type: "paragraph",
+          text: "For a web app, such as a customer portal, a booking system or an internal tool, we've done the same for seven UK companies, including how each one charges and when the code becomes yours.",
+          link: { text: "Compare UK web app development companies.", href: "/blog/web-app-development-companies-uk" },
+        },
       ],
     },
     {

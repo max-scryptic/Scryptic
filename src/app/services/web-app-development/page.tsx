@@ -117,6 +117,7 @@ const options: OptionRow[] = [
 ]
 
 const guides = postsBySlug([
+  "web-app-development-companies-uk",
   "web-application-development-services",
   "how-to-build-a-web-app",
   "how-to-choose-an-app-development-company-uk",
@@ -124,7 +125,6 @@ const guides = postsBySlug([
   "mobile-web-development",
   "progressive-web-app-development-company",
   "dashboard-app-design",
-  "build-a-web-app-with-python",
   "reactjs-web-development-company-hiring-mistakes",
 ])
 

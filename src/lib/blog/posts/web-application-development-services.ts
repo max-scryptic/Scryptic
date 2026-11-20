@@ -13,7 +13,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
   summary:
     "Web application development is building software people use in a browser: the screens, the business rules behind them, the database and the hosting it runs on. A first release goes through scope, design, build, testing and launch, whoever builds it. Keep it to one useful workflow rather than the whole roadmap, and choose a builder who can say what will ship, what it costs and who owns it afterwards.",
   datePublished: "2026-10-21",
-  dateModified: "2026-11-18",
+  dateModified: "2026-11-20",
   facts: [
     { label: "Parts of a web app", value: "Screens, rules, data, services, hosting" },
     { label: "Delivery stages", value: "6" },
@@ -142,23 +142,15 @@ export const webApplicationDevelopmentServices: BlogPost = {
     },
     {
       id: "choosing-a-supplier",
-      heading: "How do you choose a web app development agency?",
+      heading: "Who should build your web app?",
       blocks: [
         {
           type: "paragraph",
-          text: "Judge a web app development agency by the scope it proposes, how it delivers and what it hands over at the end, not just by its portfolio.",
-        },
-        {
-          type: "paragraph",
-          text: "Give every agency on your list the same short description of your workflow. What each quote leaves out often tells you more than the difference in the headline price, and so does how soon you'll see working software rather than progress reports.",
+          text: "Whoever can describe the first release, how it will be tested and what you'll own at the end, before they talk about their portfolio. Ask each candidate how they'd handle the awkward cases in your workflow, like the double booking and the failed deposit above: a team that has built this kind of app before answers without reaching for a specification.",
           link: {
-            text: "Use our buyer's checklist for the questions to ask and the red flags.",
-            href: "/blog/how-to-choose-an-app-development-company-uk",
+            text: "Seven UK web app development companies, compared on price, timeline and ownership.",
+            href: "/blog/web-app-development-companies-uk",
           },
-        },
-        {
-          type: "paragraph",
-          text: "Ask each one to walk you through how they would handle the awkward cases in your workflow, like the double booking and the failed deposit above. An agency that has built this kind of app before will answer without reaching for a specification.",
         },
         { type: "subheading", text: "If you hire a design agency first" },
         {
