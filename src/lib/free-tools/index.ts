@@ -43,7 +43,7 @@ export const freeTools = [
     summary: "Eight quick questions and a ballpark price and timeline for your MVP, in about a minute.",
     cta: "Estimate your build",
     description:
-      "Free MVP cost calculator for UK founders. Answer eight questions about your app and get an estimate in development weeks and pounds, plus what drives the price.",
+      "Free MVP cost calculator for UK founders. Get a price and timeline from eight questions, and compare MVP pricing from freelancers, studios and agencies.",
     category: "BusinessApplication",
   },
   {

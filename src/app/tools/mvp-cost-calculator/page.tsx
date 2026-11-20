@@ -1,4 +1,5 @@
 import { CostCalculator } from "@/components/free-tools/cost-calculator"
+import { MvpPricing } from "@/components/free-tools/mvp-pricing"
 import { ToolPage } from "@/components/free-tools/tool-page"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, toolPage } from "@/lib/seo"
@@ -51,6 +52,7 @@ export default function MvpCostCalculatorPage() {
       }}
     >
       <CostCalculator />
+      <MvpPricing />
     </ToolPage>
   )
 }

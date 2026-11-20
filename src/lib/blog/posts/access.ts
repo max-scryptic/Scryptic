@@ -5,16 +5,17 @@ import type { BlogPost } from "@/lib/blog/types"
 
 export const access: BlogPost = {
   slug: "migrate-from-access",
-  title: "Access database to web app, moving the tables first",
+  title: "Access database to web app migration, starting with the tables",
   series: "migration",
   topic: "Access",
   logo: accessLogo,
   category: "Internal tool builders",
   description:
-    "Turning an Access database into a web app: move the tables to Postgres and keep the Access forms, then rebuild queries, reports and VBA one area at a time.",
+    "Migrate an Access database to a web app: move the tables to PostgreSQL, keep the Access forms running, then rebuild queries, reports and VBA area by area.",
   summary:
-    "An Access database to web app migration goes best back end first. Copy the tables into Postgres and relink them, and the Access forms keep working while the web app is built on the same data. Then rebuild forms, reports, queries and VBA one area of the business at a time, and retire Access when the last one moves. A database of a few dozen tables typically takes six to ten weeks.",
+    "An Access database to web app migration goes best back end first. Migrate the tables to PostgreSQL and relink them, and the Access forms keep working while the web app is built on the same data. Then rebuild forms, reports, queries and VBA one area of the business at a time, and retire Access when the last one moves. A database of a few dozen tables typically takes six to ten weeks.",
   datePublished: "2026-11-12",
+  dateModified: "2026-11-20",
   facts: [
     { label: "Code export", value: "None, forms, reports and VBA are rebuilt" },
     { label: "Data", value: "Tables move to Postgres, Access relinks over ODBC" },
@@ -95,11 +96,11 @@ export const access: BlogPost = {
     },
     {
       id: "tables-first",
-      heading: "Move the tables first and keep the Access forms",
+      heading: "Migrating an Access database to PostgreSQL while the forms keep working",
       blocks: [
         {
           type: "paragraph",
-          text: "Copy the tables into Postgres, then point Access at them as linked tables over ODBC. The forms and reports carry on working, the 2 GB limit and the fragile shared file go away, and the web app can be built against the real data from day one.",
+          text: "To migrate an Access database to PostgreSQL, copy the tables into Postgres, then point Access at them as linked tables over ODBC. The forms and reports carry on working, the 2 GB limit and the fragile shared file go away, and the web app can be built against the real data from day one.",
         },
         {
           type: "image",
