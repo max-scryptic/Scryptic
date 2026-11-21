@@ -16,6 +16,7 @@ import { buildAnMvp } from "@/lib/blog/posts/build-an-mvp"
 import { builderAi } from "@/lib/blog/posts/builder-ai"
 import { chooseAppDevelopmentCompany } from "@/lib/blog/posts/choose-app-development-company"
 import { dashboardAppDesign } from "@/lib/blog/posts/dashboard-app-design"
+import { digitalProductAgency } from "@/lib/blog/posts/digital-product-agency"
 import { emergent } from "@/lib/blog/posts/emergent"
 import { excelSpreadsheetToWebApp } from "@/lib/blog/posts/excel-spreadsheet-to-web-app"
 import { filemaker } from "@/lib/blog/posts/filemaker"
@@ -93,6 +94,7 @@ export const posts: BlogPost[] = [
   webApplicationDevelopmentServices,
   bestSaasDevelopmentCompany,
   webAppDevelopmentCompaniesUk,
+  digitalProductAgency,
   pwaDevelopment,
   progressiveWebAppDevelopmentCompany,
   buildAWebApp,
