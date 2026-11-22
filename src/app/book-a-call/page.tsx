@@ -3,6 +3,7 @@ import { cn } from "cn"
 
 import { BookCallForm } from "@/components/book-call-form"
 import { PageJsonLd } from "@/components/json-ld"
+import { PixelIn } from "@/components/pixel-in"
 import { inset } from "@/lib/frame"
 import { createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
@@ -33,7 +34,7 @@ export default function BookCallPage() {
       <div className="mx-auto grid w-full max-w-6xl items-start gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
         <div className={cn("flex flex-col gap-10 lg:sticky lg:top-32", inset)}>
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
-            Book a free <span className="pixel-in text-primary">30 minute</span> discovery call
+            Book a free <PixelIn className="text-primary">30 minute</PixelIn> discovery call
           </h1>
 
           <section aria-labelledby="agenda-heading" className="flex flex-col gap-5">

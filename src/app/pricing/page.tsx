@@ -4,6 +4,7 @@ import { cn } from "cn"
 import { PageJsonLd } from "@/components/json-ld"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
 import { AfterLaunch, PricingCards } from "@/components/landing/pricing-section"
+import { PixelIn } from "@/components/pixel-in"
 import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 import { createMetadata, pages } from "@/lib/seo"
@@ -52,7 +53,7 @@ export default function PricingPage() {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
           <div className={cn("flex flex-col items-start gap-6", inset)}>
             <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
-              Fixed prices for <span className="pixel-in text-primary">MVP and app development</span>
+              Fixed prices for <PixelIn className="text-primary">MVP and app development</PixelIn>
             </h1>
             <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
               Every build is a fixed price agreed before it starts. After launch, support is optional, and hosting is

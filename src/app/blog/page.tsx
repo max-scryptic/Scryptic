@@ -2,6 +2,7 @@ import Link from "next/link"
 import { cn } from "cn"
 
 import { PageJsonLd } from "@/components/json-ld"
+import { PixelIn } from "@/components/pixel-in"
 import { PostCard } from "@/components/post-card"
 import { PostCarousel } from "@/components/post-carousel"
 import { Button } from "@/components/ui/button"
@@ -24,7 +25,7 @@ export default function BlogPage() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
         <div className={cn("flex flex-col items-start gap-6", inset)}>
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
-            The {siteConfig.name} <span className="pixel-in text-primary">blog</span>
+            The {siteConfig.name} <PixelIn className="text-primary">blog</PixelIn>
           </h1>
           <p className="max-w-xl text-lg text-pretty text-muted-foreground">
             Practical guides on building, launching and growing apps, from the team that builds

@@ -10,6 +10,7 @@ import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
+import { PixelIn } from "@/components/pixel-in"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { createMetadata, pages } from "@/lib/seo"
 import { afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, services } from "@/lib/services"
@@ -121,7 +122,7 @@ export default function Home() {
       <LandingHero
         title={
           <>
-            From idea to <span className="pixel-in text-[#c3caff]">MVP</span>, without hiring a dev team.
+            From idea to <PixelIn className="text-[#c3caff]">MVP</PixelIn>, without hiring a dev team.
           </>
         }
         intro={`${siteConfig.name} is an MVP and app development studio in Brighton, building web apps and SaaS products for UK founders.`}

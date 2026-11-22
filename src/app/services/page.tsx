@@ -5,6 +5,7 @@ import { ContactSection } from "@/components/landing/contact-section"
 import { LandingHero } from "@/components/landing/hero"
 import { ServicesVisual } from "@/components/landing/hero-visuals"
 import { CheckIcon, LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { PixelIn } from "@/components/pixel-in"
 import { Button } from "@/components/ui/button"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { inset } from "@/lib/frame"
@@ -30,7 +31,7 @@ export default function ServicesPage() {
       <LandingHero
         title={
           <>
-            App development <span className="pixel-in text-[#c3caff]">services</span> for UK founders.
+            App development <PixelIn className="text-[#c3caff]">services</PixelIn> for UK founders.
           </>
         }
         eyebrow={{ label: siteConfig.name }}
