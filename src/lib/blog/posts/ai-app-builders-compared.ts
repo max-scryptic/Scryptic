@@ -71,6 +71,11 @@ export const aiAppBuildersCompared: BlogPost = {
             ],
           ],
         },
+        {
+          type: "paragraph",
+          text: "Google's Firebase Studio isn't in the table because it's closing: Google shuts it down on 22 March 2027 and deletes every workspace still in it that day. If your app was built there, getting the code and its .env file out comes before choosing anything else.",
+          link: { text: "Firebase Studio migration before the March 2027 shutdown.", href: "/blog/migrate-from-firebase-studio" },
+        },
       ],
     },
     {

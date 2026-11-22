@@ -63,6 +63,11 @@ export const chooseAppDevelopmentCompany: BlogPost = {
         },
         {
           type: "paragraph",
+          text: "Some agencies sell more than the build. A digital product agency researches the problem with your users and decides what the first release should be, which earns its fee when you don't yet know who the app is for and is money spent twice when you do.",
+          link: { text: "What a digital product agency does, and when you need one.", href: "/blog/digital-product-agency" },
+        },
+        {
+          type: "paragraph",
           text: "Some kinds of build add questions of their own. A progressive web app needs a supplier who can show offline saves working on your users' phones, not just an install icon.",
           link: {
             text: "What to ask a PWA development company to prove.",
@@ -86,6 +91,11 @@ export const chooseAppDevelopmentCompany: BlogPost = {
           type: "paragraph",
           text: "For a web app, such as a customer portal, a booking system or an internal tool, we've done the same for seven UK companies, including how each one charges and when the code becomes yours.",
           link: { text: "Compare UK web app development companies.", href: "/blog/web-app-development-companies-uk" },
+        },
+        {
+          type: "paragraph",
+          text: "If the app is built around an AI model, the pilot and what happens after it matter more than the build price, so we've compared seven UK AI agencies on those too.",
+          link: { text: "UK AI agencies compared, from pilot to production.", href: "/blog/ai-agency-uk" },
         },
       ],
     },

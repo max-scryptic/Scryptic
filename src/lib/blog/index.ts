@@ -1,5 +1,6 @@
 import { access } from "@/lib/blog/posts/access"
 import { adalo } from "@/lib/blog/posts/adalo"
+import { aiAgencyUk } from "@/lib/blog/posts/ai-agency-uk"
 import { aiAppBuildersCompared } from "@/lib/blog/posts/ai-app-builders-compared"
 import { aiSoftwareDevelopment } from "@/lib/blog/posts/ai-software-development"
 import { airtable } from "@/lib/blog/posts/airtable"
@@ -95,6 +96,7 @@ export const posts: BlogPost[] = [
   bestSaasDevelopmentCompany,
   webAppDevelopmentCompaniesUk,
   digitalProductAgency,
+  aiAgencyUk,
   pwaDevelopment,
   progressiveWebAppDevelopmentCompany,
   buildAWebApp,

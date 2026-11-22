@@ -164,6 +164,11 @@ export const googleSheetsDatabase: BlogPost = {
           type: "paragraph",
           text: "An outgrown spreadsheet also makes a surprisingly good spec: it shows exactly how your business already works.",
         },
+        {
+          type: "paragraph",
+          text: "The same applies when the sheet is an Excel workbook, and there the formulas usually matter more than the rows. Each calculation becomes code that has to give the workbook's own answers before anyone trusts it.",
+          link: { text: "Excel spreadsheet to web app, keeping what the formulas do.", href: "/blog/excel-spreadsheet-to-web-app" },
+        },
       ],
     },
     {

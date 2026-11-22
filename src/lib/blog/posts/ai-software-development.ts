@@ -216,6 +216,11 @@ export const aiSoftwareDevelopment: BlogPost = {
           text: "We build AI products ourselves. ReelEstate and Viewlio went from first sketch to launch through the same fixed-price sprint a client MVP does, and every check, metering rule and fallback described above comes from them.",
           link: { text: "See the AI products we have built.", href: "/work" },
         },
+        {
+          type: "paragraph",
+          text: "If you're weighing up firms that sell AI work more broadly, from consultancies to agents set up inside HubSpot or Microsoft 365, we've compared seven UK AI agencies on what they publish about pilots, prices and who owns the prompts.",
+          link: { text: "Hiring an AI agency in the UK, from pilot to production.", href: "/blog/ai-agency-uk" },
+        },
         { type: "subheading", text: "Questions to ask any AI development company" },
         {
           type: "checklist",

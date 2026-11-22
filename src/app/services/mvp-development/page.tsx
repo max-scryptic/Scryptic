@@ -198,8 +198,8 @@ const faqs: Faq[] = [
     answer:
       "Yes. Several of our launches have AI at their core: ReelEstate turns listing photos into property videos and Viewlio gives YouTube creators AI analytics on their channels. The same sprint covers the AI pipeline, its costs and checks on its output.",
     link: {
-      text: "How AI software development works, from coding agents to checking a model's output.",
-      href: "/blog/ai-software-development",
+      text: "What building your own AI involves, from the model to the app around it.",
+      href: "/blog/build-your-own-ai",
     },
   },
   {
