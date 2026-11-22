@@ -47,7 +47,7 @@ export function LandingHero({
    * "lapis": white type on the Lapis band (home, services hub). "light": dark
    * type on a pale Lapis tint with Lapis cubes (service pages). Highlight the
    * headline's lead phrase with text-[#c3caff] on Lapis and text-primary on light,
-   * plus `pixel-in` so it builds in from pixels like the other page headings.
+   * in <PixelIn> so it builds in from pixels like the other page headings.
    */
   tone?: "lapis" | "light"
 }) {

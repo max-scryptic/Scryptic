@@ -13,6 +13,7 @@ import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/compone
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { FitCheckSection, LayersSection } from "@/components/landing/service-sections"
 import { StackSection } from "@/components/landing/stack-section"
+import { PixelIn } from "@/components/pixel-in"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postCategories, postsBySlug, postsInSeries } from "@/lib/blog"
 import { inset } from "@/lib/frame"
@@ -290,7 +291,7 @@ export default function NoCodeMigrationPage() {
         tone="light"
         title={
           <>
-            <span className="pixel-in text-primary">No-code app migration</span>, without losing a user.
+            <PixelIn className="text-primary">No-code app migration</PixelIn>, without losing a user.
           </>
         }
         intro={`${siteConfig.name} moves Bubble, Lovable, Glide and Airtable apps to code you own, with your users and data brought across.`}

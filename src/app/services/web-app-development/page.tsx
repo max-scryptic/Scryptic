@@ -19,6 +19,7 @@ import {
   type OptionRow,
 } from "@/components/landing/service-sections"
 import { WorkSection } from "@/components/landing/work-section"
+import { PixelIn } from "@/components/pixel-in"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
@@ -246,7 +247,7 @@ export default function WebAppDevelopmentPage() {
         tone="light"
         title={
           <>
-            <span className="pixel-in text-primary">Custom web app development</span>, live in weeks.
+            <PixelIn className="text-primary">Custom web app development</PixelIn>, live in weeks.
           </>
         }
         intro="A web app development agency for UK teams, building one workflow as production code at a fixed price."

@@ -13,6 +13,7 @@ import { FitCheckSection, HubSection, OptionsSection, type OptionRow } from "@/c
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
+import { PixelIn } from "@/components/pixel-in"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
@@ -219,7 +220,7 @@ export default function MvpDevelopmentPage() {
         tone="light"
         title={
           <>
-            <span className="pixel-in text-primary">MVP development</span> for UK startups, in a 2 week sprint.
+            <PixelIn className="text-primary">MVP development</PixelIn> for UK startups, in a 2 week sprint.
           </>
         }
         intro="Fixed-price MVP development services from a UK studio, with sign-in and payments live at launch."

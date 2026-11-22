@@ -12,6 +12,7 @@ import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { FitCheckSection, HubSection } from "@/components/landing/service-sections"
 import { WorkSection } from "@/components/landing/work-section"
+import { PixelIn } from "@/components/pixel-in"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
@@ -206,7 +207,7 @@ export default function MobileAppDevelopmentPage() {
         tone="light"
         title={
           <>
-            <span className="pixel-in text-primary">Native mobile app development</span> for iOS and Android.
+            <PixelIn className="text-primary">Native mobile app development</PixelIn> for iOS and Android.
           </>
         }
         intro="A mobile app development company for UK founders and teams, building native iPhone and Android apps as production code at a fixed price."
