@@ -24,7 +24,7 @@ export default function BlogPage() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
         <div className={cn("flex flex-col items-start gap-6", inset)}>
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
-            The {siteConfig.name} <span className="text-primary">blog</span>
+            The {siteConfig.name} <span className="pixel-in text-primary">blog</span>
           </h1>
           <p className="max-w-xl text-lg text-pretty text-muted-foreground">
             Practical guides on building, launching and growing apps, from the team that builds

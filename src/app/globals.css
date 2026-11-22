@@ -373,6 +373,46 @@
       right calc(var(--gutter) - 26px) top 0;
     mask-repeat: no-repeat, repeat-y, repeat-y;
   }
+
+  /* A highlighted word in a page heading that builds itself out of 4px
+     pixels on load (the pixel-in animation below): each frame adds another
+     eighth of the cells of a 32px tile, in a fixed random order, until the
+     word is whole. Each layer holds one frame's new cells. */
+  .pixel-in {
+    --px-1: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M4 24h4v4h-4zM12 28h4v4h-4zM20 4h4v4h-4zM20 8h4v4h-4zM20 12h4v4h-4zM16 0h4v4h-4zM4 12h4v4h-4zM12 20h4v4h-4z'/%3E%3C/svg%3E");
+    --px-2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M28 24h4v4h-4zM28 8h4v4h-4zM16 16h4v4h-4zM8 0h4v4h-4zM4 4h4v4h-4zM16 12h4v4h-4zM24 24h4v4h-4zM16 8h4v4h-4z'/%3E%3C/svg%3E");
+    --px-3: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M8 16h4v4h-4zM0 12h4v4h-4zM4 28h4v4h-4zM4 8h4v4h-4zM28 4h4v4h-4zM24 28h4v4h-4zM24 20h4v4h-4zM28 12h4v4h-4z'/%3E%3C/svg%3E");
+    --px-4: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M12 24h4v4h-4zM16 24h4v4h-4zM16 28h4v4h-4zM12 16h4v4h-4zM0 16h4v4h-4zM28 0h4v4h-4zM24 4h4v4h-4zM8 12h4v4h-4z'/%3E%3C/svg%3E");
+    --px-5: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M0 20h4v4h-4zM20 20h4v4h-4zM20 0h4v4h-4zM0 24h4v4h-4zM12 0h4v4h-4zM16 20h4v4h-4zM8 20h4v4h-4zM16 4h4v4h-4z'/%3E%3C/svg%3E");
+    --px-6: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M28 28h4v4h-4zM0 0h4v4h-4zM24 0h4v4h-4zM24 16h4v4h-4zM12 8h4v4h-4zM12 4h4v4h-4zM8 8h4v4h-4zM20 28h4v4h-4z'/%3E%3C/svg%3E");
+    --px-7: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M4 0h4v4h-4zM28 20h4v4h-4zM8 4h4v4h-4zM24 8h4v4h-4zM4 20h4v4h-4zM0 28h4v4h-4zM24 12h4v4h-4zM20 16h4v4h-4z'/%3E%3C/svg%3E");
+    mask-size: 32px 32px;
+  }
+
+  /* The 404 heading, its end broken up into pixels: past a solid run, a dither
+     of 4px cells thins out over the last --crumble (40px), from every cell
+     kept in the first column down to 2 of 8 in the last. The crumble animation
+     below eats in from the end on load; a few pixels fall away after it
+     (components/crumble-heading.tsx). */
+  .pixel-crumble {
+    --crumble: 40px;
+    mask-image:
+      linear-gradient(#000 0 0),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='32'%3E%3Cpath d='M0 8h4v4h-4zM0 0h4v4h-4zM0 24h4v4h-4zM0 20h4v4h-4zM0 16h4v4h-4zM0 12h4v4h-4zM0 4h4v4h-4zM0 28h4v4h-4zM4 0h4v4h-4zM4 16h4v4h-4zM4 24h4v4h-4zM4 12h4v4h-4zM4 4h4v4h-4zM4 8h4v4h-4zM4 28h4v4h-4zM8 28h4v4h-4zM8 4h4v4h-4zM8 20h4v4h-4zM8 8h4v4h-4zM8 0h4v4h-4zM8 16h4v4h-4zM8 24h4v4h-4zM12 8h4v4h-4zM12 28h4v4h-4zM12 16h4v4h-4zM12 4h4v4h-4zM12 24h4v4h-4zM12 20h4v4h-4zM16 12h4v4h-4zM16 8h4v4h-4zM16 28h4v4h-4zM16 20h4v4h-4zM16 16h4v4h-4zM16 24h4v4h-4zM20 12h4v4h-4zM20 20h4v4h-4zM20 16h4v4h-4zM20 24h4v4h-4zM20 0h4v4h-4zM24 20h4v4h-4zM24 16h4v4h-4zM24 8h4v4h-4zM24 0h4v4h-4zM28 20h4v4h-4zM28 28h4v4h-4zM28 4h4v4h-4zM32 24h4v4h-4zM32 4h4v4h-4zM32 0h4v4h-4zM36 4h4v4h-4zM36 28h4v4h-4z'/%3E%3C/svg%3E");
+    mask-size:
+      calc(100% - var(--crumble)) 100%,
+      40px 32px;
+    mask-position:
+      left top,
+      right top;
+    mask-repeat: no-repeat, repeat-y;
+  }
+}
+
+@property --crumble {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -472,6 +512,15 @@
     animation-delay: calc(250ms + var(--i, 0) * 80ms);
   }
 
+  /* Page heading highlights (.pixel-in) build in from pixels, frame by frame. */
+  .pixel-in {
+    animation: pixel-in 0.56s step-end 0.15s backwards;
+  }
+  /* The 404 heading crumbles in from its end, a column of cells at a time. */
+  .pixel-crumble {
+    animation: crumble 1s steps(10) 0.6s backwards;
+  }
+
   /* Scroll-linked hero parallax where the browser supports it: the cubes and
      copy drift down slower than the page and the copy fades as it leaves. */
   @supports (animation-timeline: scroll()) {
@@ -484,6 +533,13 @@
     .hero-recede {
       animation-name: recede;
       animation-range: 0 80vh;
+    }
+    /* The hero drips (components/pixel-drip.tsx) slide out from behind the
+       band a cell at a time as it leaves, so they lengthen. */
+    .drip-stretch {
+      animation: drip-stretch steps(4) both;
+      animation-timeline: scroll(root);
+      animation-range: 0 60vh;
     }
   }
 }
@@ -650,5 +706,48 @@
   }
   50% {
     opacity: 1;
+  }
+}
+
+/* One frame per eighth (step-end holds each until the next); whole once it ends. */
+@keyframes pixel-in {
+  0% {
+    mask-image: linear-gradient(transparent 0 0);
+  }
+  12.5% {
+    mask-image: var(--px-1);
+  }
+  25% {
+    mask-image: var(--px-1), var(--px-2);
+  }
+  37.5% {
+    mask-image: var(--px-1), var(--px-2), var(--px-3);
+  }
+  50% {
+    mask-image: var(--px-1), var(--px-2), var(--px-3), var(--px-4);
+  }
+  62.5% {
+    mask-image: var(--px-1), var(--px-2), var(--px-3), var(--px-4), var(--px-5);
+  }
+  75% {
+    mask-image: var(--px-1), var(--px-2), var(--px-3), var(--px-4), var(--px-5), var(--px-6);
+  }
+  87.5% {
+    mask-image: var(--px-1), var(--px-2), var(--px-3), var(--px-4), var(--px-5), var(--px-6), var(--px-7);
+  }
+  100% {
+    mask-image: none;
+  }
+}
+
+@keyframes crumble {
+  from {
+    --crumble: 0px;
+  }
+}
+
+@keyframes drip-stretch {
+  to {
+    transform: translateY(16px);
   }
 }
