@@ -122,7 +122,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             </div>
 
             {/* Brackets but no guides: beside the intro, its edge lines would cut through the copy. */}
-            <dl className="corners grid gap-5 border border-border bg-card p-6 text-sm sm:grid-cols-2 lg:grid-cols-1">
+            <dl className="pip grid gap-5 border border-border bg-card p-6 text-sm sm:grid-cols-2 lg:grid-cols-1">
               <div className="flex flex-col gap-1">
                 <dt className="font-mono text-xs text-muted-foreground">Built for</dt>
                 <dd>{study.audience}</dd>
@@ -162,7 +162,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               {paragraph}
             </p>
           ))}
-          <ul className="corners grid gap-px border border-border bg-border sm:grid-cols-2">
+          <ul className="ticks grid gap-px border border-border bg-border sm:grid-cols-2">
             {study.features.map((feature) => (
               <li key={feature.name} className="flex flex-col gap-2 bg-card p-6">
                 <h3>{feature.name}</h3>
@@ -185,7 +185,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 <h3 className={cn("text-lg", inset)}>In the app</h3>
                 <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
                   {appScreens.map((shot) => (
-                    <li key={shot.alt} className="corners border border-border bg-card">
+                    <li key={shot.alt} className="ticks border border-border bg-card">
                       <Image
                         src={shot.src}
                         alt={shot.alt}

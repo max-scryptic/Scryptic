@@ -21,7 +21,7 @@ export function AboutSection() {
       <article
         aria-labelledby="founder-name"
         data-reveal
-        className="corners guides grid border border-border bg-card sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+        className="pip guides grid border border-border bg-card sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
       >
         <div className="relative aspect-square bg-portrait">
           <Image

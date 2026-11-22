@@ -25,7 +25,7 @@ export function BrowserFrame({
   return (
     <figure
       className={cn(
-        "corners border border-border bg-card shadow-xl shadow-black/5",
+        "ticks border border-border bg-card shadow-xl shadow-black/5",
         className,
       )}
     >

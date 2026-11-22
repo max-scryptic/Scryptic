@@ -155,7 +155,7 @@ export function OptionsSection({
       <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`}>
         {intro}
       </SectionHeading>
-      <div className="corners guides border border-border bg-card">
+      <div className="ticks guides border border-border bg-card">
         <div className="relative overflow-x-auto">
           <table className="w-full min-w-[760px] border-collapse text-left text-sm">
             <caption className="sr-only">{caption}</caption>

@@ -219,7 +219,7 @@ function ToolsSection() {
       <SectionHeading className={inset} eyebrow="Where from" title="Apps we migrate" id="tools-heading">
         {migrationGuides.length} builders and platforms, each with a free step by step migration guide.
       </SectionHeading>
-      <div className="corners guides border border-border bg-card">
+      <div className="ticks guides border border-border bg-card">
         {postCategories.map((category) => {
           const categoryPosts = migrationGuides.filter((post) => post.category === category.name)
           if (categoryPosts.length === 0) return null

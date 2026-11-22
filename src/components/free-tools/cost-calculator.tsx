@@ -31,7 +31,7 @@ export function CostCalculator() {
       <form
         aria-label="About your app"
         onSubmit={(event) => event.preventDefault()}
-        className="corners flex flex-col gap-10 border border-border bg-card p-5 sm:p-8"
+        className="pip flex flex-col gap-10 border border-border bg-card p-5 sm:p-8"
       >
         {costQuestions.map((question, index) => (
           <ChoiceGroup

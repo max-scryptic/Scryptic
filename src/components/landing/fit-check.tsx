@@ -61,7 +61,7 @@ export function FitCheck({
   const strong = count >= total - 1
 
   return (
-    <div className="corners guides grid border border-border bg-card md:grid-cols-[1.4fr_1fr]">
+    <div className="ticks guides grid border border-border bg-card md:grid-cols-[1.4fr_1fr]">
       <ul data-reveal="children" className="grid auto-rows-fr divide-y divide-border">
         {items.map((item, index) => (
           <li key={item} className="flex">

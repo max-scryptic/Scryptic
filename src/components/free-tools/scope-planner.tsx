@@ -52,7 +52,7 @@ export function ScopePlanner() {
 
   return (
     <div className="grid items-start gap-10 lg:grid-cols-[1.3fr_1fr]">
-      <div className="corners flex flex-col gap-8 border border-border bg-card p-5 sm:p-8">
+      <div className="pip flex flex-col gap-8 border border-border bg-card p-5 sm:p-8">
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-medium tracking-tight">Your features</h2>
           <p className="text-sm text-muted-foreground">
