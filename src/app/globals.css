@@ -516,9 +516,24 @@
   .pixel-in {
     animation: pixel-in 0.56s step-end 0.15s backwards;
   }
+  /* In a landing hero the heading rises in first (.hero-rise), so wait for it to land. */
+  .hero-rise .pixel-in {
+    animation-delay: 0.5s;
+  }
   /* The 404 heading crumbles in from its end, a column of cells at a time. */
   .pixel-crumble {
     animation: crumble 1s steps(10) 0.6s backwards;
+  }
+
+  /* Band drips and piles (components/pixel-drip.tsx) run out from behind their
+     band a cell at a time, on load or once scrolled to ("wait" until then).
+     `translate`, so it stacks with the hero's scroll stretch on `transform`;
+     backwards fill, so nothing is left behind once played. */
+  [data-drip="wait"] {
+    translate: 0 var(--drip-in-from);
+  }
+  [data-drip="play"] {
+    animation: drip-in var(--drip-in-time) steps(var(--drip-in-steps)) var(--drip-in-delay) backwards;
   }
 
   /* Scroll-linked hero parallax where the browser supports it: the cubes and
@@ -743,6 +758,12 @@
 @keyframes crumble {
   from {
     --crumble: 0px;
+  }
+}
+
+@keyframes drip-in {
+  from {
+    translate: 0 var(--drip-in-from);
   }
 }
 

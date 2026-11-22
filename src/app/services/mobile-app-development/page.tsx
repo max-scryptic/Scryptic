@@ -206,7 +206,7 @@ export default function MobileAppDevelopmentPage() {
         tone="light"
         title={
           <>
-            <span className="text-primary">Native mobile app development</span> for iOS and Android.
+            <span className="pixel-in text-primary">Native mobile app development</span> for iOS and Android.
           </>
         }
         intro="A mobile app development company for UK founders and teams, building native iPhone and Android apps as production code at a fixed price."

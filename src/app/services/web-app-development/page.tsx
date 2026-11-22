@@ -246,7 +246,7 @@ export default function WebAppDevelopmentPage() {
         tone="light"
         title={
           <>
-            <span className="text-primary">Custom web app development</span>, live in weeks.
+            <span className="pixel-in text-primary">Custom web app development</span>, live in weeks.
           </>
         }
         intro="A web app development agency for UK teams, building one workflow as production code at a fixed price."
