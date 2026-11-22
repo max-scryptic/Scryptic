@@ -66,8 +66,6 @@ export type CaseStudy = {
   features: { name: string; text: string }[]
   /** "Under the hood": the engineering worth pointing at. */
   engineering: { name: string; text: string }[]
-  /** "The stack": the answer-first sentence that leads the section. */
-  stackSummary: string
   /** Every layer of the product, from the frontend to hosting, in that order. */
   stack: StackLayer[]
   /** Up to four tools for the card's chips and the page's intro panel. */
@@ -145,63 +143,61 @@ const reelEstate: CaseStudy = {
       text: "A credit is taken in the same SQL statement that creates the clip, spending the soonest-to-expire credits first, and a failed clip refunds the balance it came from. Stripe webhooks re-read the subscription each time, so repeated or out-of-order events do no harm.",
     },
   ],
-  stackSummary:
-    "ReelEstate is a Next.js app on Vercel, with Neon Postgres for data and sign-in, fal.ai for the AI video and photo models, ffmpeg for checking and rendering video, Stripe for plans and Resend for email.",
   stack: [
     {
       role: "Frontend",
       tools: [tech.nextjs, tech.react, tech.typescript, tech.tailwind],
-      note: "A Next.js App Router app in TypeScript, styled with Tailwind CSS, with drag and drop for arranging clips into reels.",
+      note: "App Router, drag-and-drop reel editor",
     },
     {
       role: "Backend",
       tools: [tech.nodejs],
-      note: "Next.js route handlers and server actions on Node.js. Reel renders split into segments that background workers claim through database leases.",
+      note: "Route handlers and background renders",
     },
     {
       role: "Database",
       tools: [tech.neon],
-      note: "Properties, clips, credits and render jobs, with credits taken in the same SQL statement that creates each clip.",
+      note: "Clips, credits and render jobs",
     },
     {
       role: "Auth",
       tools: [tech.neonAuth],
-      note: "Sign-up, email codes and password resets, with team workspaces and roles built on top.",
+      note: "Email codes and team workspaces",
     },
     {
       role: "AI models",
       tools: [tech.fal],
-      note: "Runs the generative models: MiniMax for camera-move video clips and Nano Banana Pro for photo edits, finished by webhook or polling.",
+      note: "MiniMax video, Nano Banana Pro edits",
     },
     {
       role: "Video and images",
       tools: [tech.ffmpeg, tech.sharp],
-      note: "ffmpeg checks every clip for invented cuts, measures its pace and stitches reels. sharp prepares photos and carousel slides.",
+      note: "Cut checks, pacing and reel renders",
     },
     {
       role: "Payments",
       tools: [tech.stripe],
-      note: "Monthly and yearly plans with a shared credit balance, kept in sync by webhooks that re-read each subscription.",
+      note: "Monthly and yearly credit plans",
     },
     {
       role: "Email",
       tools: [tech.resend],
-      note: "Sign-in codes, password resets and workspace invitations, written with React Email.",
+      note: "Sign-in codes and team invites",
     },
     {
       role: "Storage",
       tools: [tech.r2],
-      note: "Listing photos, generated clips and finished reels.",
+      note: "Photos, clips and finished reels",
     },
     {
       role: "Address lookup",
       tools: [tech.googlePlaces],
-      note: "Autocompletes the address when an agent adds a property.",
+      note: "Property address autocomplete",
     },
     {
       role: "Hosting",
       tools: [tech.vercel],
-      note: "Hosts the app and runs its serverless functions.",
+      note: "App and serverless functions",
     },
   ],
   highlights: [tech.nextjs, tech.fal, tech.ffmpeg, tech.neon],
@@ -289,58 +285,56 @@ const untilThen: CaseStudy = {
       text: "A bad address may not surface for years, and every bounce hurts deliverability. Addresses are checked for likely typos, throwaway inboxes and domains that cannot receive mail, and a signed webhook feeds bounces and complaints into a suppression list.",
     },
   ],
-  stackSummary:
-    "Until Then is a Next.js app on Vercel, with Neon Postgres and Drizzle for data, Neon Auth for accounts, Resend to deliver every message, Stripe for payments and Cloudflare R2 for recordings.",
   stack: [
     {
       role: "Frontend",
       tools: [tech.nextjs, tech.react, tech.typescript, tech.tailwind],
-      note: "A Next.js App Router app in TypeScript, with Base UI components styled in Tailwind CSS.",
+      note: "App Router with Base UI components",
     },
     {
       role: "Backend",
       tools: [tech.nodejs],
-      note: "Next.js route handlers and server actions on Node.js, plus a dispatcher route that sends every message that has come due.",
+      note: "Server actions and the send dispatcher",
     },
     {
       role: "Database",
       tools: [tech.neon, tech.drizzle],
-      note: "Messages, recipients and delivery state, queried through Drizzle. Each send is claimed with one conditional update, so it can never go twice.",
+      note: "Messages, recipients and delivery state",
     },
     {
       role: "Auth",
       tools: [tech.neonAuth],
-      note: "Neon's managed Better Auth runs sign-up, email codes and password resets.",
+      note: "Neon's managed Better Auth",
     },
     {
       role: "Email",
       tools: [tech.resend],
-      note: "Delivers every message on its day. Signed webhooks feed bounces and complaints into a suppression list.",
+      note: "Delivers every message on its day",
     },
     {
       role: "Payments",
       tools: [tech.stripe],
-      note: "One-time Checkout payments for voice and video messages and the lifetime plan, sealed by an idempotent webhook.",
+      note: "One-time payments per recording",
     },
     {
       role: "Storage",
       tools: [tech.r2],
-      note: "Recordings upload from the browser straight to R2 through short-lived signed links, then are deleted when the open window closes.",
+      note: "Recordings, uploaded from the browser",
     },
     {
       role: "In-browser video",
       tools: [tech.webcodecs],
-      note: "Re-encodes video on the device to 720p before upload, through Mediabunny, so a ten-minute message is about 80 MB.",
+      note: "Compresses video to 720p before upload",
     },
     {
       role: "Analytics",
       tools: [tech.posthog],
-      note: "Product analytics from the browser and the server.",
+      note: "Product analytics",
     },
     {
       role: "Hosting",
       tools: [tech.vercel],
-      note: "Hosts the app. Vercel Cron backs up the external 15-minute cron that sends due messages.",
+      note: "App, plus a backup cron",
     },
   ],
   highlights: [tech.nextjs, tech.neon, tech.resend, tech.stripe],
@@ -427,63 +421,61 @@ const viewlio: CaseStudy = {
       text: "Stripe webhooks keep subscriptions in sync and credits are metered per minute of footage. Every model call's cost is logged, and an admin panel edits prompts with version history.",
     },
   ],
-  stackSummary:
-    "Viewlio is a Next.js app on Vercel, with Supabase for the database and Google sign-in, the YouTube APIs for retention data, OpenAI for the analysis, ffmpeg, Tesseract and Qencode for video, and Stripe for billing.",
   stack: [
     {
       role: "Frontend",
       tools: [tech.nextjs, tech.react, tech.typescript, tech.tailwind],
-      note: "A Next.js App Router app in TypeScript, styled with Tailwind CSS.",
+      note: "Reports, dashboards and checklists",
     },
     {
       role: "Backend",
       tools: [tech.nodejs],
-      note: "Next.js route handlers on Node.js. Each analysis runs in passes that hand off before the function's time limit, so long jobs finish on serverless.",
+      note: "Long analyses split across functions",
     },
     {
       role: "Database",
       tools: [tech.supabase],
-      note: "Reports, videos, credits and prompt versions, with a pg_cron watchdog that restarts any analysis that stalls.",
+      note: "Reports, credits and a pg_cron watchdog",
     },
     {
       role: "Auth",
       tools: [tech.supabaseAuth],
-      note: "One Google sign-in, which also grants read-only access to the creator's channel.",
+      note: "Google sign-in with channel access",
     },
     {
       role: "YouTube data",
       tools: [tech.youtube],
-      note: "The YouTube Data and Analytics APIs supply each video's retention curve, stats and the creator's recent uploads.",
+      note: "Retention curves and channel stats",
     },
     {
       role: "AI models",
       tools: [tech.openai],
-      note: "GPT models read the frames, audio and transcript around each moment and write the findings and fixes. Transcription models produce the script.",
+      note: "Findings, fixes and transcripts",
     },
     {
       role: "Video analysis",
       tools: [tech.ffmpeg, tech.tesseract, tech.qencode],
-      note: "ffmpeg finds cuts, freeze frames, loudness and silence. Tesseract reads on-screen text. Qencode transcodes each upload into a light proxy.",
+      note: "Cuts, on-screen text and proxies",
     },
     {
       role: "Payments",
       tools: [tech.stripe],
-      note: "Starter and Pro subscriptions, with deep-dive credits metered per minute of footage.",
+      note: "Subscriptions and per-minute credits",
     },
     {
       role: "Storage",
       tools: [tech.r2],
-      note: "Multi-gigabyte source files upload straight from the browser in multipart chunks.",
+      note: "Multi-gigabyte source uploads",
     },
     {
       role: "Testing",
       tools: [tech.vitest],
-      note: "Over a hundred test files covering the retention maths, the AI pipeline, uploads and billing.",
+      note: "Over a hundred test files",
     },
     {
       role: "Hosting",
       tools: [tech.vercel],
-      note: "Hosts the app and runs its serverless functions.",
+      note: "App and serverless functions",
     },
   ],
   highlights: [tech.nextjs, tech.supabase, tech.openai, tech.ffmpeg],
@@ -570,48 +562,46 @@ const prettyMetrics: CaseStudy = {
       text: "Provider keys are encrypted with AES-256-GCM and bound to the owning account, so a copied ciphertext will not decrypt anywhere else. Stripe webhook signatures are verified directly, and production refuses test keys.",
     },
   ],
-  stackSummary:
-    "Pretty Metrics is a Next.js app on Vercel, with Neon Postgres for data and sign-in, Canvas and WebCodecs to draw and encode every card in the browser, Stripe for the Pro upgrade and Resend for email.",
   stack: [
     {
       role: "Frontend",
       tools: [tech.nextjs, tech.react, tech.typescript, tech.tailwind],
-      note: "A Next.js App Router app in TypeScript, styled with Tailwind CSS.",
+      note: "The studio and share card editor",
     },
     {
       role: "Backend",
       tools: [tech.nodejs],
-      note: "Next.js route handlers on Node.js fetch from each provider with a read-only key and map it onto one monthly model. Revenue figures are never stored.",
+      note: "Reads provider data, stores none",
     },
     {
       role: "Graphics",
       tools: [tech.canvas],
-      note: "Around 9,000 lines of hand-written canvas scenes paint the animated backdrops, and each card is captured as an image on the device.",
+      note: "Hand-drawn animated backdrops",
     },
     {
       role: "Video export",
       tools: [tech.webcodecs],
-      note: "Encodes seamless MP4 loops in the browser through Mediabunny, H.264 first with VP9 and AV1 as fallbacks.",
+      note: "Looping MP4s encoded in the browser",
     },
     {
       role: "Database",
       tools: [tech.neon],
-      note: "Accounts, products and provider keys, encrypted with AES-256-GCM and bound to their owner.",
+      note: "Accounts and encrypted provider keys",
     },
     {
       role: "Auth",
       tools: [tech.neonAuth],
-      note: "Sign-up, email codes and password resets.",
+      note: "Email codes and password resets",
     },
     {
       role: "Payments",
       tools: [tech.stripe],
-      note: "The one-time Pro upgrade through Stripe Checkout, confirmed by a verified webhook.",
+      note: "The one-time Pro upgrade",
     },
     {
       role: "Email",
       tools: [tech.resend],
-      note: "Sign-in codes, email confirmations and password resets.",
+      note: "Sign-in and account emails",
     },
     {
       role: "Revenue sources",
@@ -624,12 +614,12 @@ const prettyMetrics: CaseStudy = {
         tech.square,
         tech.creem,
       ],
-      note: "Read-only connections to seven payment providers, combined into one total per product.",
+      note: "Read-only keys, combined into one total",
     },
     {
       role: "Hosting",
       tools: [tech.vercel],
-      note: "Hosts the app and runs its serverless functions.",
+      note: "App and serverless functions",
     },
   ],
   highlights: [tech.nextjs, tech.canvas, tech.webcodecs, tech.stripe],
@@ -718,48 +708,46 @@ const getOutOfBed: CaseStudy = {
       text: "Purchases run through Google Play Billing and RevenueCat, linked to a random ID rather than an account. Premium status is kept on the phone, so an alarm knows what it may do offline or straight after a restart. Losing Premium deletes nothing: a photo mission falls back to another mission, or maths, so the alarm can always be stopped.",
     },
   ],
-  stackSummary:
-    "Get Out Of Bed is a native Android app in Kotlin and Jetpack Compose, with CameraX and MediaPipe for the photo mission and RevenueCat over Google Play Billing for Premium. There is no server.",
   stack: [
     {
       role: "App",
       tools: [tech.kotlin, tech.compose, tech.material3],
-      note: "A native Android app in Kotlin, with every screen built in Jetpack Compose and Material 3.",
+      note: "Native Android, every screen in Compose",
     },
     {
       role: "Alarms",
       tools: [tech.androidAlarms],
-      note: "setAlarmClock and a foreground service keep the alarm on time and ringing, even in Doze and after a restart.",
+      note: "On time, even in Doze",
     },
     {
       role: "Camera",
       tools: [tech.camerax],
-      note: "Captures the photo mission's reference shot and the live frames it is matched against.",
+      note: "Captures the photo mission",
     },
     {
       role: "On-device AI",
       tools: [tech.mediapipe],
-      note: "A MobileNet image embedder matches mission photos on the phone, so no photo is ever uploaded.",
+      note: "Photo matching on the phone",
     },
     {
       role: "Payments",
       tools: [tech.playBilling, tech.revenuecat],
-      note: "Google Play takes the payment and RevenueCat tracks Premium against a random ID, not an account.",
+      note: "Premium, with no account needed",
     },
     {
       role: "Backend",
       tools: [tech.onDevice],
-      note: "No server and no accounts. Alarms, records and mission photos stay on the phone.",
+      note: "Everything stays on the phone",
     },
     {
       role: "Testing",
       tools: [tech.junit],
-      note: "Unit tests for alarm scheduling, missed alarms, missions, photo matching and Premium.",
+      note: "Alarm, mission and Premium tests",
     },
     {
       role: "Website",
       tools: [tech.vercel],
-      note: "getoutofbed.app is a static site on Vercel.",
+      note: "Static site for getoutofbed.app",
     },
   ],
   highlights: [tech.kotlin, tech.compose, tech.mediapipe, tech.revenuecat],

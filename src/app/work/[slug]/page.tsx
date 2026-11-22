@@ -243,14 +243,16 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             <h2 id="stack-heading" className="text-2xl tracking-tight sm:text-3xl">
               The stack
             </h2>
-            <p className="text-lg text-pretty text-muted-foreground">{study.stackSummary}</p>
+            <p className="text-lg text-pretty text-muted-foreground">
+              Everything {study.name} runs on, layer by layer.
+            </p>
           </div>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {study.stack.map((layer) => (
               <li
                 key={layer.role}
                 className={cn(
-                  "ticks flex flex-col gap-4 border border-border bg-card p-6",
+                  "ticks flex flex-col gap-3 border border-border bg-card p-6",
                   layer.tools.length > 3 && "sm:col-span-2",
                 )}
               >

@@ -109,6 +109,6 @@ export type StackLayer = {
   /** The job this layer does, e.g. "Payments". Shown as the layer's label. */
   role: string
   tools: Tech[]
-  /** One sentence on what these tools do in this product. */
+  /** What these tools do in this product, in a few words: 40 characters at most, so it stays on one line. */
   note: string
 }
