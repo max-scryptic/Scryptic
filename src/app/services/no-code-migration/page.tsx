@@ -122,6 +122,14 @@ const comparison: ComparisonRow[] = [
 
 const migrationGuides = postsInSeries("migration")
 
+// The builders the hero card's source tile cycles through, with their logos from the guides.
+const heroTools = postsBySlug([
+  "migrate-from-bubble",
+  "migrate-from-lovable",
+  "migrate-from-glide",
+  "migrate-from-airtable",
+]).map((post) => ({ slug: post.slug, topic: post.topic, logo: post.logo?.src }))
+
 const guides = postsBySlug([
   "vibe-coding-to-production",
   "google-sheets-as-a-database",
@@ -287,7 +295,7 @@ export default function NoCodeMigrationPage() {
         }
         intro={`${siteConfig.name} moves Bubble, Lovable, Glide and Airtable apps to code you own, with your users and data brought across.`}
         secondary={{ label: "See pricing", href: "#pricing" }}
-        visual={<MigrationVisual />}
+        visual={<MigrationVisual tools={heroTools} />}
         shape="migrate"
       />
       <div aria-hidden="true" className="rail-joint" />
