@@ -5,6 +5,7 @@ import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection } from "@/components/landing/faq-section"
 import { LandingHero } from "@/components/landing/hero"
 import { TerminalCard } from "@/components/landing/hero-visuals"
+import { LaunchRaceSection } from "@/components/landing/launch-race-section"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
@@ -128,6 +129,8 @@ export default function Home() {
         visual={<TerminalCard lines={terminalLines} />}
       />
       <div aria-hidden="true" className="rail-joint" />
+
+      <LaunchRaceSection />
 
       <PricingSection />
 
