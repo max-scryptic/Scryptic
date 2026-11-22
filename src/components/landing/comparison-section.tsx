@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { cn } from "cn"
 
+import { BrandLogo } from "@/components/brand-logo"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
@@ -112,57 +113,56 @@ export function ComparisonSection({
         </Button>
       </div>
 
-      {/* The brackets and guides sit on an outer box, as the scroll area would clip them.
-          Relative so the visually hidden labels stay inside the scroll area on phones. */}
+      {/* Never scrolls: on phones the columns narrow and the padding tightens so all six fit. */}
       <div className="ticks guides border border-border bg-card">
-        <div className="relative overflow-x-auto">
-          <table className="w-full min-w-[600px] border-collapse text-left sm:min-w-[720px]">
-            <caption className="sr-only">
-              How {siteConfig.name} compares with an in-house hire, an agency, a freelancer and
-              AI-only tools
-            </caption>
-            <thead>
-              <tr className="border-b border-border">
-                <td className="sticky left-0 z-10 w-[24%] bg-card" />
+        <table className="w-full table-fixed border-collapse text-left">
+          <caption className="sr-only">
+            How {siteConfig.name} compares with an in-house hire, an agency, a freelancer and
+            AI-only tools
+          </caption>
+          <thead>
+            <tr className="border-b border-border">
+              <td className="w-[24%]" />
+              {/* Below lg the mark stands in for the wordmark, which is too wide for the column. */}
+              <th
+                scope="col"
+                className="w-[14%] bg-primary/10 py-4 text-center font-logo text-lg font-extrabold tracking-tight lowercase sm:w-[16%] sm:px-4 sm:py-6 xl:text-xl"
+              >
+                <BrandLogo className="mx-auto size-6 sm:size-7 lg:hidden" />
+                <span className="max-lg:sr-only">{siteConfig.name}</span>
+              </th>
+              {alternatives.map((alternative) => (
                 <th
+                  key={alternative}
                   scope="col"
-                  className="w-[16%] bg-primary/10 px-4 py-6 text-center font-logo text-xl font-extrabold tracking-tight lowercase"
+                  className="w-[15.5%] py-4 text-center text-[0.625rem] leading-tight font-medium text-balance sm:w-[15%] sm:px-4 sm:py-6 sm:text-sm"
                 >
-                  {siteConfig.name}
+                  {alternative}
                 </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody data-reveal="children" className="divide-y divide-border">
+            {rows.map((row) => (
+              <tr key={row.name}>
+                <th scope="row" className="px-2 py-4 font-normal sm:px-8 sm:py-5">
+                  <span className="block text-sm font-medium sm:text-base">{row.name}</span>
+                  <span className="hidden text-sm text-pretty text-muted-foreground sm:block">
+                    {row.text}
+                  </span>
+                </th>
+                <td className="bg-primary/10 px-1 py-4 sm:px-4 sm:py-5">
+                  <ComparisonMark value highlight />
+                </td>
                 {alternatives.map((alternative) => (
-                  <th
-                    key={alternative}
-                    scope="col"
-                    className="w-[15%] px-4 py-6 text-center text-sm font-medium"
-                  >
-                    {alternative}
-                  </th>
+                  <td key={alternative} className="px-1 py-4 sm:px-4 sm:py-5">
+                    <ComparisonMark value={row.values[alternative]} />
+                  </td>
                 ))}
               </tr>
-            </thead>
-            <tbody data-reveal="children" className="divide-y divide-border">
-              {rows.map((row) => (
-                <tr key={row.name}>
-                  <th scope="row" className="sticky left-0 z-10 bg-card px-4 py-5 font-normal sm:px-8">
-                    <span className="block font-medium">{row.name}</span>
-                    <span className="hidden text-sm text-pretty text-muted-foreground sm:block">
-                      {row.text}
-                    </span>
-                  </th>
-                  <td className="bg-primary/10 px-4 py-5">
-                    <ComparisonMark value highlight />
-                  </td>
-                  {alternatives.map((alternative) => (
-                    <td key={alternative} className="px-4 py-5">
-                      <ComparisonMark value={row.values[alternative]} />
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </LandingSection>
   )

@@ -125,8 +125,8 @@ export type OptionRow = { name: string; cells: string[] }
 /**
  * A plain comparison of the usual routes to the same result, in words rather
  * than ticks: what you get, what it costs, how long it takes and who owns it.
- * The first row is ours and is tinted. Scrolls sideways on phones, with the
- * first column pinned, like the tick table in ComparisonSection.
+ * The first row is ours and is tinted. Never scrolls: on phones each route
+ * stacks into a block with its cells labelled (.table-stack in globals.css).
  */
 export function OptionsSection({
   id,
@@ -156,47 +156,40 @@ export function OptionsSection({
         {intro}
       </SectionHeading>
       <div className="ticks guides border border-border bg-card">
-        <div className="relative overflow-x-auto">
-          <table className="w-full min-w-[760px] border-collapse text-left text-sm">
-            <caption className="sr-only">{caption}</caption>
-            <thead>
-              <tr className="border-b border-border font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                <td className="sticky left-0 z-10 w-[18%] bg-card" />
-                {columns.map((column) => (
-                  <th key={column} scope="col" className="px-4 py-5 font-normal">
-                    {column}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody data-reveal="children" className="divide-y divide-border">
-              {rows.map((row, index) => (
-                <tr key={row.name} className={cn(index === 0 && "bg-primary/10")}>
-                  <th
-                    scope="row"
+        <table className="table-stack w-full border-collapse text-left text-sm">
+          <caption className="sr-only">{caption}</caption>
+          <thead>
+            <tr className="border-b border-border font-mono text-xs tracking-widest text-muted-foreground uppercase">
+              <td className="w-[18%]" />
+              {columns.map((column) => (
+                <th key={column} scope="col" className="px-4 py-5 font-normal">
+                  {column}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody data-reveal="children" className="divide-y divide-border">
+            {rows.map((row, index) => (
+              <tr key={row.name} className={cn("max-sm:py-4", index === 0 && "bg-primary/10")}>
+                <th scope="row" className="px-4 py-5 align-top text-base font-medium max-sm:py-1 sm:px-6">
+                  {row.name}
+                </th>
+                {row.cells.map((cell, cellIndex) => (
+                  <td
+                    key={cellIndex}
+                    data-label={columns[cellIndex]}
                     className={cn(
-                      "sticky left-0 z-10 px-4 py-5 align-top text-base font-medium sm:px-6",
-                      index === 0 ? "bg-[color-mix(in_oklab,var(--primary)_10%,var(--card))]" : "bg-card",
+                      "px-4 py-5 align-top text-pretty max-sm:py-1.5",
+                      cellIndex === 0 ? "text-foreground" : "text-muted-foreground",
                     )}
                   >
-                    {row.name}
-                  </th>
-                  {row.cells.map((cell, cellIndex) => (
-                    <td
-                      key={cellIndex}
-                      className={cn(
-                        "px-4 py-5 align-top text-pretty",
-                        cellIndex === 0 ? "text-foreground" : "text-muted-foreground",
-                      )}
-                    >
-                      {cell}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       {footnote && <p className={cn(inset, "text-sm text-pretty text-muted-foreground")}>{footnote}</p>}
     </LandingSection>
