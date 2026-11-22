@@ -47,8 +47,8 @@ export function MvpPricing() {
 
       <div className="flex flex-col gap-4">
         <h3 className="text-xl tracking-tight">What an MVP costs, by who builds it</h3>
-        <div className="overflow-x-auto border border-border bg-card">
-          <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+        <div className="border border-border bg-card">
+          <table className="table-stack w-full border-collapse text-left text-sm">
             <caption className="sr-only">Typical UK MVP cost and how each kind of supplier charges</caption>
             <thead>
               <tr className="border-b border-border font-mono text-xs tracking-widest text-muted-foreground uppercase">
@@ -65,12 +65,19 @@ export function MvpPricing() {
             </thead>
             <tbody className="divide-y divide-border">
               {routes.map(([route, cost, pricing]) => (
-                <tr key={route}>
-                  <th scope="row" className="px-4 py-4 align-top font-medium">
+                <tr key={route} className="max-sm:py-3">
+                  <th scope="row" className="px-4 py-4 align-top font-medium max-sm:py-1">
                     {route}
                   </th>
-                  <td className="px-4 py-4 align-top">{cost}</td>
-                  <td className="px-4 py-4 align-top text-pretty text-muted-foreground">{pricing}</td>
+                  <td data-label="Typical MVP cost" className="px-4 py-4 align-top max-sm:py-1">
+                    {cost}
+                  </td>
+                  <td
+                    data-label="How it’s usually priced"
+                    className="px-4 py-4 align-top text-pretty text-muted-foreground max-sm:py-1"
+                  >
+                    {pricing}
+                  </td>
                 </tr>
               ))}
             </tbody>

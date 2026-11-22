@@ -156,43 +156,45 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "table") {
     return (
-      // The corner ticks sit on an outer box, as the scroll area would clip them.
+      // Never scrolls: on phones the rows stack (.table-stack in globals.css).
       <div className="ticks border border-border">
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-xl text-left text-sm">
-            <caption className="sr-only">{block.caption}</caption>
-            <thead className="bg-card">
-              <tr>
-                {block.columns.map((column) => (
-                  <th
-                    key={column}
-                    scope="col"
-                    className="p-4 font-mono text-xs font-normal text-muted-foreground"
-                  >
-                    {column}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border border-t border-border">
-              {block.rows.map((row) => (
-                <tr key={row[0]}>
-                  {row.map((cell, index) =>
-                    index === 0 ? (
-                      <th key={index} scope="row" className="p-4 align-top font-medium">
-                        {cell}
-                      </th>
-                    ) : (
-                      <td key={index} className="p-4 align-top text-pretty text-muted-foreground">
-                        {cell}
-                      </td>
-                    ),
-                  )}
-                </tr>
+        <table className="table-stack w-full text-left text-sm">
+          <caption className="sr-only">{block.caption}</caption>
+          <thead className="bg-card">
+            <tr>
+              {block.columns.map((column) => (
+                <th
+                  key={column}
+                  scope="col"
+                  className="p-4 font-mono text-xs font-normal text-muted-foreground"
+                >
+                  {column}
+                </th>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border sm:border-t sm:border-border">
+            {block.rows.map((row) => (
+              <tr key={row[0]} className="max-sm:py-3">
+                {row.map((cell, index) =>
+                  index === 0 ? (
+                    <th key={index} scope="row" className="p-4 align-top font-medium max-sm:py-1">
+                      {cell}
+                    </th>
+                  ) : (
+                    <td
+                      key={index}
+                      data-label={block.columns[index]}
+                      className="p-4 align-top text-pretty text-muted-foreground max-sm:py-1"
+                    >
+                      {cell}
+                    </td>
+                  ),
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     )
   }

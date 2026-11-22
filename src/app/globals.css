@@ -211,6 +211,34 @@
 
 /* In the components layer, so utilities such as `fixed` or `absolute` win. */
 @layer components {
+  /* Tables of words never scroll. On phones each row stacks into a block, its
+     cells labelled from their data-label (the column heading), and the header
+     row is kept for screen readers only. From sm up it is a normal table. */
+  @media (width < 40rem) {
+    .table-stack,
+    .table-stack :is(tbody, tr, th, td) {
+      display: block;
+    }
+    .table-stack thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    .table-stack td[data-label]::before {
+      content: attr(data-label);
+      display: block;
+      margin-bottom: 0.25rem;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-muted-foreground);
+    }
+  }
+
   .ruled {
     --rail-x: max(1rem, calc(50% - var(--container-6xl) / 2));
     --rail: var(--guide);
