@@ -11,16 +11,15 @@ import { useHeroLoop } from "@/components/landing/use-hero-loop"
  * heroes share a layout but not a picture. Each sits in a HeroWindow, which
  * hides it from assistive tech: the copy beside it says the same thing.
  *
- * Every card keeps moving. It plays its entrance (hero-terminal, hero-wipe in
- * globals.css), holds its finished picture for a moment, then loops through
- * a short story of the work: commands typing out, a sprint filling in, records
+ * Every card keeps moving, from the moment the page loads: there is no
+ * entrance, the card starts on the first frame of a short story of the work and
+ * loops through it: commands typing out, a sprint filling in, records
  * moving through a workflow, builds going to review, data being copied. Each
  * story is a list of frames stepped by useHeroLoop; the services card's
  * packets and the migration card's builder tile loop in CSS alone.
  *
- * A card renders `step === null` (server render, before the loop starts, and
- * always with reduced motion) as its finished picture, which is also its last
- * frame, so nothing jumps when the loop takes over.
+ * With reduced motion `step` is null, which a card renders as its finished
+ * picture, the same as its last frame.
  */
 
 function Check({ className }: { className?: string }) {
@@ -88,7 +87,8 @@ function terminalFrames(lines: TerminalLine[]): TerminalFrame[] {
 export function TerminalCard({ lines }: { lines: TerminalLine[] }) {
   const frames = useMemo(() => terminalFrames(lines), [lines])
   const durations = useMemo(() => durationsOf(frames), [frames])
-  const [ref, step] = useHeroLoop(durations, 5000)
+  const [ref, step] = useHeroLoop(durations, 1)
+  // Starts on frame 1, an empty prompt; frame 0 fades out the finished screen between laps.
   const frame = step === null ? null : frames[step]
   const shown = frame?.shown ?? lines.length
   const typed = frame?.typed
@@ -98,8 +98,6 @@ export function TerminalCard({ lines }: { lines: TerminalLine[] }) {
       <div
         className={cn(
           "flex flex-col gap-2 p-5 font-mono text-sm leading-relaxed transition-opacity duration-400",
-          // The entrance staggers the lines in; once the loop runs, it prints them itself.
-          frame ? "" : "hero-terminal",
           frame?.fading && "opacity-0",
         )}
       >
@@ -181,7 +179,7 @@ export function SprintVisual() {
           </span>
         </div>
 
-        <div className="hero-terminal flex flex-col gap-2.5">
+        <div className="flex flex-col gap-2.5">
           <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">In v1</p>
           <ul className="flex flex-wrap gap-1.5 text-xs sm:gap-2 sm:text-sm">
             {inScope.map((item, index) => {
@@ -216,7 +214,7 @@ export function SprintVisual() {
           <span>Week 1</span>
           <span className="h-2 bg-primary/15 dark:bg-primary/25">
             <span
-              className="hero-wipe block h-full w-full origin-left bg-primary transition-transform ease-linear"
+              className="block h-full w-full origin-left bg-primary transition-transform ease-linear"
               style={fill(frame.week1)}
             />
           </span>
@@ -224,7 +222,7 @@ export function SprintVisual() {
           <span>Week 2</span>
           <span className="h-2 bg-primary/15 dark:bg-primary/25">
             <span
-              className="hero-wipe block h-full w-full origin-left bg-primary transition-transform ease-linear"
+              className="block h-full w-full origin-left bg-primary transition-transform ease-linear"
               style={fill(frame.week2)}
             />
           </span>
@@ -277,7 +275,7 @@ export function WebAppVisual() {
           <span className="shrink-0 bg-primary px-2 py-0.5 text-primary-foreground">Staff view</span>
         </div>
 
-        <ul className="hero-terminal flex flex-col divide-y divide-border border-y border-border text-sm">
+        <ul className="flex flex-col divide-y divide-border border-y border-border text-sm">
           {rows.map((row, index) => {
             const active = frame.active === index
             return (
@@ -345,7 +343,7 @@ export function MobileAppVisual() {
           <span className="shrink-0 bg-primary px-2 py-0.5 text-primary-foreground">Native</span>
         </div>
 
-        <ul className="hero-terminal grid gap-3 sm:grid-cols-2">
+        <ul className="grid gap-3 sm:grid-cols-2">
           {builds.map((build, index) => {
             const built = index < frame.built
             const inReview = index < frame.review
@@ -466,7 +464,7 @@ export function MigrationVisual({ tools }: { tools: MigrationTool[] }) {
           </div>
         </div>
 
-        <ul className="hero-terminal flex flex-col divide-y divide-border border-y border-border font-mono text-xs">
+        <ul className="flex flex-col divide-y divide-border border-y border-border font-mono text-xs">
           {migrationRows.map((row, index) => {
             const complete = copied(index) === row.count
             return (
@@ -509,12 +507,12 @@ export function ServicesVisual() {
   ]
   // The packets' loop (hero-packet in globals.css) is 4s: each track starts a
   // second after the one above, and each leg takes a quarter of the loop.
-  const delay = (track: number, leg: number) => ({ animationDelay: `${2.6 + track + leg}s` })
+  const delay = (track: number, leg: number) => ({ animationDelay: `${track + leg}s` })
 
   return (
     <HeroWindow label="services" status="4 ways in">
       <div className="flex flex-col gap-6 p-5">
-        <div className="hero-terminal flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
           {tracks.map((track, index) => (
             <div key={track.name} className="flex flex-col gap-3">
               <p className="font-mono text-xs text-primary dark:text-[#c3caff]">
@@ -538,7 +536,7 @@ export function ServicesVisual() {
                         {step}
                       </span>
                       {!last && (
-                        <span className="hero-wipe relative h-px flex-1 bg-primary/60">
+                        <span className="relative h-px flex-1 bg-primary/60">
                           <span
                             className="hero-packet absolute top-1/2 left-0 size-1.5 -translate-x-1/2 -translate-y-1/2 bg-primary opacity-0 dark:bg-[#c3caff]"
                             style={delay(index, stepIndex)}

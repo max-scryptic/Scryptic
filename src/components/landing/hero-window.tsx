@@ -23,7 +23,7 @@ export function HeroWindow({
     <div
       ref={ref}
       aria-hidden="true"
-      className="hero-card corners mx-6 flex min-h-[21.5rem] flex-col border sm:mx-8 lg:ml-0 border-border bg-card text-card-foreground shadow-2xl shadow-black/25 [--corner:var(--foreground)]"
+      className="corners mx-6 flex min-h-[21.5rem] flex-col border sm:mx-8 lg:ml-0 border-border bg-card text-card-foreground shadow-2xl shadow-black/25 [--corner:var(--foreground)]"
     >
       <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
         <span className="size-2 bg-foreground/15" />
