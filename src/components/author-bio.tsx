@@ -9,7 +9,7 @@ export function AuthorBio() {
   return (
     <section
       aria-labelledby="author-heading"
-      className="corners grid gap-6 border border-border bg-card p-6 sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-10"
+      className="pip grid gap-6 border border-border bg-card p-6 sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-10"
     >
       <div className="relative size-24 shrink-0 overflow-hidden bg-portrait sm:size-28">
         <Image

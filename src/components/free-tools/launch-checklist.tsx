@@ -50,7 +50,7 @@ export function LaunchChecklist() {
       <form
         aria-label="About your launch"
         onSubmit={(event) => event.preventDefault()}
-        className="corners flex flex-col gap-8 border border-border bg-card p-5 sm:p-8 lg:sticky lg:top-28"
+        className="pip flex flex-col gap-8 border border-border bg-card p-5 sm:p-8 lg:sticky lg:top-28"
       >
         {checklistQuestions.map((question, index) => (
           <ChoiceGroup
@@ -67,7 +67,7 @@ export function LaunchChecklist() {
 
       <section
         aria-labelledby="checklist-heading"
-        className="corners flex flex-col border border-border bg-card shadow-xl shadow-black/5"
+        className="ticks flex flex-col border border-border bg-card shadow-xl shadow-black/5"
       >
         <div className="flex flex-col gap-3 border-b border-border px-5 py-4 sm:px-8">
           <div className="flex flex-wrap items-center justify-between gap-3">

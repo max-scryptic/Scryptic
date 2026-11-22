@@ -92,7 +92,7 @@ export function ProcessSection({
       <SectionHeading className={inset} eyebrow="Process" title={title} id="process-heading">
         {intro}
       </SectionHeading>
-      <div className="corners guides border border-border bg-card">
+      <div className="ticks guides border border-border bg-card">
         <div
           aria-hidden="true"
           className="hidden grid-cols-[7.5rem_repeat(5,minmax(0,1fr))] border-b border-border font-mono text-xs text-muted-foreground uppercase sm:grid"

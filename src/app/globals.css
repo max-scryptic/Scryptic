@@ -173,9 +173,19 @@
  * - .guides runs a box's top and bottom edges out across the page, behind
  *   the box and everything else, so they show only outside it. Set --edge to
  *   the box's border width when it is not 1px.
- * - .corners puts short L-shaped brackets on the four corners of a box,
+ * - Each box gets one of three corner marks, by what it is, so no one mark
+ *   is everywhere:
+ *   .corners puts short L-shaped brackets on the four corners of a box,
  *   over its 1px border (--corner-inset for thicker borders, --corner for the
- *   colour). .corners-grow lengthens them on hover.
+ *   colour). .corners-grow lengthens them on hover. For primary surfaces only:
+ *   calls to action, pricing tiers, the app windows, the header bar, page
+ *   intros and cards that link somewhere.
+ *   .ticks puts a hairline registration cross on each corner, like the crop
+ *   marks on a drawing (--tick for the colour). For tables, diagrams, code,
+ *   screenshots and other data panels.
+ *   .pip puts one solid square on the top-left corner, the filled twin of the
+ *   rail squares (--pip for the colour). For secondary cards: callouts,
+ *   quotes, facts, bios and the question side of the free tools.
  * Guides are opaque (--guide), so where two boxes' lines overlap they do not
  * darken. A parent can retint them by setting --guide and --rail.
  */
@@ -299,6 +309,47 @@
     .corners-grow::after {
       transition: none;
     }
+  }
+
+  /* Each cross is centred on the 1px border at the corner, its arms --a long. */
+  .ticks {
+    position: relative;
+  }
+  .ticks::after {
+    --c: var(--tick, color-mix(in oklab, var(--foreground) 45%, var(--background)));
+    --a: 6px;
+    --s: calc(2 * var(--a) + 1px);
+    content: "";
+    position: absolute;
+    z-index: 20;
+    inset: calc(-1 * var(--a));
+    pointer-events: none;
+    background:
+      linear-gradient(var(--c) 0 0) left 0 top var(--a) / var(--s) 1px,
+      linear-gradient(var(--c) 0 0) left var(--a) top 0 / 1px var(--s),
+      linear-gradient(var(--c) 0 0) right 0 top var(--a) / var(--s) 1px,
+      linear-gradient(var(--c) 0 0) right var(--a) top 0 / 1px var(--s),
+      linear-gradient(var(--c) 0 0) left 0 bottom var(--a) / var(--s) 1px,
+      linear-gradient(var(--c) 0 0) left var(--a) bottom 0 / 1px var(--s),
+      linear-gradient(var(--c) 0 0) right 0 bottom var(--a) / var(--s) 1px,
+      linear-gradient(var(--c) 0 0) right var(--a) bottom 0 / 1px var(--s);
+    background-repeat: no-repeat;
+  }
+
+  /* The same 7px square as the rail joints, filled, centred on the border's corner. */
+  .pip {
+    position: relative;
+  }
+  .pip::after {
+    content: "";
+    position: absolute;
+    z-index: 20;
+    top: -3px;
+    left: -3px;
+    width: 7px;
+    height: 7px;
+    background: var(--pip, var(--primary));
+    pointer-events: none;
   }
 
   /* A sideways scroller whose cards break up into square pixels past the
