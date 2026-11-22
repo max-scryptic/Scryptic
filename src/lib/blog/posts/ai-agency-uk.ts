@@ -277,7 +277,7 @@ export const aiAgencyUk: BlogPost = {
         {
           type: "paragraph",
           text: `We're a product studio rather than an AI agency. We don't sell strategy, workshops or AI training. We build products with a model at the core, for founders whose customers will sign in and pay, coded in Next.js, TypeScript and Postgres in a fixed-price sprint from ${mvp.price} plus VAT.`,
-          link: { text: "See what each fixed-price sprint includes.", href: "/#pricing" },
+          link: { text: "See what each fixed-price sprint includes.", href: "/pricing" },
         },
         {
           type: "paragraph",

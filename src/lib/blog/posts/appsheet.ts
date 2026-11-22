@@ -171,7 +171,7 @@ export const appsheet: BlogPost = {
         {
           type: "paragraph",
           text: "Most AppSheet apps take three to six weeks to rebuild and switch over. The number of tables, security filters and bots sets the pace, and offline support adds time on top. A stable internal app whose users are all on your Workspace plan is usually cheaper to keep, so the move pays when customers, contractors or volume are involved. A focused rebuild often fits one of our fixed-price sprints.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },

@@ -20,7 +20,7 @@ import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
 import { afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
-import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
+import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
 const page = pages.noCodeMigration
 
@@ -192,6 +192,7 @@ const faqs: Faq[] = [
   {
     question: "What happens after launch, and what does support cost?",
     answer: afterLaunchAnswer(),
+    link: { text: "See the support plan and the other options after launch.", href: pages.pricing.path },
   },
   {
     question: "Who owns the app after the migration?",
@@ -271,7 +272,6 @@ export default function NoCodeMigrationPage() {
           ...services.map((service) =>
             serviceJsonLd(page, { ...service, serviceType: "No-code app migration" }),
           ),
-          supportJsonLd(page),
           faqJsonLd(page, faqs),
         ]}
       />

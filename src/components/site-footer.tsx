@@ -11,9 +11,9 @@ import { servicePages } from "@/lib/service-pages"
 import { siteConfig } from "@/lib/site"
 import { caseStudies } from "@/lib/work"
 
-// The home page's sections, in the order they appear on it.
+// Pricing, then the home page's sections in the order they appear on it.
 const homeLinks = [
-  { name: "Pricing", href: "/#pricing" },
+  { name: "Pricing", href: pages.pricing.path },
   { name: "Process", href: "/#process" },
   { name: "Our work", href: "/#work" },
   { name: `Why ${siteConfig.name}`, href: "/#compare" },

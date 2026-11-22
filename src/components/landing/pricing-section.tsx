@@ -13,17 +13,21 @@ import { foundingOffer, mvp, services, supportPlan } from "@/lib/services"
  * gets a Lapis border and a tag sitting on its top edge. Every card is
  * square-edged, with accent brackets on its corners and its top and bottom
  * edges run out across the page. Under the cards, the founding-client
- * banner while `foundingOffer` is set, then the "After launch" box: the
- * support plan and the other ways to carry on. Pair with serviceJsonLd() for
- * each package and supportJsonLd() for the plan.
+ * banner while `foundingOffer` is set. With `afterLaunch`, the "After launch"
+ * box follows: the support plan and the other ways to carry on. Only /pricing
+ * shows it. Pair with serviceJsonLd() for each package, and with
+ * supportJsonLd() for the plan when the box is shown.
  */
 export function PricingSection({
   title = "A fully built MVP, ready to take to market",
   intro = "Two fixed-price sprints, agreed before the build starts.",
+  afterLaunch = false,
   children,
 }: {
   title?: string
   intro?: React.ReactNode
+  /** Show the "After launch" box: the support plan and the other ways to carry on. */
+  afterLaunch?: boolean
   /** Shown under the cards, e.g. a note on what else the packages cover. */
   children?: React.ReactNode
 }) {
@@ -127,7 +131,7 @@ export function PricingSection({
         </aside>
       )}
 
-      <AfterLaunch />
+      {afterLaunch && <AfterLaunch />}
 
       {children && <div className={cn("text-pretty text-muted-foreground", inset)}>{children}</div>}
     </LandingSection>
@@ -151,8 +155,9 @@ function AfterLaunch() {
 
   return (
     <section
+      id="after-launch"
       aria-labelledby="after-launch-heading"
-      className="corners guides flex flex-col gap-8 border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
+      className="scroll-mt-28 corners guides flex flex-col gap-8 border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
     >
       <div className="flex flex-col gap-2">
         <p className="font-mono text-xs tracking-widest text-primary uppercase">After launch</p>

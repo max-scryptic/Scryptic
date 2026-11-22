@@ -9,7 +9,7 @@
  *
  * Quote our prices from @/lib/services (`${mvp.price}`), never typed in. Outside
  * posts about choosing a supplier, mention us in a sentence with a link to
- * "/#pricing" rather than a pricing table or a sales section: the footer
+ * "/pricing" rather than a pricing table or a sales section: the footer
  * already offers the call. Don't copy wording from another post.
  */
 
@@ -23,7 +23,7 @@ export type PostBlock =
   | {
       type: "paragraph"
       text: string
-      /** A link that follows the text, such as "/#pricing". Its text should make sense out of context. */
+      /** A link that follows the text, such as "/pricing". Its text should make sense out of context. */
       link?: { text: string; href: string }
     }
   | {

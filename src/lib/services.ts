@@ -30,8 +30,8 @@ export const currency = "GBP"
 /**
  * Optional, recommended monthly support once the handover week ends, on
  * either package. Shown with a "Recommended" tag.
- * The pricing section's "After launch" box, its Service JSON-LD and the FAQs
- * on what happens after launch all read from here.
+ * The "After launch" box on /pricing, its Service JSON-LD and the FAQs on
+ * what happens after launch all read from here.
  */
 export const supportPlan = {
   id: "support",

@@ -238,7 +238,7 @@ for name, frame in sheets.items():
         {
           type: "paragraph",
           text: "Both sprints are priced before any build starts, so the first stage has a fixed cost even if the later ones wait.",
-          link: { text: "Compare the two fixed-price sprints", href: "/#pricing" },
+          link: { text: "Compare the two fixed-price sprints", href: "/pricing" },
         },
       ],
     },

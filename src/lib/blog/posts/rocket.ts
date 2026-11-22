@@ -227,7 +227,7 @@ export const rocket: BlogPost = {
         {
           type: "paragraph",
           text: "We take Rocket apps through these steps inside a fixed-price sprint, with the repository, Supabase project and hosting in your company's name from the first day.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },

@@ -238,7 +238,7 @@ export const buildYourOwnAi: BlogPost = {
         {
           type: "paragraph",
           text: `We build AI products as production code at a fixed price, from ${mvp.price} + VAT, with the model provider account, the code and the hosting all in your company's name.`,
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },

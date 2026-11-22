@@ -2,6 +2,7 @@ import type { Metadata, MetadataRoute } from "next"
 
 import { posts, type BlogPost } from "@/lib/blog"
 import { freeTools, type FreeTool } from "@/lib/free-tools"
+import { mvp, supportPlan } from "@/lib/services"
 import { isIndexable, siteConfig } from "@/lib/site"
 import { caseStudies, type CaseStudy } from "@/lib/work"
 
@@ -135,6 +136,14 @@ export const pages = {
     priority: 0.8,
   },
   ...servicePageEntries,
+  pricing: {
+    path: "/pricing",
+    title: "Pricing",
+    description: `${siteConfig.name} pricing: fixed-price MVP sprints from ${mvp.price} + VAT, optional support at ${supportPlan.price} a ${supportPlan.per}, and hosting billed to you at cost in accounts in your name.`,
+    lastModified: "2026-11-22",
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
   blog: {
     path: "/blog",
     title: "Blog",
