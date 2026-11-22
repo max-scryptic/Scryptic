@@ -49,8 +49,6 @@ export const supportPlan = {
     "Up to half a day of small changes each month",
   ],
   terms: "Optional, cancel any time",
-  /** Why we recommend it, shown under the price. */
-  why: "Apps need updates to stay secure and working, and the first months after launch are when users find the most to fix.",
 }
 
 /**

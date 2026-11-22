@@ -187,9 +187,7 @@ function AfterLaunch() {
               </li>
             ))}
           </ul>
-          <p className="text-sm text-pretty text-muted-foreground">
-            <span className="font-medium text-foreground">{supportPlan.terms}.</span> {supportPlan.why}
-          </p>
+          <p className="text-sm font-medium">{supportPlan.terms}.</p>
         </article>
 
         <div className="flex flex-col gap-6">
@@ -204,11 +202,6 @@ function AfterLaunch() {
           ))}
         </div>
       </div>
-
-      <p className="border-t border-border pt-5 text-sm text-pretty text-muted-foreground">
-        Hosting and third-party services, such as email sending and payments, are billed to you
-        directly at cost, in accounts in your name.
-      </p>
     </section>
   )
 }
