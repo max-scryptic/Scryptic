@@ -215,7 +215,7 @@ export const knack: BlogPost = {
         {
           type: "paragraph",
           text: "A focused rebuild often fits one of our fixed-price sprints.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },

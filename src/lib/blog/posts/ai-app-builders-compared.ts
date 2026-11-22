@@ -210,7 +210,7 @@ export const aiAppBuildersCompared: BlogPost = {
         {
           type: "paragraph",
           text: "We fix these in fixed-price sprints, hardening the apps worth keeping and rebuilding the backend where it has to move.",
-          link: { text: "Compare our two fixed-price packages.", href: "/#pricing" },
+          link: { text: "Compare our two fixed-price packages.", href: "/pricing" },
         },
         {
           type: "paragraph",

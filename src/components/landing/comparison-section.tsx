@@ -114,7 +114,7 @@ export function ComparisonSection({
 
       {/* The brackets and guides sit on an outer box, as the scroll area would clip them.
           Relative so the visually hidden labels stay inside the scroll area on phones. */}
-      <div className="corners guides border border-border bg-card">
+      <div className="ticks guides border border-border bg-card">
         <div className="relative overflow-x-auto">
           <table className="w-full min-w-[600px] border-collapse text-left sm:min-w-[720px]">
             <caption className="sr-only">

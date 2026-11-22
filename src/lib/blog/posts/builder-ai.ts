@@ -210,7 +210,7 @@ export const builderAi: BlogPost = {
         {
           type: "paragraph",
           text: "Like Builder.ai, we quote a fixed price. Unlike Builder.ai, the code sits in your GitHub from the first day and every account is in your name, so a supplier's fate never decides your app's.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },

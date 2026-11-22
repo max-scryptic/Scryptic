@@ -21,7 +21,7 @@ import { siteConfig } from "@/lib/site"
 import { mobileTools } from "@/lib/stack"
 import { founder } from "@/lib/team"
 import { mobileCaseStudies } from "@/lib/work"
-import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
+import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
 const page = pages.mobileAppDevelopment
 
@@ -177,6 +177,7 @@ const faqs: Faq[] = [
   {
     question: "What happens after launch, and what does support cost?",
     answer: afterLaunchAnswer(),
+    link: { text: "See the support plan and the other options after launch.", href: pages.pricing.path },
   },
   {
     question: "Who owns the app once it is built?",
@@ -195,7 +196,6 @@ export default function MobileAppDevelopmentPage() {
           ...services.map((service) =>
             serviceJsonLd(page, { ...service, serviceType: "Mobile app development" }),
           ),
-          supportJsonLd(page),
           faqJsonLd(page, faqs),
         ]}
       />

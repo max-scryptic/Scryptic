@@ -240,7 +240,7 @@ export const pwaDevelopment: BlogPost = {
         {
           type: "paragraph",
           text: `We quote first PWA releases as a fixed price starting at ${mvp.price} plus VAT, and before you commit we work out which rows of this table fit the sprint.`,
-          link: { text: "Compare the two packages.", href: "/#pricing" },
+          link: { text: "Compare the two packages.", href: "/pricing" },
         },
       ],
     },

@@ -25,8 +25,9 @@ export const navItems: FloatingNavItem[] = [
       description: service.tagline,
     })),
   },
-  { name: "Case studies", link: pages.work.path, hideBelow: "xs" },
-  { name: "Free tools", link: pages.tools.path, hideBelow: "sm" },
+  { name: "Pricing", link: pages.pricing.path, hideBelow: "xs" },
+  { name: "Case studies", link: pages.work.path, hideBelow: "sm" },
+  { name: "Free tools", link: pages.tools.path, hideBelow: "lg" },
   { name: "Blog", link: pages.blog.path, hideBelow: "lg" },
 ]
 

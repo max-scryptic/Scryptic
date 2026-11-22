@@ -11,7 +11,7 @@ import { toolGroups, type FreeTool } from "@/lib/free-tools"
  */
 export function ToolList({ tools, grouped = false }: { tools: FreeTool[]; grouped?: boolean }) {
   return (
-    <div className="corners guides border border-border bg-card">
+    <div className="ticks guides border border-border bg-card">
       {grouped ? (
         toolGroups.map((group) => (
           <section

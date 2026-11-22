@@ -41,7 +41,7 @@ src/
                         an optional hover and focus menu per item
     landing/            The landing page sections (hero, pricing, process, stack, work, comparison, about,
                         FAQ, contact, guides), service-sections.tsx (icon rows, pills, from-to map, fit panel)
-                        and hero-visuals.tsx (each service hero's card). The home page and every service page are
+                        and hero-visuals.tsx (each hero's looping card, stepped by use-hero-loop.ts). The home page and every service page are
                         built from these, so they look the same; each page passes its own copy
     site-header.tsx     Nav items and call to action for the floating navbar
     site-footer.tsx
@@ -85,7 +85,7 @@ src/
 - **Feature code imports from `@/components/ui/*`**, never from `@base-ui/react` directly, so a widget can be restyled or swapped in one place.
 - **Style with theme tokens** (`bg-background`, `text-muted-foreground`, `border-border`, ...) from `globals.css` rather than raw colours, so light and dark mode keep working.
 - **One class helper:** `import { cn } from "cn"`.
-- **Blueprint frame, no rounded corners.** Every radius token is 0, so don't add `rounded-*`. The root layout draws guide lines down the edges of the `max-w-6xl` content column. Cards sit on them with `corners` (accent brackets) and, when full width, `guides` (their top and bottom edges run out across the page). Copy and buttons outside a card take `inset` from `src/lib/frame.ts` so they never run along a guide. The classes are documented in `src/app/globals.css`.
+- **Blueprint frame, no rounded corners.** Every radius token is 0, so don't add `rounded-*`. The root layout draws guide lines down the edges of the `max-w-6xl` content column. Cards sit on them with one corner mark each, chosen by what the card is: `corners` (accent brackets) for primary surfaces such as calls to action, pricing tiers and linked cards; `ticks` (hairline registration crosses) for tables, diagrams, code and screenshots; `pip` (one solid square, top left) for secondary cards such as callouts, facts and bios. When full width they also take `guides` (their top and bottom edges run out across the page). Copy and buttons outside a card take `inset` from `src/lib/frame.ts` so they never run along a guide. The classes are documented in `src/app/globals.css`.
 - **Composition uses `render`, not `asChild`:** `<Button nativeButton={false} render={<Link href="/#services" />}>Services</Button>`.
 
 ## Adding widgets

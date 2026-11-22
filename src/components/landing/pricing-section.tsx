@@ -8,14 +8,10 @@ import { pages } from "@/lib/seo"
 import { foundingOffer, mvp, services, supportPlan } from "@/lib/services"
 
 /**
- * The fixed-price packages from @/lib/services, one card each: name and
- * sprint, the price, what is included, then the call. The preferred package
- * gets a Lapis border and a tag sitting on its top edge. Every card is
- * square-edged, with accent brackets on its corners and its top and bottom
- * edges run out across the page. Under the cards, the founding-client
- * banner while `foundingOffer` is set, then the "After launch" box: the
- * support plan and the other ways to carry on. Pair with serviceJsonLd() for
- * each package and supportJsonLd() for the plan.
+ * The pricing block on the home and service pages: a heading, then the
+ * package cards and founding-client banner from <PricingCards />, and a
+ * button through to /pricing for support, hosting and the FAQs. Pair with
+ * serviceJsonLd() for each package.
  */
 export function PricingSection({
   title = "A fully built MVP, ready to take to market",
@@ -38,6 +34,37 @@ export function PricingSection({
         {intro}
       </SectionHeading>
 
+      <PricingCards />
+
+      <div className="flex justify-center">
+        <Button
+          size="lg"
+          variant="outline"
+          nativeButton={false}
+          render={<Link href={pages.pricing.path} />}
+          className="h-11 px-5 text-base"
+        >
+          More pricing info
+        </Button>
+      </div>
+
+      {children && <div className={cn("text-pretty text-muted-foreground", inset)}>{children}</div>}
+    </LandingSection>
+  )
+}
+
+/**
+ * The fixed-price packages from @/lib/services, one card each: name and
+ * sprint, the price, what is included, then the call. The preferred package
+ * gets a Lapis border and a tag sitting on its top edge. Every card is
+ * square-edged, with accent brackets on its corners and its top and bottom
+ * edges run out across the page. Under the cards, the founding-client
+ * banner while `foundingOffer` is set. No section or heading of its own, so
+ * /pricing can place it under its <h1>.
+ */
+export function PricingCards() {
+  return (
+    <>
       <div data-reveal="children" className="grid gap-6 pt-4 md:grid-cols-2">
         {services.map((service) => (
           <article
@@ -92,7 +119,7 @@ export function PricingSection({
       {foundingOffer && (
         <aside
           aria-labelledby="founding-offer-heading"
-          className="corners flex flex-col gap-5 border border-primary/30 bg-primary/5 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10"
+          className="pip flex flex-col gap-5 border border-primary/30 bg-primary/5 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10"
         >
           <div className="flex flex-col gap-3">
             <p className="font-mono text-xs tracking-widest text-primary uppercase">
@@ -126,16 +153,16 @@ export function PricingSection({
           </Button>
         </aside>
       )}
-
-      <AfterLaunch />
-
-      {children && <div className={cn("text-pretty text-muted-foreground", inset)}>{children}</div>}
-    </LandingSection>
+    </>
   )
 }
 
-/** What happens once the handover week ends: the recommended support plan, another sprint, or taking it in-house. */
-function AfterLaunch() {
+/**
+ * What happens once the handover week ends: the recommended support plan,
+ * another sprint, or taking it in-house. Only /pricing shows it; pair with
+ * supportJsonLd().
+ */
+export function AfterLaunch() {
   const others = [
     {
       name: "Another sprint",
@@ -151,8 +178,9 @@ function AfterLaunch() {
 
   return (
     <section
+      id="after-launch"
       aria-labelledby="after-launch-heading"
-      className="corners guides flex flex-col gap-8 border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
+      className="scroll-mt-28 corners guides flex flex-col gap-8 border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
     >
       <div className="flex flex-col gap-2">
         <p className="font-mono text-xs tracking-widest text-primary uppercase">After launch</p>
@@ -187,9 +215,7 @@ function AfterLaunch() {
               </li>
             ))}
           </ul>
-          <p className="text-sm text-pretty text-muted-foreground">
-            <span className="font-medium text-foreground">{supportPlan.terms}.</span> {supportPlan.why}
-          </p>
+          <p className="text-sm font-medium">{supportPlan.terms}.</p>
         </article>
 
         <div className="flex flex-col gap-6">
@@ -204,11 +230,6 @@ function AfterLaunch() {
           ))}
         </div>
       </div>
-
-      <p className="border-t border-border pt-5 text-sm text-pretty text-muted-foreground">
-        Hosting and third-party services, such as email sending and payments, are billed to you
-        directly at cost, in accounts in your name.
-      </p>
     </section>
   )
 }

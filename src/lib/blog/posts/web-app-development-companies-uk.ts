@@ -279,7 +279,7 @@ export const webAppDevelopmentCompaniesUk: BlogPost = {
         {
           type: "paragraph",
           text: "We're the smallest company here and the narrowest offer: one web app first release, coded in Next.js, TypeScript and Postgres, at the fixed prices in the table, built by the founder you speak to on the first call. That suits a founder or a small business with one workflow to get live.",
-          link: { text: "See what each fixed-price sprint includes.", href: "/#pricing" },
+          link: { text: "See what each fixed-price sprint includes.", href: "/pricing" },
         },
         {
           type: "paragraph",

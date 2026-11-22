@@ -233,7 +233,7 @@ export const powerApps: BlogPost = {
         {
           type: "paragraph",
           text: "Weigh that against what the app costs to keep each year, in premium licences, external access and hours lost to delegation and connector limits. Then add what you take on: hosting, monitoring and someone to maintain the code. If every user is on staff and the totals come out close, keep the app. A focused first app often fits one of our fixed-price sprints.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },

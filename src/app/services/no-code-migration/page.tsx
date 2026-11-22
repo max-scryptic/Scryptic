@@ -20,7 +20,7 @@ import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
 import { afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
-import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
+import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
 const page = pages.noCodeMigration
 
@@ -122,6 +122,14 @@ const comparison: ComparisonRow[] = [
 
 const migrationGuides = postsInSeries("migration")
 
+// The builders the hero card's source tile cycles through, with their logos from the guides.
+const heroTools = postsBySlug([
+  "migrate-from-bubble",
+  "migrate-from-lovable",
+  "migrate-from-glide",
+  "migrate-from-airtable",
+]).map((post) => ({ slug: post.slug, topic: post.topic, logo: post.logo?.src }))
+
 const guides = postsBySlug([
   "vibe-coding-to-production",
   "google-sheets-as-a-database",
@@ -192,6 +200,7 @@ const faqs: Faq[] = [
   {
     question: "What happens after launch, and what does support cost?",
     answer: afterLaunchAnswer(),
+    link: { text: "See the support plan and the other options after launch.", href: pages.pricing.path },
   },
   {
     question: "Who owns the app after the migration?",
@@ -210,7 +219,7 @@ function ToolsSection() {
       <SectionHeading className={inset} eyebrow="Where from" title="Apps we migrate" id="tools-heading">
         {migrationGuides.length} builders and platforms, each with a free step by step migration guide.
       </SectionHeading>
-      <div className="corners guides border border-border bg-card">
+      <div className="ticks guides border border-border bg-card">
         {postCategories.map((category) => {
           const categoryPosts = migrationGuides.filter((post) => post.category === category.name)
           if (categoryPosts.length === 0) return null
@@ -271,7 +280,6 @@ export default function NoCodeMigrationPage() {
           ...services.map((service) =>
             serviceJsonLd(page, { ...service, serviceType: "No-code app migration" }),
           ),
-          supportJsonLd(page),
           faqJsonLd(page, faqs),
         ]}
       />
@@ -287,7 +295,7 @@ export default function NoCodeMigrationPage() {
         }
         intro={`${siteConfig.name} moves Bubble, Lovable, Glide and Airtable apps to code you own, with your users and data brought across.`}
         secondary={{ label: "See pricing", href: "#pricing" }}
-        visual={<MigrationVisual />}
+        visual={<MigrationVisual tools={heroTools} />}
         shape="migrate"
       />
       <div aria-hidden="true" className="rail-joint" />

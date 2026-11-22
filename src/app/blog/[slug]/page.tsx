@@ -68,7 +68,7 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "callout") {
     return (
-      <aside className="corners flex flex-col gap-2 border border-primary/50 bg-card p-6">
+      <aside className="pip flex flex-col gap-2 border border-primary/50 bg-card p-6">
         <p className="font-mono text-xs tracking-widest text-primary uppercase">{block.title}</p>
         <p className="text-pretty">{block.text}</p>
       </aside>
@@ -83,7 +83,7 @@ function Block({ block }: { block: PostBlock }) {
     return (
       // White in both themes: the diagrams are drawn on white.
       <figure className="flex flex-col gap-3">
-        <div className="corners border border-border bg-white">
+        <div className="ticks border border-border bg-white">
           <Image
             src={block.image}
             alt={block.alt}
@@ -103,7 +103,7 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "caseStudy") {
     return (
-      <figure className="corners flex flex-col gap-3 border border-border bg-card p-6">
+      <figure className="pip flex flex-col gap-3 border border-border bg-card p-6">
         <p className="font-mono text-xs tracking-widest text-primary uppercase">
           Case study &middot; {block.company}
         </p>
@@ -126,8 +126,8 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "code") {
     return (
-      // The brackets sit on an outer box, as the scroll area would clip them.
-      <figure className="corners border border-border bg-card">
+      // The corner ticks sit on an outer box, as the scroll area would clip them.
+      <figure className="ticks border border-border bg-card">
         <figcaption className="border-b border-border px-4 py-2 font-mono text-xs text-muted-foreground">
           {block.label}
         </figcaption>
@@ -140,7 +140,7 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "checklist") {
     return (
-      <ul className="corners flex flex-col gap-3 border border-border bg-card p-6">
+      <ul className="pip flex flex-col gap-3 border border-border bg-card p-6">
         {block.items.map((item) => (
           <li key={item} className="flex gap-4">
             <span
@@ -156,8 +156,8 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "table") {
     return (
-      // The brackets sit on an outer box, as the scroll area would clip them.
-      <div className="corners border border-border">
+      // The corner ticks sit on an outer box, as the scroll area would clip them.
+      <div className="ticks border border-border">
         <div className="overflow-x-auto">
           <table className="w-full min-w-xl text-left text-sm">
             <caption className="sr-only">{block.caption}</caption>
@@ -320,7 +320,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           {/* The post's answer up front, with its quick facts underneath, across the full column. */}
           <section
             aria-labelledby="in-short-heading"
-            className="corners guides flex flex-col border border-border bg-card"
+            className="guides flex flex-col border border-border bg-card"
           >
             <div className="relative flex flex-col gap-5 px-6 py-8 sm:px-8 lg:py-10">
               {/* Drawn over the border, so the summary keeps the facts' left edge. */}

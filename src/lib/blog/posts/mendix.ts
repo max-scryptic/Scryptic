@@ -240,7 +240,7 @@ export const mendix: BlogPost = {
         {
           type: "paragraph",
           text: "A focused first app, such as a customer portal with a handful of roles, often fits one of our fixed-price sprints.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },

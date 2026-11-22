@@ -3,7 +3,8 @@ import { AboutSection } from "@/components/landing/about-section"
 import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection } from "@/components/landing/faq-section"
-import { LandingHero, TerminalCard } from "@/components/landing/hero"
+import { LandingHero } from "@/components/landing/hero"
+import { TerminalCard } from "@/components/landing/hero-visuals"
 import { LaunchRaceSection } from "@/components/landing/launch-race-section"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
@@ -14,7 +15,7 @@ import { createMetadata, pages } from "@/lib/seo"
 import { afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
-import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
+import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
 // The search title leads with the brand, then says what we do. pageTitle()
 // drops the repeated app name it would append, so this renders as written. The
@@ -67,6 +68,7 @@ const faqs = [
   {
     question: "What happens after launch, and what does support cost?",
     answer: afterLaunchAnswer(),
+    link: { text: "See the support plan and the other options after launch.", href: pages.pricing.path },
   },
   {
     question: "Who owns the code once the app is built?",
@@ -111,7 +113,6 @@ export default function Home() {
         page={pages.home}
         nodes={[
           ...services.map((service) => serviceJsonLd(pages.home, service)),
-          supportJsonLd(pages.home),
           faqJsonLd(pages.home, faqs),
         ]}
       />

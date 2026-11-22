@@ -198,7 +198,7 @@ export const emergent: BlogPost = {
         {
           type: "paragraph",
           text: "We take Emergent apps through these steps for founders who'd rather not, usually within one of our fixed-price sprints.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },

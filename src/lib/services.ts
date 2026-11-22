@@ -30,8 +30,8 @@ export const currency = "GBP"
 /**
  * Optional, recommended monthly support once the handover week ends, on
  * either package. Shown with a "Recommended" tag.
- * The pricing section's "After launch" box, its Service JSON-LD and the FAQs
- * on what happens after launch all read from here.
+ * The "After launch" box on /pricing, its Service JSON-LD and the FAQs on
+ * what happens after launch all read from here.
  */
 export const supportPlan = {
   id: "support",
@@ -49,8 +49,6 @@ export const supportPlan = {
     "Up to half a day of small changes each month",
   ],
   terms: "Optional, cancel any time",
-  /** Why we recommend it, shown under the price. */
-  why: "Apps need updates to stay secure and working, and the first months after launch are when users find the most to fix.",
 }
 
 /**
