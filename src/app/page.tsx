@@ -4,14 +4,14 @@ import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection } from "@/components/landing/faq-section"
 import { LandingHero, TerminalCard } from "@/components/landing/hero"
-import { PainPointsSection, type PainPoint } from "@/components/landing/pain-points-section"
+import { LaunchRaceSection } from "@/components/landing/launch-race-section"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { createMetadata, pages } from "@/lib/seo"
-import { afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, mvp, services } from "@/lib/services"
+import { afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
@@ -94,47 +94,6 @@ const faqs = [
   },
 ]
 
-// The problems founders bring to the discovery call, each answered in a line.
-// Keep the answers true to the packages: prices and sprints come from @/lib/services.
-const painPoints: PainPoint[] = [
-  {
-    icon: "card",
-    pain: "The quotes don't fit the budget",
-    detail: "Agencies price a first version like a finished product, with weeks of discovery before any code is written.",
-    answer: `Two fixed prices, from ${mvp.price} + VAT, agreed before the build starts.`,
-  },
-  {
-    icon: "users",
-    pain: "You can't find a technical co-founder",
-    detail: "Hiring a developer means a recruitment round, equity talks and months before anything ships.",
-    answer: "Work directly with the developer building it, from the first call to launch day.",
-  },
-  {
-    icon: "code",
-    pain: "The prototype won't hold up",
-    detail: "A no-code or AI-built app makes a good demo, then struggles with logins, payments and real users.",
-    answer: "Production code, with authentication, payments and analytics in place at launch.",
-  },
-  {
-    icon: "clock",
-    pain: "The launch date keeps slipping",
-    detail: "Freelancers go quiet, the scope drifts and the release moves back another month.",
-    answer: `Launched after a ${mvp.sprint}, with a catch-up every Friday.`,
-  },
-  {
-    icon: "spark",
-    pain: "You're not sure what to build first",
-    detail: "Months go into features nobody asked for before a single customer has tried the product.",
-    answer: "Ship the smallest version customers will pay for, then build on what you learn.",
-  },
-  {
-    icon: "lock",
-    pain: "Someone else holds the keys",
-    detail: "The code, hosting and accounts sit with the agency or the platform, so leaving means starting again.",
-    answer: "Your repository and accounts, in your name, handed over at launch.",
-  },
-]
-
 const terminalLines = [
   { prompt: true, text: "scryptic discover" },
   { prompt: false, text: "goals, users and constraints mapped" },
@@ -170,11 +129,7 @@ export default function Home() {
       />
       <div aria-hidden="true" className="rail-joint" />
 
-      <PainPointsSection
-        title="Your idea is ready. Getting it built is the hard part."
-        intro="Most founders stall in the same places: the cost, the hiring, code that breaks and launch dates that slip. Each package is built to get past them."
-        points={painPoints}
-      />
+      <LaunchRaceSection />
 
       <PricingSection />
 
