@@ -121,7 +121,14 @@ const comparison: ComparisonRow[] = [
   },
 ]
 
-const migrationGuides = postsInSeries("migration")
+// Guides in the series that cover a topic rather than one tool. They stay on
+// /blog but are left out of the "Apps we migrate" grid, which lists tools.
+const topicGuides = new Set([
+  "lovable-vs-bolt-vs-replit-vs-base44-vs-v0",
+  "uk-data-residency-ai-built-apps",
+  "lovable-app-backup",
+])
+const migrationGuides = postsInSeries("migration").filter((post) => !topicGuides.has(post.slug))
 
 // The builders the hero card's source tile cycles through, with their logos from the guides.
 const heroTools = postsBySlug([
