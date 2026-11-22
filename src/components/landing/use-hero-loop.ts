@@ -1,29 +1,43 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useSyncExternalStore } from "react"
+
+const reducedMotion = "(prefers-reduced-motion: reduce)"
+
+function subscribeToMotion(onChange: () => void) {
+  const query = window.matchMedia(reducedMotion)
+  query.addEventListener("change", onChange)
+  return () => query.removeEventListener("change", onChange)
+}
 
 /**
  * Steps a hero card through its loop, one frame at a time: frame i lasts
  * durations[i] milliseconds, then the loop wraps back to frame 0.
  *
- * Returns null until the loop starts, and for good with reduced motion. A card
- * renders null as its finished picture, the same as the loop's last frame, so
- * the server render, the entrance animation and the first loop join up without
- * a jump. The loop starts `delay` ms after mount, once the entrance has played
- * and the finished card has been on screen for a moment, and it pauses while
- * the card is scrolled out of view or the tab is hidden.
+ * The card starts on frame `start`, on the server too, and moves on as soon as
+ * it is on screen: there is no entrance before the loop. It pauses while the
+ * card is scrolled out of view or the tab is hidden.
+ *
+ * With reduced motion it returns null for good, which a card renders as its
+ * finished picture, the same as its last frame.
  *
  * Pass a module-level (or memoised) durations array, so the timers are not
  * reset on every render.
  */
-export function useHeroLoop(durations: readonly number[], delay = 4500) {
+export function useHeroLoop(durations: readonly number[], start = 0) {
   const ref = useRef<HTMLDivElement>(null)
-  const [step, setStep] = useState<number | null>(null)
+  const [step, setStep] = useState(start)
   const [running, setRunning] = useState(false)
+  // False on the server and during hydration, so both render the start frame.
+  const reduced = useSyncExternalStore(
+    subscribeToMotion,
+    () => window.matchMedia(reducedMotion).matches,
+    () => false,
+  )
 
   useEffect(() => {
     const el = ref.current
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    if (!el || reduced) return
 
     let visible = false
     const update = () => setRunning(visible && !document.hidden)
@@ -36,18 +50,15 @@ export function useHeroLoop(durations: readonly number[], delay = 4500) {
     return () => {
       observer.disconnect()
       document.removeEventListener("visibilitychange", update)
+      setRunning(false)
     }
-  }, [])
+  }, [reduced])
 
   useEffect(() => {
     if (!running) return
-    const wait = step === null ? delay : durations[step]
-    const timer = window.setTimeout(
-      () => setStep((current) => (current === null ? 0 : (current + 1) % durations.length)),
-      wait,
-    )
+    const timer = window.setTimeout(() => setStep((current) => (current + 1) % durations.length), durations[step])
     return () => window.clearTimeout(timer)
-  }, [running, step, durations, delay])
+  }, [running, step, durations])
 
-  return [ref, step] as const
+  return [ref, reduced ? null : step] as const
 }
