@@ -1,13 +1,10 @@
 "use client"
 
-import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { cn } from "cn"
 
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
-import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
-import { pages } from "@/lib/seo"
 
 /*
  * The usual route to a first launch against a Scryptic sprint, raced week by
@@ -190,17 +187,6 @@ export function LaunchRaceSection() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className={inset}>
-        <Button
-          size="lg"
-          nativeButton={false}
-          render={<Link href={pages.bookCall.path} />}
-          className="h-11 w-fit px-6 text-base"
-        >
-          Book a discovery call
-        </Button>
       </div>
     </LandingSection>
   )
