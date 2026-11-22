@@ -30,7 +30,7 @@ export default function ServicesPage() {
       <LandingHero
         title={
           <>
-            App development <span className="text-[#c3caff]">services</span> for UK founders.
+            App development <span className="pixel-in text-[#c3caff]">services</span> for UK founders.
           </>
         }
         eyebrow={{ label: siteConfig.name }}

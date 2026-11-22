@@ -121,7 +121,7 @@ export default function Home() {
       <LandingHero
         title={
           <>
-            From idea to <span className="text-[#c3caff]">MVP</span>, without hiring a dev team.
+            From idea to <span className="pixel-in text-[#c3caff]">MVP</span>, without hiring a dev team.
           </>
         }
         intro={`${siteConfig.name} is an MVP and app development studio in Brighton, building web apps and SaaS products for UK founders.`}

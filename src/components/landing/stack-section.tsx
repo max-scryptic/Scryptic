@@ -1,13 +1,17 @@
 import Image from "next/image"
 import { cn } from "cn"
 
+import { PixelDrip } from "@/components/pixel-drip"
 import { inset } from "@/lib/frame"
 import { stack } from "@/lib/stack"
 
 /**
  * A full-width band of the same Lapis as the hero, in both themes, with each
  * logo on a white tile. Like the hero, its background covers the page's guide
- * lines, with a square on each where they stop and start again.
+ * lines, with a square on each where they stop and start again. A few
+ * piles of landed drips sit on its top edge and a few short drips run off
+ * its bottom, both playing in as they scroll into view (PixelDrip), so it
+ * answers the hero's drips without lining up with them.
  */
 export function StackSection({
   title = "A stack built for a fast, scalable launch",
@@ -16,13 +20,16 @@ export function StackSection({
   title?: string
   lead?: string
 }) {
+  const band = "bg-[#2b3fd6]"
   return (
     <>
-      <div aria-hidden="true" className="rail-joint" />
+      {/* The joints sit above the band, which paints over the piles and drips. */}
+      <div aria-hidden="true" className="rail-joint z-[3]" />
+      <PixelDrip className={band} pattern="bandPiles" side="top" play="view" />
       <section
         aria-labelledby="stack-heading"
         id="stack"
-        className="scroll-mt-4 bg-[#2b3fd6] px-4 py-20 text-white sm:px-6 sm:py-24"
+        className={cn("relative z-[2] scroll-mt-4 px-4 py-20 text-white sm:px-6 sm:py-24", band)}
       >
         <div className={cn("mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16", inset)}>
           <div data-reveal="children" className="flex flex-col gap-5">
@@ -63,7 +70,8 @@ export function StackSection({
           </ul>
         </div>
       </section>
-      <div aria-hidden="true" className="rail-joint" />
+      <PixelDrip className={band} pattern="bandDrips" play="view" />
+      <div aria-hidden="true" className="rail-joint z-[3]" />
     </>
   )
 }

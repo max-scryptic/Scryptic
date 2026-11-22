@@ -290,7 +290,7 @@ export default function NoCodeMigrationPage() {
         tone="light"
         title={
           <>
-            <span className="text-primary">No-code app migration</span>, without losing a user.
+            <span className="pixel-in text-primary">No-code app migration</span>, without losing a user.
           </>
         }
         intro={`${siteConfig.name} moves Bubble, Lovable, Glide and Airtable apps to code you own, with your users and data brought across.`}

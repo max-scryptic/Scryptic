@@ -219,7 +219,7 @@ export default function MvpDevelopmentPage() {
         tone="light"
         title={
           <>
-            <span className="text-primary">MVP development</span> for UK startups, in a 2 week sprint.
+            <span className="pixel-in text-primary">MVP development</span> for UK startups, in a 2 week sprint.
           </>
         }
         intro="Fixed-price MVP development services from a UK studio, with sign-in and payments live at launch."
