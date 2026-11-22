@@ -10,7 +10,7 @@ import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { createMetadata, pages } from "@/lib/seo"
-import { launchOffer, offerPrice, services } from "@/lib/services"
+import { foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
@@ -27,7 +27,7 @@ export const metadata = createMetadata({
 const faqs = [
   {
     question: "How much does it cost to build an app with Scryptic?",
-    answer: `There are two fixed prices, both plus VAT. ${services.map((s) => `The ${s.name} is ${s.price}, a ${s.sprint}`).join(". ")}.${launchOffer ? ` For a limited time there is ${launchOffer.percentOff}% off ${launchOffer.appliesTo}, which brings them to ${services.map(offerPrice).join(" and ")}.` : ""} Both end with a week of handover after launch for bug fixes and a smooth rollout. The discovery call settles which one fits, so the price is agreed before any build starts.`,
+    answer: `There are two fixed prices, both plus VAT. ${services.map((s) => `The ${s.name} is ${s.price}, a ${s.sprint}`).join(". ")}.${foundingOfferSentence()} Both end with a week of handover after launch for bug fixes and a smooth rollout. The discovery call settles which one fits, so the price is agreed before any build starts.`,
   },
   {
     question: "How long does it take to build an app?",

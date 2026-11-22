@@ -352,7 +352,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
     {
       question: "How much does a SaaS development company charge in the UK?",
       answer:
-        `Among the UK companies we compared, published MVP prices run from about £8,000 at the low end to $50,000 or more (one company prices in US dollars), and larger consultancies such as thoughtbot and Studio Graphene do not publish rates. Ours are fixed: ${mvp.price} plus VAT for the two week MVP sprint, or ${extendedMvp.price} plus VAT for the three week Extended MVP.`,
+        `Among the other UK companies we compared, published MVP prices run from about £8,000 at the low end to $50,000 or more (one company prices in US dollars), and larger consultancies such as thoughtbot and Studio Graphene do not publish rates. Ours are fixed: ${mvp.price} plus VAT for the two week MVP sprint, or ${extendedMvp.price} plus VAT for the three week Extended MVP.`,
     },
     {
       question: "How long does it take to build a SaaS MVP?",

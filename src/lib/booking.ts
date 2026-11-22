@@ -16,7 +16,7 @@ export type BookingQuestion = {
 }
 
 /** Builds below this budget are flagged in the form so expectations are set before the call. */
-export const underMinimumBudget = "Under £10k"
+export const underMinimumBudget = "Under £7.5k"
 
 export const bookingQuestions = [
   {
@@ -37,7 +37,7 @@ export const bookingQuestions = [
   {
     name: "budget",
     label: "What budget do you have in mind for the build?",
-    options: [underMinimumBudget, "£10k to £25k", "£25k to £50k", "£50k+", "Not sure yet"],
+    options: [underMinimumBudget, "£7.5k to £25k", "£25k to £50k", "£50k+", "Not sure yet"],
   },
   {
     name: "timeline",

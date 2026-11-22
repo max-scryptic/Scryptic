@@ -16,7 +16,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { launchOffer, offerPrice, services } from "@/lib/services"
+import { foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { mobileTools } from "@/lib/stack"
 import { founder } from "@/lib/team"
@@ -128,7 +128,7 @@ const faqs: Faq[] = [
   },
   {
     question: "How much does mobile app development cost in the UK?",
-    answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} package is ${s.price} for a ${s.sprint}`).join(", and ")}.${launchOffer ? ` For a limited time there is ${launchOffer.percentOff}% off ${launchOffer.appliesTo}, bringing them to ${services.map(offerPrice).join(" and ")}.` : ""} The scope and price are agreed after the discovery call, before any build starts. Apple's developer programme (US$99 a year) and Google Play's one-off US$25 registration are paid by you, into accounts in your name.`,
+    answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} package is ${s.price} for a ${s.sprint}`).join(", and ")}.${foundingOfferSentence()} The scope and price are agreed after the discovery call, before any build starts. Apple's developer programme (US$99 a year) and Google Play's one-off US$25 registration are paid by you, into accounts in your name.`,
     link: {
       text: "What it costs to build an app in the UK, by route and type of app.",
       href: "/blog/how-much-does-it-cost-to-build-an-app-uk",

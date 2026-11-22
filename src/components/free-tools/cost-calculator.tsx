@@ -14,7 +14,7 @@ import {
   summarizeEstimate,
   type CostAnswers,
 } from "@/lib/free-tools/cost-calculator"
-import { formatPrice, launchOffer, offerPrice, weeklyRate } from "@/lib/services"
+import { formatPrice, weeklyRate } from "@/lib/services"
 
 /*
  * The MVP Cost Calculator: every question on the page, with the estimate in a
@@ -84,13 +84,6 @@ export function CostCalculator() {
           <p className="text-pretty">
             That is our <strong className="font-medium">{service.name}</strong> package: launched
             after a {service.sprint}, then a week of handover.
-            {launchOffer && (
-              <>
-                {" "}
-                With {launchOffer.percentOff}% off {launchOffer.appliesTo}, it is{" "}
-                <strong className="font-medium text-primary">{offerPrice(service)}</strong>.
-              </>
-            )}
           </p>
         )}
 

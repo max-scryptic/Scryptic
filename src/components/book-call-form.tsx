@@ -24,6 +24,7 @@ import {
   type BookingQuestion,
 } from "@/lib/booking"
 import { siteConfig } from "@/lib/site"
+import { mvp } from "@/lib/services"
 
 type Errors = Partial<Record<string, string>>
 
@@ -422,7 +423,7 @@ function QuestionSlide({
       </div>
       {question.name === "budget" && budget === underMinimumBudget && (
         <FieldDescription>
-          MVP builds start from £10,000 + VAT. The call is still worth booking: we can scope a smaller
+          MVP builds start from {mvp.price} + VAT. The call is still worth booking: we can scope a smaller
           first release, or point you to a better fit.
         </FieldDescription>
       )}

@@ -28,23 +28,35 @@ export type ServiceOffer = {
 export const currency = "GBP"
 
 /**
- * A limited discount on the next few builds, on either package. The pricing
- * section and the pricing FAQ both show it. Set to null once the last
- * discounted build is booked and the full prices come back everywhere.
+ * Founding-client slots: extra work added free to the next few builds, on
+ * either package, in return for a case study. The price stays the same; the
+ * pricing section shows it under the cards and the pricing FAQs mention it.
+ * Set to null once the last slot is booked.
  */
-export const launchOffer: {
-  percentOff: number
-  /** What the discount covers, completing "25% off ...". */
-  appliesTo: string
+export const foundingOffer: {
+  /** How many builds get it, e.g. 2. */
+  slots: number
+  /** When the slots run, completing "2 founding-client slots ...". */
+  period: string
+  /** What is added free, each completing "Free: ...". */
+  extras: string[]
+  /** What the client gives in return, completing "In return for ...". */
+  inReturn: string
 } | null = {
-  percentOff: 25,
-  appliesTo: "our next two MVPs",
+  slots: 2,
+  period: "this quarter",
+  extras: [
+    "an extra month of support after handover, for bug fixes and small changes",
+    "a launch landing page for your product, built and set up for search",
+  ],
+  inReturn: "a case study and an honest testimonial once you have launched",
 }
 
-/** The offer's price for a package, formatted like `price`, e.g. "£7,500". */
-export function offerPrice(service: ServiceOffer) {
-  if (!launchOffer) return service.price
-  return formatPrice(service.amount * (1 - launchOffer.percentOff / 100))
+/** The offer in one sentence, for FAQ answers. Empty when there is no offer. */
+export function foundingOfferSentence() {
+  if (!foundingOffer) return ""
+  const { slots, period, extras, inReturn } = foundingOffer
+  return ` ${period[0].toUpperCase()}${period.slice(1)}, ${slots} founding-client slots come at the same price with these added free: ${extras.join("; and ")}. In return we ask for ${inReturn}.`
 }
 
 const shared = {
@@ -59,8 +71,8 @@ export const services: ServiceOffer[] = [
     name: "MVP",
     sprint: "2 week development sprint",
     developmentWeeks: 1,
-    price: "£10,000",
-    amount: 10000,
+    price: "£7,500",
+    amount: 7500,
     preferred: true,
     includes: [
       "A fully built MVP, ready to take to market",
@@ -75,8 +87,8 @@ export const services: ServiceOffer[] = [
     name: "Extended MVP",
     sprint: "3 week development sprint",
     developmentWeeks: 2,
-    price: "£20,000",
-    amount: 20000,
+    price: "£15,000",
+    amount: 15000,
     includes: [
       "A fully built MVP, ready to take to market",
       "2 weeks of development by our team",
@@ -86,13 +98,13 @@ export const services: ServiceOffer[] = [
   },
 ]
 
-/** Each package on its own, for copy that quotes one, such as a blog post's "from £10,000". */
+/** Each package on its own, for copy that quotes one, such as a blog post's "from £7,500". */
 export const [mvp, extendedMvp] = services
 
-/** What a week of development costs, read off the packages: the MVP is one week for £10,000. */
+/** What a week of development costs, read off the packages: the MVP is one week for £7,500. */
 export const weeklyRate = services[0].amount / services[0].developmentWeeks
 
-/** "£10,000" for 10000. */
+/** "£7,500" for 7500. */
 export function formatPrice(amount: number) {
   return `£${Math.round(amount).toLocaleString("en-GB")}`
 }

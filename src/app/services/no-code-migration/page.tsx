@@ -18,7 +18,7 @@ import { postCategories, postsBySlug, postsInSeries } from "@/lib/blog"
 import { inset } from "@/lib/frame"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { launchOffer, offerPrice, services } from "@/lib/services"
+import { foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
@@ -135,7 +135,7 @@ const guides = postsBySlug([
 const faqs: Faq[] = [
   {
     question: "How much does it cost to migrate a no-code app?",
-    answer: `Migrations are priced like our MVPs: a fixed price, plus VAT. ${services.map((s) => `The ${s.name} is ${s.price} for a ${s.sprint}`).join(", and ")}.${launchOffer ? ` For a limited time there is ${launchOffer.percentOff}% off ${launchOffer.appliesTo}, bringing them to ${services.map(offerPrice).join(" and ")}.` : ""} Which one fits depends on the screens, workflows and integrations your app has, which the audit works out before a price is agreed.`,
+    answer: `Migrations are priced like our MVPs: a fixed price, plus VAT. ${services.map((s) => `The ${s.name} is ${s.price} for a ${s.sprint}`).join(", and ")}.${foundingOfferSentence()} Which one fits depends on the screens, workflows and integrations your app has, which the audit works out before a price is agreed.`,
   },
   {
     question: "How long does a migration take?",

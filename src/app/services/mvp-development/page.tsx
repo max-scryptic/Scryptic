@@ -17,7 +17,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { extendedMvp, launchOffer, mvp, offerPrice, services } from "@/lib/services"
+import { extendedMvp, foundingOfferSentence, mvp, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
@@ -137,7 +137,7 @@ const faqs: Faq[] = [
   },
   {
     question: "How much does MVP development cost in the UK?",
-    answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} is ${s.price} for a ${s.sprint}`).join(", and ")}.${launchOffer ? ` For a limited time there is ${launchOffer.percentOff}% off ${launchOffer.appliesTo}, bringing them to ${services.map(offerPrice).join(" and ")}.` : ""} The price is agreed after the discovery call, before any build starts, and does not change mid-sprint.`,
+    answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} is ${s.price} for a ${s.sprint}`).join(", and ")}.${foundingOfferSentence()} The price is agreed after the discovery call, before any build starts, and does not change mid-sprint.`,
     link: {
       text: "What it costs to build an app in the UK, by route and type of app.",
       href: "/blog/how-much-does-it-cost-to-build-an-app-uk",

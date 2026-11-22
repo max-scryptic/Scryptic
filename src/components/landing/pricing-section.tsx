@@ -5,14 +5,16 @@ import { CheckIcon, LandingSection, SectionHeading } from "@/components/landing/
 import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 import { pages } from "@/lib/seo"
-import { launchOffer, offerPrice, services } from "@/lib/services"
+import { foundingOffer, services } from "@/lib/services"
 
 /**
  * The fixed-price packages from @/lib/services, one card each: name and
  * sprint, the price, what is included, then the call. The preferred package
  * gets a Lapis border and a tag sitting on its top edge. Every card is
  * square-edged, with accent brackets on its corners and its top and bottom
- * edges run out across the page. Pair with serviceJsonLd() for each package.
+ * edges run out across the page. Under the cards, the founding-client
+ * banner while `foundingOffer` is set. Pair with serviceJsonLd() for each
+ * package.
  */
 export function PricingSection({
   title = "A fully built MVP, ready to take to market",
@@ -31,18 +33,6 @@ export function PricingSection({
         eyebrow="Pricing"
         title={title}
         id="pricing-heading"
-        aside={
-          launchOffer && (
-            <p className="flex flex-wrap items-center gap-x-3 gap-y-1 border border-primary/30 bg-primary/5 px-4 py-2">
-              <span className="font-mono text-xs tracking-widest text-primary uppercase">
-                Limited offer
-              </span>
-              <span>
-                {launchOffer.percentOff}% off {launchOffer.appliesTo}
-              </span>
-            </p>
-          )
-        }
       >
         {intro}
       </SectionHeading>
@@ -71,22 +61,10 @@ export function PricingSection({
               </h3>
               <p className="text-muted-foreground">{service.sprint}</p>
             </div>
-            <div className="flex flex-col gap-2">
-              {launchOffer && (
-                <p className="flex items-center gap-3 text-lg text-muted-foreground">
-                  <span className="sr-only">Usually</span>
-                  <s>{service.price}</s>
-                  <span className="bg-primary/10 px-2.5 py-0.5 font-mono text-xs tracking-widest text-primary uppercase dark:bg-primary/30 dark:text-foreground">
-                    {launchOffer.percentOff}% off
-                  </span>
-                </p>
-              )}
-              <p className="flex items-baseline gap-2">
-                {launchOffer && <span className="sr-only">Now</span>}
-                <span className="text-5xl font-semibold tracking-tight">{offerPrice(service)}</span>
-                <span className="text-lg text-muted-foreground">+ VAT</span>
-              </p>
-            </div>
+            <p className="flex items-baseline gap-2">
+              <span className="text-5xl font-semibold tracking-tight">{service.price}</span>
+              <span className="text-lg text-muted-foreground">+ VAT</span>
+            </p>
             <div className="flex flex-col gap-4">
               <h4 className="font-medium">What is included</h4>
               <ul className="flex flex-col gap-3 text-pretty">
@@ -109,6 +87,44 @@ export function PricingSection({
           </article>
         ))}
       </div>
+
+      {foundingOffer && (
+        <aside
+          aria-labelledby="founding-offer-heading"
+          className="corners flex flex-col gap-5 border border-primary/30 bg-primary/5 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10"
+        >
+          <div className="flex flex-col gap-3">
+            <p className="font-mono text-xs tracking-widest text-primary uppercase">
+              {foundingOffer.slots} slots {foundingOffer.period}
+            </p>
+            <h3 id="founding-offer-heading" className="text-xl tracking-tight text-balance">
+              Founding clients get more for the same price
+            </h3>
+            <ul className="flex flex-col gap-2 text-pretty">
+              {foundingOffer.extras.map((extra) => (
+                <li key={extra} className="flex gap-3">
+                  <CheckIcon />
+                  <span>
+                    <span className="font-medium">Free:</span> {extra}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-sm text-pretty text-muted-foreground">
+              On either package, in return for {foundingOffer.inReturn}.
+            </p>
+          </div>
+          <Button
+            size="lg"
+            variant="outline"
+            nativeButton={false}
+            render={<Link href={pages.bookCall.path} />}
+            className="h-12 shrink-0 text-base"
+          >
+            Claim a founding slot
+          </Button>
+        </aside>
+      )}
 
       {children && <div className={cn("text-pretty text-muted-foreground", inset)}>{children}</div>}
     </LandingSection>
