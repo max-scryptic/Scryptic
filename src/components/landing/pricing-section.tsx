@@ -8,26 +8,17 @@ import { pages } from "@/lib/seo"
 import { foundingOffer, mvp, services, supportPlan } from "@/lib/services"
 
 /**
- * The fixed-price packages from @/lib/services, one card each: name and
- * sprint, the price, what is included, then the call. The preferred package
- * gets a Lapis border and a tag sitting on its top edge. Every card is
- * square-edged, with accent brackets on its corners and its top and bottom
- * edges run out across the page. Under the cards, the founding-client
- * banner while `foundingOffer` is set. With `afterLaunch`, the "After launch"
- * box follows: the support plan and the other ways to carry on. Only /pricing
- * shows it. Pair with serviceJsonLd() for each package, and with
- * supportJsonLd() for the plan when the box is shown.
+ * The pricing block on the home and service pages: a heading, then the
+ * package cards and founding-client banner from <PricingCards />. Pair with
+ * serviceJsonLd() for each package.
  */
 export function PricingSection({
   title = "A fully built MVP, ready to take to market",
   intro = "Two fixed-price sprints, agreed before the build starts.",
-  afterLaunch = false,
   children,
 }: {
   title?: string
   intro?: React.ReactNode
-  /** Show the "After launch" box: the support plan and the other ways to carry on. */
-  afterLaunch?: boolean
   /** Shown under the cards, e.g. a note on what else the packages cover. */
   children?: React.ReactNode
 }) {
@@ -42,6 +33,25 @@ export function PricingSection({
         {intro}
       </SectionHeading>
 
+      <PricingCards />
+
+      {children && <div className={cn("text-pretty text-muted-foreground", inset)}>{children}</div>}
+    </LandingSection>
+  )
+}
+
+/**
+ * The fixed-price packages from @/lib/services, one card each: name and
+ * sprint, the price, what is included, then the call. The preferred package
+ * gets a Lapis border and a tag sitting on its top edge. Every card is
+ * square-edged, with accent brackets on its corners and its top and bottom
+ * edges run out across the page. Under the cards, the founding-client
+ * banner while `foundingOffer` is set. No section or heading of its own, so
+ * /pricing can place it under its <h1>.
+ */
+export function PricingCards() {
+  return (
+    <>
       <div data-reveal="children" className="grid gap-6 pt-4 md:grid-cols-2">
         {services.map((service) => (
           <article
@@ -130,16 +140,16 @@ export function PricingSection({
           </Button>
         </aside>
       )}
-
-      {afterLaunch && <AfterLaunch />}
-
-      {children && <div className={cn("text-pretty text-muted-foreground", inset)}>{children}</div>}
-    </LandingSection>
+    </>
   )
 }
 
-/** What happens once the handover week ends: the recommended support plan, another sprint, or taking it in-house. */
-function AfterLaunch() {
+/**
+ * What happens once the handover week ends: the recommended support plan,
+ * another sprint, or taking it in-house. Only /pricing shows it; pair with
+ * supportJsonLd().
+ */
+export function AfterLaunch() {
   const others = [
     {
       name: "Another sprint",

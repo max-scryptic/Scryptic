@@ -1,19 +1,18 @@
+import Link from "next/link"
+import { cn } from "cn"
+
 import { PageJsonLd } from "@/components/json-ld"
-import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
-import { LandingHero, TerminalCard } from "@/components/landing/hero"
-import { PricingSection } from "@/components/landing/pricing-section"
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { AfterLaunch, PricingCards } from "@/components/landing/pricing-section"
+import { Button } from "@/components/ui/button"
+import { inset } from "@/lib/frame"
 import { createMetadata, pages } from "@/lib/seo"
-import { services, supportPlan } from "@/lib/services"
-import { siteConfig } from "@/lib/site"
+import { services } from "@/lib/services"
 import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
 
 const page = pages.pricing
 
 export const metadata = createMetadata(page)
-
-const supportPrice = `${supportPlan.price} + VAT a ${supportPlan.per}`
 
 // Rendered in the FAQ section and emitted as FAQPage JSON-LD; keep them identical.
 const faqs: Faq[] = [
@@ -34,14 +33,9 @@ const faqs: Faq[] = [
   },
 ]
 
-const terminalLines = [
-  { prompt: true, text: "scryptic quote" },
-  ...services.map((s) => ({ prompt: false, text: `${s.name}: ${s.price} + VAT, fixed` })),
-  { prompt: true, text: "scryptic support --after-handover" },
-  { prompt: false, text: `${supportPrice}, optional` },
-  { prompt: false, text: "hosting billed to you, at cost" },
-]
-
+// Laid out like /tools and /work: a plain heading, the content, then the call
+// to action. The FAQ section brings its own page padding, so each block here
+// sets its own rather than <main>.
 export default function PricingPage() {
   return (
     <main className="flex flex-col">
@@ -53,32 +47,53 @@ export default function PricingPage() {
           faqJsonLd(page, faqs),
         ]}
       />
-      <ScrollReveal />
 
-      <LandingHero
-        eyebrow={{ label: siteConfig.name }}
-        title={
-          <>
-            Fixed prices for <span className="text-[#c3caff]">MVP</span> and app development.
-          </>
-        }
-        intro="Every build is a fixed price agreed before it starts. After launch, support is optional, and hosting is billed to you at cost."
-        secondary={{ label: "Pricing FAQs", href: "#faq" }}
-        visual={<TerminalCard lines={terminalLines} />}
-      />
-      <div aria-hidden="true" className="rail-joint" />
+      <div className="px-4 pt-32 sm:px-6 sm:pt-40">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
+          <div className={cn("flex flex-col items-start gap-6", inset)}>
+            <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
+              Fixed prices for <span className="text-primary">MVP and app development</span>
+            </h1>
+            <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
+              Every build is a fixed price agreed before it starts. After launch, support is optional, and hosting is
+              billed to you at cost.
+            </p>
+          </div>
 
-      <PricingSection title="Two packages, priced before the build" afterLaunch />
+          <section id="pricing" aria-label="Packages" className="flex flex-col gap-12">
+            <PricingCards />
+          </section>
+
+          <AfterLaunch />
+        </div>
+      </div>
 
       <FaqSection
         faqs={faqs}
-        intro="Who pays for what, whose name the accounts are in and what happens after launch."
+        intro="Who pays for what, whose name the accounts are in and why we recommend support."
       />
 
-      <ContactSection
-        title="Get a fixed price for your app"
-        text="Tell us what you want to build. You will leave the call knowing which package fits and what it costs."
-      />
+      <div className="px-4 pb-24 sm:px-6">
+        <section
+          aria-labelledby="pricing-cta-heading"
+          className="corners guides mx-auto flex w-full max-w-6xl flex-col items-start gap-4 border border-border bg-card p-6 sm:p-10"
+        >
+          <h2 id="pricing-cta-heading" className="text-2xl tracking-tight text-balance">
+            Get a fixed price for your app
+          </h2>
+          <p className="text-pretty text-muted-foreground">
+            Book a free discovery call. You will leave knowing which package fits and what it costs.
+          </p>
+          <Button
+            size="lg"
+            nativeButton={false}
+            render={<Link href={pages.bookCall.path} />}
+            className="h-11 px-6 text-base"
+          >
+            Book a discovery call
+          </Button>
+        </section>
+      </div>
     </main>
   )
 }
