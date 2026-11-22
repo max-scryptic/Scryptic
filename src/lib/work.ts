@@ -61,11 +61,15 @@ export type CaseStudy = {
   scope: string
   /** Paragraphs for "The problem". */
   problem: string[]
-  /** Paragraphs for "What we built". */
+  /** Paragraphs for "What we built". The first leads, in large type. */
   solution: string[]
+  /** Shown as numbered cards under "Features", three to a row: six reads best. */
   features: { name: string; text: string }[]
-  /** "Under the hood": the engineering worth pointing at. */
-  engineering: { name: string; text: string }[]
+  /**
+   * "Under the hood": the engineering worth pointing at. Each note leads with a
+   * figure taken from its own text: a short value and a lower-case label.
+   */
+  engineering: { name: string; figure: { value: string; label: string }; text: string }[]
   /** Every layer of the product, from the frontend to hosting, in that order. */
   stack: StackLayer[]
   /** Up to four tools for the card's chips and the page's intro panel. */
@@ -124,22 +128,27 @@ const reelEstate: CaseStudy = {
   engineering: [
     {
       name: "An AI video pipeline without a queue service",
+      figure: { value: "2", label: "ways a clip completes, one stored result" },
       text: "Each clip is a database row and a job on fal.ai. It completes through a webhook or through the page polling, whichever comes first, and a database lease makes sure only one path stores the result. The webhook body is never trusted: the app fetches the result again with its own key.",
     },
     {
       name: "Catching bad AI output automatically",
+      figure: { value: "1", label: "automatic retry before a Retry button shows" },
       text: "Video models sometimes cut to a room that does not exist. Every finished clip is decoded with ffmpeg and its frames compared against the clip's own typical change, so a sudden spike flags an invented cut. The clip is regenerated automatically, and only comes back with a Retry button if it happens twice.",
     },
     {
       name: "A steady camera, measured",
+      figure: { value: "12", label: "evenly timed keyframes per camera move" },
       text: "Moves are sent as twelve evenly timed keyframes with geometric spacing, so a zoom feels constant. Where a clip still rushes, the app measures the pace from its frames and trims to the steady part without cutting the file, so the agent can widen the trim again.",
     },
     {
       name: "Video rendering on serverless",
+      figure: { value: "0", label: "frames dropped or doubled between clips" },
       text: "Reels render in background work split into segments, claimed by workers through database leases and stitched with ffmpeg. Transitions are layered with alpha masks using the same easing as the in-browser preview, and clips at different frame rates are retimed so no frame is dropped or doubled.",
     },
     {
       name: "Credits that cannot be double-spent",
+      figure: { value: "1", label: "SQL statement takes the credit and makes the clip" },
       text: "A credit is taken in the same SQL statement that creates the clip, spending the soonest-to-expire credits first, and a failed clip refunds the balance it came from. Stripe webhooks re-read the subscription each time, so repeated or out-of-order events do no harm.",
     },
   ],
@@ -266,22 +275,27 @@ const untilThen: CaseStudy = {
   engineering: [
     {
       name: "Delivery that cannot send twice",
+      figure: { value: "15 min", label: "between checks for messages that are due" },
       text: "A cron job checks for due messages every 15 minutes, with Vercel Cron as an hourly backup. Each message is claimed with a single conditional database update, so overlapping runs can never double-send, and a partly failed send retries only the recipients still waiting.",
     },
     {
       name: "Video compressed in the browser",
+      figure: { value: "~80 MB", label: "for a ten-minute video message" },
       text: "Before upload, video is re-encoded on the device with WebCodecs to 720p at about 1 Mbps, preferring H.264 and falling back to VP9. A ten-minute message lands at around 80 MB instead of a multi-gigabyte phone file, and the encoder only loads when it is needed.",
     },
     {
       name: "Uploads straight to storage",
+      figure: { value: "0", label: "recordings passed through the app server" },
       text: "Recordings go from the browser directly to Cloudflare R2 through short-lived signed links, so large files never pass through the app server. The server then verifies what actually arrived, its size and its length, and deletes anything over the limit.",
     },
     {
       name: "Payments that cannot be lost",
+      figure: { value: "2", label: "paths to seal a message, one function" },
       text: "The Stripe webhook and the return from Checkout run the same idempotent function, so whichever arrives first seals the message. As a last check, the dispatcher refuses to send a recording that has not been paid for.",
     },
     {
       name: "Protecting a domain that sends years later",
+      figure: { value: "3", label: "checks before an address is accepted" },
       text: "A bad address may not surface for years, and every bounce hurts deliverability. Addresses are checked for likely typos, throwaway inboxes and domains that cannot receive mail, and a signed webhook feeds bounces and complaints into a suppression list.",
     },
   ],
@@ -402,22 +416,27 @@ const viewlio: CaseStudy = {
   engineering: [
     {
       name: "Filtering noise before the AI runs",
+      figure: { value: "1.8×", label: "steeper than normal before a drop counts" },
       text: "A drop only counts if it falls about 1.8 times steeper than the video's own typical decline, or underperforms similar videos, and small neighbouring dips merge into one moment. The model never gets asked to invent a reason for ordinary decay.",
     },
     {
       name: "Measured facts, not guesses",
+      figure: { value: "5", label: "signals measured before the model runs" },
       text: "ffmpeg detects hard cuts, freeze frames, cuts to black, loudness and silence, and Tesseract reads on-screen text offline. Those measurements go to the vision model as facts, so its explanations are grounded in what is actually on screen.",
     },
     {
       name: "Long jobs on short-lived servers",
+      figure: { value: "0", label: "reports lost when the tab closes" },
       text: "A deep dive can run longer than a serverless function is allowed to. Each pass hands off to a fresh one when time runs short, leases stop two passes working on the same video, and a pg_cron watchdog restarts stalled analyses, so a report finishes even after the creator closes the tab.",
     },
     {
       name: "Multi-gigabyte uploads",
+      figure: { value: "Multi-GB", label: "source files, uploaded in chunks" },
       text: "Browsers upload source files straight to Cloudflare R2 in multipart chunks. Each upload is transcoded to a lightweight proxy, the original is deleted once the proxy exists, and ffmpeg seeks straight to each moment over a signed URL instead of downloading the whole file.",
     },
     {
       name: "Billing and cost control",
+      figure: { value: "100%", label: "of model calls have their cost logged" },
       text: "Stripe webhooks keep subscriptions in sync and credits are metered per minute of footage. Every model call's cost is logged, and an admin panel edits prompts with version history.",
     },
   ],
@@ -543,22 +562,27 @@ const prettyMetrics: CaseStudy = {
   engineering: [
     {
       name: "Video encoded in the browser",
+      figure: { value: "3", label: "codecs tried: H.264, VP9 and AV1" },
       text: "The card is captured once as a transparent image, then each frame paints the animated scene underneath it. Frames go to the browser's own video encoder, H.264 first with VP9 and AV1 as fallbacks, and every clip is exactly one loop long so it repeats without a seam.",
     },
     {
       name: "Animated scenes in plain canvas",
+      figure: { value: "~9,000", label: "lines of hand-written canvas scenes" },
       text: "Around 9,000 lines of hand-written canvas scenes, each a function that paints one moment and loops exactly. Pixel-art scenes draw on a small fixed grid and scale up, so the preview and the exported file match at any size.",
     },
     {
       name: "Brand colours read from a website",
+      figure: { value: "4", label: "places a site's colours are read from" },
       text: "The server collects the colours a site declares, from its theme colour, manifest, CSS variables and SVG logo, groups near-identical shades and picks a primary and a clearly different secondary in a perceptual colour space. Every fetch is checked against private network addresses, so the URL box cannot probe the server.",
     },
     {
       name: "One model for seven provider APIs",
+      figure: { value: "7", label: "provider APIs on one monthly grid" },
       text: "Each provider's data is mapped onto the same monthly grid. Stripe has no MRR history, so it is rebuilt from subscriptions. Mixed currencies are never summed, a product with one unreadable provider fails rather than showing a total that is too low, and derived metrics are calculated in the browser.",
     },
     {
       name: "Keys that only work for their owner",
+      figure: { value: "AES-256", label: "encryption, bound to the owning account" },
       text: "Provider keys are encrypted with AES-256-GCM and bound to the owning account, so a copied ciphertext will not decrypt anywhere else. Stripe webhook signatures are verified directly, and production refuses test keys.",
     },
   ],
@@ -689,22 +713,27 @@ const getOutOfBed: CaseStudy = {
   engineering: [
     {
       name: "Alarms that ring on time, even in Doze",
+      figure: { value: "1", label: "alarm scheduled at a time, the soonest" },
       text: "Alarms are set with setAlarmClock, the call Android's own clock app uses, so they fire exactly on time in battery-saving Doze mode. Only the soonest alarm is ever scheduled and each ring schedules the next, so an edited or deleted alarm never leaves a stale one behind. Restarts, clock and time zone changes and app updates all reschedule, before the phone is even unlocked.",
     },
     {
       name: "A ring that keeps going",
+      figure: { value: "60 s", label: "between checks that it is still ringing" },
       text: "The sound plays from a foreground service separate from the mission screen, so a crash or a closed screen does not silence it. Every minute it rings, a check confirms it is still making a sound and restarts it if Android killed it. If Android refuses to start the sound at all, a fallback notification plays the phone's own alarm tone on repeat until the missions are open.",
     },
     {
       name: "Missed alarms reported, not discovered",
+      figure: { value: "1 min", label: "late is enough to report an alarm" },
       text: "Each scheduled time and each actual ring is recorded. If an alarm was due and never rang, because the phone was off or a manufacturer's battery saver stopped it, the app says so with a notification and a card. An alarm that rang over a minute late is reported too, so a silent failure is caught the first time, not by oversleeping again.",
     },
     {
       name: "Photo matching on the phone",
+      figure: { value: "2", label: "matching frames in a row to pass" },
       text: "The photo mission compares the camera with the saved reference using a MobileNet image embedder through MediaPipe, plus a check that the outlines line up, from Sobel edge maps compared at small shifts. Each colour channel is stretched first, so a dim, lamp-lit shot of the right spot passes while a different spot in the same room fails. Two matching frames in a row are needed, and no photo leaves the phone.",
     },
     {
       name: "Premium that never breaks an alarm",
+      figure: { value: "0", label: "accounts needed to buy Premium" },
       text: "Purchases run through Google Play Billing and RevenueCat, linked to a random ID rather than an account. Premium status is kept on the phone, so an alarm knows what it may do offline or straight after a restart. Losing Premium deletes nothing: a photo mission falls back to another mission, or maths, so the alarm can always be stopped.",
     },
   ],

@@ -44,6 +44,34 @@ function ExternalIcon() {
   )
 }
 
+/** A note's first sentence and the rest, so the first can lead in the foreground colour. */
+function splitLede(text: string): [string, string] {
+  const match = text.match(/^(.+?[.!?])\s+(?=[A-Z])/)
+  if (!match) return [text, ""]
+  return [match[1], text.slice(match[0].length)]
+}
+
+function SectionHeading({
+  id,
+  eyebrow,
+  title,
+  className,
+}: {
+  id: string
+  eyebrow: string
+  title: string
+  className?: string
+}) {
+  return (
+    <div className={cn("flex flex-col gap-3", className)}>
+      <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
+      <h2 id={id} className="text-2xl tracking-tight text-balance sm:text-3xl">
+        {title}
+      </h2>
+    </div>
+  )
+}
+
 function Section({
   id,
   eyebrow,
@@ -60,12 +88,7 @@ function Section({
       aria-labelledby={id}
       className={cn("grid gap-8 pt-12 lg:grid-cols-[1fr_2fr] lg:gap-14", inset)}
     >
-      <div className="flex flex-col gap-3">
-        <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
-        <h2 id={id} className="text-2xl tracking-tight text-balance sm:text-3xl">
-          {title}
-        </h2>
-      </div>
+      <SectionHeading id={id} eyebrow={eyebrow} title={title} />
       <div className="flex flex-col gap-6">{children}</div>
     </section>
   )
@@ -81,6 +104,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const index = caseStudies.indexOf(study)
   const next = caseStudies[(index + 1) % caseStudies.length]
   const appScreens = study.appScreens ?? []
+  const [lead, ...moreSolution] = study.solution
 
   return (
     <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
@@ -162,21 +186,37 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           ))}
         </Section>
 
-        <Section id="solution-heading" eyebrow="The product" title="What we built">
-          {study.solution.map((paragraph) => (
-            <p key={paragraph} className="text-lg text-pretty text-muted-foreground">
-              {paragraph}
-            </p>
-          ))}
-          <ul className="ticks grid gap-px border border-border bg-border sm:grid-cols-2">
-            {study.features.map((feature) => (
-              <li key={feature.name} className="flex flex-col gap-2 bg-card p-6">
-                <h3>{feature.name}</h3>
-                <p className="text-sm text-pretty text-muted-foreground">{feature.text}</p>
-              </li>
-            ))}
-          </ul>
-        </Section>
+        <section aria-labelledby="solution-heading" className="flex flex-col gap-12 pt-12">
+          <div className={cn("grid gap-8 lg:grid-cols-[1fr_2fr] lg:gap-14", inset)}>
+            <SectionHeading id="solution-heading" eyebrow="The product" title="What we built" />
+            <div className="flex flex-col gap-5">
+              <p className="text-2xl/snug tracking-tight text-pretty sm:text-3xl/snug">{lead}</p>
+              {moreSolution.map((paragraph) => (
+                <p key={paragraph} className="text-lg text-pretty text-muted-foreground">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-8">
+            <div className={cn("flex items-center gap-4", inset)}>
+              <h3 className="font-mono text-xs tracking-widest text-primary uppercase">Features</h3>
+              <span aria-hidden="true" className="h-px flex-1 bg-border" />
+            </div>
+            <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {study.features.map((feature, i) => (
+                <li key={feature.name} className="pip flex flex-col gap-3 border border-border bg-card p-6">
+                  <span aria-hidden="true" className="font-mono text-xs text-primary">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h4 className="text-lg">{feature.name}</h4>
+                  <p className="text-sm text-pretty text-muted-foreground">{feature.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
 
         {study.gallery.length > 0 || appScreens.length > 0 ? (
           <section aria-labelledby="screens-heading" className="flex flex-col gap-8 pt-12">
@@ -222,16 +262,38 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           </section>
         ) : null}
 
-        <Section id="engineering-heading" eyebrow="Under the hood" title="The engineering">
-          <ul className="flex flex-col divide-y divide-border border-y border-border">
-            {study.engineering.map((item) => (
-              <li key={item.name} className="flex flex-col gap-2 py-6">
-                <h3 className="text-lg">{item.name}</h3>
-                <p className="text-pretty text-muted-foreground">{item.text}</p>
-              </li>
-            ))}
-          </ul>
-        </Section>
+        <section aria-labelledby="engineering-heading" className="flex flex-col gap-10 pt-12">
+          <SectionHeading
+            id="engineering-heading"
+            eyebrow="Under the hood"
+            title="The engineering"
+            className={cn("max-w-3xl", inset)}
+          />
+          <ol className="grid gap-4 md:grid-cols-6">
+            {study.engineering.map((item, i) => {
+              const [lede, rest] = splitLede(item.text)
+              return (
+                <li
+                  key={item.name}
+                  className={cn(
+                    "ticks flex flex-col gap-5 border border-border bg-card p-6 sm:p-8",
+                    // Three across, then the rest in pairs.
+                    i < 3 ? "md:col-span-2" : "md:col-span-3",
+                  )}
+                >
+                  <p className="flex flex-col gap-1 border-b border-border pb-5">
+                    <span className="text-5xl tracking-tight text-primary">{item.figure.value}</span>
+                    <span className="font-mono text-xs text-muted-foreground">{item.figure.label}</span>
+                  </p>
+                  <h3 className="text-lg">{item.name}</h3>
+                  <p className="text-sm text-pretty text-muted-foreground">
+                    <span className="text-foreground">{lede}</span> {rest}
+                  </p>
+                </li>
+              )
+            })}
+          </ol>
+        </section>
 
         <section
           id="stack"
