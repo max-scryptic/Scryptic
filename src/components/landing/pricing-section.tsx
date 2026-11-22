@@ -5,14 +5,17 @@ import { CheckIcon, LandingSection, SectionHeading } from "@/components/landing/
 import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 import { pages } from "@/lib/seo"
-import { launchOffer, offerPrice, services } from "@/lib/services"
+import { foundingOffer, mvp, services, supportPlan } from "@/lib/services"
 
 /**
  * The fixed-price packages from @/lib/services, one card each: name and
  * sprint, the price, what is included, then the call. The preferred package
  * gets a Lapis border and a tag sitting on its top edge. Every card is
  * square-edged, with accent brackets on its corners and its top and bottom
- * edges run out across the page. Pair with serviceJsonLd() for each package.
+ * edges run out across the page. Under the cards, the founding-client
+ * banner while `foundingOffer` is set, then the "After launch" box: the
+ * support plan and the other ways to carry on. Pair with serviceJsonLd() for
+ * each package and supportJsonLd() for the plan.
  */
 export function PricingSection({
   title = "A fully built MVP, ready to take to market",
@@ -31,18 +34,6 @@ export function PricingSection({
         eyebrow="Pricing"
         title={title}
         id="pricing-heading"
-        aside={
-          launchOffer && (
-            <p className="flex flex-wrap items-center gap-x-3 gap-y-1 border border-primary/30 bg-primary/5 px-4 py-2">
-              <span className="font-mono text-xs tracking-widest text-primary uppercase">
-                Limited offer
-              </span>
-              <span>
-                {launchOffer.percentOff}% off {launchOffer.appliesTo}
-              </span>
-            </p>
-          )
-        }
       >
         {intro}
       </SectionHeading>
@@ -71,22 +62,10 @@ export function PricingSection({
               </h3>
               <p className="text-muted-foreground">{service.sprint}</p>
             </div>
-            <div className="flex flex-col gap-2">
-              {launchOffer && (
-                <p className="flex items-center gap-3 text-lg text-muted-foreground">
-                  <span className="sr-only">Usually</span>
-                  <s>{service.price}</s>
-                  <span className="bg-primary/10 px-2.5 py-0.5 font-mono text-xs tracking-widest text-primary uppercase dark:bg-primary/30 dark:text-foreground">
-                    {launchOffer.percentOff}% off
-                  </span>
-                </p>
-              )}
-              <p className="flex items-baseline gap-2">
-                {launchOffer && <span className="sr-only">Now</span>}
-                <span className="text-5xl font-semibold tracking-tight">{offerPrice(service)}</span>
-                <span className="text-lg text-muted-foreground">+ VAT</span>
-              </p>
-            </div>
+            <p className="flex items-baseline gap-2">
+              <span className="text-5xl font-semibold tracking-tight">{service.price}</span>
+              <span className="text-lg text-muted-foreground">+ VAT</span>
+            </p>
             <div className="flex flex-col gap-4">
               <h4 className="font-medium">What is included</h4>
               <ul className="flex flex-col gap-3 text-pretty">
@@ -110,7 +89,126 @@ export function PricingSection({
         ))}
       </div>
 
+      {foundingOffer && (
+        <aside
+          aria-labelledby="founding-offer-heading"
+          className="corners flex flex-col gap-5 border border-primary/30 bg-primary/5 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10"
+        >
+          <div className="flex flex-col gap-3">
+            <p className="font-mono text-xs tracking-widest text-primary uppercase">
+              {foundingOffer.slots} slots {foundingOffer.period}
+            </p>
+            <h3 id="founding-offer-heading" className="text-xl tracking-tight text-balance">
+              Founding clients get more for the same price
+            </h3>
+            <ul className="flex flex-col gap-2 text-pretty">
+              {foundingOffer.extras.map((extra) => (
+                <li key={extra} className="flex gap-3">
+                  <CheckIcon />
+                  <span>
+                    <span className="font-medium">Free:</span> {extra}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-sm text-pretty text-muted-foreground">
+              On either package, in return for {foundingOffer.inReturn}.
+            </p>
+          </div>
+          <Button
+            size="lg"
+            variant="outline"
+            nativeButton={false}
+            render={<Link href={pages.bookCall.path} />}
+            className="h-12 shrink-0 text-base"
+          >
+            Claim a founding slot
+          </Button>
+        </aside>
+      )}
+
+      <AfterLaunch />
+
       {children && <div className={cn("text-pretty text-muted-foreground", inset)}>{children}</div>}
     </LandingSection>
+  )
+}
+
+/** What happens once the handover week ends: the recommended support plan, another sprint, or taking it in-house. */
+function AfterLaunch() {
+  const others = [
+    {
+      name: "Another sprint",
+      price: `From ${mvp.price} + VAT`,
+      text: "For bigger features, once real users show what to build next. Priced like the packages, before the work starts.",
+    },
+    {
+      name: "Take it in-house",
+      price: "Free",
+      text: "The code, hosting and accounts are yours from day one, so your own developer can pick it up with nothing to transfer.",
+    },
+  ]
+
+  return (
+    <section
+      aria-labelledby="after-launch-heading"
+      className="corners guides flex flex-col gap-8 border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
+    >
+      <div className="flex flex-col gap-2">
+        <p className="font-mono text-xs tracking-widest text-primary uppercase">After launch</p>
+        <h3 id="after-launch-heading" className="text-2xl tracking-tight text-balance">
+          What happens after the handover week
+        </h3>
+      </div>
+
+      <div className="grid gap-8 lg:grid-cols-[3fr_2fr] lg:gap-10">
+        <article
+          id={supportPlan.id}
+          aria-labelledby={`${supportPlan.id}-name`}
+          className="relative flex scroll-mt-28 flex-col gap-5 border-2 border-primary p-6"
+        >
+          <p className="absolute -top-3.5 right-6 bg-primary px-4 py-1 font-mono text-xs tracking-widest text-primary-foreground uppercase">
+            Recommended
+          </p>
+          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <h4 id={`${supportPlan.id}-name`} className="text-xl tracking-tight">
+              {supportPlan.name}
+            </h4>
+            <p className="flex items-baseline gap-2">
+              <span className="text-3xl font-semibold tracking-tight">{supportPlan.price}</span>
+              <span className="text-muted-foreground">+ VAT a {supportPlan.per}</span>
+            </p>
+          </div>
+          <ul className="grid gap-3 text-pretty sm:grid-cols-2">
+            {supportPlan.includes.map((item) => (
+              <li key={item} className="flex gap-3">
+                <CheckIcon />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p className="text-sm text-pretty text-muted-foreground">
+            <span className="font-medium text-foreground">{supportPlan.terms}.</span> {supportPlan.why}
+          </p>
+        </article>
+
+        <div className="flex flex-col gap-6">
+          {others.map((option) => (
+            <div key={option.name} className="flex flex-col gap-1.5 border-l-2 border-border pl-5">
+              <h4 className="flex flex-wrap items-baseline justify-between gap-x-4 font-medium">
+                {option.name}
+                <span className="font-mono text-sm font-normal text-muted-foreground">{option.price}</span>
+              </h4>
+              <p className="text-pretty text-muted-foreground">{option.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <p className="border-t border-border pt-5 text-sm text-pretty text-muted-foreground">
+        Hosting and third-party services, such as email sending and payments, are billed to you
+        directly at cost, in accounts in your name.
+      </p>
+    </section>
   )
 }

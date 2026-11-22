@@ -10,7 +10,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { inset } from "@/lib/frame"
 import { createMetadata, pages } from "@/lib/seo"
 import { servicePages } from "@/lib/service-pages"
-import { offerPrice, services } from "@/lib/services"
+import { services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
 
@@ -69,7 +69,7 @@ export default function ServicesPage() {
               </ul>
               <p className="flex items-baseline gap-2">
                 <span className="text-muted-foreground">From</span>
-                <span className="text-3xl font-semibold tracking-tight">{offerPrice(entryPackage)}</span>
+                <span className="text-3xl font-semibold tracking-tight">{entryPackage.price}</span>
                 <span className="text-muted-foreground">+ VAT</span>
               </p>
               <Button

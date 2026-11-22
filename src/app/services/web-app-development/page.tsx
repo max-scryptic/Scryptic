@@ -23,10 +23,10 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { extendedMvp, launchOffer, mvp, offerPrice, services } from "@/lib/services"
+import { extendedMvp, afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, mvp, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
-import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
+import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
 
 const page = pages.webAppDevelopment
 
@@ -144,7 +144,7 @@ const faqs: Faq[] = [
   },
   {
     question: "How much does web app development cost in the UK?",
-    answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} package is ${s.price} for a ${s.sprint}`).join(", and ")}.${launchOffer ? ` For a limited time there is ${launchOffer.percentOff}% off ${launchOffer.appliesTo}, bringing them to ${services.map(offerPrice).join(" and ")}.` : ""} The packages are named for a first release, and a web app is priced the same way: the scope and price are agreed after the discovery call, before any build starts.`,
+    answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} package is ${s.price} for a ${s.sprint}`).join(", and ")}.${foundingOfferSentence()}${supportPriceSentence()} The packages are named for a first release, and a web app is priced the same way: the scope and price are agreed after the discovery call, before any build starts.`,
     link: {
       text: "What it costs to build an app in the UK, by route and type of app.",
       href: "/blog/how-much-does-it-cost-to-build-an-app-uk",
@@ -215,6 +215,10 @@ const faqs: Faq[] = [
     answer: `${founder.name}, the founder, a full-stack developer with five years of experience building software for enterprise clients and startups. You work with the same person from the discovery call to launch day, with a video demo every Friday.`,
   },
   {
+    question: "What happens after launch, and what does support cost?",
+    answer: afterLaunchAnswer(),
+  },
+  {
     question: "Who owns the web app once it is built?",
     answer:
       "You do. The code lives in your repository, and the hosting, database, storage and payment accounts are in your name and handed over at launch. Any developer you hire later can run and deploy it without us.",
@@ -231,6 +235,7 @@ export default function WebAppDevelopmentPage() {
           ...services.map((service) =>
             serviceJsonLd(page, { ...service, serviceType: "Web application development" }),
           ),
+          supportJsonLd(page),
           faqJsonLd(page, faqs),
         ]}
       />

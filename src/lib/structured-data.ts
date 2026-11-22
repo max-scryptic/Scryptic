@@ -15,7 +15,7 @@ import type {
 
 import type { FreeTool } from "@/lib/free-tools"
 import { pages, type PageEntry } from "@/lib/seo"
-import { currency, type ServiceOffer } from "@/lib/services"
+import { currency, supportPlan, type ServiceOffer } from "@/lib/services"
 import { absoluteUrl, siteConfig } from "@/lib/site"
 import type { CaseStudy } from "@/lib/work"
 
@@ -196,6 +196,37 @@ export function serviceJsonLd(page: PageEntry, service: ServiceOffer): Service {
         price: service.amount,
         priceCurrency: currency,
         valueAddedTaxIncluded: false,
+      },
+    },
+  }
+}
+
+/** The monthly support plan, shown in the pricing section's "After launch" box on `page`. */
+export function supportJsonLd(page: PageEntry): Service {
+  const url = `${absoluteUrl(page.path)}#${supportPlan.id}`
+
+  return {
+    "@type": "Service",
+    "@id": url,
+    name: supportPlan.name,
+    serviceType: supportPlan.serviceType,
+    description: `${supportPlan.includes.join(". ")}. ${supportPlan.terms}.`,
+    url,
+    provider: { "@id": ids.organization },
+    areaServed: { "@type": "Country", name: supportPlan.areaServed },
+    offers: {
+      "@type": "Offer",
+      url,
+      price: supportPlan.amount,
+      priceCurrency: currency,
+      // Billed monthly, plus VAT.
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: supportPlan.amount,
+        priceCurrency: currency,
+        valueAddedTaxIncluded: false,
+        unitCode: "MON",
+        unitText: supportPlan.per,
       },
     },
   }

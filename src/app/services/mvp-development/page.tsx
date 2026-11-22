@@ -17,9 +17,9 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { extendedMvp, launchOffer, mvp, offerPrice, services } from "@/lib/services"
+import { extendedMvp, afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, mvp, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
-import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
+import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
 
 const page = pages.mvpDevelopment
 
@@ -137,7 +137,7 @@ const faqs: Faq[] = [
   },
   {
     question: "How much does MVP development cost in the UK?",
-    answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} is ${s.price} for a ${s.sprint}`).join(", and ")}.${launchOffer ? ` For a limited time there is ${launchOffer.percentOff}% off ${launchOffer.appliesTo}, bringing them to ${services.map(offerPrice).join(" and ")}.` : ""} The price is agreed after the discovery call, before any build starts, and does not change mid-sprint.`,
+    answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} is ${s.price} for a ${s.sprint}`).join(", and ")}.${foundingOfferSentence()}${supportPriceSentence()} The price is agreed after the discovery call, before any build starts, and does not change mid-sprint.`,
     link: {
       text: "What it costs to build an app in the UK, by route and type of app.",
       href: "/blog/how-much-does-it-cost-to-build-an-app-uk",
@@ -203,9 +203,8 @@ const faqs: Faq[] = [
     },
   },
   {
-    question: "What happens after the MVP launches?",
-    answer:
-      "A week of handover and support for bug fixes and a smooth rollout, then the code, hosting and accounts are yours. You can book another sprint once real users show what to build next, or hand the codebase to your own developer.",
+    question: "What happens after launch, and what does support cost?",
+    answer: afterLaunchAnswer(),
   },
   {
     question: "Who owns the MVP once it is built?",
@@ -219,7 +218,11 @@ export default function MvpDevelopmentPage() {
     <main className="flex flex-col">
       <PageJsonLd
         page={page}
-        nodes={[...services.map((service) => serviceJsonLd(page, service)), faqJsonLd(page, faqs)]}
+        nodes={[
+          ...services.map((service) => serviceJsonLd(page, service)),
+          supportJsonLd(page),
+          faqJsonLd(page, faqs),
+        ]}
       />
       <ScrollReveal />
 
