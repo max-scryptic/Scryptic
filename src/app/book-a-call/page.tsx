@@ -13,15 +13,15 @@ export const metadata = createMetadata(pages.bookCall)
 const agenda = [
   {
     name: "Your idea or product",
-    text: "What you are building, who it is for and where it is stuck. If something already exists, we look at it together.",
+    text: "What you are building, who it is for and where it is stuck.",
   },
   {
-    name: "Straight advice",
-    text: "An honest view on scope, stack and which package fits, including what is not worth building yet. Useful even if we are not the right fit.",
+    name: "Our recommendation",
+    text: "The right scope, stack and package for you.",
   },
   {
     name: "A clear next step",
-    text: "If it makes sense to work together, the scope and price are agreed before anything starts. The MVP launches after a 2 week sprint, followed by a week of handover.",
+    text: "A fixed scope and price, then a 2 week sprint to launch.",
   },
 ]
 
