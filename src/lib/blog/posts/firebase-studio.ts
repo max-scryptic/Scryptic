@@ -231,7 +231,7 @@ export const firebaseStudio: BlogPost = {
         {
           type: "paragraph",
           text: "If you'd rather hand it over, we move Studio apps into a repository you own, keep the URL and the users, and set up deploys from there, usually within one of our fixed-price sprints.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },

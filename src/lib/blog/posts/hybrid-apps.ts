@@ -194,7 +194,7 @@ export const hybridApps: BlogPost = {
         {
           type: "paragraph",
           text: "We build first releases as web apps that work on any phone, with the business rules on the server. That keeps every route in this post open: wrap it, add a native app, or leave it in the browser until customers ask for more.",
-          link: { text: "See what each package includes.", href: "/#pricing" },
+          link: { text: "See what each package includes.", href: "/pricing" },
         },
       ],
     },

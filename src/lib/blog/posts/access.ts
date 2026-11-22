@@ -217,7 +217,7 @@ export const access: BlogPost = {
         {
           type: "paragraph",
           text: "The table move plus a first area of the business often fits one of our fixed-price sprints.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },

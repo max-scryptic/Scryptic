@@ -355,7 +355,7 @@ export const webAppWithPython: BlogPost = {
         {
           type: "paragraph",
           text: "A prototype that already does one job is a good starting point for a fixed-price build.",
-          link: { text: "Our fixed-price packages and what they cover.", href: "/#pricing" },
+          link: { text: "Our fixed-price packages and what they cover.", href: "/pricing" },
         },
       ],
     },

@@ -273,7 +273,7 @@ export const digitalProductAgency: BlogPost = {
         {
           type: "paragraph",
           text: "That works when you arrive knowing who the app is for. If you don't, hiring an agency for discovery alone and taking its outputs to a build studio is a sensible split, and the list of discovery outputs above is how you make sure they travel. We'll price a build from another team's discovery as readily as from our own calls.",
-          link: { text: "Compare our two fixed-price packages.", href: "/#pricing" },
+          link: { text: "Compare our two fixed-price packages.", href: "/pricing" },
         },
       ],
     },

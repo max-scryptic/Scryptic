@@ -202,7 +202,7 @@ export const filemaker: BlogPost = {
         {
           type: "paragraph",
           text: "For a single department or a smaller solution, the first phase often fits one of our fixed-price sprints.",
-          link: { text: "See what a fixed-price sprint includes", href: "/#pricing" },
+          link: { text: "See what a fixed-price sprint includes", href: "/pricing" },
         },
       ],
     },
