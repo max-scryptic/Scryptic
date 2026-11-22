@@ -115,6 +115,11 @@ export const automationsToSaas: BlogPost = {
         },
         {
           type: "paragraph",
+          text: "A step that calls a model, such as an OpenAI node that drafts replies or sorts incoming documents, moves across the same way. Its prompt, the documents it reads and the actions it's allowed to take become code you can test, and what it returns gets checked before anything acts on it.",
+          link: { text: "How to build your own AI on a model you don't have to train.", href: "/blog/build-your-own-ai" },
+        },
+        {
+          type: "paragraph",
           text: `Keep the old automations running for existing clients until the product can serve them, then move them across one at a time. When we build this kind of first version, it's a fixed price per sprint: two weeks at ${mvp.price} + VAT, or three at ${extendedMvp.price} + VAT. If your workflows need more than that, we'll say so before quoting.`,
         },
       ],

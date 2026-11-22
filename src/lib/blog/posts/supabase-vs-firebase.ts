@@ -100,6 +100,11 @@ export const supabaseVsFirebase: BlogPost = {
           type: "paragraph",
           text: "Leaving Firebase means redesigning Firestore documents as tables and undoing the duplicated data, exporting Firebase Auth users, rewriting every security rule, and replacing every Firebase SDK call in the app. One helpful detail: the Auth export includes password hashes, so users can move without a forced reset if the new system supports Firebase's hashing. It's weeks of work, not a setting.",
         },
+        {
+          type: "paragraph",
+          text: "Firebase itself isn't going away. Google is closing Firebase Studio, its AI development environment in the browser, on 22 March 2027 and deleting every workspace still in it that day, but Firestore, Authentication and everything else running in your Firebase project carry on.",
+          link: { text: "What to copy out of Firebase Studio before 22 March 2027.", href: "/blog/migrate-from-firebase-studio" },
+        },
       ],
     },
     {

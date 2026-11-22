@@ -49,6 +49,11 @@ export const selfHostingN8n: BlogPost = {
           type: "paragraph",
           text: "At the time of writing a suitable VPS typically costs somewhere around £5 to £25 a month, with a managed database or backup storage adding a little more. Size memory generously rather than CPU: workflows that handle large files or long AI responses hold that data in memory, and running out of memory is the most common way a small instance falls over.",
         },
+        {
+          type: "paragraph",
+          text: "If neither running a server nor paying for n8n Cloud suits you, or the licence rules out what you have in mind, another tool may fit better: Make if you want someone else to host it, Activepieces if you want open source you run yourself.",
+          link: { text: "Hosted and open source n8n alternatives compared.", href: "/blog/n8n-alternatives" },
+        },
       ],
     },
     {

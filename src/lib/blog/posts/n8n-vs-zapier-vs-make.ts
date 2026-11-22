@@ -142,6 +142,11 @@ export const n8nVsZapierVsMake: BlogPost = {
           text: "Self-hosting isn't free, just differently priced: someone has to patch it, back it up and notice when it stops. Plenty of teams end up running two tools, keeping Zapier for quick team automations and moving the high-volume, business-critical ones to n8n, where they're cheaper and easier to version.",
           link: { text: "What running n8n on your own server involves.", href: "/blog/self-hosting-n8n" },
         },
+        {
+          type: "paragraph",
+          text: "If n8n is nearly right but one thing rules it out, such as its licence, the server or the canvas once workflows grow long, the tools that replace it sort into a few groups by the reason you're leaving.",
+          link: { text: "n8n alternatives, grouped by what you need instead.", href: "/blog/n8n-alternatives" },
+        },
       ],
     },
     {
