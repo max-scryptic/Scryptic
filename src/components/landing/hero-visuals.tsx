@@ -11,9 +11,9 @@ import { useHeroLoop } from "@/components/landing/use-hero-loop"
  * heroes share a layout but not a picture. Each sits in a HeroWindow, which
  * hides it from assistive tech: the copy beside it says the same thing.
  *
- * Every card keeps moving, from the moment the page loads: there is no
- * entrance, the card starts on the first frame of a short story of the work and
- * loops through it: commands typing out, a sprint filling in, records
+ * Every card keeps moving. It comes in whole on load (.hero-card in
+ * globals.css), already showing the first frame of a short story of the work,
+ * then loops through that story as it lands: commands typing out, a sprint filling in, records
  * moving through a workflow, builds going to review, data being copied. Each
  * story is a list of frames stepped by useHeroLoop; the services card's
  * packets and the migration card's builder tile loop in CSS alone.
@@ -506,8 +506,9 @@ export function ServicesVisual() {
     { name: "No-code migration", steps: ["Bubble app", "Rebuild", "Code you own"] },
   ]
   // The packets' loop (hero-packet in globals.css) is 4s: each track starts a
-  // second after the one above, and each leg takes a quarter of the loop.
-  const delay = (track: number, leg: number) => ({ animationDelay: `${track + leg}s` })
+  // second after the one above, and each leg takes a quarter of the loop. The
+  // first sets off as the card lands (.hero-card in globals.css).
+  const delay = (track: number, leg: number) => ({ animationDelay: `${1.1 + track + leg}s` })
 
   return (
     <HeroWindow label="services" status="4 ways in">

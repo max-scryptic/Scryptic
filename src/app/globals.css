@@ -339,11 +339,16 @@
   }
 
   /* Landing heroes (components/landing/hero.tsx), on load: the copy rises in
-     line by line. The card beside it has no entrance; it starts its loop
-     straight away (components/landing/hero-visuals.tsx). */
+     line by line, and the card beside it comes in whole, rising and scaling up
+     into place. Nothing inside the card is staggered; once it has landed it
+     starts its loop (components/landing/hero-visuals.tsx, useHeroLoop's
+     `entrance`, which matches this delay plus duration). */
   .hero-rise > * {
     animation: rise 0.8s var(--ease-out) backwards;
     animation-delay: calc(100ms + var(--i, 0) * 120ms);
+  }
+  .hero-card {
+    animation: zoom-in 0.9s var(--ease-out) 250ms backwards;
   }
   /* The migration card's source tile cycles through builders, each shown for
      a quarter of the loop (negative delays start each one at its turn). */
