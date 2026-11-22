@@ -57,6 +57,22 @@ const paths = {
   ),
   screen: <path d="M3 4h18v12H3zM8 20h8M12 16v4" />,
   spark: <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6" />,
+  film: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4" />
+    </>
+  ),
+  camera: (
+    <>
+      <path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <circle cx="12" cy="13" r="3.5" />
+    </>
+  ),
+  scan: <path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M8 9h8M12 9v7" />,
+  brush: (
+    <path d="M19 3 9.5 12.5M11 14l-1.5-1.5M9.5 12.5C7 12.5 5.5 14 5.5 16.5c0 1.5-1 2.5-2.5 3 1.5 1 3.5 1.5 5.5.5 2-1 3-3 2.5-6z" />
+  ),
 } as const
 
 export type IconName = keyof typeof paths

@@ -1,5 +1,7 @@
 import type { StaticImageData } from "next/image"
 
+import { tech, type StackLayer, type Tech } from "@/lib/tech"
+
 import getOutOfBedDetail1 from "@/assets/work/get-out-of-bed/detail-1.webp"
 import getOutOfBedDetail2 from "@/assets/work/get-out-of-bed/detail-2.webp"
 import getOutOfBedHero from "@/assets/work/get-out-of-bed/hero.webp"
@@ -64,7 +66,10 @@ export type CaseStudy = {
   features: { name: string; text: string }[]
   /** "Under the hood": the engineering worth pointing at. */
   engineering: { name: string; text: string }[]
-  stack: string[]
+  /** Every layer of the product, from the frontend to hosting, in that order. */
+  stack: StackLayer[]
+  /** Up to four tools for the card's chips and the page's intro panel. */
+  highlights: Tech[]
   cover: Screenshot
   gallery: Screenshot[]
   /** A phone app's store screenshots, shown in a row above the gallery. */
@@ -139,20 +144,63 @@ const reelEstate: CaseStudy = {
     },
   ],
   stack: [
-    "Next.js",
-    "fal.ai",
-    "ffmpeg",
-    "Neon Postgres",
-    "React",
-    "TypeScript",
-    "Neon Auth",
-    "Cloudflare R2",
-    "Stripe",
-    "Resend",
-    "Google Places",
-    "sharp",
-    "Vercel",
+    {
+      role: "Frontend",
+      tools: [tech.nextjs, tech.react, tech.typescript, tech.tailwind],
+      note: "App Router, drag-and-drop reel editor",
+    },
+    {
+      role: "Backend",
+      tools: [tech.nodejs],
+      note: "Route handlers and background renders",
+    },
+    {
+      role: "Database",
+      tools: [tech.neon],
+      note: "Clips, credits and render jobs",
+    },
+    {
+      role: "Auth",
+      tools: [tech.neonAuth],
+      note: "Email codes and team workspaces",
+    },
+    {
+      role: "AI models",
+      tools: [tech.fal],
+      note: "MiniMax video, Nano Banana Pro edits",
+    },
+    {
+      role: "Video and images",
+      tools: [tech.ffmpeg, tech.sharp],
+      note: "Cut checks, pacing and reel renders",
+    },
+    {
+      role: "Payments",
+      tools: [tech.stripe],
+      note: "Monthly and yearly credit plans",
+    },
+    {
+      role: "Email",
+      tools: [tech.resend],
+      note: "Sign-in codes and team invites",
+    },
+    {
+      role: "Storage",
+      tools: [tech.r2],
+      note: "Photos, clips and finished reels",
+    },
+    {
+      role: "Address lookup",
+      tools: [tech.googlePlaces],
+      note: "Property address autocomplete",
+    },
+    {
+      role: "Hosting",
+      tools: [tech.vercel],
+      note: "App and serverless functions",
+    },
   ],
+  highlights: [tech.nextjs, tech.fal, tech.ffmpeg, tech.neon],
   cover: {
     src: reelEstateHero,
     alt: "The ReelEstate home page: the headline Turn listing photos into videos that sell homes faster, above a property video of a loft office",
@@ -218,7 +266,7 @@ const untilThen: CaseStudy = {
   engineering: [
     {
       name: "Delivery that cannot send twice",
-      text: "A cron job checks for due messages every five minutes, with Vercel Cron as an hourly backup. Each message is claimed with a single conditional database update, so overlapping runs can never double-send, and a partly failed send retries only the recipients still waiting.",
+      text: "A cron job checks for due messages every 15 minutes, with Vercel Cron as an hourly backup. Each message is claimed with a single conditional database update, so overlapping runs can never double-send, and a partly failed send retries only the recipients still waiting.",
     },
     {
       name: "Video compressed in the browser",
@@ -238,19 +286,58 @@ const untilThen: CaseStudy = {
     },
   ],
   stack: [
-    "Next.js",
-    "Neon Postgres",
-    "Stripe",
-    "Cloudflare R2",
-    "React",
-    "TypeScript",
-    "Drizzle ORM",
-    "Better Auth",
-    "Resend",
-    "WebCodecs",
-    "Tailwind CSS",
-    "Vercel",
+    {
+      role: "Frontend",
+      tools: [tech.nextjs, tech.react, tech.typescript, tech.tailwind],
+      note: "App Router with Base UI components",
+    },
+    {
+      role: "Backend",
+      tools: [tech.nodejs],
+      note: "Server actions and the send dispatcher",
+    },
+    {
+      role: "Database",
+      tools: [tech.neon, tech.drizzle],
+      note: "Messages, recipients and delivery state",
+    },
+    {
+      role: "Auth",
+      tools: [tech.neonAuth],
+      note: "Neon's managed Better Auth",
+    },
+    {
+      role: "Email",
+      tools: [tech.resend],
+      note: "Delivers every message on its day",
+    },
+    {
+      role: "Payments",
+      tools: [tech.stripe],
+      note: "One-time payments per recording",
+    },
+    {
+      role: "Storage",
+      tools: [tech.r2],
+      note: "Recordings, uploaded from the browser",
+    },
+    {
+      role: "In-browser video",
+      tools: [tech.webcodecs],
+      note: "Compresses video to 720p before upload",
+    },
+    {
+      role: "Analytics",
+      tools: [tech.posthog],
+      note: "Product analytics",
+    },
+    {
+      role: "Hosting",
+      tools: [tech.vercel],
+      note: "App, plus a backup cron",
+    },
   ],
+  highlights: [tech.nextjs, tech.neon, tech.resend, tech.stripe],
   cover: {
     src: untilThenHero,
     alt: "The Until Then home page: the until then wordmark and the line Messages that arrive when you cannot, over soft pink clouds",
@@ -335,20 +422,63 @@ const viewlio: CaseStudy = {
     },
   ],
   stack: [
-    "Next.js",
-    "Supabase",
-    "OpenAI",
-    "ffmpeg",
-    "React",
-    "TypeScript",
-    "Postgres",
-    "YouTube APIs",
-    "Stripe",
-    "Cloudflare R2",
-    "Tesseract",
-    "Recharts",
-    "Vercel",
+    {
+      role: "Frontend",
+      tools: [tech.nextjs, tech.react, tech.typescript, tech.tailwind],
+      note: "Reports, dashboards and checklists",
+    },
+    {
+      role: "Backend",
+      tools: [tech.nodejs],
+      note: "Long analyses split across functions",
+    },
+    {
+      role: "Database",
+      tools: [tech.supabase],
+      note: "Reports, credits and a pg_cron watchdog",
+    },
+    {
+      role: "Auth",
+      tools: [tech.supabaseAuth],
+      note: "Google sign-in with channel access",
+    },
+    {
+      role: "YouTube data",
+      tools: [tech.youtube],
+      note: "Retention curves and channel stats",
+    },
+    {
+      role: "AI models",
+      tools: [tech.openai],
+      note: "Findings, fixes and transcripts",
+    },
+    {
+      role: "Video analysis",
+      tools: [tech.ffmpeg, tech.tesseract, tech.qencode],
+      note: "Cuts, on-screen text and proxies",
+    },
+    {
+      role: "Payments",
+      tools: [tech.stripe],
+      note: "Subscriptions and per-minute credits",
+    },
+    {
+      role: "Storage",
+      tools: [tech.r2],
+      note: "Multi-gigabyte source uploads",
+    },
+    {
+      role: "Testing",
+      tools: [tech.vitest],
+      note: "Over a hundred test files",
+    },
+    {
+      role: "Hosting",
+      tools: [tech.vercel],
+      note: "App and serverless functions",
+    },
   ],
+  highlights: [tech.nextjs, tech.supabase, tech.openai, tech.ffmpeg],
   cover: {
     src: viewlioHero,
     alt: "The Viewlio home page: the headline Know exactly where your viewers leave. And what to change, beside a sample retention report with a drop-off at 2:41 and a suggested fix",
@@ -433,19 +563,66 @@ const prettyMetrics: CaseStudy = {
     },
   ],
   stack: [
-    "Next.js",
-    "Canvas",
-    "WebCodecs",
-    "Stripe",
-    "React",
-    "TypeScript",
-    "Neon Postgres",
-    "Neon Auth",
-    "Recharts",
-    "Resend",
-    "Tailwind CSS",
-    "Vercel",
+    {
+      role: "Frontend",
+      tools: [tech.nextjs, tech.react, tech.typescript, tech.tailwind],
+      note: "The studio and share card editor",
+    },
+    {
+      role: "Backend",
+      tools: [tech.nodejs],
+      note: "Reads provider data, stores none",
+    },
+    {
+      role: "Graphics",
+      tools: [tech.canvas],
+      note: "Hand-drawn animated backdrops",
+    },
+    {
+      role: "Video export",
+      tools: [tech.webcodecs],
+      note: "Looping MP4s encoded in the browser",
+    },
+    {
+      role: "Database",
+      tools: [tech.neon],
+      note: "Accounts and encrypted provider keys",
+    },
+    {
+      role: "Auth",
+      tools: [tech.neonAuth],
+      note: "Email codes and password resets",
+    },
+    {
+      role: "Payments",
+      tools: [tech.stripe],
+      note: "The one-time Pro upgrade",
+    },
+    {
+      role: "Email",
+      tools: [tech.resend],
+      note: "Sign-in and account emails",
+    },
+    {
+      role: "Revenue sources",
+      tools: [
+        tech.stripe,
+        tech.paddle,
+        tech.lemonSqueezy,
+        tech.polar,
+        tech.revenuecat,
+        tech.square,
+        tech.creem,
+      ],
+      note: "Read-only keys, combined into one total",
+    },
+    {
+      role: "Hosting",
+      tools: [tech.vercel],
+      note: "App and serverless functions",
+    },
   ],
+  highlights: [tech.nextjs, tech.canvas, tech.webcodecs, tech.stripe],
   cover: {
     src: prettyMetricsHero,
     alt: "The Pretty Metrics home page: rows of revenue chart cards for MRR, new customers and total revenue on colourful still and animated backdrops",
@@ -532,16 +709,48 @@ const getOutOfBed: CaseStudy = {
     },
   ],
   stack: [
-    "Kotlin",
-    "Jetpack Compose",
-    "MediaPipe",
-    "RevenueCat",
-    "Material 3",
-    "CameraX",
-    "Google Play Billing",
-    "JUnit",
-    "Vercel",
+    {
+      role: "App",
+      tools: [tech.kotlin, tech.compose, tech.material3],
+      note: "Native Android, every screen in Compose",
+    },
+    {
+      role: "Alarms",
+      tools: [tech.androidAlarms],
+      note: "On time, even in Doze",
+    },
+    {
+      role: "Camera",
+      tools: [tech.camerax],
+      note: "Captures the photo mission",
+    },
+    {
+      role: "On-device AI",
+      tools: [tech.mediapipe],
+      note: "Photo matching on the phone",
+    },
+    {
+      role: "Payments",
+      tools: [tech.playBilling, tech.revenuecat],
+      note: "Premium, with no account needed",
+    },
+    {
+      role: "Backend",
+      tools: [tech.onDevice],
+      note: "Everything stays on the phone",
+    },
+    {
+      role: "Testing",
+      tools: [tech.junit],
+      note: "Alarm, mission and Premium tests",
+    },
+    {
+      role: "Website",
+      tools: [tech.vercel],
+      note: "Static site for getoutofbed.app",
+    },
   ],
+  highlights: [tech.kotlin, tech.compose, tech.mediapipe, tech.revenuecat],
   cover: {
     src: getOutOfBedHero,
     alt: "The Get Out Of Bed home page: the headline GET OUT OF BED and the line No snoozing. Just missions., above a sleepy sun peeking over a duvet",

@@ -57,9 +57,9 @@ export function CaseStudyCard({
         </Heading>
         <p className="text-pretty text-muted-foreground">{study.summary}</p>
         <ul aria-label="Built with" className="mt-auto flex flex-wrap gap-2 pt-3 font-mono text-xs">
-          {study.stack.slice(0, 4).map((tech) => (
-            <li key={tech} className="bg-primary/10 px-3 py-1 text-primary">
-              {tech}
+          {study.highlights.map((tool) => (
+            <li key={tool.name} className="bg-primary/10 px-3 py-1 text-primary">
+              {tool.name}
             </li>
           ))}
         </ul>

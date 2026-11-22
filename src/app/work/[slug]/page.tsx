@@ -6,6 +6,7 @@ import { notFound } from "next/navigation"
 
 import { BrowserFrame } from "@/components/browser-frame"
 import { PageJsonLd } from "@/components/json-ld"
+import { TechMark } from "@/components/tech-mark"
 import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 import { caseStudyPage, createMetadata, pages } from "@/lib/seo"
@@ -133,7 +134,12 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               </div>
               <div className="flex flex-col gap-1 sm:col-span-2 lg:col-span-1">
                 <dt className="font-mono text-xs text-muted-foreground">Stack</dt>
-                <dd>{study.stack.join(", ")}</dd>
+                <dd>
+                  {study.highlights.map((tool) => tool.name).join(", ")}.{" "}
+                  <a href="#stack" className="text-primary underline-offset-4 hover:underline">
+                    See the full stack
+                  </a>
+                </dd>
               </div>
             </dl>
           </div>
@@ -225,14 +231,47 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               </li>
             ))}
           </ul>
-          <ul aria-label="Built with" className="flex flex-wrap gap-2 font-mono text-xs">
-            {study.stack.map((tech) => (
-              <li key={tech} className="bg-primary/10 px-3 py-1 text-primary">
-                {tech}
+        </Section>
+
+        <section
+          id="stack"
+          aria-labelledby="stack-heading"
+          className="flex scroll-mt-28 flex-col gap-8 pt-12"
+        >
+          <div className={cn("flex max-w-3xl flex-col gap-3", inset)}>
+            <p className="font-mono text-xs tracking-widest text-primary uppercase">Built with</p>
+            <h2 id="stack-heading" className="text-2xl tracking-tight sm:text-3xl">
+              The stack
+            </h2>
+            <p className="text-lg text-pretty text-muted-foreground">
+              Everything {study.name} runs on, layer by layer.
+            </p>
+          </div>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {study.stack.map((layer) => (
+              <li
+                key={layer.role}
+                className={cn(
+                  "ticks flex flex-col gap-3 border border-border bg-card p-6",
+                  layer.tools.length > 3 && "sm:col-span-2",
+                )}
+              >
+                <h3 className="font-mono text-xs tracking-widest text-primary uppercase">
+                  {layer.role}
+                </h3>
+                <ul className="flex flex-wrap gap-x-5 gap-y-3">
+                  {layer.tools.map((tool) => (
+                    <li key={tool.name} className="flex items-center gap-3">
+                      <TechMark tool={tool} />
+                      <span className="font-medium">{tool.name}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm text-pretty text-muted-foreground">{layer.note}</p>
               </li>
             ))}
           </ul>
-        </Section>
+        </section>
 
         <footer className="grid gap-6 pt-12 md:grid-cols-2">
           <Link

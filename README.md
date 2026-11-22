@@ -53,6 +53,7 @@ src/
     social-links.tsx    The founder's profile icon links (LinkedIn, X, Instagram)
     tool-logo.tsx       The migrated-from tool's logo: a watermark on post cards, a tile in post headers
     post-icon.tsx       The subject icon a post without a logo shows as its card's watermark
+    tech-mark.tsx       A tool's mark on a white tile, for the case studies' "The stack" sections
     json-ld.tsx         Safe JSON-LD <script> + per-page WebPage/Breadcrumb graph
     free-tools/         The free tools: the shared page frame (tool-page.tsx), cards, question and
                         result widgets, and one component per tool
@@ -66,6 +67,8 @@ src/
     booking.ts          /book-a-call questions, and how answers reach the booking link or email
     team.ts             The founder profile used on /, /book-a-call and as blog author
     stack.ts            The "Our stack" tiles on /, each with its logo from src/assets/stack/
+    tech.ts             Every tool a case study's stack names, with its square mark from
+                        src/assets/stack/marks/ (or a line icon), and the StackLayer type
     blog/               Blog posts as data: types.ts (the shape), posts/<tool>.ts (one per post),
                         index.ts (the list, categories and helpers). A post is a file plus a line in index.ts;
                         its optional tool logo is an SVG in src/assets/blog/logos/ imported as the post's `logo`
