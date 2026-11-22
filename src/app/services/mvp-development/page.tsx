@@ -46,18 +46,6 @@ const fitChecks = [
 ]
 const fitInitial = [0, 1, 3]
 
-// Which founders each package suits, shown under the pricing cards.
-const packageFit = [
-  {
-    name: `${mvp.name}, ${mvp.sprint}`,
-    text: "For one user journey with sign-in and payments: a booking flow, a single-sided SaaS tool or an AI feature wrapped in an account. Suits founders who want paying users quickly and are happy to add the next feature once those users ask for it.",
-  },
-  {
-    name: `${extendedMvp.name}, ${extendedMvp.sprint}`,
-    text: "For a first release with two kinds of user, a back office or an integration with another system: a two-sided marketplace, a SaaS product with teams and roles, or a migration from a no-code app with live data. The discovery call settles which one fits before you pay.",
-  },
-]
-
 // The usual routes to a first release, in words. Figures for agencies are the
 // ones UK studios publish, as compared in the best-saas-development-company post.
 const optionColumns = ["What you get", "Price", "Time to launch", "Who owns the code"]
@@ -252,17 +240,7 @@ export default function MvpDevelopmentPage() {
       <PricingSection
         title="Fixed-price MVP development"
         intro="Two sprints, priced before the build starts."
-      >
-        <h3 className="pb-4 text-lg font-medium text-foreground">Which MVP package suits you?</h3>
-        <dl className="grid gap-6 md:grid-cols-2">
-          {packageFit.map((item) => (
-            <div key={item.name} className="flex flex-col gap-2">
-              <dt className="font-medium text-foreground">{item.name}</dt>
-              <dd>{item.text}</dd>
-            </div>
-          ))}
-        </dl>
-      </PricingSection>
+      />
 
       <ProcessSection
         title="From idea to launched MVP"
