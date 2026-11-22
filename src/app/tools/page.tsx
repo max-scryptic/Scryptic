@@ -19,7 +19,7 @@ export default function ToolsPage() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
         <div className={cn("flex flex-col items-start gap-6", inset)}>
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
-            Free tools for founders <span className="text-primary">building an app</span>
+            Free tools for founders <span className="pixel-in text-primary">building an app</span>
           </h1>
           <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
             Price your MVP, scope a first release, plan the launch and check your site. Free, with no sign up.

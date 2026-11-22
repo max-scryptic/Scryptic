@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 import { BrandLogo } from "@/components/brand-logo"
+import { CrumbleHeading } from "@/components/crumble-heading"
 import { Button } from "@/components/ui/button"
 import { pageTitle, robotsFor } from "@/lib/seo"
 
@@ -18,7 +19,7 @@ export default function NotFound() {
     <main className="flex min-h-svh flex-col items-center justify-center gap-8 bg-muted px-4 py-6 text-center">
       <div className="flex flex-col items-center gap-4">
         <BrandLogo className="size-14" />
-        <h1 className="text-3xl tracking-tight">Page not found</h1>
+        <CrumbleHeading className="text-4xl tracking-tight sm:text-5xl">Page not found</CrumbleHeading>
         <p className="max-w-sm text-balance text-muted-foreground">
           The page you are looking for does not exist or has moved.
         </p>

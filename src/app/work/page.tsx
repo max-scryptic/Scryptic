@@ -20,7 +20,7 @@ export default function WorkPage() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
         <div className={cn("flex flex-col items-start gap-6", inset)}>
           <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
-            Products we designed, built and <span className="text-primary">launched</span>
+            Products we designed, built and <span className="pixel-in text-primary">launched</span>
           </h1>
           <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
             Web apps and a native Android app that {siteConfig.name} has taken from idea to launch, each on its own domain with payments built in.
