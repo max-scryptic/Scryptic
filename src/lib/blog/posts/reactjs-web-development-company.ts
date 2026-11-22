@@ -1,7 +1,7 @@
 import browserVsServerRendering from "@/assets/blog/images/browser-vs-server-rendering.webp"
 import reactInterfaceOnly from "@/assets/blog/images/react-interface-only.webp"
 import type { BlogPost } from "@/lib/blog/types"
-import { extendedMvp, mvp } from "@/lib/services"
+import { extendedMvp, mvp, supportPlan } from "@/lib/services"
 
 export const reactjsWebDevelopmentCompany: BlogPost = {
   slug: "reactjs-web-development-company-hiring-mistakes",
@@ -241,7 +241,7 @@ export const reactjsWebDevelopmentCompany: BlogPost = {
     {
       question: "Who keeps a React app up to date after launch?",
       answer:
-        "Agree that before launch. React and the libraries around it release updates and security fixes, and someone has to apply them: a developer on retainer, a freelancer you call in, or your own hire. Our handover week covers bug fixes straight after launch; after that the code is in your repository, so any React developer can pick it up.",
+        `Agree that before launch. React and the libraries around it release updates and security fixes, and someone has to apply them: a developer on retainer, a freelancer you call in, or your own hire. Our handover week covers bug fixes straight after launch, and our optional support plan (${supportPlan.price} + VAT a ${supportPlan.per}) applies the updates after that; either way the code is in your repository, so any React developer can pick it up.`,
     },
   ],
 }

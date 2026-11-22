@@ -10,10 +10,10 @@ import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { createMetadata, pages } from "@/lib/seo"
-import { foundingOfferSentence, services } from "@/lib/services"
+import { afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
-import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
+import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
 
 // The search title leads with the brand, then says what we do. pageTitle()
 // drops the repeated app name it would append, so this renders as written. The
@@ -27,7 +27,7 @@ export const metadata = createMetadata({
 const faqs = [
   {
     question: "How much does it cost to build an app with Scryptic?",
-    answer: `There are two fixed prices, both plus VAT. ${services.map((s) => `The ${s.name} is ${s.price}, a ${s.sprint}`).join(". ")}.${foundingOfferSentence()} Both end with a week of handover after launch for bug fixes and a smooth rollout. The discovery call settles which one fits, so the price is agreed before any build starts.`,
+    answer: `There are two fixed prices, both plus VAT. ${services.map((s) => `The ${s.name} is ${s.price}, a ${s.sprint}`).join(". ")}. Both end with a week of handover after launch for bug fixes and a smooth rollout.${supportPriceSentence()}${foundingOfferSentence()} The discovery call settles which one fits, so the price is agreed before any build starts.`,
   },
   {
     question: "How long does it take to build an app?",
@@ -62,6 +62,10 @@ const faqs = [
     question: "Can you work on an existing app or codebase?",
     answer:
       "Yes. We review existing code, infrastructure and prototypes during discovery. Often the best plan is to build on what you have rather than start again, and the agreed scope says which parts we would keep, fix or replace.",
+  },
+  {
+    question: "What happens after launch, and what does support cost?",
+    answer: afterLaunchAnswer(),
   },
   {
     question: "Who owns the code once the app is built?",
@@ -106,6 +110,7 @@ export default function Home() {
         page={pages.home}
         nodes={[
           ...services.map((service) => serviceJsonLd(pages.home, service)),
+          supportJsonLd(pages.home),
           faqJsonLd(pages.home, faqs),
         ]}
       />

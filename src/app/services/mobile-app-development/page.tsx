@@ -16,12 +16,12 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { foundingOfferSentence, services } from "@/lib/services"
+import { afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { mobileTools } from "@/lib/stack"
 import { founder } from "@/lib/team"
 import { mobileCaseStudies } from "@/lib/work"
-import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
+import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
 
 const page = pages.mobileAppDevelopment
 
@@ -128,7 +128,7 @@ const faqs: Faq[] = [
   },
   {
     question: "How much does mobile app development cost in the UK?",
-    answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} package is ${s.price} for a ${s.sprint}`).join(", and ")}.${foundingOfferSentence()} The scope and price are agreed after the discovery call, before any build starts. Apple's developer programme (US$99 a year) and Google Play's one-off US$25 registration are paid by you, into accounts in your name.`,
+    answer: `With ${siteConfig.name} it is a fixed price, plus VAT. ${services.map((s) => `The ${s.name} package is ${s.price} for a ${s.sprint}`).join(", and ")}.${foundingOfferSentence()}${supportPriceSentence()} The scope and price are agreed after the discovery call, before any build starts. Apple's developer programme (US$99 a year) and Google Play's one-off US$25 registration are paid by you, into accounts in your name.`,
     link: {
       text: "What it costs to build an app in the UK, by route and type of app.",
       href: "/blog/how-much-does-it-cost-to-build-an-app-uk",
@@ -175,6 +175,10 @@ const faqs: Faq[] = [
     answer: `${founder.name}, the founder, a full-stack developer with five years of experience building software for enterprise clients and startups. You work with the same person from the discovery call to launch day, with a demo every Friday.`,
   },
   {
+    question: "What happens after launch, and what does support cost?",
+    answer: afterLaunchAnswer(),
+  },
+  {
     question: "Who owns the app once it is built?",
     answer:
       "You do. The code lives in your repositories, the app is published under your developer accounts and the signing keys are kept somewhere you control. Any developer you hire later can build and release updates without us.",
@@ -191,6 +195,7 @@ export default function MobileAppDevelopmentPage() {
           ...services.map((service) =>
             serviceJsonLd(page, { ...service, serviceType: "Mobile app development" }),
           ),
+          supportJsonLd(page),
           faqJsonLd(page, faqs),
         ]}
       />

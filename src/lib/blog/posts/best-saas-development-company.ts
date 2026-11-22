@@ -1,6 +1,6 @@
 import providerChecksGates from "@/assets/blog/images/provider-checks-gates.webp"
 import type { BlogPost } from "@/lib/blog/types"
-import { extendedMvp, mvp } from "@/lib/services"
+import { extendedMvp, mvp, supportPlan } from "@/lib/services"
 
 export const bestSaasDevelopmentCompany: BlogPost = {
   slug: "best-saas-development-company",
@@ -180,7 +180,7 @@ export const bestSaasDevelopmentCompany: BlogPost = {
         { type: "subheading", text: "Support after launch is where the offers differ most" },
         {
           type: "paragraph",
-          text: "Goodspeed says most of its clients move onto a monthly retainer. Neptune Digital sells support plans from £460 a month, and Augustova offers monthly support at a price agreed at go-live. Our packages end with a handover week of bug fixes and support. If you want one company looking after the product for years, the retainer studios are built for that and we are not.",
+          text: `Goodspeed says most of its clients move onto a monthly retainer. Neptune Digital sells support plans from £460 a month, and Augustova offers monthly support at a price agreed at go-live. Our packages end with a handover week of bug fixes and support, then an optional support plan at ${supportPlan.price} + VAT a ${supportPlan.per} for fixes, updates and small changes, which you can cancel any time. If you want a larger team building new features every month for years, the retainer studios are built for that.`,
         },
         { type: "subheading", text: "Ownership is worth asking about every time" },
         {

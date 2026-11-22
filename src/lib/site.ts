@@ -17,7 +17,7 @@ export const siteConfig = {
   tagline: "Development as a service",
   // Optional longer context for llms.txt. Leave empty to omit.
   summary:
-    "Scryptic builds MVPs ready to take to market, in two fixed-price packages. The MVP is a 2 week development sprint for £7,500 plus VAT: a week of development and a week of iteration on your feedback. The Extended MVP is a 3 week sprint for £15,000 plus VAT with two weeks of development. Both end with a week of handover after launch for bug fixes and a smooth rollout, with a catch-up every Friday.",
+    "Scryptic builds MVPs ready to take to market, in two fixed-price packages. The MVP is a 2 week development sprint for £7,500 plus VAT: a week of development and a week of iteration on your feedback. The Extended MVP is a 3 week sprint for £15,000 plus VAT with two weeks of development. Both end with a week of handover after launch for bug fixes and a smooth rollout, with a catch-up every Friday. After that, an optional support plan covers bug fixes, security updates, monitoring and small changes for £750 plus VAT a month.",
   keywords: [
     "MVP development",
     "app development studio",

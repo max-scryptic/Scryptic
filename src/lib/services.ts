@@ -28,6 +28,32 @@ export type ServiceOffer = {
 export const currency = "GBP"
 
 /**
+ * Optional, recommended monthly support once the handover week ends, on
+ * either package. Shown with a "Recommended" tag.
+ * The pricing section's "After launch" box, its Service JSON-LD and the FAQs
+ * on what happens after launch all read from here.
+ */
+export const supportPlan = {
+  id: "support",
+  name: "Support plan",
+  serviceType: "App maintenance and support",
+  areaServed: "United Kingdom",
+  price: "£750",
+  amount: 750,
+  /** Billing period, completing "£750 + VAT a ...". */
+  per: "month",
+  includes: [
+    "Bug fixes",
+    "Security and dependency updates",
+    "Uptime and error monitoring",
+    "Up to half a day of small changes each month",
+  ],
+  terms: "Optional, cancel any time",
+  /** Why we recommend it, shown under the price. */
+  why: "Apps need updates to stay secure and working, and the first months after launch are when users find the most to fix.",
+}
+
+/**
  * Founding-client slots: extra work added free to the next few builds, on
  * either package, in return for a case study. The price stays the same; the
  * pricing section shows it under the cards and the pricing FAQs mention it.
@@ -46,7 +72,7 @@ export const foundingOffer: {
   slots: 2,
   period: "this quarter",
   extras: [
-    "an extra month of support after handover, for bug fixes and small changes",
+    `an extra month of our support plan after handover (worth ${supportPlan.price})`,
     "a launch landing page for your product, built and set up for search",
   ],
   inReturn: "a case study and an honest testimonial once you have launched",
@@ -103,6 +129,18 @@ export const [mvp, extendedMvp] = services
 
 /** What a week of development costs, read off the packages: the MVP is one week for £7,500. */
 export const weeklyRate = services[0].amount / services[0].developmentWeeks
+
+/** The answer to "What happens after launch, and what does support cost?", for the FAQs. */
+export function afterLaunchAnswer() {
+  const items = supportPlan.includes.map((item) => item[0].toLowerCase() + item.slice(1))
+  const list = `${items.slice(0, -1).join(", ")} and ${items.at(-1)}`
+  return `Every package ends with a week of handover for bug fixes and a smooth rollout. After that, support is optional but recommended: our ${supportPlan.name.toLowerCase()} is ${supportPlan.price} + VAT a ${supportPlan.per} for ${list}, and you can cancel any time. Bigger features are another sprint, priced like the packages, or you can hand the code to your own developer, since the code, hosting and accounts are already yours. Hosting and third-party services are billed to you directly, at cost.`
+}
+
+/** One sentence on support, for the pricing FAQs. Starts with a space, like `foundingOfferSentence`. */
+export function supportPriceSentence() {
+  return ` Support after the handover week is optional, at ${supportPlan.price} + VAT a ${supportPlan.per}.`
+}
 
 /** "£7,500" for 7500. */
 export function formatPrice(amount: number) {
