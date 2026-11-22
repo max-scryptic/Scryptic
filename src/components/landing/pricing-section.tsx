@@ -9,7 +9,8 @@ import { foundingOffer, mvp, services, supportPlan } from "@/lib/services"
 
 /**
  * The pricing block on the home and service pages: a heading, then the
- * package cards and founding-client banner from <PricingCards />. Pair with
+ * package cards and founding-client banner from <PricingCards />, and a
+ * button through to /pricing for support, hosting and the FAQs. Pair with
  * serviceJsonLd() for each package.
  */
 export function PricingSection({
@@ -34,6 +35,18 @@ export function PricingSection({
       </SectionHeading>
 
       <PricingCards />
+
+      <div className="flex justify-center">
+        <Button
+          size="lg"
+          variant="outline"
+          nativeButton={false}
+          render={<Link href={pages.pricing.path} />}
+          className="h-11 px-5 text-base"
+        >
+          More pricing info
+        </Button>
+      </div>
 
       {children && <div className={cn("text-pretty text-muted-foreground", inset)}>{children}</div>}
     </LandingSection>
