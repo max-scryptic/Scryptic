@@ -200,8 +200,9 @@ export function AfterLaunch() {
     },
   ]
 
-  // No outer card or outlines here: a Lapis tint marks the recommended plan,
-  // and the alternatives hang off a thin rail with a square node each.
+  // The recommended plan is a card, like the packages above it, with a Lapis
+  // tint. The alternatives sit on the page beside it, hanging off a thin rail
+  // with a square node each.
   return (
     <section id="after-launch" aria-labelledby="after-launch-heading" className="flex scroll-mt-28 flex-col gap-8">
       <div className={cn("flex flex-col gap-2", inset)}>
@@ -215,7 +216,7 @@ export function AfterLaunch() {
         <article
           id={supportPlan.id}
           aria-labelledby={`${supportPlan.id}-name`}
-          className="flex scroll-mt-28 flex-col gap-5 bg-linear-to-br from-primary/15 via-primary/5 to-transparent p-6 sm:p-8"
+          className="corners flex scroll-mt-28 flex-col gap-5 border border-border bg-card bg-linear-to-br from-primary/10 to-transparent p-6 shadow-xl shadow-black/5 sm:p-8"
         >
           <p className="flex items-center gap-2 font-mono text-xs tracking-widest text-primary uppercase">
             <span className="size-2 bg-primary" aria-hidden="true" />
