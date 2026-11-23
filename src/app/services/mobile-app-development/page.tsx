@@ -108,6 +108,7 @@ const guides = postsBySlug([
   "hybrid-apps",
   "how-much-does-it-cost-to-build-an-app-uk",
   "how-to-choose-an-app-development-company-uk",
+  "mobile-app-development-companies-uk",
   "pwa-development",
   "mobile-web-development",
   "supabase-vs-firebase",

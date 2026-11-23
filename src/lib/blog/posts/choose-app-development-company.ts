@@ -12,7 +12,7 @@ export const chooseAppDevelopmentCompany: BlogPost = {
   summary:
     "Choose an app development company by what you can check, not by the size of the quote: live apps you can use, a named person writing your code, and a contract that assigns the code and every account to you. Ask the questions below, listen for the answers, and walk away if several red flags turn up together.",
   datePublished: "2026-10-14",
-  dateModified: "2026-11-10",
+  dateModified: "2026-11-23",
   sections: [
     {
       id: "before-you-start",
@@ -157,6 +157,14 @@ export const chooseAppDevelopmentCompany: BlogPost = {
           link: {
             text: "The mobile app development checks a web build skips.",
             href: "/blog/mobile-app-development",
+          },
+        },
+        {
+          type: "paragraph",
+          text: "Some suppliers answer part of this on their own sites. We set seven UK mobile studios side by side on how they build, what they charge and who ends up holding the code and the store accounts.",
+          link: {
+            text: "UK mobile app development companies, compared.",
+            href: "/blog/mobile-app-development-companies-uk",
           },
         },
         {

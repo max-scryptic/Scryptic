@@ -33,6 +33,7 @@ import { lovableAppBackup } from "@/lib/blog/posts/lovable-app-backup"
 import { ukDataResidency } from "@/lib/blog/posts/uk-data-residency"
 import { mendix } from "@/lib/blog/posts/mendix"
 import { mobileAppDevelopment } from "@/lib/blog/posts/mobile-app-development"
+import { mobileAppDevelopmentCompaniesUk } from "@/lib/blog/posts/mobile-app-development-companies-uk"
 import { mobileWebDevelopment } from "@/lib/blog/posts/mobile-web-development"
 import { mvpAgile } from "@/lib/blog/posts/mvp-agile"
 import { mvpSoftware } from "@/lib/blog/posts/mvp-software"
@@ -95,6 +96,7 @@ export const posts: BlogPost[] = [
   webApplicationDevelopmentServices,
   bestSaasDevelopmentCompany,
   webAppDevelopmentCompaniesUk,
+  mobileAppDevelopmentCompaniesUk,
   digitalProductAgency,
   aiAgencyUk,
   pwaDevelopment,
