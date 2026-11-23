@@ -1,3 +1,4 @@
+import { Fragment } from "react"
 import Link from "next/link"
 import { cn } from "cn"
 
@@ -119,58 +120,60 @@ export function PricingCards() {
       {foundingOffer && (
         <aside
           aria-labelledby="founding-offer-heading"
-          className="pip grid border border-primary/30 bg-primary/5 [grid-template-areas:'head'_'deal'_'cta'] sm:grid-cols-[1fr_auto] sm:[grid-template-areas:'head_cta'_'deal_deal']"
+          className="pip grid border border-primary/30 bg-primary/5 md:grid-cols-[1fr_16rem]"
         >
-          <div className="flex flex-col gap-2 p-6 [grid-area:head] sm:p-8">
-            <p className="flex items-center gap-3 font-mono text-xs tracking-widest text-primary uppercase">
-              <span className="flex gap-1" aria-hidden="true">
-                {Array.from({ length: foundingOffer.slots }, (_, i) => (
-                  <span key={i} className="size-2 bg-primary" />
-                ))}
-              </span>
-              {foundingOffer.slots} founding slots {foundingOffer.period}
-            </p>
-            <h3 id="founding-offer-heading" className="text-xl tracking-tight text-balance sm:text-2xl">
-              Same price, more at launch
+          <div className="flex flex-col gap-4 p-6 sm:p-8">
+            <p className="font-mono text-xs tracking-widest text-primary uppercase">Founding client offer</p>
+            <h3 id="founding-offer-heading" className="text-2xl tracking-tight text-balance">
+              Same price, {countWord(foundingOffer.extras.length)} things added free
             </h3>
+            <ul className="flex flex-col gap-2 text-pretty">
+              {foundingOffer.extras.map((extra) => (
+                <li key={extra} className="flex gap-3">
+                  <CheckIcon />
+                  {sentenceCase(extra)}
+                </li>
+              ))}
+            </ul>
+            <p className="text-pretty text-muted-foreground">
+              <span className="text-foreground">The trade:</span> {foundingOffer.inReturn}.
+            </p>
           </div>
-          <Button
-            size="lg"
-            variant="outline"
-            nativeButton={false}
-            render={<Link href={pages.bookCall.path} />}
-            className="mx-6 mb-6 h-12 text-base [grid-area:cta] sm:my-8 sm:mr-8 sm:ml-0 sm:self-center"
-          >
-            Claim a founding slot
-          </Button>
 
-          <div className="grid border-t border-primary/20 [grid-area:deal] md:grid-cols-[3fr_2fr]">
-            <div className="flex flex-col gap-3 p-6 sm:px-8">
-              <h4 className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                Free on either package
-              </h4>
-              <ul className="flex flex-col gap-2 text-pretty">
-                {foundingOffer.extras.map((extra) => (
-                  <li key={extra} className="flex gap-3">
-                    <CheckIcon />
-                    {sentenceCase(extra)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex flex-col gap-3 border-t border-primary/20 p-6 sm:px-8 md:border-t-0 md:border-l">
-              <h4 className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                We ask
-              </h4>
-              <p className="text-pretty">
-                {sentenceCase(foundingOffer.inReturn)}.
-              </p>
-            </div>
+          {/* The stub: a dashed tear line with a notch punched out at each end.
+              Each notch is a circle on the card's edge, clipped to its inner half
+              (plus the 1px border it covers). */}
+          <div className="relative flex flex-col items-start justify-center gap-4 border-t border-dashed border-primary/40 p-6 sm:p-8 md:border-t-0 md:border-l">
+            <span
+              aria-hidden="true"
+              className="absolute -top-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/30 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
+            />
+            <span
+              aria-hidden="true"
+              className="absolute -bottom-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/30 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
+            />
+            <p className="flex items-baseline gap-3">
+              <span className="font-mono text-6xl leading-none text-primary">{foundingOffer.slots}</span>
+              <span className="text-muted-foreground">slots left</span>
+            </p>
+            <Button
+              size="lg"
+              nativeButton={false}
+              render={<Link href={pages.bookCall.path} />}
+              className="h-12 w-full text-base"
+            >
+              Claim a founding slot
+            </Button>
           </div>
         </aside>
       )}
     </>
   )
+}
+
+/** Spells out small counts for headings, e.g. "two things added free". */
+function countWord(n: number) {
+  return ["no", "one", "two", "three", "four", "five"][n] ?? String(n)
 }
 
 /** The founding-offer strings complete a sentence, so lead with a capital when they stand alone. */
@@ -197,26 +200,25 @@ export function AfterLaunch() {
     },
   ]
 
+  // No outer card or outlines here: a Lapis tint marks the recommended plan,
+  // and the alternatives hang off a thin rail with a square node each.
   return (
-    <section
-      id="after-launch"
-      aria-labelledby="after-launch-heading"
-      className="scroll-mt-28 corners guides flex flex-col gap-8 border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8 lg:p-10"
-    >
-      <div className="flex flex-col gap-2">
+    <section id="after-launch" aria-labelledby="after-launch-heading" className="flex scroll-mt-28 flex-col gap-8">
+      <div className={cn("flex flex-col gap-2", inset)}>
         <p className="font-mono text-xs tracking-widest text-primary uppercase">After launch</p>
         <h3 id="after-launch-heading" className="text-2xl tracking-tight text-balance">
           What happens after the handover week
         </h3>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[3fr_2fr] lg:gap-10">
+      <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:gap-12">
         <article
           id={supportPlan.id}
           aria-labelledby={`${supportPlan.id}-name`}
-          className="relative flex scroll-mt-28 flex-col gap-5 border-2 border-primary p-6"
+          className="flex scroll-mt-28 flex-col gap-5 bg-linear-to-br from-primary/15 via-primary/5 to-transparent p-6 sm:p-8"
         >
-          <p className="absolute -top-3.5 right-6 bg-primary px-4 py-1 font-mono text-xs tracking-widest text-primary-foreground uppercase">
+          <p className="flex items-center gap-2 font-mono text-xs tracking-widest text-primary uppercase">
+            <span className="size-2 bg-primary" aria-hidden="true" />
             Recommended
           </p>
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
@@ -239,15 +241,25 @@ export function AfterLaunch() {
           <p className="text-sm font-medium">{supportPlan.terms}.</p>
         </article>
 
-        <div className="flex flex-col gap-6">
-          {others.map((option) => (
-            <div key={option.name} className="flex flex-col gap-1.5 border-l-2 border-border pl-5">
-              <h4 className="flex flex-wrap items-baseline justify-between gap-x-4 font-medium">
-                {option.name}
-                <span className="font-mono text-sm font-normal text-muted-foreground">{option.price}</span>
-              </h4>
-              <p className="text-pretty text-muted-foreground">{option.text}</p>
-            </div>
+        <div className="relative flex flex-col gap-4 pl-8 lg:justify-center">
+          <span
+            aria-hidden="true"
+            className="absolute top-2 bottom-2 left-[3px] w-px bg-linear-to-b from-primary/60 via-border to-transparent"
+          />
+          {others.map((option, i) => (
+            <Fragment key={option.name}>
+              {i > 0 && (
+                <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">Or</p>
+              )}
+              <div className="relative flex flex-col gap-1.5">
+                <span aria-hidden="true" className="absolute top-2 -left-8 size-[7px] bg-primary" />
+                <h4 className="flex flex-wrap items-baseline gap-x-3 font-medium">
+                  {option.name}
+                  <span className="font-mono text-sm font-normal text-primary">{option.price}</span>
+                </h4>
+                <p className="text-pretty text-muted-foreground">{option.text}</p>
+              </div>
+            </Fragment>
           ))}
         </div>
       </div>
