@@ -119,42 +119,63 @@ export function PricingCards() {
       {foundingOffer && (
         <aside
           aria-labelledby="founding-offer-heading"
-          className="pip flex flex-col gap-5 border border-primary/30 bg-primary/5 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10"
+          className="pip grid border border-primary/30 bg-primary/5 [grid-template-areas:'head'_'deal'_'cta'] sm:grid-cols-[1fr_auto] sm:[grid-template-areas:'head_cta'_'deal_deal']"
         >
-          <div className="flex flex-col gap-3">
-            <p className="font-mono text-xs tracking-widest text-primary uppercase">
-              {foundingOffer.slots} slots {foundingOffer.period}
+          <div className="flex flex-col gap-2 p-6 [grid-area:head] sm:p-8">
+            <p className="flex items-center gap-3 font-mono text-xs tracking-widest text-primary uppercase">
+              <span className="flex gap-1" aria-hidden="true">
+                {Array.from({ length: foundingOffer.slots }, (_, i) => (
+                  <span key={i} className="size-2 bg-primary" />
+                ))}
+              </span>
+              {foundingOffer.slots} founding slots {foundingOffer.period}
             </p>
-            <h3 id="founding-offer-heading" className="text-xl tracking-tight text-balance">
-              Founding clients get more for the same price
+            <h3 id="founding-offer-heading" className="text-xl tracking-tight text-balance sm:text-2xl">
+              Same price, more at launch
             </h3>
-            <ul className="flex flex-col gap-2 text-pretty">
-              {foundingOffer.extras.map((extra) => (
-                <li key={extra} className="flex gap-3">
-                  <CheckIcon />
-                  <span>
-                    <span className="font-medium">Free:</span> {extra}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-sm text-pretty text-muted-foreground">
-              On either package, in return for {foundingOffer.inReturn}.
-            </p>
           </div>
           <Button
             size="lg"
             variant="outline"
             nativeButton={false}
             render={<Link href={pages.bookCall.path} />}
-            className="h-12 shrink-0 text-base"
+            className="mx-6 mb-6 h-12 text-base [grid-area:cta] sm:my-8 sm:mr-8 sm:ml-0 sm:self-center"
           >
             Claim a founding slot
           </Button>
+
+          <div className="grid border-t border-primary/20 [grid-area:deal] md:grid-cols-[3fr_2fr]">
+            <div className="flex flex-col gap-3 p-6 sm:px-8">
+              <h4 className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
+                Free on either package
+              </h4>
+              <ul className="flex flex-col gap-2 text-pretty">
+                {foundingOffer.extras.map((extra) => (
+                  <li key={extra} className="flex gap-3">
+                    <CheckIcon />
+                    {sentenceCase(extra)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col gap-3 border-t border-primary/20 p-6 sm:px-8 md:border-t-0 md:border-l">
+              <h4 className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
+                We ask
+              </h4>
+              <p className="text-pretty">
+                {sentenceCase(foundingOffer.inReturn)}.
+              </p>
+            </div>
+          </div>
         </aside>
       )}
     </>
   )
+}
+
+/** The founding-offer strings complete a sentence, so lead with a capital when they stand alone. */
+function sentenceCase(text: string) {
+  return text[0].toUpperCase() + text.slice(1)
 }
 
 /**
