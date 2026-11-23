@@ -23,6 +23,10 @@ export function StackSection({
   const band = "bg-[#2b3fd6]"
   return (
     <>
+      {/* The change to Lapis needs more room than a section break: these spacers
+          add a second py-24's worth of dark page on each side, on top of the
+          neighbouring sections' own padding. */}
+      <div aria-hidden="true" className="h-24" />
       {/* The joints sit above the band, which paints over the piles and drips. */}
       <div aria-hidden="true" className="rail-joint z-[3]" />
       <PixelDrip className={band} pattern="bandPiles" side="top" play="view" />
@@ -72,6 +76,7 @@ export function StackSection({
       </section>
       <PixelDrip className={band} pattern="bandDrips" play="view" />
       <div aria-hidden="true" className="rail-joint z-[3]" />
+      <div aria-hidden="true" className="h-24" />
     </>
   )
 }
