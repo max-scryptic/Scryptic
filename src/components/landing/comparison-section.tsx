@@ -3,7 +3,6 @@ import { cn } from "cn"
 
 import { BrandLogo } from "@/components/brand-logo"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
-import { SpacetimeColumn } from "@/components/landing/spacetime-column"
 import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 import { pages } from "@/lib/seo"
@@ -114,14 +113,12 @@ export function ComparisonSection({
 
       {/* Never scrolls: on phones the columns narrow and the padding tightens so all six fit. */}
       <div className="ticks guides border border-border bg-card">
-        {/* Our column's tint and pattern, one layer down the whole column so the pattern runs on
-            across the rows. Its left and width match the column widths set on the header row. */}
+        {/* Our column's aurora, one layer down the whole column so it reads as one piece rather
+            than a tint per cell. Its left and width match the column widths on the header row. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-[24%] w-[14%] bg-primary/10 sm:w-[16%]"
-        >
-          <SpacetimeColumn />
-        </div>
+          className="aurora pointer-events-none absolute inset-y-0 left-[24%] w-[14%] sm:w-[16%]"
+        />
         <table className="relative w-full table-fixed border-collapse text-left">
           <caption className="sr-only">
             How {siteConfig.name} compares with an in-house hire, an agency, a freelancer and

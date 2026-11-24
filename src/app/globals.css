@@ -372,6 +372,34 @@
     background-repeat: no-repeat;
   }
 
+  /* Soft overlapping glows of Lapis and periwinkle down a tall box, with a
+     faint warm touch of Glint at the foot: one piece of colour for a
+     highlighted column (our column in the comparison table), not a pattern. */
+  .aurora {
+    background-color: color-mix(in oklab, var(--primary) 6%, transparent);
+    background-image:
+      radial-gradient(
+        ellipse 150% 38% at 0% 10%,
+        color-mix(in oklab, var(--primary) 26%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 140% 40% at 100% 42%,
+        color-mix(in oklab, var(--portrait) 22%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 150% 36% at 10% 72%,
+        color-mix(in oklab, var(--primary) 18%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 160% 30% at 100% 100%,
+        color-mix(in oklab, var(--chart-2) 10%, transparent),
+        transparent 70%
+      );
+  }
+
   /* The same 7px square as the rail joints, filled, centred on the border's corner. */
   .pip {
     position: relative;
