@@ -157,7 +157,7 @@ export function PricingCards() {
               render={<Link href={pages.bookCall.path} />}
               className="h-12 w-full text-base"
             >
-              Claim a founding slot
+              Claim slot
             </Button>
           </div>
         </aside>
