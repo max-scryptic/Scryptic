@@ -242,6 +242,7 @@ export default function MvpDevelopmentPage() {
       />
 
       <FitCheckSection
+        band="warm"
         id="fit"
         eyebrow="Who it is for"
         title="Is an MVP sprint right for you?"
@@ -267,6 +268,7 @@ export default function MvpDevelopmentPage() {
       />
 
       <ComparisonSection
+        band="ink"
         title="How a studio sprint compares, at a glance"
       />
 

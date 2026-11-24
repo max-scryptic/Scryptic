@@ -112,16 +112,20 @@ export const sectionSpace = {
 } as const
 
 /**
- * Quiet full-bleed section backgrounds besides the page and Lapis, a shade
- * off the page in either theme: warm is a paper tone, cool a Lapis tint. Each
- * redraws the guides over itself (.ruled) in its own colour, with a rail
- * joint where it starts and ends.
+ * Full-bleed section backgrounds besides the page and Lapis. Each redraws the
+ * guides over itself (.ruled) in its own colour, with a rail joint where it
+ * starts and ends.
+ * - warm: a quiet paper tone, a shade off the page in either theme.
+ * - ink: a near-black band in both themes. Everything inside it uses the dark
+ *   theme's tokens (the .dark class), so its cards, buttons and text need no
+ *   band-specific styles. --band-ink is the same in both themes, so it reads
+ *   the same on the section despite the .dark class.
  */
-export type SectionBand = "warm" | "cool"
+export type SectionBand = "warm" | "ink"
 
 const bands: Record<SectionBand, string> = {
   warm: "bg-band-warm [--guide:color-mix(in_oklab,var(--foreground)_12%,var(--band-warm))]",
-  cool: "bg-band-cool [--guide:color-mix(in_oklab,var(--foreground)_12%,var(--band-cool))]",
+  ink: "dark bg-band-ink text-foreground [--guide:color-mix(in_oklab,var(--foreground)_12%,var(--band-ink))]",
 }
 
 /**

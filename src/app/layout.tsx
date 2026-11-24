@@ -5,6 +5,7 @@ import { EmDashGuard } from "@/components/em-dash-guard";
 import { themeScript } from "@/components/theme-toggle";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
+import { StrayPixels } from "@/components/stray-pixels";
 import { SiteHeader } from "@/components/site-header";
 import {
   baseOpenGraph,
@@ -127,6 +128,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             the footer's top rule. Clipped sideways, as cards run their edges out to
             the viewport edges. */}
         <div className="ruled ruled-bottom isolate flex min-h-dvh flex-col overflow-x-clip">
+          <StrayPixels />
           {children}
         </div>
         <SiteFooter />

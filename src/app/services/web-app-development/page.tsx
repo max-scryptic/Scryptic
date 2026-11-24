@@ -279,6 +279,7 @@ export default function WebAppDevelopmentPage() {
       />
 
       <FitCheckSection
+        band="warm"
         id="fit"
         eyebrow="Who it is for"
         title="Is a sprint right for your web app?"
@@ -312,6 +313,7 @@ export default function WebAppDevelopmentPage() {
       />
 
       <ComparisonSection
+        band="ink"
         title="Who should build your web app?"
       />
 
