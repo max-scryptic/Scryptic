@@ -258,6 +258,7 @@ export default function WebAppDevelopmentPage() {
 
       <HubSection
         id="what-we-build"
+        eyebrow="What we build"
         title="Web apps built around one job"
         items={kinds}
         core={{ name: "Your web app", tag: "One workflow" }}
@@ -265,6 +266,7 @@ export default function WebAppDevelopmentPage() {
 
       <LayersSection
         id="layers"
+        eyebrow="How it is built"
         title="What goes into a web app"
         layers={layers}
       />
@@ -279,6 +281,7 @@ export default function WebAppDevelopmentPage() {
 
       <FitCheckSection
         id="fit"
+        eyebrow="Who it is for"
         title="Is a sprint right for your web app?"
         items={fitChecks}
         initial={fitInitial}
@@ -290,6 +293,7 @@ export default function WebAppDevelopmentPage() {
 
       <OptionsSection
         id="options"
+        eyebrow="Your options"
         title="Web app developers for hire, compared"
         caption="Five ways to hire web app developers, compared on what you get, price, time to a first release and who owns the code"
         columns={optionColumns}

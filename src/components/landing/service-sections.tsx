@@ -19,11 +19,13 @@ import { inset } from "@/lib/frame"
  */
 export function HubSection({
   id,
+  eyebrow,
   title,
   items,
   core,
 }: {
   id: string
+  eyebrow: string
   title: string
   items: HubItem[]
   /** The product card's label before the hub starts going round; defaults to "Your MVP". */
@@ -33,6 +35,7 @@ export function HubSection({
     <LandingSection id={id} labelledBy={`${id}-heading`}>
       <SectionHeading
         className={cn(inset, "mx-auto text-center *:mx-auto")}
+        eyebrow={eyebrow}
         title={title}
         id={`${id}-heading`} />
       <LaunchKitHub items={items} core={core} />
@@ -48,17 +51,19 @@ export function HubSection({
  */
 export function LayersSection({
   id,
+  eyebrow,
   title,
   layers,
 }: {
   id: string
+  eyebrow: string
   title: string
   layers: AppLayer[]
 }) {
   return (
     <>
       <LandingSection id={id} labelledBy={`${id}-heading`}>
-        <SectionHeading className={inset} title={title} id={`${id}-heading`} />
+        <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`} />
         <div className={cn(inset, "border-t border-border pt-10")}>
           <AppLayers layers={layers} />
         </div>
@@ -76,6 +81,7 @@ export function LayersSection({
  */
 export function FitCheckSection({
   id,
+  eyebrow,
   title,
   items,
   initial = [],
@@ -83,6 +89,7 @@ export function FitCheckSection({
   verdicts,
 }: {
   id: string
+  eyebrow: string
   title: string
   items: string[]
   /** Which statements start ticked, by index. */
@@ -93,7 +100,7 @@ export function FitCheckSection({
 }) {
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
-      <SectionHeading className={inset} title={title} id={`${id}-heading`} />
+      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`} />
       <FitCheck items={items} initial={initial} cta={cta} verdicts={verdicts} />
     </LandingSection>
   )
@@ -110,6 +117,7 @@ export type OptionRow = { name: string; cells: string[] }
  */
 export function OptionsSection({
   id,
+  eyebrow,
   title,
   caption,
   columns,
@@ -117,6 +125,7 @@ export function OptionsSection({
   footnote,
 }: {
   id: string
+  eyebrow: string
   title: string
   /** Says what the table compares; read out by screen readers. */
   caption: string
@@ -128,7 +137,7 @@ export function OptionsSection({
 }) {
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
-      <SectionHeading className={inset} title={title} id={`${id}-heading`} />
+      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`} />
       <div className="ticks guides border border-border bg-card">
         <table className="table-stack w-full border-collapse text-left text-sm">
           <caption className="sr-only">{caption}</caption>

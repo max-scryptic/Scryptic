@@ -224,7 +224,7 @@ const faqs: Faq[] = [
 function ToolsSection() {
   return (
     <LandingSection id="tools" labelledBy="tools-heading">
-      <SectionHeading className={inset} title="Apps we migrate" id="tools-heading" />
+      <SectionHeading className={inset} eyebrow="Where from" title="Apps we migrate" id="tools-heading" />
       <div className="ticks guides border border-border bg-card">
         {postCategories.map((category) => {
           const categoryPosts = migrationGuides.filter((post) => post.category === category.name)
@@ -309,6 +309,7 @@ export default function NoCodeMigrationPage() {
 
       <LayersSection
         id="moves"
+        eyebrow="What moves"
         title="Everything comes with you"
         layers={layers}
       />
@@ -325,6 +326,7 @@ export default function NoCodeMigrationPage() {
 
       <FitCheckSection
         id="fit"
+        eyebrow="Migrate or stay"
         title="Should you migrate at all?"
         items={fitChecks}
         initial={fitInitial}

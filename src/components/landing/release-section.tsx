@@ -100,10 +100,12 @@ const pad = (n: number) => String(n + 1).padStart(2, "0")
 
 export function ReleaseSection({
   id = "release",
+  eyebrow,
   title,
   steps,
 }: {
   id?: string
+  eyebrow: string
   title: string
   steps: ReleaseStep[]
 }) {
@@ -111,7 +113,7 @@ export function ReleaseSection({
 
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
-      <SectionHeading className={inset} title={title} id={`${id}-heading`} />
+      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`} />
       <div ref={ref} className="grid items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
         <div className={inset}>
           <ol className="flex flex-col border-t border-border">

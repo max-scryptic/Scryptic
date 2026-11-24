@@ -26,6 +26,7 @@ export function PricingSection({
     <LandingSection id="pricing" labelledBy="pricing-heading">
       <SectionHeading
         className={inset}
+        eyebrow="Pricing"
         title={title}
         id="pricing-heading" />
 

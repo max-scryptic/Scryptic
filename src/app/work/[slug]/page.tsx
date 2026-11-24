@@ -53,15 +53,18 @@ function splitLede(text: string): [string, string] {
 
 function SectionHeading({
   id,
+  eyebrow,
   title,
   className,
 }: {
   id: string
+  eyebrow: string
   title: string
   className?: string
 }) {
   return (
     <div className={cn("flex flex-col gap-3", className)}>
+      <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
       <h2 id={id} className="text-2xl tracking-tight text-balance sm:text-3xl">
         {title}
       </h2>
@@ -71,10 +74,12 @@ function SectionHeading({
 
 function Section({
   id,
+  eyebrow,
   title,
   children,
 }: {
   id: string
+  eyebrow: string
   title: string
   children: React.ReactNode
 }) {
@@ -83,7 +88,7 @@ function Section({
       aria-labelledby={id}
       className={cn("grid gap-8 pt-12 lg:grid-cols-[1fr_2fr] lg:gap-14", inset)}
     >
-      <SectionHeading id={id} title={title} />
+      <SectionHeading id={id} eyebrow={eyebrow} title={title} />
       <div className="flex flex-col gap-6">{children}</div>
     </section>
   )
@@ -173,7 +178,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           />
         </header>
 
-        <Section id="problem-heading" title={`Why ${study.name} exists`}>
+        <Section id="problem-heading" eyebrow="The problem" title={`Why ${study.name} exists`}>
           {study.problem.map((paragraph) => (
             <p key={paragraph} className="text-lg text-pretty text-muted-foreground">
               {paragraph}
@@ -183,7 +188,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
         <section aria-labelledby="solution-heading" className="flex flex-col gap-12 pt-12">
           <div className={cn("grid gap-8 lg:grid-cols-[1fr_2fr] lg:gap-14", inset)}>
-            <SectionHeading id="solution-heading" title="What we built" />
+            <SectionHeading id="solution-heading" eyebrow="The product" title="What we built" />
             <div className="flex flex-col gap-5">
               <p className="text-2xl/snug tracking-tight text-pretty sm:text-3xl/snug">{lead}</p>
               {moreSolution.map((paragraph) => (
@@ -216,6 +221,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         {study.gallery.length > 0 || appScreens.length > 0 ? (
           <section aria-labelledby="screens-heading" className="flex flex-col gap-8 pt-12">
             <div className={cn("flex flex-col gap-3", inset)}>
+              <p className="font-mono text-xs tracking-widest text-primary uppercase">Screens</p>
               <h2 id="screens-heading" className="text-2xl tracking-tight sm:text-3xl">
                 A closer look
               </h2>
@@ -259,6 +265,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         <section aria-labelledby="engineering-heading" className="flex flex-col gap-10 pt-12">
           <SectionHeading
             id="engineering-heading"
+            eyebrow="Under the hood"
             title="The engineering"
             className={cn("max-w-3xl", inset)}
           />
@@ -294,12 +301,10 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           className="flex scroll-mt-28 flex-col gap-8 pt-12"
         >
           <div className={cn("flex max-w-3xl flex-col gap-3", inset)}>
+            <p className="font-mono text-xs tracking-widest text-primary uppercase">Built with</p>
             <h2 id="stack-heading" className="text-2xl tracking-tight sm:text-3xl">
               The stack
             </h2>
-            <p className="text-lg text-pretty text-muted-foreground">
-              Everything {study.name} runs on, layer by layer.
-            </p>
           </div>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {study.stack.map((layer) => (
