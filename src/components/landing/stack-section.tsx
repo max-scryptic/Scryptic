@@ -15,10 +15,8 @@ import { stack } from "@/lib/stack"
  */
 export function StackSection({
   title = "A stack built for a fast, scalable launch",
-  lead = "Production-grade tools that scale without a rebuild, with every account in your name.",
 }: {
   title?: string
-  lead?: string
 }) {
   const band = "bg-[#2b3fd6]"
   return (
@@ -37,10 +35,10 @@ export function StackSection({
       >
         <div className={cn("mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16", inset)}>
           <div data-reveal="children" className="flex flex-col gap-5">
+            <p className="font-mono text-xs tracking-widest text-[#c3caff] uppercase">Our stack</p>
             <h2 id="stack-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
               {title}
             </h2>
-            <p className="text-lg text-pretty text-white/80">{lead}</p>
           </div>
           <ul data-reveal="children" className="grid grid-cols-2 gap-3 sm:gap-4">
             {stack.map((tool) => (

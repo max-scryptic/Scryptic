@@ -89,10 +89,7 @@ export function LaunchRaceSection() {
       <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
         <SectionHeading
           title="The usual route takes months. Ours takes weeks."
-          id="problems-heading"
-        >
-          Hiring, quotes, specs and delays add up. A Scryptic sprint skips them.
-        </SectionHeading>
+          id="problems-heading" />
         <div aria-hidden="true" className="flex shrink-0 flex-col gap-1 lg:items-end">
           <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">Time to launch</p>
           <p className="text-6xl leading-none tracking-tighter tabular-nums sm:text-7xl">

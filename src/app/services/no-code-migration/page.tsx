@@ -224,9 +224,7 @@ const faqs: Faq[] = [
 function ToolsSection() {
   return (
     <LandingSection id="tools" labelledBy="tools-heading">
-      <SectionHeading className={inset} title="Apps we migrate" id="tools-heading">
-        {migrationGuides.length} builders and platforms, each with a free step by step migration guide.
-      </SectionHeading>
+      <SectionHeading className={inset} eyebrow="Where from" title="Apps we migrate" id="tools-heading" />
       <div className="ticks guides border border-border bg-card">
         {postCategories.map((category) => {
           const categoryPosts = migrationGuides.filter((post) => post.category === category.name)
@@ -311,27 +309,25 @@ export default function NoCodeMigrationPage() {
 
       <LayersSection
         id="moves"
+        eyebrow="What moves"
         title="Everything comes with you"
-        intro="The whole app moves, not just its screens, and is checked before the old one is switched off."
         layers={layers}
       />
 
       <PricingSection
         title="Migrations are priced like an MVP"
-        intro="The same two fixed-price sprints. The audit settles which one fits."
       />
 
       <ProcessSection
         title="From audit to cutover"
-        intro={`An audit, a ${calendarPackage.sprint} with Friday demos, then cutover and a week of support.`}
         calendar={migrationCalendar}
         note={`An example schedule for a migration on the ${calendarPackage.name} package. Larger apps take the Extended MVP, which adds a second week of development.`}
       />
 
       <FitCheckSection
         id="fit"
+        eyebrow="Migrate or stay"
         title="Should you migrate at all?"
-        intro="Not every app should move. If it works, the costs are fine and nothing is blocked, stay where you are."
         items={fitChecks}
         initial={fitInitial}
         cta={{ label: "Book a free app audit call", href: "#contact" }}
@@ -340,18 +336,15 @@ export default function NoCodeMigrationPage() {
 
       <StackSection
         title="Where your app moves to"
-        lead="A mainstream production stack in your name, with no builder fees and code any developer can pick up."
       />
 
       <ComparisonSection
         title="Who should move your app?"
-        intro="A fixed price, with a tested plan for your data and users."
         rows={comparison}
       />
 
       <GuidesSection
         title="More on moving to code"
-        intro="For apps that started in a spreadsheet or an automation tool, where the data lands and what a build costs, plus a quiz on whether to move."
         posts={guides}
         tools={[freeTool("build-or-no-code")]}
         more={{ label: "All migration guides", href: `${pages.blog.path}#migration` }}
@@ -359,7 +352,6 @@ export default function NoCodeMigrationPage() {
 
       <FaqSection
         faqs={faqs}
-        intro="What founders ask before moving off a no-code or AI builder."
       />
 
       <ContactSection

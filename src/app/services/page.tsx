@@ -42,9 +42,7 @@ export default function ServicesPage() {
       />
 
       <LandingSection id="services" labelledBy="services-heading">
-        <SectionHeading className={inset} title="Four services, one way of working" id="services-heading">
-          From an idea, a workflow, a phone app or a no-code app, you get a fixed price, weekly demos and code you own.
-        </SectionHeading>
+        <SectionHeading className={inset} eyebrow="What we do" title="Four services, one way of working" id="services-heading" />
         <div data-reveal="children" className="grid gap-6 md:grid-cols-2">
           {servicePages.map((service, index) => (
             <article

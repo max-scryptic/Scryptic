@@ -13,13 +13,11 @@ import { pages } from "@/lib/seo"
 /** Blog posts and free tools that go deeper on a service page's subject. */
 export function GuidesSection({
   title,
-  intro,
   posts,
   tools = [],
   more = { label: "All guides", href: pages.blog.path },
 }: {
   title: string
-  intro: React.ReactNode
   posts: BlogPost[]
   tools?: FreeTool[]
   more?: { label: string; href: string }
@@ -27,9 +25,7 @@ export function GuidesSection({
   return (
     <LandingSection id="guides" labelledBy="guides-heading">
       <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-        <SectionHeading title={title} id="guides-heading">
-          {intro}
-        </SectionHeading>
+        <SectionHeading eyebrow="Guides" title={title} id="guides-heading" />
         <Button
           size="lg"
           variant="outline"

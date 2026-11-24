@@ -64,6 +64,7 @@ export function ToolPage({
           className={cn("grid gap-12 lg:grid-cols-[1fr_1.4fr]", inset)}
         >
           <div className="flex flex-col items-start gap-4">
+            <p className="font-mono text-xs tracking-widest text-primary uppercase">FAQ</p>
             <h2 id="tool-faq-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
               Frequently asked questions
             </h2>

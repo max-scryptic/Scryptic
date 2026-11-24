@@ -71,7 +71,6 @@ export default function PricingPage() {
 
       <FaqSection
         faqs={faqs}
-        intro="Who pays for what, whose name the accounts are in and why we recommend support."
       />
 
       <div className="px-4 pb-24 sm:px-6">

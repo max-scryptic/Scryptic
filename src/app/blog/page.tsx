@@ -80,13 +80,13 @@ export default function BlogPage() {
               className="flex scroll-mt-28 flex-col gap-8 pt-12"
             >
               <div className={cn("flex max-w-2xl flex-col gap-3", inset)}>
+                <p className="font-mono text-xs tracking-widest text-primary uppercase">Series</p>
                 <h2
                   id={`${series.id}-heading`}
                   className="text-3xl tracking-tight text-balance sm:text-4xl"
                 >
                   {series.name}
                 </h2>
-                <p className="text-lg text-pretty text-muted-foreground">{series.intro}</p>
               </div>
 
               <PostCarousel

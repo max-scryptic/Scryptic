@@ -19,14 +19,14 @@ import { inset } from "@/lib/frame"
  */
 export function HubSection({
   id,
+  eyebrow,
   title,
-  intro,
   items,
   core,
 }: {
   id: string
+  eyebrow: string
   title: string
-  intro: React.ReactNode
   items: HubItem[]
   /** The product card's label before the hub starts going round; defaults to "Your MVP". */
   core?: HubCore
@@ -35,11 +35,9 @@ export function HubSection({
     <LandingSection id={id} labelledBy={`${id}-heading`}>
       <SectionHeading
         className={cn(inset, "mx-auto text-center *:mx-auto")}
+        eyebrow={eyebrow}
         title={title}
-        id={`${id}-heading`}
-      >
-        {intro}
-      </SectionHeading>
+        id={`${id}-heading`} />
       <LaunchKitHub items={items} core={core} />
     </LandingSection>
   )
@@ -53,21 +51,19 @@ export function HubSection({
  */
 export function LayersSection({
   id,
+  eyebrow,
   title,
-  intro,
   layers,
 }: {
   id: string
+  eyebrow: string
   title: string
-  intro: React.ReactNode
   layers: AppLayer[]
 }) {
   return (
     <>
       <LandingSection id={id} labelledBy={`${id}-heading`}>
-        <SectionHeading className={inset} title={title} id={`${id}-heading`}>
-          {intro}
-        </SectionHeading>
+        <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`} />
         <div className={cn(inset, "border-t border-border pt-10")}>
           <AppLayers layers={layers} />
         </div>
@@ -85,16 +81,16 @@ export function LayersSection({
  */
 export function FitCheckSection({
   id,
+  eyebrow,
   title,
-  intro,
   items,
   initial = [],
   cta = { label: "Book a discovery call", href: "#contact" },
   verdicts,
 }: {
   id: string
+  eyebrow: string
   title: string
-  intro: React.ReactNode
   items: string[]
   /** Which statements start ticked, by index. */
   initial?: number[]
@@ -104,9 +100,7 @@ export function FitCheckSection({
 }) {
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
-      <SectionHeading className={inset} title={title} id={`${id}-heading`}>
-        {intro}
-      </SectionHeading>
+      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`} />
       <FitCheck items={items} initial={initial} cta={cta} verdicts={verdicts} />
     </LandingSection>
   )
@@ -123,16 +117,16 @@ export type OptionRow = { name: string; cells: string[] }
  */
 export function OptionsSection({
   id,
+  eyebrow,
   title,
-  intro,
   caption,
   columns,
   rows,
   footnote,
 }: {
   id: string
+  eyebrow: string
   title: string
-  intro: React.ReactNode
   /** Says what the table compares; read out by screen readers. */
   caption: string
   /** The headings after the first column. */
@@ -143,9 +137,7 @@ export function OptionsSection({
 }) {
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
-      <SectionHeading className={inset} title={title} id={`${id}-heading`}>
-        {intro}
-      </SectionHeading>
+      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`} />
       <div className="ticks guides border border-border bg-card">
         <table className="table-stack w-full border-collapse text-left text-sm">
           <caption className="sr-only">{caption}</caption>

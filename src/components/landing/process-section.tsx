@@ -77,21 +77,17 @@ function dayRange(day: number, span: number) {
  */
 export function ProcessSection({
   title = "From first call to launch",
-  intro,
   calendar = mvpCalendar,
   note = `An example schedule for the ${calendarPackage.name}. The Extended MVP adds a second week of development.`,
 }: {
   title?: string
-  intro: React.ReactNode
   calendar?: ProcessCalendar
   /** The caption under the calendar. */
   note?: string
 }) {
   return (
     <LandingSection id="process" labelledBy="process-heading" space="tight">
-      <SectionHeading className={inset} title={title} id="process-heading">
-        {intro}
-      </SectionHeading>
+      <SectionHeading className={inset} title={title} id="process-heading" />
       <div className="ticks guides border border-border bg-card">
         <div
           aria-hidden="true"

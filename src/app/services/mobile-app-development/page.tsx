@@ -9,7 +9,7 @@ import type { IconName } from "@/components/landing/icons"
 import { PlatformSection } from "@/components/landing/mobile-sections"
 import { ReleaseSection, type ReleaseStep } from "@/components/landing/release-section"
 import { PricingSection } from "@/components/landing/pricing-section"
-import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
+import { ProcessSection } from "@/components/landing/process-section"
 import { FitCheckSection, HubSection } from "@/components/landing/service-sections"
 import { WorkSection } from "@/components/landing/work-section"
 import { PixelIn } from "@/components/pixel-in"
@@ -219,8 +219,8 @@ export default function MobileAppDevelopmentPage() {
 
       <HubSection
         id="what-we-build"
+        eyebrow="What we build"
         title="Mobile apps built around one job"
-        intro="Each one does a real job for your customers or your team, from opening the app to the finished task."
         items={kinds}
         core={{ name: "Your app", tag: "iOS + Android" }}
       />
@@ -231,6 +231,7 @@ export default function MobileAppDevelopmentPage() {
 
       <PlatformSection
         id="ios"
+        eyebrow="iPhone"
         title="iOS app development"
         summary={platforms.ios.summary}
         points={platforms.ios.points}
@@ -240,6 +241,7 @@ export default function MobileAppDevelopmentPage() {
 
       <PlatformSection
         id="android"
+        eyebrow="Android"
         title="Android app development"
         summary={platforms.android.summary}
         points={platforms.android.points}
@@ -250,49 +252,44 @@ export default function MobileAppDevelopmentPage() {
       <div aria-hidden="true" className="rail-joint border-t border-border" />
 
       <ReleaseSection
+        eyebrow="From code to the stores"
         title="How your app gets into the App Store and Google Play"
-        intro="Five steps from the first build to a listing customers can install, each one run from accounts in your name."
         steps={releaseSteps}
       />
       <div aria-hidden="true" className="rail-joint border-t border-border" />
 
       <PricingSection
         title="Fixed-price mobile app development"
-        intro="Two sprints for the first release of your app, priced before the build starts."
       />
 
       <ProcessSection
         title="From brief to the app stores"
-        intro={`A discovery call, a ${calendarPackage.sprint} with a demo every Friday, then a week of support.`}
       />
 
       <FitCheckSection
         id="fit"
+        eyebrow="Who it is for"
         title="Is a sprint right for your app?"
-        intro="It suits a clearly scoped first release. If a web app would serve you better, we will say so on the call."
         items={fitChecks}
         initial={fitInitial}
       />
 
       <WorkSection
         title="A native Android app we built"
-        intro="Get Out Of Bed is an alarm clock written in Kotlin with Jetpack Compose. It rings on time through Android's battery savers, matches photos on the phone and sells Premium through Google Play."
         studies={mobileCaseStudies}
       />
 
       <ComparisonSection
         title="Who should build your mobile app?"
-        intro="Native code from a small studio, with the price fixed before the build."
       />
 
       <GuidesSection
         title="Plan your app before the call"
-        intro="Guides on mobile builds and the web alternatives, costs and choosing who builds it, plus two free tools."
         posts={guides}
         tools={tools}
       />
 
-      <FaqSection faqs={faqs} intro="Cost, platforms, the stores and who owns the result." />
+      <FaqSection faqs={faqs} />
 
       <ContactSection
         title="Talk through your app"

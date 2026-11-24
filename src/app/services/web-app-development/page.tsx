@@ -10,7 +10,7 @@ import { LandingHero } from "@/components/landing/hero"
 import { WebAppVisual } from "@/components/landing/hero-visuals"
 import type { IconName } from "@/components/landing/icons"
 import { PricingSection } from "@/components/landing/pricing-section"
-import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
+import { ProcessSection } from "@/components/landing/process-section"
 import {
   FitCheckSection,
   HubSection,
@@ -258,46 +258,43 @@ export default function WebAppDevelopmentPage() {
 
       <HubSection
         id="what-we-build"
+        eyebrow="What we build"
         title="Web apps built around one job"
-        intro="Each does a real job for your customers or your team, from sign-in to the finished task."
         items={kinds}
         core={{ name: "Your web app", tag: "One workflow" }}
       />
 
       <LayersSection
         id="layers"
+        eyebrow="How it is built"
         title="What goes into a web app"
-        intro="A web app is more than its screens. Every layer is built, tested and handed over in your name."
         layers={layers}
       />
 
       <PricingSection
         title="Fixed-price web app development"
-        intro="Two sprints for the first release of your web app, priced before the build starts."
       />
 
       <ProcessSection
         title="From brief to live web app"
-        intro={`A discovery call, a ${calendarPackage.sprint} with a demo every Friday, then a week of support.`}
       />
 
       <FitCheckSection
         id="fit"
+        eyebrow="Who it is for"
         title="Is a sprint right for your web app?"
-        intro="It suits a clearly scoped first release. If you need a team for years, we will say so on the call."
         items={fitChecks}
         initial={fitInitial}
       />
 
       <WorkSection
         title="Web apps we have built and launched"
-        intro="Dashboards, AI tools and team workspaces, each taken from first sketch to a live domain."
       />
 
       <OptionsSection
         id="options"
+        eyebrow="Your options"
         title="Web app developers for hire, compared"
-        intro="What you get, what it costs, how long it takes and who owns the code, for the five usual ways to get a web app built."
         caption="Five ways to hire web app developers, compared on what you get, price, time to a first release and who owns the code"
         columns={optionColumns}
         rows={options}
@@ -317,19 +314,16 @@ export default function WebAppDevelopmentPage() {
 
       <ComparisonSection
         title="Who should build your web app?"
-        intro="Agency-grade code at a freelancer's pace, with the price fixed before the build."
       />
 
       <GuidesSection
         title="Plan your web app before the call"
-        intro="Guides on scoping, designing and building a web app and choosing who builds it, plus two free tools."
         posts={guides}
         tools={tools}
       />
 
       <FaqSection
         faqs={faqs}
-        intro="Cost, choosing a developer, timeline, phones and who owns the result."
       />
 
       <ContactSection

@@ -90,19 +90,15 @@ function ComparisonMark({ value, highlight = false }: { value: boolean; highligh
 
 export function ComparisonSection({
   title,
-  intro,
   rows = studioComparison,
 }: {
   title: string
-  intro: React.ReactNode
   rows?: ComparisonRow[]
 }) {
   return (
     <LandingSection id="compare" labelledBy="compare-heading">
       <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-        <SectionHeading title={title} id="compare-heading">
-          {intro}
-        </SectionHeading>
+        <SectionHeading title={title} id="compare-heading" />
         <Button
           size="lg"
           nativeButton={false}

@@ -10,19 +10,15 @@ import { featuredCaseStudies, type CaseStudy } from "@/lib/work"
 
 export function WorkSection({
   title = "Products we have built and launched",
-  intro = "Every app below went through the same process as a client build, from first sketch to live domain.",
   studies = featuredCaseStudies,
 }: {
   title?: string
-  intro?: React.ReactNode
   studies?: CaseStudy[]
 }) {
   return (
     <LandingSection id="work" labelledBy="work-heading">
       <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-        <SectionHeading title={title} id="work-heading">
-          {intro}
-        </SectionHeading>
+        <SectionHeading title={title} id="work-heading" />
         <Button
           size="lg"
           variant="outline"
