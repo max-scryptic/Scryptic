@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { cn } from "cn"
 
+import { pixelLabel } from "@/components/landing/section-heading"
+
 /*
  * Started as Aceternity UI's Floating Navbar
  * (ui.aceternity.com/components/floating-navbar), ported to this repo's tokens.
@@ -147,7 +149,8 @@ export function FloatingNavLink({
     <Link
       href={href}
       className={cn(
-        "flex min-h-10 items-center px-1 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground focus-visible:text-foreground min-[360px]:px-2 md:px-3 md:text-base",
+        "flex min-h-10 items-center px-1 whitespace-nowrap text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground focus-visible:text-foreground min-[360px]:px-2 md:px-3",
+        pixelLabel,
         className,
       )}
     >
@@ -170,7 +173,10 @@ export function FloatingNavAction({
   return (
     <Link
       href={href}
-      className="flex min-h-10 items-center bg-primary px-2.5 text-sm font-medium whitespace-nowrap text-primary-foreground transition-colors hover:bg-primary/80 min-[360px]:px-3 sm:px-4 md:text-base"
+      className={cn(
+        "flex min-h-10 items-center bg-primary px-2.5 whitespace-nowrap text-primary-foreground transition-colors hover:bg-primary/80 min-[360px]:px-3 sm:px-4",
+        pixelLabel,
+      )}
     >
       {children}
     </Link>

@@ -121,6 +121,7 @@ export default function Home() {
       <ScrollReveal />
 
       <LandingHero
+        eyebrow={{ label: "MVP development studio" }}
         title={
           <>
             From idea to <PixelIn className="text-[#c3caff]">MVP</PixelIn>, without hiring a dev team.

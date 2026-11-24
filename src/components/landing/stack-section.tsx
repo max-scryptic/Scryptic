@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { cn } from "cn"
 
+import { Eyebrow } from "@/components/landing/section-heading"
 import { PixelDrip } from "@/components/pixel-drip"
 import { inset } from "@/lib/frame"
 import { stack } from "@/lib/stack"
@@ -35,7 +36,7 @@ export function StackSection({
       >
         <div className={cn("mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16", inset)}>
           <div data-reveal="children" className="flex flex-col gap-5">
-            <p className="font-mono text-xs tracking-widest text-[#c3caff] uppercase">Our stack</p>
+            <Eyebrow className="text-[#c3caff]">Our stack</Eyebrow>
             {/* Larger than a section heading: the band is one of the page's standout moments. */}
             <h2 id="stack-heading" className="text-4xl leading-[1.02] tracking-[-0.035em] text-balance sm:text-5xl lg:text-6xl">
               {title}

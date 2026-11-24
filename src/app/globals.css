@@ -94,6 +94,7 @@
   --font-logo: var(--font-syne);
   --font-display: var(--font-bricolage);
   --font-mono: var(--font-ibm-plex-mono);
+  --font-pixel: var(--font-geist-pixel);
 
   --radius-xs: var(--radius);
   --radius-sm: var(--radius);

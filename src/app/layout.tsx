@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Hanken_Grotesk, IBM_Plex_Mono, Syne } from "next/font/google";
+import { Bricolage_Grotesque, Geist_Pixel, Hanken_Grotesk, IBM_Plex_Mono, Syne } from "next/font/google";
 
 import { EmDashGuard } from "@/components/em-dash-guard";
 import { themeScript } from "@/components/theme-toggle";
@@ -23,7 +23,8 @@ import "./globals.css";
 
 // Brand type: Syne for the wordmark only, Bricolage Grotesque for page and
 // section headings, Hanken Grotesk for text and smaller headings, IBM Plex
-// Mono for labels, numbers and code.
+// Mono for numbers and code, and Geist Pixel for the small uppercase labels
+// over sections, the nav links and button text.
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
@@ -46,6 +47,11 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
+});
+
+const geistPixel = Geist_Pixel({
+  variable: "--font-geist-pixel",
+  subsets: ["latin"],
 });
 
 // Search console ownership tags, read at build time. Unset ones are skipped.
@@ -103,7 +109,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={siteConfig.language}
-      className={`${syne.variable} ${bricolage.variable} ${hankenGrotesk.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${syne.variable} ${bricolage.variable} ${hankenGrotesk.variable} ${ibmPlexMono.variable} ${geistPixel.variable} h-full antialiased`}
       data-scroll-behavior="smooth"
       // The theme script adds .dark before React hydrates.
       suppressHydrationWarning
