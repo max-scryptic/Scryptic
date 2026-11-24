@@ -113,7 +113,15 @@ export function ComparisonSection({
 
       {/* Never scrolls: on phones the columns narrow and the padding tightens so all six fit. */}
       <div className="ticks guides border border-border bg-card">
-        <table className="w-full table-fixed border-collapse text-left">
+        {/* Our column's tint and grid, one layer down the whole column so the grid runs on
+            across the rows. Its left and width match the column widths set on the header row. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-[24%] w-[14%] bg-primary/10 sm:w-[16%]"
+        >
+          <div className="graph-paper absolute inset-0" />
+        </div>
+        <table className="relative w-full table-fixed border-collapse text-left">
           <caption className="sr-only">
             How {siteConfig.name} compares with an in-house hire, an agency, a freelancer and
             AI-only tools
@@ -124,7 +132,7 @@ export function ComparisonSection({
               {/* Below lg the mark stands in for the wordmark, which is too wide for the column. */}
               <th
                 scope="col"
-                className="w-[14%] bg-primary/10 py-4 text-center font-logo text-lg font-extrabold tracking-tight lowercase sm:w-[16%] sm:px-4 sm:py-6 xl:text-xl"
+                className="w-[14%] py-4 text-center font-logo text-lg font-extrabold tracking-tight lowercase sm:w-[16%] sm:px-4 sm:py-6 xl:text-xl"
               >
                 <BrandLogo className="mx-auto size-6 sm:size-7 lg:hidden" />
                 <span className="max-lg:sr-only">{siteConfig.name}</span>
@@ -149,7 +157,7 @@ export function ComparisonSection({
                     {row.text}
                   </span>
                 </th>
-                <td className="bg-primary/10 px-1 py-4 sm:px-4 sm:py-5">
+                <td className="px-1 py-4 sm:px-4 sm:py-5">
                   <ComparisonMark value highlight />
                 </td>
                 {alternatives.map((alternative) => (
