@@ -50,6 +50,12 @@
   --voxel-top: color-mix(in oklab, var(--portrait) 20%, var(--background));
   --voxel-left: color-mix(in oklab, var(--portrait) 38%, var(--background));
   --voxel-right: color-mix(in oklab, var(--portrait) 62%, var(--background));
+  /* Glint at full strength, the same in both themes: the stray pixels on the guides. */
+  --glint: #f2a93b;
+  /* Two quiet section bands besides Lapis, a shade off the page either way:
+     a warm paper and a cool Lapis tint. */
+  --band-warm: #f5f2ec;
+  --band-cool: #e6e9f6;
 }
 
 .dark {
@@ -87,6 +93,8 @@
   --voxel-top: color-mix(in oklab, var(--portrait) 30%, var(--background));
   --voxel-left: color-mix(in oklab, var(--portrait) 17%, var(--background));
   --voxel-right: color-mix(in oklab, var(--portrait) 9%, var(--background));
+  --band-warm: #16141a;
+  --band-cool: #121427;
 }
 
 @theme inline {
@@ -140,6 +148,9 @@
   --color-voxel-top: var(--voxel-top);
   --color-voxel-left: var(--voxel-left);
   --color-voxel-right: var(--voxel-right);
+  --color-glint: var(--glint);
+  --color-band-warm: var(--band-warm);
+  --color-band-cool: var(--band-cool);
 }
 
 @layer base {

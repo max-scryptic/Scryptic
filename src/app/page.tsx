@@ -10,6 +10,7 @@ import { PricingSection } from "@/components/landing/pricing-section"
 import { ProblemStatement } from "@/components/landing/problem-statement"
 import { ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
+import { type PixelCluster, StrayPixels } from "@/components/landing/stray-pixels"
 import { WorkSection } from "@/components/landing/work-section"
 import { PixelIn } from "@/components/pixel-in"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -108,6 +109,53 @@ const terminalLines = [
   { prompt: false, text: "launched in a 2 week sprint" },
 ]
 
+// Pockets of colour on the guides, one cluster at a few section breaks.
+const pockets: Record<string, PixelCluster[]> = {
+  statement: [
+    {
+      side: "left",
+      top: "3rem",
+      cells: [
+        { at: [0, 0], tone: "glint" },
+        { at: [1, 1], tone: "glint" },
+      ],
+    },
+  ],
+  pricing: [
+    {
+      side: "right",
+      top: "-2rem",
+      cells: [
+        { at: [0, 0], tone: "glint" },
+        { at: [1, 0], tone: "glint" },
+        { at: [1, 1], tone: "primary" },
+        { at: [0, 3], tone: "outline" },
+      ],
+    },
+  ],
+  work: [
+    {
+      side: "left",
+      top: "2rem",
+      cells: [
+        { at: [-1, 0], tone: "portrait" },
+        { at: [0, 1], tone: "glint" },
+        { at: [0, 2], tone: "glint" },
+      ],
+    },
+  ],
+  contact: [
+    {
+      side: "right",
+      top: "-7rem",
+      cells: [
+        { at: [0, 0], tone: "glint" },
+        { at: [-1, 2], tone: "outline" },
+      ],
+    },
+  ],
+}
+
 export default function Home() {
   return (
     <main className="flex flex-col">
@@ -131,6 +179,8 @@ export default function Home() {
         visual={<TerminalCard lines={terminalLines} />}
       />
 
+      <StrayPixels clusters={pockets.statement} />
+
       <ProblemStatement
         parts={[
           { text: "You have the idea, and people waiting to use it. What you don't have is a dev team, or months to hire one. So we build the first version with you in a" },
@@ -142,24 +192,31 @@ export default function Home() {
 
       <LaunchRaceSection />
 
+      <StrayPixels clusters={pockets.pricing} />
+
       <PricingSection />
 
-      <AboutSection />
+      <AboutSection band="warm" />
 
       <ProcessSection
       />
 
       <StackSection />
 
+      <StrayPixels clusters={pockets.work} />
+
       <WorkSection />
 
       <ComparisonSection
+        band="cool"
         title="Hire in-house. Brief an agency. Chance a freelancer. Or skip the trade-offs."
       />
 
       <FaqSection
         faqs={faqs}
       />
+
+      <StrayPixels clusters={pockets.contact} />
 
       <ContactSection />
     </main>

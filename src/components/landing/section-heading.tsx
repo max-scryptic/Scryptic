@@ -112,6 +112,19 @@ export const sectionSpace = {
 } as const
 
 /**
+ * Quiet full-bleed section backgrounds besides the page and Lapis, a shade
+ * off the page in either theme: warm is a paper tone, cool a Lapis tint. Each
+ * redraws the guides over itself (.ruled) in its own colour, with a rail
+ * joint where it starts and ends.
+ */
+export type SectionBand = "warm" | "cool"
+
+const bands: Record<SectionBand, string> = {
+  warm: "bg-band-warm [--guide:color-mix(in_oklab,var(--foreground)_12%,var(--band-warm))]",
+  cool: "bg-band-cool [--guide:color-mix(in_oklab,var(--foreground)_12%,var(--band-cool))]",
+}
+
+/**
  * A landing section's outer frame: full width with the page gutters, its
  * content in the max-w-6xl column.
  */
@@ -119,18 +132,37 @@ export function LandingSection({
   id,
   labelledBy,
   space = "default",
+  band,
   className,
   children,
 }: {
   id: string
   labelledBy: string
   space?: keyof typeof sectionSpace
+  band?: SectionBand
   className?: string
   children: React.ReactNode
 }) {
-  return (
-    <section aria-labelledby={labelledBy} id={id} className={cn("px-4 sm:px-6", sectionSpace[space])}>
+  const section = (
+    <section
+      aria-labelledby={labelledBy}
+      id={id}
+      className={cn(
+        "px-4 sm:px-6",
+        sectionSpace[space],
+        band && "ruled",
+        band && bands[band],
+      )}
+    >
       <div className={cn("mx-auto flex max-w-6xl flex-col gap-12", className)}>{children}</div>
     </section>
+  )
+  if (!band) return section
+  return (
+    <>
+      <div aria-hidden="true" className="rail-joint" />
+      {section}
+      <div aria-hidden="true" className="rail-joint" />
+    </>
   )
 }
