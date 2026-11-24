@@ -255,11 +255,9 @@ export default function WebAppDevelopmentPage() {
         visual={<WebAppVisual />}
         shape="panels"
       />
-      <div aria-hidden="true" className="rail-joint" />
 
       <HubSection
         id="what-we-build"
-        eyebrow="What we build"
         title="Web apps built around one job"
         intro="Each does a real job for your customers or your team, from sign-in to the finished task."
         items={kinds}
@@ -268,7 +266,6 @@ export default function WebAppDevelopmentPage() {
 
       <LayersSection
         id="layers"
-        eyebrow="How it is built"
         title="What goes into a web app"
         intro="A web app is more than its screens. Every layer is built, tested and handed over in your name."
         layers={layers}
@@ -286,7 +283,6 @@ export default function WebAppDevelopmentPage() {
 
       <FitCheckSection
         id="fit"
-        eyebrow="Who it is for"
         title="Is a sprint right for your web app?"
         intro="It suits a clearly scoped first release. If you need a team for years, we will say so on the call."
         items={fitChecks}
@@ -300,7 +296,6 @@ export default function WebAppDevelopmentPage() {
 
       <OptionsSection
         id="options"
-        eyebrow="Your options"
         title="Web app developers for hire, compared"
         intro="What you get, what it costs, how long it takes and who owns the code, for the five usual ways to get a web app built."
         caption="Five ways to hire web app developers, compared on what you get, price, time to a first release and who owns the code"

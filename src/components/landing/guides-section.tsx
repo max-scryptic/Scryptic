@@ -27,7 +27,7 @@ export function GuidesSection({
   return (
     <LandingSection id="guides" labelledBy="guides-heading">
       <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-        <SectionHeading eyebrow="Guides" title={title} id="guides-heading">
+        <SectionHeading title={title} id="guides-heading">
           {intro}
         </SectionHeading>
         <Button

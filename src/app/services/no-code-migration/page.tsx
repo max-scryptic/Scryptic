@@ -224,7 +224,7 @@ const faqs: Faq[] = [
 function ToolsSection() {
   return (
     <LandingSection id="tools" labelledBy="tools-heading">
-      <SectionHeading className={inset} eyebrow="Where from" title="Apps we migrate" id="tools-heading">
+      <SectionHeading className={inset} title="Apps we migrate" id="tools-heading">
         {migrationGuides.length} builders and platforms, each with a free step by step migration guide.
       </SectionHeading>
       <div className="ticks guides border border-border bg-card">
@@ -306,13 +306,11 @@ export default function NoCodeMigrationPage() {
         visual={<MigrationVisual tools={heroTools} />}
         shape="migrate"
       />
-      <div aria-hidden="true" className="rail-joint" />
 
       <ToolsSection />
 
       <LayersSection
         id="moves"
-        eyebrow="What moves"
         title="Everything comes with you"
         intro="The whole app moves, not just its screens, and is checked before the old one is switched off."
         layers={layers}
@@ -332,7 +330,6 @@ export default function NoCodeMigrationPage() {
 
       <FitCheckSection
         id="fit"
-        eyebrow="Migrate or stay"
         title="Should you migrate at all?"
         intro="Not every app should move. If it works, the costs are fine and nothing is blocked, stay where you are."
         items={fitChecks}

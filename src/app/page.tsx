@@ -130,7 +130,6 @@ export default function Home() {
         secondary={{ label: "See pricing", href: "/#pricing" }}
         visual={<TerminalCard lines={terminalLines} />}
       />
-      <div aria-hidden="true" className="rail-joint" />
 
       <ProblemStatement
         parts={[
