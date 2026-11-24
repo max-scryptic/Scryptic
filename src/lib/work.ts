@@ -824,7 +824,7 @@ export const caseStudies: CaseStudy[] = [viewlio, prettyMetrics, reelEstate, unt
 export const mobileCaseStudies: CaseStudy[] = caseStudies.filter((study) => study.operatingSystem)
 
 /** The case studies shown on the home page; /work lists them all. */
-export const featuredCaseStudies: CaseStudy[] = [viewlio, prettyMetrics]
+export const featuredCaseStudies: CaseStudy[] = [viewlio, reelEstate]
 
 export function getCaseStudy(slug: string) {
   return caseStudies.find((study) => study.slug === slug)
