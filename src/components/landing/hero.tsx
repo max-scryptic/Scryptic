@@ -14,7 +14,8 @@ import { pages } from "@/lib/seo"
  * below. Either background covers the page's guide lines, so none run through
  * it. The visual keeps the same inset as the copy, so the two sit
  * symmetrically in the column. Its bottom edge drips pixels down into the
- * page (PixelDrip). Render a `rail-joint` straight after it.
+ * page (PixelDrip), and it ends with its own rail joint and the gap before
+ * the first section, so pages render nothing between it and that section.
  *
  * Keep every hero the same size: a headline of about 45 characters (three
  * lines at full width) and an intro of about 115 (one sentence), as on the
@@ -145,6 +146,10 @@ export function LandingHero({
         </div>
       </section>
       <PixelDrip className={band} stretch />
+      {/* Squares on the guides where the band ends. Its bottom margin gives
+          the drips, which take no space of their own, clear room before the
+          first section, so they never crowd its heading. */}
+      <div aria-hidden="true" className="rail-joint mb-12 sm:mb-20" />
     </>
   )
 }

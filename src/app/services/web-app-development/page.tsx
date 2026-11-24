@@ -255,7 +255,6 @@ export default function WebAppDevelopmentPage() {
         visual={<WebAppVisual />}
         shape="panels"
       />
-      <div aria-hidden="true" className="rail-joint" />
 
       <HubSection
         id="what-we-build"

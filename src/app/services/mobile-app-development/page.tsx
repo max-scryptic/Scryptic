@@ -216,7 +216,6 @@ export default function MobileAppDevelopmentPage() {
         visual={<MobileAppVisual />}
         shape="studio"
       />
-      <div aria-hidden="true" className="rail-joint" />
 
       <HubSection
         id="what-we-build"

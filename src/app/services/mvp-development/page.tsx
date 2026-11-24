@@ -228,7 +228,6 @@ export default function MvpDevelopmentPage() {
         visual={<SprintVisual />}
         shape="growth"
       />
-      <div aria-hidden="true" className="rail-joint" />
 
       <HubSection
         id="included"

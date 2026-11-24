@@ -306,7 +306,6 @@ export default function NoCodeMigrationPage() {
         visual={<MigrationVisual tools={heroTools} />}
         shape="migrate"
       />
-      <div aria-hidden="true" className="rail-joint" />
 
       <ToolsSection />
 

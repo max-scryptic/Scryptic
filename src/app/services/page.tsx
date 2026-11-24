@@ -40,7 +40,6 @@ export default function ServicesPage() {
         visual={<ServicesVisual />}
         shape="services"
       />
-      <div aria-hidden="true" className="rail-joint" />
 
       <LandingSection id="services" labelledBy="services-heading">
         <SectionHeading className={inset} eyebrow="What we do" title="Four services, one way of working" id="services-heading">
