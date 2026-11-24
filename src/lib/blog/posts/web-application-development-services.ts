@@ -30,6 +30,7 @@ export const webApplicationDevelopmentServices: BlogPost = {
         {
           type: "paragraph",
           text: "Website and app development often overlap, because many products need both a public marketing site and a signed-in service. They are still separate pieces of work, and worth scoping separately.",
+          link: { text: "How to price and split website and app development.", href: "/blog/website-and-app-development" },
         },
         {
           type: "paragraph",
