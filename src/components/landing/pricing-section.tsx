@@ -115,10 +115,10 @@ export function PricingCards() {
       {foundingOffer && (
         <aside
           aria-labelledby="founding-offer-heading"
-          className="pip grid border border-glint/60 bg-[color-mix(in_oklab,var(--glint)_14%,var(--card))] [--pip:var(--glint)] md:grid-cols-[1fr_16rem]"
+          className="pip grid border border-primary/30 bg-primary/5 md:grid-cols-[1fr_16rem]"
         >
           <div className="flex flex-col gap-4 p-6 sm:p-8">
-            <p className="font-mono text-xs tracking-widest text-glint-ink uppercase">Founding client offer</p>
+            <p className="font-mono text-xs tracking-widest text-primary uppercase">Founding client offer</p>
             <h3 id="founding-offer-heading" className="text-2xl tracking-tight text-balance">
               Same price, {countWord(foundingOffer.extras.length)} things added free
             </h3>
@@ -138,17 +138,17 @@ export function PricingCards() {
           {/* The stub: a dashed tear line with a notch punched out at each end.
               Each notch is a circle on the card's edge, clipped to its inner half
               (plus the 1px border it covers). */}
-          <div className="relative flex flex-col items-start justify-center gap-4 border-t border-dashed border-glint/60 p-6 sm:p-8 md:border-t-0 md:border-l">
+          <div className="relative flex flex-col items-start justify-center gap-4 border-t border-dashed border-primary/40 p-6 sm:p-8 md:border-t-0 md:border-l">
             <span
               aria-hidden="true"
-              className="absolute -top-2.5 -left-2.5 hidden size-5 rounded-full border border-glint/60 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
+              className="absolute -top-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/30 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
             />
             <span
               aria-hidden="true"
-              className="absolute -bottom-2.5 -left-2.5 hidden size-5 rounded-full border border-glint/60 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
+              className="absolute -bottom-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/30 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
             />
             <p className="flex items-baseline gap-3">
-              <span className="font-mono text-6xl leading-none text-glint-ink">{foundingOffer.slots}</span>
+              <span className="font-mono text-6xl leading-none text-primary">{foundingOffer.slots}</span>
               <span className="text-muted-foreground">slots left</span>
             </p>
             <Button

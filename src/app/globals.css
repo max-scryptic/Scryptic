@@ -50,14 +50,12 @@
   --voxel-top: color-mix(in oklab, var(--portrait) 20%, var(--background));
   --voxel-left: color-mix(in oklab, var(--portrait) 38%, var(--background));
   --voxel-right: color-mix(in oklab, var(--portrait) 62%, var(--background));
-  /* Glint at full strength, the same in both themes: the page's pockets of colour
-     (stray pixels, highlighted words, the founding offer). Fills only, with ink
-     text on it; --glint-ink is the readable version for text. */
+  /* Glint at full strength, the same in both themes: the stray pixels on the guides. */
   --glint: #f2a93b;
-  --glint-ink: #8a5200;
-  /* The two section bands besides Lapis: a warm paper and an ink one. */
-  --band-warm: #f6efe2;
-  --band-ink: #14131b;
+  /* Two quiet section bands besides Lapis, a shade off the page either way:
+     a warm paper and a cool Lapis tint. */
+  --band-warm: #f5f2ec;
+  --band-cool: #e6e9f6;
 }
 
 .dark {
@@ -95,9 +93,8 @@
   --voxel-top: color-mix(in oklab, var(--portrait) 30%, var(--background));
   --voxel-left: color-mix(in oklab, var(--portrait) 17%, var(--background));
   --voxel-right: color-mix(in oklab, var(--portrait) 9%, var(--background));
-  --glint-ink: #f2a93b;
-  --band-warm: #1b1813;
-  --band-ink: #161a3a;
+  --band-warm: #16141a;
+  --band-cool: #121427;
 }
 
 @theme inline {
@@ -152,9 +149,8 @@
   --color-voxel-left: var(--voxel-left);
   --color-voxel-right: var(--voxel-right);
   --color-glint: var(--glint);
-  --color-glint-ink: var(--glint-ink);
   --color-band-warm: var(--band-warm);
-  --color-band-ink: var(--band-ink);
+  --color-band-cool: var(--band-cool);
 }
 
 @layer base {

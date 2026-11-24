@@ -208,7 +208,7 @@ export default function Home() {
       <WorkSection />
 
       <ComparisonSection
-        band="ink"
+        band="cool"
         title="Hire in-house. Brief an agency. Chance a freelancer. Or skip the trade-offs."
       />
 
