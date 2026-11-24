@@ -50,9 +50,9 @@ export default function MvpCostCalculatorPage() {
         href: "/blog/how-much-does-it-cost-to-build-an-app-uk",
         title: "How much does it cost to build an app in the UK?",
       }}
+      sections={<MvpPricing />}
     >
       <CostCalculator />
-      <MvpPricing />
     </ToolPage>
   )
 }

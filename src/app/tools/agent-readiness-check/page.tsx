@@ -70,9 +70,9 @@ export default function AgentReadinessCheckPage() {
       }
       intro="See your site the way ChatGPT, Claude and Perplexity do, with a fix for each of 13 signals."
       faqs={faqs}
+      sections={<WhatWeCheck items={checked} />}
     >
       <SiteChecker kind="agent" />
-      <WhatWeCheck items={checked} />
     </ToolPage>
   )
 }
