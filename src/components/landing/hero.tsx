@@ -78,7 +78,7 @@ export function LandingHero({
           }
           className="hero-parallax absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
         />
-        <div className="hero-recede mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
+        <div className="hero-recede mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.2fr_1fr]">
           <div className={cn("hero-rise flex flex-col items-start gap-7", inset)}>
             {/* The eyebrow hangs in the band's top padding, out of the flow, so a
                 hero with one is exactly as tall as the home page's without. */}
