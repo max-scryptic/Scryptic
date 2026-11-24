@@ -214,7 +214,6 @@ export default function MvpDevelopmentPage() {
       <ScrollReveal />
 
       <LandingHero
-        eyebrow={{ label: "Services", href: pages.services.path, current: "MVP development" }}
         tone="light"
         title={
           <>

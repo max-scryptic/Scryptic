@@ -292,7 +292,6 @@ export default function NoCodeMigrationPage() {
       <ScrollReveal />
 
       <LandingHero
-        eyebrow={{ label: "Services", href: pages.services.path, current: "No-code migration" }}
         tone="light"
         title={
           <>

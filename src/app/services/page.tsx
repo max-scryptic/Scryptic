@@ -12,7 +12,6 @@ import { inset } from "@/lib/frame"
 import { createMetadata, pages } from "@/lib/seo"
 import { servicePages } from "@/lib/service-pages"
 import { services } from "@/lib/services"
-import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
 
 const page = pages.services
@@ -34,7 +33,6 @@ export default function ServicesPage() {
             App development <PixelIn className="text-[#c3caff]">services</PixelIn> for UK founders.
           </>
         }
-        eyebrow={{ label: siteConfig.name }}
         intro="MVP development, web and mobile app development and no-code migration, each built in a fixed-price 2 or 3 week sprint with a demo every Friday."
         secondary={{ label: "Compare services", href: "#services" }}
         visual={<ServicesVisual />}
