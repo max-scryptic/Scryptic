@@ -77,20 +77,21 @@ export default function BlogPage() {
               key={series.id}
               id={series.id}
               aria-labelledby={`${series.id}-heading`}
-              className="flex scroll-mt-28 flex-col gap-8 pt-12"
+              className="scroll-mt-28 pt-12"
             >
-              <div className={cn("flex max-w-2xl flex-col gap-3", inset)}>
-                <p className="font-mono text-xs tracking-widest text-primary uppercase">Series</p>
-                <h2
-                  id={`${series.id}-heading`}
-                  className="text-3xl tracking-tight text-balance sm:text-4xl"
-                >
-                  {series.name}
-                </h2>
-              </div>
-
               <PostCarousel
                 label={`${series.name} posts`}
+                heading={
+                  <div className="flex max-w-2xl flex-col gap-3">
+                    <p className="font-mono text-xs tracking-widest text-primary uppercase">Series</p>
+                    <h2
+                      id={`${series.id}-heading`}
+                      className="text-3xl tracking-tight text-balance sm:text-4xl"
+                    >
+                      {series.name}
+                    </h2>
+                  </div>
+                }
                 items={seriesPosts.map((post) => ({
                   id: post.slug,
                   group: post.category,

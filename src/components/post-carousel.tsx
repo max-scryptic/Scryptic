@@ -18,18 +18,24 @@ export type CarouselItem = {
 /**
  * A row of post cards that scrolls sideways, so a series on /blog takes one
  * row however many posts it has. Every card is in the server HTML (the filter
- * starts on "All"), so crawlers see every link. With `groups`, chips above the
- * row narrow it to one group and show that group's description.
+ * starts on "All"), so crawlers see every link. The arrows sit in line with
+ * `heading`; the count and page dots sit under the row. With `groups`, chips
+ * under the heading narrow the row to one group and show that group's description.
  */
 export function PostCarousel({
   label,
+  heading,
   items,
   groups,
+  className,
 }: {
   /** Names the carousel for screen readers, e.g. "Choosing your stack posts". */
   label: string
+  /** The section's heading, shown beside the arrows. */
+  heading: ReactNode
   items: CarouselItem[]
   groups?: { name: string; text: string }[]
+  className?: string
 }) {
   const listId = useId()
   const listRef = useRef<HTMLUListElement>(null)
@@ -119,9 +125,40 @@ export function PostCarousel({
   }
 
   return (
-    <div role="region" aria-roledescription="carousel" aria-label={label} className="flex flex-col gap-6">
-      <div className={cn("flex flex-wrap items-end justify-between gap-4", inset)}>
-        {groups ? (
+    <div
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={label}
+      className={cn("flex flex-col gap-10", className)}
+    >
+      <div className={cn("flex flex-col gap-6", inset)}>
+        <div className="flex items-end justify-between gap-4">
+          <div className="min-w-0 flex-1">{heading}</div>
+          <div className="flex shrink-0 gap-2">
+            <Button
+              variant="outline"
+              size="icon-lg"
+              aria-controls={listId}
+              aria-label="Previous posts"
+              disabled={!canScroll.prev}
+              onClick={() => goToPage(pages.current - 1)}
+            >
+              <Chevron direction="left" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon-lg"
+              aria-controls={listId}
+              aria-label="Next posts"
+              disabled={!canScroll.next}
+              onClick={() => goToPage(pages.current + 1)}
+            >
+              <Chevron direction="right" />
+            </Button>
+          </div>
+        </div>
+
+        {groups && (
           <div className="flex flex-col gap-3">
             <ul className="flex flex-wrap gap-2 font-mono text-xs" aria-label="Filter by kind of tool">
               {[{ name: null, label: "All" }, ...groups.map((g) => ({ name: g.name, label: g.name }))].map(
@@ -145,37 +182,10 @@ export function PostCarousel({
               )}
             </ul>
             <p className="max-w-2xl text-sm text-pretty text-muted-foreground" aria-live="polite">
-              {activeGroup ? activeGroup.text : `All ${items.length} guides, grouped by kind of tool.`}
+              {activeGroup ? activeGroup.text : "Every guide, grouped by kind of tool."}
             </p>
           </div>
-        ) : (
-          <p className="font-mono text-xs text-muted-foreground">
-            {items.length} {items.length === 1 ? "post" : "posts"}
-          </p>
         )}
-
-        <div className="ml-auto flex gap-2">
-          <Button
-            variant="outline"
-            size="icon-lg"
-            aria-controls={listId}
-            aria-label="Previous posts"
-            disabled={!canScroll.prev}
-            onClick={() => goToPage(pages.current - 1)}
-          >
-            <Chevron direction="left" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon-lg"
-            aria-controls={listId}
-            aria-label="Next posts"
-            disabled={!canScroll.next}
-            onClick={() => goToPage(pages.current + 1)}
-          >
-            <Chevron direction="right" />
-          </Button>
-        </div>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -204,11 +214,25 @@ export function PostCarousel({
           </ul>
           <div ref={sparkRef} aria-hidden="true" className="pointer-events-none absolute inset-0" />
         </div>
-        {/* Page dots. Their row is kept while the count is measured, so it does not shift the page. */}
-        {shown.length > 1 && (
-          <ul className={cn("flex min-h-6 flex-wrap justify-center gap-1", inset)} aria-label="Pages">
-            {pages.count > 1 &&
-              Array.from({ length: pages.count }, (_, page) => (
+
+        {/* Under the row: the count and the page dots. On phones the dots take a
+            line of their own, as one card a page can make a long run of them. */}
+        <div
+          className={cn(
+            "grid min-h-6 items-center gap-x-4 gap-y-3 sm:grid-cols-[1fr_minmax(0,max-content)_1fr]",
+            inset
+          )}
+        >
+          <p className="font-mono text-xs text-muted-foreground">
+            {shown.length} {shown.length === 1 ? "post" : "posts"}
+          </p>
+
+          {pages.count > 1 && (
+            <ul
+              className="row-start-1 flex flex-wrap justify-center gap-1 sm:col-start-2"
+              aria-label="Pages"
+            >
+              {Array.from({ length: pages.count }, (_, page) => (
                 <li key={page}>
                   <button
                     type="button"
@@ -229,8 +253,9 @@ export function PostCarousel({
                   </button>
                 </li>
               ))}
-          </ul>
-        )}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   )
