@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { cn } from "cn"
 
 import { ToolList } from "@/components/free-tools/tool-list"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
@@ -26,34 +25,43 @@ export function GuidesSection({
   tools?: FreeTool[]
   more?: { label: string; href: string }
 }) {
+  const heading = (
+    <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <SectionHeading eyebrow="Guides" title={title} id="guides-heading" />
+      <Button
+        size="lg"
+        variant="outline"
+        nativeButton={false}
+        render={<Link href={more.href} />}
+        className="h-11 shrink-0 px-5 text-base"
+      >
+        {more.label}
+      </Button>
+    </div>
+  )
+
   return (
     <LandingSection id="guides" labelledBy="guides-heading">
-      <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-        <SectionHeading eyebrow="Guides" title={title} id="guides-heading" />
-        <Button
-          size="lg"
-          variant="outline"
-          nativeButton={false}
-          render={<Link href={more.href} />}
-          className="h-11 shrink-0 px-5 text-base"
-        >
-          {more.label}
-        </Button>
-      </div>
-      {/* One row of guides at most: past three they scroll sideways, as the blog's series do. */}
+      {/* One row of guides at most: past three they scroll sideways, as the blog's
+          series do, with the arrows beside the heading. */}
       {posts.length > MAX_IN_ROW ? (
         <PostCarousel
           label={`${title} guides`}
+          heading={heading}
+          className="gap-12"
           items={posts.map((post) => ({ id: post.slug, card: <PostCard post={post} /> }))}
         />
       ) : (
-        posts.length > 0 && (
-          <div data-reveal="children" className="grid gap-6 md:auto-cols-fr md:grid-flow-col">
-            {posts.map((post) => (
-              <PostCard key={post.slug} post={post} />
-            ))}
-          </div>
-        )
+        <>
+          <div className={inset}>{heading}</div>
+          {posts.length > 0 && (
+            <div data-reveal="children" className="grid gap-6 md:auto-cols-fr md:grid-flow-col">
+              {posts.map((post) => (
+                <PostCard key={post.slug} post={post} />
+              ))}
+            </div>
+          )}
+        </>
       )}
       {tools.length > 0 && <ToolList tools={tools} />}
     </LandingSection>

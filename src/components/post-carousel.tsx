@@ -18,19 +18,24 @@ export type CarouselItem = {
 /**
  * A row of post cards that scrolls sideways, so a series on /blog takes one
  * row however many posts it has. Every card is in the server HTML (the filter
- * starts on "All"), so crawlers see every link. The count, page dots and arrows
- * sit under the row. With `groups`, chips above the row narrow it to one group
- * and show that group's description.
+ * starts on "All"), so crawlers see every link. The arrows sit in line with
+ * `heading`; the count and page dots sit under the row. With `groups`, chips
+ * under the heading narrow the row to one group and show that group's description.
  */
 export function PostCarousel({
   label,
+  heading,
   items,
   groups,
+  className,
 }: {
   /** Names the carousel for screen readers, e.g. "Choosing your stack posts". */
   label: string
+  /** The section's heading, shown beside the arrows. */
+  heading: ReactNode
   items: CarouselItem[]
   groups?: { name: string; text: string }[]
+  className?: string
 }) {
   const listId = useId()
   const listRef = useRef<HTMLUListElement>(null)
@@ -120,124 +125,136 @@ export function PostCarousel({
   }
 
   return (
-    <div role="region" aria-roledescription="carousel" aria-label={label} className="flex flex-col gap-6">
-      {groups && (
-        <div className={cn("flex flex-col gap-3", inset)}>
-          <ul className="flex flex-wrap gap-2 font-mono text-xs" aria-label="Filter by kind of tool">
-            {[{ name: null, label: "All" }, ...groups.map((g) => ({ name: g.name, label: g.name }))].map(
-              (chip) => (
-                <li key={chip.label}>
-                  <button
-                    type="button"
-                    aria-pressed={group === chip.name}
-                    onClick={() => setGroup(chip.name)}
-                    className={cn(
-                      "border px-3 py-1 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
-                      group === chip.name
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                    )}
-                  >
-                    {chip.label}
-                  </button>
-                </li>
-              )
-            )}
-          </ul>
-          <p className="max-w-2xl text-sm text-pretty text-muted-foreground" aria-live="polite">
-            {activeGroup ? activeGroup.text : "Every guide, grouped by kind of tool."}
-          </p>
-        </div>
-      )}
-
-      {/* The row reaches a gutter past each guide, where its cards pass while it
-          scrolls: they dissolve into pixels there (.dissolve-x) and throw off
-          sparks, drawn in the layer over the row. */}
-      <div className="relative">
-        <ul
-          id={listId}
-          ref={listRef}
-          onScroll={() => {
-            update()
-            sparks()
-          }}
-          onScrollEnd={settle}
-          className="dissolve-x -mx-(--gutter) flex snap-x snap-mandatory scroll-px-(--gutter) gap-6 overflow-x-auto px-(--gutter) pt-px pb-2 [--gutter:--spacing(4)] [scrollbar-width:none] sm:[--gutter:--spacing(6)] [&::-webkit-scrollbar]:hidden"
-        >
-          {shown.map((item) => (
-            <li
-              key={item.id}
-              className="grid w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+    <div
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={label}
+      className={cn("flex flex-col gap-10", className)}
+    >
+      <div className={cn("flex flex-col gap-6", inset)}>
+        <div className="flex items-end justify-between gap-4">
+          <div className="min-w-0 flex-1">{heading}</div>
+          <div className="flex shrink-0 gap-2">
+            <Button
+              variant="outline"
+              size="icon-lg"
+              aria-controls={listId}
+              aria-label="Previous posts"
+              disabled={!canScroll.prev}
+              onClick={() => goToPage(pages.current - 1)}
             >
-              {item.card}
-            </li>
-          ))}
-        </ul>
-        <div ref={sparkRef} aria-hidden="true" className="pointer-events-none absolute inset-0" />
+              <Chevron direction="left" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon-lg"
+              aria-controls={listId}
+              aria-label="Next posts"
+              disabled={!canScroll.next}
+              onClick={() => goToPage(pages.current + 1)}
+            >
+              <Chevron direction="right" />
+            </Button>
+          </div>
+        </div>
+
+        {groups && (
+          <div className="flex flex-col gap-3">
+            <ul className="flex flex-wrap gap-2 font-mono text-xs" aria-label="Filter by kind of tool">
+              {[{ name: null, label: "All" }, ...groups.map((g) => ({ name: g.name, label: g.name }))].map(
+                (chip) => (
+                  <li key={chip.label}>
+                    <button
+                      type="button"
+                      aria-pressed={group === chip.name}
+                      onClick={() => setGroup(chip.name)}
+                      className={cn(
+                        "border px-3 py-1 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
+                        group === chip.name
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                      )}
+                    >
+                      {chip.label}
+                    </button>
+                  </li>
+                )
+              )}
+            </ul>
+            <p className="max-w-2xl text-sm text-pretty text-muted-foreground" aria-live="polite">
+              {activeGroup ? activeGroup.text : "Every guide, grouped by kind of tool."}
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* Under the row: the count, the page dots and the arrows. On phones the dots
-          take a line of their own, as one card a page can make a long run of them. */}
-      <div
-        className={cn(
-          "grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 sm:grid-cols-[1fr_minmax(0,max-content)_1fr]",
-          inset
-        )}
-      >
-        <p className="font-mono text-xs text-muted-foreground">
-          {shown.length} {shown.length === 1 ? "post" : "posts"}
-        </p>
-
-        {pages.count > 1 && (
+      <div className="flex flex-col gap-4">
+        {/* The row reaches a gutter past each guide, where its cards pass while it
+            scrolls: they dissolve into pixels there (.dissolve-x) and throw off
+            sparks, drawn in the layer over the row. */}
+        <div className="relative">
           <ul
-            className="col-span-2 row-start-1 flex flex-wrap justify-center gap-1 sm:col-span-1 sm:col-start-2"
-            aria-label="Pages"
+            id={listId}
+            ref={listRef}
+            onScroll={() => {
+              update()
+              sparks()
+            }}
+            onScrollEnd={settle}
+            className="dissolve-x -mx-(--gutter) flex snap-x snap-mandatory scroll-px-(--gutter) gap-6 overflow-x-auto px-(--gutter) pt-px pb-2 [--gutter:--spacing(4)] [scrollbar-width:none] sm:[--gutter:--spacing(6)] [&::-webkit-scrollbar]:hidden"
           >
-            {Array.from({ length: pages.count }, (_, page) => (
-              <li key={page}>
-                <button
-                  type="button"
-                  aria-controls={listId}
-                  aria-label={`Page ${page + 1} of ${pages.count}`}
-                  aria-current={page === pages.current ? "true" : undefined}
-                  onClick={() => goToPage(page)}
-                  className="group/dot flex h-6 items-center px-1 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
-                >
-                  <span
-                    className={cn(
-                      "block h-1.5 transition-all duration-300 motion-reduce:transition-none",
-                      page === pages.current
-                        ? "w-5 bg-primary"
-                        : "w-1.5 bg-muted-foreground/40 group-hover/dot:bg-muted-foreground"
-                    )}
-                  />
-                </button>
+            {shown.map((item) => (
+              <li
+                key={item.id}
+                className="grid w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+              >
+                {item.card}
               </li>
             ))}
           </ul>
-        )}
+          <div ref={sparkRef} aria-hidden="true" className="pointer-events-none absolute inset-0" />
+        </div>
 
-        <div className="col-start-2 flex gap-2 justify-self-end sm:col-start-3">
-          <Button
-            variant="outline"
-            size="icon-lg"
-            aria-controls={listId}
-            aria-label="Previous posts"
-            disabled={!canScroll.prev}
-            onClick={() => goToPage(pages.current - 1)}
-          >
-            <Chevron direction="left" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon-lg"
-            aria-controls={listId}
-            aria-label="Next posts"
-            disabled={!canScroll.next}
-            onClick={() => goToPage(pages.current + 1)}
-          >
-            <Chevron direction="right" />
-          </Button>
+        {/* Under the row: the count and the page dots. On phones the dots take a
+            line of their own, as one card a page can make a long run of them. */}
+        <div
+          className={cn(
+            "grid min-h-6 items-center gap-x-4 gap-y-3 sm:grid-cols-[1fr_minmax(0,max-content)_1fr]",
+            inset
+          )}
+        >
+          <p className="font-mono text-xs text-muted-foreground">
+            {shown.length} {shown.length === 1 ? "post" : "posts"}
+          </p>
+
+          {pages.count > 1 && (
+            <ul
+              className="row-start-1 flex flex-wrap justify-center gap-1 sm:col-start-2"
+              aria-label="Pages"
+            >
+              {Array.from({ length: pages.count }, (_, page) => (
+                <li key={page}>
+                  <button
+                    type="button"
+                    aria-controls={listId}
+                    aria-label={`Page ${page + 1} of ${pages.count}`}
+                    aria-current={page === pages.current ? "true" : undefined}
+                    onClick={() => goToPage(page)}
+                    className="group/dot flex h-6 items-center px-1 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+                  >
+                    <span
+                      className={cn(
+                        "block h-1.5 transition-all duration-300 motion-reduce:transition-none",
+                        page === pages.current
+                          ? "w-5 bg-primary"
+                          : "w-1.5 bg-muted-foreground/40 group-hover/dot:bg-muted-foreground"
+                      )}
+                    />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
