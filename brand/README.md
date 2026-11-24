@@ -52,7 +52,8 @@ All three are free from Google Fonts under the SIL Open Font License.
 | Role | Typeface | Weights |
 | --- | --- | --- |
 | The wordmark only | [Syne](https://fonts.google.com/specimen/Syne) | ExtraBold (800) |
-| Headlines and body text | [Hanken Grotesk](https://fonts.google.com/specimen/Hanken+Grotesk) | Headlines Medium (500) with tight tracking; text Regular, Medium, SemiBold |
+| Page and section headlines | [Bricolage Grotesque](https://fonts.google.com/specimen/Bricolage+Grotesque) | Medium (500), and Regular (400) at hero size, tracked in tight (-0.03em to -0.04em) |
+| Body text and smaller headings | [Hanken Grotesk](https://fonts.google.com/specimen/Hanken+Grotesk) | Regular, Medium, SemiBold |
 | Labels, numbers, code | [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) | Regular, Medium |
 
 ## Regenerating the files

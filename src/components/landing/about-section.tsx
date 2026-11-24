@@ -10,9 +10,9 @@ import { founder } from "@/lib/team"
 /** The studio and its founder, with the founder's portrait, bio and profiles. */
 export function AboutSection() {
   return (
-    <LandingSection id="about" labelledBy="about-heading" className="gap-16">
+    <LandingSection id="about" labelledBy="about-heading" space="loose" className="gap-16">
       <div className={cn("flex flex-col gap-6", inset)}>
-        <SectionHeading eyebrow="About us" title="A small studio, on purpose" id="about-heading">
+        <SectionHeading title="A small studio, on purpose" id="about-heading">
           {siteConfig.name} takes on a few projects at a time, so you work directly with the
           developer building your product.
         </SectionHeading>

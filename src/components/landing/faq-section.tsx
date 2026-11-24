@@ -1,7 +1,7 @@
 import { cn } from "cn"
 import Link from "next/link"
 
-import { SectionHeading } from "@/components/landing/section-heading"
+import { SectionHeading, sectionSpace } from "@/components/landing/section-heading"
 import { inset } from "@/lib/frame"
 
 export type Faq = {
@@ -17,7 +17,7 @@ export type Faq = {
  */
 export function FaqSection({ faqs, intro }: { faqs: Faq[]; intro: React.ReactNode }) {
   return (
-    <section aria-labelledby="faq-heading" id="faq" className="scroll-mt-4 px-4 py-24 sm:px-6">
+    <section aria-labelledby="faq-heading" id="faq" className={cn("px-4 sm:px-6", sectionSpace.tight)}>
       <div className={cn("mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]", inset)}>
         <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading">
           {intro}

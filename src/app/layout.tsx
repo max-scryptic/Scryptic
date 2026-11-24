@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Hanken_Grotesk, IBM_Plex_Mono, Syne } from "next/font/google";
+import { Bricolage_Grotesque, Hanken_Grotesk, IBM_Plex_Mono, Syne } from "next/font/google";
 
 import { EmDashGuard } from "@/components/em-dash-guard";
 import { themeScript } from "@/components/theme-toggle";
@@ -21,11 +21,20 @@ import {
 
 import "./globals.css";
 
-// Brand type: Syne for the wordmark only, Hanken Grotesk for headings (at
-// medium weight) and text, IBM Plex Mono for labels, numbers and code.
+// Brand type: Syne for the wordmark only, Bricolage Grotesque for page and
+// section headings, Hanken Grotesk for text and smaller headings, IBM Plex
+// Mono for labels, numbers and code.
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
+});
+
+// Variable, with an optical size axis: it tightens and gains character at
+// display sizes and stays plain at small ones.
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+  axes: ["opsz"],
 });
 
 const hankenGrotesk = Hanken_Grotesk({
@@ -94,7 +103,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={siteConfig.language}
-      className={`${syne.variable} ${hankenGrotesk.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${syne.variable} ${bricolage.variable} ${hankenGrotesk.variable} ${ibmPlexMono.variable} h-full antialiased`}
       data-scroll-behavior="smooth"
       // The theme script adds .dark before React hydrates.
       suppressHydrationWarning

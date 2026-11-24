@@ -15,7 +15,12 @@ export function SectionHeading({
   aside,
   className,
 }: {
-  eyebrow: string
+  /**
+   * A small label above the title. Use it only where it helps a reader find
+   * their place (Pricing, FAQ), not on every section: the same label, heading
+   * and intro stack on every section makes a page read as a template.
+   */
+  eyebrow?: string
   title: string
   children: React.ReactNode
   id: string
@@ -32,8 +37,10 @@ export function SectionHeading({
         className,
       )}
     >
-      <p className="font-mono text-xs tracking-widest text-primary uppercase xl:col-start-1">{eyebrow}</p>
-      <h2 id={id} className="max-w-2xl text-3xl tracking-tight text-balance sm:text-4xl xl:col-start-1 xl:self-center">
+      {eyebrow && (
+        <p className="font-mono text-xs tracking-widest text-primary uppercase xl:col-start-1">{eyebrow}</p>
+      )}
+      <h2 id={id} className="max-w-2xl text-3xl leading-[1.05] text-balance sm:text-[2.75rem] xl:col-start-1 xl:self-center">
         {title}
       </h2>
       <p className="max-w-2xl text-lg text-pretty text-muted-foreground xl:col-start-1">{children}</p>
@@ -81,24 +88,37 @@ export function CrossIcon({ className }: { className?: string }) {
 }
 
 /**
+ * Vertical rhythm for a landing section. Vary it down the page: dense,
+ * reference sections (FAQ, process) sit tight, the sections that make the
+ * case get room, and an even py-24 everywhere reads as a template. Each
+ * scroll margin tops the padding up to 7rem, so a linked heading lands just
+ * under the fixed header.
+ */
+export const sectionSpace = {
+  tight: "scroll-mt-12 py-16 sm:py-20",
+  default: "scroll-mt-4 py-24",
+  loose: "scroll-mt-0 py-28 sm:py-40",
+} as const
+
+/**
  * A landing section's outer frame: full width with the page gutters, its
- * content in the max-w-6xl column. Sections with py-24 take scroll-mt-4, not
- * scroll-mt-28: with the 6rem top padding their heading still lands 7rem down,
- * just under the fixed header.
+ * content in the max-w-6xl column.
  */
 export function LandingSection({
   id,
   labelledBy,
+  space = "default",
   className,
   children,
 }: {
   id: string
   labelledBy: string
+  space?: keyof typeof sectionSpace
   className?: string
   children: React.ReactNode
 }) {
   return (
-    <section aria-labelledby={labelledBy} id={id} className="scroll-mt-4 px-4 py-24 sm:px-6">
+    <section aria-labelledby={labelledBy} id={id} className={cn("px-4 sm:px-6", sectionSpace[space])}>
       <div className={cn("mx-auto flex max-w-6xl flex-col gap-12", className)}>{children}</div>
     </section>
   )
