@@ -15,12 +15,11 @@ const tones: Record<PixelTone, string> = {
 }
 
 /**
- * Which colours a page's pixels draw from, by path. The home page has Glint,
- * the service pages mint, and every other page keeps to the theme's own blues.
- * The first is the page's accent and leads every cluster; repeats weight the draw.
+ * Which colours a page's pixels draw from, by path. The service pages have
+ * mint, and every other page keeps to the theme's own blues. The first is the
+ * page's accent and leads every cluster; repeats weight the draw.
  */
 function paletteFor(pathname: string): PixelTone[] {
-  if (pathname === "/") return ["glint", "glint", "glint", "primary", "portrait"]
   if (pathname.startsWith("/services")) return ["mint", "mint", "mint", "primary", "portrait"]
   return ["primary", "primary", "portrait", "portrait"]
 }
@@ -28,16 +27,23 @@ function paletteFor(pathname: string): PixelTone[] {
 /** Cell size in px: a little over the 8px grid the drips build in, so a lone pixel reads as placed rather than as a speck. */
 const CELL = 10
 
-/** Cluster shapes as [x, y] cells; x counts out from the guide, away from the content. */
+/**
+ * Cluster shapes as [x, y] cells; x counts out from the guide, away from the
+ * content. Mostly lone pixels and pairs; repeats weight the draw.
+ */
 const shapes: [number, number][][] = [
   [[0, 0]],
+  [[0, 0]],
+  [[0, 0]],
   [[0, 0], [1, 1]],
-  [[0, 0], [1, 0]],
-  [[0, 0], [0, 1], [1, 1]],
+  [[0, 0], [1, 1]],
   [[0, 0], [2, 1]],
-  [[0, 0], [1, 0], [1, 1]],
   [[0, 0], [0, 2]],
+  [[0, 0], [1, 0], [1, 1]],
 ]
+
+/** How far apart two clusters must be, as a share of the page height, so they never bunch. */
+const MIN_GAP = 18
 
 /** FNV-1a: a stable number from the path, so a page scatters the same way on the server and in the browser. */
 function hash(text: string) {
@@ -58,9 +64,11 @@ function seeded(seed: number) {
 }
 
 /**
- * A few loose pixels scattered down every page, as if they fell off the
- * drips, in the margins outside the content column. Sparse on purpose, four to six clusters a page however long it is,
- * each in its own stretch of the page so they never bunch.
+ * A few loose pixels scattered down every page but the home page (which
+ * places its own at section breaks, components/landing/stray-pixels.tsx), as
+ * if they fell off the drips, in the margins outside the content column.
+ * Sparse on purpose: one to three small clusters a page however long it is,
+ * at random heights and sides, kept well apart.
  *
  * The placement looks random but comes from the path, so it is the same on
  * every visit and on the server and the browser (no hydration mismatch).
@@ -71,22 +79,31 @@ function seeded(seed: number) {
  */
 export function StrayPixels({ className }: { className?: string }) {
   const pathname = usePathname() ?? "/"
+  if (pathname === "/") return null
+
   const random = seeded(hash(pathname))
   const pick = <T,>(list: T[]) => list[Math.floor(random() * list.length)]
   const palette = paletteFor(pathname)
 
-  const count = 4 + Math.floor(random() * 3)
-  // From just under the hero to just above the footer, in equal stretches.
-  const from = 9
-  const span = (94 - from) / count
-  const clusters = Array.from({ length: count }, (_, index) => {
+  // One to three, two most often.
+  const count = pick([1, 2, 2, 3])
+  // Random heights from just under the hero to just above the footer, each
+  // at least MIN_GAP from the others (a few tries, then it does with fewer).
+  const tops: number[] = []
+  for (let tries = 0; tops.length < count && tries < 24; tries++) {
+    const top = 10 + random() * 82
+    if (tops.every((other) => Math.abs(other - top) >= MIN_GAP)) tops.push(top)
+  }
+  tops.sort((a, b) => a - b)
+
+  const clusters = tops.map((top) => {
     const side = random() < 0.5 ? "left" : "right"
     // Somewhere in the margin outside the guide, never on or across it, so no
     // card edge or corner mark ever clips or crowds a pixel.
-    const across = 0.3 + random() * 0.55
+    const across = 0.2 + random() * 0.7
     return {
       side,
-      top: from + span * index + random() * span * 0.8,
+      top,
       across,
       // The first cell is always the page's accent, so every cluster carries it.
       cells: pick(shapes).map((at, cell) => ({
