@@ -36,7 +36,8 @@ const faqs: Faq[] = [
 
 // Laid out like /tools and /work: a plain heading, the content, then the call
 // to action. The FAQ section brings its own page padding, so each block here
-// sets its own rather than <main>.
+// sets its own rather than <main>, with the landing page's py-24 rhythm
+// between blocks.
 export default function PricingPage() {
   return (
     <main className="flex flex-col">
@@ -49,7 +50,7 @@ export default function PricingPage() {
         ]}
       />
 
-      <div className={cn("px-4 sm:px-6", pageTop)}>
+      <div className={cn("px-4 pb-24 sm:px-6", pageTop)}>
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
           <div className={cn("flex flex-col items-start gap-6", inset)}>
             <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">
@@ -64,7 +65,12 @@ export default function PricingPage() {
           <section id="pricing" aria-label="Packages" className="flex flex-col gap-12">
             <PricingCards />
           </section>
+        </div>
+      </div>
 
+      {/* Its own band, spaced like a landing section (py-24 each side). */}
+      <div className="px-4 py-24 sm:px-6">
+        <div className="mx-auto w-full max-w-6xl">
           <AfterLaunch />
         </div>
       </div>
@@ -73,7 +79,7 @@ export default function PricingPage() {
         faqs={faqs}
       />
 
-      <div className="px-4 pb-24 sm:px-6">
+      <div className="px-4 pt-8 pb-24 sm:px-6 sm:pt-12">
         <section
           aria-labelledby="pricing-cta-heading"
           className="corners guides mx-auto flex w-full max-w-6xl flex-col items-start gap-4 border border-border bg-card p-6 sm:p-10"

@@ -12,7 +12,7 @@ export function AboutSection() {
   return (
     <LandingSection id="about" labelledBy="about-heading" space="loose" className="gap-16">
       <div className={cn("flex flex-col gap-6", inset)}>
-        <SectionHeading title="A small studio, on purpose" id="about-heading" />
+        <SectionHeading eyebrow="About" title="A small studio, on purpose" id="about-heading" />
       </div>
 
       <article

@@ -4,11 +4,15 @@ import { cn } from "cn"
 import { ToolList } from "@/components/free-tools/tool-list"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { PostCard } from "@/components/post-card"
+import { PostCarousel } from "@/components/post-carousel"
 import { Button } from "@/components/ui/button"
 import type { BlogPost } from "@/lib/blog"
 import { inset } from "@/lib/frame"
 import type { FreeTool } from "@/lib/free-tools"
 import { pages } from "@/lib/seo"
+
+/** The most guides shown side by side before the row becomes a carousel. */
+const MAX_IN_ROW = 3
 
 /** Blog posts and free tools that go deeper on a service page's subject. */
 export function GuidesSection({
@@ -36,12 +40,20 @@ export function GuidesSection({
           {more.label}
         </Button>
       </div>
-      {posts.length > 0 && (
-        <div data-reveal="children" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <PostCard key={post.slug} post={post} />
-          ))}
-        </div>
+      {/* One row of guides at most: past three they scroll sideways, as the blog's series do. */}
+      {posts.length > MAX_IN_ROW ? (
+        <PostCarousel
+          label={`${title} guides`}
+          items={posts.map((post) => ({ id: post.slug, card: <PostCard post={post} /> }))}
+        />
+      ) : (
+        posts.length > 0 && (
+          <div data-reveal="children" className="grid gap-6 md:auto-cols-fr md:grid-flow-col">
+            {posts.map((post) => (
+              <PostCard key={post.slug} post={post} />
+            ))}
+          </div>
+        )
       )}
       {tools.length > 0 && <ToolList tools={tools} />}
     </LandingSection>

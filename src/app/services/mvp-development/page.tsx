@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 import { PageJsonLd } from "@/components/json-ld"
 import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
@@ -267,15 +265,6 @@ export default function MvpDevelopmentPage() {
         caption="Five ways to get an MVP built, compared on what you get, price, time to launch and who owns the code"
         columns={optionColumns}
         rows={options}
-        footnote={
-          <>
-            Agency figures come from what UK MVP studios publish on their own sites.{" "}
-            <Link href="/blog/best-saas-development-company" className="text-foreground underline underline-offset-4 hover:text-primary">
-              See six UK SaaS and MVP development companies compared by name
-            </Link>
-            .
-          </>
-        }
       />
 
       <ComparisonSection

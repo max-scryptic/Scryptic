@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import { cn } from "cn"
 
-import { LandingSection } from "@/components/landing/section-heading"
+import { Eyebrow, LandingSection } from "@/components/landing/section-heading"
 import { inset } from "@/lib/frame"
 
 /** A run of the statement; `accent` ones light up in Lapis rather than ink. */
@@ -28,7 +28,15 @@ const END = 0.6
  * Keep it to one or two sentences, about 40 words, and say something only
  * this studio would: it is the page's loudest line after the hero.
  */
-export function ProblemStatement({ parts, id = "statement" }: { parts: StatementPart[]; id?: string }) {
+export function ProblemStatement({
+  parts,
+  id = "statement",
+  eyebrow = "The short version",
+}: {
+  parts: StatementPart[]
+  id?: string
+  eyebrow?: string
+}) {
   const heading = useRef<HTMLHeadingElement>(null)
   const words = parts.flatMap(({ text, accent }) =>
     text
@@ -68,7 +76,8 @@ export function ProblemStatement({ parts, id = "statement" }: { parts: Statement
   }, [])
 
   return (
-    <LandingSection id={id} labelledBy={`${id}-heading`} space="loose">
+    <LandingSection id={id} labelledBy={`${id}-heading`} space="loose" className="gap-6">
+      <Eyebrow className={inset}>{eyebrow}</Eyebrow>
       <h2
         ref={heading}
         id={`${id}-heading`}

@@ -76,10 +76,12 @@ function dayRange(day: number, span: number) {
  * with their days.
  */
 export function ProcessSection({
+  eyebrow = "Process",
   title = "From first call to launch",
   calendar = mvpCalendar,
   note = `An example schedule for the ${calendarPackage.name}. The Extended MVP adds a second week of development.`,
 }: {
+  eyebrow?: string
   title?: string
   calendar?: ProcessCalendar
   /** The caption under the calendar. */
@@ -87,7 +89,7 @@ export function ProcessSection({
 }) {
   return (
     <LandingSection id="process" labelledBy="process-heading" space="tight">
-      <SectionHeading className={inset} title={title} id="process-heading" />
+      <SectionHeading className={inset} eyebrow={eyebrow} title={title} id="process-heading" />
       <div className="ticks guides border border-border bg-card">
         <div
           aria-hidden="true"

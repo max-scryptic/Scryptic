@@ -1,14 +1,17 @@
 import Link from "next/link"
 
+import { Eyebrow } from "@/components/landing/section-heading"
 import { Button } from "@/components/ui/button"
 import { pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 
 /** The closing call to action: one card with the booking button and the studio's email. */
 export function ContactSection({
+  eyebrow = "Get started",
   title = "Start with a discovery call",
   text = "Tell us what you are building and where it is stuck. You will leave knowing the next step.",
 }: {
+  eyebrow?: string
   title?: string
   text?: string
 }) {
@@ -18,6 +21,7 @@ export function ContactSection({
         data-reveal="zoom"
         className="corners guides mx-auto flex max-w-6xl flex-col items-center gap-6 border border-border bg-card px-6 py-16 text-center sm:py-20"
       >
+        <Eyebrow>{eyebrow}</Eyebrow>
         <h2 id="contact-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
           {title}
         </h2>

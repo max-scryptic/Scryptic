@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { cn } from "cn"
 
+import { pixelLabel } from "@/components/landing/section-heading"
 import { PixelDrip } from "@/components/pixel-drip"
 import { Button } from "@/components/ui/button"
 import { VoxelField, type VoxelShape } from "@/components/voxel-field"
@@ -53,7 +54,7 @@ export function LandingHero({
   tone?: "lapis" | "light"
 }) {
   const light = tone === "light"
-  const eyebrowText = "font-mono text-xs tracking-widest uppercase"
+  const eyebrowText = pixelLabel
   const parentColour = light ? "text-primary hover:text-foreground" : "text-[#c3caff] hover:text-white"
   // The band's colour, shared with the drips off its bottom edge.
   const band =light ? "bg-[#e3e7fb] dark:bg-[#161a3a]" : "bg-[#2b3fd6]"

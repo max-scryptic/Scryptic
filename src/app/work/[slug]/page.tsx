@@ -110,7 +110,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
     <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd page={page} nodes={[caseStudyJsonLd(page, study)]} />
 
-      <article className="mx-auto flex w-full max-w-6xl flex-col gap-16">
+      {/* gap plus each section's pt-12 matches the landing page's ~12rem between sections. */}
+      <article className="mx-auto flex w-full max-w-6xl flex-col gap-24 sm:gap-36">
         <header className="relative flex flex-col gap-10">
           {/* The breadcrumb and, from sm up, the category share one row that
               hangs in the page's top padding, out of the flow, as in the service

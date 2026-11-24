@@ -9,16 +9,18 @@ import { pages } from "@/lib/seo"
 import { featuredCaseStudies, type CaseStudy } from "@/lib/work"
 
 export function WorkSection({
+  eyebrow = "Case studies",
   title = "Products we have built and launched",
   studies = featuredCaseStudies,
 }: {
+  eyebrow?: string
   title?: string
   studies?: CaseStudy[]
 }) {
   return (
     <LandingSection id="work" labelledBy="work-heading">
       <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-        <SectionHeading title={title} id="work-heading" />
+        <SectionHeading eyebrow={eyebrow} title={title} id="work-heading" />
         <Button
           size="lg"
           variant="outline"

@@ -7,6 +7,17 @@ import { cn } from "cn"
  */
 
 /**
+ * The type of the small uppercase labels over sections, the nav links and
+ * button text: Geist Pixel, spaced out. Colour is left to the caller.
+ */
+export const pixelLabel = "font-pixel text-sm tracking-[0.12em] uppercase"
+
+/** The small label above a section's heading, e.g. "Pricing". */
+export function Eyebrow({ className, children }: { className?: string; children: React.ReactNode }) {
+  return <p className={cn(pixelLabel, "text-primary", className)}>{children}</p>
+}
+
+/**
  * The label and h2 at the top of a landing section. No intro under the
  * title: let the section's content follow the heading directly.
  */
@@ -17,8 +28,8 @@ export function SectionHeading({
   aside,
   className,
 }: {
-  /** A small label above the title, e.g. "Pricing". */
-  eyebrow?: string
+  /** The small label above the title, e.g. "Pricing". Every section has one. */
+  eyebrow: string
   title: string
   id: string
   /** Shown beside the title on wide screens, and under it on narrower ones. */
@@ -34,9 +45,7 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow && (
-        <p className="font-mono text-xs tracking-widest text-primary uppercase xl:col-start-1">{eyebrow}</p>
-      )}
+      {eyebrow && <Eyebrow className="xl:col-start-1">{eyebrow}</Eyebrow>}
       <h2 id={id} className="max-w-2xl text-3xl leading-[1.05] text-balance sm:text-[2.75rem] xl:col-start-1 xl:self-center">
         {title}
       </h2>
