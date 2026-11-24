@@ -2,7 +2,6 @@ import Link from "next/link"
 import { cn } from "cn"
 
 import { CaseStudyCard } from "@/components/case-study-card"
-import { Eyebrow } from "@/components/landing/section-heading"
 import { PageJsonLd } from "@/components/json-ld"
 import { PixelIn } from "@/components/pixel-in"
 import { Button } from "@/components/ui/button"
@@ -31,15 +30,13 @@ export default function WorkPage() {
 
         <CaseStudyGroup
           id="web-apps"
-          eyebrow="Web apps"
-          title="SaaS products and AI tools in the browser"
+          title="Web Apps"
           studies={webCaseStudies}
         />
 
         <CaseStudyGroup
           id="mobile-apps"
-          eyebrow="Mobile apps"
-          title="Native apps on the phone"
+          title="Mobile Apps"
           studies={mobileCaseStudies}
         />
 
@@ -68,18 +65,16 @@ export default function WorkPage() {
 }
 
 /**
- * One kind of product: a label, a heading and its cards, two to a row. A
+ * One kind of product: a heading and its cards, two to a row. A
  * group with one study shows it wide, screenshot beside the text, rather than
  * as half a row.
  */
 function CaseStudyGroup({
   id,
-  eyebrow,
   title,
   studies,
 }: {
   id: string
-  eyebrow: string
   title: string
   studies: CaseStudy[]
 }) {
@@ -87,12 +82,9 @@ function CaseStudyGroup({
   const single = studies.length === 1
   return (
     <section aria-labelledby={`${id}-heading`} id={id} className="flex scroll-mt-28 flex-col gap-8">
-      <div className={cn("flex flex-col gap-2", inset)}>
-        <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 id={`${id}-heading`} className="text-3xl tracking-tight text-balance">
-          {title}
-        </h2>
-      </div>
+      <h2 id={`${id}-heading`} className={cn("text-3xl tracking-tight text-balance", inset)}>
+        {title}
+      </h2>
       <div className={cn("grid gap-6", !single && "md:grid-cols-2")}>
         {studies.map((study) => (
           <CaseStudyCard key={study.slug} study={study} headingLevel="h3" wide={single} className="guides" />

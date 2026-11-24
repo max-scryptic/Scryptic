@@ -5,18 +5,18 @@ import { useSyncExternalStore } from "react"
 import { Button } from "@/components/ui/button"
 
 /*
- * Light and dark mode. The theme is the .dark class on <html>: the visitor's
- * saved choice if they have made one, otherwise their system setting.
- * themeScript applies it before first paint (layout.tsx inlines it in <head>);
- * ThemeToggle flips it and remembers the choice.
+ * Light and dark mode. The theme is the .dark class on <html>. Dark is the
+ * default: layout.tsx renders <html> with .dark, and themeScript (inlined in
+ * <head>, before first paint) only switches to light when the visitor has
+ * chosen it. The system setting is ignored. ThemeToggle flips the theme and
+ * remembers the choice.
  */
 
 const STORAGE_KEY = "theme"
 
 export const themeScript = `(() => {
   try {
-    const saved = localStorage.getItem("${STORAGE_KEY}");
-    const dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    const dark = localStorage.getItem("${STORAGE_KEY}") !== "light";
     document.documentElement.classList.toggle("dark", dark);
     document.documentElement.style.colorScheme = dark ? "dark" : "light";
   } catch {}
@@ -28,34 +28,16 @@ function applyTheme(dark: boolean) {
 }
 
 function subscribe(onChange: () => void) {
-  // Follow the system setting until the visitor picks a theme themselves.
-  const media = matchMedia("(prefers-color-scheme: dark)")
-  const onSystemChange = () => {
-    if (readSaved() === null) applyTheme(media.matches)
-    onChange()
-  }
   const observer = new MutationObserver(onChange)
   observer.observe(document.documentElement, { attributeFilter: ["class"] })
-  media.addEventListener("change", onSystemChange)
-  return () => {
-    observer.disconnect()
-    media.removeEventListener("change", onSystemChange)
-  }
-}
-
-function readSaved() {
-  try {
-    return localStorage.getItem(STORAGE_KEY)
-  } catch {
-    return null
-  }
+  return () => observer.disconnect()
 }
 
 export function ThemeToggle() {
   const dark = useSyncExternalStore(
     subscribe,
     () => document.documentElement.classList.contains("dark"),
-    () => false,
+    () => true,
   )
 
   function toggle() {
