@@ -115,7 +115,7 @@ export function PricingCards() {
       {foundingOffer && (
         <aside
           aria-labelledby="founding-offer-heading"
-          className="pip grid border border-primary/30 bg-primary/5 md:grid-cols-[1fr_16rem]"
+          className="pip grid border border-primary/30 bg-primary/5 md:grid-cols-[1fr_auto]"
         >
           <div className="flex flex-col gap-4 p-6 sm:p-8">
             <p className="font-mono text-xs tracking-widest text-primary uppercase">Founding client offer</p>
@@ -136,6 +136,7 @@ export function PricingCards() {
           </div>
 
           {/* The stub: a dashed tear line with a notch punched out at each end.
+              Its column is sized to the button's label, so the label never clips.
               Each notch is a circle on the card's edge, clipped to its inner half
               (plus the 1px border it covers). */}
           <div className="relative flex flex-col items-start justify-center gap-4 border-t border-dashed border-primary/40 p-6 sm:p-8 md:border-t-0 md:border-l">
@@ -155,7 +156,7 @@ export function PricingCards() {
               size="lg"
               nativeButton={false}
               render={<Link href={pages.bookCall.path} />}
-              className="h-12 w-full text-base"
+              className="h-auto min-h-12 w-full py-3 text-center text-base whitespace-normal text-balance"
             >
               Claim a founding slot
             </Button>
