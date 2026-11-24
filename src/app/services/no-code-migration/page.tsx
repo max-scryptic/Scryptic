@@ -346,7 +346,6 @@ export default function NoCodeMigrationPage() {
         title="More on moving to code"
         posts={guides}
         tools={[freeTool("build-or-no-code")]}
-        more={{ label: "All migration guides", href: `${pages.blog.path}#migration` }}
       />
 
       <FaqSection

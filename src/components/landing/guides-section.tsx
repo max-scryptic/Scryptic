@@ -1,14 +1,10 @@
-import Link from "next/link"
-
 import { ToolList } from "@/components/free-tools/tool-list"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { PostCard } from "@/components/post-card"
 import { PostCarousel } from "@/components/post-carousel"
-import { Button } from "@/components/ui/button"
 import type { BlogPost } from "@/lib/blog"
 import { inset } from "@/lib/frame"
 import type { FreeTool } from "@/lib/free-tools"
-import { pages } from "@/lib/seo"
 
 /** The most guides shown side by side before the row becomes a carousel. */
 const MAX_IN_ROW = 3
@@ -18,27 +14,12 @@ export function GuidesSection({
   title,
   posts,
   tools = [],
-  more = { label: "All guides", href: pages.blog.path },
 }: {
   title: string
   posts: BlogPost[]
   tools?: FreeTool[]
-  more?: { label: string; href: string }
 }) {
-  const heading = (
-    <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-      <SectionHeading eyebrow="Guides" title={title} id="guides-heading" />
-      <Button
-        size="lg"
-        variant="outline"
-        nativeButton={false}
-        render={<Link href={more.href} />}
-        className="h-11 shrink-0 px-5 text-base"
-      >
-        {more.label}
-      </Button>
-    </div>
-  )
+  const heading = <SectionHeading eyebrow="Guides" title={title} id="guides-heading" />
 
   return (
     <LandingSection id="guides" labelledBy="guides-heading">
