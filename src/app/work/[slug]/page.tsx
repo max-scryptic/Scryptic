@@ -110,7 +110,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
     <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
       <PageJsonLd page={page} nodes={[caseStudyJsonLd(page, study)]} />
 
-      <article className="mx-auto flex w-full max-w-6xl flex-col gap-16">
+      {/* gap plus each section's pt-12 matches the landing page's ~12rem between sections. */}
+      <article className="mx-auto flex w-full max-w-6xl flex-col gap-24 sm:gap-36">
         <header className="flex flex-col gap-10">
           <nav aria-label="Breadcrumb" className={cn("font-mono text-xs text-muted-foreground", inset)}>
             <ol className="flex items-center gap-2">
