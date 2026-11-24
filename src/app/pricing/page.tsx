@@ -79,7 +79,8 @@ export default function PricingPage() {
         faqs={faqs}
       />
 
-      <div className="px-4 pt-8 pb-24 sm:px-6 sm:pt-12">
+      {/* No top padding: the FAQ section's own bottom padding is the gap, as on the landing and service pages. */}
+      <div className="px-4 pb-24 sm:px-6">
         <section
           aria-labelledby="pricing-cta-heading"
           className="corners guides mx-auto flex w-full max-w-6xl flex-col items-start gap-4 border border-border bg-card p-6 sm:p-10"
