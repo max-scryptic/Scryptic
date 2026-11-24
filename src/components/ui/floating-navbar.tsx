@@ -26,6 +26,8 @@ export type FloatingNavItem = {
    * widest phones, and the rest are Tailwind's.
    */
   hideBelow?: "xs" | "sm" | "md" | "lg"
+  /** A shorter label for the narrowest phones, below 400px, where the full name would push the action off the bar. */
+  shortName?: string
   /**
    * Pages under this one, shown in a menu that opens on hover or keyboard
    * focus on wide screens. The item itself stays a link to an index of the
@@ -70,7 +72,14 @@ export function FloatingNav({
               className={cn(item.hideBelow && hideBelowClass[item.hideBelow], item.children && "group/menu relative")}
             >
               <FloatingNavLink href={item.link}>
-                {item.name}
+                {item.shortName ? (
+                  <>
+                    <span className="min-[400px]:hidden">{item.shortName}</span>
+                    <span className="hidden min-[400px]:inline">{item.name}</span>
+                  </>
+                ) : (
+                  item.name
+                )}
                 {item.children && <ChevronIcon />}
               </FloatingNavLink>
               {item.children && <NavMenu items={item.children} label={item.name} />}

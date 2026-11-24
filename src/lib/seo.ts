@@ -124,7 +124,7 @@ export const pages = {
     path: "/work",
     title: "Case studies",
     description:
-      "Case studies of web apps Scryptic designed, built and launched, covering the problem each one solves, the product we shipped and the engineering behind it.",
+      "Case studies of the web and mobile apps Scryptic designed, built and launched: the problem each solves, the product we shipped and the engineering behind it.",
     changeFrequency: "monthly",
     priority: 0.8,
   },

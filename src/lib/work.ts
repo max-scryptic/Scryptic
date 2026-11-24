@@ -820,7 +820,10 @@ const getOutOfBed: CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [viewlio, prettyMetrics, reelEstate, untilThen, getOutOfBed]
 
-/** The phone apps, for the mobile app development page. */
+/** The web apps, listed first on /work. */
+export const webCaseStudies: CaseStudy[] = caseStudies.filter((study) => !study.operatingSystem)
+
+/** The phone apps, listed on their own on /work and on the mobile app development page. */
 export const mobileCaseStudies: CaseStudy[] = caseStudies.filter((study) => study.operatingSystem)
 
 /** The case studies shown on the home page; /work lists them all. */
