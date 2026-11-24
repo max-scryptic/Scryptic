@@ -372,23 +372,6 @@
     background-repeat: no-repeat;
   }
 
-  /* Blueprint graph paper: a faint grid of primary hairlines that fades out
-     towards the bottom. For one highlighted area, such as our column in the
-     comparison table, not whole panels. --grid sets the cell size. */
-  .graph-paper {
-    --grid: 16px;
-    --line: color-mix(in oklab, var(--primary) 11%, transparent);
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: var(--grid) var(--grid);
-    background-position: center top;
-    mask-image: linear-gradient(to bottom, #000, rgb(0 0 0 / 0.2));
-  }
-  .dark .graph-paper {
-    --line: color-mix(in oklab, var(--primary) 12%, transparent);
-  }
-
   /* The same 7px square as the rail joints, filled, centred on the border's corner. */
   .pip {
     position: relative;
