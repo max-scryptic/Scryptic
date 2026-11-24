@@ -7,20 +7,19 @@ import { cn } from "cn"
  */
 
 /**
- * The h2 and intro at the top of a landing section. No label above the title:
- * a label, heading and intro stacked on every section reads as a template.
+ * The h2 at the top of a landing section, on its own: no label above it and no
+ * intro under it, as a label, heading and intro stacked on every section reads
+ * as a template. Let the section's content follow the heading directly.
  */
 export function SectionHeading({
   title,
-  children,
   id,
   aside,
   className,
 }: {
   title: string
-  children: React.ReactNode
   id: string
-  /** Shown right after the title on wide screens, and after the intro on narrower ones. */
+  /** Shown beside the title on wide screens, and under it on narrower ones. */
   aside?: React.ReactNode
   className?: string
 }) {
@@ -36,7 +35,6 @@ export function SectionHeading({
       <h2 id={id} className="max-w-2xl text-3xl leading-[1.05] text-balance sm:text-[2.75rem] xl:col-start-1 xl:self-center">
         {title}
       </h2>
-      <p className="max-w-2xl text-lg text-pretty text-muted-foreground xl:col-start-1">{children}</p>
       {aside && (
         <div className="mt-2 justify-self-start xl:col-start-2 xl:row-start-1 xl:mt-0 xl:self-center">
           {aside}

@@ -8,7 +8,7 @@ import { TerminalCard } from "@/components/landing/hero-visuals"
 import { LaunchRaceSection } from "@/components/landing/launch-race-section"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { ProblemStatement } from "@/components/landing/problem-statement"
-import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
+import { ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { PixelIn } from "@/components/pixel-in"
@@ -147,7 +147,6 @@ export default function Home() {
       <AboutSection />
 
       <ProcessSection
-        intro={`Two calls, a ${calendarPackage.sprint}, then handover and a week of support, with a demo every Friday.`}
       />
 
       <StackSection />
@@ -156,12 +155,10 @@ export default function Home() {
 
       <ComparisonSection
         title="Hire in-house. Brief an agency. Chance a freelancer. Or skip the trade-offs."
-        intro={`${siteConfig.name} gives you agency-quality software at freelancer speed, with code you own outright.`}
       />
 
       <FaqSection
         faqs={faqs}
-        intro="Straight answers on pricing, timelines and process. Anything else, ask on the call."
       />
 
       <ContactSection />

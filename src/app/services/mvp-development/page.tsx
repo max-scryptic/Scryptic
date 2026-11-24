@@ -10,7 +10,7 @@ import type { IconName } from "@/components/landing/icons"
 import { SprintVisual } from "@/components/landing/hero-visuals"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { FitCheckSection, HubSection, OptionsSection, type OptionRow } from "@/components/landing/service-sections"
-import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
+import { ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
 import { PixelIn } from "@/components/pixel-in"
@@ -232,42 +232,35 @@ export default function MvpDevelopmentPage() {
       <HubSection
         id="included"
         title="What every MVP launches with"
-        intro="A product customers can sign up to and pay for, not a prototype to rebuild."
         items={launchKit}
       />
 
       <PricingSection
         title="Fixed-price MVP development"
-        intro="Two sprints, priced before the build starts."
       />
 
       <ProcessSection
         title="From idea to launched MVP"
-        intro={`Two calls, a ${calendarPackage.sprint} with Friday demos, then a week of support.`}
       />
 
       <FitCheckSection
         id="fit"
         title="Is an MVP sprint right for you?"
-        intro="If it is the wrong tool for you, we will say so on the call."
         items={fitChecks}
         initial={fitInitial}
       />
 
       <StackSection
         title="Built on the stack you would hire for later"
-        lead="The production stack established products run on, so developers you hire later inherit code they know."
       />
 
       <WorkSection
         title="MVPs we have built and launched"
-        intro="Each went from first sketch to live domain through the same sprint a client MVP does."
       />
 
       <OptionsSection
         id="options"
         title="MVP development companies, freelancers and builders compared"
-        intro="Scope, price, timeline and code ownership for the five usual ways to get a first release built."
         caption="Five ways to get an MVP built, compared on what you get, price, time to launch and who owns the code"
         columns={optionColumns}
         rows={options}
@@ -284,19 +277,16 @@ export default function MvpDevelopmentPage() {
 
       <ComparisonSection
         title="How a studio sprint compares, at a glance"
-        intro="Agency-quality code at freelancer speed, for a fixed price."
       />
 
       <GuidesSection
         title="Plan your MVP before the call"
-        intro="Free guides and tools for scoping and costing a first release."
         posts={guides}
         tools={tools}
       />
 
       <FaqSection
         faqs={faqs}
-        intro="Cost, timeline, scope and what happens after launch."
       />
 
       <ContactSection

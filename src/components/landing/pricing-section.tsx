@@ -16,11 +16,9 @@ import { foundingOffer, mvp, services, supportPlan } from "@/lib/services"
  */
 export function PricingSection({
   title = "A fully built MVP, ready to take to market",
-  intro = "Two fixed-price sprints, agreed before the build starts.",
   children,
 }: {
   title?: string
-  intro?: React.ReactNode
   /** Shown under the cards, e.g. a note on what else the packages cover. */
   children?: React.ReactNode
 }) {
@@ -29,10 +27,7 @@ export function PricingSection({
       <SectionHeading
         className={inset}
         title={title}
-        id="pricing-heading"
-      >
-        {intro}
-      </SectionHeading>
+        id="pricing-heading" />
 
       <PricingCards />
 
