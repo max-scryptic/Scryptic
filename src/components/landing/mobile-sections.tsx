@@ -2,7 +2,7 @@ import Image from "next/image"
 import { cn } from "cn"
 
 import { Icon } from "@/components/landing/icons"
-import { CheckIcon, LandingSection } from "@/components/landing/section-heading"
+import { CheckIcon, Eyebrow, LandingSection } from "@/components/landing/section-heading"
 import { StoreListing, type Store } from "@/components/landing/store-listing"
 import { inset } from "@/lib/frame"
 import type { MobileTool } from "@/lib/stack"
@@ -75,7 +75,7 @@ export function PlatformSection({
           <StoreListing store={store} className="w-full" />
         </div>
         <div data-reveal="children" className="flex flex-col gap-5">
-          <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
+          <Eyebrow>{eyebrow}</Eyebrow>
           <h2 id={`${id}-heading`} className="text-3xl tracking-tight text-balance sm:text-4xl">
             {title}
           </h2>
