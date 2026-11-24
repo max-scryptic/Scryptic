@@ -77,7 +77,7 @@ export default function BlogPage() {
               key={series.id}
               id={series.id}
               aria-labelledby={`${series.id}-heading`}
-              className="flex scroll-mt-28 flex-col gap-8 pt-12"
+              className="flex scroll-mt-28 flex-col gap-10 pt-12"
             >
               <div className={cn("flex max-w-2xl flex-col gap-3", inset)}>
                 <p className="font-mono text-xs tracking-widest text-primary uppercase">Series</p>
