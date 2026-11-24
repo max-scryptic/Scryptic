@@ -204,7 +204,6 @@ export default function MobileAppDevelopmentPage() {
       <ScrollReveal />
 
       <LandingHero
-        eyebrow={{ label: "Services", href: pages.services.path, current: "Mobile app development" }}
         tone="light"
         title={
           <>
