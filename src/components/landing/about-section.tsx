@@ -17,20 +17,19 @@ export function AboutSection() {
 
       <article
         aria-labelledby="founder-name"
-        data-reveal
         className="pip guides grid border border-border bg-card sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
       >
         <div className="relative aspect-square">
-          {/* The backdrop builds in from pixels as the card scrolls in, then the
-              cut-out portrait rises onto it (.reveal-pixels and .reveal-photo
-              in globals.css). */}
-          <div aria-hidden="true" className="pixel-in reveal-pixels absolute inset-0 bg-portrait" />
+          {/* The card and the cut-out portrait stay put; only the backdrop
+              behind the portrait builds in from pixels as it scrolls into view
+              (data-reveal="pixels" in globals.css). */}
+          <div aria-hidden="true" data-reveal="pixels" className="pixel-in absolute inset-0 bg-portrait" />
           <Image
             src={founder.image}
             alt={`Portrait of ${founder.name}, ${founder.role.toLowerCase()} of ${siteConfig.name}`}
             fill
             sizes="(min-width: 1152px) 460px, (min-width: 640px) 40vw, 100vw"
-            className="reveal-photo object-cover object-bottom"
+            className="object-cover object-bottom"
           />
         </div>
         <div className="flex flex-col justify-center gap-5 p-6 sm:p-10">

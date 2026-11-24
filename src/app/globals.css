@@ -524,13 +524,14 @@
   }
 
   /* Scroll reveals (components/scroll-reveal.tsx). data-reveal fades the
-     element up; "children" staggers its direct children; "zoom" scales in.
+     element up; "children" staggers its direct children; "zoom" scales in;
+     "pixels" builds the element in from pixels, with no fade (below).
      Fill mode is backwards only, so no transform is left behind once played. */
-  [data-reveal-state="waiting"]:not([data-reveal="children"]),
+  [data-reveal-state="waiting"]:not([data-reveal="children"], [data-reveal="pixels"]),
   [data-reveal-state="waiting"][data-reveal="children"] > * {
     opacity: 0;
   }
-  [data-reveal-state="play"]:not([data-reveal="children"]),
+  [data-reveal-state="play"]:not([data-reveal="children"], [data-reveal="pixels"]),
   [data-reveal-state="play"][data-reveal="children"] > * {
     animation: rise 0.8s var(--ease-out) backwards;
     animation-delay: calc(var(--i, 0) * 80ms);
@@ -549,23 +550,17 @@
     animation-delay: calc(250ms + var(--i, 0) * 80ms);
   }
 
-  /* A colour block (.pixel-in .reveal-pixels) inside a scroll reveal builds in
-     from pixels once it plays, rather than on load, in 8px cells so the
-     pixels read at block size; a .reveal-photo on it rises in once it is
-     whole. The founder portrait in components/landing/about-section.tsx. */
-  [data-reveal-state="waiting"] .reveal-pixels {
+  /* A colour block (.pixel-in, data-reveal="pixels") builds in from pixels
+     when it scrolls into view rather than on load, in 8px cells so the pixels
+     read at block size. Nothing else moves: what sits on it is simply there.
+     The founder portrait's backdrop (components/landing/about-section.tsx). */
+  [data-reveal="pixels"][data-reveal-state="waiting"] {
     animation: none;
     mask-image: linear-gradient(transparent 0 0);
   }
-  [data-reveal-state="play"] .reveal-pixels {
+  [data-reveal="pixels"][data-reveal-state="play"] {
     mask-size: 64px 64px;
-    animation: pixel-in 0.8s step-end 0.2s backwards;
-  }
-  [data-reveal-state="waiting"] .reveal-photo {
-    opacity: 0;
-  }
-  [data-reveal-state="play"] .reveal-photo {
-    animation: rise 0.8s var(--ease-out) 0.9s backwards;
+    animation: pixel-in 0.8s step-end 0.1s backwards;
   }
 
   /* Page heading highlights (.pixel-in) build in from pixels, frame by frame. */
@@ -613,21 +608,17 @@
       animation-range: 0 60vh;
     }
   }
+}
 
-  /* The scroll-lit statement (components/landing/problem-statement.tsx):
-     each word brightens over its own slice (--a to --b) of the heading's pass
-     across the viewport. Both fill modes, so words stay dim until their turn
-     and lit after it. */
-  @supports (animation-timeline: view()) {
-    .lit-words {
-      view-timeline: --lit block;
-    }
-    .lit-word {
-      animation: lit linear both;
-      animation-timeline: --lit;
-      animation-range: cover var(--a) cover var(--b);
-    }
-  }
+/* The scroll-lit statement (components/landing/problem-statement.tsx). Its
+   script sets --lit (0 to 1, how far the heading has come up the screen) and
+   data-lit="on"; until then, or with reduced motion, every word is whole.
+   The light's leading edge runs from before the first word to three past the
+   last (--n words), and each word (--i) brightens from 0.16 to 1 over the
+   three words behind that edge. Pure arithmetic on one value, so the same
+   position always gives the same words, in every browser. */
+.lit-words[data-lit="on"] .lit-word {
+  opacity: clamp(0.16, calc(0.16 + (var(--lit, 0) * (var(--n) + 3) - var(--i)) * 0.28), 1);
 }
 
 :root {
@@ -651,12 +642,6 @@
   from {
     opacity: 0;
     transform: translateY(24px);
-  }
-}
-
-@keyframes lit {
-  from {
-    opacity: 0.16;
   }
 }
 
