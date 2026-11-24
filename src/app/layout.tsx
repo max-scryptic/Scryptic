@@ -99,24 +99,24 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: siteConfig.colors.background },
-    { media: "(prefers-color-scheme: dark)", color: siteConfig.colors.backgroundDark },
-  ],
-  colorScheme: "light dark",
+  // Dark by default (see components/theme-toggle.tsx), whatever the system setting.
+  themeColor: siteConfig.colors.backgroundDark,
+  colorScheme: "dark light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={siteConfig.language}
-      className={`${syne.variable} ${bricolage.variable} ${hankenGrotesk.variable} ${ibmPlexMono.variable} ${geistPixel.variable} h-full antialiased`}
+      className={`${syne.variable} ${bricolage.variable} ${hankenGrotesk.variable} ${ibmPlexMono.variable} ${geistPixel.variable} h-full antialiased dark`}
+      style={{ colorScheme: "dark" }}
       data-scroll-behavior="smooth"
-      // The theme script adds .dark before React hydrates.
+      // Dark by default; the theme script removes .dark before React hydrates
+      // when the visitor has chosen light.
       suppressHydrationWarning
     >
       <head>
-        {/* Runs before first paint so a dark-theme visitor never sees a light flash. */}
+        {/* Runs before first paint so a light-theme visitor never sees a dark flash. */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="relative min-h-full">
