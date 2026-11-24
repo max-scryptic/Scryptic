@@ -273,8 +273,13 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
       />
 
       <article className="mx-auto flex w-full max-w-6xl flex-col gap-16">
-        <header className="flex flex-col gap-10">
-          <nav aria-label="Breadcrumb" className={cn("font-mono text-xs text-muted-foreground", inset)}>
+        <header className="relative flex flex-col gap-10">
+          {/* Hangs in the page's top padding, out of the flow, as in the service
+              heroes, so the title section starts at the same height. */}
+          <nav
+            aria-label="Breadcrumb"
+            className={cn("absolute bottom-full left-0 mb-5 font-mono text-xs text-muted-foreground", inset)}
+          >
             <ol className="flex flex-wrap items-center gap-2">
               <li>
                 <Link href={pages.blog.path} className="hover:text-foreground">
