@@ -324,6 +324,7 @@ export default function NoCodeMigrationPage() {
       />
 
       <FitCheckSection
+        band="warm"
         id="fit"
         eyebrow="Migrate or stay"
         title="Should you migrate at all?"
@@ -338,6 +339,7 @@ export default function NoCodeMigrationPage() {
       />
 
       <ComparisonSection
+        band="ink"
         title="Who should move your app?"
         rows={comparison}
       />

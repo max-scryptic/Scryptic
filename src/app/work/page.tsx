@@ -2,6 +2,7 @@ import Link from "next/link"
 import { cn } from "cn"
 
 import { CaseStudyCard } from "@/components/case-study-card"
+import { Eyebrow } from "@/components/landing/section-heading"
 import { PageJsonLd } from "@/components/json-ld"
 import { PixelIn } from "@/components/pixel-in"
 import { Button } from "@/components/ui/button"
@@ -9,7 +10,7 @@ import { inset, pageTop } from "@/lib/frame"
 import { caseStudyPages, createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
-import { caseStudies } from "@/lib/work"
+import { mobileCaseStudies, webCaseStudies, type CaseStudy } from "@/lib/work"
 
 export const metadata = createMetadata(pages.work)
 
@@ -28,11 +29,19 @@ export default function WorkPage() {
           </p>
         </div>
 
-        <section aria-label="Case studies" className="grid gap-6 md:grid-cols-2">
-          {caseStudies.map((study) => (
-            <CaseStudyCard key={study.slug} study={study} className="guides" />
-          ))}
-        </section>
+        <CaseStudyGroup
+          id="web-apps"
+          eyebrow="Web apps"
+          title="SaaS products and AI tools in the browser"
+          studies={webCaseStudies}
+        />
+
+        <CaseStudyGroup
+          id="mobile-apps"
+          eyebrow="Mobile apps"
+          title="Native apps on the phone"
+          studies={mobileCaseStudies}
+        />
 
         <section
           aria-labelledby="work-cta-heading"
@@ -55,5 +64,40 @@ export default function WorkPage() {
         </section>
       </div>
     </main>
+  )
+}
+
+/**
+ * One kind of product: a label, a heading and its cards, two to a row. A
+ * group with one study shows it wide, screenshot beside the text, rather than
+ * as half a row.
+ */
+function CaseStudyGroup({
+  id,
+  eyebrow,
+  title,
+  studies,
+}: {
+  id: string
+  eyebrow: string
+  title: string
+  studies: CaseStudy[]
+}) {
+  if (studies.length === 0) return null
+  const single = studies.length === 1
+  return (
+    <section aria-labelledby={`${id}-heading`} id={id} className="flex scroll-mt-28 flex-col gap-8">
+      <div className={cn("flex flex-col gap-2", inset)}>
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <h2 id={`${id}-heading`} className="text-3xl tracking-tight text-balance">
+          {title}
+        </h2>
+      </div>
+      <div className={cn("grid gap-6", !single && "md:grid-cols-2")}>
+        {studies.map((study) => (
+          <CaseStudyCard key={study.slug} study={study} headingLevel="h3" wide={single} className="guides" />
+        ))}
+      </div>
+    </section>
   )
 }

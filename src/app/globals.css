@@ -50,12 +50,16 @@
   --voxel-top: color-mix(in oklab, var(--portrait) 20%, var(--background));
   --voxel-left: color-mix(in oklab, var(--portrait) 38%, var(--background));
   --voxel-right: color-mix(in oklab, var(--portrait) 62%, var(--background));
-  /* Glint at full strength, the same in both themes: the stray pixels on the guides. */
+  /* Accents for the stray pixels (components/stray-pixels.tsx), the same in both
+     themes: Glint on the home page, mint on the service pages. */
   --glint: #f2a93b;
-  /* Two quiet section bands besides Lapis, a shade off the page either way:
-     a warm paper and a cool Lapis tint. */
+  --mint: #34c99f;
+  /* Section bands besides Lapis: a quiet warm paper, a shade off the page in
+     either theme, and a near-black with a hint of Lapis, the same in both
+     (a touch darker and bluer than Night, so it still reads as a band in the
+     dark theme). */
   --band-warm: #f5f2ec;
-  --band-cool: #e6e9f6;
+  --band-ink: #08091a;
 }
 
 .dark {
@@ -94,7 +98,6 @@
   --voxel-left: color-mix(in oklab, var(--portrait) 17%, var(--background));
   --voxel-right: color-mix(in oklab, var(--portrait) 9%, var(--background));
   --band-warm: #16141a;
-  --band-cool: #121427;
 }
 
 @theme inline {
@@ -149,8 +152,9 @@
   --color-voxel-left: var(--voxel-left);
   --color-voxel-right: var(--voxel-right);
   --color-glint: var(--glint);
+  --color-mint: var(--mint);
   --color-band-warm: var(--band-warm);
-  --color-band-cool: var(--band-cool);
+  --color-band-ink: var(--band-ink);
 }
 
 @layer base {

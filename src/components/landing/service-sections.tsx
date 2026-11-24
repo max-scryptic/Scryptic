@@ -3,7 +3,7 @@ import { cn } from "cn"
 import { AppLayers, type AppLayer } from "@/components/landing/app-layers"
 import { FitCheck, type FitVerdicts } from "@/components/landing/fit-check"
 import { LaunchKitHub, type HubCore, type HubItem } from "@/components/landing/launch-kit-hub"
-import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { LandingSection, SectionHeading, type SectionBand } from "@/components/landing/section-heading"
 import { inset } from "@/lib/frame"
 
 /*
@@ -87,6 +87,7 @@ export function FitCheckSection({
   initial = [],
   cta = { label: "Book a discovery call", href: "#contact" },
   verdicts,
+  band,
 }: {
   id: string
   eyebrow: string
@@ -97,9 +98,10 @@ export function FitCheckSection({
   cta?: { label: string; href: string }
   /** The line under the score at each band; defaults to the MVP wording. */
   verdicts?: FitVerdicts
+  band?: SectionBand
 }) {
   return (
-    <LandingSection id={id} labelledBy={`${id}-heading`}>
+    <LandingSection id={id} labelledBy={`${id}-heading`} band={band}>
       <SectionHeading className={inset} eyebrow={eyebrow} title={title} id={`${id}-heading`} />
       <FitCheck items={items} initial={initial} cta={cta} verdicts={verdicts} />
     </LandingSection>
