@@ -92,6 +92,7 @@
 @theme inline {
   --font-sans: var(--font-hanken-grotesk);
   --font-logo: var(--font-syne);
+  --font-display: var(--font-bricolage);
   --font-mono: var(--font-ibm-plex-mono);
 
   --radius-xs: var(--radius);
@@ -147,11 +148,17 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
-  /* Headings share the body face at medium weight; Syne is kept for the logo. */
+  /* Page and section headings take the display face, tracked in tighter as
+     they grow; card and list headings (h3) stay in the body face. Syne is
+     kept for the logo. */
   h1,
   h2,
   h3 {
     @apply font-medium tracking-tight;
+  }
+  h1,
+  h2 {
+    @apply font-display tracking-[-0.03em];
   }
   ::selection {
     @apply bg-primary text-primary-foreground;
@@ -587,6 +594,21 @@
       animation-range: 0 60vh;
     }
   }
+
+  /* The scroll-lit statement (components/landing/problem-statement.tsx):
+     each word brightens over its own slice (--a to --b) of the heading's pass
+     across the viewport. Both fill modes, so words stay dim until their turn
+     and lit after it. */
+  @supports (animation-timeline: view()) {
+    .lit-words {
+      view-timeline: --lit block;
+    }
+    .lit-word {
+      animation: lit linear both;
+      animation-timeline: --lit;
+      animation-range: cover var(--a) cover var(--b);
+    }
+  }
 }
 
 :root {
@@ -610,6 +632,12 @@
   from {
     opacity: 0;
     transform: translateY(24px);
+  }
+}
+
+@keyframes lit {
+  from {
+    opacity: 0.16;
   }
 }
 

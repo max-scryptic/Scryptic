@@ -7,6 +7,7 @@ import { LandingHero } from "@/components/landing/hero"
 import { TerminalCard } from "@/components/landing/hero-visuals"
 import { LaunchRaceSection } from "@/components/landing/launch-race-section"
 import { PricingSection } from "@/components/landing/pricing-section"
+import { ProblemStatement } from "@/components/landing/problem-statement"
 import { calendarPackage, ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
@@ -130,6 +131,15 @@ export default function Home() {
         visual={<TerminalCard lines={terminalLines} />}
       />
       <div aria-hidden="true" className="rail-joint" />
+
+      <ProblemStatement
+        parts={[
+          { text: "You have the idea, and people waiting to use it. What you don't have is a dev team, or months to hire one. So we build the first version with you in a" },
+          { text: "two week sprint,", accent: true },
+          { text: "at a fixed price, and hand over" },
+          { text: "code that is yours.", accent: true },
+        ]}
+      />
 
       <LaunchRaceSection />
 

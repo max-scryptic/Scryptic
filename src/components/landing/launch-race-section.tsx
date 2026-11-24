@@ -88,7 +88,6 @@ export function LaunchRaceSection() {
     <LandingSection id="problems" labelledBy="problems-heading" className="gap-14">
       <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
         <SectionHeading
-          eyebrow="Sound familiar?"
           title="The usual route takes months. Ours takes weeks."
           id="problems-heading"
         >

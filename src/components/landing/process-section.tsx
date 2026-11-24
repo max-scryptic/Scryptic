@@ -88,8 +88,8 @@ export function ProcessSection({
   note?: string
 }) {
   return (
-    <LandingSection id="process" labelledBy="process-heading">
-      <SectionHeading className={inset} eyebrow="Process" title={title} id="process-heading">
+    <LandingSection id="process" labelledBy="process-heading" space="tight">
+      <SectionHeading className={inset} title={title} id="process-heading">
         {intro}
       </SectionHeading>
       <div className="ticks guides border border-border bg-card">

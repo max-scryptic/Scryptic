@@ -108,7 +108,10 @@ export function LandingHero({
                   {eyebrow.label}
                 </p>
               ) : null}
-              <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">{title}</h1>
+              {/* Display size: set tight and light, so it reads as the one big moment on the page. */}
+              <h1 className="text-[2.75rem] leading-[0.98] font-normal tracking-[-0.04em] text-balance sm:text-6xl lg:text-7xl lg:leading-[0.95]">
+                {title}
+              </h1>
             </div>
             <p className={cn("max-w-xl text-lg text-pretty", light ? "text-muted-foreground" : "text-white/80")}>
               {intro}

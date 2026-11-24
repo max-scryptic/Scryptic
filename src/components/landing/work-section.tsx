@@ -20,7 +20,7 @@ export function WorkSection({
   return (
     <LandingSection id="work" labelledBy="work-heading">
       <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-        <SectionHeading eyebrow="Our work" title={title} id="work-heading">
+        <SectionHeading title={title} id="work-heading">
           {intro}
         </SectionHeading>
         <Button

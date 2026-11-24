@@ -100,7 +100,7 @@ export function ComparisonSection({
   return (
     <LandingSection id="compare" labelledBy="compare-heading">
       <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
-        <SectionHeading eyebrow={`Why ${siteConfig.name}`} title={title} id="compare-heading">
+        <SectionHeading title={title} id="compare-heading">
           {intro}
         </SectionHeading>
         <Button
