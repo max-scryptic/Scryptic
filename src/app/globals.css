@@ -549,6 +549,25 @@
     animation-delay: calc(250ms + var(--i, 0) * 80ms);
   }
 
+  /* A colour block (.pixel-in .reveal-pixels) inside a scroll reveal builds in
+     from pixels once it plays, rather than on load, in 8px cells so the
+     pixels read at block size; a .reveal-photo on it rises in once it is
+     whole. The founder portrait in components/landing/about-section.tsx. */
+  [data-reveal-state="waiting"] .reveal-pixels {
+    animation: none;
+    mask-image: linear-gradient(transparent 0 0);
+  }
+  [data-reveal-state="play"] .reveal-pixels {
+    mask-size: 64px 64px;
+    animation: pixel-in 0.8s step-end 0.2s backwards;
+  }
+  [data-reveal-state="waiting"] .reveal-photo {
+    opacity: 0;
+  }
+  [data-reveal-state="play"] .reveal-photo {
+    animation: rise 0.8s var(--ease-out) 0.9s backwards;
+  }
+
   /* Page heading highlights (.pixel-in) build in from pixels, frame by frame. */
   .pixel-in {
     animation: pixel-in 0.56s step-end 0.15s backwards;
