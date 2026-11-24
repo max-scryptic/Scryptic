@@ -5,7 +5,7 @@ import { CaseStudyCard } from "@/components/case-study-card"
 import { PageJsonLd } from "@/components/json-ld"
 import { PixelIn } from "@/components/pixel-in"
 import { Button } from "@/components/ui/button"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { caseStudyPages, createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
@@ -15,7 +15,7 @@ export const metadata = createMetadata(pages.work)
 
 export default function WorkPage() {
   return (
-    <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
+    <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd page={pages.work} nodes={[itemListJsonLd(pages.work, caseStudyPages)]} />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">

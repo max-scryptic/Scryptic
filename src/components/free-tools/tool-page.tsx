@@ -4,7 +4,7 @@ import { cn } from "cn"
 import { ToolList } from "@/components/free-tools/tool-list"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { freeTools, type FreeTool, type ToolFaq } from "@/lib/free-tools"
 import { pages, toolPage } from "@/lib/seo"
 import { faqJsonLd, toolJsonLd } from "@/lib/structured-data"
@@ -39,20 +39,24 @@ export function ToolPage({
   const more = [0, 1, 2].map((offset) => others[(start + offset) % others.length])
 
   return (
-    <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
+    <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd page={page} nodes={[toolJsonLd(page, tool), faqJsonLd(page, faqs)]} />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-20">
         <div className="flex flex-col gap-10">
           <div className={cn("flex flex-col items-start gap-6", inset)}>
-            <Link
-              href={pages.tools.path}
-              className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-primary uppercase hover:underline"
-            >
-              <span aria-hidden="true">&larr;</span>
-              {pages.tools.title}
-            </Link>
-            <h1 className="max-w-3xl text-4xl tracking-tight text-balance sm:text-5xl">{heading}</h1>
+            {/* The back link hangs in the page's top padding, out of the flow, as
+                in the service heroes, so the heading starts at the same height. */}
+            <div className="relative">
+              <Link
+                href={pages.tools.path}
+                className="absolute bottom-full left-0 mb-5 inline-flex items-center gap-2 font-mono text-xs tracking-widest whitespace-nowrap text-primary uppercase hover:underline"
+              >
+                <span aria-hidden="true">&larr;</span>
+                {pages.tools.title}
+              </Link>
+              <h1 className="max-w-3xl text-4xl tracking-tight text-balance sm:text-5xl">{heading}</h1>
+            </div>
             <p className="max-w-2xl text-lg text-pretty text-muted-foreground">{intro}</p>
           </div>
 

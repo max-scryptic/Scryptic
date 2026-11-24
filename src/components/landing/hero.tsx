@@ -4,7 +4,7 @@ import { cn } from "cn"
 import { PixelDrip } from "@/components/pixel-drip"
 import { Button } from "@/components/ui/button"
 import { VoxelField, type VoxelShape } from "@/components/voxel-field"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { pages } from "@/lib/seo"
 
 /**
@@ -58,7 +58,8 @@ export function LandingHero({
       <section
         className={cn(
           // Above the drips, which run up behind it.
-          "relative isolate z-[2] overflow-hidden px-4 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-32",
+          "relative isolate z-[2] overflow-hidden px-4 pb-24 sm:px-6 sm:pb-32",
+          pageTop,
           band,
           light ? "text-foreground" : "text-white",
         )}

@@ -6,7 +6,7 @@ import { FaqSection, type Faq } from "@/components/landing/faq-section"
 import { AfterLaunch, PricingCards } from "@/components/landing/pricing-section"
 import { PixelIn } from "@/components/pixel-in"
 import { Button } from "@/components/ui/button"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { createMetadata, pages } from "@/lib/seo"
 import { services } from "@/lib/services"
 import { faqJsonLd, serviceJsonLd, supportJsonLd } from "@/lib/structured-data"
@@ -50,7 +50,7 @@ export default function PricingPage() {
         ]}
       />
 
-      <div className="px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
+      <div className={cn("px-4 pb-24 sm:px-6", pageTop)}>
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
           <div className={cn("flex flex-col items-start gap-6", inset)}>
             <h1 className="text-4xl tracking-tight text-balance sm:text-5xl">

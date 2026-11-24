@@ -4,7 +4,7 @@ import { cn } from "cn"
 import { BookCallForm } from "@/components/book-call-form"
 import { PageJsonLd } from "@/components/json-ld"
 import { PixelIn } from "@/components/pixel-in"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
@@ -28,7 +28,7 @@ const agenda = [
 
 export default function BookCallPage() {
   return (
-    <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
+    <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd page={pages.bookCall} />
 
       <div className="mx-auto grid w-full max-w-6xl items-start gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">

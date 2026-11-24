@@ -8,7 +8,7 @@ import { BrowserFrame } from "@/components/browser-frame"
 import { PageJsonLd } from "@/components/json-ld"
 import { TechMark } from "@/components/tech-mark"
 import { Button } from "@/components/ui/button"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { caseStudyPage, createMetadata, pages } from "@/lib/seo"
 import { caseStudyJsonLd } from "@/lib/structured-data"
 import { caseStudies, displayDomain, getCaseStudy } from "@/lib/work"
@@ -107,32 +107,46 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const [lead, ...moreSolution] = study.solution
 
   return (
-    <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
+    <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd page={page} nodes={[caseStudyJsonLd(page, study)]} />
 
       {/* gap plus each section's pt-12 matches the landing page's ~12rem between sections. */}
       <article className="mx-auto flex w-full max-w-6xl flex-col gap-24 sm:gap-36">
-        <header className="flex flex-col gap-10">
-          <nav aria-label="Breadcrumb" className={cn("font-mono text-xs text-muted-foreground", inset)}>
-            <ol className="flex items-center gap-2">
-              <li>
-                <Link href={pages.work.path} className="hover:text-foreground">
-                  {pages.work.title}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="text-foreground">
-                {study.name}
-              </li>
-            </ol>
-          </nav>
+        <header className="relative flex flex-col gap-10">
+          {/* The breadcrumb and, from sm up, the category share one row that
+              hangs in the page's top padding, out of the flow, as in the service
+              heroes, so the title starts at the same height. On phones the
+              category is too long to share the row without running up under the
+              site header, so it sits just below the title. */}
+          <div
+            className={cn(
+              "absolute bottom-full left-0 mb-5 flex items-center gap-6 font-mono text-xs whitespace-nowrap",
+              inset,
+            )}
+          >
+            <nav aria-label="Breadcrumb" className="text-muted-foreground">
+              <ol className="flex items-center gap-2">
+                <li>
+                  <Link href={pages.work.path} className="hover:text-foreground">
+                    {pages.work.title}
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li aria-current="page" className="text-foreground">
+                  {study.name}
+                </li>
+              </ol>
+            </nav>
+            <p className="hidden tracking-widest text-primary uppercase sm:block">{study.category}</p>
+          </div>
 
-          <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-14">
+          {/* Top-aligned, so the title starts at the shared height however tall the card beside it is. */}
+          <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-start lg:gap-14">
             <div className={cn("flex flex-col items-start gap-6", inset)}>
-              <p className="font-mono text-xs tracking-widest text-primary uppercase">
+              <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">{study.name}</h1>
+              <p className="font-mono text-xs tracking-widest text-primary uppercase sm:hidden">
                 {study.category}
               </p>
-              <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">{study.name}</h1>
               <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
                 {study.summary}
               </p>
