@@ -20,6 +20,7 @@ export function ToolPage({
   intro,
   faqs,
   related,
+  sections,
   children,
 }: {
   tool: FreeTool
@@ -30,6 +31,9 @@ export function ToolPage({
   faqs: ToolFaq[]
   /** A blog post that goes deeper, shown under the FAQ. */
   related?: { href: string; title: string }
+  /** Content sections under the tool, such as what it checks. Each is spaced like a service page section. */
+  sections?: React.ReactNode
+  /** The tool itself, straight under the intro. */
   children: React.ReactNode
 }) {
   const page = toolPage(tool)
@@ -42,63 +46,73 @@ export function ToolPage({
     <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd page={page} nodes={[toolJsonLd(page, tool), faqJsonLd(page, faqs)]} />
 
+      {/* Main content (the tool, its sections and the FAQ) keeps the service
+          pages' rhythm from sectionSpace: two default sections meet 12rem apart,
+          a default section and the tight FAQ 10rem (11rem from sm). The call to
+          action and the other tools close the page at a tighter gap-20. */}
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-20">
-        <div className="flex flex-col gap-10">
-          <div className={cn("flex flex-col items-start gap-6", inset)}>
-            {/* The back link hangs in the page's top padding, out of the flow, as
-                in the service heroes, so the heading starts at the same height. */}
-            <div className="relative">
-              <Link
-                href={pages.tools.path}
-                className="absolute bottom-full left-0 mb-5 inline-flex items-center gap-2 font-mono text-xs tracking-widest whitespace-nowrap text-primary uppercase hover:underline"
-              >
-                <span aria-hidden="true">&larr;</span>
-                {pages.tools.title}
-              </Link>
-              <h1 className="max-w-3xl text-4xl tracking-tight text-balance sm:text-5xl">{heading}</h1>
-            </div>
-            <p className="max-w-2xl text-lg text-pretty text-muted-foreground">{intro}</p>
-          </div>
-
-          {children}
-        </div>
-
-        <section
-          aria-labelledby="tool-faq-heading"
-          className={cn("grid gap-12 lg:grid-cols-[1fr_1.4fr]", inset)}
-        >
-          <div className="flex flex-col items-start gap-4">
-            <p className="font-mono text-xs tracking-widest text-primary uppercase">FAQ</p>
-            <h2 id="tool-faq-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
-              Frequently asked questions
-            </h2>
-            {related && (
-              <p className="text-pretty text-muted-foreground">
-                Want the detail? Read{" "}
-                <Link href={related.href} className="text-primary hover:underline">
-                  {related.title}
-                </Link>
-                .
-              </p>
-            )}
-          </div>
-          <div className="flex flex-col divide-y divide-border border-y border-border">
-            {faqs.map((faq) => (
-              <details key={faq.question} className="group py-2">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-medium [&::-webkit-details-marker]:hidden">
-                  <h3>{faq.question}</h3>
-                  <span
-                    aria-hidden="true"
-                    className="font-mono text-lg text-primary transition-transform group-open:rotate-45"
+        <div className="flex flex-col gap-40 sm:gap-44">
+          <div className="flex flex-col gap-48">
+            <div className="flex flex-col gap-10">
+              <div className={cn("flex flex-col items-start gap-6", inset)}>
+                {/* The back link hangs in the page's top padding, out of the flow, as
+                    in the service heroes, so the heading starts at the same height. */}
+                <div className="relative">
+                  <Link
+                    href={pages.tools.path}
+                    className="absolute bottom-full left-0 mb-5 inline-flex items-center gap-2 font-mono text-xs tracking-widest whitespace-nowrap text-primary uppercase hover:underline"
                   >
-                    +
-                  </span>
-                </summary>
-                <p className="pb-4 text-pretty text-muted-foreground">{faq.answer}</p>
-              </details>
-            ))}
+                    <span aria-hidden="true">&larr;</span>
+                    {pages.tools.title}
+                  </Link>
+                  <h1 className="max-w-3xl text-4xl tracking-tight text-balance sm:text-5xl">{heading}</h1>
+                </div>
+                <p className="max-w-2xl text-lg text-pretty text-muted-foreground">{intro}</p>
+              </div>
+
+              {children}
+            </div>
+
+            {sections}
           </div>
-        </section>
+
+          <section
+            aria-labelledby="tool-faq-heading"
+            className={cn("grid gap-12 lg:grid-cols-[1fr_1.4fr]", inset)}
+          >
+            <div className="flex flex-col items-start gap-4">
+              <p className="font-mono text-xs tracking-widest text-primary uppercase">FAQ</p>
+              <h2 id="tool-faq-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
+                Frequently asked questions
+              </h2>
+              {related && (
+                <p className="text-pretty text-muted-foreground">
+                  Want the detail? Read{" "}
+                  <Link href={related.href} className="text-primary hover:underline">
+                    {related.title}
+                  </Link>
+                  .
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col divide-y divide-border border-y border-border">
+              {faqs.map((faq) => (
+                <details key={faq.question} className="group py-2">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-medium [&::-webkit-details-marker]:hidden">
+                    <h3>{faq.question}</h3>
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-lg text-primary transition-transform group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="pb-4 text-pretty text-muted-foreground">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        </div>
 
         <section
           aria-labelledby="tool-cta-heading"

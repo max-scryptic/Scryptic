@@ -73,9 +73,9 @@ export default function SeoCheckPage() {
       }
       intro="Audit the basics that decide whether a page can rank, with a fix for each problem."
       faqs={faqs}
+      sections={<WhatWeCheck items={checked} />}
     >
       <SiteChecker kind="seo" />
-      <WhatWeCheck items={checked} />
     </ToolPage>
   )
 }

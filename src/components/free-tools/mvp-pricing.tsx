@@ -33,7 +33,7 @@ const routes = [
 
 export function MvpPricing() {
   return (
-    <section aria-labelledby="mvp-pricing-heading" className={cn("flex flex-col gap-8 pt-6", inset)}>
+    <section aria-labelledby="mvp-pricing-heading" className={cn("flex flex-col gap-8", inset)}>
       <div className="flex max-w-3xl flex-col gap-4">
         <h2 id="mvp-pricing-heading" className="text-2xl tracking-tight">
           MVP pricing in the UK
