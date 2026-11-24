@@ -73,7 +73,7 @@ export function LandingHero({
           }
           className="hero-parallax absolute top-0 right-0 -z-10 h-[540px] w-[960px] mask-b-from-[110px] mask-b-to-[200px] sm:right-auto sm:left-1/2 sm:h-[900px] sm:w-[1600px] sm:-translate-x-1/2 sm:mask-none"
         />
-        <div className="hero-recede mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
+        <div className="hero-recede mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.2fr_1fr]">
           <div className={cn("hero-rise flex flex-col items-start gap-7", inset)}>
             {/* Display size: set tight and light, so it reads as the one big moment on the page. */}
             <h1 className="text-[2.75rem] leading-[0.98] font-normal tracking-[-0.04em] text-balance sm:text-6xl lg:text-7xl lg:leading-[0.95]">
