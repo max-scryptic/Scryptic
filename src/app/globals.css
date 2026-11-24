@@ -55,11 +55,11 @@
   --glint: #f2a93b;
   --mint: #34c99f;
   /* Section bands besides Lapis: a quiet warm paper, a shade off the page in
-     either theme, and a near-black with a hint of Lapis, the same in both
-     (a touch darker and bluer than Night, so it still reads as a band in the
-     dark theme). */
+     either theme, and ink: a pale Lapis wash here, and in the dark theme a
+     near-black with a hint of Lapis (a touch darker and bluer than Night, so
+     it still reads as a band). */
   --band-warm: #f5f2ec;
-  --band-ink: #08091a;
+  --band-ink: #e3e7fb;
 }
 
 .dark {
@@ -98,6 +98,7 @@
   --voxel-left: color-mix(in oklab, var(--portrait) 17%, var(--background));
   --voxel-right: color-mix(in oklab, var(--portrait) 9%, var(--background));
   --band-warm: #16141a;
+  --band-ink: #08091a;
 }
 
 @theme inline {
