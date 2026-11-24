@@ -242,6 +242,13 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
 
   const page = blogPostPage(post)
   const series = getSeries(post.series)
+  // Shown in the breadcrumb row from sm up, and above the title on phones.
+  const label = (
+    <>
+      {series.label}
+      {post.category ? <> &middot; {post.category}</> : null}
+    </>
+  )
   const service = serviceForPost(post)
   const published = formatPostDate(post.datePublished)
   const faqHeadingId = "faq-heading"
@@ -274,36 +281,46 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
 
       <article className="mx-auto flex w-full max-w-6xl flex-col gap-16">
         <header className="relative flex flex-col gap-10">
-          {/* Hangs in the page's top padding, out of the flow, as in the service
-              heroes, so the title section starts at the same height. */}
-          <nav
-            aria-label="Breadcrumb"
-            className={cn("absolute bottom-full left-0 mb-5 font-mono text-xs text-muted-foreground", inset)}
+          {/* The breadcrumb and, from sm up, the series label share one row that
+              hangs in the page's top padding, out of the flow, as in the service
+              heroes, so the title starts at the same height. On phones the label
+              is too long to share the row without running up under the site
+              header, so it stays above the title, beside the logo. */}
+          <div
+            className={cn(
+              "absolute bottom-full left-0 mb-5 flex items-center gap-6 font-mono text-xs whitespace-nowrap",
+              inset,
+            )}
           >
-            <ol className="flex flex-wrap items-center gap-2">
-              <li>
-                <Link href={pages.blog.path} className="hover:text-foreground">
-                  {pages.blog.title}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="text-foreground">
-                {post.topic}
-              </li>
-            </ol>
-          </nav>
+            <nav aria-label="Breadcrumb" className="text-muted-foreground">
+              <ol className="flex flex-wrap items-center gap-2">
+                <li>
+                  <Link href={pages.blog.path} className="hover:text-foreground">
+                    {pages.blog.title}
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li aria-current="page" className="text-foreground">
+                  {post.topic}
+                </li>
+              </ol>
+            </nav>
+            <p className="hidden tracking-widest text-primary uppercase sm:block">{label}</p>
+          </div>
 
           <div className={cn("flex flex-col items-start gap-6", inset)}>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 sm:hidden">
               <ToolLogo post={post} />
-              <p className="font-mono text-xs tracking-widest text-primary uppercase">
-                {series.label}
-                {post.category ? <> &middot; {post.category}</> : null}
-              </p>
+              <p className="font-mono text-xs tracking-widest text-primary uppercase">{label}</p>
             </div>
-            <h1 className="max-w-4xl text-4xl tracking-tight text-balance sm:text-5xl">
-              {post.title}
-            </h1>
+            <div className="flex items-center gap-5">
+              <span className="hidden sm:contents">
+                <ToolLogo post={post} />
+              </span>
+              <h1 className="max-w-4xl text-4xl tracking-tight text-balance sm:text-5xl">
+                {post.title}
+              </h1>
+            </div>
             <p className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-muted-foreground">
               <span>By {founder.fullName}</span>
               <span aria-hidden="true">/</span>

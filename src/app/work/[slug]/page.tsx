@@ -112,28 +112,37 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
       <article className="mx-auto flex w-full max-w-6xl flex-col gap-16">
         <header className="relative flex flex-col gap-10">
-          {/* Hangs in the page's top padding, out of the flow, as in the service
-              heroes, so the title section starts at the same height. */}
-          <nav
-            aria-label="Breadcrumb"
-            className={cn("absolute bottom-full left-0 mb-5 font-mono text-xs text-muted-foreground", inset)}
+          {/* The breadcrumb and, from sm up, the category share one row that
+              hangs in the page's top padding, out of the flow, as in the service
+              heroes, so the title starts at the same height. On phones the
+              category is too long to share the row without running up under the
+              site header, so it stays above the title. */}
+          <div
+            className={cn(
+              "absolute bottom-full left-0 mb-5 flex items-center gap-6 font-mono text-xs whitespace-nowrap",
+              inset,
+            )}
           >
-            <ol className="flex items-center gap-2">
-              <li>
-                <Link href={pages.work.path} className="hover:text-foreground">
-                  {pages.work.title}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="text-foreground">
-                {study.name}
-              </li>
-            </ol>
-          </nav>
+            <nav aria-label="Breadcrumb" className="text-muted-foreground">
+              <ol className="flex items-center gap-2">
+                <li>
+                  <Link href={pages.work.path} className="hover:text-foreground">
+                    {pages.work.title}
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li aria-current="page" className="text-foreground">
+                  {study.name}
+                </li>
+              </ol>
+            </nav>
+            <p className="hidden tracking-widest text-primary uppercase sm:block">{study.category}</p>
+          </div>
 
-          <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:gap-14">
+          {/* Top-aligned, so the title starts at the shared height however tall the card beside it is. */}
+          <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-start lg:gap-14">
             <div className={cn("flex flex-col items-start gap-6", inset)}>
-              <p className="font-mono text-xs tracking-widest text-primary uppercase">
+              <p className="font-mono text-xs tracking-widest text-primary uppercase sm:hidden">
                 {study.category}
               </p>
               <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">{study.name}</h1>
