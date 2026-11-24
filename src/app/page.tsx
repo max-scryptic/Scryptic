@@ -19,12 +19,12 @@ import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
-// The search title leads with the brand, then says what we do. pageTitle()
-// drops the repeated app name it would append, so this renders as written. The
-// registry title stays "Scryptic" for breadcrumbs, JSON-LD and llms.txt.
+// The search title says what we do, then pageTitle() appends the app name, the
+// same order as every other page: "MVP and app development studio | Scryptic".
+// The registry title stays "Scryptic" for breadcrumbs, JSON-LD and llms.txt.
 export const metadata = createMetadata({
   ...pages.home,
-  title: `${siteConfig.name} | MVP and app development studio`,
+  title: "MVP and app development studio",
 })
 
 // Rendered in the FAQ section and emitted as FAQPage JSON-LD; keep them identical.
