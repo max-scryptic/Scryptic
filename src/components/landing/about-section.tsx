@@ -1,16 +1,16 @@
 import Image from "next/image"
 import { cn } from "cn"
 
-import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { LandingSection, SectionHeading, type SectionBand } from "@/components/landing/section-heading"
 import { SocialLinks } from "@/components/social-links"
 import { inset } from "@/lib/frame"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 
 /** The studio and its founder, with the founder's portrait, bio and profiles. */
-export function AboutSection() {
+export function AboutSection({ band }: { band?: SectionBand } = {}) {
   return (
-    <LandingSection id="about" labelledBy="about-heading" space="loose" className="gap-16">
+    <LandingSection id="about" labelledBy="about-heading" space="loose" band={band} className="gap-16">
       <div className={cn("flex flex-col gap-6", inset)}>
         <SectionHeading eyebrow="About" title="A small studio, on purpose" id="about-heading" />
       </div>

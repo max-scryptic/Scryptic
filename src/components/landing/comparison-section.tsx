@@ -2,7 +2,7 @@ import Link from "next/link"
 import { cn } from "cn"
 
 import { BrandLogo } from "@/components/brand-logo"
-import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
+import { LandingSection, SectionHeading, type SectionBand } from "@/components/landing/section-heading"
 import { Button } from "@/components/ui/button"
 import { inset } from "@/lib/frame"
 import { pages } from "@/lib/seo"
@@ -92,13 +92,15 @@ export function ComparisonSection({
   eyebrow = "Compare",
   title,
   rows = studioComparison,
+  band,
 }: {
   eyebrow?: string
   title: string
   rows?: ComparisonRow[]
+  band?: SectionBand
 }) {
   return (
-    <LandingSection id="compare" labelledBy="compare-heading">
+    <LandingSection id="compare" labelledBy="compare-heading" band={band}>
       <div className={cn("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", inset)}>
         <SectionHeading eyebrow={eyebrow} title={title} id="compare-heading" />
         <Button

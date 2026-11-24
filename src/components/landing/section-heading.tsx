@@ -112,6 +112,18 @@ export const sectionSpace = {
 } as const
 
 /**
+ * Full-bleed section backgrounds besides the page and Lapis. Each redraws the
+ * guides over itself (.ruled) in its own colour, with a rail joint where it
+ * starts and ends.
+ * - warm: a paper tone, light in the light theme and a warm charcoal in dark.
+ * - ink: an ink band in the light theme and a deep navy in dark. Everything
+ *   inside uses the dark theme's tokens (the .dark class on the section), so
+ *   cards, buttons and text need no band-specific styles. Its colour sits on
+ *   a wrapper, as --band-ink on the section itself would read the dark value.
+ */
+export type SectionBand = "warm" | "ink"
+
+/**
  * A landing section's outer frame: full width with the page gutters, its
  * content in the max-w-6xl column.
  */
@@ -119,18 +131,37 @@ export function LandingSection({
   id,
   labelledBy,
   space = "default",
+  band,
   className,
   children,
 }: {
   id: string
   labelledBy: string
   space?: keyof typeof sectionSpace
+  band?: SectionBand
   className?: string
   children: React.ReactNode
 }) {
-  return (
-    <section aria-labelledby={labelledBy} id={id} className={cn("px-4 sm:px-6", sectionSpace[space])}>
+  const section = (
+    <section
+      aria-labelledby={labelledBy}
+      id={id}
+      className={cn(
+        "px-4 sm:px-6",
+        sectionSpace[space],
+        band === "warm" && "ruled bg-band-warm [--guide:color-mix(in_oklab,var(--foreground)_12%,var(--band-warm))]",
+        band === "ink" && "dark ruled text-foreground [--guide:color-mix(in_oklab,var(--foreground)_14%,var(--band-ink))]",
+      )}
+    >
       <div className={cn("mx-auto flex max-w-6xl flex-col gap-12", className)}>{children}</div>
     </section>
+  )
+  if (!band) return section
+  return (
+    <>
+      <div aria-hidden="true" className="rail-joint" />
+      {band === "ink" ? <div className="bg-band-ink">{section}</div> : section}
+      <div aria-hidden="true" className="rail-joint" />
+    </>
   )
 }

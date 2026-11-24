@@ -6,7 +6,7 @@ import { cn } from "cn"
 import { Eyebrow, LandingSection } from "@/components/landing/section-heading"
 import { inset } from "@/lib/frame"
 
-/** A run of the statement; `accent` ones light up in Lapis rather than ink. */
+/** A run of the statement; `accent` ones are set on a Glint block, like a highlighter. */
 export type StatementPart = { text: string; accent?: boolean }
 
 /** Where the heading's top is, as a fraction of the viewport, when the first word starts to light. */
@@ -38,12 +38,14 @@ export function ProblemStatement({
   eyebrow?: string
 }) {
   const heading = useRef<HTMLHeadingElement>(null)
-  const words = parts.flatMap(({ text, accent }) =>
-    text
-      .split(/\s+/)
-      .filter(Boolean)
-      .map((word) => ({ word, accent })),
-  )
+  // Each run keeps the place in the sentence of its first word, which is what
+  // the light reads. A highlighted run lights as one piece, block and all.
+  const runs = parts.reduce<{ words: string[]; accent?: boolean; start: number }[]>((list, { text, accent }) => {
+    const last = list.at(-1)
+    const start = last ? last.start + last.words.length : 0
+    return [...list, { words: text.split(/\s+/).filter(Boolean), accent, start }]
+  }, [])
+  const count = runs.reduce((total, run) => total + run.words.length, 0)
 
   useEffect(() => {
     const el = heading.current
@@ -81,22 +83,33 @@ export function ProblemStatement({
       <h2
         ref={heading}
         id={`${id}-heading`}
-        style={{ "--n": words.length } as React.CSSProperties}
+        style={{ "--n": count } as React.CSSProperties}
         className={cn(
           "lit-words max-w-5xl text-[2rem] leading-[1.1] font-normal text-pretty sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]",
           inset,
         )}
       >
-        {words.map(({ word, accent }, index) => (
-          <span key={index}>
-            <span
-              className={cn("lit-word", accent && "text-primary")}
-              style={{ "--i": index } as React.CSSProperties}
-            >
-              {word}
-            </span>{" "}
-          </span>
-        ))}
+        {runs.map(({ words, accent, start }) =>
+          accent ? (
+            <span key={start}>
+              {/* Cloned per line, so a phrase that wraps gets a block on each line. */}
+              <mark
+                className="lit-word bg-glint box-decoration-clone px-[0.12em] text-[#14131b]"
+                style={{ "--i": start } as React.CSSProperties}
+              >
+                {words.join(" ")}
+              </mark>{" "}
+            </span>
+          ) : (
+            words.map((word, offset) => (
+              <span key={start + offset}>
+                <span className="lit-word" style={{ "--i": start + offset } as React.CSSProperties}>
+                  {word}
+                </span>{" "}
+              </span>
+            ))
+          ),
+        )}
       </h2>
     </LandingSection>
   )
