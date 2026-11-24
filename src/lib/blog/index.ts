@@ -60,6 +60,7 @@ import { webAppWithPython } from "@/lib/blog/posts/web-app-with-python"
 import { webAppDevelopmentCompaniesUk } from "@/lib/blog/posts/web-app-development-companies-uk"
 import { webApplicationDevelopmentServices } from "@/lib/blog/posts/web-application-development-services"
 import { webflow } from "@/lib/blog/posts/webflow"
+import { websiteAndAppDevelopment } from "@/lib/blog/posts/website-and-app-development"
 import { weweb } from "@/lib/blog/posts/weweb"
 import { wix } from "@/lib/blog/posts/wix"
 import type { BlogPost, PostBlock, PostCategory, PostSeriesId } from "@/lib/blog/types"
@@ -94,6 +95,7 @@ export const posts: BlogPost[] = [
   chooseAppDevelopmentCompany,
   reactjsWebDevelopmentCompany,
   webApplicationDevelopmentServices,
+  websiteAndAppDevelopment,
   bestSaasDevelopmentCompany,
   webAppDevelopmentCompaniesUk,
   mobileAppDevelopmentCompaniesUk,
