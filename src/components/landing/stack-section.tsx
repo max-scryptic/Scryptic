@@ -37,7 +37,6 @@ export function StackSection({
       >
         <div className={cn("mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16", inset)}>
           <div data-reveal="children" className="flex flex-col gap-5">
-            <p className="font-mono text-xs tracking-widest text-[#c3caff] uppercase">Our stack</p>
             <h2 id="stack-heading" className="text-3xl tracking-tight text-balance sm:text-4xl">
               {title}
             </h2>

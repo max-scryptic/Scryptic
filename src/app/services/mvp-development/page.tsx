@@ -231,7 +231,6 @@ export default function MvpDevelopmentPage() {
 
       <HubSection
         id="included"
-        eyebrow="What you get"
         title="What every MVP launches with"
         intro="A product customers can sign up to and pay for, not a prototype to rebuild."
         items={launchKit}
@@ -249,7 +248,6 @@ export default function MvpDevelopmentPage() {
 
       <FitCheckSection
         id="fit"
-        eyebrow="Who it is for"
         title="Is an MVP sprint right for you?"
         intro="If it is the wrong tool for you, we will say so on the call."
         items={fitChecks}
@@ -268,7 +266,6 @@ export default function MvpDevelopmentPage() {
 
       <OptionsSection
         id="options"
-        eyebrow="Your options"
         title="MVP development companies, freelancers and builders compared"
         intro="Scope, price, timeline and code ownership for the five usual ways to get a first release built."
         caption="Five ways to get an MVP built, compared on what you get, price, time to launch and who owns the code"

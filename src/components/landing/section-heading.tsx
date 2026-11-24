@@ -6,21 +6,17 @@ import { cn } from "cn"
  * same. A section's copy is passed in; its layout lives here.
  */
 
-/** The eyebrow, h2 and intro at the top of a landing section. */
+/**
+ * The h2 and intro at the top of a landing section. No label above the title:
+ * a label, heading and intro stacked on every section reads as a template.
+ */
 export function SectionHeading({
-  eyebrow,
   title,
   children,
   id,
   aside,
   className,
 }: {
-  /**
-   * A small label above the title. Use it only where it helps a reader find
-   * their place (Pricing, FAQ), not on every section: the same label, heading
-   * and intro stack on every section makes a page read as a template.
-   */
-  eyebrow?: string
   title: string
   children: React.ReactNode
   id: string
@@ -37,15 +33,12 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow && (
-        <p className="font-mono text-xs tracking-widest text-primary uppercase xl:col-start-1">{eyebrow}</p>
-      )}
       <h2 id={id} className="max-w-2xl text-3xl leading-[1.05] text-balance sm:text-[2.75rem] xl:col-start-1 xl:self-center">
         {title}
       </h2>
       <p className="max-w-2xl text-lg text-pretty text-muted-foreground xl:col-start-1">{children}</p>
       {aside && (
-        <div className="mt-2 justify-self-start xl:col-start-2 xl:row-start-2 xl:mt-0 xl:self-center">
+        <div className="mt-2 justify-self-start xl:col-start-2 xl:row-start-1 xl:mt-0 xl:self-center">
           {aside}
         </div>
       )}

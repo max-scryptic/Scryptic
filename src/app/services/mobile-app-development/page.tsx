@@ -219,7 +219,6 @@ export default function MobileAppDevelopmentPage() {
 
       <HubSection
         id="what-we-build"
-        eyebrow="What we build"
         title="Mobile apps built around one job"
         intro="Each one does a real job for your customers or your team, from opening the app to the finished task."
         items={kinds}
@@ -232,7 +231,6 @@ export default function MobileAppDevelopmentPage() {
 
       <PlatformSection
         id="ios"
-        eyebrow="iPhone"
         title="iOS app development"
         summary={platforms.ios.summary}
         points={platforms.ios.points}
@@ -242,7 +240,6 @@ export default function MobileAppDevelopmentPage() {
 
       <PlatformSection
         id="android"
-        eyebrow="Android"
         title="Android app development"
         summary={platforms.android.summary}
         points={platforms.android.points}
@@ -253,7 +250,6 @@ export default function MobileAppDevelopmentPage() {
       <div aria-hidden="true" className="rail-joint border-t border-border" />
 
       <ReleaseSection
-        eyebrow="From code to the stores"
         title="How your app gets into the App Store and Google Play"
         intro="Five steps from the first build to a listing customers can install, each one run from accounts in your name."
         steps={releaseSteps}
@@ -272,7 +268,6 @@ export default function MobileAppDevelopmentPage() {
 
       <FitCheckSection
         id="fit"
-        eyebrow="Who it is for"
         title="Is a sprint right for your app?"
         intro="It suits a clearly scoped first release. If a web app would serve you better, we will say so on the call."
         items={fitChecks}

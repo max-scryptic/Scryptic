@@ -49,7 +49,6 @@ export function ToolTiles({ tools, className }: { tools: MobileTool[]; className
 /** One platform: its store listing on one side, what we build and with what on the other. */
 export function PlatformSection({
   id,
-  eyebrow,
   title,
   summary,
   points,
@@ -58,7 +57,6 @@ export function PlatformSection({
   reverse = false,
 }: {
   id: string
-  eyebrow: string
   title: string
   summary: string
   points: string[]
@@ -75,7 +73,6 @@ export function PlatformSection({
           <StoreListing store={store} className="w-full" />
         </div>
         <div data-reveal="children" className="flex flex-col gap-5">
-          <p className="font-mono text-xs tracking-widest text-primary uppercase">{eyebrow}</p>
           <h2 id={`${id}-heading`} className="text-3xl tracking-tight text-balance sm:text-4xl">
             {title}
           </h2>
