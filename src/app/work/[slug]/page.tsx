@@ -116,7 +116,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               hangs in the page's top padding, out of the flow, as in the service
               heroes, so the title starts at the same height. On phones the
               category is too long to share the row without running up under the
-              site header, so it stays above the title. */}
+              site header, so it sits just below the title. */}
           <div
             className={cn(
               "absolute bottom-full left-0 mb-5 flex items-center gap-6 font-mono text-xs whitespace-nowrap",
@@ -142,10 +142,10 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           {/* Top-aligned, so the title starts at the shared height however tall the card beside it is. */}
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-start lg:gap-14">
             <div className={cn("flex flex-col items-start gap-6", inset)}>
+              <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">{study.name}</h1>
               <p className="font-mono text-xs tracking-widest text-primary uppercase sm:hidden">
                 {study.category}
               </p>
-              <h1 className="text-4xl tracking-tight text-balance sm:text-6xl">{study.name}</h1>
               <p className="max-w-2xl text-lg text-pretty text-muted-foreground">
                 {study.summary}
               </p>

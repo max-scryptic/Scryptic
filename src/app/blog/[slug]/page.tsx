@@ -285,7 +285,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               hangs in the page's top padding, out of the flow, as in the service
               heroes, so the title starts at the same height. On phones the label
               is too long to share the row without running up under the site
-              header, so it stays above the title, beside the logo. */}
+              header, so it sits just below the title, beside the logo. */}
           <div
             className={cn(
               "absolute bottom-full left-0 mb-5 flex items-center gap-6 font-mono text-xs whitespace-nowrap",
@@ -309,10 +309,6 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           </div>
 
           <div className={cn("flex flex-col items-start gap-6", inset)}>
-            <div className="flex items-center gap-4 sm:hidden">
-              <ToolLogo post={post} />
-              <p className="font-mono text-xs tracking-widest text-primary uppercase">{label}</p>
-            </div>
             <div className="flex items-center gap-5">
               <span className="hidden sm:contents">
                 <ToolLogo post={post} />
@@ -320,6 +316,10 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
               <h1 className="max-w-4xl text-4xl tracking-tight text-balance sm:text-5xl">
                 {post.title}
               </h1>
+            </div>
+            <div className="flex items-center gap-4 sm:hidden">
+              <ToolLogo post={post} />
+              <p className="font-mono text-xs tracking-widest text-primary uppercase">{label}</p>
             </div>
             <p className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-muted-foreground">
               <span>By {founder.fullName}</span>
