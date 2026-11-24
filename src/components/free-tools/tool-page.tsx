@@ -4,7 +4,7 @@ import { cn } from "cn"
 import { ToolList } from "@/components/free-tools/tool-list"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { freeTools, type FreeTool, type ToolFaq } from "@/lib/free-tools"
 import { pages, toolPage } from "@/lib/seo"
 import { faqJsonLd, toolJsonLd } from "@/lib/structured-data"
@@ -39,7 +39,7 @@ export function ToolPage({
   const more = [0, 1, 2].map((offset) => others[(start + offset) % others.length])
 
   return (
-    <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
+    <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd page={page} nodes={[toolJsonLd(page, tool), faqJsonLd(page, faqs)]} />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-20">

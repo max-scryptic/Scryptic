@@ -18,7 +18,7 @@ import {
   relatedPosts,
   type PostBlock,
 } from "@/lib/blog"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { blogPostPage, createMetadata, pages } from "@/lib/seo"
 import { serviceForPost } from "@/lib/service-pages"
 import { absoluteUrl } from "@/lib/site"
@@ -255,7 +255,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
   const showContents = contents.length >= 4
 
   return (
-    <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
+    <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd
         page={page}
         nodes={[

@@ -5,7 +5,7 @@ import { ToolList } from "@/components/free-tools/tool-list"
 import { PageJsonLd } from "@/components/json-ld"
 import { PixelIn } from "@/components/pixel-in"
 import { Button } from "@/components/ui/button"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { freeTools } from "@/lib/free-tools"
 import { createMetadata, pages, toolPages } from "@/lib/seo"
 import { itemListJsonLd } from "@/lib/structured-data"
@@ -14,7 +14,7 @@ export const metadata = createMetadata(pages.tools)
 
 export default function ToolsPage() {
   return (
-    <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
+    <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd page={pages.tools} nodes={[itemListJsonLd(pages.tools, toolPages)]} />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">

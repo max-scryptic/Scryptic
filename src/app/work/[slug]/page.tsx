@@ -8,7 +8,7 @@ import { BrowserFrame } from "@/components/browser-frame"
 import { PageJsonLd } from "@/components/json-ld"
 import { TechMark } from "@/components/tech-mark"
 import { Button } from "@/components/ui/button"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { caseStudyPage, createMetadata, pages } from "@/lib/seo"
 import { caseStudyJsonLd } from "@/lib/structured-data"
 import { caseStudies, displayDomain, getCaseStudy } from "@/lib/work"
@@ -107,7 +107,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const [lead, ...moreSolution] = study.solution
 
   return (
-    <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
+    <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd page={page} nodes={[caseStudyJsonLd(page, study)]} />
 
       <article className="mx-auto flex w-full max-w-6xl flex-col gap-16">

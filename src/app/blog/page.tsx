@@ -7,7 +7,7 @@ import { PostCard } from "@/components/post-card"
 import { PostCarousel } from "@/components/post-carousel"
 import { Button } from "@/components/ui/button"
 import { latestPosts, postCategories, postSeries, postsInCategory, postsInSeries } from "@/lib/blog"
-import { inset } from "@/lib/frame"
+import { inset, pageTop } from "@/lib/frame"
 import { blogPostPages, createMetadata, pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 import { itemListJsonLd } from "@/lib/structured-data"
@@ -19,7 +19,7 @@ const LATEST_COUNT = 6
 
 export default function BlogPage() {
   return (
-    <main className="flex flex-col px-4 pt-32 pb-24 sm:px-6 sm:pt-40">
+    <main className={cn("flex flex-col px-4 pb-24 sm:px-6", pageTop)}>
       <PageJsonLd page={pages.blog} nodes={[itemListJsonLd(pages.blog, blogPostPages)]} />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16">
