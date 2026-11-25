@@ -14,6 +14,7 @@ export const aiAppBuildersCompared: BlogPost = {
   summary:
     "Lovable vs Bolt is the closest contest of the five: both hand over a full app whose data sits in Supabase, and Replit Agent hands over a full app on its own Postgres. v0 and Base44 give you screens. v0 leaves most of the backend unbuilt, and Base44 keeps its backend on its own servers when you leave. For a production app, that split decides the budget more than any demo does.",
   datePublished: "2026-11-08",
+  dateModified: "2026-11-25",
   facts: [
     { label: "Whole app to keep", value: "Lovable, Bolt and Replit Agent" },
     { label: "Screens to keep", value: "v0 and Base44" },
@@ -168,16 +169,26 @@ export const aiAppBuildersCompared: BlogPost = {
           text: "Public pages are where v0 starts ahead. Next.js can render a page on the server, so search engines and AI assistants receive finished HTML. Lovable and most Bolt projects are Vite apps that build each page in the browser, which is fine behind a login and a handicap for a landing page that needs to rank. The free Agent Readiness Check scans any website to see whether AI agents such as ChatGPT and Claude can crawl, read, understand and cite it.",
           link: { text: "Scan your public pages with the Agent Readiness Check.", href: "/tools/agent-readiness-check" },
         },
+        { type: "subheading", text: "v0 vs Bolt" },
         {
           type: "paragraph",
           text: "Next to Bolt, v0 wins when the interface is what's hard about the product and a developer will build the backend anyway. If you want a working app with a database behind it straight from your prompts, Bolt gets you further.",
           link: { text: "Find out which v0 screens still run on sample data.", href: "/blog/migrate-from-v0" },
         },
+        { type: "subheading", text: "Replit vs v0" },
+        {
+          type: "paragraph",
+          text: "These two sit at opposite ends of the table. Replit Agent writes the server, the Postgres database and the sign-in, then runs them for you, so a founder with no developer can have customers using it. v0 hands a developer polished Next.js screens and leaves the server to them.",
+        },
+        {
+          type: "paragraph",
+          text: "So the choice comes down to who builds what comes next. With no developer lined up, start in Replit and plan the security review before launch. With a developer who will write the backend, v0 gets the screens right sooner, and each comes with somewhere to run it: Replit Deployments for one, Vercel for the other.",
+        },
       ],
     },
     {
       id: "base44",
-      heading: "Base44 makes starting easy and leaving slow",
+      heading: "Base44 vs Lovable and v0, easy to start and slow to leave",
       blocks: [
         {
           type: "paragraph",
@@ -192,10 +203,20 @@ export const aiAppBuildersCompared: BlogPost = {
           title: "Plan launch day around your users",
           text: "Base44's data export has user records but no password hashes, so every user needs a password reset or a sign-in link on launch day. Uploaded files are stored on Base44 too, and are copied to your own storage as a separate job.",
         },
+        { type: "subheading", text: "Base44 vs Lovable" },
         {
           type: "paragraph",
-          text: "Against Lovable, the whole difference sits in the backend. Lovable's is a Supabase project you can own outright, while Base44's has to be built again behind the screens you keep.",
+          text: "On day one they feel alike: describe the app, and screens with sign-in and saved data appear without connecting anything. The whole difference sits in the backend. Lovable's is a Supabase project you can own outright, while Base44's has to be built again behind the screens you keep.",
+        },
+        {
+          type: "paragraph",
+          text: "Pick Base44 for an internal tool or a test you expect to throw away, and Lovable with your own Supabase project for anything you mean to launch to customers. If you already have a Base44 app with users, building the new backend comes before any choice of builder.",
           link: { text: "What moving a Base44 app to your own backend involves.", href: "/blog/migrate-from-base44" },
+        },
+        { type: "subheading", text: "Base44 vs v0" },
+        {
+          type: "paragraph",
+          text: "Both leave you with screens rather than a whole app, but in different states. v0's screens were never wired to anything, so a developer connects them to a new backend from the start. Base44's screens work only while they can reach Base44, so they keep running during the rebuild but every SDK call has to be swapped out before you can cancel the plan.",
         },
       ],
     },

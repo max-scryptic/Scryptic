@@ -177,7 +177,7 @@ export const replit: BlogPost = {
         {
           type: "paragraph",
           text: "The usual reasons to move are hosting region, cost at higher traffic, or wanting every deploy to come from the repository. On region, Replit now publishes to Europe on its paid plans, but not to the UK on its own, and the choice is permanent once an app is published. If you move, files in Replit's object storage go to an S3 compatible bucket, copied with a short script that also rewrites any URLs stored in the database.",
-          link: { text: "Where each AI builder keeps your data, and what UK GDPR asks.", href: "/blog/uk-data-residency-ai-built-apps" },
+          link: { text: "Replit data residency, and where the other AI builders keep data.", href: "/blog/uk-data-residency-ai-built-apps" },
         },
       ],
     },

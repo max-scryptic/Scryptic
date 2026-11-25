@@ -12,7 +12,7 @@ export const n8nAlternatives: BlogPost = {
   summary:
     "The right n8n alternative depends on why you're leaving: Make or Zapier if you don't want to run servers, Activepieces if you want open source that feels like n8n, and Trigger.dev or Inngest if developers own the work. If the workflow has become the product, skip the next tool and write it as code in your own backend.",
   datePublished: "2026-10-14",
-  dateModified: "2026-10-28",
+  dateModified: "2026-11-25",
   sections: [
     {
       id: "what-you-give-up",
@@ -24,7 +24,30 @@ export const n8nAlternatives: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Your reason for leaving usually answers it. The licence is one: n8n's Sustainable Use License is fair-code, not OSI open source, so selling n8n as a service or building it into a product your customers log into needs a commercial deal. Running it is another: the Community Edition is free, but the server, Postgres, queue mode, upgrades and backups are yours. And sometimes the workflow has simply turned into a program, forty nodes and a Code node full of JavaScript, with no tests and no diff you can read. Find yours in the groups below.",
+          text: "Your reason for leaving usually answers it. The licence is one: n8n's Sustainable Use License is fair-code, not OSI open source, so selling n8n as a service or building it into a product your customers log into needs a commercial deal. Running it is another: the Community Edition is free, but the server, Postgres, queue mode, upgrades and backups are yours. And sometimes the workflow has simply turned into a program, forty nodes and a Code node full of JavaScript, with no tests and no diff you can read. Find yours in the table, then in the groups below.",
+        },
+        {
+          type: "table",
+          caption: "Eleven n8n alternatives compared on where each runs, its licence and how you build workflows in it",
+          columns: ["Alternative", "Where it runs", "Licence", "How you build"],
+          rows: [
+            ["Make", "Hosted only", "Proprietary", "A visual canvas with routers and iterators"],
+            ["Zapier", "Hosted only", "Proprietary", "Linear steps in a visual editor"],
+            ["Pabbly Connect", "Hosted only", "Proprietary", "A visual editor"],
+            ["Activepieces", "Hosted or self-hosted", "MIT core, SSO and audit logs paid", "A visual canvas, integrations in TypeScript"],
+            ["Windmill", "Hosted or self-hosted", "AGPLv3 core", "Scripts in Python, TypeScript, Go, Bash or SQL"],
+            ["Node-RED", "Self-hosted", "Apache 2.0", "Visual flows, best with hardware and MQTT"],
+            ["Trigger.dev", "Hosted or self-hosted", "Apache 2.0", "TypeScript tasks in your own repository"],
+            ["Inngest", "Hosted", "Apache 2.0 SDKs, source-available server", "Step functions in your own repository"],
+            ["Temporal", "Managed cloud or self-hosted", "MIT", "Code, with SDKs in several languages"],
+            ["Pipedream", "Hosted only", "Proprietary", "Node.js or Python steps"],
+            ["Power Automate", "Hosted, inside Microsoft 365", "Proprietary", "Cloud flows, plus desktop flows for old Windows apps"],
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "If the server is your only reason, you may want different n8n hosting rather than a different tool. n8n Cloud runs the same workflows with no server of your own, and a self-hosted setup with Postgres, tested backups and alerts removes most of the late-night fixing that makes people leave.",
+          link: { text: "Our runbook for self-hosted n8n in production.", href: "/blog/self-hosting-n8n" },
         },
       ],
     },
@@ -131,7 +154,7 @@ export const n8nAlternatives: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text: "Keep internal agents in n8n and write customer-facing ones in code. The AI Agent node connects a chat model to memory and tools, including sub-workflows and MCP servers, and it's fine for triaging an inbox or drafting replies for a human to approve. Prototyping a product idea there is sensible too.",
+          text: "Keep internal agents in n8n and write customer-facing ones in code. The AI Agent node connects a chat model to memory and tools, including sub-workflows and MCP servers, and it's fine for triaging an inbox or drafting replies for a human to approve. Prototyping a product idea there is sensible too. The same goes for the hosted agent builders, such as Gumloop, Lindy and Relevance AI, that turn up on most lists of n8n alternatives.",
         },
         {
           type: "paragraph",

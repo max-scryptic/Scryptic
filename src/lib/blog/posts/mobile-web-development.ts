@@ -15,7 +15,7 @@ export const mobileWebDevelopment: BlogPost = {
   summary:
     "Mobile web development is building a website or web app that people can finish their task on in a phone's browser, not just one that fits the screen. Before you brief a developer, settle five decisions: which screens are designed for the phone first, where a half-filled form survives, how people sign in, what each form field asks of the keyboard and which phones and browsers you test. Each one changes the build, and each is cheap to settle now.",
   datePublished: "2026-10-30",
-  dateModified: "2026-11-05",
+  dateModified: "2026-11-25",
   facts: [
     { label: "Worked example", value: "Season sign-ups for a junior football club" },
     { label: "Most missed test", value: "A link opened inside a social app" },
@@ -152,15 +152,41 @@ export const mobileWebDevelopment: BlogPost = {
     },
     {
       id: "what-to-test",
-      heading: "Which phones and browsers should you test on?",
+      heading: "How do you test a mobile web app?",
       blocks: [
         {
           type: "paragraph",
-          text: "Test on the route your link actually travels, not only on the developer's own phone. For the club, that means the form opened from the Facebook post, from the group chat and from the reminder email, on an iPhone in Safari and on an older Android phone in Chrome, which is where slow pages show first.",
+          text: "Test each journey on the route its link actually travels, on the kinds of phone your users carry, with the interruptions they actually get. The developer's own phone in a quiet office is the one case you can skip. For the club, that comes to six runs before launch:",
         },
         {
-          type: "paragraph",
-          text: "Do at least one full run on a slow connection, from the link to the confirmation, including the trip to the banking app and back. Large images and scripts that load before the form can be used are the usual reasons a page that's quick on office Wi-Fi drags on a touchline. Write down the browsers you checked and any known gaps, so nobody is surprised later.",
+          type: "list",
+          ordered: true,
+          items: [
+            {
+              term: "Open it the way parents will",
+              text: "From the Facebook post, the group chat and the reminder email, so the in-app browsers get tested as well as Safari and Chrome.",
+            },
+            {
+              term: "Cover both kinds of phone",
+              text: "A recent iPhone in Safari and an older Android phone in Chrome, which is where slow pages show first. If nobody has a spare one, a remote device service such as BrowserStack runs real phones from a laptop.",
+            },
+            {
+              term: "Run it on a slow connection",
+              text: "One full run from the link to the confirmation, including the trip to the banking app and back. Large images and scripts that load before the form can be used are the usual reasons a page that's quick on office Wi-Fi drags on a touchline.",
+            },
+            {
+              term: "Interrupt it",
+              text: "Leave halfway through for another app, lock the screen, turn the phone sideways and come back. Whatever you decided about half-filled forms should hold every time.",
+            },
+            {
+              term: "Turn the text size up",
+              text: "Set the phone's text size to its largest and pinch to zoom. Labels, prices and the pay button should still fit, with nothing overlapping or cut off.",
+            },
+            {
+              term: "Write down what you checked",
+              text: "The phones, browsers and in-app browsers each journey ran on, the date and any known gaps, so nobody is surprised later.",
+            },
+          ],
         },
         {
           type: "paragraph",
@@ -171,11 +197,15 @@ export const mobileWebDevelopment: BlogPost = {
     },
     {
       id: "who-builds-it",
-      heading: "Do you need a mobile developer for a mobile web app?",
+      heading: "What does a mobile web developer do?",
       blocks: [
         {
           type: "paragraph",
-          text: "No. Mobile web application development is web work: you need a web developer who designs for the phone and tests on real ones. Mobile app developers specialise in iOS and Android apps, app stores and device features; a mobile web app needs none of those, and paying for them buys skills the product won't use.",
+          text: "A mobile web developer builds websites and web apps that people use in a phone's browser: the phone screens designed first, forms that suit a phone keyboard, sign-in that survives an in-app browser, and testing on real handsets. It's web work, so a mobile web app doesn't need a mobile app developer.",
+        },
+        {
+          type: "paragraph",
+          text: "Mobile application development for iOS and Android is a different trade, built around app stores and device features. Mobile web application development needs none of that, and paying for it buys skills the product won't use. When you brief, ask for a web developer who has shipped phone-first journeys before.",
         },
       ],
     },
