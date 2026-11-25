@@ -9,7 +9,6 @@ import { TerminalCard } from "@/components/landing/hero-visuals"
 import { LaunchRaceSection } from "@/components/landing/launch-race-section"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { ProblemStatement } from "@/components/landing/problem-statement"
-import { ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { type PixelCluster, StrayPixels } from "@/components/landing/stray-pixels"
 import { WorkSection } from "@/components/landing/work-section"
@@ -193,16 +192,13 @@ export default function Home() {
 
       <BuildTrio />
 
-      <LaunchRaceSection />
-
       <StrayPixels clusters={pockets.pricing} />
 
       <PricingSection />
 
       <AboutSection band="warm" />
 
-      <ProcessSection
-      />
+      <LaunchRaceSection />
 
       <StackSection />
 

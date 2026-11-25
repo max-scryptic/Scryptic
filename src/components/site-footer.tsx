@@ -14,7 +14,7 @@ import { caseStudies } from "@/lib/work"
 // Pricing, then the home page's sections in the order they appear on it.
 const homeLinks = [
   { name: "Pricing", href: pages.pricing.path },
-  { name: "Process", href: "/#process" },
+  { name: "Speed", href: "/#problems" },
   { name: "Our work", href: "/#work" },
   { name: `Why ${siteConfig.name}`, href: "/#compare" },
   { name: "About", href: "/#about" },
