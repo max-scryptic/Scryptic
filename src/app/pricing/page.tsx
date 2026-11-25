@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { cn } from "cn"
 
+import { CornerPixels, ctaFrame } from "@/components/corner-pixels"
 import { PageJsonLd } from "@/components/json-ld"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
 import { AfterLaunch, PricingCards } from "@/components/landing/pricing-section"
@@ -87,8 +88,10 @@ export default function PricingPage() {
       <div className="px-4 pb-24 sm:px-6">
         <section
           aria-labelledby="pricing-cta-heading"
-          className="corners guides mx-auto flex w-full max-w-6xl flex-col items-start gap-4 border border-border bg-card p-6 sm:p-10"
+          className={cn(ctaFrame, "mx-auto w-full max-w-6xl flex flex-col items-start gap-4 p-6 sm:p-10")}
         >
+          <CornerPixels corner="top-right" />
+          <CornerPixels corner="bottom-left" />
           <h2 id="pricing-cta-heading" className="text-2xl tracking-tight text-balance">
             Get a fixed price for your app
           </h2>

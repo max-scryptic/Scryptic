@@ -5,6 +5,7 @@ import { cn } from "cn"
 import { notFound } from "next/navigation"
 
 import { BrowserFrame } from "@/components/browser-frame"
+import { CornerPixels, ctaFrame } from "@/components/corner-pixels"
 import { PageJsonLd } from "@/components/json-ld"
 import { TechMark } from "@/components/tech-mark"
 import { Button } from "@/components/ui/button"
@@ -162,7 +163,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             </div>
 
             {/* Brackets but no guides: beside the intro, its edge lines would cut through the copy. */}
-            <dl className="pip grid gap-5 border border-border bg-card p-6 text-sm sm:grid-cols-2 lg:grid-cols-1">
+            <dl className="pip grid gap-5 border border-border p-6 text-sm sm:grid-cols-2 lg:grid-cols-1">
               <div className="flex flex-col gap-1">
                 <dt className="font-mono text-xs text-muted-foreground">Built for</dt>
                 <dd>{study.audience}</dd>
@@ -221,7 +222,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             </div>
             <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {study.features.map((feature, i) => (
-                <li key={feature.name} className="pip flex flex-col gap-3 border border-border bg-card p-6">
+                <li key={feature.name} className="pip flex flex-col gap-3 border border-border p-6">
                   <span aria-hidden="true" className="font-mono text-xs text-primary">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -246,7 +247,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 <h3 className={cn("text-lg", inset)}>In the app</h3>
                 <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
                   {appScreens.map((shot) => (
-                    <li key={shot.alt} className="ticks border border-border bg-card">
+                    <li key={shot.alt} className="ticks border border-border">
                       <Image
                         src={shot.src}
                         alt={shot.alt}
@@ -291,7 +292,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 <li
                   key={item.name}
                   className={cn(
-                    "ticks flex flex-col gap-5 border border-border bg-card p-6 sm:p-8",
+                    "ticks flex flex-col gap-5 border border-border p-6 sm:p-8",
                     // Three across, then the rest in pairs.
                     i < 3 ? "md:col-span-2" : "md:col-span-3",
                   )}
@@ -326,7 +327,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               <li
                 key={layer.role}
                 className={cn(
-                  "ticks flex flex-col gap-3 border border-border bg-card p-6",
+                  "ticks flex flex-col gap-3 border border-border p-6",
                   layer.tools.length > 3 && "sm:col-span-2",
                 )}
               >
@@ -350,7 +351,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         <footer className="grid gap-6 pt-12 md:grid-cols-2">
           <Link
             href={`/work/${next.slug}`}
-            className="group corners corners-grow guides flex flex-col gap-2 border border-border bg-card p-6 transition-colors hover:border-primary/50 sm:p-8"
+            className="group corners corners-grow guides flex flex-col gap-2 border border-border p-6 transition-colors hover:border-primary/50 sm:p-8"
           >
             <span className="font-mono text-xs text-muted-foreground">Next case study</span>
             <span className="text-2xl tracking-tight">
@@ -358,7 +359,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             </span>
             <span className="text-sm text-pretty text-muted-foreground">{next.category}</span>
           </Link>
-          <div className="corners guides flex flex-col items-start gap-4 border border-primary/50 bg-card p-6 sm:p-8">
+          <div className={cn(ctaFrame, "flex flex-col items-start gap-4 p-6 sm:p-8")}>
+            <CornerPixels corner="top-right" />
+            <CornerPixels corner="bottom-left" />
             <p className="text-2xl tracking-tight text-balance">Building something like {study.name}?</p>
             <p className="text-sm text-pretty text-muted-foreground">
               Start with a free discovery call. You leave with a scoped first release and a written

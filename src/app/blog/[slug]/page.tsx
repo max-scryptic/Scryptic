@@ -68,7 +68,7 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "callout") {
     return (
-      <aside className="pip flex flex-col gap-2 border border-primary/50 bg-card p-6">
+      <aside className="pip flex flex-col gap-2 border border-primary/50 p-6">
         <p className="font-mono text-xs tracking-widest text-primary uppercase">{block.title}</p>
         <p className="text-pretty">{block.text}</p>
       </aside>
@@ -103,7 +103,7 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "caseStudy") {
     return (
-      <figure className="pip flex flex-col gap-3 border border-border bg-card p-6">
+      <figure className="pip flex flex-col gap-3 border border-border p-6">
         <p className="font-mono text-xs tracking-widest text-primary uppercase">
           Case study &middot; {block.company}
         </p>
@@ -127,7 +127,7 @@ function Block({ block }: { block: PostBlock }) {
   if (block.type === "code") {
     return (
       // The corner ticks sit on an outer box, as the scroll area would clip them.
-      <figure className="ticks border border-border bg-card">
+      <figure className="ticks border border-border">
         <figcaption className="border-b border-border px-4 py-2 font-mono text-xs text-muted-foreground">
           {block.label}
         </figcaption>
@@ -140,7 +140,7 @@ function Block({ block }: { block: PostBlock }) {
 
   if (block.type === "checklist") {
     return (
-      <ul className="pip flex flex-col gap-3 border border-border bg-card p-6">
+      <ul className="pip flex flex-col gap-3 border border-border p-6">
         {block.items.map((item) => (
           <li key={item} className="flex gap-4">
             <span
@@ -160,7 +160,7 @@ function Block({ block }: { block: PostBlock }) {
       <div className="ticks border border-border">
         <table className="table-stack w-full text-left text-sm">
           <caption className="sr-only">{block.caption}</caption>
-          <thead className="bg-card">
+          <thead>
             <tr>
               {block.columns.map((column) => (
                 <th
@@ -344,7 +344,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
           {/* The post's answer up front, with its quick facts underneath, across the full column. */}
           <section
             aria-labelledby="in-short-heading"
-            className="guides flex flex-col border border-border bg-card"
+            className="guides flex flex-col border border-border"
           >
             <div className="relative flex flex-col gap-5 px-6 py-8 sm:px-8 lg:py-10">
               {/* Drawn over the border, so the summary keeps the facts' left edge. */}
@@ -371,7 +371,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
                 {post.facts.map((fact) => (
                   <div
                     key={fact.label}
-                    className="flex flex-col gap-1 bg-card px-6 py-5 sm:px-8 sm:odd:last:col-span-2 lg:odd:last:col-span-1"
+                    className="flex flex-col gap-1 bg-background px-6 py-5 sm:px-8 sm:odd:last:col-span-2 lg:odd:last:col-span-1"
                   >
                     <dt className="font-mono text-xs text-muted-foreground">{fact.label}</dt>
                     <dd className="text-pretty">{fact.value}</dd>

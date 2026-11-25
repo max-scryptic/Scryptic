@@ -43,7 +43,7 @@ export function NoCodeQuiz() {
       <form
         aria-label="About your idea"
         onSubmit={(event) => event.preventDefault()}
-        className="pip flex flex-col gap-10 border border-border bg-card p-5 sm:p-8"
+        className="pip flex flex-col gap-10 border border-border p-5 sm:p-8"
       >
         {quizQuestions.map((question, index) => (
           <ChoiceGroup

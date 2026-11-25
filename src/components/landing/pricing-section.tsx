@@ -213,7 +213,7 @@ export function AfterLaunch() {
         <article
           id={supportPlan.id}
           aria-labelledby={`${supportPlan.id}-name`}
-          className="corners flex scroll-mt-28 flex-col gap-5 border border-border bg-card bg-linear-to-br from-primary/10 to-transparent p-6 shadow-xl shadow-black/5 sm:p-8"
+          className="corners corners-grow flex scroll-mt-28 flex-col gap-5 border border-border bg-linear-to-br from-primary/10 to-transparent to-60% p-6 shadow-xl shadow-black/5 transition duration-300 ease-out hover:border-primary/50 hover:from-primary/15 hover:shadow-primary/10 motion-reduce:transition-none sm:p-8"
         >
           <p className="flex items-center gap-2 font-mono text-xs tracking-widest text-primary uppercase">
             <span className="size-2 bg-primary" aria-hidden="true" />

@@ -74,7 +74,7 @@ export function SiteChecker({ kind }: { kind: SiteCheckKind }) {
       <form
         onSubmit={run}
         aria-label={kind === "agent" ? "Check a site for AI agents" : "Check a page for SEO"}
-        className="corners guides flex flex-col gap-3 border border-border bg-card p-5 shadow-xl shadow-black/5 sm:p-8"
+        className="corners guides flex flex-col gap-3 border border-border p-5 shadow-xl shadow-black/5 sm:p-8"
       >
         <label htmlFor={`${kind}-url`} className="font-medium">
           {kind === "agent" ? "Website address" : "Page address"}
@@ -105,7 +105,7 @@ export function SiteChecker({ kind }: { kind: SiteCheckKind }) {
 
       <div aria-live="polite" aria-busy={checking}>
         {checking && (
-          <div className="pip guides flex items-center gap-3 border border-border bg-card p-5 text-muted-foreground sm:p-8">
+          <div className="pip guides flex items-center gap-3 border border-border p-5 text-muted-foreground sm:p-8">
             <span className="size-4 animate-spin border-2 border-primary border-t-transparent motion-reduce:animate-none" />
             Fetching {state.url} and reading it like {kind === "agent" ? "an AI crawler" : "a search engine"}...
           </div>
@@ -127,7 +127,7 @@ function Report({ report }: { report: SiteReport }) {
   return (
     <section
       aria-label={`Results for ${host}`}
-      className="ticks guides flex flex-col border border-border bg-card"
+      className="ticks guides flex flex-col border border-border"
     >
       <div className="grid gap-6 border-b border-border p-5 sm:grid-cols-[auto_1fr] sm:items-center sm:p-8">
         <ScoreRing score={report.score} />

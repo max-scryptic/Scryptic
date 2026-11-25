@@ -52,7 +52,7 @@ export function ScopePlanner() {
 
   return (
     <div className="grid items-start gap-10 lg:grid-cols-[1.3fr_1fr]">
-      <div className="pip flex flex-col gap-8 border border-border bg-card p-5 sm:p-8">
+      <div className="pip flex flex-col gap-8 border border-border p-5 sm:p-8">
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-medium tracking-tight">Your features</h2>
           <p className="text-sm text-muted-foreground">
@@ -76,7 +76,7 @@ export function ScopePlanner() {
                   placeholder={index === 0 ? "Your core feature, e.g. book a lesson" : "Feature"}
                   value={feature.name}
                   onChange={(event) => update(feature.id, { name: event.target.value })}
-                  className={cn("h-10 bg-card", !feature.launch && "text-muted-foreground line-through")}
+                  className={cn("h-10 bg-background", !feature.launch && "text-muted-foreground line-through")}
                 />
                 <Button
                   type="button"
@@ -197,7 +197,7 @@ export function ScopePlanner() {
                   <span
                     key={service.id}
                     aria-hidden="true"
-                    className="absolute inset-y-0 w-0.5 bg-card"
+                    className="absolute inset-y-0 w-0.5 bg-background"
                     style={{ left: `${(service.developmentWeeks / scale) * 100}%` }}
                   />
                 ))}

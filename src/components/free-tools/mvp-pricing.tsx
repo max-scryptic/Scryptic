@@ -47,7 +47,7 @@ export function MvpPricing() {
 
       <div className="flex flex-col gap-4">
         <h3 className="text-xl tracking-tight">What an MVP costs, by who builds it</h3>
-        <div className="border border-border bg-card">
+        <div className="border border-border">
           <table className="table-stack w-full border-collapse text-left text-sm">
             <caption className="sr-only">Typical UK MVP cost and how each kind of supplier charges</caption>
             <thead>
