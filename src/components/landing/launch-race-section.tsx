@@ -91,14 +91,14 @@ export function LaunchRaceSection() {
           eyebrow="Speed"
           title="The usual route takes months. Ours takes weeks."
           id="problems-heading" />
-        {/* A scoreboard rather than a stat: the week ticks over in the pixel face. */}
-        <div aria-hidden="true" className="flex shrink-0 flex-col gap-2 lg:items-end">
+        {/* In the heading's face; Lapis while the weeks count up, white once they stop. */}
+        <div aria-hidden="true" className="flex shrink-0 flex-col gap-1 lg:items-end">
           <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">Time to launch</p>
-          <p className="flex items-baseline gap-3 font-pixel leading-none tabular-nums">
-            <span className="text-2xl tracking-[0.12em] text-muted-foreground uppercase sm:text-3xl">Week</span>
+          <p className="text-6xl leading-none tracking-tighter tabular-nums sm:text-7xl">
+            <span className="text-3xl tracking-tight text-muted-foreground/60 sm:text-4xl">Week </span>
             <span
               className={cn(
-                "text-7xl transition-colors sm:text-8xl",
+                "transition-colors",
                 finished ? "text-foreground" : "text-primary dark:text-[#c3caff]",
               )}
             >
