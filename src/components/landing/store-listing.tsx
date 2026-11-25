@@ -16,11 +16,6 @@ import { cn } from "cn"
 
 export type Store = "app-store" | "google-play"
 
-const stores = {
-  "app-store": { label: "App Store" },
-  "google-play": { label: "Google Play" },
-} satisfies Record<Store, { label: string }>
-
 const fonts = {
   ios: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif',
   android: '"Google Sans", Roboto, "Helvetica Neue", system-ui, sans-serif',
@@ -561,20 +556,14 @@ function Phone({ store }: { store: Store }) {
 }
 
 export function StoreListing({ store, className }: { store: Store; className?: string }) {
-  const { label } = stores[store]
-
   return (
-    <div
-      aria-hidden="true"
-      className={cn("relative flex flex-col gap-6 overflow-hidden border border-border bg-background p-4 sm:p-6", className)}
-    >
-      <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">{label}</span>
-
+    <div aria-hidden="true" className={cn("relative flex flex-col", className)}>
       {/*
-       * A soft glow behind the phone; the phone is drawn at full size and
-       * zoomed to fit the column. On narrow screens the whole phone shows. On
-       * wide ones it takes no height of its own, so the card is exactly as tall
-       * as the copy beside it, and the phone runs off the card's lower edge.
+       * A soft glow behind the phone, with no card around it; the phone is
+       * drawn at full size and zoomed to fit the column. On narrow screens the
+       * whole phone shows. On wide ones it takes no height of its own, so the
+       * listing is exactly as tall as the copy beside it, and the phone fades
+       * out at its lower edge.
        */}
       <div className="relative flex flex-1 items-center justify-center lg:overflow-hidden">
         <span className="absolute top-1/2 left-1/2 size-[70%] -translate-1/2 rounded-full bg-primary/20 blur-3xl" />
