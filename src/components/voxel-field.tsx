@@ -91,13 +91,6 @@ export const voxelShapes = {
     height: (_u, _v, random) => 1 + Math.floor(random() * 1.7),
     clump: false,
   },
-  /** The services hub: two islands, one per service. */
-  services: {
-    seed: 48,
-    density: (u, v) => Math.max(blob(u, v, 0.66, 0.06, 0.12, 0.16), blob(u, v, 0.97, 0.5, 0.1, 0.24)) * 0.75,
-    height: looseHeight,
-    clump: true,
-  },
 } satisfies Record<string, FieldShape>
 
 export type VoxelShape = keyof typeof voxelShapes

@@ -61,25 +61,15 @@ const latestPostDate = posts
   .sort()
   .at(-1)
 
-const services = {
-  path: "/services",
-  title: "Services",
-  searchTitle: "MVP, web and mobile app development services",
-  description: `${siteConfig.name} services for UK founders: MVP, web app and mobile app development and no-code migration, each built as production code in a fixed-price sprint.`,
-  changeFrequency: "monthly",
-  priority: 0.9,
-} satisfies PageEntry
-
-// Each service has a landing page under /services. The nav menu, the footer
-// and the /services hub list them from src/lib/service-pages.ts.
+// Each service has a landing page under /services. There is no /services hub
+// (next.config.ts redirects it home); the footer lists them from
+// src/lib/service-pages.ts.
 const servicePageEntries = {
-  services,
   mvpDevelopment: {
     path: "/services/mvp-development",
     title: "MVP development services for UK startups",
     description:
       "MVP development services for UK startups: built in a fixed-price 2 or 3 week sprint and launched with sign-in, payments and analytics live. You own the code.",
-    parents: [services],
     lastModified: "2026-11-18",
     changeFrequency: "monthly",
     priority: 0.9,
@@ -89,7 +79,6 @@ const servicePageEntries = {
     title: "Web app development services from UK developers",
     description:
       "Custom web app development for UK businesses and founders: one workflow built as production code in a fixed-price 2 or 3 week sprint, the code in your name.",
-    parents: [services],
     lastModified: "2026-11-18",
     changeFrequency: "monthly",
     priority: 0.9,
@@ -99,7 +88,6 @@ const servicePageEntries = {
     title: "Mobile app development services",
     description:
       "Native iOS and Android app development for UK founders: built in Swift and Kotlin in a fixed-price sprint, then published from your own store accounts.",
-    parents: [services],
     lastModified: "2026-11-10",
     changeFrequency: "monthly",
     priority: 0.9,
@@ -109,7 +97,6 @@ const servicePageEntries = {
     title: "No-code app migration",
     description:
       "Move your Bubble, Lovable, Adalo, Glide or Airtable app to code you own. Scryptic migrates your data and users to a production stack in a fixed-price sprint.",
-    parents: [services],
     lastModified: "2026-11-02",
     changeFrequency: "monthly",
     priority: 0.9,

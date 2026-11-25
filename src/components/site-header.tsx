@@ -13,7 +13,7 @@ import { siteConfig } from "@/lib/site"
 
 // Pages of their own only. The home page's sections are linked from the
 // footer, and the logo leads back home. The service pages stay out of the bar:
-// the footer, the /services hub and the posts that cover them link to them.
+// the footer and the posts that cover them link to them.
 export const navItems: FloatingNavItem[] = [
   { name: "Case studies", link: pages.work.path },
   { name: "Pricing", link: pages.pricing.path },
