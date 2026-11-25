@@ -151,7 +151,8 @@ export function LandingSection({
       id={id}
       className={cn(
         "px-4 sm:px-6",
-        sectionSpace[space],
+        // A band keeps a single section's padding inside, whatever its rhythm.
+        band ? sectionSpace.default : sectionSpace[space],
         band && "ruled",
         band && bands[band],
       )}
@@ -160,11 +161,14 @@ export function LandingSection({
     </section>
   )
   if (!band) return section
+  // Double the section padding outside the band (.band-gap), single inside.
   return (
     <>
+      <div aria-hidden="true" className="band-gap" />
       <div aria-hidden="true" className="rail-joint" />
       {section}
       <div aria-hidden="true" className="rail-joint" />
+      <div aria-hidden="true" className="band-gap" />
     </>
   )
 }

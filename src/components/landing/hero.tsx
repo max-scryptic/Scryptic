@@ -111,10 +111,11 @@ export function LandingHero({
         </div>
       </section>
       <PixelDrip className={band} stretch />
-      {/* Squares on the guides where the band ends. Its bottom margin gives
-          the drips, which take no space of their own, clear room before the
-          first section, so they never crowd its heading. */}
-      <div aria-hidden="true" className="rail-joint mb-12 sm:mb-20" />
+      {/* Squares on the guides where the band ends, then the gap outside it
+          that every band gets (.band-gap), which also gives the drips, which
+          take no space of their own, clear room before the first section. */}
+      <div aria-hidden="true" className="rail-joint" />
+      <div aria-hidden="true" className="band-gap" />
     </>
   )
 }
