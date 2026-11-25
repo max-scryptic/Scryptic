@@ -114,7 +114,7 @@ export function ComparisonSection({
       </div>
 
       {/* Never scrolls: on phones the columns narrow and the padding tightens so all six fit. */}
-      <div className="ticks guides border border-border bg-card">
+      <div className="ticks guides border border-border">
         {/* Our column's aurora, one layer down the whole column so it reads as one piece rather
             than a tint per cell. Its left and width match the column widths on the header row. */}
         <div
