@@ -16,9 +16,15 @@ export const founder = {
   fullName: "Max Winter-Leinweber",
   role: "Founder",
   image: "/team/max.png",
-  bio: "Full-stack developer. Enterprise work taught me to write secure, maintainable code; startups taught me to ship fast and cut what doesn't matter. I'll only use a new tool if it makes your product better, not just because it's new.",
-  /** Short facts shown as a row under the bio on the home page. */
-  facts: ["5 yrs full-stack", "Enterprise + startups", "Brighton, UK"],
+  /**
+   * The pull quote that is the whole of the home page's About section, with
+   * the founder's name and profile links under it. `highlight` is set in
+   * Lapis after `lead`.
+   */
+  quote: {
+    lead: "Enterprise work taught me to write code that lasts. Startups taught me to ship fast and cut what doesn't matter.",
+    highlight: "You get both.",
+  },
   /** The shorter, third-person bio in the "About the author" box on every blog post. */
   authorBio:
     "Max is the founder of Scryptic and a full-stack developer with five years of experience building software for enterprise clients and startups. He builds MVPs for UK founders and takes apps made with no-code and AI builders through to production.",
