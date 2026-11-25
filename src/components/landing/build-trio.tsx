@@ -26,26 +26,26 @@ import { pages } from "@/lib/seo"
  */
 
 /** cos 30°: how far a unit along an isometric axis moves across the screen. */
-export const C = 0.866
+const C = 0.866
 
 /** Lays a flat drawing (x right, y down) on an upright panel that runs up and to the right. */
-export const wall = (x: number, y: number) => `matrix(${C} -0.5 0 1 ${x} ${y})`
+const wall = (x: number, y: number) => `matrix(${C} -0.5 0 1 ${x} ${y})`
 
 /** A point on a wall at (x, y), in screen units. */
-export const onWall = (x: number, y: number, u: number, v: number) => [x + C * u, y - 0.5 * u + v] as const
+const onWall = (x: number, y: number, u: number, v: number) => [x + C * u, y - 0.5 * u + v] as const
 
 /** Custom properties for a part's hover state. */
-export const vars = (v: Record<string, string | number>) => v as React.CSSProperties
+const vars = (v: Record<string, string | number>) => v as React.CSSProperties
 
 /** Lines and the faces they bound: hairlines that stay 1.25px whatever the drawing's size. */
-export const line = "fill-background stroke-foreground/45"
-export const faint = "fill-background stroke-foreground/20"
+const line = "fill-background stroke-foreground/45"
+const faint = "fill-background stroke-foreground/20"
 
 /*
  * Pixel fills, in the order the drawings pick from. Foreground reads white on
  * Night and ink on Mist, so the drawings work in either theme.
  */
-export const tones = {
+const tones = {
   ink: "fill-foreground",
   dim: "fill-foreground/20",
   lapis: "fill-primary",
@@ -53,14 +53,14 @@ export const tones = {
   glint: "fill-glint",
   mint: "fill-mint",
 } as const
-export type Tone = keyof typeof tones
+type Tone = keyof typeof tones
 
 /**
  * An upright slab: a rounded panel with some thickness, its back edge showing
  * up and to the left. `children` are drawn on its face, in the panel's own flat
  * units (x right from its left edge, y down from its top).
  */
-export function Slab({
+function Slab({
   x,
   y,
   w,
@@ -106,7 +106,7 @@ export function Slab({
 }
 
 /** A square pixel on a face; `twinkle` sets it blinking, offset by `--d` steps. */
-export function Pixel({
+function Pixel({
   x,
   y,
   size,
@@ -138,7 +138,7 @@ export function Pixel({
  * The drawings' shared frame: hairlines that do not scale with the drawing.
  * `fit` moves (and scales) a drawing to centre it in the frame.
  */
-export function Drawing({ fit, children }: { fit?: string; children: React.ReactNode }) {
+function Drawing({ fit, children }: { fit?: string; children: React.ReactNode }) {
   return (
     <svg
       viewBox="0 0 260 240"
@@ -321,13 +321,13 @@ function MobileAppDrawing() {
 /* Migration: an app's blocks lifted off a dashed, no-code platform and stacked on a solid one of your own. */
 
 /** A point on the floor grid: i runs down and right, j down and left, k up, in cubes of `s`. */
-export const iso = (ox: number, oy: number, s: number, i: number, j: number, k = 0) =>
+const iso = (ox: number, oy: number, s: number, i: number, j: number, k = 0) =>
   [ox + C * s * (i - j), oy + 0.5 * s * (i + j) - s * k] as const
 
-export const pts = (points: (readonly [number, number])[]) => points.map(([px, py]) => `${px},${py}`).join(" ")
+const pts = (points: (readonly [number, number])[]) => points.map(([px, py]) => `${px},${py}`).join(" ")
 
 /** A cube whose back corner on the floor is at grid point (i, j, k); `top` colours its top face. */
-export function Cube({
+function Cube({
   ox,
   oy,
   s,
@@ -363,7 +363,7 @@ export function Cube({
 }
 
 /** A square platform, `n` cubes a side and `t` thick, whose back corner is at (ox, oy). */
-export function Platform({ ox, oy, s, n, t, dashed }: { ox: number; oy: number; s: number; n: number; t: number; dashed?: boolean }) {
+function Platform({ ox, oy, s, n, t, dashed }: { ox: number; oy: number; s: number; n: number; t: number; dashed?: boolean }) {
   const p = (i: number, j: number, dz = 0) => {
     const [px, py] = iso(ox, oy, s, i, j)
     return [px, py + dz] as const
