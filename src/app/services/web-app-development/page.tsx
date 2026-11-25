@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 import { PageJsonLd } from "@/components/json-ld"
 import type { AppLayer } from "@/components/landing/app-layers"
 import { ComparisonSection } from "@/components/landing/comparison-section"
@@ -15,8 +13,6 @@ import {
   FitCheckSection,
   HubSection,
   LayersSection,
-  OptionsSection,
-  type OptionRow,
 } from "@/components/landing/service-sections"
 import { WorkSection } from "@/components/landing/work-section"
 import { PixelIn } from "@/components/pixel-in"
@@ -24,7 +20,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { extendedMvp, afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, mvp, services } from "@/lib/services"
+import { afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
@@ -65,57 +61,6 @@ const fitChecks = [
   "A spreadsheet or tool is creaking",
 ]
 const fitInitial = [0, 1, 3]
-
-// The usual ways to hire web app developers, in words. Price ranges match the
-// how-much-does-it-cost-to-build-an-app-uk post.
-const optionColumns = ["What you get", "Typical price", "Time to a first release", "Who owns the code"]
-const options: OptionRow[] = [
-  {
-    name: `${siteConfig.name} sprint`,
-    cells: [
-      "One workflow built as production code by the developer you meet on the first call",
-      `${mvp.price} or ${extendedMvp.price} + VAT, fixed before the build`,
-      "2 or 3 weeks, then a week of support",
-      "You, from launch day",
-    ],
-  },
-  {
-    name: "Web app development agency",
-    cells: [
-      "A team with project managers, designers and testers, and a formal discovery phase",
-      "Roughly £40,000 to £150,000 or more for a first version",
-      "Usually two to six months",
-      "Check the contract: some keep the code or hosting until the final invoice",
-    ],
-  },
-  {
-    name: "Freelance web app developer",
-    cells: [
-      "One developer building what you specify, test and manage yourself",
-      "Roughly £300 to £700 a day in the UK",
-      "Depends on their availability and your spec",
-      "You, if the contract assigns it",
-    ],
-  },
-  {
-    name: "In-house developer",
-    cells: [
-      "Someone who stays on the product after launch",
-      "A salary, plus recruitment time and cost",
-      "Months, once hiring is counted",
-      "You",
-    ],
-  },
-  {
-    name: "No-code or AI app builder",
-    cells: [
-      "A working app you build and maintain yourself",
-      "Monthly subscriptions, plus your own time",
-      "Days to weeks",
-      "No-code platforms keep the app; AI builders give you code to harden",
-    ],
-  },
-]
 
 const guides = postsBySlug([
   "web-app-development-companies-uk",
@@ -289,27 +234,6 @@ export default function WebAppDevelopmentPage() {
 
       <WorkSection
         title="Web apps we have built and launched"
-      />
-
-      <OptionsSection
-        id="options"
-        eyebrow="Your options"
-        title="Web app developers for hire, compared"
-        caption="Five ways to hire web app developers, compared on what you get, price, time to a first release and who owns the code"
-        columns={optionColumns}
-        rows={options}
-        footnote={
-          <>
-            Agency and freelance figures are typical UK ranges, not quotes.{" "}
-            <Link
-              href="/blog/how-to-choose-an-app-development-company-uk"
-              className="text-foreground underline underline-offset-4 hover:text-primary"
-            >
-              The buyer&apos;s checklist for choosing a web app development company
-            </Link>
-            .
-          </>
-        }
       />
 
       <ComparisonSection
