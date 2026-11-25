@@ -242,7 +242,6 @@ export default function MvpDevelopmentPage() {
       />
 
       <FitCheckSection
-        band="warm"
         id="fit"
         eyebrow="Who it is for"
         title="Is an MVP sprint right for you?"

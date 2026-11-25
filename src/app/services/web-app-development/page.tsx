@@ -224,7 +224,6 @@ export default function WebAppDevelopmentPage() {
       />
 
       <FitCheckSection
-        band="warm"
         id="fit"
         eyebrow="Who it is for"
         title="Is a sprint right for your web app?"
