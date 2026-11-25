@@ -117,19 +117,21 @@ export function PricingCards() {
       {foundingOffer && (
         <aside
           aria-labelledby="founding-offer-heading"
-          // Dressed like the package cards above it: page background, a Lapis wash fading in from
-          // the left, corner brackets that lengthen on hover and its edges run out across the page.
-          className="corners corners-grow guides grid border border-primary/40 bg-linear-to-r from-primary/10 to-transparent to-60% transition duration-300 ease-out hover:from-primary/15 hover:shadow-xl hover:shadow-primary/10 motion-reduce:transition-none md:grid-cols-[1fr_16rem]"
+          // Built like the package cards above it (page background, corner brackets that lengthen
+          // on hover, edges run out across the page) but in Glint rather than Lapis, so it reads as
+          // a one-off: its wash glows out from the stub, behind the slots left, rather than in
+          // from the left. The button stays Lapis, like every other call to action.
+          className="corners corners-grow guides grid border border-glint/40 bg-linear-to-l from-glint/10 to-transparent to-50% transition duration-300 ease-out [--corner:var(--glint)] hover:from-glint/15 hover:shadow-xl hover:shadow-glint/10 motion-reduce:transition-none md:grid-cols-[1fr_16rem]"
         >
           <div className="flex flex-col gap-4 p-6 sm:p-8">
-            <p className="font-mono text-xs tracking-widest text-primary uppercase">Founding client offer</p>
+            <p className="font-mono text-xs tracking-widest text-glint uppercase">Founding client offer</p>
             <h3 id="founding-offer-heading" className="text-2xl tracking-tight text-balance">
               Same price, {countWord(foundingOffer.extras.length)} things added free
             </h3>
             <ul className="flex flex-col gap-2 text-pretty">
               {foundingOffer.extras.map((extra) => (
                 <li key={extra} className="flex gap-3">
-                  <CheckIcon />
+                  <CheckIcon className="text-glint" />
                   {sentenceCase(extra)}
                 </li>
               ))}
@@ -142,17 +144,17 @@ export function PricingCards() {
           {/* The stub: a dashed tear line with a notch punched out at each end.
               Each notch is a circle on the card's edge, clipped to its inner half
               (plus the 1px border it covers). */}
-          <div className="relative flex flex-col items-start justify-center gap-4 border-t border-dashed border-primary/40 p-6 sm:p-8 md:border-t-0 md:border-l">
+          <div className="relative flex flex-col items-start justify-center gap-4 border-t border-dashed border-glint/40 p-6 sm:p-8 md:border-t-0 md:border-l">
             <span
               aria-hidden="true"
-              className="absolute -top-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/40 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
+              className="absolute -top-2.5 -left-2.5 hidden size-5 rounded-full border border-glint/40 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
             />
             <span
               aria-hidden="true"
-              className="absolute -bottom-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/40 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
+              className="absolute -bottom-2.5 -left-2.5 hidden size-5 rounded-full border border-glint/40 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
             />
             <p className="flex items-baseline gap-3">
-              <span className="font-mono text-6xl leading-none text-primary">{foundingOffer.slots}</span>
+              <span className="font-mono text-6xl leading-none text-glint">{foundingOffer.slots}</span>
               <span className="text-muted-foreground">slots left</span>
             </p>
             <Button
