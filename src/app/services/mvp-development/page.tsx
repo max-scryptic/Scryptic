@@ -7,7 +7,7 @@ import { LandingHero } from "@/components/landing/hero"
 import type { IconName } from "@/components/landing/icons"
 import { SprintVisual } from "@/components/landing/hero-visuals"
 import { PricingSection } from "@/components/landing/pricing-section"
-import { FitCheckSection, HubSection, OptionsSection, type OptionRow } from "@/components/landing/service-sections"
+import { FitCheckSection, HubSection } from "@/components/landing/service-sections"
 import { ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { WorkSection } from "@/components/landing/work-section"
@@ -16,7 +16,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { postsBySlug } from "@/lib/blog"
 import { freeTool } from "@/lib/free-tools"
 import { createMetadata, pages } from "@/lib/seo"
-import { extendedMvp, afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, mvp, services } from "@/lib/services"
+import { afterLaunchAnswer, supportPriceSentence, foundingOfferSentence, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 import { faqJsonLd, serviceJsonLd } from "@/lib/structured-data"
 
@@ -44,57 +44,6 @@ const fitChecks = [
   "It is a web app or SaaS",
 ]
 const fitInitial = [0, 1, 3]
-
-// The usual routes to a first release, in words. Figures for agencies are the
-// ones UK studios publish, as compared in the best-saas-development-company post.
-const optionColumns = ["What you get", "Price", "Time to launch", "Who owns the code"]
-const options: OptionRow[] = [
-  {
-    name: `${siteConfig.name} MVP sprint`,
-    cells: [
-      "One core journey as production code, with sign-in, payments and analytics live",
-      `${mvp.price} or ${extendedMvp.price} + VAT, fixed before the build`,
-      "2 or 3 weeks, then a week of support",
-      "You, from launch day",
-    ],
-  },
-  {
-    name: "MVP development agency",
-    cells: [
-      "A larger first release from a team, often with a project manager and a retainer after launch",
-      "Published prices run from about £8,000 to over $50,000 (one firm prices in dollars); some bill for time",
-      "Usually 5 to 12 weeks in the offers we compared",
-      "Check the contract; on a Bubble build the app stays on the platform",
-    ],
-  },
-  {
-    name: "Freelance developer",
-    cells: [
-      "Whatever you can specify, test and manage yourself",
-      "A day rate, billed for the time it takes",
-      "Depends on their availability and your spec",
-      "You, if the contract assigns it",
-    ],
-  },
-  {
-    name: "No-code or AI builder",
-    cells: [
-      "A working version you build and maintain yourself",
-      "Monthly subscriptions, plus your own time",
-      "Days to weeks",
-      "No-code platforms keep the app; AI builders give you code to harden",
-    ],
-  },
-  {
-    name: "In-house hire",
-    cells: [
-      "A developer who stays on the product after launch",
-      "A salary, plus recruitment time and cost",
-      "Months, once hiring is counted",
-      "You",
-    ],
-  },
-]
 
 const guides = postsBySlug([
   "how-to-build-an-mvp",
@@ -255,15 +204,6 @@ export default function MvpDevelopmentPage() {
 
       <WorkSection
         title="MVPs we have built and launched"
-      />
-
-      <OptionsSection
-        id="options"
-        eyebrow="Your options"
-        title="MVP development companies, freelancers and builders compared"
-        caption="Five ways to get an MVP built, compared on what you get, price, time to launch and who owns the code"
-        columns={optionColumns}
-        rows={options}
       />
 
       <ComparisonSection
