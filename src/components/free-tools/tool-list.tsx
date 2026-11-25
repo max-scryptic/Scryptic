@@ -41,7 +41,7 @@ function ToolRows({ tools }: { tools: FreeTool[] }) {
       {tools.map((tool) => (
         <li
           key={tool.slug}
-          className="group relative grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 border-t border-border px-4 py-5 transition-colors hover:bg-primary/5 sm:gap-5 sm:px-6"
+          className="group relative grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 border-t border-border bg-linear-to-r from-primary/0 to-transparent to-70% px-4 py-5 transition-colors duration-300 ease-out focus-within:from-primary/15 hover:from-primary/15 motion-reduce:transition-none sm:gap-5 sm:px-6"
         >
           <span className="flex size-11 items-center justify-center bg-muted text-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary dark:bg-secondary">
             <ToolIcon icon={tool.icon} className="size-5" />
