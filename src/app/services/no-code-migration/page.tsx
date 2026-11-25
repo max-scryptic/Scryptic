@@ -225,7 +225,7 @@ function ToolsSection() {
   return (
     <LandingSection id="tools" labelledBy="tools-heading">
       <SectionHeading className={inset} eyebrow="Where from" title="Apps we migrate" id="tools-heading" />
-      <div className="ticks guides border border-border bg-card">
+      <div className="ticks guides border border-border bg-background">
         {postCategories.map((category) => {
           const categoryPosts = migrationGuides.filter((post) => post.category === category.name)
           if (categoryPosts.length === 0) return null
@@ -244,7 +244,7 @@ function ToolsSection() {
                   <li key={post.slug}>
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="group flex h-full items-center gap-2.5 border border-border bg-background p-2.5 transition-colors hover:border-primary/50 sm:gap-3 sm:p-3"
+                      className="group flex h-full items-center gap-2.5 border border-border p-2.5 transition-colors hover:border-primary/50 sm:gap-3 sm:p-3"
                     >
                       {post.logo && (
                         <span
