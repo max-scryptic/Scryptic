@@ -3,6 +3,7 @@
 import { useMemo } from "react"
 import { cn } from "cn"
 
+import { BRAND_MARK_PATHS } from "@/components/brand-logo"
 import { HeroWindow } from "@/components/landing/hero-window"
 import { useHeroLoop } from "@/components/landing/use-hero-loop"
 
@@ -15,8 +16,8 @@ import { useHeroLoop } from "@/components/landing/use-hero-loop"
  *
  * Every card keeps moving. It comes in whole on load (.hero-card in
  * globals.css), already showing the first frame of a short story of the work,
- * then loops through that story as it lands: commands typing out, a sprint
- * filling in. Each story is a list of frames stepped by useHeroLoop.
+ * then loops through that story as it lands: the Scryptic mark loading and
+ * commands typing out, a sprint filling in. Each story is a list of frames stepped by useHeroLoop.
  *
  * With reduced motion `step` is null, which a card renders as its finished
  * picture, the same as its last frame.
@@ -56,22 +57,43 @@ const pending = "border border-dashed border-border text-muted-foreground"
 
 const durationsOf = (frames: readonly { ms: number }[]) => frames.map((frame) => frame.ms)
 
-// --- Home: the terminal -----------------------------------------------------
+// --- Home: the loader, then the terminal ------------------------------------
 
 export type TerminalLine = { prompt: boolean; text: string }
 
-/** One frame of the terminal: lines before `shown` are printed; `typed` is how far into line `shown` the command has got. */
-type TerminalFrame = { shown: number; typed?: number; fading?: boolean; ms: number }
+/**
+ * One frame of the home card. While `loading` is set, the Scryptic mark is
+ * loading: 0 is a whole disc, 1 the halves slid apart into the S, and the
+ * pixel bar under it fills to match; `leaving` fades it out. Otherwise it is
+ * the terminal: lines before `shown` are printed, and `typed` is how far into
+ * line `shown` the command has got.
+ */
+type TerminalFrame = { shown: number; typed?: number; fading?: boolean; loading?: number; leaving?: boolean; ms: number }
+
+/** The loader's progress, frame by frame: uneven steps with a stall or two, as a real one goes. */
+const loadingSteps = [
+  { loading: 0, ms: 550 },
+  { loading: 0.18, ms: 240 },
+  { loading: 0.32, ms: 200 },
+  { loading: 0.4, ms: 420 },
+  { loading: 0.66, ms: 220 },
+  { loading: 0.82, ms: 340 },
+  { loading: 1, ms: 700 },
+  { loading: 1, leaving: true, ms: 380 },
+]
 
 function terminalFrames(lines: TerminalLine[]): TerminalFrame[] {
-  // Fade the finished screen out, then type each command and print its ticks.
-  const frames: TerminalFrame[] = [{ shown: lines.length, fading: true, ms: 450 }]
+  // Fade the finished screen out, load, then type each command and print its ticks.
+  const frames: TerminalFrame[] = [
+    { shown: lines.length, fading: true, ms: 450 },
+    ...loadingSteps.map((step) => ({ shown: 0, ...step })),
+  ]
   lines.forEach((line, index) => {
     if (!line.prompt) {
       frames.push({ shown: index + 1, ms: 380 })
       return
     }
-    frames.push({ shown: index, typed: 0, ms: index === 0 ? 700 : 450 })
+    frames.push({ shown: index, typed: 0, ms: 450 })
     for (let typed = 1; typed <= line.text.length; typed++) {
       // An uneven rhythm reads as typing; a beat after the last key before it runs.
       const last = typed === line.text.length
@@ -83,57 +105,113 @@ function terminalFrames(lines: TerminalLine[]): TerminalFrame[] {
   return frames
 }
 
-/** Home: command lines typed out and printed one after another, on a loop. `$` lines are commands, the rest ticks. */
+/** How many squares the loader's pixel bar has. */
+const LOADER_CELLS = 12
+
+/**
+ * The Scryptic mark as a loader (the paths of BrandLogo, components/brand-logo.tsx):
+ * its two half discs start together as one disc and slide apart into the S
+ * as `progress` runs from 0 to 1, over a bar of pixels filling in. Only ever
+ * slid, never rotated, as the brand asks.
+ */
+function MarkLoader({ progress }: { progress: number }) {
+  // Closed, each half sits 2 units across and 1 up or down from its place in the mark.
+  const apart = 1 - progress
+  const slide = (direction: 1 | -1) => ({
+    transform: `translate(${direction * 2 * apart}px, ${direction * apart}px)`,
+  })
+  const filled = Math.round(progress * LOADER_CELLS)
+  return (
+    <div className="flex flex-col items-center gap-6">
+      <svg viewBox="0 0 24 24" className="size-20 overflow-visible fill-primary dark:fill-[#c3caff]">
+        <path d={BRAND_MARK_PATHS[0]} className="transition-transform duration-300 ease-out" style={slide(1)} />
+        <path d={BRAND_MARK_PATHS[1]} className="transition-transform duration-300 ease-out" style={slide(-1)} />
+      </svg>
+      <div className="flex flex-col items-center gap-2.5">
+        <span className="flex gap-1">
+          {Array.from({ length: LOADER_CELLS }, (_, cell) => (
+            <span
+              key={cell}
+              className={cn(
+                "size-2 transition-colors duration-150",
+                cell < filled ? "bg-primary dark:bg-[#c3caff]" : "bg-foreground/10",
+              )}
+            />
+          ))}
+        </span>
+        <span className="font-mono text-xs text-muted-foreground tabular-nums">
+          {progress === 1 ? "ready" : `loading ${Math.round(progress * 100)}%`}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Home: the Scryptic mark loading, then command lines typed out and printed
+ * one after another, on a loop. `$` lines are commands, the rest ticks.
+ */
 export function TerminalCard({ lines }: { lines: TerminalLine[] }) {
   const frames = useMemo(() => terminalFrames(lines), [lines])
   const durations = useMemo(() => durationsOf(frames), [frames])
   const [ref, step] = useHeroLoop(durations, 1)
-  // Starts on frame 1, an empty prompt; frame 0 fades out the finished screen between laps.
+  // Starts on frame 1, the loader; frame 0 fades out the finished screen between laps.
   const frame = step === null ? null : frames[step]
   const shown = frame?.shown ?? lines.length
   const typed = frame?.typed
+  const loading = frame?.loading
 
   return (
     <HeroWindow ref={ref}>
-      <div
-        className={cn(
-          "flex flex-col gap-2 p-5 font-mono text-sm leading-relaxed transition-opacity duration-400",
-          frame?.fading && "opacity-0",
-        )}
-      >
-        {lines.map((line, index) => {
-          const typing = typed !== undefined && index === shown
-          const visible = index < shown || typing
-          return (
-            <p
-              key={line.text}
-              className={cn(
-                "flex gap-3",
-                line.prompt ? "text-foreground [&:not(:first-child)]:mt-3" : "text-muted-foreground",
-                !visible && "invisible",
-                frame && !frame.fading && !line.prompt && visible && "hero-print",
-              )}
-            >
-              <span className="text-primary">{line.prompt ? "$" : "✓"}</span>
-              {typing ? (
-                <span>
-                  {line.text.slice(0, typed)}
-                  {/* Takes no width, so the line never reflows as it types. */}
-                  <span className="-mr-2 inline-block h-4 w-2 translate-y-0.5 bg-primary" />
-                  <span className="invisible">{line.text.slice(typed)}</span>
-                </span>
-              ) : (
-                line.text
-              )}
-            </p>
-          )
-        })}
-        <span
+      <div className="relative">
+        <div
           className={cn(
-            "mt-1 h-4 w-2 animate-pulse bg-primary motion-reduce:animate-none",
-            shown < lines.length && "invisible",
+            "absolute inset-0 flex items-center justify-center transition-opacity duration-400",
+            (loading === undefined || frame?.leaving) && "opacity-0",
           )}
-        />
+        >
+          {loading !== undefined && <MarkLoader progress={loading} />}
+        </div>
+        <div
+          className={cn(
+            "flex flex-col gap-2 p-5 font-mono text-sm leading-relaxed transition-opacity duration-400",
+            (frame?.fading || loading !== undefined) && "opacity-0",
+          )}
+        >
+          {lines.map((line, index) => {
+            const typing = typed !== undefined && index === shown
+            const visible = index < shown || typing
+            return (
+              <p
+                key={line.text}
+                className={cn(
+                  "flex gap-3",
+                  line.prompt ? "text-foreground [&:not(:first-child)]:mt-3" : "text-muted-foreground",
+                  !visible && "invisible",
+                  frame && !frame.fading && !line.prompt && visible && "hero-print",
+                )}
+              >
+                <span className="text-primary">{line.prompt ? "$" : "✓"}</span>
+                {typing ? (
+                  <span>
+                    {line.text.slice(0, typed)}
+                    {/* Takes no width, so the line never reflows as it types. */}
+                    <span className="-mr-2 inline-block h-4 w-2 translate-y-0.5 bg-primary" />
+                    <span className="invisible">{line.text.slice(typed)}</span>
+                  </span>
+                ) : (
+                  line.text
+                )}
+              </p>
+            )
+          })}
+          <span
+            className={cn(
+              "mt-1 h-4 w-2 animate-pulse bg-primary motion-reduce:animate-none",
+              shown < lines.length && "invisible",
+            )}
+          />
+        </div>
       </div>
     </HeroWindow>
   )
