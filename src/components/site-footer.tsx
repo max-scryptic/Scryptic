@@ -21,10 +21,7 @@ const homeLinks = [
   { name: "FAQ", href: "/#faq" },
 ]
 
-const serviceLinks = [
-  ...servicePages.map((service) => ({ name: service.name, href: service.page.path })),
-  { name: "All services", href: pages.services.path },
-]
+const serviceLinks = servicePages.map((service) => ({ name: service.name, href: service.page.path }))
 
 const workLinks = [
   ...caseStudies.map((study) => ({ name: study.name, href: `/work/${study.slug}` })),

@@ -114,8 +114,8 @@ export function LaunchRaceSection() {
         {totalWeeks - launchWeek} weeks live with customers.
       </p>
 
-      {/* No card: the race runs straight on the page, between the guides. */}
-      <div className="py-2">
+      {/* A data panel like the other diagrams, but left the page colour rather than filled. */}
+      <div className="ticks guides border border-border py-12 sm:py-16">
         <div ref={ref} aria-hidden="true" className={cn("relative flex flex-col gap-10 pt-10", inset)}>
           {/* Week ruler and guides, behind the tracks. Every other one is dropped on phones. */}
           <div className="pointer-events-none absolute inset-y-0 right-6 left-6 sm:right-8 sm:left-8">
