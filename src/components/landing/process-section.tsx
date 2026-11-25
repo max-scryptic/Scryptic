@@ -6,11 +6,13 @@ import { services } from "@/lib/services"
 
 const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"]
 
+// The calendar is printed on paper (.surface-paper) in both themes, so these
+// use the light theme's tokens and need no dark: variants.
 const calendarTones = {
-  call: "border border-border bg-background text-foreground",
+  call: "border border-dashed border-foreground/30 bg-background text-foreground",
   build: "bg-primary text-primary-foreground",
-  iterate: "bg-primary/15 text-primary dark:bg-primary/30 dark:text-foreground",
-  demo: "border border-primary bg-card text-primary dark:text-foreground",
+  iterate: "bg-primary/15 text-primary",
+  demo: "border-2 border-primary bg-background font-medium text-primary",
   handover: "bg-chart-2 text-[#14131b]",
   support: "bg-chart-2/15 text-foreground",
 }
@@ -71,9 +73,11 @@ function dayRange(day: number, span: number) {
 }
 
 /**
- * The process calendar: one row per week on a Monday to Friday grid, Friday
- * shaded as demo day. Phones drop the day columns and list each week's events
- * with their days.
+ * The process calendar, drawn as a printed planner rather than another card:
+ * a warm paper sheet (.surface-paper, the same in both themes) taped to the
+ * page at a slight tilt. One row per week on a Monday to Friday grid, Friday
+ * run over with a Glint highlighter as demo day. Phones drop the day columns,
+ * and the tilt, and list each week's events with their days.
  */
 export function ProcessSection({
   eyebrow = "Process",
@@ -90,7 +94,16 @@ export function ProcessSection({
   return (
     <LandingSection id="process" labelledBy="process-heading" space="tight">
       <SectionHeading className={inset} eyebrow={eyebrow} title={title} id="process-heading" />
-      <div className="ticks guides border border-border bg-card">
+      <div className="surface-paper relative shadow-2xl shadow-black/25 lg:-rotate-[0.4deg]">
+        {/* Two strips of tape holding the sheet to the page. */}
+        <span
+          aria-hidden="true"
+          className="absolute -top-3 left-8 z-10 h-6 w-24 -rotate-3 bg-glint/50 shadow-sm sm:left-16"
+        />
+        <span
+          aria-hidden="true"
+          className="absolute -top-3 right-8 z-10 h-6 w-24 rotate-2 bg-glint/50 shadow-sm sm:right-16"
+        />
         <div
           aria-hidden="true"
           className="hidden grid-cols-[7.5rem_repeat(5,minmax(0,1fr))] border-b border-border font-mono text-xs text-muted-foreground uppercase sm:grid"
@@ -101,10 +114,10 @@ export function ProcessSection({
               key={day}
               className={cn(
                 "flex items-center justify-center gap-2 border-l border-border py-4",
-                day === "Fri" && "bg-primary/5 text-primary dark:text-foreground",
+                day === "Fri" && "bg-glint/25 font-medium text-foreground",
               )}
             >
-              {day === "Fri" && <span className="size-1.5 rotate-45 bg-primary" />}
+              {day === "Fri" && <span className="size-1.5 rotate-45 bg-chart-2" />}
               {day}
             </span>
           ))}
@@ -123,7 +136,7 @@ export function ProcessSection({
                 <span
                   key={day}
                   aria-hidden="true"
-                  className={cn("hidden border-l border-border sm:block", day === "Fri" && "bg-primary/5")}
+                  className={cn("hidden border-l border-border sm:block", day === "Fri" && "bg-glint/25")}
                   style={{ gridArea: `1 / ${index + 2}` }}
                 />
               ))}

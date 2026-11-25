@@ -196,7 +196,7 @@ export default function Home() {
 
       <PricingSection />
 
-      <AboutSection band="warm" />
+      <AboutSection />
 
       <ProcessSection
       />

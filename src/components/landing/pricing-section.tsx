@@ -52,10 +52,11 @@ export function PricingSection({
 /**
  * The fixed-price packages from @/lib/services, one card each: name and
  * sprint, the price, what is included, then the call. The preferred package
- * gets a Lapis border and a tag sitting on its top edge. Every card is
+ * is filled solid Lapis, with an inverted button and a tag on its top edge,
+ * so the pair reads as a choice rather than two equal boxes. Every card is
  * square-edged, with accent brackets on its corners and its top and bottom
- * edges run out across the page. Under the cards, the founding-client
- * banner while `foundingOffer` is set. No section or heading of its own, so
+ * edges run out across the page. Under the cards, the founding-client offer
+ * as a Glint ticket with a tear-off stub, while `foundingOffer` is set. No section or heading of its own, so
  * /pricing can place it under its <h1>.
  */
 export function PricingCards() {
@@ -70,12 +71,12 @@ export function PricingCards() {
             className={cn(
               "corners guides flex scroll-mt-28 flex-col gap-8 bg-card p-6 sm:p-8 lg:p-10",
               service.preferred
-                ? "border-2 border-primary shadow-xl shadow-primary/15 [--corner-inset:2px] [--corner:var(--foreground)] [--edge:2px]"
+                ? "border-2 border-primary bg-primary text-primary-foreground shadow-2xl shadow-primary/30 [--corner-inset:2px] [--corner:var(--foreground)] [--edge:2px]"
                 : "border border-border shadow-xl shadow-black/5",
             )}
           >
             {service.preferred && (
-              <p className="absolute -top-3.5 right-6 z-10 bg-primary px-4 py-1 font-mono text-xs tracking-widest text-primary-foreground uppercase sm:right-10">
+              <p className="absolute -top-3.5 right-6 z-10 bg-foreground px-4 py-1 font-mono text-xs tracking-widest text-background uppercase sm:right-10">
                 Preferred
               </p>
             )}
@@ -83,18 +84,22 @@ export function PricingCards() {
               <h3 id={`${service.id}-name`} className="text-2xl tracking-tight">
                 {service.name}
               </h3>
-              <p className="text-muted-foreground">{service.sprint}</p>
+              <p className={service.preferred ? "text-primary-foreground/75" : "text-muted-foreground"}>
+                {service.sprint}
+              </p>
             </div>
             <p className="flex items-baseline gap-2">
               <span className="text-5xl font-semibold tracking-tight">{service.price}</span>
-              <span className="text-lg text-muted-foreground">+ VAT</span>
+              <span className={cn("text-lg", service.preferred ? "text-primary-foreground/75" : "text-muted-foreground")}>
+                + VAT
+              </span>
             </p>
             <div className="flex flex-col gap-4">
               <h4 className="font-medium">What is included</h4>
               <ul className="flex flex-col gap-3 text-pretty">
                 {service.includes.map((item) => (
                   <li key={item} className="flex gap-3">
-                    <CheckIcon />
+                    <CheckIcon className={cn(service.preferred && "text-primary-foreground")} />
                     {item}
                   </li>
                 ))}
@@ -104,7 +109,10 @@ export function PricingCards() {
               size="lg"
               nativeButton={false}
               render={<Link href={pages.bookCall.path} />}
-              className="mt-auto h-12 w-full text-base"
+              className={cn(
+                "mt-auto h-12 w-full text-base",
+                service.preferred && "bg-primary-foreground text-primary hover:bg-primary-foreground/85",
+              )}
             >
               Book a discovery call
             </Button>
@@ -115,17 +123,19 @@ export function PricingCards() {
       {foundingOffer && (
         <aside
           aria-labelledby="founding-offer-heading"
-          className="pip grid border border-primary/30 bg-primary/5 md:grid-cols-[1fr_16rem]"
+          className="pip grid border border-chart-2/50 bg-[#fbf1df] [--pip:var(--chart-2)] md:grid-cols-[1fr_16rem] dark:bg-chart-2/10"
         >
           <div className="flex flex-col gap-4 p-6 sm:p-8">
-            <p className="font-mono text-xs tracking-widest text-primary uppercase">Founding client offer</p>
+            <p className="font-mono text-xs tracking-widest text-[#9a5a06] uppercase dark:text-chart-2">
+              Founding client offer
+            </p>
             <h3 id="founding-offer-heading" className="text-2xl tracking-tight text-balance">
               Same price, {countWord(foundingOffer.extras.length)} things added free
             </h3>
             <ul className="flex flex-col gap-2 text-pretty">
               {foundingOffer.extras.map((extra) => (
                 <li key={extra} className="flex gap-3">
-                  <CheckIcon />
+                  <CheckIcon className="text-[#9a5a06] dark:text-chart-2" />
                   {sentenceCase(extra)}
                 </li>
               ))}
@@ -138,24 +148,25 @@ export function PricingCards() {
           {/* The stub: a dashed tear line with a notch punched out at each end.
               Each notch is a circle on the card's edge, clipped to its inner half
               (plus the 1px border it covers). */}
-          <div className="relative flex flex-col items-start justify-center gap-4 border-t border-dashed border-primary/40 p-6 sm:p-8 md:border-t-0 md:border-l">
+          <div className="relative flex flex-col items-start justify-center gap-4 border-t-2 border-dashed border-chart-2/60 p-6 sm:p-8 md:border-t-0 md:border-l-2">
             <span
               aria-hidden="true"
-              className="absolute -top-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/30 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
+              className="absolute -top-2.5 -left-[11px] hidden size-5 rounded-full border border-chart-2/50 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
             />
             <span
               aria-hidden="true"
-              className="absolute -bottom-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/30 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
+              className="absolute -bottom-2.5 -left-[11px] hidden size-5 rounded-full border border-chart-2/50 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
             />
-            <p className="flex items-baseline gap-3">
-              <span className="font-mono text-6xl leading-none text-primary">{foundingOffer.slots}</span>
-              <span className="text-muted-foreground">slots left</span>
+            {/* A stamp on the stub: the count in the pixel face, inked at an angle. */}
+            <p className="flex -rotate-3 items-baseline gap-3 border-2 border-chart-2 px-3 py-2 text-[#9a5a06] dark:text-chart-2">
+              <span className="font-pixel text-6xl leading-none">{foundingOffer.slots}</span>
+              <span className="font-mono text-xs tracking-widest uppercase">slots left</span>
             </p>
             <Button
               size="lg"
               nativeButton={false}
               render={<Link href={pages.bookCall.path} />}
-              className="h-12 w-full text-base"
+              className="h-12 w-full bg-chart-2 text-base text-[#14131b] hover:bg-chart-2/85"
             >
               Claim slot
             </Button>

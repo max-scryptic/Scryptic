@@ -101,6 +101,48 @@
   --band-ink: #08091a;
 }
 
+/*
+ * Fixed surfaces that look the same in either theme, so a section can stand
+ * apart from the page around it. Each resets the theme tokens for what sits
+ * on it (custom properties inherit, so this wins over .dark on <html>), and
+ * redeclares --guide, which :root resolves once against the page colours.
+ * Avoid dark: utilities inside them: the .dark class is still on <html>.
+ * - surface-paper: a warm printed sheet with the light theme's ink and Lapis
+ *   (the process planner).
+ * - surface-portrait: the flat periwinkle behind cut-out portraits, with
+ *   Obsidian text and accents (the About band).
+ */
+.surface-paper {
+  --background: #fbf8f1;
+  --foreground: #14131b;
+  --card: #fbf8f1;
+  --card-foreground: #14131b;
+  --primary: #2b3fd6;
+  --primary-foreground: #ffffff;
+  --muted-foreground: #5b6072;
+  --border: rgb(20 19 27 / 12%);
+  --chart-2: #d98a1c;
+  --guide: rgb(20 19 27 / 12%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.surface-portrait {
+  --background: var(--portrait);
+  --foreground: #14131b;
+  --card: var(--portrait);
+  --card-foreground: #14131b;
+  --primary: #14131b;
+  --primary-foreground: #ffffff;
+  --muted-foreground: rgb(20 19 27 / 72%);
+  --border: rgb(20 19 27 / 18%);
+  --ring: #14131b;
+  --guide: color-mix(in oklab, #14131b 16%, var(--portrait));
+  --mark: #14131b;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
 @theme inline {
   --font-sans: var(--font-hanken-grotesk);
   --font-logo: var(--font-syne);

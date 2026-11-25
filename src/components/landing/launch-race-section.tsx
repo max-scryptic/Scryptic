@@ -67,7 +67,7 @@ function TrackHeader({ name, end, show, highlight }: { name: React.ReactNode; en
       {name}
       <p
         className={cn(
-          "bg-card font-mono text-xs tracking-widest uppercase transition-opacity duration-500",
+          "bg-background font-mono text-xs tracking-widest uppercase transition-opacity duration-500",
           show ? "opacity-100" : "opacity-0",
           highlight ? "text-primary dark:text-[#c3caff]" : "text-muted-foreground",
         )}
@@ -91,11 +91,19 @@ export function LaunchRaceSection() {
           eyebrow="Speed"
           title="The usual route takes months. Ours takes weeks."
           id="problems-heading" />
-        <div aria-hidden="true" className="flex shrink-0 flex-col gap-1 lg:items-end">
+        {/* A scoreboard rather than a stat: the week ticks over in the pixel face. */}
+        <div aria-hidden="true" className="flex shrink-0 flex-col gap-2 lg:items-end">
           <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">Time to launch</p>
-          <p className="text-6xl leading-none tracking-tighter tabular-nums sm:text-7xl">
-            <span className="text-3xl tracking-tight text-muted-foreground/60 sm:text-4xl">Week </span>
-            {String(week).padStart(2, "0")}
+          <p className="flex items-baseline gap-3 font-pixel leading-none tabular-nums">
+            <span className="text-2xl tracking-[0.12em] text-muted-foreground uppercase sm:text-3xl">Week</span>
+            <span
+              className={cn(
+                "text-7xl transition-colors sm:text-8xl",
+                finished ? "text-foreground" : "text-primary dark:text-[#c3caff]",
+              )}
+            >
+              {String(week).padStart(2, "0")}
+            </span>
           </p>
         </div>
       </div>
@@ -106,25 +114,37 @@ export function LaunchRaceSection() {
         {totalWeeks - launchWeek} weeks live with customers.
       </p>
 
-      <div className="ticks guides border border-border bg-card py-8 sm:py-10">
+      {/* No card: the race runs straight on the page, between the guides. */}
+      <div className="py-2">
         <div ref={ref} aria-hidden="true" className={cn("relative flex flex-col gap-10 pt-10", inset)}>
           {/* Week ruler and guides, behind the tracks. Every other one is dropped on phones. */}
           <div className="pointer-events-none absolute inset-y-0 right-6 left-6 sm:right-8 sm:left-8">
             {Array.from({ length: totalWeeks / tickEvery + 1 }, (_, i) => i * tickEvery).map((w) => (
               <div
                 key={w}
-                className={cn("absolute inset-y-0 border-l border-dashed border-border", w % 8 !== 0 && "max-md:hidden")}
+                className={cn(
+                  "absolute inset-y-0 border-l",
+                  w === launchWeek ? "z-[1] border-solid border-primary" : "border-dashed border-border",
+                  w % 8 !== 0 && w !== launchWeek && "max-md:hidden",
+                )}
                 style={{ left: pct(w) }}
               >
                 <span
                   className={cn(
-                    "absolute top-0 -translate-x-1/2 bg-card px-1 font-mono text-[10px] tracking-widest whitespace-nowrap text-muted-foreground transition-colors",
+                    "absolute top-0 -translate-x-1/2 bg-background px-1 font-mono text-[10px] tracking-widest whitespace-nowrap text-muted-foreground uppercase transition-colors",
                     w === 0 && "translate-x-0 pl-0",
                     w === totalWeeks && "-translate-x-full pr-0",
                     week >= w && w > 0 && "text-foreground",
+                    w === launchWeek && "bg-primary px-1.5 text-primary-foreground",
                   )}
                 >
-                  {w}
+                  {w === launchWeek ? (
+                    <>
+                      Launch<span className="max-md:hidden"> · {w}</span>
+                    </>
+                  ) : (
+                    w
+                  )}
                 </span>
               </div>
             ))}
@@ -132,7 +152,7 @@ export function LaunchRaceSection() {
 
           <div className="relative flex flex-col gap-3">
             <TrackHeader
-              name={<p className="bg-card font-medium">The usual route</p>}
+              name={<p className="bg-background font-medium">The usual route</p>}
               end={`Launch? Week ${totalWeeks}`}
               show={finished}
             />
@@ -155,7 +175,7 @@ export function LaunchRaceSection() {
 
           <div className="relative flex flex-col gap-3">
             <TrackHeader
-              name={<p className="bg-card font-logo text-xl font-extrabold lowercase">Scryptic</p>}
+              name={<p className="bg-background font-logo text-xl font-extrabold lowercase">Scryptic</p>}
               end={`${totalWeeks - launchWeek} weeks live`}
               show={finished}
               highlight
