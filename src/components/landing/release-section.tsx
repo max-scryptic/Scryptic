@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { cn } from "cn"
 
 import { ReleasePhone, type ReleaseStepId } from "@/components/landing/release-graphics"
+import { ReleaseBoard, ReleaseLog, ReleaseStack } from "@/components/landing/release-concepts"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { inset } from "@/lib/frame"
 
@@ -110,6 +111,12 @@ export function ReleaseSection({
   steps: ReleaseStep[]
 }) {
   const { ref, motion, playing, active, select } = useStepCycle(steps.length)
+  // Prototype switch: ?concept=board|log|stack previews an alternative to the phone.
+  const concept = useSyncExternalStore(
+    () => () => {},
+    () => new URLSearchParams(window.location.search).get("concept"),
+    () => null,
+  )
 
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
@@ -177,13 +184,27 @@ export function ReleaseSection({
             })}
           </ol>
         </div>
-        <ReleasePhone
-          id={steps[active].id}
-          caption={`${pad(active)} / ${steps[active].id}`}
-          status={phoneStatus[steps[active].id]}
-          animate={motion}
-          className="order-first lg:order-last"
-        />
+        <div aria-hidden="true" className="order-first flex justify-center lg:order-last">
+          {concept === "board" ? (
+            <ReleaseBoard id={steps[active].id} status={phoneStatus[steps[active].id]} animate={motion} />
+          ) : concept === "log" ? (
+            <ReleaseLog id={steps[active].id} status={phoneStatus[steps[active].id]} animate={motion} />
+          ) : concept === "stack" ? (
+            <ReleaseStack
+              id={steps[active].id}
+              caption={`${pad(active)} / ${steps[active].id}`}
+              status={phoneStatus[steps[active].id]}
+              animate={motion}
+            />
+          ) : (
+            <ReleasePhone
+              id={steps[active].id}
+              caption={`${pad(active)} / ${steps[active].id}`}
+              status={phoneStatus[steps[active].id]}
+              animate={motion}
+            />
+          )}
+        </div>
       </div>
     </LandingSection>
   )
