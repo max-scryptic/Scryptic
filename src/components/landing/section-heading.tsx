@@ -135,6 +135,7 @@ export function LandingSection({
   labelledBy,
   space = "default",
   band,
+  tightAfterBand,
   className,
   children,
 }: {
@@ -142,6 +143,8 @@ export function LandingSection({
   labelledBy: string
   space?: keyof typeof sectionSpace
   band?: SectionBand
+  /** Straight after a band, keep only the band's gap above it (6rem), not double. */
+  tightAfterBand?: boolean
   className?: string
   children: React.ReactNode
 }) {
@@ -155,6 +158,7 @@ export function LandingSection({
         band ? sectionSpace.default : sectionSpace[space],
         band && "ruled",
         band && bands[band],
+        tightAfterBand && "after-band-tight",
       )}
     >
       <div className={cn("mx-auto flex max-w-6xl flex-col gap-12", className)}>{children}</div>

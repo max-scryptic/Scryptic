@@ -1023,4 +1023,9 @@
   section:is(:has(+ .band-gap), :has(+ .stray-pixels + .band-gap)) {
     padding-bottom: 6rem;
   }
+  /* A few sections (the FAQ, Guides) sit closer: the band gap alone (6rem)
+     above them, half the usual. */
+  :is(.band-gap, .band-gap + .stray-pixels) + section.after-band-tight {
+    padding-top: 0;
+  }
 }
