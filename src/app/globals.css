@@ -556,11 +556,6 @@
   .hero-card {
     animation: zoom-in 0.9s var(--ease-out) 250ms backwards;
   }
-  /* The migration card's source tile cycles through builders, each shown for
-     a quarter of the loop (negative delays start each one at its turn). */
-  .hero-cycle {
-    animation: cycle 8s ease-in-out infinite;
-  }
 
   /* Hero card loops (components/landing/hero-visuals.tsx): printed lines slide in, ticks pop, changed labels fade up and a
      finished item rings once. Classes are added as each frame plays, so each
@@ -738,7 +733,9 @@
   offset-distance: calc(20% + var(--d, 0) * 30%);
 }
 /* Hover or focus anywhere on a panel (.build-panel) plays its drawing forward,
-   staggered by --h. Without motion the end state simply appears. */
+   staggered by --h. Without motion the end state simply appears. A service
+   page's hero (components/landing/hero-drawing.tsx) plays the same drawing
+   forward and back on a loop, with data-build="play". */
 .build-show,
 .build-drop {
   opacity: 0;
@@ -746,7 +743,7 @@
 .build-drop {
   translate: 0 -16px;
 }
-.build-panel:is(:hover, :focus-visible) {
+:is(.build-panel:is(:hover, :focus-visible), [data-build="play"]) {
   & .build-hover {
     translate: var(--hx, 0) var(--hy, 0);
   }
@@ -764,7 +761,7 @@
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .build-panel :is(.build-hover, .build-show, .build-drop, .build-fill, .build-dim) {
+  :is(.build-panel, [data-build]) :is(.build-hover, .build-show, .build-drop, .build-fill, .build-dim) {
     transition:
       translate 0.6s var(--ease-out),
       opacity 0.35s ease,
@@ -772,7 +769,7 @@
       stroke 0.3s ease;
     transition-delay: calc(var(--h, 0) * 40ms);
   }
-  .build-panel .build-drop {
+  :is(.build-panel, [data-build]) .build-drop {
     transition-timing-function: cubic-bezier(0.3, 1.5, 0.5, 1), ease;
     transition-delay: 0.15s;
   }
@@ -825,20 +822,6 @@
   from {
     opacity: 0;
     transform: translateY(24px) scale(0.96);
-  }
-}
-
-@keyframes cycle {
-  0%,
-  22% {
-    opacity: 1;
-  }
-  25%,
-  97% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
 

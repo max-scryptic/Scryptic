@@ -6,8 +6,9 @@ import { ComparisonSection, type ComparisonRow } from "@/components/landing/comp
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
 import { GuidesSection } from "@/components/landing/guides-section"
+import { MigrationDrawing } from "@/components/landing/build-trio"
 import { LandingHero } from "@/components/landing/hero"
-import { MigrationVisual } from "@/components/landing/hero-visuals"
+import { HeroDrawing } from "@/components/landing/hero-drawing"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { calendarPackage, ProcessSection, type ProcessCalendar } from "@/components/landing/process-section"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
@@ -129,14 +130,6 @@ const topicGuides = new Set([
   "lovable-app-backup",
 ])
 const migrationGuides = postsInSeries("migration").filter((post) => !topicGuides.has(post.slug))
-
-// The builders the hero card's source tile cycles through, with their logos from the guides.
-const heroTools = postsBySlug([
-  "migrate-from-bubble",
-  "migrate-from-lovable",
-  "migrate-from-glide",
-  "migrate-from-airtable",
-]).map((post) => ({ slug: post.slug, topic: post.topic, logo: post.logo?.src }))
 
 const guides = postsBySlug([
   "vibe-coding-to-production",
@@ -300,7 +293,7 @@ export default function NoCodeMigrationPage() {
         }
         intro={`${siteConfig.name} moves Bubble, Lovable, Glide and Airtable apps to code you own, with your users and data brought across.`}
         secondary={{ label: "See pricing", href: "#pricing" }}
-        visual={<MigrationVisual tools={heroTools} />}
+        visual={<HeroDrawing><MigrationDrawing /></HeroDrawing>}
         shape="migrate"
       />
 

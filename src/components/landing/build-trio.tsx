@@ -23,6 +23,9 @@ import { pages } from "@/lib/seo"
  * Those changes are classes on parts of the drawing (build-hover, build-show,
  * build-drop, build-fill, build-dim), with --hx, --hy, --fill and the stagger
  * --h set per part.
+ *
+ * The drawings are exported for the hero of each service's own page, where
+ * HeroDrawing (hero-drawing.tsx) plays them forward and back on a loop.
  */
 
 /** cos 30°: how far a unit along an isometric axis moves across the screen. */
@@ -162,7 +165,7 @@ const barTops: Tone[] = ["periwinkle", "ink", "lapis", "ink", "mint", "periwinkl
 /** The most pixels a column reaches once the chart has grown. */
 const maxBar = 7
 
-function WebAppDrawing() {
+export function WebAppDrawing() {
   const x = 78
   const y = 120
   const cell = 7
@@ -255,7 +258,7 @@ const icons: (Tone | null)[] = [
 /** The colours the empty slots fill with on hover. */
 const installs = ["var(--primary)", "var(--mint)", "var(--portrait)", "var(--glint)"]
 
-function MobileAppDrawing() {
+export function MobileAppDrawing() {
   const x = 116
   const y = 78
   const size = 11
@@ -414,7 +417,7 @@ const newBlocks: { i: number; j: number; k: number; top?: Tone }[] = [
  */
 const arc = "M62 66 C 74 10, 178 10, 190 50"
 
-function MigrationDrawing() {
+export function MigrationDrawing() {
   const s = 16
   const n = 3
   // Old platform up and to the left, new one down and to the right.
