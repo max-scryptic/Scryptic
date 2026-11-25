@@ -406,8 +406,13 @@ const newBlocks: { i: number; j: number; k: number; top?: Tone }[] = [
   { i: 1, j: 1, k: 1, top: "glint" },
 ]
 
-/** The arc the blocks travel along, from the old stack's top to the new one's. */
-const arc = "M62 104 C 88 34, 168 30, 196 92"
+/**
+ * The arc the blocks travel along, from just above the old stack's top cube to
+ * just above the new one's. It lifts off and lands near vertically and never
+ * crosses either stack, so a block in transit (about 13 units tall, drawn up
+ * from its point on the arc) stays clear of the drawings.
+ */
+const arc = "M62 66 C 74 10, 178 10, 190 50"
 
 function MigrationDrawing() {
   const s = 16
@@ -416,7 +421,7 @@ function MigrationDrawing() {
   const old = { ox: 62, oy: 112 }
   const fresh = { ox: 190, oy: 112 }
   return (
-    <Drawing fit="translate(130 122) scale(1.15) translate(-126 -108)">
+    <Drawing fit="translate(130 122) scale(1.15) translate(-126 -100)">
       <Platform {...old} s={s} n={n} t={8} dashed />
       {/* On hover what is left on the old platform fades out. */}
       <g className="build-dim">
