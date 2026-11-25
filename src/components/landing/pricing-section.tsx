@@ -68,7 +68,7 @@ export function PricingCards() {
             id={service.id}
             aria-labelledby={`${service.id}-name`}
             className={cn(
-              "corners guides flex scroll-mt-28 flex-col gap-8 bg-card p-6 sm:p-8 lg:p-10",
+              "corners guides flex scroll-mt-28 flex-col gap-8 p-6 sm:p-8 lg:p-10",
               service.preferred
                 ? "border-2 border-primary shadow-xl shadow-primary/15 [--corner-inset:2px] [--corner:var(--foreground)] [--edge:2px]"
                 : "border border-border shadow-xl shadow-black/5",
