@@ -11,27 +11,69 @@ const tones = {
   outline: "border border-primary bg-background",
 } as const
 
+type Cell = { at: [number, number]; tone: keyof typeof tones; order?: number }
+
 /**
  * One corner's pixels, as [x, y] cells stepping in from the corner. The first
  * few show at rest; the rest build in one by one on hover, in `order`, as if
  * the cluster were growing out of the corner.
+ *
+ * `regular` suits a centred card, with the same weight in both corners. A card
+ * with its text on the left takes `heavy` top right, in the open space, and
+ * `light` bottom left, under the button.
  */
-const cluster: { at: [number, number]; tone: keyof typeof tones; order?: number }[] = [
-  { at: [0, 0], tone: "primary" },
-  { at: [1, 0], tone: "primary" },
-  { at: [0, 1], tone: "primary" },
-  { at: [2, 0], tone: "portrait" },
-  { at: [0, 2], tone: "glint" },
-  { at: [1, 1], tone: "outline", order: 1 },
-  { at: [3, 0], tone: "primary", order: 2 },
-  { at: [0, 3], tone: "primary", order: 3 },
-  { at: [2, 1], tone: "glint", order: 4 },
-  { at: [1, 2], tone: "portrait", order: 5 },
-  { at: [4, 0], tone: "outline", order: 6 },
-  { at: [3, 2], tone: "primary", order: 7 },
-  { at: [0, 5], tone: "primary", order: 8 },
-  { at: [5, 1], tone: "glint", order: 9 },
-]
+const clusters = {
+  light: [
+    { at: [0, 0], tone: "primary" },
+    { at: [1, 0], tone: "primary" },
+    { at: [0, 1], tone: "glint" },
+    { at: [2, 0], tone: "outline", order: 1 },
+    { at: [0, 2], tone: "primary", order: 2 },
+    { at: [1, 1], tone: "portrait", order: 3 },
+  ],
+  regular: [
+    { at: [0, 0], tone: "primary" },
+    { at: [1, 0], tone: "primary" },
+    { at: [0, 1], tone: "primary" },
+    { at: [2, 0], tone: "portrait" },
+    { at: [0, 2], tone: "glint" },
+    { at: [1, 1], tone: "outline", order: 1 },
+    { at: [3, 0], tone: "primary", order: 2 },
+    { at: [0, 3], tone: "primary", order: 3 },
+    { at: [2, 1], tone: "glint", order: 4 },
+    { at: [1, 2], tone: "portrait", order: 5 },
+    { at: [4, 0], tone: "outline", order: 6 },
+    { at: [3, 2], tone: "primary", order: 7 },
+    { at: [0, 5], tone: "primary", order: 8 },
+    { at: [5, 1], tone: "glint", order: 9 },
+  ],
+  heavy: [
+    { at: [0, 0], tone: "primary" },
+    { at: [1, 0], tone: "primary" },
+    { at: [2, 0], tone: "primary" },
+    { at: [0, 1], tone: "primary" },
+    { at: [1, 1], tone: "primary" },
+    { at: [3, 0], tone: "portrait" },
+    { at: [0, 2], tone: "glint" },
+    { at: [2, 1], tone: "glint" },
+    { at: [0, 3], tone: "primary" },
+    { at: [4, 0], tone: "outline" },
+    { at: [1, 2], tone: "portrait", order: 1 },
+    { at: [5, 0], tone: "primary", order: 2 },
+    { at: [3, 1], tone: "primary", order: 3 },
+    { at: [0, 4], tone: "outline", order: 4 },
+    { at: [2, 2], tone: "glint", order: 5 },
+    { at: [6, 0], tone: "primary", order: 6 },
+    { at: [4, 1], tone: "portrait", order: 7 },
+    { at: [1, 3], tone: "primary", order: 8 },
+    { at: [5, 2], tone: "glint", order: 9 },
+    { at: [7, 1], tone: "primary", order: 10 },
+    { at: [0, 6], tone: "primary", order: 11 },
+    { at: [3, 3], tone: "outline", order: 12 },
+    { at: [8, 0], tone: "glint", order: 13 },
+    { at: [2, 4], tone: "primary", order: 14 },
+  ],
+} satisfies Record<string, Cell[]>
 
 /**
  * A pixel cluster in one inner corner of a call-to-action card. The card needs
@@ -39,7 +81,14 @@ const cluster: { at: [number, number]; tone: keyof typeof tones; order?: number 
  * (`.corners` gives one). Drawn for the top left and flipped into place, so x
  * and y always step in from the corner.
  */
-export function CornerPixels({ corner }: { corner: "top-right" | "bottom-left" }) {
+export function CornerPixels({
+  corner,
+  weight = "regular",
+}: {
+  corner: "top-right" | "bottom-left"
+  weight?: keyof typeof clusters
+}) {
+  const cluster: Cell[] = clusters[weight]
   return (
     <div
       aria-hidden="true"

@@ -34,8 +34,8 @@ export default function ToolsPage() {
           aria-labelledby="tools-cta-heading"
           className={cn(ctaFrame, "flex flex-col items-start gap-4 p-6 sm:p-10")}
         >
-          <CornerPixels corner="top-right" />
-          <CornerPixels corner="bottom-left" />
+          <CornerPixels corner="top-right" weight="heavy" />
+          <CornerPixels corner="bottom-left" weight="light" />
           <h2 id="tools-cta-heading" className="text-2xl tracking-tight text-balance">
             Want a second opinion on your plan?
           </h2>

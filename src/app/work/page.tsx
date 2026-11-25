@@ -45,8 +45,8 @@ export default function WorkPage() {
           aria-labelledby="work-cta-heading"
           className={cn(ctaFrame, "flex flex-col items-start gap-4 p-6 sm:p-10")}
         >
-          <CornerPixels corner="top-right" />
-          <CornerPixels corner="bottom-left" />
+          <CornerPixels corner="top-right" weight="heavy" />
+          <CornerPixels corner="bottom-left" weight="light" />
           <h2 id="work-cta-heading" className="text-2xl tracking-tight text-balance">
             Want yours on this page?
           </h2>

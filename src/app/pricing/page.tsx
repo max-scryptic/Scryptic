@@ -90,8 +90,8 @@ export default function PricingPage() {
           aria-labelledby="pricing-cta-heading"
           className={cn(ctaFrame, "mx-auto w-full max-w-6xl flex flex-col items-start gap-4 p-6 sm:p-10")}
         >
-          <CornerPixels corner="top-right" />
-          <CornerPixels corner="bottom-left" />
+          <CornerPixels corner="top-right" weight="heavy" />
+          <CornerPixels corner="bottom-left" weight="light" />
           <h2 id="pricing-cta-heading" className="text-2xl tracking-tight text-balance">
             Get a fixed price for your app
           </h2>
