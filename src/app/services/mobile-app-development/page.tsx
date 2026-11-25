@@ -266,7 +266,6 @@ export default function MobileAppDevelopmentPage() {
       />
 
       <FitCheckSection
-        band="warm"
         id="fit"
         eyebrow="Who it is for"
         title="Is a sprint right for your app?"

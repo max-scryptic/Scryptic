@@ -61,7 +61,7 @@ export function FitCheck({
   const strong = count >= total - 1
 
   return (
-    <div className="ticks guides grid border border-border bg-card md:grid-cols-[1.4fr_1fr]">
+    <div className="ticks guides grid border border-border bg-background md:grid-cols-[1.4fr_1fr]">
       <ul data-reveal="children" className="grid auto-rows-fr divide-y divide-border">
         {items.map((item, index) => (
           <li key={item} className="flex">
@@ -94,7 +94,7 @@ export function FitCheck({
           </li>
         ))}
       </ul>
-      <div className="flex flex-col justify-between gap-8 border-t border-border bg-primary/[0.03] p-6 sm:p-8 md:border-t-0 md:border-l">
+      <div className="flex flex-col justify-between gap-8 border-t border-border p-6 sm:p-8 md:border-t-0 md:border-l">
         <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">Your fit</p>
         <div className="flex flex-col gap-6">
           <p className="text-8xl leading-none tracking-tighter sm:text-9xl">
