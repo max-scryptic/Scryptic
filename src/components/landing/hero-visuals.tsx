@@ -3,8 +3,8 @@
 import { useMemo } from "react"
 import { cn } from "cn"
 
-import { BRAND_MARK_PATHS } from "@/components/brand-logo"
 import { HeroWindow } from "@/components/landing/hero-window"
+import { pixelLabel } from "@/components/landing/section-heading"
 import { useHeroLoop } from "@/components/landing/use-hero-loop"
 
 /*
@@ -64,68 +64,134 @@ export type TerminalLine = { prompt: boolean; text: string }
 /**
  * One frame of the home card. While `loading` is set, the Scryptic mark is
  * loading: 0 is a whole disc, 1 the halves slid apart into the S, and the
- * pixel bar under it fills to match; `leaving` fades it out. Otherwise it is
- * the terminal: lines before `shown` are printed, and `typed` is how far into
- * line `shown` the command has got.
+ * pixel bar under it fills to match; `pixels` is the share of the loader's
+ * pixels showing, so it builds in and breaks up a few at a time. Otherwise it
+ * is the terminal: lines before `shown` are printed, `typed` is how far into
+ * line `shown` the command has got, and `cursor: false` blinks the cursor off.
  */
-type TerminalFrame = { shown: number; typed?: number; fading?: boolean; loading?: number; leaving?: boolean; ms: number }
+type TerminalFrame = {
+  shown: number
+  typed?: number
+  cursor?: boolean
+  fading?: boolean
+  loading?: number
+  pixels?: number
+  ms: number
+}
 
-/** The loader's progress, frame by frame: uneven steps with a stall or two, as a real one goes. */
+/** The loader: built in from pixels, filled in uneven steps with a stall or two, as a real one goes, then broken up. */
 const loadingSteps = [
-  { loading: 0, ms: 550 },
+  { loading: 0, pixels: 0.3, ms: 70 },
+  { loading: 0, pixels: 0.65, ms: 70 },
+  { loading: 0, ms: 480 },
   { loading: 0.18, ms: 240 },
   { loading: 0.32, ms: 200 },
   { loading: 0.4, ms: 420 },
   { loading: 0.66, ms: 220 },
   { loading: 0.82, ms: 340 },
   { loading: 1, ms: 700 },
-  { loading: 1, leaving: true, ms: 380 },
+  { loading: 1, pixels: 0.7, ms: 70 },
+  { loading: 1, pixels: 0.4, ms: 70 },
+  { loading: 1, pixels: 0.15, ms: 70 },
+  { loading: 1, pixels: 0, ms: 160 },
 ]
 
-function terminalFrames(lines: TerminalLine[]): TerminalFrame[] {
-  // Fade the finished screen out, load, then type each command and print its ticks.
-  const frames: TerminalFrame[] = [
-    { shown: lines.length, fading: true, ms: 450 },
-    ...loadingSteps.map((step) => ({ shown: 0, ...step })),
-  ]
+/** The empty prompt's cursor, on and off a few times before the first command types out. */
+const blinks = [true, false, true, false, true]
+
+/**
+ * The card's frames: the loader once, then the loop: the cursor blinks at an
+ * empty prompt, each command types and prints its ticks, the finished screen
+ * holds and fades. `loopFrom` is where each lap after the first starts.
+ */
+function terminalFrames(lines: TerminalLine[]) {
+  const frames: TerminalFrame[] = loadingSteps.map((step) => ({ shown: 0, ...step }))
+  const loopFrom = frames.length
   lines.forEach((line, index) => {
     if (!line.prompt) {
       frames.push({ shown: index + 1, ms: 380 })
       return
     }
-    frames.push({ shown: index, typed: 0, ms: 450 })
+    if (index === 0) {
+      blinks.forEach((cursor) => frames.push({ shown: index, typed: 0, cursor, ms: 380 }))
+    } else {
+      frames.push({ shown: index, typed: 0, ms: 450 })
+    }
     for (let typed = 1; typed <= line.text.length; typed++) {
       // An uneven rhythm reads as typing; a beat after the last key before it runs.
       const last = typed === line.text.length
       frames.push({ shown: index, typed, ms: last ? 420 : 38 + ((typed * 7) % 5) * 14 })
     }
   })
-  // Hold the finished screen.
+  // Hold the finished screen, then fade it out before the next lap.
   frames[frames.length - 1].ms = 4500
-  return frames
+  frames.push({ shown: lines.length, fading: true, ms: 450 })
+  return { frames, loopFrom }
 }
+
+/** A fixed scatter in [0, 1) for pixel n, so each pixel has its turn to come and go, the same on the server. */
+const scatter = (n: number) => {
+  const x = Math.sin(n * 12.9898 + 4.1) * 43758.5453
+  return x - Math.floor(x)
+}
+
+/** The size of the mark's pixels, in the 24-unit grid of BrandLogo. */
+const PIXEL = 1.25
+
+/**
+ * One half of the mark (components/brand-logo.tsx: half discs of radius 8.5)
+ * as rows of square pixels stepping in from its flat edge at `edge`, centred
+ * on `cx`; `up` for the top half.
+ */
+function halfDisc(cx: number, edge: number, up: boolean) {
+  const cells: { x: number; y: number }[] = []
+  const radius = 8.5
+  for (let row = 0; (row + 0.5) * PIXEL < radius; row++) {
+    const half = Math.round(Math.sqrt(radius ** 2 - ((row + 0.5) * PIXEL) ** 2) / PIXEL)
+    const y = up ? edge - (row + 1) * PIXEL : edge + row * PIXEL
+    for (let col = -half; col < half; col++) cells.push({ x: cx + col * PIXEL, y })
+  }
+  return cells
+}
+
+const markHalves = [halfDisc(10, 11, true), halfDisc(14, 13, false)]
 
 /** How many squares the loader's pixel bar has. */
 const LOADER_CELLS = 12
 
 /**
- * The Scryptic mark as a loader (the paths of BrandLogo, components/brand-logo.tsx):
- * its two half discs start together as one disc and slide apart into the S
- * as `progress` runs from 0 to 1, over a bar of pixels filling in. Only ever
- * slid, never rotated, as the brand asks.
+ * The Scryptic mark as a loader, drawn in pixels to match the pixel type: its
+ * two half discs start together as one disc and slide apart into the S as
+ * `progress` runs from 0 to 1, over a bar of pixels filling in. Only ever
+ * slid, never rotated, as the brand asks. `pixels` is the share of its pixels
+ * showing; each pixel has its own turn, so it builds in and breaks up unevenly.
  */
-function MarkLoader({ progress }: { progress: number }) {
+function MarkLoader({ progress, pixels }: { progress: number; pixels: number }) {
   // Closed, each half sits 2 units across and 1 up or down from its place in the mark.
   const apart = 1 - progress
-  const slide = (direction: 1 | -1) => ({
-    transform: `translate(${direction * 2 * apart}px, ${direction * apart}px)`,
-  })
   const filled = Math.round(progress * LOADER_CELLS)
+  const shows = (n: number) => scatter(n) < pixels
+  let n = 0
   return (
     <div className="flex flex-col items-center gap-6">
-      <svg viewBox="0 0 24 24" className="size-20 overflow-visible fill-primary dark:fill-[#c3caff]">
-        <path d={BRAND_MARK_PATHS[0]} className="transition-transform duration-300 ease-out" style={slide(1)} />
-        <path d={BRAND_MARK_PATHS[1]} className="transition-transform duration-300 ease-out" style={slide(-1)} />
+      <svg viewBox="0 0 24 24" shapeRendering="crispEdges" className="size-24 overflow-visible fill-primary dark:fill-[#c3caff]">
+        {markHalves.map((cells, half) => {
+          const direction = half === 0 ? 1 : -1
+          return (
+            <g
+              key={half}
+              className="transition-transform duration-300 ease-out"
+              style={{ transform: `translate(${direction * 2 * apart}px, ${direction * apart}px)` }}
+            >
+              {cells.map((cell) => {
+                const visible = shows(n++)
+                return visible ? (
+                  <rect key={`${cell.x} ${cell.y}`} x={cell.x} y={cell.y} width={PIXEL} height={PIXEL} />
+                ) : null
+              })}
+            </g>
+          )
+        })}
       </svg>
       <div className="flex flex-col items-center gap-2.5">
         <span className="flex gap-1">
@@ -135,12 +201,13 @@ function MarkLoader({ progress }: { progress: number }) {
               className={cn(
                 "size-2 transition-colors duration-150",
                 cell < filled ? "bg-primary dark:bg-[#c3caff]" : "bg-foreground/10",
+                !shows(n + cell) && "invisible",
               )}
             />
           ))}
         </span>
-        <span className="font-mono text-xs text-muted-foreground tabular-nums">
-          {progress === 1 ? "ready" : `loading ${Math.round(progress * 100)}%`}
+        <span className={cn(pixelLabel, "text-xs text-muted-foreground tabular-nums", pixels < 0.5 && "invisible")}>
+          {progress === 1 ? "Ready" : `Loading ${Math.round(progress * 100)}%`}
         </span>
       </div>
     </div>
@@ -148,34 +215,34 @@ function MarkLoader({ progress }: { progress: number }) {
 }
 
 /**
- * Home: the Scryptic mark loading, then command lines typed out and printed
- * one after another, on a loop. `$` lines are commands, the rest ticks.
+ * Home: the Scryptic mark loading, once, then a terminal on a loop: the
+ * cursor blinks at an empty prompt, and command lines type out and print one
+ * after another. `$` lines are commands, the rest ticks.
  */
 export function TerminalCard({ lines }: { lines: TerminalLine[] }) {
-  const frames = useMemo(() => terminalFrames(lines), [lines])
+  const { frames, loopFrom } = useMemo(() => terminalFrames(lines), [lines])
   const durations = useMemo(() => durationsOf(frames), [frames])
-  const [ref, step] = useHeroLoop(durations, 1)
-  // Starts on frame 1, the loader; frame 0 fades out the finished screen between laps.
+  // Starts on the loader, on the server too; later laps start at the prompt.
+  const [ref, step] = useHeroLoop(durations, { loopFrom })
   const frame = step === null ? null : frames[step]
   const shown = frame?.shown ?? lines.length
   const typed = frame?.typed
   const loading = frame?.loading
 
   return (
-    <HeroWindow ref={ref}>
+    <HeroWindow ref={ref} label="~/your-idea">
       <div className="relative">
+        {loading !== undefined && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <MarkLoader progress={loading} pixels={frame?.pixels ?? 1} />
+          </div>
+        )}
         <div
           className={cn(
-            "absolute inset-0 flex items-center justify-center transition-opacity duration-400",
-            (loading === undefined || frame?.leaving) && "opacity-0",
-          )}
-        >
-          {loading !== undefined && <MarkLoader progress={loading} />}
-        </div>
-        <div
-          className={cn(
-            "flex flex-col gap-2 p-5 font-mono text-sm leading-relaxed transition-opacity duration-400",
-            (frame?.fading || loading !== undefined) && "opacity-0",
+            "flex flex-col gap-2 p-5 font-mono text-sm leading-relaxed",
+            // Only the finished screen fades; the prompt comes in at once, as the loader breaks up.
+            frame?.fading && "opacity-0 transition-opacity duration-400",
+            loading !== undefined && "invisible",
           )}
         >
           {lines.map((line, index) => {
@@ -196,7 +263,7 @@ export function TerminalCard({ lines }: { lines: TerminalLine[] }) {
                   <span>
                     {line.text.slice(0, typed)}
                     {/* Takes no width, so the line never reflows as it types. */}
-                    <span className="-mr-2 inline-block h-4 w-2 translate-y-0.5 bg-primary" />
+                    <span className={cn("-mr-2 inline-block h-4 w-2 translate-y-0.5 bg-primary", frame?.cursor === false && "invisible")} />
                     <span className="invisible">{line.text.slice(typed)}</span>
                   </span>
                 ) : (
