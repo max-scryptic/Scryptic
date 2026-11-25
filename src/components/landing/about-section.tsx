@@ -8,9 +8,10 @@ import { siteConfig } from "@/lib/site"
 import { founder } from "@/lib/team"
 
 /**
- * The studio and its founder, without a card: the portrait on the left, and
- * on the right a large pull quote from the bio, then who said it, the bio and
- * facts, with the profile links along the bottom.
+ * The studio and its founder, as a single pull quote: the portrait on the
+ * left, the quote large on the right, and only the founder's name and
+ * profile links along the bottom. No card: the frame is the guides, run out
+ * across the page above and below, with a rule between the two halves.
  */
 export function AboutSection({ band }: { band?: SectionBand } = {}) {
   return (
@@ -19,11 +20,8 @@ export function AboutSection({ band }: { band?: SectionBand } = {}) {
         <SectionHeading eyebrow="About" title="A small studio, on purpose" id="about-heading" />
       </div>
 
-      <article
-        aria-labelledby="founder-name"
-        className="grid gap-10 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-12 lg:gap-16"
-      >
-        <div className="pip relative aspect-square">
+      <figure className="pip guides grid border-y border-border sm:grid-cols-2">
+        <div className="relative aspect-square">
           {/* The cut-out portrait stays put; only the backdrop behind it builds in
               from pixels as it scrolls into view (data-reveal="pixels" in globals.css). */}
           <div aria-hidden="true" data-reveal="pixels" className="pixel-in absolute inset-0 bg-portrait" />
@@ -31,49 +29,30 @@ export function AboutSection({ band }: { band?: SectionBand } = {}) {
             src={founder.image}
             alt={`Portrait of ${founder.name}, ${founder.role.toLowerCase()} of ${siteConfig.name}`}
             fill
-            sizes="(min-width: 1152px) 460px, (min-width: 640px) 40vw, 100vw"
+            sizes="(min-width: 1152px) 576px, (min-width: 640px) 50vw, 100vw"
             className="object-cover object-bottom"
           />
         </div>
 
-        <figure data-reveal="children" className={cn("flex flex-col justify-between gap-10 sm:pl-0", inset)}>
-          <blockquote className="text-4xl leading-[1.04] tracking-[-0.03em] text-balance lg:text-6xl">
+        <div className="flex flex-col justify-between border-border sm:border-l">
+          <blockquote
+            data-reveal
+            className="px-6 pt-10 pb-12 text-3xl leading-[1.1] tracking-[-0.025em] text-balance sm:px-10 sm:pt-12 lg:text-5xl"
+          >
             <p>
-              <span className="text-primary">“</span>
-              {founder.quote.lead} <span className="text-primary">{founder.quote.highlight}”</span>
+              “{founder.quote.lead} <span className="text-primary">{founder.quote.highlight}</span>”
             </p>
           </blockquote>
 
-          <figcaption className="flex flex-col gap-5">
+          <figcaption className="flex items-center justify-between gap-4 border-t border-border py-3 pr-4 pl-6 sm:pl-10">
             <p className="flex items-baseline gap-3">
-              <span id="founder-name" className="text-2xl tracking-tight">
-                {founder.name}
-              </span>
-              <span className="font-mono text-xs tracking-widest text-primary uppercase">{founder.role}</span>
+              <span className="text-lg tracking-tight">{founder.name}</span>
+              <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">{founder.role}</span>
             </p>
-            <p className="max-w-xl text-pretty text-muted-foreground">{founder.bio}</p>
-            {/* The links along the bottom, with the facts beside them from lg up. */}
-            <div className="flex flex-col gap-4 border-t border-border pt-5 lg:flex-row lg:items-center lg:justify-between">
-              {/* Dots only from lg up: in a narrower column the row wraps and a dot would lead the next line. */}
-              <ul className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs tracking-wide text-muted-foreground uppercase lg:gap-x-3">
-                {founder.facts.map((fact, index) => (
-                  <li key={fact} className="flex items-center gap-3">
-                    {index > 0 && (
-                      <span aria-hidden="true" className="hidden text-primary lg:inline">
-                        ·
-                      </span>
-                    )}
-                    {fact}
-                  </li>
-                ))}
-              </ul>
-              <div className="-ml-2 lg:-mr-2 lg:ml-0">
-                <SocialLinks name={founder.fullName} profiles={founder.socials} />
-              </div>
-            </div>
+            <SocialLinks name={founder.fullName} profiles={founder.socials} />
           </figcaption>
-        </figure>
-      </article>
+        </div>
+      </figure>
     </LandingSection>
   )
 }
