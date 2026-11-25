@@ -17,9 +17,9 @@ import { cn } from "cn"
 export type Store = "app-store" | "google-play"
 
 const stores = {
-  "app-store": { label: "App Store", footnote: "From your Apple Developer account" },
-  "google-play": { label: "Google Play", footnote: "From your Play Console account" },
-} satisfies Record<Store, { label: string; footnote: string }>
+  "app-store": { label: "App Store" },
+  "google-play": { label: "Google Play" },
+} satisfies Record<Store, { label: string }>
 
 const fonts = {
   ios: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif',
@@ -561,20 +561,14 @@ function Phone({ store }: { store: Store }) {
 }
 
 export function StoreListing({ store, className }: { store: Store; className?: string }) {
-  const { label, footnote } = stores[store]
+  const { label } = stores[store]
 
   return (
     <div
       aria-hidden="true"
       className={cn("relative flex flex-col gap-6 overflow-hidden border border-border bg-background p-4 sm:p-6", className)}
     >
-      <span className="flex items-center justify-between font-mono text-xs text-muted-foreground">
-        <span className="tracking-widest uppercase">{label}</span>
-        <span className="flex items-center gap-1.5">
-          <span className="size-1.5 rounded-full bg-primary" />
-          Live
-        </span>
-      </span>
+      <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">{label}</span>
 
       {/*
        * A soft glow behind the phone; the phone is drawn at full size and
@@ -589,8 +583,6 @@ export function StoreListing({ store, className }: { store: Store; className?: s
         </div>
         <span className="absolute inset-x-0 bottom-0 hidden h-12 bg-linear-to-t from-background to-transparent lg:block" />
       </div>
-
-      <span className="border-t border-border pt-3 font-mono text-xs text-muted-foreground">{footnote}</span>
     </div>
   )
 }
