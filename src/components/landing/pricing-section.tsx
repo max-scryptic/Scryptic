@@ -117,7 +117,11 @@ export function PricingCards() {
       {foundingOffer && (
         <aside
           aria-labelledby="founding-offer-heading"
-          className="pip grid border border-primary/30 bg-primary/5 md:grid-cols-[1fr_16rem]"
+          // Built like the package cards above it (page background, corner brackets that lengthen
+          // on hover, edges run out across the page) but cut like a coupon, so it reads as a
+          // one-off: a dashed edge to match the tear line, and a wash that glows out from the
+          // stub, behind the slots left, rather than in from the top left.
+          className="corners corners-grow guides grid border border-dashed border-primary/50 bg-linear-to-l from-primary/15 to-transparent to-50% transition duration-300 ease-out hover:from-primary/25 hover:shadow-xl hover:shadow-primary/10 motion-reduce:transition-none md:grid-cols-[1fr_16rem]"
         >
           <div className="flex flex-col gap-4 p-6 sm:p-8">
             <p className="font-mono text-xs tracking-widest text-primary uppercase">Founding client offer</p>
@@ -140,14 +144,14 @@ export function PricingCards() {
           {/* The stub: a dashed tear line with a notch punched out at each end.
               Each notch is a circle on the card's edge, clipped to its inner half
               (plus the 1px border it covers). */}
-          <div className="relative flex flex-col items-start justify-center gap-4 border-t border-dashed border-primary/40 p-6 sm:p-8 md:border-t-0 md:border-l">
+          <div className="relative flex flex-col items-start justify-center gap-4 border-t border-dashed border-primary/50 p-6 sm:p-8 md:border-t-0 md:border-l">
             <span
               aria-hidden="true"
-              className="absolute -top-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/30 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
+              className="absolute -top-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/50 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
             />
             <span
               aria-hidden="true"
-              className="absolute -bottom-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/30 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
+              className="absolute -bottom-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/50 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
             />
             <p className="flex items-baseline gap-3">
               <span className="font-mono text-6xl leading-none text-primary">{foundingOffer.slots}</span>
