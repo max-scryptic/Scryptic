@@ -4,16 +4,16 @@ import { extendedMvp, mvp, supportPlan } from "@/lib/services"
 
 export const bestSaasDevelopmentCompany: BlogPost = {
   slug: "best-saas-development-company",
-  title: "Best SaaS development company for your first release",
+  title: "Best UK SaaS development companies for a first release",
   series: "launch",
   topic: "SaaS agencies",
   icon: "building",
   description:
-    "Compare UK SaaS and MVP development companies on price, timeline and ownership, from Bubble studios to fixed-price sprints, and what to check before you sign.",
+    "Six UK SaaS development companies compared on price, timeline and ownership, from Bubble studios to fixed-price sprints, and what to check before you sign.",
   summary:
-    "The best SaaS development company is the one that can ship your next usable release for an agreed price and leave you owning the code and the accounts. Below we compare six UK SaaS and MVP development companies, including Goodspeed, Augustova, Neptune Digital and ourselves, on what they build, how they charge and how long an MVP takes, then give you seven checks to run before you sign.",
+    "The best SaaS development company for a first release is the one that can ship it for an agreed price and leave you owning the code and the accounts. Below we compare six UK SaaS development companies, including Goodspeed, Augustova, Neptune Digital and ourselves, on what they build, how they charge and how long an MVP takes, then give you seven checks to run before you sign.",
   datePublished: "2026-10-22",
-  dateModified: "2026-11-04",
+  dateModified: "2026-11-25",
   facts: [
     { label: "Companies compared", value: "6" },
     { label: "Published MVP prices", value: "From about £8,000 to over $50,000 (one firm prices in dollars)" },
@@ -92,6 +92,11 @@ export const bestSaasDevelopmentCompany: BlogPost = {
         {
           type: "paragraph",
           text: "The UK studios founders most often shortlist differ most on three choices: whether they write code or build on a platform like Bubble or FileMaker, whether they charge a fixed price or bill for time, and what they offer once the app is live. The table sets six of them side by side, using what each company publishes about itself.",
+        },
+        {
+          type: "paragraph",
+          text: "Larger agencies that build SaaS among other kinds of web app, such as Magora and GoodCore, sell discovery phases, dedicated teams and hourly rates rather than a first-release package, so we compare them with the other UK web app companies instead.",
+          link: { text: "Seven UK web app development companies compared.", href: "/blog/web-app-development-companies-uk" },
         },
         {
           type: "table",

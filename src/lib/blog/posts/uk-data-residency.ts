@@ -14,6 +14,7 @@ export const ukDataResidency: BlogPost = {
   summary:
     "UK data residency is a choice rather than a legal requirement: UK GDPR lets an app store personal data abroad, as long as each transfer out of the UK is covered. Lovable Cloud and Replit let you pick a European region once and then lock it, Base44 keeps app data in the US unless your plan includes UK or EU residency, and a Supabase project you create yourself can sit in London.",
   datePublished: "2026-11-10",
+  dateModified: "2026-11-25",
   facts: [
     { label: "Required by UK GDPR", value: "No, but transfers need cover" },
     { label: "Lovable Cloud", value: "Europe region, locked at set-up" },
@@ -95,15 +96,23 @@ export const ukDataResidency: BlogPost = {
             ],
           ],
         },
+        { type: "subheading", text: "Lovable data residency" },
         {
           type: "paragraph",
-          text: "A UK founder can get two of these wrong without noticing. Lovable Cloud offers Europe as a region but not the UK on its own, so if a customer insists on UK hosting, connect the app to a Supabase project you create in eu-west-2 instead. And Supabase's general Europe option can place a project in London or Zurich, neither of which is in the EU, so pick a specific region when a contract says EU only. Region is one row in a longer choice of backend, which our Supabase and Firebase comparison works through for a startup.",
+          text: "Lovable data residency depends on which backend the app runs on, and a UK founder can get it wrong two ways without noticing. Lovable Cloud offers Europe as a region but not the UK on its own, so if a customer insists on UK hosting, connect the app to a Supabase project you create in eu-west-2 instead. And Supabase's general Europe option can place a project in London or Zurich, neither of which is in the EU, so pick a specific region when a contract says EU only. Region is one row in a longer choice of backend, which our Supabase and Firebase comparison works through for a startup.",
           link: { text: "Supabase vs Firebase for a startup.", href: "/blog/supabase-vs-firebase" },
         },
+        { type: "subheading", text: "Replit data residency" },
         {
           type: "paragraph",
-          text: "Replit keeps the development workspace apart from the published app. The workspace has a region of its own, fixed when it's created, and Replit's documentation warns that development resources such as object storage may not match the published geography. Customer data copied into the workspace for testing sits with those development resources, so the workspace region belongs in your answer too.",
+          text: "Replit data residency is fixed in two places: the region you publish the app to, which is North America unless you pick Europe on a paid plan, and the region of the development workspace, set when the workspace is created. Replit's documentation warns that development resources such as object storage may not match the published geography. Customer data copied into the workspace for testing sits with those development resources, so the workspace region belongs in your answer too.",
         },
+        { type: "subheading", text: "Base44 data residency" },
+        {
+          type: "paragraph",
+          text: "Base44 data residency is a workspace setting on its higher plans, and Base44 is the only builder here that will move an existing app's data to another region. The setting covers where data is stored rather than where it's processed, and it leaves out some files and older apps, which the next two sections cover.",
+        },
+        { type: "subheading", text: "Bolt data residency" },
         {
           type: "paragraph",
           text: "Bolt is missing from the table because we couldn't find a region stated in its documentation. Ask Bolt in writing before launch, or claim the database into your own Supabase organisation, where the dashboard shows the region.",

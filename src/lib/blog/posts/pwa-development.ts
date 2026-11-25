@@ -36,6 +36,7 @@ export const pwaDevelopment: BlogPost = {
         {
           type: "paragraph",
           text: "An install icon won't rescue an app that's slow or confusing. If people can't finish the main task in an ordinary browser tab, fix that first. Giving them another way to open it won't help.",
+          link: { text: "The mobile web development decisions that come before installing.", href: "/blog/mobile-web-development" },
         },
       ],
     },

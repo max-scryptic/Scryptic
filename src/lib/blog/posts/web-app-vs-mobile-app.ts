@@ -98,6 +98,7 @@ export const webAppVsMobileApp: BlogPost = {
         {
           type: "paragraph",
           text: "Yes, for most first releases. A responsive web app is one codebase that works in the browser on phones, tablets and laptops, and the same code can go further when it needs to, so web and mobile rarely means two builds on day one.",
+          link: { text: "Mobile web development, and what a phone's browser asks of the build.", href: "/blog/mobile-web-development" },
         },
         {
           type: "list",

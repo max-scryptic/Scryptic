@@ -28,6 +28,7 @@ export const mobileAppDevelopment: BlogPost = {
         {
           type: "paragraph",
           text: "Mobile app development is building software that people install on their phone from the App Store or Google Play. It covers the app on the phone, the server and database it talks to, and the work of getting each version through store review and onto people's phones.",
+          link: { text: "When mobile web development, in the phone's browser, is enough instead.", href: "/blog/mobile-web-development" },
         },
         { type: "subheading", text: "The stages of mobile app development" },
         {

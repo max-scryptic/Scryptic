@@ -87,6 +87,7 @@ export const lovable: BlogPost = {
         {
           type: "paragraph",
           text: "Moving out of Lovable Cloud means recreating the schema in a new Supabase project, copying table data, copying storage files, recreating secrets and reconfiguring sign-in providers. Lovable documents a manual route based on exporting each table as CSV, and some third-party tools automate more of it. Rehearse the move on a fresh project first, and check whether user passwords will carry across. If they will not, plan a password reset or magic link email at launch.",
+          link: { text: "Take a Lovable app backup you have restored before the move.", href: "/blog/lovable-app-backup" },
         },
         { type: "subheading", text: "Collect the accounts" },
         {
@@ -287,7 +288,6 @@ export const lovable: BlogPost = {
         {
           type: "paragraph",
           text: "Launch by pointing the domain at the new hosting, then keep the Lovable project frozen and read-only for a few weeks as a fallback. If you moved out of Lovable Cloud, run the final data copy in a short, announced window and compare row counts before you switch.",
-          link: { text: "How to make a Lovable app backup you can restore.", href: "/blog/lovable-app-backup" },
         },
         {
           type: "checklist",
