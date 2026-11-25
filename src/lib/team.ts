@@ -17,6 +17,11 @@ export const founder = {
   role: "Founder",
   image: "/team/max.png",
   bio: "Full-stack developer. Enterprise work taught me to write secure, maintainable code; startups taught me to ship fast and cut what doesn't matter. I'll only use a new tool if it makes your product better, not just because it's new.",
+  /**
+   * The pull quote that leads the home page's About section, from the bio.
+   * `highlight` is set in Lapis after `lead`.
+   */
+  quote: { lead: "Ship fast, and cut what", highlight: "doesn't matter." },
   /** Short facts shown as a row under the bio on the home page. */
   facts: ["5 yrs full-stack", "Enterprise + startups", "Brighton, UK"],
   /** The shorter, third-person bio in the "About the author" box on every blog post. */
