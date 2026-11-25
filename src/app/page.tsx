@@ -1,5 +1,6 @@
 import { PageJsonLd } from "@/components/json-ld"
 import { AboutSection } from "@/components/landing/about-section"
+import { BuildTrio } from "@/components/landing/build-trio"
 import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection } from "@/components/landing/faq-section"
@@ -189,6 +190,8 @@ export default function Home() {
           { text: "code that is yours.", accent: true },
         ]}
       />
+
+      <BuildTrio />
 
       <LaunchRaceSection />
 
