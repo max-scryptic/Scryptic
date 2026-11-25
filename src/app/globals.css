@@ -102,15 +102,12 @@
 }
 
 /*
- * Fixed surfaces that look the same in either theme, so a section can stand
- * apart from the page around it. Each resets the theme tokens for what sits
- * on it (custom properties inherit, so this wins over .dark on <html>), and
- * redeclares --guide, which :root resolves once against the page colours.
- * Avoid dark: utilities inside them: the .dark class is still on <html>.
- * - surface-paper: a warm printed sheet with the light theme's ink and Lapis
- *   (the process planner).
- * - surface-portrait: the flat periwinkle behind cut-out portraits, with
- *   Obsidian text and accents (the About band).
+ * A warm printed sheet that looks the same in either theme, so the process
+ * planner stands apart from the page around it. It resets the theme tokens to
+ * the light theme's ink and Lapis for what sits on it (custom properties
+ * inherit, so this wins over .dark on <html>), and redeclares --guide, which
+ * :root resolves once against the page colours. Avoid dark: utilities inside
+ * it: the .dark class is still on <html>.
  */
 .surface-paper {
   --background: #fbf8f1;
@@ -123,22 +120,6 @@
   --border: rgb(20 19 27 / 12%);
   --chart-2: #d98a1c;
   --guide: rgb(20 19 27 / 12%);
-  background-color: var(--background);
-  color: var(--foreground);
-}
-
-.surface-portrait {
-  --background: var(--portrait);
-  --foreground: #14131b;
-  --card: var(--portrait);
-  --card-foreground: #14131b;
-  --primary: #14131b;
-  --primary-foreground: #ffffff;
-  --muted-foreground: rgb(20 19 27 / 72%);
-  --border: rgb(20 19 27 / 18%);
-  --ring: #14131b;
-  --guide: color-mix(in oklab, #14131b 16%, var(--portrait));
-  --mark: #14131b;
   background-color: var(--background);
   color: var(--foreground);
 }
