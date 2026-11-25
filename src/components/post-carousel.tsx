@@ -34,7 +34,7 @@ export function PostCarousel({
   /** The section's heading, shown beside the arrows. */
   heading: ReactNode
   items: CarouselItem[]
-  groups?: { name: string; text: string }[]
+  groups?: { name: string }[]
   className?: string
 }) {
   const listId = useId()
@@ -48,7 +48,6 @@ export function PostCarousel({
   const target = useRef<{ page: number; timer?: number } | null>(null)
 
   const shown = group ? items.filter((item) => item.group === group) : items
-  const activeGroup = groups?.find((g) => g.name === group)
 
   /**
    * Where each page starts, measured from the cards themselves. A page is as many
@@ -159,32 +158,27 @@ export function PostCarousel({
         </div>
 
         {groups && (
-          <div className="flex flex-col gap-3">
-            <ul className="flex flex-wrap gap-2 font-mono text-xs" aria-label="Filter by kind of tool">
-              {[{ name: null, label: "All" }, ...groups.map((g) => ({ name: g.name, label: g.name }))].map(
-                (chip) => (
-                  <li key={chip.label}>
-                    <button
-                      type="button"
-                      aria-pressed={group === chip.name}
-                      onClick={() => setGroup(chip.name)}
-                      className={cn(
-                        "border px-3 py-1 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
-                        group === chip.name
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                      )}
-                    >
-                      {chip.label}
-                    </button>
-                  </li>
-                )
-              )}
-            </ul>
-            <p className="max-w-2xl text-sm text-pretty text-muted-foreground" aria-live="polite">
-              {activeGroup ? activeGroup.text : "Every guide, grouped by kind of tool."}
-            </p>
-          </div>
+          <ul className="flex flex-wrap gap-2 font-mono text-xs" aria-label="Filter by kind of tool">
+            {[{ name: null, label: "All" }, ...groups.map((g) => ({ name: g.name, label: g.name }))].map(
+              (chip) => (
+                <li key={chip.label}>
+                  <button
+                    type="button"
+                    aria-pressed={group === chip.name}
+                    onClick={() => setGroup(chip.name)}
+                    className={cn(
+                      "border px-3 py-1 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
+                      group === chip.name
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                    )}
+                  >
+                    {chip.label}
+                  </button>
+                </li>
+              )
+            )}
+          </ul>
         )}
       </div>
 
