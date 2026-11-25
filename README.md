@@ -26,8 +26,8 @@ Open [http://localhost:3000](http://localhost:3000).
 src/
   app/                  Routes: / (landing page), /book-a-call (qualifying questions, then the booking link),
                         /work and /work/[slug] (case studies), /blog and /blog/[slug] (migration guides),
-                        /tools and /tools/<slug> (free tools), /services and /services/<slug> (one landing page
-                        per service), /api/site-check (the server side of the SEO and Agent Readiness checks)
+                        /tools and /tools/<slug> (free tools), /services/<slug> (one landing page per
+                        service; /services itself redirects home), /api/site-check (the server side of the SEO and Agent Readiness checks)
     globals.css         Theme tokens (light) and Tailwind setup
     robots.ts           robots.txt, sitemap.xml, manifest, llms.txt, icons and the
     sitemap.ts            Open Graph image are all generated from src/lib (see
@@ -60,7 +60,7 @@ src/
     em-dash-guard.tsx   Dev guard against em dashes in rendered text
   lib/
     site.ts             Brand facts, contact email and booking link, site URL, indexability
-    service-pages.ts    The services with a page under /services: the nav menu, footer, hub cards and
+    service-pages.ts    The services with a page under /services: the nav menu, footer and
                         which blog series point to each
     services.ts         The service offer: card, price and Service JSON-LD, and the weekly rate the
                         MVP Cost Calculator and Scope Planner price with

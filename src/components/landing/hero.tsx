@@ -9,7 +9,7 @@ import { pages } from "@/lib/seo"
 
 /**
  * The full-width, square-edged band that opens a landing page. The home page
- * and the services hub use the Lapis band, the same Lapis in both themes; the
+ * uses the Lapis band, the same Lapis in both themes; the
  * individual service pages use the pale `light` band, so they read as a level
  * below. Either background covers the page's guide lines, so none run through
  * it. The visual keeps the same inset as the copy, so the two sit
@@ -42,7 +42,7 @@ export function LandingHero({
   /** The cubes behind the band; each page has its own. */
   shape?: VoxelShape
   /**
-   * "lapis": white type on the Lapis band (home, services hub). "light": dark
+   * "lapis": white type on the Lapis band (home). "light": dark
    * type on a pale Lapis tint with Lapis cubes (service pages). Highlight the
    * headline's lead phrase with text-[#c3caff] on Lapis and text-primary on light,
    * in <PixelIn> so it builds in from pixels like the other page headings.
