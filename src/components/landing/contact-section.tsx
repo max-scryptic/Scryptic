@@ -4,7 +4,6 @@ import type { CSSProperties } from "react"
 
 import { Button } from "@/components/ui/button"
 import { pages } from "@/lib/seo"
-import { siteConfig } from "@/lib/site"
 
 /** Cell size in px, the same as the stray pixels on the guides (components/landing/stray-pixels.tsx). */
 const CELL = 10
@@ -78,8 +77,8 @@ function CornerPixels({ corner }: { corner: "top-right" | "bottom-left" }) {
 }
 
 /**
- * The closing call to action: one card with the booking button and the
- * studio's email, on the page background. Pixel clusters sit in two of its
+ * The closing call to action: one card with the booking button, on the page
+ * background. Pixel clusters sit in two of its
  * corners and grow on hover. No pixel label over it: those belong to content
  * sections.
  */
@@ -110,12 +109,6 @@ export function ContactSection({
         >
           Book a discovery call
         </Button>
-        <p className="font-mono text-xs text-muted-foreground">
-          or email{" "}
-          <a href={`mailto:${siteConfig.organization.email}`} className="text-primary hover:underline">
-            {siteConfig.organization.email}
-          </a>
-        </p>
       </div>
     </section>
   )
