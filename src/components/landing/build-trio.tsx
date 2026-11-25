@@ -475,7 +475,7 @@ export function BuildTrio() {
     <LandingSection id="what-we-build" labelledBy="what-we-build-heading">
         <SectionHeading
           eyebrow="What we build"
-          title="Web apps, mobile apps and migrations, all as code you own"
+          title="Web apps, mobile apps and migrations"
           id="what-we-build-heading"
           className={inset}
         />
