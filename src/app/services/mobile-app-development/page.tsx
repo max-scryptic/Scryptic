@@ -7,7 +7,6 @@ import { LandingHero } from "@/components/landing/hero"
 import { MobileAppVisual } from "@/components/landing/hero-visuals"
 import type { IconName } from "@/components/landing/icons"
 import { PlatformSection } from "@/components/landing/mobile-sections"
-import { ReleaseSection, type ReleaseStep } from "@/components/landing/release-section"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { ProcessSection } from "@/components/landing/process-section"
 import { FitCheckSection, HubSection } from "@/components/landing/service-sections"
@@ -61,35 +60,6 @@ const platforms = {
     ],
   },
 }
-
-// From the first build to the stores, each with its own graphic in the release section.
-const releaseSteps: ReleaseStep[] = [
-  {
-    id: "build",
-    name: "Built natively",
-    text: "Swift for iPhone and Kotlin for Android, in your repository, with a demo every Friday.",
-  },
-  {
-    id: "test",
-    name: "Tested on real phones",
-    text: "Test builds go out through TestFlight and Google Play's testing tracks, so you use the app on your own phone first.",
-  },
-  {
-    id: "submit",
-    name: "Submitted for review",
-    text: "From your Apple Developer and Play Console accounts, with the listing, screenshots and privacy details filled in.",
-  },
-  {
-    id: "review",
-    name: "Approved by Apple and Google",
-    text: "They set the review times, so the launch date allows for them, and we answer any questions the reviewers ask.",
-  },
-  {
-    id: "live",
-    name: "Live in the stores",
-    text: "Your app, under your company's name, ready for customers to install.",
-  },
-]
 
 // The self-check in the fit section. The ones in fitInitial start ticked.
 const fitChecks = [
@@ -247,13 +217,6 @@ export default function MobileAppDevelopmentPage() {
         store="google-play"
         tools={mobileTools.android}
         reverse
-      />
-      <div aria-hidden="true" className="rail-joint border-t border-border" />
-
-      <ReleaseSection
-        eyebrow="From code to the stores"
-        title="How your app gets into the App Store and Google Play"
-        steps={releaseSteps}
       />
       <div aria-hidden="true" className="rail-joint border-t border-border" />
 
