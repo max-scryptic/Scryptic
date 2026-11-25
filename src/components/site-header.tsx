@@ -22,10 +22,10 @@ export const navItems: FloatingNavItem[] = [
 ]
 
 // Below lg the links fold into a "Menu" panel, which has room for every
-// top-level page, so phones can reach the whole site from the bar.
+// top-level page in the bar, plus Home. Services stays out here too, as in the
+// desktop bar.
 const menuItems: MobileNavMenuItem[] = [
   { name: "Home", link: pages.home.path },
-  { name: "Services", link: pages.services.path },
   ...navItems,
   { name: "Book a call", link: pages.bookCall.path },
 ]
