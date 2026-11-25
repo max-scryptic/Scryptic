@@ -7,24 +7,34 @@ import {
   FloatingNavAction,
   type FloatingNavItem,
 } from "@/components/ui/floating-navbar"
+import type { MobileNavMenuItem } from "@/components/ui/mobile-nav-menu"
 import { pages } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 
 // Pages of their own only. The home page's sections are linked from the
-// footer, and the logo leads back home. Narrow bars drop the later links
-// first; the footer still has them. The service pages stay out of the bar:
+// footer, and the logo leads back home. The service pages stay out of the bar:
 // the footer, the /services hub and the posts that cover them link to them.
 export const navItems: FloatingNavItem[] = [
-  { name: "Case studies", shortName: "Work", link: pages.work.path },
-  { name: "Pricing", link: pages.pricing.path, hideBelow: "sm" },
-  { name: "Free tools", link: pages.tools.path, hideBelow: "lg" },
-  { name: "Blog", link: pages.blog.path, hideBelow: "lg" },
+  { name: "Case studies", link: pages.work.path },
+  { name: "Pricing", link: pages.pricing.path },
+  { name: "Free tools", link: pages.tools.path },
+  { name: "Blog", link: pages.blog.path },
+]
+
+// Below lg the links fold into a "Menu" panel, which has room for every
+// top-level page, so phones can reach the whole site from the bar.
+const menuItems: MobileNavMenuItem[] = [
+  { name: "Home", link: pages.home.path },
+  { name: "Services", link: pages.services.path },
+  ...navItems,
+  { name: "Book a call", link: pages.bookCall.path },
 ]
 
 export function SiteHeader() {
   return (
     <FloatingNav
       navItems={navItems}
+      menuItems={menuItems}
       brand={
         <Link
           href="/"
