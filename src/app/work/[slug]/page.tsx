@@ -360,8 +360,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             <span className="text-sm text-pretty text-muted-foreground">{next.category}</span>
           </Link>
           <div className={cn(ctaFrame, "flex flex-col items-start gap-4 p-6 sm:p-8")}>
-            <CornerPixels corner="top-right" />
-            <CornerPixels corner="bottom-left" />
+            <CornerPixels corner="top-right" weight="heavy" />
+            <CornerPixels corner="bottom-left" weight="light" />
             <p className="text-2xl tracking-tight text-balance">Building something like {study.name}?</p>
             <p className="text-sm text-pretty text-muted-foreground">
               Start with a free discovery call. You leave with a scoped first release and a written

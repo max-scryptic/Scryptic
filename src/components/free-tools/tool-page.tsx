@@ -119,8 +119,8 @@ export function ToolPage({
           aria-labelledby="tool-cta-heading"
           className={cn(ctaFrame, "flex flex-col items-start gap-4 p-6 sm:p-10")}
         >
-          <CornerPixels corner="top-right" />
-          <CornerPixels corner="bottom-left" />
+          <CornerPixels corner="top-right" weight="heavy" />
+          <CornerPixels corner="bottom-left" weight="light" />
           <h2 id="tool-cta-heading" className="text-2xl tracking-tight text-balance">
             Rather talk it through with a developer?
           </h2>
