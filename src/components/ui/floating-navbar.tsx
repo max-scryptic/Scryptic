@@ -2,6 +2,7 @@ import Link from "next/link"
 import { cn } from "cn"
 
 import { pixelLabel } from "@/components/landing/section-heading"
+import { MobileNavMenu, type MobileNavMenuItem } from "@/components/ui/mobile-nav-menu"
 
 /*
  * Started as Aceternity UI's Floating Navbar
@@ -16,18 +17,13 @@ import { pixelLabel } from "@/components/landing/section-heading"
  * - Links are next/link inside a <nav> landmark, centred in the bar, and the
  *   trailing slot takes any element (the call to action) instead of a
  *   hard-coded Login button.
+ * - Below lg, where the links don't all fit, a single "Menu" button opens a
+ *   panel listing `menuItems`, so phones can reach every page.
  */
 
 export type FloatingNavItem = {
   name: string
   link: string
-  /**
-   * Leave out of the bar below this breakpoint: xs is 420px, roughly the
-   * widest phones, and the rest are Tailwind's.
-   */
-  hideBelow?: "xs" | "sm" | "md" | "lg"
-  /** A shorter label for the narrowest phones, below 400px, where the full name would push the action off the bar. */
-  shortName?: string
   /**
    * Pages under this one, shown in a menu that opens on hover or keyboard
    * focus on wide screens. The item itself stays a link to an index of the
@@ -36,21 +32,16 @@ export type FloatingNavItem = {
   children?: { name: string; link: string; description?: string }[]
 }
 
-// Literal class names, so Tailwind can see them.
-const hideBelowClass = {
-  xs: "hidden min-[420px]:block",
-  sm: "hidden sm:block",
-  md: "hidden md:block",
-  lg: "hidden lg:block",
-} as const
-
 export function FloatingNav({
   navItems,
+  menuItems,
   brand,
   action,
   className,
 }: {
   navItems: FloatingNavItem[]
+  /** Every page the "Menu" panel lists below lg. Defaults to `navItems`. */
+  menuItems?: MobileNavMenuItem[]
   brand?: React.ReactNode
   action?: React.ReactNode
   className?: string
@@ -65,27 +56,18 @@ export function FloatingNav({
       {/* Equal outer columns keep the links centred in the bar, whatever the brand and action widths. */}
       <div className="flex justify-self-start">{brand}</div>
       <nav aria-label="Main" className="flex items-center">
-        <ul className="flex items-center md:gap-1">
+        <ul className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) => (
-            <li
-              key={item.link}
-              className={cn(item.hideBelow && hideBelowClass[item.hideBelow], item.children && "group/menu relative")}
-            >
+            <li key={item.link} className={cn(item.children && "group/menu relative")}>
               <FloatingNavLink href={item.link}>
-                {item.shortName ? (
-                  <>
-                    <span className="min-[400px]:hidden">{item.shortName}</span>
-                    <span className="hidden min-[400px]:inline">{item.name}</span>
-                  </>
-                ) : (
-                  item.name
-                )}
+                {item.name}
                 {item.children && <ChevronIcon />}
               </FloatingNavLink>
               {item.children && <NavMenu items={item.children} label={item.name} />}
             </li>
           ))}
         </ul>
+        <MobileNavMenu items={menuItems ?? navItems} className="lg:hidden" />
       </nav>
       <div className="flex items-center gap-0.5 justify-self-end min-[360px]:gap-1 sm:gap-2">{action}</div>
     </header>
