@@ -101,6 +101,29 @@
   --band-ink: #08091a;
 }
 
+/*
+ * A warm printed sheet that looks the same in either theme, so the process
+ * planner stands apart from the page around it. It resets the theme tokens to
+ * the light theme's ink and Lapis for what sits on it (custom properties
+ * inherit, so this wins over .dark on <html>), and redeclares --guide, which
+ * :root resolves once against the page colours. Avoid dark: utilities inside
+ * it: the .dark class is still on <html>.
+ */
+.surface-paper {
+  --background: #fbf8f1;
+  --foreground: #14131b;
+  --card: #fbf8f1;
+  --card-foreground: #14131b;
+  --primary: #2b3fd6;
+  --primary-foreground: #ffffff;
+  --muted-foreground: #5b6072;
+  --border: rgb(20 19 27 / 12%);
+  --chart-2: #d98a1c;
+  --guide: rgb(20 19 27 / 12%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
 @theme inline {
   --font-sans: var(--font-hanken-grotesk);
   --font-logo: var(--font-syne);
