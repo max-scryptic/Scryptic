@@ -293,7 +293,7 @@ export default function NoCodeMigrationPage() {
         }
         intro={`${siteConfig.name} moves Bubble, Lovable, Glide and Airtable apps to code you own, with your users and data brought across.`}
         secondary={{ label: "See pricing", href: "#pricing" }}
-        visual={<HeroDrawing><MigrationDrawing /></HeroDrawing>}
+        visual={<HeroDrawing seed={11}><MigrationDrawing /></HeroDrawing>}
         shape="migrate"
       />
 
