@@ -202,9 +202,9 @@ export function AfterLaunch() {
     <section id="after-launch" aria-labelledby="after-launch-heading" className="flex scroll-mt-28 flex-col gap-8">
       <div className={cn("flex flex-col gap-2", inset)}>
         <p className="font-mono text-xs tracking-widest text-primary uppercase">After launch</p>
-        <h3 id="after-launch-heading" className="text-2xl tracking-tight text-balance">
+        <h2 id="after-launch-heading" className="text-2xl tracking-tight text-balance">
           What happens after the handover week
-        </h3>
+        </h2>
       </div>
 
       <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:gap-12">
@@ -218,9 +218,9 @@ export function AfterLaunch() {
             Recommended
           </p>
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <h4 id={`${supportPlan.id}-name`} className="text-xl tracking-tight">
+            <h3 id={`${supportPlan.id}-name`} className="text-xl tracking-tight">
               {supportPlan.name}
-            </h4>
+            </h3>
             <p className="flex items-baseline gap-2">
               <span className="text-3xl font-semibold tracking-tight">{supportPlan.price}</span>
               <span className="text-muted-foreground">+ VAT a {supportPlan.per}</span>
@@ -249,10 +249,10 @@ export function AfterLaunch() {
               )}
               <div className="relative flex flex-col gap-1.5">
                 <span aria-hidden="true" className="absolute top-2 -left-8 size-[7px] bg-primary" />
-                <h4 className="flex flex-wrap items-baseline gap-x-3 font-medium">
+                <h3 className="flex flex-wrap items-baseline gap-x-3 font-medium">
                   {option.name}
                   <span className="font-mono text-sm font-normal text-primary">{option.price}</span>
-                </h4>
+                </h3>
                 <p className="text-pretty text-muted-foreground">{option.text}</p>
               </div>
             </Fragment>

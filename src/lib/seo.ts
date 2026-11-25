@@ -64,6 +64,7 @@ const latestPostDate = posts
 const services = {
   path: "/services",
   title: "Services",
+  searchTitle: "MVP, web and mobile app development services",
   description: `${siteConfig.name} services for UK founders: MVP, web app and mobile app development and no-code migration, each built as production code in a fixed-price sprint.`,
   changeFrequency: "monthly",
   priority: 0.9,
@@ -120,6 +121,7 @@ export const pages = {
   bookCall: {
     path: "/book-a-call",
     title: "Book a call",
+    searchTitle: "Book a free discovery call about your app",
     description:
       "Book a free 30 minute discovery call with Scryptic. Answer four quick questions about your app, then pick a time to talk scope, cost and timeline.",
     changeFrequency: "monthly",
@@ -128,6 +130,7 @@ export const pages = {
   work: {
     path: "/work",
     title: "Case studies",
+    searchTitle: "Case studies of the apps we built and launched",
     description:
       "Case studies of the web and mobile apps Scryptic designed, built and launched: the problem each solves, the product we shipped and the engineering behind it.",
     changeFrequency: "monthly",
@@ -136,6 +139,7 @@ export const pages = {
   tools: {
     path: "/tools",
     title: "Free tools",
+    searchTitle: "Free MVP and app planning tools for founders",
     description: `Free tools for founders from ${siteConfig.name}: an MVP cost calculator, scope planner, no-code quiz, launch checklist, and SEO and AI agent readiness checks.`,
     changeFrequency: "monthly",
     priority: 0.8,
@@ -144,6 +148,7 @@ export const pages = {
   pricing: {
     path: "/pricing",
     title: "Pricing",
+    searchTitle: "Fixed-price MVP and app development pricing",
     description: `${siteConfig.name} pricing: fixed-price MVP sprints from ${mvp.price} + VAT, optional support at ${supportPlan.price} a ${supportPlan.per}, and hosting billed to you at cost in accounts in your name.`,
     lastModified: "2026-11-22",
     changeFrequency: "monthly",
@@ -152,6 +157,7 @@ export const pages = {
   blog: {
     path: "/blog",
     title: "Blog",
+    searchTitle: "Guides to building and launching apps | Blog",
     description: `Practical guides from the ${siteConfig.name} studio on planning, building, launching and growing apps, written by the developers who build them for founders.`,
     lastModified: latestPostDate,
     changeFrequency: "weekly",

@@ -62,7 +62,11 @@ export default function PricingPage() {
             </p>
           </div>
 
-          <section id="pricing" aria-label="Packages" className="flex flex-col gap-12">
+          <section id="pricing" aria-labelledby="packages-heading" className="flex flex-col gap-12">
+            {/* The cards bring h3s; this keeps the outline h1, h2, h3 without a visible heading. */}
+            <h2 id="packages-heading" className="sr-only">
+              MVP packages
+            </h2>
             <PricingCards />
           </section>
         </div>
