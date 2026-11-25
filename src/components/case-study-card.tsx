@@ -44,7 +44,8 @@ export function CaseStudyCard({
           className="block aspect-[16/10] h-auto w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         />
       </div>
-      <div className="flex flex-1 flex-col gap-3 p-6 sm:p-8">
+      {/* The gradient's stops transition (Tailwind registers them), so it fades in on hover or focus. */}
+      <div className="flex flex-1 flex-col gap-3 bg-linear-to-br from-primary/0 to-transparent to-70% p-6 transition-colors duration-300 ease-out group-focus-within:from-primary/15 group-hover:from-primary/15 motion-reduce:transition-none sm:p-8">
         <p className="font-mono text-xs tracking-widest text-primary uppercase">{study.category}</p>
         <Heading className="text-2xl tracking-tight">
           <Link
