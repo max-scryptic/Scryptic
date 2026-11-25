@@ -4,8 +4,9 @@ import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
 import { GuidesSection } from "@/components/landing/guides-section"
+import { WebAppDrawing } from "@/components/landing/build-trio"
 import { LandingHero } from "@/components/landing/hero"
-import { WebAppVisual } from "@/components/landing/hero-visuals"
+import { HeroDrawing } from "@/components/landing/hero-drawing"
 import type { IconName } from "@/components/landing/icons"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { ProcessSection } from "@/components/landing/process-section"
@@ -196,7 +197,7 @@ export default function WebAppDevelopmentPage() {
         }
         intro="A web app development agency for UK teams, building one workflow as production code at a fixed price."
         secondary={{ label: "See pricing", href: "#pricing" }}
-        visual={<WebAppVisual />}
+        visual={<HeroDrawing label="app.yourcompany.co.uk" status="Live"><WebAppDrawing /></HeroDrawing>}
         shape="panels"
       />
 

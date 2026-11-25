@@ -3,8 +3,9 @@ import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection, type Faq } from "@/components/landing/faq-section"
 import { GuidesSection } from "@/components/landing/guides-section"
+import { MobileAppDrawing } from "@/components/landing/build-trio"
 import { LandingHero } from "@/components/landing/hero"
-import { MobileAppVisual } from "@/components/landing/hero-visuals"
+import { HeroDrawing } from "@/components/landing/hero-drawing"
 import type { IconName } from "@/components/landing/icons"
 import { PlatformSection } from "@/components/landing/mobile-sections"
 import { PricingSection } from "@/components/landing/pricing-section"
@@ -182,7 +183,7 @@ export default function MobileAppDevelopmentPage() {
         }
         intro="A mobile app development company for UK founders and teams, building native iPhone and Android apps as production code at a fixed price."
         secondary={{ label: "See pricing", href: "#pricing" }}
-        visual={<MobileAppVisual />}
+        visual={<HeroDrawing label="release.v1" status="Week 2 of 2"><MobileAppDrawing /></HeroDrawing>}
         shape="studio"
       />
 
