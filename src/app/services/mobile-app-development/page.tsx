@@ -183,7 +183,7 @@ export default function MobileAppDevelopmentPage() {
         }
         intro="A mobile app development company for UK founders and teams, building native iPhone and Android apps as production code at a fixed price."
         secondary={{ label: "See pricing", href: "#pricing" }}
-        visual={<HeroDrawing seed={7}><MobileAppDrawing /></HeroDrawing>}
+        visual={<HeroDrawing label="release.v1" status="Week 2 of 2"><MobileAppDrawing /></HeroDrawing>}
         shape="studio"
       />
 

@@ -197,7 +197,7 @@ export default function WebAppDevelopmentPage() {
         }
         intro="A web app development agency for UK teams, building one workflow as production code at a fixed price."
         secondary={{ label: "See pricing", href: "#pricing" }}
-        visual={<HeroDrawing seed={3}><WebAppDrawing /></HeroDrawing>}
+        visual={<HeroDrawing label="app.yourcompany.co.uk" status="Live"><WebAppDrawing /></HeroDrawing>}
         shape="panels"
       />
 
