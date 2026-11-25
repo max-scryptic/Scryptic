@@ -22,7 +22,7 @@ export function GuidesSection({
   const heading = <SectionHeading eyebrow="Guides" title={title} id="guides-heading" />
 
   return (
-    <LandingSection id="guides" labelledBy="guides-heading">
+    <LandingSection id="guides" labelledBy="guides-heading" tightAfterBand>
       {/* One row of guides at most: past three they scroll sideways, as the blog's
           series do, with the arrows beside the heading. */}
       {posts.length > MAX_IN_ROW ? (

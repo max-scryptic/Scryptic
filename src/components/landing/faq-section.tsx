@@ -17,7 +17,7 @@ export type Faq = {
  */
 export function FaqSection({ faqs }: { faqs: Faq[] }) {
   return (
-    <section aria-labelledby="faq-heading" id="faq" className={cn("px-4 sm:px-6", sectionSpace.tight)}>
+    <section aria-labelledby="faq-heading" id="faq" className={cn("after-band-tight px-4 sm:px-6", sectionSpace.tight)}>
       <div className={cn("mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.4fr]", inset)}>
         <SectionHeading eyebrow="FAQ" title="Frequently asked questions" id="faq-heading" />
         <div data-reveal="children" className="flex flex-col divide-y divide-border border-y border-border">
