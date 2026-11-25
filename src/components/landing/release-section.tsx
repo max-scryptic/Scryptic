@@ -3,26 +3,26 @@
 import { useEffect, useRef, useState } from "react"
 import { cn } from "cn"
 
-import { StepGraphic, StepWindow, type ReleaseStepId } from "@/components/landing/release-graphics"
+import { ReleasePhone, type ReleaseStepId } from "@/components/landing/release-graphics"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { inset } from "@/lib/frame"
 
 /*
  * The mobile app development page's release journey: the steps from the first
- * build to the live store listing, beside a window showing the current step's
- * graphic. Only the current step's copy is open. While the section is on
+ * build to the live store listing, beside a phone whose screen shows the
+ * current step. Only the current step's copy is open. While the section is on
  * screen it advances on a timer, a bar along the step's bottom edge filling as
  * it goes; clicking a step opens it and stops the timer. With reduced motion
  * it starts on the last step with every step reached, and still opens on
- * click. The window is decorative; the list says the same thing.
+ * click. The phone is decorative; the list says the same thing.
  */
 
 const STEP_MS = 4000
 
 export type ReleaseStep = { id: ReleaseStepId; name: string; text: string }
 
-// The window's title bar status for each step.
-const windowStatus: Record<ReleaseStepId, string> = {
+// The status under the phone for each step.
+const phoneStatus: Record<ReleaseStepId, string> = {
   build: "Demo Friday",
   test: "Testing",
   submit: "Submitted",
@@ -177,26 +177,13 @@ export function ReleaseSection({
             })}
           </ol>
         </div>
-        <StepWindow
-          title={`release.v1 / ${pad(active)} ${steps[active].id}`}
-          status={windowStatus[steps[active].id]}
+        <ReleasePhone
+          id={steps[active].id}
+          caption={`${pad(active)} / ${steps[active].id}`}
+          status={phoneStatus[steps[active].id]}
+          animate={motion}
           className="order-first lg:order-last"
-        >
-          {/* Every graphic in one grid cell, so the window keeps the tallest one's height. */}
-          <div className="grid p-5">
-            {steps.map((step, index) => (
-              <div
-                key={step.id}
-                className={cn(
-                  "col-start-1 row-start-1 transition-[opacity,transform] duration-500 ease-out",
-                  index === active ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-2 opacity-0",
-                )}
-              >
-                <StepGraphic id={step.id} />
-              </div>
-            ))}
-          </div>
-        </StepWindow>
+        />
       </div>
     </LandingSection>
   )
