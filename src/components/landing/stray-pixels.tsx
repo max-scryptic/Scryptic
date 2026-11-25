@@ -34,7 +34,7 @@ export type PixelCluster = {
  */
 export function StrayPixels({ clusters, className }: { clusters: PixelCluster[]; className?: string }) {
   return (
-    <div aria-hidden="true" className={cn("pointer-events-none relative z-[1] hidden h-0 sm:block", className)}>
+    <div aria-hidden="true" className={cn("stray-pixels pointer-events-none relative z-[1] hidden h-0 sm:block", className)}>
       {clusters.map((cluster, index) => (
         <div
           key={index}

@@ -333,6 +333,16 @@
     height: 0;
   }
 
+  /* The page-coloured gap outside a full-bleed band (the hero, the Lapis stack
+     band, LandingSection's warm and ink bands): one on each side. A band keeps
+     a single section's padding (6rem) inside it and gets double outside it:
+     this 6rem, plus the neighbouring section's padding on that side, which the
+     rule in the utilities layer below sets to 6rem whatever the section's own
+     rhythm. Two bands in a row meet with a gap each, 12rem of page between. */
+  .band-gap {
+    height: 6rem;
+  }
+
   .guides {
     position: relative;
   }
@@ -998,5 +1008,19 @@
 @keyframes drip-stretch {
   to {
     transform: translateY(16px);
+  }
+}
+
+/* The section on either side of a .band-gap gets a single section's padding
+   (6rem) on the side facing the band, so the page between the band and that
+   section's content is always double the band's own (see .band-gap). In the
+   utilities layer, and more specific, so it wins over the section's py-*.
+   A zero-height StrayPixels cluster may sit between the two. */
+@layer utilities {
+  :is(.band-gap, .band-gap + .stray-pixels) + section {
+    padding-top: 6rem;
+  }
+  section:is(:has(+ .band-gap), :has(+ .stray-pixels + .band-gap)) {
+    padding-bottom: 6rem;
   }
 }
