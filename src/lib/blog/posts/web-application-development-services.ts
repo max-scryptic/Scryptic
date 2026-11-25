@@ -4,6 +4,7 @@ import { extendedMvp, mvp } from "@/lib/services"
 export const webApplicationDevelopmentServices: BlogPost = {
   slug: "web-application-development-services",
   title: "What web application development involves, from architecture to launch",
+  searchTitle: "What web application development involves, end to end",
   series: "launch",
   service: "web-app-development",
   topic: "Web apps",

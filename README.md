@@ -123,7 +123,7 @@ What you get, all derived from those:
 
 | Concern | Where | Notes |
 | --- | --- | --- |
-| Title, description, canonical | `createMetadata()`, `pageTitle()` | Titles are pipe-delimited, most specific first: `Login \| Brand`, `Invoice 42 \| Billing \| Brand`. Colons and dashes as separators fail lint and are rewritten at runtime. Canonical is absolute via `metadataBase`. |
+| Title, description, canonical | `createMetadata()`, `pageTitle()` | Titles are pipe-delimited, most specific first: `Login \| Brand`, `Invoice 42 \| Billing \| Brand`. Colons and dashes as separators fail lint and are rewritten at runtime. At most 70 characters (Bing Webmaster Tools' limit): parent segments are dropped to fit, and a page whose own name is still too long fails the build until it gets a shorter `searchTitle`. Canonical is absolute via `metadataBase`. |
 | Open Graph + Twitter/X cards | `createMetadata()`, `opengraph-image.tsx` | 1200x630 generated card on every page, `summary_large_image`. |
 | Robots meta | `robotsFor()` | `max-snippet:-1`, `max-image-preview:large` so AI Overviews and rich results can quote freely. |
 | `robots.txt` | `src/app/robots.ts` | Allows all crawlers, names AI search and AI training bots explicitly (`ALLOW_AI_TRAINING` toggles training only). |

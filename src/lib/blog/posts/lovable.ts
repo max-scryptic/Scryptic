@@ -4,6 +4,7 @@ import type { BlogPost } from "@/lib/blog/types"
 export const lovable: BlogPost = {
   slug: "migrate-from-lovable",
   title: "How to take a Lovable app to production without rebuilding it",
+  searchTitle: "How to take a Lovable app to production without a rebuild",
   series: "migration",
   topic: "Lovable",
   logo: lovableLogo,

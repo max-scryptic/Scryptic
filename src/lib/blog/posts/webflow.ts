@@ -4,6 +4,7 @@ import type { BlogPost } from "@/lib/blog/types"
 export const webflow: BlogPost = {
   slug: "migrate-from-webflow",
   title: "Adding a real product to a Webflow site without losing rankings",
+  searchTitle: "Adding a product to a Webflow site without losing rankings",
   series: "migration",
   topic: "Webflow",
   logo: webflowLogo,

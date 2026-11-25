@@ -137,6 +137,12 @@ export type BlogPost = {
   slug: string
   /** The <h1> and the page title. No colons or dashes as separators. */
   title: string
+  /**
+   * A shorter title for the <title> tag only, when "<title> | Scryptic" would
+   * run past 70 characters (59 or fewer here). The <h1>, card, share image and
+   * JSON-LD keep `title`. The build fails if a post needs one and has none.
+   */
+  searchTitle?: string
   series: PostSeriesId
   /**
    * A word or two on what the post is about, shown above the title on its

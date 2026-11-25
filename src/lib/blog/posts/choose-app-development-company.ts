@@ -4,6 +4,7 @@ import { extendedMvp, mvp } from "@/lib/services"
 export const chooseAppDevelopmentCompany: BlogPost = {
   slug: "how-to-choose-an-app-development-company-uk",
   title: "A buyer's checklist for choosing an app development company in the UK",
+  searchTitle: "Choosing an app development company in the UK, a checklist",
   series: "launch",
   topic: "Hiring",
   icon: "users",

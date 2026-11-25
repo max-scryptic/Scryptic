@@ -24,6 +24,11 @@ export type PageEntry = {
   path: string
   /** Page name without the app name, which pageTitle() appends. No colons or dashes as separators. */
   title: string
+  /**
+   * A shorter name for the <title> only, when `title` would push the full page
+   * title past MAX_TITLE_LENGTH. Breadcrumbs, JSON-LD and llms.txt keep `title`.
+   */
+  searchTitle?: string
   /** 120 to 160 characters, written as a direct answer to "what is this page?". */
   description: string
   /** Breadcrumb trail above this page, nearest last. Home is implied. */
@@ -59,6 +64,7 @@ const latestPostDate = posts
 const services = {
   path: "/services",
   title: "Services",
+  searchTitle: "MVP, web and mobile app development services",
   description: `${siteConfig.name} services for UK founders: MVP, web app and mobile app development and no-code migration, each built as production code in a fixed-price sprint.`,
   changeFrequency: "monthly",
   priority: 0.9,
@@ -115,6 +121,7 @@ export const pages = {
   bookCall: {
     path: "/book-a-call",
     title: "Book a call",
+    searchTitle: "Book a free discovery call about your app",
     description:
       "Book a free 30 minute discovery call with Scryptic. Answer four quick questions about your app, then pick a time to talk scope, cost and timeline.",
     changeFrequency: "monthly",
@@ -123,6 +130,7 @@ export const pages = {
   work: {
     path: "/work",
     title: "Case studies",
+    searchTitle: "Case studies of the apps we built and launched",
     description:
       "Case studies of the web and mobile apps Scryptic designed, built and launched: the problem each solves, the product we shipped and the engineering behind it.",
     changeFrequency: "monthly",
@@ -131,6 +139,7 @@ export const pages = {
   tools: {
     path: "/tools",
     title: "Free tools",
+    searchTitle: "Free MVP and app planning tools for founders",
     description: `Free tools for founders from ${siteConfig.name}: an MVP cost calculator, scope planner, no-code quiz, launch checklist, and SEO and AI agent readiness checks.`,
     changeFrequency: "monthly",
     priority: 0.8,
@@ -139,6 +148,7 @@ export const pages = {
   pricing: {
     path: "/pricing",
     title: "Pricing",
+    searchTitle: "Fixed-price MVP and app development pricing",
     description: `${siteConfig.name} pricing: fixed-price MVP sprints from ${mvp.price} + VAT, optional support at ${supportPlan.price} a ${supportPlan.per}, and hosting billed to you at cost in accounts in your name.`,
     lastModified: "2026-11-22",
     changeFrequency: "monthly",
@@ -147,6 +157,7 @@ export const pages = {
   blog: {
     path: "/blog",
     title: "Blog",
+    searchTitle: "Guides to building and launching apps | Blog",
     description: `Practical guides from the ${siteConfig.name} studio on planning, building, launching and growing apps, written by the developers who build them for founders.`,
     lastModified: latestPostDate,
     changeFrequency: "weekly",
@@ -188,6 +199,7 @@ export function blogPostPage(post: BlogPost): PageEntry {
     path: `/blog/${post.slug}`,
     title: post.title,
     description: post.description,
+    searchTitle: post.searchTitle,
     parents: [pages.blog],
     lastModified: post.dateModified ?? post.datePublished,
     changeFrequency: "yearly",
@@ -238,8 +250,16 @@ export function robotsFor(noIndex = false): Metadata["robots"] {
  * Never a colon or a dash as the separator. ESLint rejects authored titles
  * that use one; pageTitle() also rewrites them, for titles that come from
  * data (a CMS post called "Launch: what's new" becomes "Launch | what's new").
+ *
+ * A full title is at most MAX_TITLE_LENGTH characters: Bing Webmaster Tools
+ * flags longer ones, and Google cuts them off in results. When it would run
+ * over, the parent segments are dropped, the one next to the app name first
+ * ("A long post title | Blog | Acme Inc." becomes "A long post title | Acme
+ * Inc."). If the page's own name is still too long, pageTitle() throws, which
+ * fails the build; give the page a shorter `searchTitle` in the registry.
  */
 export const TITLE_SEPARATOR = " | "
+export const MAX_TITLE_LENGTH = 70
 
 function normalizeTitleSegment(segment: string) {
   return segment
@@ -252,12 +272,26 @@ function normalizeTitleSegment(segment: string) {
 
 /** Joins title segments with the pipe separator, app name last. */
 export function pageTitle(...segments: string[]) {
-  return [...segments, siteConfig.name]
+  const parts = [...segments, siteConfig.name]
     .map(normalizeTitleSegment)
     .flatMap((segment) => segment.split(TITLE_SEPARATOR))
     .map((segment) => segment.trim())
     .filter((segment, index, all) => segment && all.indexOf(segment) === index)
-    .join(TITLE_SEPARATOR)
+
+  // Drop parents, nearest the app name first, until the title fits. The first
+  // segment (the page's own name) and the app name always stay.
+  while (parts.join(TITLE_SEPARATOR).length > MAX_TITLE_LENGTH && parts.length > 2) {
+    parts.splice(parts.length - 2, 1)
+  }
+
+  const title = parts.join(TITLE_SEPARATOR)
+  if (title.length > MAX_TITLE_LENGTH) {
+    throw new Error(
+      `Page title "${title}" is ${title.length} characters, over the ${MAX_TITLE_LENGTH} character limit. ` +
+        `Give the page a shorter searchTitle (for a blog post, in its file under src/lib/blog/posts).`,
+    )
+  }
+  return title
 }
 
 const twitterAccounts = siteConfig.twitterHandle
@@ -301,7 +335,7 @@ export const baseTwitter = {
 export function createMetadata(page: PageEntry): Metadata {
   // Parents follow the page, nearest first: "Invoice 42 | Billing | Acme Inc.".
   const parentTitles = (page.parents ?? []).map((parent) => parent.title).reverse()
-  const fullTitle = pageTitle(page.title, ...parentTitles)
+  const fullTitle = pageTitle(page.searchTitle ?? page.title, ...parentTitles)
   const images = page.image
     ? [{ ...shareImage, url: page.image, alt: fullTitle }]
     : [shareImage]
