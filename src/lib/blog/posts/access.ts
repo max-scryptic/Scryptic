@@ -6,6 +6,7 @@ import type { BlogPost } from "@/lib/blog/types"
 export const access: BlogPost = {
   slug: "migrate-from-access",
   title: "Access database to web app migration, starting with the tables",
+  searchTitle: "Access database to web app migration, tables first",
   series: "migration",
   topic: "Access",
   logo: accessLogo,

@@ -4,6 +4,7 @@ import type { BlogPost } from "@/lib/blog/types"
 export const replit: BlogPost = {
   slug: "migrate-from-replit",
   title: "Getting a Replit Agent app ready for production, week by week",
+  searchTitle: "Getting a Replit Agent app to production, week by week",
   series: "migration",
   topic: "Replit",
   logo: replitLogo,

@@ -6,6 +6,7 @@ import { extendedMvp, mvp } from "@/lib/services"
 export const mvpSoftware: BlogPost = {
   slug: "what-is-mvp-software",
   title: "What is MVP software? The minimum viable product, with an example",
+  searchTitle: "What is MVP software? The minimum viable product explained",
   series: "launch",
   topic: "MVP meaning",
   icon: "book-open",

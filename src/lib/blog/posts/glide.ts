@@ -4,6 +4,7 @@ import type { BlogPost } from "@/lib/blog/types"
 export const glide: BlogPost = {
   slug: "migrate-from-glide",
   title: "Glide migration and five questions to answer before you leave",
+  searchTitle: "Glide migration, five questions to answer before you leave",
   series: "migration",
   topic: "Glide",
   logo: glideLogo,

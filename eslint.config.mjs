@@ -24,7 +24,7 @@ const EM_DASH_RULES = [
 const TITLE_BAD_SEPARATOR = "(:(\\s|$)|\\s[-\\u2013\\u2014\\u2015]\\s)";
 const TITLE_MESSAGE =
   'Page titles use " | " between segments, never a colon or a dash. Build them with pageTitle() or createMetadata() from @/lib/seo.';
-const TITLE_KEYS = "/^(title|absolute|default|template)$/";
+const TITLE_KEYS = "/^(title|searchTitle|absolute|default|template)$/";
 
 const TITLE_RULES = [
   {

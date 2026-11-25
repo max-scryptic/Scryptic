@@ -4,6 +4,7 @@ import type { BlogPost } from "@/lib/blog/types"
 export const v0: BlogPost = {
   slug: "migrate-from-v0",
   title: "Migrating from v0 to a production app, explained for founders",
+  searchTitle: "Migrating from v0 to a production app, for founders",
   series: "migration",
   topic: "v0",
   logo: v0Logo,

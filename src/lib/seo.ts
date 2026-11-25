@@ -24,6 +24,11 @@ export type PageEntry = {
   path: string
   /** Page name without the app name, which pageTitle() appends. No colons or dashes as separators. */
   title: string
+  /**
+   * A shorter name for the <title> only, when `title` would push the full page
+   * title past MAX_TITLE_LENGTH. Breadcrumbs, JSON-LD and llms.txt keep `title`.
+   */
+  searchTitle?: string
   /** 120 to 160 characters, written as a direct answer to "what is this page?". */
   description: string
   /** Breadcrumb trail above this page, nearest last. Home is implied. */
@@ -188,6 +193,7 @@ export function blogPostPage(post: BlogPost): PageEntry {
     path: `/blog/${post.slug}`,
     title: post.title,
     description: post.description,
+    searchTitle: post.searchTitle,
     parents: [pages.blog],
     lastModified: post.dateModified ?? post.datePublished,
     changeFrequency: "yearly",
@@ -238,8 +244,16 @@ export function robotsFor(noIndex = false): Metadata["robots"] {
  * Never a colon or a dash as the separator. ESLint rejects authored titles
  * that use one; pageTitle() also rewrites them, for titles that come from
  * data (a CMS post called "Launch: what's new" becomes "Launch | what's new").
+ *
+ * A full title is at most MAX_TITLE_LENGTH characters: Bing Webmaster Tools
+ * flags longer ones, and Google cuts them off in results. When it would run
+ * over, the parent segments are dropped, the one next to the app name first
+ * ("A long post title | Blog | Acme Inc." becomes "A long post title | Acme
+ * Inc."). If the page's own name is still too long, pageTitle() throws, which
+ * fails the build; give the page a shorter `searchTitle` in the registry.
  */
 export const TITLE_SEPARATOR = " | "
+export const MAX_TITLE_LENGTH = 70
 
 function normalizeTitleSegment(segment: string) {
   return segment
@@ -252,12 +266,26 @@ function normalizeTitleSegment(segment: string) {
 
 /** Joins title segments with the pipe separator, app name last. */
 export function pageTitle(...segments: string[]) {
-  return [...segments, siteConfig.name]
+  const parts = [...segments, siteConfig.name]
     .map(normalizeTitleSegment)
     .flatMap((segment) => segment.split(TITLE_SEPARATOR))
     .map((segment) => segment.trim())
     .filter((segment, index, all) => segment && all.indexOf(segment) === index)
-    .join(TITLE_SEPARATOR)
+
+  // Drop parents, nearest the app name first, until the title fits. The first
+  // segment (the page's own name) and the app name always stay.
+  while (parts.join(TITLE_SEPARATOR).length > MAX_TITLE_LENGTH && parts.length > 2) {
+    parts.splice(parts.length - 2, 1)
+  }
+
+  const title = parts.join(TITLE_SEPARATOR)
+  if (title.length > MAX_TITLE_LENGTH) {
+    throw new Error(
+      `Page title "${title}" is ${title.length} characters, over the ${MAX_TITLE_LENGTH} character limit. ` +
+        `Give the page a shorter searchTitle (for a blog post, in its file under src/lib/blog/posts).`,
+    )
+  }
+  return title
 }
 
 const twitterAccounts = siteConfig.twitterHandle
@@ -301,7 +329,7 @@ export const baseTwitter = {
 export function createMetadata(page: PageEntry): Metadata {
   // Parents follow the page, nearest first: "Invoice 42 | Billing | Acme Inc.".
   const parentTitles = (page.parents ?? []).map((parent) => parent.title).reverse()
-  const fullTitle = pageTitle(page.title, ...parentTitles)
+  const fullTitle = pageTitle(page.searchTitle ?? page.title, ...parentTitles)
   const images = page.image
     ? [{ ...shareImage, url: page.image, alt: fullTitle }]
     : [shareImage]
