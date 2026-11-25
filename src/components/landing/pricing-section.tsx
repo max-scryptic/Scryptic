@@ -117,7 +117,9 @@ export function PricingCards() {
       {foundingOffer && (
         <aside
           aria-labelledby="founding-offer-heading"
-          className="pip grid border border-primary/30 bg-primary/5 md:grid-cols-[1fr_16rem]"
+          // Dressed like the package cards above it: page background, a Lapis wash fading in from
+          // the left, corner brackets that lengthen on hover and its edges run out across the page.
+          className="corners corners-grow guides grid border border-primary/40 bg-linear-to-r from-primary/10 to-transparent to-60% transition duration-300 ease-out hover:from-primary/15 hover:shadow-xl hover:shadow-primary/10 motion-reduce:transition-none md:grid-cols-[1fr_16rem]"
         >
           <div className="flex flex-col gap-4 p-6 sm:p-8">
             <p className="font-mono text-xs tracking-widest text-primary uppercase">Founding client offer</p>
@@ -143,11 +145,11 @@ export function PricingCards() {
           <div className="relative flex flex-col items-start justify-center gap-4 border-t border-dashed border-primary/40 p-6 sm:p-8 md:border-t-0 md:border-l">
             <span
               aria-hidden="true"
-              className="absolute -top-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/30 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
+              className="absolute -top-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/40 bg-background [clip-path:inset(calc(50%-1px)_0_0_0)] md:block"
             />
             <span
               aria-hidden="true"
-              className="absolute -bottom-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/30 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
+              className="absolute -bottom-2.5 -left-2.5 hidden size-5 rounded-full border border-primary/40 bg-background [clip-path:inset(0_0_calc(50%-1px)_0)] md:block"
             />
             <p className="flex items-baseline gap-3">
               <span className="font-mono text-6xl leading-none text-primary">{foundingOffer.slots}</span>
