@@ -5,6 +5,7 @@ import { cn } from "cn"
 
 import { ReleasePhone, type ReleaseStepId } from "@/components/landing/release-graphics"
 import { ReleaseBoard, ReleaseLog, ReleaseStack } from "@/components/landing/release-concepts"
+import { ReleaseSplit, ReleaseStores, ReleaseStrip } from "@/components/landing/release-simple"
 import { LandingSection, SectionHeading } from "@/components/landing/section-heading"
 import { inset } from "@/lib/frame"
 
@@ -117,6 +118,9 @@ export function ReleaseSection({
     () => new URLSearchParams(window.location.search).get("concept"),
     () => null,
   )
+  if (concept === "strip") return <ReleaseStrip id={id} eyebrow={eyebrow} title={title} steps={steps} />
+  if (concept === "split") return <ReleaseSplit id={id} eyebrow={eyebrow} title={title} />
+  if (concept === "stores") return <ReleaseStores id={id} eyebrow={eyebrow} title={title} />
 
   return (
     <LandingSection id={id} labelledBy={`${id}-heading`}>
