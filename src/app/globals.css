@@ -706,6 +706,104 @@
   &:nth-child(n + 10) { --i: 9; }
 }
 
+/*
+ * The home page's row of what we build (components/landing/build-trio.tsx).
+ * A rail square where each divider meets the row's top and bottom edges, then
+ * the drawings' small loops: chart and icon pixels blink in turn (--d is each
+ * one's place in the turn), the cursor bobs, the phone's badge pulses and the
+ * migration's pixels ride the arc one after another. With reduced motion the
+ * pixels are simply lit and the travellers sit along the arc.
+ */
+.build-joint {
+  position: absolute;
+  z-index: 1;
+  left: -4px;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--primary);
+  background: var(--background);
+}
+.build-travel {
+  offset-rotate: 0deg;
+  offset-distance: calc(20% + var(--d, 0) * 30%);
+}
+/* Hover or focus anywhere on a panel (.build-panel) plays its drawing forward,
+   staggered by --h. Without motion the end state simply appears. */
+.build-show,
+.build-drop {
+  opacity: 0;
+}
+.build-drop {
+  translate: 0 -16px;
+}
+.build-panel:is(:hover, :focus-visible) {
+  & .build-hover {
+    translate: var(--hx, 0) var(--hy, 0);
+  }
+  & .build-show,
+  & .build-drop {
+    opacity: 1;
+    translate: 0 0;
+  }
+  & .build-fill {
+    fill: var(--fill);
+    stroke: transparent;
+  }
+  & .build-dim {
+    opacity: 0.3;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .build-panel :is(.build-hover, .build-show, .build-drop, .build-fill, .build-dim) {
+    transition:
+      translate 0.6s var(--ease-out),
+      opacity 0.35s ease,
+      fill 0.3s ease,
+      stroke 0.3s ease;
+    transition-delay: calc(var(--h, 0) * 40ms);
+  }
+  .build-panel .build-drop {
+    transition-timing-function: cubic-bezier(0.3, 1.5, 0.5, 1), ease;
+    transition-delay: 0.15s;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .build-twinkle {
+    animation: build-twinkle 4.8s ease-in-out infinite;
+    animation-delay: calc(var(--d, 0) * -0.6s);
+  }
+  .build-float {
+    animation: build-float 3.2s ease-in-out infinite;
+  }
+  .build-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: build-pulse 2.4s ease-in-out infinite;
+  }
+  .build-travel {
+    animation: build-travel 3.6s cubic-bezier(0.45, 0, 0.55, 1) infinite backwards;
+    animation-delay: calc(var(--d, 0) * 1.2s);
+  }
+}
+@keyframes build-twinkle {
+  0%, 70%, 100% { opacity: 1; }
+  80% { opacity: 0.25; }
+}
+@keyframes build-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -3px; }
+}
+@keyframes build-pulse {
+  0%, 60%, 100% { scale: 1; }
+  75% { scale: 1.35; }
+}
+@keyframes build-travel {
+  0% { offset-distance: 0%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
 @keyframes rise {
   from {
     opacity: 0;

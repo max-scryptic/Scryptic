@@ -1,5 +1,6 @@
 import { PageJsonLd } from "@/components/json-ld"
 import { AboutSection } from "@/components/landing/about-section"
+import { BuildTrio } from "@/components/landing/build-trio"
 import { ComparisonSection } from "@/components/landing/comparison-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { FaqSection } from "@/components/landing/faq-section"
@@ -8,7 +9,6 @@ import { TerminalCard } from "@/components/landing/hero-visuals"
 import { LaunchRaceSection } from "@/components/landing/launch-race-section"
 import { PricingSection } from "@/components/landing/pricing-section"
 import { ProblemStatement } from "@/components/landing/problem-statement"
-import { ProcessSection } from "@/components/landing/process-section"
 import { StackSection } from "@/components/landing/stack-section"
 import { type PixelCluster, StrayPixels } from "@/components/landing/stray-pixels"
 import { WorkSection } from "@/components/landing/work-section"
@@ -190,7 +190,7 @@ export default function Home() {
         ]}
       />
 
-      <LaunchRaceSection />
+      <BuildTrio />
 
       <StrayPixels clusters={pockets.pricing} />
 
@@ -198,8 +198,7 @@ export default function Home() {
 
       <AboutSection band="warm" />
 
-      <ProcessSection
-      />
+      <LaunchRaceSection />
 
       <StackSection />
 
