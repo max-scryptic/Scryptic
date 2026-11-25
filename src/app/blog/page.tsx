@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { cn } from "cn"
 
+import { CornerPixels, ctaFrame } from "@/components/corner-pixels"
 import { PageJsonLd } from "@/components/json-ld"
 import { PixelIn } from "@/components/pixel-in"
 import { PostCard } from "@/components/post-card"
@@ -109,8 +110,10 @@ export default function BlogPage() {
 
         <section
           aria-labelledby="blog-cta-heading"
-          className="corners guides flex flex-col items-start gap-4 border border-border bg-card p-6 sm:p-10"
+          className={cn(ctaFrame, "flex flex-col items-start gap-4 p-6 sm:p-10")}
         >
+          <CornerPixels corner="top-right" />
+          <CornerPixels corner="bottom-left" />
           <h2 id="blog-cta-heading" className="text-2xl tracking-tight text-balance">
             Planning an app, or stuck with one?
           </h2>

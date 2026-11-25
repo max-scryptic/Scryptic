@@ -25,7 +25,7 @@ export function CaseStudyCard({
   return (
     <article
       className={cn(
-        "group corners corners-grow flex flex-col border border-border bg-card transition-colors hover:border-primary/50",
+        "group corners corners-grow flex flex-col border border-border transition-colors hover:border-primary/50",
         wide && "lg:flex-row",
         className,
       )}

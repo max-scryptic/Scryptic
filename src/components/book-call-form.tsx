@@ -192,7 +192,7 @@ export function BookCallForm() {
   return (
     <div
       ref={cardRef}
-      className="corners flex scroll-mt-28 flex-col border border-border bg-card shadow-xl shadow-black/5 sm:scroll-mt-32"
+      className="corners flex scroll-mt-28 flex-col border border-border shadow-xl shadow-black/5 sm:scroll-mt-32"
     >
       <ol className="grid grid-cols-2 border-b border-border font-mono text-xs">
         {steps.map((label, index) => (

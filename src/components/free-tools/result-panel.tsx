@@ -20,7 +20,7 @@ export function ResultPanel({
     <section
       id={id}
       aria-label={label}
-      className="corners flex scroll-mt-28 flex-col border border-border bg-card shadow-xl shadow-black/5 lg:sticky lg:top-28"
+      className="corners flex scroll-mt-28 flex-col border border-border shadow-xl shadow-black/5 lg:sticky lg:top-28"
     >
       <div className="flex flex-col gap-3 border-b border-border px-5 py-4 sm:px-8">
         <div className="flex items-baseline justify-between gap-4 font-mono text-xs">

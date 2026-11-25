@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { cn } from "cn"
 
+import { CornerPixels, ctaFrame } from "@/components/corner-pixels"
 import { ToolList } from "@/components/free-tools/tool-list"
 import { PageJsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
@@ -116,8 +117,10 @@ export function ToolPage({
 
         <section
           aria-labelledby="tool-cta-heading"
-          className="corners guides flex flex-col items-start gap-4 border border-border bg-card p-6 sm:p-10"
+          className={cn(ctaFrame, "flex flex-col items-start gap-4 p-6 sm:p-10")}
         >
+          <CornerPixels corner="top-right" />
+          <CornerPixels corner="bottom-left" />
           <h2 id="tool-cta-heading" className="text-2xl tracking-tight text-balance">
             Rather talk it through with a developer?
           </h2>

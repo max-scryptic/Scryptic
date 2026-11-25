@@ -2,6 +2,7 @@ import Link from "next/link"
 import { cn } from "cn"
 
 import { CaseStudyCard } from "@/components/case-study-card"
+import { CornerPixels, ctaFrame } from "@/components/corner-pixels"
 import { PageJsonLd } from "@/components/json-ld"
 import { PixelIn } from "@/components/pixel-in"
 import { Button } from "@/components/ui/button"
@@ -42,8 +43,10 @@ export default function WorkPage() {
 
         <section
           aria-labelledby="work-cta-heading"
-          className="corners guides flex flex-col items-start gap-4 border border-border bg-card p-6 sm:p-10"
+          className={cn(ctaFrame, "flex flex-col items-start gap-4 p-6 sm:p-10")}
         >
+          <CornerPixels corner="top-right" />
+          <CornerPixels corner="bottom-left" />
           <h2 id="work-cta-heading" className="text-2xl tracking-tight text-balance">
             Want yours on this page?
           </h2>
