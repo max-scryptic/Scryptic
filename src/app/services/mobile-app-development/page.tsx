@@ -226,7 +226,7 @@ export default function MobileAppDevelopmentPage() {
       />
 
       <ProcessSection
-        title="From brief to the app stores"
+        title="From brief to your users' phones"
       />
 
       <FitCheckSection
