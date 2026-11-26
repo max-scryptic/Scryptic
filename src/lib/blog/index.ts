@@ -36,6 +36,7 @@ import { mobileAppDevelopment } from "@/lib/blog/posts/mobile-app-development"
 import { mobileAppDevelopmentCompaniesUk } from "@/lib/blog/posts/mobile-app-development-companies-uk"
 import { mobileWebDevelopment } from "@/lib/blog/posts/mobile-web-development"
 import { mvpAgile } from "@/lib/blog/posts/mvp-agile"
+import { mvpCostUk } from "@/lib/blog/posts/mvp-cost-uk"
 import { mvpSoftware } from "@/lib/blog/posts/mvp-software"
 import { mvpSoftwareDevelopmentExample } from "@/lib/blog/posts/mvp-software-development-example"
 import { n8nAlternatives } from "@/lib/blog/posts/n8n-alternatives"
@@ -82,6 +83,7 @@ export type {
  */
 export const posts: BlogPost[] = [
   appCostUk,
+  mvpCostUk,
   saasCost,
   mvpSoftware,
   buildAnMvp,
