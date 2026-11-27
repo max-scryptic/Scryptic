@@ -2,6 +2,7 @@ import { access } from "@/lib/blog/posts/access"
 import { adalo } from "@/lib/blog/posts/adalo"
 import { aiAgencyUk } from "@/lib/blog/posts/ai-agency-uk"
 import { aiAppBuildersCompared } from "@/lib/blog/posts/ai-app-builders-compared"
+import { aiSaas } from "@/lib/blog/posts/ai-saas"
 import { aiSoftwareDevelopment } from "@/lib/blog/posts/ai-software-development"
 import { airtable } from "@/lib/blog/posts/airtable"
 import { appsheet } from "@/lib/blog/posts/appsheet"
@@ -91,6 +92,7 @@ export const posts: BlogPost[] = [
   mvpSoftwareDevelopmentExample,
   aiSoftwareDevelopment,
   buildYourOwnAi,
+  aiSaas,
   dashboardAppDesign,
   mobileWebDevelopment,
   mobileAppDevelopment,
